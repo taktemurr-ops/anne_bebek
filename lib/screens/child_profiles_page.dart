@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import '../services/child_profiles.dart';
 import '../services/child_journals.dart';
 import '../services/secure_health_store.dart';
+import '../utils/baby_age.dart';
 
 class ChildProfilesPage extends StatefulWidget {
   const ChildProfilesPage({super.key});
@@ -206,12 +207,7 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
 
   Widget _profileCard(ChildProfile profile) {
-    final ageMonths = (DateTime.now().year - profile.birthDate.year) * 12 +
-        DateTime.now().month - profile.birthDate.month -
-        (DateTime.now().day < profile.birthDate.day ? 1 : 0);
-    final ageText = ageMonths < 0 ? 'Yeni doğan' :
-        ageMonths < 12 ? '$ageMonths aylık' :
-        '${ageMonths ~/ 12} yaş ${ageMonths % 12} ay';
+    final ageText = BabyAge.label(profile.birthDate, DateTime.now());
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       color: Colors.white,
