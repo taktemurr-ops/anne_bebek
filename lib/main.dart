@@ -23,6 +23,7 @@ import 'screens/baby_health_page.dart';
 import 'screens/reminders_page.dart';
 import 'screens/release_check_page.dart';
 import 'widgets/quick_access.dart';
+import 'widgets/daily_quick_actions.dart';
 import 'sleep_journal.dart';
 import 'dart:convert';
 import 'extra_features.dart';
@@ -360,6 +361,13 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     _hero('Bebeğinizin Sağlığı İçin\nTüm Rehber Burada',
       bebekAdi.isEmpty ? 'Beslenme, bakım, gelişim ve sağlık bir arada.' : '$bebekAdi • $yas',
       Icons.child_friendly_rounded, onTap: () => setState(() => sekme = 1), button: 'Keşfet →'),
+    _baslik('Hızlı günlük kayıt ✨'),
+    DailyQuickActions(
+      onFeeding: () => _olayEkle('Beslenme'),
+      onSleep: () => _olayEkle('Uyku'),
+      onDiaper: () => _olayEkle('Bez'),
+      onMeasurement: _olcumEkle,
+    ),
     _baslik('Kategorileri keşfet 🌸'),
     LayoutBuilder(builder: (context, constraints) => GridView.count(
       crossAxisCount: constraints.maxWidth < 350 ? 2 : 4,
