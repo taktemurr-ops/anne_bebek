@@ -163,7 +163,7 @@ class BackupService {
     return result;
   }
 
-  /// Replace only supported app keys. Roll back if a write fails.
+  /// Restore only keys present in the backup. Roll back if a write fails.
   static Future<int> restore(String raw) async {
     final data = parse(raw); // validate everything before touching storage
     final p = await SharedPreferences.getInstance();
@@ -176,20 +176,16 @@ class BackupService {
           : (SecureHealthStore.keys.contains(key) ? secureBefore : p.get(key));
     }
     try {
-      for (final key in keys) {
-        if (!data.containsKey(key)) {
-          if (SecureHealthStore.keys.contains(key)) {
-            await SecureHealthStore.delete(key);
-          } else if (!await p.remove(key)) {
-            throw StateError('Kayıt silinemedi: $key');
-          }
+      // Older backups may not include newer feature keys. Never erase
+      // unrelated records merely because an older backup omitted them.
+      for (final entry in data.entries) {
+        final key = entry.key;
+        final value = entry.value;
+        if (SecureHealthStore.keys.contains(key)) {
+          await SecureHealthStore.write(key, key == 'pregnancy_checklist_v3'
+              ? jsonEncode(value) : value as String);
         } else {
-          if (SecureHealthStore.keys.contains(key)) {
-            await SecureHealthStore.write(key, key == 'pregnancy_checklist_v3'
-                ? jsonEncode(data[key]!) : data[key]! as String);
-          } else {
-            await _write(p, key, data[key]!);
-          }
+          await _write(p, key, value);
         }
       }
     } catch (_) {
