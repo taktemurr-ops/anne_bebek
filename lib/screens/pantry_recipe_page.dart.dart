@@ -52,8 +52,10 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
       final ok = await prefs.setString(_storageKey, jsonEncode(_pantry.toList()..sort()));
       if (!ok) throw StateError('Kaydedilemedi');
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Malzemeler kaydedilemedi.')));
+      }
     }
   }
 
@@ -113,8 +115,10 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('$added malzeme alışveriş listesine eklendi.')));
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Alışveriş listesi güncellenemedi; mevcut kayıtlar korunuyor.')));
+      }
     }
   }
 
@@ -156,7 +160,9 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
     for (final r in generalRecipes) {
       if (_category != 'Tümü' && r.category != _category) continue;
       if (query.isNotEmpty && !_normalize(r.title).contains(query) &&
-          !r.ingredients.any((i) => _normalize(i).contains(query))) continue;
+          !r.ingredients.any((i) => _normalize(i).contains(query))) {
+        continue;
+      }
       final total = r.ingredients.length;
       if (total == 0) continue;
       final matched = r.ingredients.where(_have).length;

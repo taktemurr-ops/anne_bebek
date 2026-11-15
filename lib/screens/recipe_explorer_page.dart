@@ -76,8 +76,10 @@ class _RecipeExplorerPageState extends State<RecipeExplorerPage> {
           ? '$added malzeme alışveriş listesine eklendi.'
           : 'Alışveriş listesi kaydedilemedi.')));
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Alışveriş listesi okunamadı; mevcut veriler korunuyor.')));
+      }
     }
   }
 
@@ -334,11 +336,15 @@ class _InteractiveRecipeDetailsState extends State<_InteractiveRecipeDetails> {
     try {
       final p = await SharedPreferences.getInstance();
       final ok = await p.setString(_noteKey, _notes.text);
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(ok ? 'Tarif notun kaydedildi.' : 'Not kaydedilemedi.')));
+      }
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Not kaydedilemedi; mevcut kayıtlar korunuyor.')));
+      }
     } finally { if (mounted) setState(() => _saving = false); }
   }
 

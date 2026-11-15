@@ -74,8 +74,10 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
       }
       _hasStoredWeek = true;
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Plan kaydedilemedi. Lütfen tekrar deneyin.')));
+      }
     }
   }
 

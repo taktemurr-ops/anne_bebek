@@ -80,8 +80,10 @@ class _ModuleHubPageState extends State<ModuleHubPage> {
             final rows = <String>['Kategori,Modül',
               ...modules.map((m) => '"${m.$1}","${m.$2}"')];
             await Clipboard.setData(ClipboardData(text: rows.join('\\n')));
-            if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Modül listesi panoya kopyalandı.')));
+            }
           }),
       ]),
       body: ListView(padding: const EdgeInsets.all(16), children: [

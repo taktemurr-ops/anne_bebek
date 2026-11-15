@@ -114,8 +114,10 @@ class _WeeklyShoppingAssistantPageState extends State<WeeklyShoppingAssistantPag
       setState(() => _existing..clear()..addAll(normalized));
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$count yeni ürün mevcut alışveriş listesine eklendi.')));
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Alışveriş listesi kaydedilemedi; eski kayıtlar korundu.')));
+      }
     }
   }
 

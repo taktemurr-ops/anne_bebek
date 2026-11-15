@@ -113,9 +113,11 @@ class _DailyMealSuggestionsPageState extends State<DailyMealSuggestionsPage> {
       if (!saved) throw StateError('Kayıt başarısız');
       if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$day $meal planına eklendi.')));
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Plan kaydedilemedi; mevcut kayıtlar korunuyor.')),
       );
+      }
     } finally {
       if (mounted) setState(() => _busy = false);
     }

@@ -121,8 +121,10 @@ class _ProjectCompletionCenterPageState extends State<ProjectCompletionCenterPag
       }
     }
     await Clipboard.setData(ClipboardData(text: '\uFEFF${rows.join('\r\n')}'));
-    if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Kontrol raporu CSV olarak panoya kopyalandı.')));
+    }
   }
 
   @override

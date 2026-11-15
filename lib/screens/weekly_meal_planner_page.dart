@@ -74,8 +74,10 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
       }
       _hasStoredWeek = true;
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Plan kaydedilemedi. Lütfen tekrar deneyin.')));
+      }
     }
   }
 
@@ -132,8 +134,10 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
       final prefs = await SharedPreferences.getInstance();
       final raw = prefs.getString(previousKey);
       if (raw == null) {
-        if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Önceki hafta için kayıtlı plan bulunamadı.')));
+        }
         return;
       }
       final decoded = jsonDecode(raw);
@@ -146,8 +150,10 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
         }
       }
       if (additions.isEmpty) {
-        if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Aktarılabilecek boş öğün bulunamadı.')));
+        }
         return;
       }
       if (!mounted) return;
@@ -162,11 +168,15 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
       if (approved != true || !mounted) return;
       setState(() => _plan.addAll(additions));
       await _save();
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('${additions.length} öğün önceki haftadan aktarıldı.')));
+      }
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Önceki hafta okunamadı. Eski kayıtlar korundu.')));
+      }
     }
   }
 

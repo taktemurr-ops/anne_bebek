@@ -98,8 +98,10 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
         throw StateError('Kullanım bilgileri kaydedilemedi');
       }
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Malzemeler kaydedilemedi.')));
+      }
     }
   }
 
@@ -299,8 +301,10 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
     final current = _details[item]?['quantity'] ?? '';
     final match = RegExp(r'^\s*(\d+(?:[.,]\d+)?)\s*(.*)$').firstMatch(current);
     if (match == null) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Önce ürün miktarını sayı ve birim olarak gir (örn. 500 g).')));
+      }
       return;
     }
     final available = double.tryParse(match.group(1)!.replaceAll(',', '.')) ?? 0;
@@ -417,8 +421,10 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('$added malzeme alışveriş listesine eklendi.')));
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Alışveriş listesi güncellenemedi; mevcut kayıtlar korunuyor.')));
+      }
     }
   }
 
