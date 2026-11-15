@@ -390,6 +390,39 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       onDiaper: () => _olayEkle('Bez değişimi'),
       onMeasurement: _olcumEkle,
     ),
+    _baslik('Gelişim ve beslenme'),
+    _panel(
+      child: Column(children: [
+        ListTile(
+          leading: const Icon(Icons.monitor_weight_outlined, color: mor),
+          title: const Text('Büyüme geçmişi'),
+          subtitle: Text(olcumler.isEmpty
+              ? 'Henüz ölçüm eklenmedi'
+              : '${olcumler.length} ölçüm kaydı • grafiklere göz at'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => _sayfa('Büyüme Grafikleri',
+              GrowthChartsPage(measurements: olcumler)),
+        ),
+        const Divider(height: 1),
+        ListTile(
+          leading: const Icon(Icons.restaurant_menu_rounded, color: mor),
+          title: const Text('Bebeğime uygun tarifler'),
+          subtitle: const Text('Yaş, kategori ve malzemeye göre keşfet'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (_) => const BabyRecipesPage())),
+        ),
+        const Divider(height: 1),
+        ListTile(
+          leading: const Icon(Icons.security_outlined, color: mor),
+          title: const Text('Şifreli yedekleme ve geri yükleme'),
+          subtitle: const Text('Kayıtlarını güvenli biçimde dışa aktar'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (_) => const BackupPage())),
+        ),
+      ]),
+    ),
     _baslik('Kategorileri keşfet 🌸'),
     LayoutBuilder(builder: (context, constraints) => GridView.count(
       crossAxisCount: constraints.maxWidth < 350 ? 2 : 4,
