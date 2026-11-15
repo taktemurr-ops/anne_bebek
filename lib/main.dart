@@ -361,11 +361,33 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     _hero('Bebeğinizin Sağlığı İçin\nTüm Rehber Burada',
       bebekAdi.isEmpty ? 'Beslenme, bakım, gelişim ve sağlık bir arada.' : '$bebekAdi • $yas',
       Icons.child_friendly_rounded, onTap: () => setState(() => sekme = 1), button: 'Keşfet →'),
+    _panel(
+      color: const Color(0xFFFFEAF5),
+      child: ListTile(
+        leading: const Icon(Icons.face_rounded, color: mor, size: 32),
+        title: Text(bebekAdi.isEmpty ? 'Bebek profilini tamamla' : bebekAdi,
+          style: const TextStyle(fontWeight: FontWeight.w700)),
+        subtitle: Text(yas),
+        trailing: const Icon(Icons.edit_outlined, color: mor),
+        onTap: _profil,
+      ),
+    ),
+    _baslik('Bugünkü takip özeti'),
+    _panel(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _sayac('Beslenme', 'Beslenme'),
+          _sayac('Uyku', 'Uyku'),
+          _sayac('Bez', 'Bez değişimi'),
+        ],
+      ),
+    ),
     _baslik('Hızlı günlük kayıt ✨'),
     DailyQuickActions(
-      onFeeding: () => _olayEkle('Beslenme'),
-      onSleep: () => _olayEkle('Uyku'),
-      onDiaper: () => _olayEkle('Bez'),
+      onFeeding: () => _sayfa('Beslenme günlüğüm', const TrackingJournalPage()),
+      onSleep: () => _sayfa('Uyku günlüğüm', const SleepJournalPage()),
+      onDiaper: () => _olayEkle('Bez değişimi'),
       onMeasurement: _olcumEkle,
     ),
     _baslik('Kategorileri keşfet 🌸'),
