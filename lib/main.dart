@@ -24,6 +24,7 @@ import 'screens/reminders_page.dart';
 import 'screens/release_check_page.dart';
 import 'widgets/quick_access.dart';
 import 'widgets/daily_quick_actions.dart';
+import 'utils/baby_age.dart';
 import 'sleep_journal.dart';
 import 'dart:convert';
 import 'extra_features.dart';
@@ -172,12 +173,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   }
 
   String _tarih(DateTime d) => '${d.day.toString().padLeft(2, '0')}.${d.month.toString().padLeft(2, '0')}.${d.year}';
-  String get yas {
-    if (dogum == null) return 'Doğum tarihi eklenmedi';
-    final gun = DateTime.now().difference(dogum!).inDays;
-    if (gun < 0) return 'Doğum bekleniyor';
-    return gun < 30 ? '$gun günlük' : '${(gun / 30.44).floor()} aylık (yaklaşık)';
-  }
+  String get yas => BabyAge.label(dogum, DateTime.now());
 
   void _profillerAc() => Navigator.of(context).push(
     MaterialPageRoute<void>(builder: (_) => const ChildProfilesPage()));
