@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'secure_health_store.dart';
+import 'child_profiles.dart';
+import 'child_journals.dart';
 
 /// Portable, plaintext backup of the app's own local records.
 /// NOT encrypted: users must store and transfer it securely.
@@ -10,6 +12,7 @@ class BackupService {
   static const maxBytes = 3 * 1024 * 1024;
   static const keys = <String>{
     'bebekAdi', 'dogum', 'sonAdet', 'olaylar', 'olcumler',
+    'child_profiles_directory_v58', 'child_journal_entries_v59',
     'alisveris', 'favoriler', 'sepet', 'tamamlanan',
     'anne_bebek_lifehub_v1', 'pregnancy_last_period_v3',
     'pregnancy_checklist_v3', 'family_calendar_v3',
@@ -74,6 +77,22 @@ class BackupService {
       if (entry.key == 'pregnancy_checklist_v3' && value is! List<String>) {
         if (value is! List || !value.every((item) => item is String)) {
           throw const FormatException('Gebelik kontrol listesi geçersiz.');
+        }
+      }
+      // Çoklu çocuk kayıtlarını geri yüklemeden önce model düzeyinde doğrula.
+      if (entry.key == 'child_profiles_directory_v58' ||
+          entry.key == 'child_journal_entries_v59') {
+        if (value is! String) {
+          throw const FormatException('Çocuk profili veya günlüğü geçersiz.');
+        }
+        try {
+          if (entry.key == 'child_profiles_directory_v58') {
+            decodeChildProfiles(value);
+          } else {
+            decodeChildJournal(value);
+          }
+        } catch (_) {
+          throw const FormatException('Çocuk profili veya günlüğü geçersiz.');
         }
       }
       if (entry.key == 'baby_v2') {
