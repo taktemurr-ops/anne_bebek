@@ -7,37 +7,51 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   flutter-check:
+    name: Flutter Analyze, Test ve APK
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
-      - name: Checkout
+      - name: Kaynak kodlarini indir
         uses: actions/checkout@v4
 
-      - name: Java kurulumu
+      - name: Java 17 kurulumu
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
-      - name: Flutter kurulumu
+      - name: Flutter 3.47.9 kurulumu
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.47.9'
           channel: stable
           cache: true
 
-      - name: Flutter surumu
+      - name: Flutter surumunu kontrol et
         run: flutter --version
 
-      - name: Paketleri yukle
+      - name: Bagimliliklari yukle
         run: flutter pub get
 
       - name: Flutter analiz
         run: flutter analyze
 
-      - name: Flutter test
+      - name: Flutter testleri
         run: flutter test
 
-      - name: Android APK derleme
+      - name: Android APK olustur
         run: flutter build apk --debug
+
+      - name: APK dosyasini kaydet
+        uses: actions/upload-artifact@v4
+        with:
+          name: anne-bebek-debug-apk
+          path: build/app/outputs/flutter-apk/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
