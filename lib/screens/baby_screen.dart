@@ -4,8 +4,6 @@ import '../services/app_store.dart';
 import '../widgets/ui.dart';
 import 'baby_health_page.dart';
 import 'child_profiles_page.dart';
-import 'child_growth_trends_page.dart';
-import 'child_journal_page.dart';
 import 'module_hub_page.dart';
 
 class BabyScreen extends StatelessWidget {
@@ -48,11 +46,11 @@ class BabyScreen extends StatelessWidget {
           MaterialPageRoute<void>(builder: (_) => const BabyHealthPage())),
           icon: const Icon(Icons.monitor_heart_outlined), label: const Text('Bebek sağlığı')),
         OutlinedButton.icon(onPressed: () => Navigator.push(context,
-          MaterialPageRoute<void>(builder: (_) => const ChildGrowthTrendsPage())),
-          icon: const Icon(Icons.show_chart), label: const Text('Büyüme trendleri')),
+          MaterialPageRoute<void>(builder: (_) => const ChildProfilesPage())),
+          icon: const Icon(Icons.show_chart), label: const Text('Büyüme trendleri (çocuk seç)')),
         OutlinedButton.icon(onPressed: () => Navigator.push(context,
-          MaterialPageRoute<void>(builder: (_) => const ChildJournalPage())),
-          icon: const Icon(Icons.book_outlined), label: const Text('Günlük')),
+          MaterialPageRoute<void>(builder: (_) => const ChildProfilesPage())),
+          icon: const Icon(Icons.book_outlined), label: const Text('Günlük (çocuk seç)')),
       ]),
       const SizedBox(height: 12),
 

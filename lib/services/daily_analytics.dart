@@ -96,11 +96,7 @@ WeeklyBabyComparison compareBabyWeeks(
       values.fold(0, (sum, item) => sum + item.sleepMinutes);
   int solidsTotal(Iterable<DailyBabyStats> values) =>
       values.fold(0, (sum, item) => sum + item.solids);
-
-  final currentSolids = solidsTotal(previous);
-  final previousSolids = solidsTotal(current);
-
   return WeeklyBabyComparison(formula(current), formula(previous),
       sleepTotal(current), sleepTotal(previous),
-      currentSolids, previousSolids);
+      solidsTotal(current), solidsTotal(previous));
 }

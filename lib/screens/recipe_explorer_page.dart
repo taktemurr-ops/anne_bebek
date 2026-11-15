@@ -261,7 +261,7 @@ class _InteractiveRecipeDetailsState extends State<_InteractiveRecipeDetails> {
             },
           ),
           DropdownButtonFormField<String>(
-            value: meal, decoration: const InputDecoration(labelText: 'Öğün'),
+            initialValue: meal, decoration: const InputDecoration(labelText: 'Öğün'),
             items: _meals.map((m) => DropdownMenuItem(value: m, child: Text(m))).toList(),
             onChanged: (v) { if (v != null) update(() => meal = v); },
           ),

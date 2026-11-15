@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,35 +16,16 @@ class SecureHealthStore {
     'olaylar', 'olcumler', 'baby_sleep_journal_v1',
     'baby_v2', 'entries_v2', 'anne_bebek_lifehub_v1', 'women_lifestyle_v1', 'product_catalog_v1', 'cloud_auth_session_v1',
   };
-  static final FlutterSecureStorage _storage = FlutterSecureStorage(
+  static const FlutterSecureStorage _storage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
   );
-
-  static Future<bool> _secureStorageAvailable() async {
-    try {
-      await _storage.read(key: '__secure_health_store_probe__');
-      return true;
-    } on MissingPluginException {
-      return false;
-    } on PlatformException catch (error) {
-      if (error.code == 'MissingPluginException') {
-        return false;
-      }
-      rethrow;
-    }
-  }
 
   /// Migration is idempotent. Delete legacy plaintext ONLY after a successful
   /// secure write and read-back. Errors propagate instead of losing records.
   static Future<String?> read(String key) async {
     _checkKey(key);
-    final prefs = await SharedPreferences.getInstance();
-    if (!await _secureStorageAvailable()) {
-      return key == 'pregnancy_checklist_v3'
-          ? (prefs.getStringList(key) == null ? null : _encodeList(prefs.getStringList(key)!))
-          : prefs.getString(key);
-    }
     final existing = await _storage.read(key: key);
+    final prefs = await SharedPreferences.getInstance();
     final legacy = key == 'pregnancy_checklist_v3'
         ? (prefs.getStringList(key) == null ? null : _encodeList(prefs.getStringList(key)!))
         : prefs.getString(key);
@@ -75,11 +55,6 @@ class SecureHealthStore {
 
   static Future<void> write(String key, String value) async {
     _checkKey(key);
-    final prefs = await SharedPreferences.getInstance();
-    if (!await _secureStorageAvailable()) {
-      await prefs.setString(key, value);
-      return;
-    }
     // Prevent overwriting an un-migrated, different plaintext record.
     // Call read first to complete migration and detect any conflict.
     await read(key);
@@ -88,6 +63,7 @@ class SecureHealthStore {
       throw StateError('Güvenli kayıt doğrulanamadı: $key');
     }
     // Cleanup in case a legacy copy remained after an interrupted migration.
+    final prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey(key) && !await prefs.remove(key)) {
       throw StateError('Eski kayıt kaldırılamadı: $key');
     }
@@ -95,14 +71,10 @@ class SecureHealthStore {
 
   static Future<void> delete(String key) async {
     _checkKey(key);
-    final prefs = await SharedPreferences.getInstance();
-    if (!await _secureStorageAvailable()) {
-      await prefs.remove(key);
-      return;
-    }
     // Remove both copies when explicitly deleting, including after a failed
     // migration. This is intentionally different from read/write behavior.
     await _storage.delete(key: key);
+    final prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey(key) && !await prefs.remove(key)) {
       throw StateError('Eski kayıt kaldırılamadı: $key');
     }

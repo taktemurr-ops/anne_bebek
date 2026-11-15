@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'integration_status_page.dart';
 import 'project_completion_center_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,9 +17,9 @@ const releaseChecks = <String>[
   'iOS derleme ve TestFlight doğrulaması yapıldı (Mac gerekli)',
   'Mağaza ekran görüntüleri, izinler ve gizlilik beyanı hazır',
   'Hassas verilerle temiz kurulum ve yükseltme senaryosu test edildi',
-  'İki forumlarının canlı Supabase bağlantısı ve RLS politikaları doğrulandı',
+  'İki forumun canlı Supabase bağlantısı ve RLS politikaları doğrulandı',
   'Premium için gerçek mağaza satın alma ve geri yükleme akışları doğrulandı',
-  'AI servisine sunucu bağlantısı, kota ve sağlık güvenliği kontrolleri doğrulandı',
+  'AI asistanı sunucu bağlantısı, kota ve sağlık güvenliği kontrolleri doğrulandı',
   'İnternet kapalıyken yerel kayıtlar ve ekran geçişleri denendi',
   'Tarif arama, favori ve alışveriş listesi yeniden başlatmadan sonra kontrol edildi',
   'Kullanıcı verileri korunarak önceki paket üzerinden yükseltme denendi',
@@ -35,6 +35,7 @@ const releaseChecks = <String>[
   'Hassas sağlık kayıtlarının yedekleme ve geri yükleme akışı denendi',
   'Çevrimdışı modül geçişleri ve hata durumları kontrol edildi',
   'Gerçek Android ve iOS derleme hataları giderildi',
+
 ];
 
 class ReleaseCheckPage extends StatefulWidget {
@@ -45,7 +46,7 @@ class ReleaseCheckPage extends StatefulWidget {
 }
 
 class _ReleaseCheckPageState extends State<ReleaseCheckPage> {
-  static const _key = 'release_checks_v32';
+  static const _key = 'release_checks_v32_final_audit';
   Set<int> checked = {};
   bool loading = true;
   bool saving = false;

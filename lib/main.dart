@@ -640,7 +640,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       const SizedBox(height: 12),
       SingleChildScrollView(scrollDirection: Axis.horizontal,
         child: Row(children: categories.map((f) => Padding(
-          padding: const EdgeInsets.only(right: 8)),
+          padding: const EdgeInsets.only(right: 8),
           child: ChoiceChip(label: Text(f), selected: selected == f,
             selectedColor: const Color(0xFF9E60C8),
             labelStyle: TextStyle(color: selected == f ? Colors.white : mor),

@@ -477,7 +477,7 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
     for (final r in generalRecipes) {
       if (_category != 'Tümü' && r.category != _category) continue;
       if (query.isNotEmpty && !_normalize(r.title).contains(query) &&
-          !r.ingredients.any((i) => _normalize(i).contains(query))) continue;
+          !r.ingredients.any((i) => _normalize(i).contains(query))) { continue ; }
       final total = r.ingredients.length;
       if (total == 0) continue;
       final matched = r.ingredients.where(_have).length;
@@ -579,7 +579,7 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
                 if (_daysLeft(item) != null && _daysLeft(item)! < 0) 'Tarihi geçmiş',
                 if (_daysLeft(item) != null && _daysLeft(item)! >= 0 && _daysLeft(item)! <= 3) 'Son kullanma tarihi yaklaşıyor',
               ].join(' • ')),
-              trailing: Wrap(mainAxisSize: MainAxisSize.min, children: [
+              trailing: Wrap(children: [
                 IconButton(tooltip: 'Tüketim kaydet', icon: const Icon(Icons.remove_circle_outline),
                   onPressed: () => _consume(item)),
                 IconButton(tooltip: 'Ürünü sil', icon: const Icon(Icons.delete_outline),

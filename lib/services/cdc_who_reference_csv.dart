@@ -64,11 +64,14 @@ class CdcWhoReferenceCsv {
     if (rows.isEmpty || rows.first.completedMonth != 0) {
       throw const FormatException('Doğum referansı eksik');
     }
+    if (rows.length != 25 || anyMissingMonth(rows)) {
+      throw const FormatException('WHO 0–24 ay referansının 25 ayı da bulunmalı');
+    }
     return List.unmodifiable(rows);
   }
 
   static bool anyMissingMonth(List<CdcWhoRow> rows) =>
-      rows.isEmpty || rows.first.completedMonth != 0 || rows.any((row) => row.completedMonth < 0 || row.completedMonth > 24);
+      rows.length != 25 || List.generate(25, (i) => i).any((i) => rows[i].completedMonth != i);
 
   static double? percentileAtCompletedMonth(List<CdcWhoRow> rows, int month, double value) {
     for (final row in rows) {

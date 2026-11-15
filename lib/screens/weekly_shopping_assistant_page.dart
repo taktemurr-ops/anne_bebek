@@ -59,7 +59,7 @@ class _WeeklyShoppingAssistantPageState extends State<WeeklyShoppingAssistantPag
         Text('Alışveriş için seçilen: ${_selected.where((n) => !_atHome(n)).length}'),
         const SizedBox(height: 12),
         const Text('Eksiklerin kategori dağılımı:', style: TextStyle(fontWeight: FontWeight.bold)),
-        ...((categories.entries.toList()..sort((a,b) => a.key.compareTo(b.key))).map((e) => Padding(
+        ...(categories.entries.toList()..sort((a,b) => a.key.compareTo(b.key))).map((e) => Padding(
           padding: const EdgeInsets.only(top: 5), child: Text('${e.key}: ${e.value}'))),
         const SizedBox(height: 10),
         const Text('Miktarlar farklı ölçü birimlerinde otomatik birleştirilmez.', style: TextStyle(fontSize: 12)),

@@ -6,8 +6,6 @@ import 'weekly_meal_planner_page.dart';
 import 'baby_recipes_page.dart';
 import 'baby_health_page.dart';
 import 'child_profiles_page.dart';
-import 'child_growth_trends_page.dart';
-import 'child_journal_page.dart';
 import 'womens_health_journal_page.dart';
 import 'postpartum_care_page.dart';
 import 'backup_page.dart';
@@ -32,8 +30,8 @@ class _ModuleHubPageState extends State<ModuleHubPage> {
   final modules = <(String, String, IconData, Widget)>[
     ('Bebek', 'Çocuk profilleri', Icons.people_outline, const ChildProfilesPage()),
     ('Bebek', 'Bebek sağlığı', Icons.monitor_heart_outlined, const BabyHealthPage()),
-    ('Bebek', 'Büyüme trendleri', Icons.show_chart, const ChildGrowthTrendsPage()),
-    ('Bebek', 'Çocuk günlüğü', Icons.book_outlined, const ChildJournalPage()),
+    ('Bebek', 'Büyüme trendleri (çocuk seçimi)', Icons.show_chart, const ChildProfilesPage()),
+    ('Bebek', 'Çocuk günlüğü (çocuk seçimi)', Icons.book_outlined, const ChildProfilesPage()),
     ('Mutfak', 'Akıllı alışveriş', Icons.shopping_basket_outlined, const SmartShoppingPage()),
     ('Mutfak', 'Haftalık yemek planı', Icons.restaurant_menu, const WeeklyMealPlannerPage()),
     ('Mutfak', 'Bebek tarifleri', Icons.rice_bowl_outlined, const BabyRecipesPage()),
@@ -80,7 +78,7 @@ class _ModuleHubPageState extends State<ModuleHubPage> {
           icon: const Icon(Icons.copy_all_outlined),
           onPressed: () async {
             final rows = <String>['Kategori,Modül',
-              ...modules.map((m) => '\"${m.$1}\",\"${m.$2}\"')];
+              ...modules.map((m) => '"${m.$1}","${m.$2}"')];
             await Clipboard.setData(ClipboardData(text: rows.join('\\n')));
             if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Modül listesi panoya kopyalandı.')));

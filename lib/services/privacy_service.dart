@@ -10,12 +10,8 @@ class PrivacyService {
     var removed = 0;
     for (final key in BackupService.keys) {
       if (SecureHealthStore.keys.contains(key)) {
-        final existsInSecure = (await SecureHealthStore.read(key)) != null;
-        final existsInPlaintext = prefs.containsKey(key);
-        if (existsInSecure || existsInPlaintext) {
-          await SecureHealthStore.delete(key);
-          removed++;
-        }
+        await SecureHealthStore.delete(key);
+        removed++;
         continue;
       }
       if (prefs.containsKey(key)) {
