@@ -263,6 +263,23 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   bool _olcumGecerli(String metin, double? deger, double min, double max) =>
       metin.trim().isEmpty || (deger != null && deger.isFinite && deger >= min && deger <= max);
 
+  // Kayıt başarısız olursa silinen öğeyi eski konumuna geri koy.
+  Future<void> _kayitSil(
+    List<Map<String, String>> liste,
+    Map<String, String> kayit,
+  ) async {
+    final index = liste.indexOf(kayit);
+    if (index < 0) return;
+    setState(() => liste.removeAt(index));
+    final basarili = await _kaydet();
+    if (!mounted) return;
+    if (!basarili) {
+      setState(() => liste.insert(index.clamp(0, liste.length), kayit));
+    }
+    _kayitBildir(basarili,
+        basariMesaji: 'Kayıt silindi.');
+  }
+
   Future<void> _urunEkle() async {
     final urun = TextEditingController();
     await showDialog<void>(context: context, builder: (ctx) => AlertDialog(
@@ -525,7 +542,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     ...olaylar.take(30).map((o) => _panel(child: ListTile(
       leading: const Icon(Icons.check_circle_outline, color: mor), title: Text(o['tur'] ?? ''),
       subtitle: Text('${_guvenliTarih(o['zaman'])}  ${o['not'] ?? ''}'),
-      trailing: IconButton(icon: const Icon(Icons.delete_outline), onPressed: () {setState(() => olaylar.remove(o)); _kaydet();})))),
+      trailing: IconButton(icon: const Icon(Icons.delete_outline), onPressed: () => _kayitSil(olaylar, o))))),
     _panel(color: const Color(0xFFF1E6FF), child: ListTile(
       leading: const Icon(Icons.show_chart, color: mor),
       title: const Text('Boy / kilo grafiklerini görüntüle'),
@@ -537,7 +554,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     ...olcumler.map((o) => _panel(child: ListTile(leading: const Icon(Icons.show_chart, color: mor),
       title: Text('Boy: ${_olcumMetni(o['boy'], 'cm')}  •  Kilo: ${_olcumMetni(o['kilo'], 'kg')}\nBaş çevresi: ${_olcumMetni(o['basCevresi'], 'cm')}'),
       subtitle: Text(_guvenliTarih(o['tarih'])),
-      trailing: IconButton(icon: const Icon(Icons.delete_outline), onPressed: () {setState(() => olcumler.remove(o)); _kaydet();})))),
+      trailing: IconButton(icon: const Icon(Icons.delete_outline), onPressed: () => _kayitSil(olcumler, o))))),
     _baslik('Bakım rehberi'),
     _rehberKart('Bebek Masajı', Icons.spa), _rehberKart('Bebek Gelişimi', Icons.auto_graph),
     _rehberKart('Beslenme', Icons.restaurant), _rehberKart('Uyku Düzeni', Icons.bedtime),
