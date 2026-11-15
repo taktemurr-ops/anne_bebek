@@ -134,4 +134,22 @@ void main() {
     }
   });
 
+  test('eski yedek mevcut yeni modül kayıtlarını silmez', () async {
+    SharedPreferences.setMockInitialValues({
+      'shopping_v2': '[{"item":"korunacak"}]',
+      'alisveris': '[]',
+    });
+    final oldBackup = jsonEncode({
+      'format': BackupService.format,
+      'version': 1,
+      'data': {'bebekAdi': 'Yedekten gelen'},
+    });
+    final restored = await BackupService.restore(oldBackup);
+    expect(restored, 1);
+    final prefs = await SharedPreferences.getInstance();
+    expect(prefs.getString('shopping_v2'), '[{"item":"korunacak"}]');
+    expect(prefs.getString('alisveris'), '[]');
+    expect(await SecureHealthStore.read('bebekAdi'), 'Yedekten gelen');
+  });
+
 }
