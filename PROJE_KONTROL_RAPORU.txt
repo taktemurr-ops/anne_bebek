@@ -1,0 +1,25 @@
+ANNE & BEBEK — BÜTÜNLEŞİK PROJE KONTROL RAPORU
+Kaynak: lib(10) önceki onarım sürümü + bu tur android(4), ios(4), test(5), pubspec(6).
+Dart kaynak: 112 lib + 59 test = 171.
+Yerel import/export/part taraması: 0 eksik.
+Harici paket taraması: tüm kullanılan paketler pubspec içinde tanımlı.
+Android: bildirim izinleri ve alıcıları mevcut; Java 17 ve desugaring yapılandırılmış.
+DİKKAT: Android applicationId com.example.anne_bebek örnek kimliktir.
+DİKKAT: Android release yapılandırması debug imzasını kullanıyor; mağazaya yayın için değiştirilmelidir.
+Flutter/Dart SDK ve cihaz testi burada çalıştırılamadı; DERLEME BAŞARILI iddiası yoktur.
+Bu paket mevcut kaynakların konsolidasyonu ve statik doğrulamasıdır; bütün işlevlerin tamamlandığını garanti etmez.
+
+YEREL DOĞRULAMA:
+flutter pub get
+flutter analyze
+flutter test
+flutter build apk --debug
+flutter build appbundle --release  # YALNIZCA gerçek imzalama yapılandırmasından sonra
+iOS: macOS üzerinde pod install ve flutter build ios --no-codesign
+
+KALAN KRİTİK İŞLER:
+- Flutter analyzer hatalarını gerçek SDK üzerinde gidermek.
+- 59 test dosyasını çalıştırıp başarısız testleri düzeltmek.
+- Android üretim applicationId, release keystore, sürüm ve izin incelemesi.
+- iOS signing/provisioning, bildirim izinleri ve gerçek cihaz testi.
+- Yedekleme, sağlık verileri, forum ve AI servisleri için uçtan uca güvenlik testleri.

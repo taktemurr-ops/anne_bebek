@@ -1,0 +1,43 @@
+# Flutter / Dart generated files
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+coverage/
+**/doc/api/
+*.g.dart
+*.freezed.dart
+
+# IDE / local machine
+.idea/
+.vscode/*.log
+*.iml
+*.swp
+.DS_Store
+Thumbs.db
+android/local.properties
+android/key.properties
+android/*.jks
+android/*.keystore
+*.keystore
+*.jks
+
+# Android / iOS generated output
+android/.gradle/
+android/captures/
+android/app/build/
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/ephemeral/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+**/DerivedData/
+*.xcuserstate
+
+# Sensitive local configuration
+.env
+.env.*
+!.env.example

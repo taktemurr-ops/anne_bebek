@@ -1,0 +1,328 @@
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../data/baby_recipe_catalog.dart';
+
+/// Mevcut baby_recipe_catalog.dart veri modelini değiştirmeden kullanır.
+class BabyRecipesPage extends StatefulWidget {
+  const BabyRecipesPage({super.key});
+
+  @override
+  State<BabyRecipesPage> createState() => _BabyRecipesPageState();
+}
+
+class _BabyRecipesPageState extends State<BabyRecipesPage> {
+  static const _favoritesKey = 'baby_recipe_favorites_v1';
+  final _searchController = TextEditingController();
+  final Set<String> _favorites = <String>{};
+  String _query = '';
+  String _age = 'Tümü';
+  String _category = 'Tümü';
+  bool _favoritesOnly = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFavorites();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _loadFavorites() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      if (!mounted) return;
+      setState(() {
+        _favorites
+          ..clear()
+          ..addAll(prefs.getStringList(_favoritesKey) ?? const <String>[]);
+      });
+    } catch (error) {
+      debugPrint('Bebek tarifi favorileri yüklenemedi: $error');
+    }
+  }
+
+  Future<void> _toggleFavorite(String id) async {
+    setState(() {
+      if (!_favorites.add(id)) _favorites.remove(id);
+    });
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final saved = await prefs.setStringList(_favoritesKey, _favorites.toList());
+      if (!saved) throw StateError('Favoriler kaydedilemedi');
+    } catch (error) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Favori kaydedilemedi. Tekrar deneyin.')),
+      );
+      debugPrint('Bebek tarifi favori kayıt hatası: $error');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final categories = <String>[
+      'Tümü',
+      ...{for (final recipe in babyRecipes) recipe.category},
+    ];
+    final ages = <String>[
+      'Tümü',
+      ...{for (final recipe in babyRecipes) recipe.age},
+    ];
+    final normalizedQuery = _query.trim().toLowerCase();
+    final visible = babyRecipes.where((recipe) {
+      final ageMatches = _age == 'Tümü' || recipe.age == _age;
+      final categoryMatches =
+          _category == 'Tümü' || recipe.category == _category;
+      final favoriteMatches = !_favoritesOnly || _favorites.contains(recipe.id);
+      final searchText = [
+        recipe.title,
+        recipe.ingredient,
+        recipe.vegetable,
+        ...recipe.ingredients,
+      ].join(' ').toLowerCase();
+      return ageMatches && categoryMatches && favoriteMatches &&
+          searchText.contains(normalizedQuery);
+    }).toList();
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Bebek tarifleri')),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(14, 12, 14, 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFEAF5),
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Bebeğim için tarifler 💗',
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800,
+                                color: Color(0xFF48235F))),
+                        const SizedBox(height: 6),
+                        Text('${babyRecipes.length} tarif varyasyonu • Yaşa ve malzemeye göre keşfet'),
+                        const SizedBox(height: 5),
+                        const Text(
+                          'Yaş etiketleri genel bilgi içindir. Alerjenleri, kıvamı ve bebeğinizin gelişimini dikkate alın.',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _searchController,
+                    onChanged: (value) => setState(() => _query = value),
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.search),
+                      hintText: 'Tarif veya malzeme ara',
+                      suffixIcon: _query.isEmpty ? null : IconButton(
+                        tooltip: 'Aramayı temizle',
+                        onPressed: () {
+                          _searchController.clear();
+                          setState(() => _query = '');
+                        },
+                        icon: const Icon(Icons.close),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(child: DropdownButtonFormField<String>(
+                        key: ValueKey('age_$_age'),
+                        initialValue: _age,
+                        isExpanded: true,
+                        decoration: const InputDecoration(labelText: 'Yaş'),
+                        items: ages.map((value) => DropdownMenuItem(
+                          value: value,
+                          child: Text(value == 'Tümü' ? 'Tüm yaşlar' : '$value ay',
+                              overflow: TextOverflow.ellipsis),
+                        )).toList(),
+                        onChanged: (value) {
+                          if (value != null) setState(() => _age = value);
+                        },
+                      )),
+                      const SizedBox(width: 10),
+                      Expanded(child: DropdownButtonFormField<String>(
+                        key: ValueKey('category_$_category'),
+                        initialValue: _category,
+                        isExpanded: true,
+                        decoration: const InputDecoration(labelText: 'Kategori'),
+                        items: categories.map((value) => DropdownMenuItem(
+                          value: value,
+                          child: Text(value, overflow: TextOverflow.ellipsis),
+                        )).toList(),
+                        onChanged: (value) {
+                          if (value != null) setState(() => _category = value);
+                        },
+                      )),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(child: Text('${visible.length} sonuç',
+                          style: const TextStyle(fontWeight: FontWeight.w600))),
+                      FilterChip(
+                        label: Text('Favoriler (${_favorites.length})'),
+                        avatar: const Icon(Icons.favorite, size: 17),
+                        selected: _favoritesOnly,
+                        onSelected: (value) => setState(() => _favoritesOnly = value),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: visible.isEmpty
+                  ? Center(child: Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.search_off, size: 48,
+                              color: Color(0xFF48235F)),
+                          const SizedBox(height: 10),
+                          const Text('Bu filtrelerde tarif bulunamadı.'),
+                          TextButton(
+                            onPressed: () {
+                              _searchController.clear();
+                              setState(() {
+                                _query = '';
+                                _age = 'Tümü';
+                                _category = 'Tümü';
+                                _favoritesOnly = false;
+                              });
+                            },
+                            child: const Text('Filtreleri temizle'),
+                          ),
+                        ],
+                      ),
+                    ))
+                  : ListView.builder(
+                      padding: const EdgeInsets.fromLTRB(12, 0, 12, 20),
+                      itemCount: visible.length,
+                      itemBuilder: (context, index) {
+                        final recipe = visible[index];
+                        return Card(
+                          child: ListTile(
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 14, vertical: 7),
+                            leading: const CircleAvatar(
+                              backgroundColor: Color(0xFFFFD9ED),
+                              child: Icon(Icons.restaurant_menu,
+                                  color: Color(0xFF48235F)),
+                            ),
+                            title: Text(recipe.title,
+                                style: const TextStyle(fontWeight: FontWeight.w700)),
+                            subtitle: Text('${recipe.age} ay • ${recipe.category}'),
+                            trailing: IconButton(
+                              tooltip: _favorites.contains(recipe.id)
+                                  ? 'Favorilerden çıkar' : 'Favorilere ekle',
+                              icon: Icon(_favorites.contains(recipe.id)
+                                  ? Icons.favorite : Icons.favorite_border,
+                                  color: const Color(0xFFF0449B)),
+                              onPressed: () => _toggleFavorite(recipe.id),
+                            ),
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute<void>(
+                                builder: (_) => _BabyRecipeDetailPage(recipe: recipe),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Katalog modelinin somut tipine bağımlı olmamak için detay sayfası
+// aynı dosyada kurulur; mevcut katalog alanları korunur.
+class _BabyRecipeDetailPage extends StatelessWidget {
+  const _BabyRecipeDetailPage({required this.recipe});
+  final dynamic recipe;
+
+  @override
+  Widget build(BuildContext context) {
+    final ingredients = (recipe.ingredients as List).cast<String>();
+    final steps = (recipe.steps as List).cast<String>();
+    return Scaffold(
+      appBar: AppBar(title: Text(recipe.title as String)),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.all(18),
+          children: [
+            Container(
+              padding: const EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFEAF5),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(recipe.title as String,
+                      style: Theme.of(context).textTheme.headlineSmall),
+                  const SizedBox(height: 8),
+                  Text('${recipe.age} ay ve üzeri • ${recipe.category}'),
+                ],
+              ),
+            ),
+            const SizedBox(height: 18),
+            Text('Malzemeler', style: Theme.of(context).textTheme.titleLarge),
+            ...ingredients.map((item) => ListTile(
+              dense: true,
+              leading: const Icon(Icons.check_circle_outline,
+                  color: Color(0xFF48235F)),
+              title: Text(item),
+            )),
+            const SizedBox(height: 14),
+            Text('Hazırlanışı', style: Theme.of(context).textTheme.titleLarge),
+            ...steps.asMap().entries.map((entry) => ListTile(
+              leading: CircleAvatar(
+                radius: 15,
+                backgroundColor: const Color(0xFFFFD9ED),
+                child: Text('${entry.key + 1}',
+                    style: const TextStyle(color: Color(0xFF48235F))),
+              ),
+              title: Text(entry.value),
+            )),
+            const SizedBox(height: 18),
+            const Card(
+              color: Color(0xFFFFF1F7),
+              child: Padding(
+                padding: EdgeInsets.all(14),
+                child: Text(
+                  'ÖNEMLİ: Ek gıdaya genellikle yaklaşık 6. ayda, gelişimsel hazır oluşa göre başlanır. '
+                  '12 aydan önce bal vermeyin; tuz ve şeker eklemeyin. '
+                  'Bütün kuruyemişler ve sert/yuvarlak parçalar boğulma riski taşır. '
+                  'Alerjenleri kontrol edin, yiyecekleri uygun kıvamda sunun '
+                  've bebeği yemek sırasında yalnız bırakmayın.',
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

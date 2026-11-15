@@ -1,0 +1,13 @@
+{
+  "screens": 38,
+  "dart_files": 99,
+  "recipe_records": 155,
+  "duplicate_recipe_ids": [],
+  "missing_relative_imports": [],
+  "limitations": [
+    "No Flutter compile",
+    "No device tests",
+    "No server tests",
+    "No medical editorial review"
+  ]
+}
