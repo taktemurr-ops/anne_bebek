@@ -2,10 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:anne_bebek/services/cdc_who_reference_csv.dart';
 
 void main() {
-  const sample = 'Sex,Agemos,L,M,S\n1,0,0.3487,3.3464,0.14602\n1,1.5,0.2297,4.4709,0.13395';
+  final sample = ['Sex,Agemos,L,M,S',
+      ...List.generate(25, (i) =>
+        '1,${i == 0 ? '0' : '$i.5'},${i == 0 ? '0.3487' : '0.2297'},${i == 0 ? '3.3464' : '4.4709'},${i == 0 ? '0.14602' : '0.13395'}')].join('\n');
   test('CDC WHO birth median gives approximately 50th percentile', () {
     final rows = CdcWhoReferenceCsv.parse(sample, expectedSex: 1);
-    expect(rows.length, 2);
+    expect(rows.length, 25);
     expect(rows[1].completedMonth, 1);
     expect(CdcWhoReferenceCsv.percentileAtCompletedMonth(rows, 0, 3.3464)!, closeTo(50, 0.01));
   });
@@ -15,15 +17,14 @@ void main() {
     expect(() => CdcWhoReferenceCsv.parse('Sex,Agemos,L,M,S\n1,1.5,0.2,4.5,0.13', expectedSex: 1), throwsFormatException);
   });
   test('filters official mixed-sex reference data correctly', () {
-    const mixed = 'Sex,Agemos,L,M,S\n'
-      '1,0,0.3487,3.3464,0.14602\n'
-      '2,0,0.3809,3.2322,0.14171\n'
-      '1,1.5,0.2297,4.4709,0.13395\n'
-      '2,1.5,0.1714,4.1873,0.13724';
+    final mixed = ['Sex,Agemos,L,M,S', ...List.generate(25, (i) {
+      final age = i == 0 ? '0' : '$i.5';
+      return '1,$age,0.3487,3.3464,0.14602\n2,$age,0.3809,3.2322,0.14171';
+    })].join('\n');
     final boys = CdcWhoReferenceCsv.parse(mixed, expectedSex: 1);
     final girls = CdcWhoReferenceCsv.parse(mixed, expectedSex: 2);
-    expect(boys.length, 2);
-    expect(girls.length, 2);
+    expect(boys.length, 25);
+    expect(girls.length, 25);
     expect(boys.first.lms.m, 3.3464);
     expect(girls.first.lms.m, 3.2322);
   });
@@ -32,6 +33,9 @@ void main() {
   });
   test('does not invent missing reference months', () {
     final rows = CdcWhoReferenceCsv.parse(sample, expectedSex: 1);
-    expect(CdcWhoReferenceCsv.percentileAtCompletedMonth(rows, 3, 6), isNull);
+    // The complete reference contains month 3. Remove it to test a gap
+    // in the lookup without weakening CSV completeness validation.
+    final missingMonthRows = rows.where((row) => row.completedMonth != 3).toList();
+    expect(CdcWhoReferenceCsv.percentileAtCompletedMonth(missingMonthRows, 3, 6), isNull);
   });
 }

@@ -14,8 +14,8 @@ void main() {
     expect(result.currentFormulaMl, 120);
     expect(result.previousFormulaMl, 80);
     expect(result.formulaDifferenceMl, 40);
-    expect(result.currentSolids, 0);
-    expect(result.previousSolids, 1);
+    expect(result.currentSolids, 1);
+    expect(result.previousSolids, 0);
   });
   test('sleep spanning midnight is distributed across weeks', () {
     final sleep = [

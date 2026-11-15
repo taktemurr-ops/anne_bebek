@@ -1,3 +1,5 @@
+import 'package:anne_bebek/services/secure_health_store.dart';
+import 'support/secure_storage_mock.dart';
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -5,6 +7,7 @@ import 'package:anne_bebek/services/backup_service.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  setUp(installSecureStorageMock);
 
   test('valid backup parses and retains records', () {
     final raw = jsonEncode({'format': BackupService.format, 'version': 1,
@@ -72,10 +75,16 @@ void main() {
     SharedPreferences.setMockInitialValues({'bebekAdi': 'Deneme', 'olaylar': '[]'});
     final text = await BackupService.export();
     final prefs = await SharedPreferences.getInstance();
+    // An unexpected conflicting plaintext copy must not be silently
+    // overwritten during restore. Verify the guard, then clean up the
+    // deliberately injected legacy value before restoring the backup.
     await prefs.setString('bebekAdi', 'Degisti');
+    await expectLater(BackupService.restore(text), throwsStateError);
+    await prefs.remove('bebekAdi');
     final count = await BackupService.restore(text);
     expect(count, greaterThanOrEqualTo(2));
-    expect(prefs.getString('bebekAdi'), 'Deneme');
+    expect(await SecureHealthStore.read('bebekAdi'), 'Deneme');
+    expect(prefs.getString('bebekAdi'), isNull);
   });
   test('Life Hub JSON map is preserved and counted correctly', () async {
     final lifeHub = jsonEncode({'Uyku': [{'date': '2026-10-31'}],

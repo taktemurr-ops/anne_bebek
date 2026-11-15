@@ -15,11 +15,11 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('1 / ${releaseChecks.length} kontrol tamamlandı'), findsOneWidget);
     final prefs = await SharedPreferences.getInstance();
-    expect(prefs.getStringList('release_checks_v32'), contains('0'));
+    expect(prefs.getStringList('release_checks_v32_final_audit'), contains('0'));
   });
 
   testWidgets('Kaydedilen kontrol yeni açılışta yüklenir', (tester) async {
-    SharedPreferences.setMockInitialValues({'release_checks_v32': <String>['2', '999', 'gecersiz']});
+    SharedPreferences.setMockInitialValues({'release_checks_v32_final_audit': <String>['2', '999', 'gecersiz']});
     await tester.pumpWidget(const MaterialApp(home: ReleaseCheckPage()));
     await tester.pumpAndSettle();
     expect(find.text('1 / ${releaseChecks.length} kontrol tamamlandı'), findsOneWidget);
@@ -31,8 +31,8 @@ void main() {
     expect(releaseChecks.length, greaterThanOrEqualTo(6));
     expect(releaseChecks.every((item) => item.trim().isNotEmpty), isTrue);
     expect(releaseChecks.toSet().length, releaseChecks.length);
-    expect(releaseChecks.any((item) => item.contains('forumlarının')), isTrue);
+    expect(releaseChecks.any((item) => item.contains('forumun')), isTrue);
     expect(releaseChecks.any((item) => item.contains('satın alma')), isTrue);
-    expect(releaseChecks.any((item) => item.contains('AI servisine')), isTrue);
+    expect(releaseChecks.any((item) => item.contains('AI asistanı')), isTrue);
   });
 }
