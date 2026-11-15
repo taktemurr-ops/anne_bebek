@@ -104,4 +104,34 @@ void main() {
     expect(() => BackupService.parse(raw), throwsFormatException);
   });
 
+  test('çoklu çocuk profili ve günlüğü yedeğe dahil edilir', () async {
+    final profiles = jsonEncode([
+      {'id': 'c1', 'name': 'Bebek', 'birthDate': '2025-08-26T00:00:00.000',
+        'sex': 'male'}
+    ]);
+    final journal = jsonEncode([
+      {'id': 'e1', 'childId': 'c1', 'category': 'feeding',
+        'note': 'Test', 'at': '2026-11-16T10:00:00.000', 'value': 120}
+    ]);
+    SharedPreferences.setMockInitialValues({
+      'child_profiles_directory_v58': profiles,
+      'child_journal_entries_v59': journal,
+    });
+    final exported = await BackupService.export();
+    final parsed = BackupService.parse(exported);
+    expect(parsed['child_profiles_directory_v58'], profiles);
+    expect(parsed['child_journal_entries_v59'], journal);
+  });
+
+  test('bozuk çoklu çocuk verisi geri yükleme öncesi reddedilir', () {
+    for (final entry in [
+      ['child_profiles_directory_v58', '[{"id":"x"}]'],
+      ['child_journal_entries_v59', '[{"id":"x"}]'],
+    ]) {
+      final raw = jsonEncode({'format': BackupService.format, 'version': 1,
+        'data': {entry[0]: entry[1]}});
+      expect(() => BackupService.parse(raw), throwsFormatException);
+    }
+  });
+
 }
