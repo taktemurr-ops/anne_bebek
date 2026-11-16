@@ -186,12 +186,15 @@ class BackupService {
           ? (secureBefore == null ? null : List<String>.from(jsonDecode(secureBefore) as List))
           : (SecureHealthStore.keys.contains(key) ? secureBefore : p.get(key));
     }
+    final attempted = <String>[];
     try {
       // Older backups may not include newer feature keys. Never erase
       // unrelated records merely because an older backup omitted them.
       for (final entry in data.entries) {
         final key = entry.key;
         final value = entry.value;
+        // Include the currently attempted key: a failed write may be partial.
+        attempted.add(key);
         if (SecureHealthStore.keys.contains(key)) {
           await SecureHealthStore.write(key, key == 'pregnancy_checklist_v3'
               ? jsonEncode(value) : value as String);
@@ -202,19 +205,20 @@ class BackupService {
     } catch (_) {
       // Only roll back keys this restore intended to modify. A failed restore
       // must never touch unrelated records added by newer app versions.
-      for (final entry in before.entries) {
-        if (entry.value == null) {
-          if (SecureHealthStore.keys.contains(entry.key)) {
-            await SecureHealthStore.delete(entry.key);
+      for (final key in attempted.reversed) {
+        final oldValue = before[key];
+        if (oldValue == null) {
+          if (SecureHealthStore.keys.contains(key)) {
+            await SecureHealthStore.delete(key);
           } else {
-            await p.remove(entry.key);
+            await p.remove(key);
           }
         } else {
-          if (SecureHealthStore.keys.contains(entry.key)) {
-            await SecureHealthStore.write(entry.key, entry.key == 'pregnancy_checklist_v3'
-                ? jsonEncode(entry.value!) : entry.value! as String);
+          if (SecureHealthStore.keys.contains(key)) {
+            await SecureHealthStore.write(key, key == 'pregnancy_checklist_v3'
+                ? jsonEncode(oldValue) : oldValue as String);
           } else {
-            await _write(p, entry.key, entry.value!);
+            await _write(p, key, oldValue);
           }
         }
       }
