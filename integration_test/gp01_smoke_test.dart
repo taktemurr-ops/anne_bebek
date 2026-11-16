@@ -6,6 +6,7 @@ import 'package:anne_bebek/widgets/daily_quick_actions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -55,6 +56,13 @@ void main() {
     expect(records.any((item) =>
         item is Map && item['tur'] == 'Beslenme' &&
         item['not'] == 'GP01 Android smoke kaydi'), isTrue);
+
+    // Sensitive journal entries must not remain in legacy plaintext storage.
+    final legacyPrefs = await SharedPreferences.getInstance();
+    expect(legacyPrefs.containsKey('olaylar'), isFalse,
+        reason: 'Saglik gunlugu SharedPreferences icinde acik metin kalmamalidir.');
+    expect(await SecureHealthStore.read('olaylar'), raw,
+        reason: 'Guvenli kayit ardisik okumada korunmalidir.');
 
     await tester.tap(find.byTooltip('Bebek profilleri'));
     await tester.pumpAndSettle();
