@@ -3,7 +3,7 @@
 class ChildProfileValidator {
   const ChildProfileValidator._();
 
-  static const int maxNameLength = 80;
+  static const int maxNameLength = 60;
 
   static String? validateName(String? name) {
     final normalized = name?.trim() ?? '';
