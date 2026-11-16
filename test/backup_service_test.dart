@@ -171,4 +171,26 @@ void main() {
       SecureHealthStore.read('baby_feeding_journal_v5'), throwsStateError);
   });
 
+  test('çoklu çocuk yedeği önizlemesi gerçek kayıt sayılarını gösterir', () {
+    final profiles = jsonEncode([
+      {'id': 'a', 'name': 'Bir', 'birthDate': '2025-08-26T00:00:00.000'},
+      {'id': 'b', 'name': 'İki', 'birthDate': '2024-08-26T00:00:00.000'},
+    ]);
+    final journals = jsonEncode([
+      {'id': 'e1', 'childId': 'a', 'category': 'feeding',
+        'note': '', 'at': '2026-11-16T10:00:00.000'},
+      {'id': 'e2', 'childId': 'b', 'category': 'sleep',
+        'note': '', 'at': '2026-11-16T11:00:00.000'},
+      {'id': 'e3', 'childId': 'a', 'category': 'growth',
+        'note': '', 'at': '2026-11-16T12:00:00.000'},
+    ]);
+    final raw = jsonEncode({'format': BackupService.format, 'version': 1,
+      'data': {'child_profiles_directory_v58': profiles,
+        'child_journal_entries_v59': journals}});
+    expect(BackupService.preview(raw), {
+      'child_profiles_directory_v58': 2,
+      'child_journal_entries_v59': 3,
+    });
+  });
+
 }
