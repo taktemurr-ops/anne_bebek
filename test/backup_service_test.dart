@@ -335,4 +335,47 @@ void main() {
     expect(prefs.getString('child_journal_entries_v59'), '[]');
   });
 
+
+  test('yedek onizlemesi hassas degerleri gostermeden sayilari verir', () {
+    final raw = jsonEncode({
+      'format': BackupService.format,
+      'version': 1,
+      'data': {
+        'bebekAdi': 'Gizli Bebek Adi',
+        'baby_feeding_journal_v5': jsonEncode([
+          {'note': 'Ozel beslenme notu'}
+        ]),
+        'alisveris': jsonEncode([
+          {'item': 'Bez'},
+          {'item': 'Mama'},
+        ]),
+      },
+    });
+    final preview = BackupService.preview(raw);
+    expect(preview['bebekAdi'], 1);
+    expect(preview['alisveris'], 2);
+    expect(preview.values.every((count) => count >= 0), isTrue);
+    expect(preview.toString(), isNot(contains('Gizli Bebek Adi')));
+    expect(preview.toString(), isNot(contains('Ozel beslenme notu')));
+  });
+
+  test('bozuk yasam merkezi yedegi kayitlari degistirmez', () async {
+    SharedPreferences.setMockInitialValues({
+      'anne_bebek_lifehub_v1': '{"Uyku":[]}',
+      'alisveris': '[]',
+    });
+    final invalid = jsonEncode({
+      'format': BackupService.format,
+      'version': 1,
+      'data': {
+        'alisveris': '[{"item":"degisecek"}]',
+        'anne_bebek_lifehub_v1': '{"Uyku":[42]}',
+      },
+    });
+    await expectLater(BackupService.restore(invalid), throwsFormatException);
+    final prefs = await SharedPreferences.getInstance();
+    expect(prefs.getString('alisveris'), '[]');
+    expect(prefs.getString('anne_bebek_lifehub_v1'), '{"Uyku":[]}');
+  });
+
 }
