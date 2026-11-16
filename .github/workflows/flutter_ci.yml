@@ -85,6 +85,13 @@ jobs:
       - name: Bagimliliklari yukle
         run: flutter pub get
 
+      - name: Android emulator icin disk alani ac
+        run: |
+          df -h
+          sudo rm -rf /usr/local/lib/android/sdk/ndk /usr/local/lib/android/sdk/cmake /usr/local/lib/android/sdk/system-images
+          sudo rm -rf /opt/hostedtoolcache/CodeQL /usr/share/dotnet /usr/local/share/powershell /opt/ghc
+          df -h
+
       - name: Android sanallastirma izinleri
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -94,8 +101,8 @@ jobs:
       - name: Android emulator GP-01 smoke testleri
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 35
-          target: google_apis
+          api-level: 34
+          target: default
           arch: x86_64
           profile: pixel_6
           disable-animations: true
