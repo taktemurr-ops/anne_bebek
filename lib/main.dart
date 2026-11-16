@@ -181,7 +181,10 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   Future<void> _profil() async {
     final ad = TextEditingController(text: bebekAdi);
     DateTime? secilen = dogum;
-    await showDialog<void>(context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, yenile) => AlertDialog(
+    ModalRoute<dynamic>? profileRoute;
+    await showDialog<void>(context: context, builder: (ctx) {
+      profileRoute = ModalRoute.of(ctx);
+      return StatefulBuilder(builder: (ctx, yenile) => AlertDialog(
       title: const Text('Bebek profili'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: ad, decoration: const InputDecoration(labelText: 'Bebeğin adı')),
@@ -202,13 +205,17 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           if (basarili) Navigator.of(ctx).pop();
           _kayitBildir(basarili, basariMesaji: 'Bebek profili kaydedildi.');
         }, child: const Text('Kaydet'))],
-    )));
+    )); });
+    await profileRoute?.completed;
     ad.dispose();
   }
 
   Future<void> _olayEkle(String tur) async {
     final not = TextEditingController();
-    await showDialog<void>(context: context, builder: (ctx) => AlertDialog(
+    ModalRoute<dynamic>? recordRoute;
+    await showDialog<void>(context: context, builder: (ctx) {
+      recordRoute = ModalRoute.of(ctx);
+      return AlertDialog(
       title: Text('$tur kaydı'),
       content: TextField(controller: not, autofocus: true, decoration: const InputDecoration(labelText: 'Açıklama / miktar (isteğe bağlı)'), maxLines: 2),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
@@ -221,13 +228,17 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           if (basarili) Navigator.of(ctx).pop();
           _kayitBildir(basarili, basariMesaji: '$tur kaydı eklendi.');
         }, child: const Text('Kaydet'))],
-    ));
+    ); });
+    await recordRoute?.completed;
     not.dispose();
   }
 
   Future<void> _olcumEkle() async {
     final boy = TextEditingController(); final kilo = TextEditingController(); final bas = TextEditingController();
-    await showDialog<void>(context: context, builder: (ctx) => AlertDialog(
+    ModalRoute<dynamic>? measureRoute;
+    await showDialog<void>(context: context, builder: (ctx) {
+      measureRoute = ModalRoute.of(ctx);
+      return AlertDialog(
       title: const Text('Büyüme ölçümü'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: boy, keyboardType: const TextInputType.numberWithOptions(decimal: true), decoration: const InputDecoration(labelText: 'Boy (cm)')),
@@ -251,7 +262,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           if (basarili) Navigator.of(ctx).pop();
           _kayitBildir(basarili, basariMesaji: 'Büyüme ölçümü kaydedildi.');
         }, child: const Text('Kaydet'))],
-    ));
+    ); });
+    await measureRoute?.completed;
     boy.dispose(); kilo.dispose(); bas.dispose();
   }
 
