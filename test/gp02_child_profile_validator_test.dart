@@ -25,6 +25,20 @@ void main() {
       expect(ChildProfileValidator.validateBirthDate(today, today: today), isNull);
     });
 
+    test('birth date comparison ignores time of day', () {
+      final today = DateTime(2026, 11, 17, 1, 0);
+      expect(
+        ChildProfileValidator.validateBirthDate(
+          DateTime(2026, 11, 17, 23, 59), today: today),
+        isNull,
+      );
+      expect(
+        ChildProfileValidator.validateBirthDate(
+          DateTime(2026, 11, 18, 0, 0), today: today),
+        isNotNull,
+      );
+    });
+
     test('rejects dates older than 18 years', () {
       final today = DateTime(2026, 11, 16);
       expect(ChildProfileValidator.validateBirthDate(DateTime(2008, 11, 15), today: today), isNotNull);
