@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:anne_bebek/main.dart';
 import 'package:anne_bebek/services/secure_health_store.dart';
 import 'package:anne_bebek/widgets/daily_quick_actions.dart';
@@ -28,11 +30,31 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Beslenme kaydı'), findsOneWidget);
+    await tester.enterText(
+      find.descendant(
+        of: find.byType(AlertDialog),
+        matching: find.byType(TextField),
+      ),
+      'GP01 Android smoke kaydi',
+    );
     await tester.tap(find.descendant(
       of: find.byType(AlertDialog), matching: find.text('Kaydet'),
     ));
     await tester.pumpAndSettle();
-    expect(await SecureHealthStore.read('olaylar'), contains('Beslenme'));
+
+    // A failed save must remain visible and must not be mistaken for success.
+    expect(find.text('Kayıt kaydedilemedi. Lütfen tekrar deneyin.'),
+        findsNothing);
+    expect(find.text('Beslenme kaydı'), findsNothing,
+        reason: 'Kayit basariliysa dialog kapanmalidir.');
+    final raw = await SecureHealthStore.read('olaylar');
+    expect(raw, isNotNull,
+        reason: 'Android Keystore uzerinde beslenme kaydi bulunamadi.');
+    final records = jsonDecode(raw!) as List<dynamic>;
+    expect(records, isNotEmpty);
+    expect(records.any((item) =>
+        item is Map && item['tur'] == 'Beslenme' &&
+        item['not'] == 'GP01 Android smoke kaydi'), isTrue);
 
     await tester.tap(find.byTooltip('Bebek profilleri'));
     await tester.pumpAndSettle();
