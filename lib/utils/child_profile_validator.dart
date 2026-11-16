@@ -17,6 +17,15 @@ class ChildProfileValidator {
     return null;
   }
 
+  static const supportedSexValues = {'unknown', 'female', 'male'};
+
+  static String? validateSex(String? value) {
+    if (value == null || !supportedSexValues.contains(value)) {
+      return 'Geçerli bir büyüme referansı seçilmelidir.';
+    }
+    return null;
+  }
+
   static String? validateBirthDate(DateTime? birthDate, {DateTime? today}) {
     if (birthDate == null) return 'Doğum tarihi seçilmelidir.';
     final now = today ?? DateTime.now();
