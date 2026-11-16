@@ -221,4 +221,37 @@ void main() {
     expect(BackupService.parse(raw)['pregnancy_checklist_v3'], ['kontrol']);
   });
 
+  test('profili olmayan çocuk günlüğü geri yükleme öncesi reddedilir', () async {
+    SharedPreferences.setMockInitialValues({'alisveris': '[]'});
+    final profiles = jsonEncode([
+      {'id': 'c1', 'name': 'Bebek', 'birthDate': '2025-08-26T00:00:00.000'}
+    ]);
+    final journals = jsonEncode([
+      {'id': 'e1', 'childId': 'missing', 'category': 'feeding',
+        'note': '', 'at': '2026-11-16T10:00:00.000'}
+    ]);
+    final raw = jsonEncode({'format': BackupService.format, 'version': 1,
+      'data': {'alisveris': '[{"item":"degistir"}]',
+        'child_profiles_directory_v58': profiles,
+        'child_journal_entries_v59': journals}});
+    expect(() => BackupService.parse(raw), throwsFormatException);
+    await expectLater(BackupService.restore(raw), throwsFormatException);
+    final prefs = await SharedPreferences.getInstance();
+    expect(prefs.getString('alisveris'), '[]');
+  });
+
+  test('eşleşen çocuk profili ve günlüğü kabul edilir', () {
+    final profiles = jsonEncode([
+      {'id': 'c1', 'name': 'Bebek', 'birthDate': '2025-08-26T00:00:00.000'}
+    ]);
+    final journals = jsonEncode([
+      {'id': 'e1', 'childId': 'c1', 'category': 'feeding',
+        'note': '', 'at': '2026-11-16T10:00:00.000'}
+    ]);
+    final raw = jsonEncode({'format': BackupService.format, 'version': 1,
+      'data': {'child_profiles_directory_v58': profiles,
+        'child_journal_entries_v59': journals}});
+    expect(BackupService.preview(raw)['child_journal_entries_v59'], 1);
+  });
+
 }
