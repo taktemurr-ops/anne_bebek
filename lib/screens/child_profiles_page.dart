@@ -83,7 +83,8 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
         FilledButton(onPressed: () {
           final value = name.text.trim();
           final error = ChildProfileValidator.validateName(value) ??
-              ChildProfileValidator.validateBirthDate(birth);
+              ChildProfileValidator.validateBirthDate(birth) ??
+              ChildProfileValidator.validateSex(sex);
           if (error != null) {
             ScaffoldMessenger.of(dialogContext).showSnackBar(SnackBar(content: Text(error)));
             return;
@@ -133,6 +134,7 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       ],
     ));
     if (selected == null || !mounted || selected == profile.sex) return;
+    if (ChildProfileValidator.validateSex(selected) != null) return;
     await _save(_profiles.map((e) => e.id == profile.id
       ? ChildProfile(id: e.id, name: e.name, birthDate: e.birthDate, sex: selected) : e).toList());
   }
