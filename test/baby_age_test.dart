@@ -65,4 +65,21 @@ void main() {
         '1 aylık');
   });
 
+  test('tamamlanan takvim aylari yeniden kullanilabilir ve sinirlar dogru', () {
+    expect(BabyAge.completedMonths(null, DateTime(2026, 2, 28)), isNull);
+    expect(BabyAge.completedMonths(DateTime(2026, 3, 1),
+        DateTime(2026, 2, 28)), isNull);
+    expect(BabyAge.completedMonths(DateTime(2026, 1, 31),
+        DateTime(2026, 2, 27)), 0);
+    expect(BabyAge.completedMonths(DateTime(2026, 1, 31),
+        DateTime(2026, 2, 28)), 1);
+    expect(BabyAge.completedMonths(DateTime(2024, 2, 29),
+        DateTime(2025, 2, 28)), 12);
+    expect(BabyAge.completedMonths(DateTime(2025, 12, 31),
+        DateTime(2026, 1, 30)), 0);
+    expect(BabyAge.completedMonths(DateTime(2025, 12, 31),
+        DateTime(2026, 1, 31)), 1);
+  });
+
+
 }
