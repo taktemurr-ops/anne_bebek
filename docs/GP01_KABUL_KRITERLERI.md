@@ -23,6 +23,15 @@ Bu belge, 8 alt iş kaleminin gerçek durumunu ve kabul kriterlerini takip eder.
 - Mevcut kişisel kayıtlar güncellemeden sonra korunuyor.
 - Geri yükleme işlemi, test verileriyle doğrulanıyor.
 
+## CI #38 ve kabul kanıtı (16 Kasım 2026)
+
+- Commit `61f599d4eab3bd72d719321c3233b362bedfa8fd` için [Flutter CI #38](https://github.com/taktemurr-ops/anne_bebek/actions/runs/43894958542) **başarılı**.
+- Aynı committe `flutter analyze`, `flutter test`, `flutter build apk --debug` ve APK artifact yükleme adımları başarılı.
+- Küçük ekran widget testleri 280, 320, 360 ve 600 px genişlikleri kapsıyor; fiziksel cihaz testi yerine geçmez.
+- Yedek önizlemesi gizlilik ve geçersiz Life Hub yedeğinde veri koruma testleri CI #38 kapsamında geçti.
+- **Açık kabul maddeleri:** gerçek cihazda profil/günlük/ölçüm/tarif/yedekleme gezinmesi, ekran taşması ve güncelleme sonrası kalıcı veri doğrulaması.
+- GP-01 yalnızca bu maddeler kanıtlandığında tamamlandı olarak işaretlenebilir.
+
 ## Güvenli yayın
 
 Değişiklikler yalnızca `feature/gp01-ana-ekran-hizli-islemler` dalındadır. CI ve manuel kabul tamamlanmadan `main` ile birleştirilmemelidir.
