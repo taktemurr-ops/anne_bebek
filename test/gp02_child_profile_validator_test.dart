@@ -3,6 +3,15 @@ import 'package:anne_bebek/utils/child_profile_validator.dart';
 
 void main() {
   group('GP-02 child profile validation', () {
+    test('accepts only supported growth reference values', () {
+      for (final value in ['unknown', 'female', 'male']) {
+        expect(ChildProfileValidator.validateSex(value), isNull);
+      }
+      expect(ChildProfileValidator.validateSex(null), isNotNull);
+      expect(ChildProfileValidator.validateSex('other'), isNotNull);
+      expect(ChildProfileValidator.validateSex('MALE'), isNotNull);
+    });
+
     test('rejects blank and excessively long names', () {
       expect(ChildProfileValidator.validateName('  '), isNotNull);
       expect(ChildProfileValidator.validateName('a' * 61), isNotNull);
