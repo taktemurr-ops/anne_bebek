@@ -378,4 +378,37 @@ void main() {
     expect(prefs.getString('anne_bebek_lifehub_v1'), '{"Uyku":[]}');
   });
 
+
+  test('bebek tarif favorileri yedekte saklanir ve geri yuklenir', () async {
+    SharedPreferences.setMockInitialValues({
+      'baby_recipe_favorites_v1': <String>['b00v00', 'b00v01'],
+    });
+    final exported = await BackupService.export();
+    final parsed = BackupService.parse(exported);
+    expect(parsed['baby_recipe_favorites_v1'], ['b00v00', 'b00v01']);
+    expect(BackupService.preview(exported)['baby_recipe_favorites_v1'], 2);
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('baby_recipe_favorites_v1', ['b01v00']);
+    expect(await BackupService.restore(exported), 1);
+    expect(prefs.getStringList('baby_recipe_favorites_v1'),
+        ['b00v00', 'b00v01']);
+  });
+
+  test('bos yedek mevcut kayitlari silmez', () async {
+    SharedPreferences.setMockInitialValues({
+      'alisveris': '["Eski kayit"]',
+      'baby_recipe_favorites_v1': <String>['b00v00'],
+    });
+    final emptyBackup = jsonEncode({
+      'format': BackupService.format,
+      'version': BackupService.version,
+      'data': <String, dynamic>{},
+    });
+    expect(await BackupService.restore(emptyBackup), 0);
+    final prefs = await SharedPreferences.getInstance();
+    expect(prefs.getString('alisveris'), '["Eski kayit"]');
+    expect(prefs.getStringList('baby_recipe_favorites_v1'), ['b00v00']);
+  });
+
 }
