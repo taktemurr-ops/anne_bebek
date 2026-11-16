@@ -11,6 +11,7 @@ import '../services/child_journals.dart';
 import '../services/child_care_plans.dart';
 import '../services/secure_health_store.dart';
 import '../utils/baby_age.dart';
+import '../utils/child_profile_validator.dart';
 
 class ChildProfilesPage extends StatefulWidget {
   const ChildProfilesPage({super.key});
@@ -78,7 +79,12 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       actions: [TextButton(onPressed: () => Navigator.pop(dialogContext), child: const Text('Vazgeç')),
         FilledButton(onPressed: () {
           final value = name.text.trim();
-          if (value.isEmpty) return;
+          final error = ChildProfileValidator.validateName(value) ??
+              ChildProfileValidator.validateBirthDate(birth);
+          if (error != null) {
+            ScaffoldMessenger.of(dialogContext).showSnackBar(SnackBar(content: Text(error)));
+            return;
+          }
           Navigator.pop(dialogContext, ChildProfile(id: DateTime.now().microsecondsSinceEpoch.toString(), name: value, birthDate: birth, sex: sex));
         }, child: const Text('Kaydet'))],
     )); });
@@ -98,7 +104,12 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () {
           final name = controller.text.trim();
-          if (name.isNotEmpty) Navigator.pop(ctx, name);
+          final error = ChildProfileValidator.validateName(name);
+          if (error != null) {
+            ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(error)));
+            return;
+          }
+          Navigator.pop(ctx, name);
         }, child: const Text('Kaydet'))],
     ); });
     await renameRoute?.completed;
@@ -130,6 +141,11 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       firstDate: DateTime(1990), lastDate: DateTime.now(),
     );
     if (chosen == null || !mounted) return;
+    final birthError = ChildProfileValidator.validateBirthDate(chosen);
+    if (birthError != null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(birthError)));
+      return;
+    }
     try {
       final entries = decodeChildJournal(
         await SecureHealthStore.read('child_journal_entries_v59'));
