@@ -31,4 +31,18 @@ void main() {
     expect(BabyAge.label(DateTime(2026, 1, 31), DateTime(2026, 3, 31)),
         '2 aylık');
   });
+  test('yaz saati gecisinde takvim gunu eksilmez', () {
+    // Europe/Berlin 2026-03-29 tarihinde saat ileri alinir.
+    // Saat dilimi ortamindan bagimsiz olarak iki takvim tarihi arasi 1 gundur.
+    expect(BabyAge.label(DateTime(2026, 3, 28, 23, 30),
+        DateTime(2026, 3, 29, 0, 30)), '1 günlük');
+    expect(BabyAge.label(DateTime(2026, 3, 28),
+        DateTime(2026, 3, 30)), '2 günlük');
+  });
+
+  test('artik yil subat ayinin 29. gunu sayilir', () {
+    expect(BabyAge.label(DateTime(2024, 2, 28), DateTime(2024, 2, 29)),
+        '1 günlük');
+  });
+
 }
