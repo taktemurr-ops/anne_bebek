@@ -43,8 +43,11 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
     final number = TextEditingController();
     String category = categories.first;
     DateTime at = DateTime.now();
+    ModalRoute<dynamic>? addRoute;
     final entry = await showDialog<ChildJournalEntry>(context: context,
-      builder: (ctx) => StatefulBuilder(builder: (ctx, update) => AlertDialog(
+      builder: (ctx) {
+        addRoute = ModalRoute.of(ctx);
+        return StatefulBuilder(builder: (ctx, update) => AlertDialog(
         title: Text('${widget.child.name} · Yeni kayıt'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min,
           children: [
@@ -74,7 +77,8 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
               childId: widget.child.id, category: category, note: note.text.trim(),
               at: at, value: isMeasure ? parsed : null));
           }, child: const Text('Kaydet'))],
-      )));
+      )); });
+    await addRoute?.completed;
     note.dispose(); number.dispose();
     if (entry != null && mounted) await _save([..._all, entry]);
   }
@@ -85,8 +89,11 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
     DateTime at = original.at;
     final isMeasure = original.category == 'Kilo (kg)' ||
         original.category == 'Boy (cm)' || original.category == 'Baş çevresi (cm)';
+    ModalRoute<dynamic>? editRoute;
     final changed = await showDialog<ChildJournalEntry>(context: context,
-      builder: (ctx) => StatefulBuilder(builder: (ctx, update) => AlertDialog(
+      builder: (ctx) {
+        editRoute = ModalRoute.of(ctx);
+        return StatefulBuilder(builder: (ctx, update) => AlertDialog(
         title: Text('${widget.child.name} · Kaydı düzenle'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
           Text(original.category),
@@ -120,7 +127,8 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
               note: note.text.trim(), at: at, value: isMeasure ? parsed : null));
           }, child: const Text('Değişiklikleri kaydet')),
         ],
-      )));
+      )); });
+    await editRoute?.completed;
     note.dispose(); number.dispose();
     if (changed != null && mounted) {
       await _save(_all.map((entry) => entry.id == original.id &&

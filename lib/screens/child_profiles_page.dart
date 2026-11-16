@@ -8,7 +8,9 @@ import 'child_report_page.dart';
 import 'package:flutter/material.dart';
 import '../services/child_profiles.dart';
 import '../services/child_journals.dart';
+import '../services/child_care_plans.dart';
 import '../services/secure_health_store.dart';
+import '../utils/baby_age.dart';
 
 class ChildProfilesPage extends StatefulWidget {
   const ChildProfilesPage({super.key});
@@ -56,7 +58,10 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
     final name = TextEditingController();
     DateTime birth = DateTime.now();
     String sex = 'unknown';
-    final result = await showDialog<ChildProfile>(context: context, builder: (dialogContext) => StatefulBuilder(builder: (dialogContext, refresh) => AlertDialog(
+    ModalRoute<dynamic>? dialogRoute;
+    final result = await showDialog<ChildProfile>(context: context, builder: (dialogContext) {
+      dialogRoute = ModalRoute.of(dialogContext);
+      return StatefulBuilder(builder: (dialogContext, refresh) => AlertDialog(
       title: const Text('Çocuk profili ekle'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: name, maxLength: 60, decoration: const InputDecoration(labelText: 'Adı')),
@@ -76,14 +81,18 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
           if (value.isEmpty) return;
           Navigator.pop(dialogContext, ChildProfile(id: DateTime.now().microsecondsSinceEpoch.toString(), name: value, birthDate: birth, sex: sex));
         }, child: const Text('Kaydet'))],
-    )));
+    )); });
+    await dialogRoute?.completed;
     name.dispose();
     if (result != null && mounted) await _save([..._profiles, result]);
   }
 
   Future<void> _rename(ChildProfile profile) async {
     final controller = TextEditingController(text: profile.name);
-    final newName = await showDialog<String>(context: context, builder: (ctx) => AlertDialog(
+    ModalRoute<dynamic>? renameRoute;
+    final newName = await showDialog<String>(context: context, builder: (ctx) {
+      renameRoute = ModalRoute.of(ctx);
+      return AlertDialog(
       title: const Text('Profil adını düzenle'),
       content: TextField(controller: controller, maxLength: 60, decoration: const InputDecoration(labelText: 'Ad')),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
@@ -91,7 +100,8 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
           final name = controller.text.trim();
           if (name.isNotEmpty) Navigator.pop(ctx, name);
         }, child: const Text('Kaydet'))],
-    ));
+    ); });
+    await renameRoute?.completed;
     controller.dispose();
     if (newName != null && mounted && newName != profile.name) {
       await _save(_profiles.map((e) => e.id == profile.id
@@ -120,6 +130,25 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       firstDate: DateTime(1990), lastDate: DateTime.now(),
     );
     if (chosen == null || !mounted) return;
+    try {
+      final entries = decodeChildJournal(
+        await SecureHealthStore.read('child_journal_entries_v59'));
+      final day = DateTime(chosen.year, chosen.month, chosen.day);
+      if (entries.any((e) => e.childId == profile.id && e.at.isBefore(day))) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Yeni doğum tarihi, kayıtlı günlüklerden sonra olamaz. Önce kayıtları kontrol edin.')));
+        }
+        return;
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Günlükler doğrulanamadı; doğum tarihi değiştirilmedi.')));
+      }
+      return;
+    }
+    if (!mounted) return;
     await _save(_profiles.map((e) => e.id == profile.id
       ? ChildProfile(id: e.id, name: e.name, birthDate: chosen, sex: e.sex) : e).toList());
   }
@@ -177,11 +206,12 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
     try {
       final journals = decodeChildJournal(
         await SecureHealthStore.read('child_journal_entries_v59'));
-      final careRaw = await SecureHealthStore.read('child_care_plan_v96');
+      final care = decodeChildCareItems(
+        await SecureHealthStore.read('child_care_plan_v96'));
       final hasJournal = journals.any((entry) => entry.childId == profile.id);
-      // Care plan may contain records not represented by the journal.
-      // Fail closed until a verified cascade/archive workflow exists.
-      if (hasJournal || (careRaw != null && careRaw.contains(profile.id))) {
+      final hasCare = care.any((item) => item.childId == profile.id);
+      // Never remove a profile with health data attached to its exact ID.
+      if (hasJournal || hasCare) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Bu çocuğa ait sağlık kayıtları var. Veri kaybını önlemek için profil silinmedi.')));
@@ -206,12 +236,7 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
 
   Widget _profileCard(ChildProfile profile) {
-    final ageMonths = (DateTime.now().year - profile.birthDate.year) * 12 +
-        DateTime.now().month - profile.birthDate.month -
-        (DateTime.now().day < profile.birthDate.day ? 1 : 0);
-    final ageText = ageMonths < 0 ? 'Yeni doğan' :
-        ageMonths < 12 ? '$ageMonths aylık' :
-        '${ageMonths ~/ 12} yaş ${ageMonths % 12} ay';
+    final ageText = BabyAge.label(profile.birthDate, DateTime.now());
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       color: Colors.white,

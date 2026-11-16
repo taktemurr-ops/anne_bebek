@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'secure_health_store.dart';
+import 'child_profiles.dart';
+import 'child_journals.dart';
+import 'child_care_plans.dart';
 
 /// Portable, plaintext backup of the app's own local records.
 /// NOT encrypted: users must store and transfer it securely.
@@ -10,7 +13,10 @@ class BackupService {
   static const maxBytes = 3 * 1024 * 1024;
   static const keys = <String>{
     'bebekAdi', 'dogum', 'sonAdet', 'olaylar', 'olcumler',
+    'child_profiles_directory_v58', 'child_journal_entries_v59',
+    'child_care_plan_v96',
     'alisveris', 'favoriler', 'sepet', 'tamamlanan',
+    'baby_recipe_favorites_v1',
     'anne_bebek_lifehub_v1', 'pregnancy_last_period_v3',
     'pregnancy_checklist_v3', 'family_calendar_v3',
     'cycle_history_v1', 'baby_feeding_journal_v5',
@@ -33,7 +39,13 @@ class BackupService {
     final data = parse(raw);
     final result = <String, int>{};
     for (final entry in data.entries) {
-      if (jsonListKeys.contains(entry.key)) {
+      if (entry.key == 'child_profiles_directory_v58') {
+        result[entry.key] = decodeChildProfiles(entry.value as String).length;
+      } else if (entry.key == 'child_journal_entries_v59') {
+        result[entry.key] = decodeChildJournal(entry.value as String).length;
+      } else if (entry.key == 'child_care_plan_v96') {
+        result[entry.key] = decodeChildCareItems(entry.value as String).length;
+      } else if (jsonListKeys.contains(entry.key)) {
         result[entry.key] = (jsonDecode(entry.value as String) as List).length;
       } else if (jsonMapKeys.contains(entry.key)) {
         final map = jsonDecode(entry.value as String) as Map;
@@ -71,9 +83,42 @@ class BackupService {
       if (value is List && !value.every((v) => v is String)) {
         throw const FormatException('Yedekte geçersiz liste var.');
       }
+      // SecureHealthStore.write requires a String for every secure key
+      // except the checklist, which is serialized as a string on restore.
+      // Reject invalid types before any storage write starts.
+      if (SecureHealthStore.keys.contains(entry.key) &&
+          entry.key != 'pregnancy_checklist_v3' && value is! String) {
+        throw const FormatException('Güvenli yedek kayıt türü geçersiz.');
+      }
       if (entry.key == 'pregnancy_checklist_v3' && value is! List<String>) {
         if (value is! List || !value.every((item) => item is String)) {
           throw const FormatException('Gebelik kontrol listesi geçersiz.');
+        }
+      }
+      // Çoklu çocuk kayıtlarını geri yüklemeden önce model düzeyinde doğrula.
+      if (entry.key == 'child_profiles_directory_v58' ||
+          entry.key == 'child_journal_entries_v59') {
+        if (value is! String) {
+          throw const FormatException('Çocuk profili veya günlüğü geçersiz.');
+        }
+        try {
+          if (entry.key == 'child_profiles_directory_v58') {
+            decodeChildProfiles(value);
+          } else {
+            decodeChildJournal(value);
+          }
+        } catch (_) {
+          throw const FormatException('Çocuk profili veya günlüğü geçersiz.');
+        }
+      }
+      if (entry.key == 'child_care_plan_v96') {
+        if (value is! String) {
+          throw const FormatException('Çocuk sağlık planı geçersiz.');
+        }
+        try {
+          decodeChildCareItems(value);
+        } catch (_) {
+          throw const FormatException('Çocuk sağlık planı geçersiz.');
         }
       }
       if (entry.key == 'baby_v2') {
@@ -118,6 +163,31 @@ class BackupService {
       }
       data[entry.key as String] = value is List ? List<String>.from(value) : value as Object;
     }
+    // When a backup includes both collections, every journal must belong to
+    // a profile in that same snapshot. Reject inconsistent snapshots before
+    // restore changes any local data.
+    if (data.containsKey('child_profiles_directory_v58') &&
+        data.containsKey('child_journal_entries_v59')) {
+      final profiles = decodeChildProfiles(
+        data['child_profiles_directory_v58'] as String);
+      final journals = decodeChildJournal(
+        data['child_journal_entries_v59'] as String);
+      final profileIds = profiles.map((profile) => profile.id).toSet();
+      if (journals.any((entry) => !profileIds.contains(entry.childId))) {
+        throw const FormatException('Yedekte profili olmayan çocuk günlüğü var.');
+      }
+    }
+    if (data.containsKey('child_profiles_directory_v58') &&
+        data.containsKey('child_care_plan_v96')) {
+      final profiles = decodeChildProfiles(
+        data['child_profiles_directory_v58'] as String);
+      final plans = decodeChildCareItems(
+        data['child_care_plan_v96'] as String);
+      final profileIds = profiles.map((profile) => profile.id).toSet();
+      if (plans.any((item) => !profileIds.contains(item.childId))) {
+        throw const FormatException('Yedekte profili olmayan çocuk sağlık planı var.');
+      }
+    }
     return data;
   }
 
@@ -144,49 +214,51 @@ class BackupService {
     return result;
   }
 
-  /// Replace only supported app keys. Roll back if a write fails.
+  /// Restore only keys present in the backup. Roll back if a write fails.
   static Future<int> restore(String raw) async {
     final data = parse(raw); // validate everything before touching storage
     final p = await SharedPreferences.getInstance();
     final before = <String, Object?>{};
-    for (final key in keys) {
+    for (final key in data.keys) {
       final secureBefore = SecureHealthStore.keys.contains(key)
           ? await SecureHealthStore.read(key) : null;
       before[key] = key == 'pregnancy_checklist_v3'
           ? (secureBefore == null ? null : List<String>.from(jsonDecode(secureBefore) as List))
           : (SecureHealthStore.keys.contains(key) ? secureBefore : p.get(key));
     }
+    final attempted = <String>[];
     try {
-      for (final key in keys) {
-        if (!data.containsKey(key)) {
+      // Older backups may not include newer feature keys. Never erase
+      // unrelated records merely because an older backup omitted them.
+      for (final entry in data.entries) {
+        final key = entry.key;
+        final value = entry.value;
+        // Include the currently attempted key: a failed write may be partial.
+        attempted.add(key);
+        if (SecureHealthStore.keys.contains(key)) {
+          await SecureHealthStore.write(key, key == 'pregnancy_checklist_v3'
+              ? jsonEncode(value) : value as String);
+        } else {
+          await _write(p, key, value);
+        }
+      }
+    } catch (_) {
+      // Only roll back keys this restore intended to modify. A failed restore
+      // must never touch unrelated records added by newer app versions.
+      for (final key in attempted.reversed) {
+        final oldValue = before[key];
+        if (oldValue == null) {
           if (SecureHealthStore.keys.contains(key)) {
             await SecureHealthStore.delete(key);
-          } else if (!await p.remove(key)) {
-            throw StateError('Kayıt silinemedi: $key');
+          } else {
+            await p.remove(key);
           }
         } else {
           if (SecureHealthStore.keys.contains(key)) {
             await SecureHealthStore.write(key, key == 'pregnancy_checklist_v3'
-                ? jsonEncode(data[key]!) : data[key]! as String);
+                ? jsonEncode(oldValue) : oldValue as String);
           } else {
-            await _write(p, key, data[key]!);
-          }
-        }
-      }
-    } catch (_) {
-      for (final entry in before.entries) {
-        if (entry.value == null) {
-          if (SecureHealthStore.keys.contains(entry.key)) {
-            await SecureHealthStore.delete(entry.key);
-          } else {
-            await p.remove(entry.key);
-          }
-        } else {
-          if (SecureHealthStore.keys.contains(entry.key)) {
-            await SecureHealthStore.write(entry.key, entry.key == 'pregnancy_checklist_v3'
-                ? jsonEncode(entry.value!) : entry.value! as String);
-          } else {
-            await _write(p, entry.key, entry.value!);
+            await _write(p, key, oldValue);
           }
         }
       }
