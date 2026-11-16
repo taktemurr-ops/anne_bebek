@@ -13,6 +13,11 @@ void main() {
     await tester.pumpWidget(const AnneBebekApp());
     await tester.pumpAndSettle();
 
+    await tester.scrollUntilVisible(
+      find.byType(DailyQuickActions), 220,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pumpAndSettle();
     expect(find.byType(DailyQuickActions), findsOneWidget);
     final feeding = find.descendant(
       of: find.byType(DailyQuickActions),
@@ -36,7 +41,10 @@ void main() {
     await tester.pumpAndSettle();
 
     final recipes = find.text('Bebeğime uygun tarifler');
-    await tester.ensureVisible(recipes);
+    await tester.scrollUntilVisible(
+      recipes, 220, scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pumpAndSettle();
     await tester.tap(recipes);
     await tester.pumpAndSettle();
     expect(find.text('Bebek tarifleri'), findsOneWidget);
@@ -44,7 +52,10 @@ void main() {
     await tester.pumpAndSettle();
 
     final backup = find.text('Şifreli yedekleme ve geri yükleme');
-    await tester.ensureVisible(backup);
+    await tester.scrollUntilVisible(
+      backup, 220, scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pumpAndSettle();
     await tester.tap(backup);
     await tester.pumpAndSettle();
     expect(find.text('Yedekleme ve geri yükleme'), findsOneWidget);
