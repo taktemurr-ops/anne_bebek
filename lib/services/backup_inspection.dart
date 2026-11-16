@@ -26,10 +26,10 @@ class BackupInspection {
     final warnings = <String>[];
     if (missing > 0) {
       warnings.add('Yedekte $missing veri alanı bulunmuyor. Geri yükleme '
-          'bu alanlardaki mevcut kayıtları da silecek.');
+          'bu alanlardaki mevcut kayıtları korur.');
     }
     if (data.isEmpty) {
-      warnings.add('Yedek boş. Onaylanırsa mevcut uygulama kayıtları silinir.');
+      warnings.add('Yedek boş; geri yüklenecek kayıt bulunmuyor. Mevcut kayıtlar korunur.');
     }
     if (exported == null) {
       warnings.add('Yedek oluşturulma tarihi bulunmuyor veya geçersiz.');
