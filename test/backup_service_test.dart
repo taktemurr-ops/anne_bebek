@@ -193,4 +193,32 @@ void main() {
     });
   });
 
+  test('güvenli kayıtların hatalı türleri hiçbir veriyi değiştirmez', () async {
+    SharedPreferences.setMockInitialValues({'alisveris': '[]'});
+    for (final invalid in [42, true, 1.5, <String>['a']]) {
+      final raw = jsonEncode({
+        'format': BackupService.format,
+        'version': 1,
+        'data': {'alisveris': '[{"item":"degistir"}]',
+          'baby_feeding_journal_v5': invalid},
+      });
+      expect(() => BackupService.parse(raw), throwsFormatException);
+      await expectLater(BackupService.restore(raw), throwsFormatException);
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getString('alisveris'), '[]');
+      expect(await SecureHealthStore.read('baby_feeding_journal_v5'), isNull);
+    }
+  });
+
+  test('güvenli metin kayıtları ve kontrol listesi geçerlidir', () {
+    final raw = jsonEncode({
+      'format': BackupService.format,
+      'version': 1,
+      'data': {'baby_feeding_journal_v5': '[]',
+        'pregnancy_checklist_v3': ['kontrol']},
+    });
+    expect(BackupService.parse(raw)['baby_feeding_journal_v5'], '[]');
+    expect(BackupService.parse(raw)['pregnancy_checklist_v3'], ['kontrol']);
+  });
+
 }
