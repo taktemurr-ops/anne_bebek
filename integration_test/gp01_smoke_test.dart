@@ -60,9 +60,13 @@ void main() {
         reason: 'Android Keystore uzerinde beslenme kaydi bulunamadi.');
     final records = jsonDecode(raw!) as List<dynamic>;
     expect(records, isNotEmpty);
-    expect(records.any((item) =>
+    final matchingRecords = records.where((item) =>
         item is Map && item['tur'] == 'Beslenme' &&
-        item['not'] == 'GP01 Android smoke kaydi'), isTrue);
+        item['not'] == 'GP01 Android smoke kaydi').toList();
+    expect(matchingRecords, hasLength(1),
+        reason: 'Tek kaydetme islemi tam olarak bir kayit olusturmalidir.');
+    expect(DateTime.tryParse(matchingRecords.single['zaman'] as String),
+        isNotNull, reason: 'Beslenme kaydinin zaman damgasi gecerlidir.');
 
     // Sensitive journal entries must not remain in legacy plaintext storage.
     final legacyPrefs = await SharedPreferences.getInstance();
