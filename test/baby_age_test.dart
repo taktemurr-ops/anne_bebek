@@ -80,6 +80,20 @@ void main() {
     expect(BabyAge.completedMonths(DateTime(2025, 12, 31),
         DateTime(2026, 1, 31)), 1);
   });
+  test('29 ve 30 gun esiginde takvim ayi davranisi korunur', () {
+    expect(BabyAge.label(DateTime(2026, 4, 1), DateTime(2026, 4, 30)),
+        '29 günlük');
+    expect(BabyAge.label(DateTime(2026, 4, 1), DateTime(2026, 5, 1)),
+        '1 aylık');
+    expect(BabyAge.label(DateTime(2026, 1, 31), DateTime(2026, 3, 1)),
+        '1 aylık');
+  });
 
+  test('ayni takvim gunundeki saat farki yasi degistirmez', () {
+    expect(BabyAge.label(DateTime(2026, 11, 16, 0, 1),
+        DateTime(2026, 11, 16, 23, 59)), '0 günlük');
+    expect(BabyAge.completedMonths(DateTime(2026, 11, 16, 23, 59),
+        DateTime(2026, 11, 16, 0, 1)), 0);
+  });
 
 }
