@@ -1,10 +1,10 @@
-﻿name: Flutter CI
+name: Flutter CI
 
 on:
   push:
     branches: [main, 'feature/gp02-*']
   pull_request:
-    branches: [main]
+    branches: [main, 'feature/gp01-*']
   workflow_dispatch:
 
 permissions:
