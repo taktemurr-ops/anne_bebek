@@ -58,7 +58,7 @@ void main() {
 
   test('backup preview shows counts without exposing values', () {
     final raw = jsonEncode({'format': BackupService.format, 'version': 1,
-      'data': {'bebekAdi': 'Özel İsim', 'olaylar': '[{},{}]',
+      'data': {'bebekAdi': 'Özel İsim', 'olaylar': '[{"tur":"uyku"},{"tur":"beslenme"}]',
         'pregnancy_checklist_v3': ['kontrol']}});
     expect(BackupService.preview(raw), {
       'bebekAdi': 1, 'olaylar': 2, 'pregnancy_checklist_v3': 1,
