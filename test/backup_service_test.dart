@@ -411,4 +411,65 @@ void main() {
     expect(prefs.getStringList('baby_recipe_favorites_v1'), ['b00v00']);
   });
 
+
+  test('cocuk saglik planlari yedeklenir, sayilir ve geri yuklenir', () async {
+    final profiles = jsonEncode([
+      {'id': 'c1', 'name': 'Deneme', 'birthDate': '2025-08-26T00:00:00.000'},
+    ]);
+    final care = jsonEncode([
+      {
+        'id': 'v1',
+        'childId': 'c1',
+        'category': 'Aşı',
+        'title': 'Doktor kontrolü',
+        'note': 'Kayıt',
+        'date': '2026-11-16T09:00:00.000',
+        'completed': false,
+      }
+    ]);
+    SharedPreferences.setMockInitialValues({
+      'child_profiles_directory_v58': profiles,
+      'child_care_plan_v96': care,
+    });
+    final raw = await BackupService.export();
+    expect(BackupService.preview(raw)['child_care_plan_v96'], 1);
+    expect(BackupService.parse(raw)['child_care_plan_v96'], care);
+
+    // The restore path preserves the encrypted child-care record.
+    expect(await BackupService.restore(raw), 2);
+    expect(await SecureHealthStore.read('child_care_plan_v96'), care);
+  });
+
+  test('profili olmayan cocuk saglik plani geri yukleme oncesi reddedilir',
+      () async {
+    SharedPreferences.setMockInitialValues({'alisveris': '[]'});
+    final profiles = jsonEncode([
+      {'id': 'c1', 'name': 'Deneme', 'birthDate': '2025-08-26T00:00:00.000'},
+    ]);
+    final care = jsonEncode([
+      {
+        'id': 'v1',
+        'childId': 'missing',
+        'category': 'Aşı',
+        'title': 'Test',
+        'note': 'Kayıt',
+        'date': '2026-11-16T09:00:00.000',
+        'completed': false,
+      }
+    ]);
+    final raw = jsonEncode({
+      'format': BackupService.format,
+      'version': BackupService.version,
+      'data': {
+        'alisveris': '["Degismemeli"]',
+        'child_profiles_directory_v58': profiles,
+        'child_care_plan_v96': care,
+      },
+    });
+    expect(() => BackupService.parse(raw), throwsFormatException);
+    await expectLater(BackupService.restore(raw), throwsFormatException);
+    final prefs = await SharedPreferences.getInstance();
+    expect(prefs.getString('alisveris'), '[]');
+  });
+
 }
