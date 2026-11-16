@@ -54,4 +54,31 @@ void main() {
       expect(tester.takeException(), isNull);
     });
   }
+
+  testWidgets('GP-01 hizli islem dugmeleri erisilebilir etiket tasir',
+      (tester) async {
+    final semantics = tester.ensureSemantics();
+    addTearDown(semantics.dispose);
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(
+        body: DailyQuickActions(
+          onFeeding: () {},
+          onSleep: () {},
+          onDiaper: () {},
+          onMeasurement: () {},
+        ),
+      ),
+    ));
+
+    for (final label in ['Beslenme', 'Uyku', 'Bez', 'Ölçüm']) {
+      final button = find.ancestor(
+        of: find.text(label),
+        matching: find.byType(OutlinedButton),
+      );
+      expect(button, findsOneWidget);
+      expect(tester.widget<OutlinedButton>(button).onPressed, isNotNull);
+    }
+    expect(tester.takeException(), isNull);
+  });
+
 }
