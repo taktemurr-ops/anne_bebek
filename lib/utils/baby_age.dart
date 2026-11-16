@@ -8,7 +8,10 @@ class BabyAge {
     final b = DateTime(birth.year, birth.month, birth.day);
     final now = DateTime(today.year, today.month, today.day);
     if (b.isAfter(now)) return 'Doğum bekleniyor';
-    final days = now.difference(b).inDays;
+    // UTC takvim tarihleri yaz/kis saati gecislerinde 23/25 saatlik gunleri onler.
+    final days = DateTime.utc(now.year, now.month, now.day)
+        .difference(DateTime.utc(b.year, b.month, b.day))
+        .inDays;
     if (days < 30) return '$days günlük';
 
     var months = (now.year - b.year) * 12 + now.month - b.month;
