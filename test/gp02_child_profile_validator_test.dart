@@ -5,7 +5,7 @@ void main() {
   group('GP-02 child profile validation', () {
     test('rejects blank and excessively long names', () {
       expect(ChildProfileValidator.validateName('  '), isNotNull);
-      expect(ChildProfileValidator.validateName('a' * 81), isNotNull);
+      expect(ChildProfileValidator.validateName('a' * 61), isNotNull);
       expect(ChildProfileValidator.validateName('  Ada  '), isNull);
     });
 
