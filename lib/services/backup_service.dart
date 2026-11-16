@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'secure_health_store.dart';
 import 'child_profiles.dart';
 import 'child_journals.dart';
+import 'child_care_plans.dart';
 
 /// Portable, plaintext backup of the app's own local records.
 /// NOT encrypted: users must store and transfer it securely.
@@ -13,6 +14,7 @@ class BackupService {
   static const keys = <String>{
     'bebekAdi', 'dogum', 'sonAdet', 'olaylar', 'olcumler',
     'child_profiles_directory_v58', 'child_journal_entries_v59',
+    'child_care_plan_v96',
     'alisveris', 'favoriler', 'sepet', 'tamamlanan',
     'baby_recipe_favorites_v1',
     'anne_bebek_lifehub_v1', 'pregnancy_last_period_v3',
@@ -41,6 +43,8 @@ class BackupService {
         result[entry.key] = decodeChildProfiles(entry.value as String).length;
       } else if (entry.key == 'child_journal_entries_v59') {
         result[entry.key] = decodeChildJournal(entry.value as String).length;
+      } else if (entry.key == 'child_care_plan_v96') {
+        result[entry.key] = decodeChildCareItems(entry.value as String).length;
       } else if (jsonListKeys.contains(entry.key)) {
         result[entry.key] = (jsonDecode(entry.value as String) as List).length;
       } else if (jsonMapKeys.contains(entry.key)) {
@@ -107,6 +111,16 @@ class BackupService {
           throw const FormatException('Çocuk profili veya günlüğü geçersiz.');
         }
       }
+      if (entry.key == 'child_care_plan_v96') {
+        if (value is! String) {
+          throw const FormatException('Çocuk sağlık planı geçersiz.');
+        }
+        try {
+          decodeChildCareItems(value);
+        } catch (_) {
+          throw const FormatException('Çocuk sağlık planı geçersiz.');
+        }
+      }
       if (entry.key == 'baby_v2') {
         if (value is! String || jsonDecode(value) is! Map) {
           throw const FormatException('Bebek profili geçersiz.');
@@ -161,6 +175,17 @@ class BackupService {
       final profileIds = profiles.map((profile) => profile.id).toSet();
       if (journals.any((entry) => !profileIds.contains(entry.childId))) {
         throw const FormatException('Yedekte profili olmayan çocuk günlüğü var.');
+      }
+    }
+    if (data.containsKey('child_profiles_directory_v58') &&
+        data.containsKey('child_care_plan_v96')) {
+      final profiles = decodeChildProfiles(
+        data['child_profiles_directory_v58'] as String);
+      final plans = decodeChildCareItems(
+        data['child_care_plan_v96'] as String);
+      final profileIds = profiles.map((profile) => profile.id).toSet();
+      if (plans.any((item) => !profileIds.contains(item.childId))) {
+        throw const FormatException('Yedekte profili olmayan çocuk sağlık planı var.');
       }
     }
     return data;
