@@ -254,4 +254,58 @@ void main() {
     expect(BackupService.preview(raw)['child_journal_entries_v59'], 1);
   });
 
+  test('çoklu çocuk kayıtları yedekten geri yüklenir', () async {
+    SharedPreferences.setMockInitialValues({
+      'child_profiles_directory_v58': '[]',
+      'child_journal_entries_v59': '[]',
+      'shopping_v2': '[{"item":"korunacak"}]',
+    });
+    final profiles = jsonEncode([
+      {'id': 'c1', 'name': 'Bebek', 'birthDate': '2025-08-26T00:00:00.000'}
+    ]);
+    final journals = jsonEncode([
+      {'id': 'e1', 'childId': 'c1', 'category': 'feeding',
+        'note': '', 'at': '2026-11-16T10:00:00.000'}
+    ]);
+    final raw = jsonEncode({
+      'format': BackupService.format,
+      'version': 1,
+      'data': {
+        'child_profiles_directory_v58': profiles,
+        'child_journal_entries_v59': journals,
+      },
+    });
+    expect(await BackupService.restore(raw), 2);
+    final prefs = await SharedPreferences.getInstance();
+    expect(prefs.getString('child_profiles_directory_v58'), profiles);
+    expect(prefs.getString('child_journal_entries_v59'), journals);
+    expect(prefs.getString('shopping_v2'), '[{"item":"korunacak"}]');
+  });
+
+  test('geçersiz çoklu çocuk yedeği mevcut kayıtları değiştirmez', () async {
+    SharedPreferences.setMockInitialValues({
+      'child_profiles_directory_v58': '[]',
+      'child_journal_entries_v59': '[]',
+    });
+    final profiles = jsonEncode([
+      {'id': 'c1', 'name': 'Bebek', 'birthDate': '2025-08-26T00:00:00.000'}
+    ]);
+    final journals = jsonEncode([
+      {'id': 'e1', 'childId': 'c2', 'category': 'feeding',
+        'note': '', 'at': '2026-11-16T10:00:00.000'}
+    ]);
+    final raw = jsonEncode({
+      'format': BackupService.format,
+      'version': 1,
+      'data': {
+        'child_profiles_directory_v58': profiles,
+        'child_journal_entries_v59': journals,
+      },
+    });
+    await expectLater(BackupService.restore(raw), throwsFormatException);
+    final prefs = await SharedPreferences.getInstance();
+    expect(prefs.getString('child_profiles_directory_v58'), '[]');
+    expect(prefs.getString('child_journal_entries_v59'), '[]');
+  });
+
 }
