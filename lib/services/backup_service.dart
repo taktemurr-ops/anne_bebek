@@ -14,6 +14,7 @@ class BackupService {
     'bebekAdi', 'dogum', 'sonAdet', 'olaylar', 'olcumler',
     'child_profiles_directory_v58', 'child_journal_entries_v59',
     'alisveris', 'favoriler', 'sepet', 'tamamlanan',
+    'baby_recipe_favorites_v1',
     'anne_bebek_lifehub_v1', 'pregnancy_last_period_v3',
     'pregnancy_checklist_v3', 'family_calendar_v3',
     'cycle_history_v1', 'baby_feeding_journal_v5',
