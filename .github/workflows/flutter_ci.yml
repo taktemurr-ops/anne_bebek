@@ -55,3 +55,48 @@ jobs:
           path: build/app/outputs/flutter-apk/app-debug.apk
           if-no-files-found: error
           retention-days: 14
+
+gp01-android-emulator:
+    name: GP-01 Android emulatorde ekran ve kayit testi
+    if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'feature/gp01-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    concurrency:
+      group: gp01-android-${{ github.head_ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Kaynak kodlarini indir
+        uses: actions/checkout@v4
+
+      - name: Java 17 kurulumu
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Flutter 3.47.9 kurulumu
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.9'
+          channel: stable
+          cache: true
+
+      - name: Bagimliliklari yukle
+        run: flutter pub get
+
+      - name: Android sanallastirma izinleri
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Android emulator GP-01 smoke testleri
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          script: flutter test integration_test/gp01_smoke_test.dart -d emulator-5554
