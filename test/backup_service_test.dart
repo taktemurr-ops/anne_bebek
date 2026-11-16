@@ -277,8 +277,12 @@ void main() {
     });
     expect(await BackupService.restore(raw), 2);
     final prefs = await SharedPreferences.getInstance();
-    expect(prefs.getString('child_profiles_directory_v58'), profiles);
-    expect(prefs.getString('child_journal_entries_v59'), journals);
+    // Sensitive child records are migrated to encrypted storage, not kept
+    // as plaintext SharedPreferences values after a successful restore.
+    expect(await SecureHealthStore.read('child_profiles_directory_v58'), profiles);
+    expect(await SecureHealthStore.read('child_journal_entries_v59'), journals);
+    expect(prefs.getString('child_profiles_directory_v58'), isNull);
+    expect(prefs.getString('child_journal_entries_v59'), isNull);
     expect(prefs.getString('shopping_v2'), '[{"item":"korunacak"}]');
   });
 
