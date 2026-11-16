@@ -9,6 +9,11 @@ void main() {
       expect(ChildProfileValidator.validateName('  Ada  '), isNull);
     });
 
+    test('accepts exactly 60 Unicode characters', () {
+      expect(ChildProfileValidator.validateName('İ' * 60), isNull);
+      expect(ChildProfileValidator.validateName('İ' * 61), isNotNull);
+    });
+
     test('rejects control characters', () {
       expect(ChildProfileValidator.validateName('Ada\nTest'), isNotNull);
     });
