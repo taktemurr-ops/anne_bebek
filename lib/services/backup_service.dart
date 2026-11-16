@@ -78,6 +78,13 @@ class BackupService {
       if (value is List && !value.every((v) => v is String)) {
         throw const FormatException('Yedekte geçersiz liste var.');
       }
+      // SecureHealthStore.write requires a String for every secure key
+      // except the checklist, which is serialized as a string on restore.
+      // Reject invalid types before any storage write starts.
+      if (SecureHealthStore.keys.contains(entry.key) &&
+          entry.key != 'pregnancy_checklist_v3' && value is! String) {
+        throw const FormatException('Güvenli yedek kayıt türü geçersiz.');
+      }
       if (entry.key == 'pregnancy_checklist_v3' && value is! List<String>) {
         if (value is! List || !value.every((item) => item is String)) {
           throw const FormatException('Gebelik kontrol listesi geçersiz.');
