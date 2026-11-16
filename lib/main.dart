@@ -398,8 +398,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     ),
     _baslik('Hızlı günlük kayıt ✨'),
     DailyQuickActions(
-      onFeeding: () => _sayfa('Beslenme günlüğüm', const TrackingJournalPage()),
-      onSleep: () => _sayfa('Uyku günlüğüm', const SleepJournalPage()),
+      // Hızlı işlemler, ana ekrandaki günlük sayacıyla aynı kaydı kullanır.
+      onFeeding: () => _olayEkle('Beslenme'),
+      onSleep: () => _olayEkle('Uyku'),
       onDiaper: () => _olayEkle('Bez değişimi'),
       onMeasurement: _olcumEkle,
     ),
