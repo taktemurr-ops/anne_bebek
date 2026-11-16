@@ -25,6 +25,10 @@ Bu belge GP-01'in sekiz alt işinin **kod ve kabul kanıtlarını** tutar. Kodun
 - `test/backup_service_test.dart` ve `test/backup_inspection_test.dart`: yedek geçerliliği, veri koruma, şifreli saklama geçişi, tarif favorileri ve sağlık planı.
 - `integration_test/gp01_smoke_test.dart`: gerçek Android emülatöründe başlangıç, Beslenme kaydı, profil, tarif ve yedek ekranına geçiş.
 
+## Son doğrulanmış CI kanıtı (16.11.2026)
+
+Commit `9048462dbd7cfde8a562ccc83f3808481a1a4dfa` için [Flutter CI #71](https://github.com/taktemurr-ops/anne_bebek/actions/runs/43926202919) **başarılı**: Flutter Analyze, Flutter Test, Android debug APK ve Android emülatör smoke işleri geçti. [APK artifact](https://github.com/taktemurr-ops/anne_bebek/actions/runs/43926202919/artifacts/14256917837) oluşturuldu (SHA-256 digest: `52f4b85747bd676d6f33a15d56b93af23c264d678959b1ee11b42a6532711e3f`). Bu kanıt **sonraki commitleri kapsamaz**. Sonraki `04e651b` commit'i Android kayıt için tekil kayıt ve geçerli zaman damgası kabulünü güçlendirir; yeni CI doğrulaması gerekir.
+
 ## Doğrulama kapıları
 
 - [ ] Son GP-01 commit'inde `flutter analyze` hatasız.
