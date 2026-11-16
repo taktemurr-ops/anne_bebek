@@ -72,7 +72,10 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
           DropdownMenuItem(value: 'male', child: Text('Erkek')),
         ], onChanged: (value) { if (value != null) refresh(() => sex = value); }),
         OutlinedButton.icon(onPressed: () async {
-          final chosen = await showDatePicker(context: dialogContext, initialDate: birth, firstDate: DateTime(1990), lastDate: DateTime.now());
+          final today = DateTime.now();
+          final earliest = DateTime(today.year - 18, today.month, today.day);
+          final chosen = await showDatePicker(context: dialogContext,
+            initialDate: birth, firstDate: earliest, lastDate: today);
           if (chosen != null) refresh(() => birth = chosen);
         }, icon: const Icon(Icons.cake_outlined), label: Text('Doğum: ${birth.day}.${birth.month}.${birth.year}')),
       ]),
