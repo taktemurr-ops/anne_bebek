@@ -135,13 +135,17 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
         await SecureHealthStore.read('child_journal_entries_v59'));
       final day = DateTime(chosen.year, chosen.month, chosen.day);
       if (entries.any((e) => e.childId == profile.id && e.at.isBefore(day))) {
-        if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Yeni doğum tarihi, kayıtlı günlüklerden sonra olamaz. Önce kayıtları kontrol edin.')));
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Yeni doğum tarihi, kayıtlı günlüklerden sonra olamaz. Önce kayıtları kontrol edin.')));
+        }
         return;
       }
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Günlükler doğrulanamadı; doğum tarihi değiştirilmedi.')));
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Günlükler doğrulanamadı; doğum tarihi değiştirilmedi.')));
+      }
       return;
     }
     if (!mounted) return;
