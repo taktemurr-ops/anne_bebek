@@ -286,6 +286,29 @@ void main() {
     expect(prefs.getString('shopping_v2'), '[{"item":"korunacak"}]');
   });
 
+  test('geri yuklenen cocuk kayitlari guvenli depodan disa aktarilir', () async {
+    SharedPreferences.setMockInitialValues({});
+    final profiles = jsonEncode([
+      {'id': 'c1', 'name': 'Bebek', 'birthDate': '2025-08-26T00:00:00.000'}
+    ]);
+    final journals = jsonEncode([
+      {'id': 'e1', 'childId': 'c1', 'category': 'feeding',
+        'note': '', 'at': '2026-11-16T10:00:00.000'}
+    ]);
+    final raw = jsonEncode({
+      'format': BackupService.format, 'version': 1,
+      'data': {'child_profiles_directory_v58': profiles,
+        'child_journal_entries_v59': journals},
+    });
+    expect(await BackupService.restore(raw), 2);
+    final exported = BackupService.parse(await BackupService.export());
+    expect(exported['child_profiles_directory_v58'], profiles);
+    expect(exported['child_journal_entries_v59'], journals);
+    final prefs = await SharedPreferences.getInstance();
+    expect(prefs.containsKey('child_profiles_directory_v58'), isFalse);
+    expect(prefs.containsKey('child_journal_entries_v59'), isFalse);
+  });
+
   test('geçersiz çoklu çocuk yedeği mevcut kayıtları değiştirmez', () async {
     SharedPreferences.setMockInitialValues({
       'child_profiles_directory_v58': '[]',
