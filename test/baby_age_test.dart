@@ -45,4 +45,24 @@ void main() {
         '1 günlük');
   });
 
+  test('farkli saat dilimi temsilinde takvim gunu korunur', () {
+    // Saat dilimi donusumu degil, kullanicinin girdigi takvim tarihi esastir.
+    expect(
+      BabyAge.label(
+        DateTime.utc(2026, 3, 28, 23, 30),
+        DateTime.utc(2026, 3, 29, 0, 30),
+      ),
+      '1 günlük',
+    );
+  });
+
+  test('artik yil ve yil donumunde ay hesabini korur', () {
+    expect(BabyAge.label(DateTime(2024, 2, 29), DateTime(2025, 2, 28)),
+        '1 yaşında');
+    expect(BabyAge.label(DateTime(2025, 12, 31), DateTime(2026, 1, 30)),
+        '0 aylık');
+    expect(BabyAge.label(DateTime(2025, 12, 31), DateTime(2026, 1, 31)),
+        '1 aylık');
+  });
+
 }
