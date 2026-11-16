@@ -148,6 +148,20 @@ class BackupService {
       }
       data[entry.key as String] = value is List ? List<String>.from(value) : value as Object;
     }
+    // When a backup includes both collections, every journal must belong to
+    // a profile in that same snapshot. Reject inconsistent snapshots before
+    // restore changes any local data.
+    if (data.containsKey('child_profiles_directory_v58') &&
+        data.containsKey('child_journal_entries_v59')) {
+      final profiles = decodeChildProfiles(
+        data['child_profiles_directory_v58'] as String);
+      final journals = decodeChildJournal(
+        data['child_journal_entries_v59'] as String);
+      final profileIds = profiles.map((profile) => profile.id).toSet();
+      if (journals.any((entry) => !profileIds.contains(entry.childId))) {
+        throw const FormatException('Yedekte profili olmayan çocuk günlüğü var.');
+      }
+    }
     return data;
   }
 
