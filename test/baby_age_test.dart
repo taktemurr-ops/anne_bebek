@@ -86,6 +86,8 @@ void main() {
     expect(BabyAge.label(DateTime(2026, 4, 1), DateTime(2026, 5, 1)),
         '1 aylık');
     expect(BabyAge.label(DateTime(2026, 1, 31), DateTime(2026, 3, 1)),
+        '29 günlük');
+    expect(BabyAge.label(DateTime(2026, 1, 31), DateTime(2026, 3, 2)),
         '1 aylık');
   });
 
