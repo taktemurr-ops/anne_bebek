@@ -168,7 +168,7 @@ class BackupService {
     final data = parse(raw); // validate everything before touching storage
     final p = await SharedPreferences.getInstance();
     final before = <String, Object?>{};
-    for (final key in keys) {
+    for (final key in data.keys) {
       final secureBefore = SecureHealthStore.keys.contains(key)
           ? await SecureHealthStore.read(key) : null;
       before[key] = key == 'pregnancy_checklist_v3'
@@ -189,6 +189,8 @@ class BackupService {
         }
       }
     } catch (_) {
+      // Only roll back keys this restore intended to modify. A failed restore
+      // must never touch unrelated records added by newer app versions.
       for (final entry in before.entries) {
         if (entry.value == null) {
           if (SecureHealthStore.keys.contains(entry.key)) {
