@@ -45,7 +45,7 @@ void main() {
     // A failed save must remain visible and must not be mistaken for success.
     expect(find.text('Kayıt kaydedilemedi. Lütfen tekrar deneyin.'),
         findsNothing);
-    expect(find.text('Beslenme kaydı'), findsNothing,
+    expect(find.byType(AlertDialog), findsNothing,
         reason: 'Kayit basariliysa dialog kapanmalidir.');
     final raw = await SecureHealthStore.read('olaylar');
     expect(raw, isNotNull,
