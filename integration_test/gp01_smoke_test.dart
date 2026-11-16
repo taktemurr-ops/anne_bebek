@@ -41,13 +41,20 @@ void main() {
     await tester.tap(find.descendant(
       of: find.byType(AlertDialog), matching: find.text('Kaydet'),
     ));
+    // Platform channel / Android Keystore work is asynchronous and may outlive
+    // the current frame. pumpAndSettle alone does not await that I/O.
+    for (var attempt = 0;
+        attempt < 40 && find.byType(AlertDialog).evaluate().isNotEmpty;
+        attempt++) {
+      await tester.pump(const Duration(milliseconds: 250));
+    }
     await tester.pumpAndSettle();
 
     // A failed save must remain visible and must not be mistaken for success.
     expect(find.text('Kayıt kaydedilemedi. Lütfen tekrar deneyin.'),
         findsNothing);
     expect(find.byType(AlertDialog), findsNothing,
-        reason: 'Kayit basariliysa dialog kapanmalidir.');
+        reason: 'Kayit 10 saniyede tamamlanmadi veya guvenli yazma basarisiz.');
     final raw = await SecureHealthStore.read('olaylar');
     expect(raw, isNotNull,
         reason: 'Android Keystore uzerinde beslenme kaydi bulunamadi.');
