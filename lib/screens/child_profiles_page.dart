@@ -8,6 +8,7 @@ import 'child_report_page.dart';
 import 'package:flutter/material.dart';
 import '../services/child_profiles.dart';
 import '../services/child_journals.dart';
+import '../services/child_care_plans.dart';
 import '../services/secure_health_store.dart';
 import '../utils/baby_age.dart';
 
@@ -129,6 +130,21 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       firstDate: DateTime(1990), lastDate: DateTime.now(),
     );
     if (chosen == null || !mounted) return;
+    try {
+      final entries = decodeChildJournal(
+        await SecureHealthStore.read('child_journal_entries_v59'));
+      final day = DateTime(chosen.year, chosen.month, chosen.day);
+      if (entries.any((e) => e.childId == profile.id && e.at.isBefore(day))) {
+        if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Yeni doğum tarihi, kayıtlı günlüklerden sonra olamaz. Önce kayıtları kontrol edin.')));
+        return;
+      }
+    } catch (_) {
+      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Günlükler doğrulanamadı; doğum tarihi değiştirilmedi.')));
+      return;
+    }
+    if (!mounted) return;
     await _save(_profiles.map((e) => e.id == profile.id
       ? ChildProfile(id: e.id, name: e.name, birthDate: chosen, sex: e.sex) : e).toList());
   }
@@ -186,11 +202,12 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
     try {
       final journals = decodeChildJournal(
         await SecureHealthStore.read('child_journal_entries_v59'));
-      final careRaw = await SecureHealthStore.read('child_care_plan_v96');
+      final care = decodeChildCareItems(
+        await SecureHealthStore.read('child_care_plan_v96'));
       final hasJournal = journals.any((entry) => entry.childId == profile.id);
-      // Care plan may contain records not represented by the journal.
-      // Fail closed until a verified cascade/archive workflow exists.
-      if (hasJournal || (careRaw != null && careRaw.contains(profile.id))) {
+      final hasCare = care.any((item) => item.childId == profile.id);
+      // Never remove a profile with health data attached to its exact ID.
+      if (hasJournal || hasCare) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Bu çocuğa ait sağlık kayıtları var. Veri kaybını önlemek için profil silinmedi.')));
