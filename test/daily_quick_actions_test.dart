@@ -23,4 +23,35 @@ void main() {
     }
     expect(calls, ['Beslenme', 'Uyku', 'Bez', 'Ölçüm']);
   });
+
+  for (final width in [280.0, 320.0, 360.0, 600.0]) {
+    testWidgets('GP-01 hızlı işlemler dar ekranda taşmaz: ${width.toInt()} px',
+        (tester) async {
+      tester.view.physicalSize = Size(width, 800);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: DailyQuickActions(
+              onFeeding: () {},
+              onSleep: () {},
+              onDiaper: () {},
+              onMeasurement: () {},
+            ),
+          ),
+        ),
+      ));
+      await tester.pumpAndSettle();
+
+      for (final label in ['Beslenme', 'Uyku', 'Bez', 'Ölçüm']) {
+        expect(find.text(label), findsOneWidget);
+      }
+      expect(tester.takeException(), isNull);
+    });
+  }
 }
