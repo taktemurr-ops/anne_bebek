@@ -63,7 +63,7 @@ jobs:
     timeout-minutes: 45
     concurrency:
       group: gp01-android-${{ github.head_ref }}
-      cancel-in-progress: true
+      cancel-in-progress: false
 
     steps:
       - name: Kaynak kodlarini indir
@@ -88,7 +88,7 @@ jobs:
       - name: Android emulator icin disk alani ac
         run: |
           df -h
-          sudo rm -rf /usr/local/lib/android/sdk/ndk /usr/local/lib/android/sdk/cmake /usr/local/lib/android/sdk/system-images
+          # Preserve Android SDK/NDK/CMake to avoid costly reinstall during Gradle build.
           sudo rm -rf /opt/hostedtoolcache/CodeQL /usr/share/dotnet /usr/local/share/powershell /opt/ghc
           df -h
 
