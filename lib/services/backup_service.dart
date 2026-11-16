@@ -36,7 +36,11 @@ class BackupService {
     final data = parse(raw);
     final result = <String, int>{};
     for (final entry in data.entries) {
-      if (jsonListKeys.contains(entry.key)) {
+      if (entry.key == 'child_profiles_directory_v58') {
+        result[entry.key] = decodeChildProfiles(entry.value as String).length;
+      } else if (entry.key == 'child_journal_entries_v59') {
+        result[entry.key] = decodeChildJournal(entry.value as String).length;
+      } else if (jsonListKeys.contains(entry.key)) {
         result[entry.key] = (jsonDecode(entry.value as String) as List).length;
       } else if (jsonMapKeys.contains(entry.key)) {
         final map = jsonDecode(entry.value as String) as Map;
