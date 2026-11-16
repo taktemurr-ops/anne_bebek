@@ -3,6 +3,20 @@
 class BabyAge {
   const BabyAge._();
 
+  /// Tamamlanan takvim ayı sayısı. Gelecekteki doğumlarda null döner.
+  /// Saat farkı yerine takvim tarihleri esas alınır.
+  static int? completedMonths(DateTime? birth, DateTime today) {
+    if (birth == null) return null;
+    final b = DateTime.utc(birth.year, birth.month, birth.day);
+    final now = DateTime.utc(today.year, today.month, today.day);
+    if (b.isAfter(now)) return null;
+    var months = (now.year - b.year) * 12 + now.month - b.month;
+    final lastDay = DateTime.utc(now.year, now.month + 1, 0).day;
+    final anniversaryDay = b.day < lastDay ? b.day : lastDay;
+    if (now.day < anniversaryDay) months--;
+    return months < 0 ? 0 : months;
+  }
+
   static String label(DateTime? birth, DateTime today) {
     if (birth == null) return 'Doğum tarihi eklenmedi';
     final b = DateTime.utc(birth.year, birth.month, birth.day);
@@ -12,14 +26,7 @@ class BabyAge {
     final days = now.difference(b).inDays;
     if (days < 30) return '$days günlük';
 
-    var months = (now.year - b.year) * 12 + now.month - b.month;
-    // Ayın son gününde doğan bebekler için kısa aylarda ay dönümünü koru.
-    final lastDayOfCurrentMonth = DateTime.utc(now.year, now.month + 1, 0).day;
-    final anniversaryDay = b.day < lastDayOfCurrentMonth
-        ? b.day
-        : lastDayOfCurrentMonth;
-    if (now.day < anniversaryDay) months--;
-    if (months < 0) months = 0;
+    final months = completedMonths(birth, today)!;
     final years = months ~/ 12;
     final remainingMonths = months % 12;
     if (years == 0) return '$months aylık';
