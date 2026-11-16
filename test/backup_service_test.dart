@@ -152,4 +152,23 @@ void main() {
     expect(await SecureHealthStore.read('bebekAdi'), 'Yedekten gelen');
   });
 
+  test('eski yedek ilgisiz güvenli kayıttaki çakışmaya dokunmaz', () async {
+    SharedPreferences.setMockInitialValues({});
+    await SecureHealthStore.write('baby_feeding_journal_v5', '[]');
+    final prefs = await SharedPreferences.getInstance();
+    // This conflict requires explicit recovery, but is unrelated to the
+    // restored key. The backup must not read, overwrite or delete it.
+    await prefs.setString('baby_feeding_journal_v5', '[{"legacy":true}]');
+    final oldBackup = jsonEncode({
+      'format': BackupService.format,
+      'version': 1,
+      'data': {'alisveris': '[]'},
+    });
+    expect(await BackupService.restore(oldBackup), 1);
+    expect(prefs.getString('baby_feeding_journal_v5'),
+        '[{"legacy":true}]');
+    await expectLater(
+      SecureHealthStore.read('baby_feeding_journal_v5'), throwsStateError);
+  });
+
 }
