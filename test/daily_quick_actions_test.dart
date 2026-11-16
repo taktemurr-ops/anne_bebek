@@ -58,7 +58,7 @@ void main() {
   testWidgets('GP-01 hizli islem dugmeleri erisilebilir etiket tasir',
       (tester) async {
     final semantics = tester.ensureSemantics();
-    addTearDown(semantics.dispose);
+    // flutter_test requires semantic handles to close before test teardown.
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
         body: DailyQuickActions(
@@ -79,6 +79,7 @@ void main() {
       expect(tester.widget<OutlinedButton>(button).onPressed, isNotNull);
     }
     expect(tester.takeException(), isNull);
+    semantics.dispose();
   });
 
 }
