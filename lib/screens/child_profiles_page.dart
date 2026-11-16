@@ -57,7 +57,10 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
     final name = TextEditingController();
     DateTime birth = DateTime.now();
     String sex = 'unknown';
-    final result = await showDialog<ChildProfile>(context: context, builder: (dialogContext) => StatefulBuilder(builder: (dialogContext, refresh) => AlertDialog(
+    ModalRoute<dynamic>? dialogRoute;
+    final result = await showDialog<ChildProfile>(context: context, builder: (dialogContext) {
+      dialogRoute = ModalRoute.of(dialogContext);
+      return StatefulBuilder(builder: (dialogContext, refresh) => AlertDialog(
       title: const Text('Çocuk profili ekle'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: name, maxLength: 60, decoration: const InputDecoration(labelText: 'Adı')),
@@ -77,14 +80,18 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
           if (value.isEmpty) return;
           Navigator.pop(dialogContext, ChildProfile(id: DateTime.now().microsecondsSinceEpoch.toString(), name: value, birthDate: birth, sex: sex));
         }, child: const Text('Kaydet'))],
-    )));
+    )); });
+    await dialogRoute?.completed;
     name.dispose();
     if (result != null && mounted) await _save([..._profiles, result]);
   }
 
   Future<void> _rename(ChildProfile profile) async {
     final controller = TextEditingController(text: profile.name);
-    final newName = await showDialog<String>(context: context, builder: (ctx) => AlertDialog(
+    ModalRoute<dynamic>? renameRoute;
+    final newName = await showDialog<String>(context: context, builder: (ctx) {
+      renameRoute = ModalRoute.of(ctx);
+      return AlertDialog(
       title: const Text('Profil adını düzenle'),
       content: TextField(controller: controller, maxLength: 60, decoration: const InputDecoration(labelText: 'Ad')),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
@@ -92,7 +99,8 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
           final name = controller.text.trim();
           if (name.isNotEmpty) Navigator.pop(ctx, name);
         }, child: const Text('Kaydet'))],
-    ));
+    ); });
+    await renameRoute?.completed;
     controller.dispose();
     if (newName != null && mounted && newName != profile.name) {
       await _save(_profiles.map((e) => e.id == profile.id
