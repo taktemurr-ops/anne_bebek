@@ -1,0 +1,37 @@
+/// GP-03: Growth measurement validation, independent from UI and persistence.
+class GrowthMeasurementValidator {
+  const GrowthMeasurementValidator._();
+
+  static String? validateWeightGrams(num? grams) {
+    if (grams == null || !grams.isFinite || grams <= 0 || grams > 200000) {
+      return 'Ağırlık 0 ile 200000 gram arasında olmalıdır.';
+    }
+    return null;
+  }
+
+  static String? validateHeightCm(num? cm) {
+    if (cm == null || !cm.isFinite || cm <= 0 || cm > 250) {
+      return 'Boy 0 ile 250 cm arasında olmalıdır.';
+    }
+    return null;
+  }
+
+  static String? validateHeadCircumferenceCm(num? cm) {
+    if (cm == null || !cm.isFinite || cm <= 0 || cm > 100) {
+      return 'Baş çevresi 0 ile 100 cm arasında olmalıdır.';
+    }
+    return null;
+  }
+
+  static String? validateMeasurementDate(DateTime? date,
+      {required DateTime birthDate, DateTime? today}) {
+    if (date == null) return 'Ölçüm tarihi gereklidir.';
+    final current = today ?? DateTime.now();
+    final day = DateTime.utc(date.year, date.month, date.day);
+    final born = DateTime.utc(birthDate.year, birthDate.month, birthDate.day);
+    final now = DateTime.utc(current.year, current.month, current.day);
+    if (day.isBefore(born)) return 'Ölçüm doğumdan önce olamaz.';
+    if (day.isAfter(now)) return 'Ölçüm tarihi gelecekte olamaz.';
+    return null;
+  }
+}
