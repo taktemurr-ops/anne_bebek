@@ -67,6 +67,43 @@ void main() {
       );
     });
 
+    test('birth chronology compares calendar days, not times', () {
+      final birth = DateTime(2026, 11, 17, 23, 59);
+      expect(
+        ChildProfileValidator.hasRecordsBeforeBirth(
+          birth, [DateTime(2026, 11, 17, 0, 1)]),
+        isFalse,
+      );
+      expect(
+        ChildProfileValidator.hasRecordsBeforeBirth(
+          birth, [DateTime(2026, 11, 16, 23, 59)]),
+        isTrue,
+      );
+      expect(
+        ChildProfileValidator.hasRecordsBeforeBirth(birth, []),
+        isFalse,
+      );
+    });
+
+    test('birth chronology checks every record and ignores later records', () {
+      final birth = DateTime(2026, 11, 17);
+      expect(
+        ChildProfileValidator.hasRecordsBeforeBirth(birth, [
+          DateTime(2026, 11, 19),
+          DateTime(2026, 11, 16),
+          DateTime(2026, 11, 18),
+        ]),
+        isTrue,
+      );
+      expect(
+        ChildProfileValidator.hasRecordsBeforeBirth(birth, [
+          DateTime(2026, 11, 17),
+          DateTime(2026, 11, 18),
+        ]),
+        isFalse,
+      );
+    });
+
     test('rejects dates older than 18 years', () {
       final today = DateTime(2026, 11, 16);
       expect(ChildProfileValidator.validateBirthDate(DateTime(2008, 11, 15), today: today), isNotNull);
