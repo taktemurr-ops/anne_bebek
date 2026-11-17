@@ -26,7 +26,7 @@ class ChildProfileValidator {
         rune == 0x2028 || rune == 0x2029 || // Unicode line/paragraph separators
         rune == 0xFEFF ||
         (rune >= 0x202A && rune <= 0x202E) ||
-        (rune >= 0x2066 && rune <= 0x206F))) // bidi isolates and deprecated directional controls {
+        (rune >= 0x2066 && rune <= 0x206F))) { // bidi isolates and deprecated directional controls
       return 'Çocuk adı kontrol karakterleri içeremez.';
     }
     return null;
