@@ -22,6 +22,28 @@ void main() {
       expect(GrowthMeasurementValidator.validateHeadCircumferenceCm(101), isNotNull);
     });
 
+    test('rejects upper bounds and accepts positive fractional measurements', () {
+      expect(GrowthMeasurementValidator.validateWeightGrams(0.1), isNull);
+      expect(GrowthMeasurementValidator.validateHeightCm(250), isNull);
+      expect(GrowthMeasurementValidator.validateHeadCircumferenceCm(100), isNull);
+      expect(GrowthMeasurementValidator.validateWeightGrams(200000.1), isNotNull);
+      expect(GrowthMeasurementValidator.validateHeightCm(250.1), isNotNull);
+      expect(GrowthMeasurementValidator.validateHeadCircumferenceCm(100.1), isNotNull);
+    });
+
+    test('date validation handles leap day and ignores time of day', () {
+      final birth = DateTime(2024, 2, 29, 23, 59);
+      final today = DateTime(2024, 3, 1, 0, 1);
+      expect(GrowthMeasurementValidator.validateMeasurementDate(
+        DateTime(2024, 2, 29, 0, 1), birthDate: birth, today: today), isNull);
+      expect(GrowthMeasurementValidator.validateMeasurementDate(
+        DateTime(2024, 3, 1, 23, 59), birthDate: birth, today: today), isNull);
+      expect(GrowthMeasurementValidator.validateMeasurementDate(
+        DateTime(2024, 2, 28), birthDate: birth, today: today), isNotNull);
+      expect(GrowthMeasurementValidator.validateMeasurementDate(
+        DateTime(2024, 3, 2), birthDate: birth, today: today), isNotNull);
+    });
+
     test('measurement date respects birth date and current calendar day', () {
       final birth = DateTime(2025, 8, 26, 23, 59);
       final now = DateTime(2026, 11, 17, 1);
