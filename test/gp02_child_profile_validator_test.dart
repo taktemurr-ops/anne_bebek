@@ -109,5 +109,38 @@ void main() {
       expect(ChildProfileValidator.validateBirthDate(DateTime(2008, 11, 15), today: today), isNotNull);
       expect(ChildProfileValidator.validateBirthDate(DateTime(2008, 11, 16), today: today), isNull);
     });
+    test('birth chronology handles leap days and mixed time zones', () {
+      final birth = DateTime.utc(2024, 2, 29, 23, 59);
+      expect(
+        ChildProfileValidator.hasRecordsBeforeBirth(
+          birth, [DateTime(2024, 2, 29, 0, 1)]),
+        isFalse,
+      );
+      expect(
+        ChildProfileValidator.hasRecordsBeforeBirth(
+          birth, [DateTime.utc(2024, 2, 28, 23, 59)]),
+        isTrue,
+      );
+      expect(
+        ChildProfileValidator.hasRecordsBeforeBirth(
+          birth, [DateTime.utc(2024, 3, 1)]),
+        isFalse,
+      );
+    });
+
+    test('18-year cutoff respects leap-year calendar normalization', () {
+      final today = DateTime(2024, 2, 29);
+      expect(
+        ChildProfileValidator.validateBirthDate(
+          DateTime(2006, 3, 1), today: today),
+        isNull,
+      );
+      expect(
+        ChildProfileValidator.validateBirthDate(
+          DateTime(2006, 2, 27), today: today),
+        isNotNull,
+      );
+    });
+
   });
 }
