@@ -46,6 +46,18 @@ void main() {
       expect(ChildProfileValidator.validateName('İpek Çağla'), isNull);
     });
 
+    test('rejects invisible Unicode tag and filler code points', () {
+      for (final codePoint in [0x034F, 0x115F, 0x1160, 0xE0001, 0xE0020, 0xE007F]) {
+        expect(
+          ChildProfileValidator.validateName(
+            'Ada${String.fromCharCode(codePoint)}Naz'),
+          isNotNull,
+          reason: 'U+${codePoint.toRadixString(16)} must be rejected',
+        );
+      }
+      expect(ChildProfileValidator.validateName('Ada Naz'), isNull);
+    });
+
     test('rejects future and missing birth dates', () {
       final today = DateTime(2026, 11, 16);
       expect(ChildProfileValidator.validateBirthDate(null, today: today), isNotNull);
