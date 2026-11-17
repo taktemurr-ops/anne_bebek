@@ -46,7 +46,20 @@ jobs:
         run: flutter test
 
       - name: Android APK olustur
-        run: flutter build apk --debug
+        shell: bash
+        run: |
+          # Retry only dependency-download failures; preserve the original exit status otherwise.
+          set +e
+          flutter build apk --debug 2>&1 | tee /tmp/anne-bebek-apk-build.log
+          result=${PIPESTATUS[0]}
+          set -e
+          if [ "$result" -ne 0 ] && grep -Eq 'Could not resolve all artifacts|Could not find org.jetbrains.kotlin|Could not parse POM|Connection reset by peer' /tmp/anne-bebek-apk-build.log; then
+            echo 'Transient Gradle dependency download failure; retrying once.'
+            sleep 15
+            flutter build apk --debug --gradle-flag=--refresh-dependencies
+          elif [ "$result" -ne 0 ]; then
+            exit "$result"
+          fi
 
       - name: APK dosyasini kaydet
         uses: actions/upload-artifact@v4
