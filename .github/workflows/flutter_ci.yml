@@ -2,9 +2,9 @@ name: Flutter CI
 
 on:
   push:
-    branches: [main, 'feature/gp02-*']
+    branches: [main, 'feature/gp*']
   pull_request:
-    branches: [main, 'feature/gp01-*']
+    branches: [main, 'feature/gp*']
   workflow_dispatch:
 
 permissions:
@@ -71,7 +71,7 @@ jobs:
 
   gp01-android-emulator:
     name: Android emulatorde ekran ve kayit testi
-    if: github.event_name == 'pull_request' && (startsWith(github.head_ref, 'feature/gp01-') || startsWith(github.head_ref, 'feature/gp02-'))
+    if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'feature/gp')
     runs-on: ubuntu-latest
     timeout-minutes: 45
     concurrency:
