@@ -162,13 +162,11 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
         await SecureHealthStore.read('child_journal_entries_v59'));
       final careItems = decodeChildCareItems(
         await SecureHealthStore.read('child_care_plan_v96'));
-      final day = DateTime(chosen.year, chosen.month, chosen.day);
-      final hasEarlierJournal = entries.any((e) =>
-          e.childId == profile.id &&
-          DateTime(e.at.year, e.at.month, e.at.day).isBefore(day));
-      final hasEarlierCare = careItems.any((item) =>
-          item.childId == profile.id &&
-          DateTime(item.date.year, item.date.month, item.date.day).isBefore(day));
+      final hasEarlierJournal = ChildProfileValidator.hasRecordsBeforeBirth(
+        chosen, entries.where((e) => e.childId == profile.id).map((e) => e.at));
+      final hasEarlierCare = ChildProfileValidator.hasRecordsBeforeBirth(
+        chosen, careItems.where((item) => item.childId == profile.id)
+            .map((item) => item.date));
       if (hasEarlierJournal || hasEarlierCare) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
