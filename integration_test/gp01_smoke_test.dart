@@ -100,5 +100,24 @@ void main() {
     await tester.tap(backup);
     await tester.pumpAndSettle();
     expect(find.text('Yedekleme ve geri yükleme'), findsOneWidget);
+
+    // Simulate closing and reopening the Flutter UI without uninstalling the
+    // application. The encrypted journal must survive widget-tree recreation.
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pumpAndSettle();
+    await tester.pumpWidget(const AnneBebekApp());
+    await tester.pumpAndSettle();
+    final persisted = await SecureHealthStore.read('olaylar');
+    expect(persisted, isNotNull,
+        reason: 'Gunluk kaydi uygulama arayuzu yeniden acilinca kaybolmamali.');
+    final reopenedRecords = jsonDecode(persisted!) as List<dynamic>;
+    expect(
+      reopenedRecords.where((item) =>
+          item is Map &&
+          item['tur'] == 'Beslenme' &&
+          item['not'] == 'GP01 Android smoke kaydi'),
+      hasLength(1),
+      reason: 'Yeniden acilista sifreli beslenme kaydi korunmalidir.',
+    );
   });
 }
