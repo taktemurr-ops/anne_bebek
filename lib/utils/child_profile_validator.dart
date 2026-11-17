@@ -17,6 +17,9 @@ class ChildProfileValidator {
         rune == 0x00AD || // soft hyphen: görünmez biçimlendirme
         rune == 0x061C || // Arabic letter mark: metin yönü kontrolü
         rune == 0x180E || // Mongolian vowel separator
+        rune == 0x034F || // combining grapheme joiner
+        rune == 0x115F || rune == 0x1160 || // Hangul fillers
+        (rune >= 0xE0000 && rune <= 0xE007F) || // invisible Unicode tags
         (rune >= 0x200B && rune <= 0x200F) ||
         (rune >= 0x2060 && rune <= 0x2064) || // invisible word joiner / operators
         rune == 0x2028 || rune == 0x2029 || // Unicode line/paragraph separators
