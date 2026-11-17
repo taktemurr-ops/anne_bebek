@@ -44,5 +44,21 @@ void main() {
       final unexpected = decodeChildProfiles('[{"id":"old","name":"Ada","birthDate":"2025-01-01","sex":"unsupported"}]');
       expect(unexpected.single.sex, 'unknown');
     });
+    test('rejects blank, padded, and control-character profile identifiers', () {
+      for (final id in ['', '  ', ' child-a', 'child-a ', 'child\\n-a']) {
+        final raw = encodeChildProfiles([
+          ChildProfile(id: id, name: 'Ada', birthDate: DateTime(2025, 1, 1)),
+        ]);
+        expect(() => decodeChildProfiles(raw), throwsFormatException,
+            reason: 'Invalid identifier should not be persisted: $id');
+      }
+      expect(
+        decodeChildProfiles(encodeChildProfiles([
+          ChildProfile(id: 'child-a', name: 'Ada', birthDate: DateTime(2025, 1, 1)),
+        ])).single.id,
+        'child-a',
+      );
+    });
+
   });
 }
