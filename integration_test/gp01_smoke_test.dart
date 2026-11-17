@@ -111,6 +111,9 @@ void main() {
     expect(persisted, isNotNull,
         reason: 'Gunluk kaydi uygulama arayuzu yeniden acilinca kaybolmamali.');
     final reopenedRecords = jsonDecode(persisted!) as List<dynamic>;
+    final reopenedLegacyPrefs = await SharedPreferences.getInstance();
+    expect(reopenedLegacyPrefs.containsKey('olaylar'), isFalse,
+        reason: 'Yeniden acilistan sonra gunluk kayitlari acik metin depoda olmamali.');
     expect(
       reopenedRecords.where((item) =>
           item is Map &&
