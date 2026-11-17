@@ -27,6 +27,13 @@ void main() {
       expect(ChildProfileValidator.validateName('Ada\nTest'), isNotNull);
     });
 
+    test('rejects C1 controls and bidi overrides in profile names', () {
+      expect(ChildProfileValidator.validateName('Ada\u0085Test'), isNotNull);
+      expect(ChildProfileValidator.validateName('Ada\u202eTest'), isNotNull);
+      expect(ChildProfileValidator.validateName('Ada\u2066Test'), isNotNull);
+      expect(ChildProfileValidator.validateName('Çağla'), isNull);
+    });
+
     test('rejects future and missing birth dates', () {
       final today = DateTime(2026, 11, 16);
       expect(ChildProfileValidator.validateBirthDate(null, today: today), isNotNull);
