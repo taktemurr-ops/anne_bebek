@@ -180,5 +180,23 @@ void main() {
       expect(ChildProfileValidator.validateName('Ayşe Naz'), isNull);
     });
 
+    test('birth chronology detects records from prior calendar year', () {
+      final birth = DateTime(2026, 1, 1);
+      expect(
+        ChildProfileValidator.hasRecordsBeforeBirth(birth, [
+          DateTime(2026, 1, 1, 0, 0),
+          DateTime(2026, 1, 2),
+        ]),
+        isFalse,
+      );
+      expect(
+        ChildProfileValidator.hasRecordsBeforeBirth(birth, [
+          DateTime(2026, 1, 2),
+          DateTime(2025, 12, 31, 23, 59),
+        ]),
+        isTrue,
+      );
+    });
+
   });
 }
