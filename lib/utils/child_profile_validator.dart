@@ -14,6 +14,9 @@ class ChildProfileValidator {
     if (normalized.runes.any((rune) =>
         rune < 32 ||
         (rune >= 127 && rune <= 159) ||
+        (rune >= 0x200B && rune <= 0x200F) ||
+        rune == 0x2060 ||
+        rune == 0xFEFF ||
         (rune >= 0x202A && rune <= 0x202E) ||
         (rune >= 0x2066 && rune <= 0x2069))) {
       return 'Çocuk adı kontrol karakterleri içeremez.';
