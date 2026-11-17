@@ -86,7 +86,7 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
         actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
           FilledButton(onPressed: () {
             final isMeasure = category.contains('(kg)') || category.contains('(cm)');
-            final parsed = double.tryParse(number.text.replaceAll(',', '.'));
+            final parsed = GrowthMeasurementValidator.parseMeasurement(number.text);
             final validation = _measurementError(category, isMeasure ? parsed : null, at);
             if (validation != null) {
               ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(validation)));
@@ -134,7 +134,7 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
           FilledButton(onPressed: () {
-            final parsed = double.tryParse(number.text.replaceAll(',', '.'));
+            final parsed = GrowthMeasurementValidator.parseMeasurement(number.text);
             final validation = _measurementError(original.category, isMeasure ? parsed : null, at);
             if (validation != null) {
               ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(validation)));
