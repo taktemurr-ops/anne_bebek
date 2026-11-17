@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/child_journals.dart';
 import '../services/child_profiles.dart';
 import '../services/secure_health_store.dart';
+import '../utils/growth_measurement_validator.dart';
 
 class ChildJournalPage extends StatefulWidget {
   final ChildProfile child;
@@ -38,6 +39,23 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
         const SnackBar(content: Text('Kaydedilemedi; eski kayıtlar korundu.'))); }
     } finally { if (mounted) setState(() => _saving = false); }
   }
+  String? _measurementError(String category, double? value, DateTime at) {
+    final dateError = GrowthMeasurementValidator.validateMeasurementDate(
+      at, birthDate: widget.child.birthDate);
+    if (dateError != null) return dateError;
+    switch (category) {
+      case 'Kilo (kg)':
+        return GrowthMeasurementValidator.validateWeightGrams(
+          value == null ? null : value * 1000);
+      case 'Boy (cm)':
+        return GrowthMeasurementValidator.validateHeightCm(value);
+      case 'Baş çevresi (cm)':
+        return GrowthMeasurementValidator.validateHeadCircumferenceCm(value);
+      default:
+        return null;
+    }
+  }
+
   Future<void> _add() async {
     final note = TextEditingController();
     final number = TextEditingController();
@@ -70,7 +88,11 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
           FilledButton(onPressed: () {
             final isMeasure = category.contains('(kg)') || category.contains('(cm)');
             final parsed = double.tryParse(number.text.replaceAll(',', '.'));
-            if (isMeasure && (parsed == null || !parsed.isFinite || parsed <= 0 || parsed > 300)) return;
+            final validation = _measurementError(category, isMeasure ? parsed : null, at);
+            if (validation != null) {
+              ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(validation)));
+              return;
+            }
             if (!isMeasure && note.text.trim().isEmpty) return;
             Navigator.pop(ctx, ChildJournalEntry(
               id: DateTime.now().microsecondsSinceEpoch.toString(),
@@ -114,8 +136,9 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
           FilledButton(onPressed: () {
             final parsed = double.tryParse(number.text.replaceAll(',', '.'));
-            if (isMeasure && (parsed == null || !parsed.isFinite || !parsed.isFinite || parsed <= 0 || parsed > 300)) {
-              ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Geçerli bir ölçüm girin.')));
+            final validation = _measurementError(original.category, isMeasure ? parsed : null, at);
+            if (validation != null) {
+              ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(validation)));
               return;
             }
             if (!isMeasure && note.text.trim().isEmpty) {
