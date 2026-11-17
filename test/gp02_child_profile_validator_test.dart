@@ -180,6 +180,18 @@ void main() {
       expect(ChildProfileValidator.validateName('Ayşe Naz'), isNull);
     });
 
+    test('rejects deprecated Unicode directional formatting controls', () {
+      for (var codePoint = 0x206A; codePoint <= 0x206F; codePoint++) {
+        expect(
+          ChildProfileValidator.validateName(
+            'Ada${String.fromCharCode(codePoint)}Naz'),
+          isNotNull,
+          reason: 'U+${codePoint.toRadixString(16)} must be rejected',
+        );
+      }
+      expect(ChildProfileValidator.validateName('Ada Naz'), isNull);
+    });
+
     test('birth chronology detects records from prior calendar year', () {
       final birth = DateTime(2026, 1, 1);
       expect(
