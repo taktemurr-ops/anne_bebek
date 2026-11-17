@@ -9,6 +9,10 @@ class GrowthMeasurementValidator {
     return null;
   }
 
+  /// UI records kilograms; bounds are enforced in grams consistently.
+  static String? validateWeightKg(num? kilograms) =>
+      validateWeightGrams(kilograms == null ? null : kilograms * 1000);
+
   static String? validateHeightCm(num? cm) {
     if (cm == null || !cm.isFinite || cm <= 0 || cm > 250) {
       return 'Boy 0 ile 250 cm arasında olmalıdır.';
