@@ -28,6 +28,21 @@ class ChildProfileValidator {
     return null;
   }
 
+  /// Prevent a birth-date change that would place existing records before birth.
+  /// Compare calendar days rather than timestamps; records on the birth day
+  /// remain valid even when their time is earlier than the selected date's time.
+  static bool hasRecordsBeforeBirth(
+    DateTime birthDate,
+    Iterable<DateTime> recordDates,
+  ) {
+    final birthDay = DateTime.utc(birthDate.year, birthDate.month, birthDate.day);
+    return recordDates.any((recordDate) {
+      final recordDay = DateTime.utc(
+        recordDate.year, recordDate.month, recordDate.day);
+      return recordDay.isBefore(birthDay);
+    });
+  }
+
   static const supportedSexValues = {'unknown', 'female', 'male'};
 
   static String? validateSex(String? value) {
