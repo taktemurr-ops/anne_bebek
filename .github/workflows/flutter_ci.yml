@@ -56,7 +56,7 @@ jobs:
           if [ "$result" -ne 0 ] && grep -Eq 'Could not resolve all artifacts|Could not find org.jetbrains.kotlin|Could not parse POM|Connection reset by peer' /tmp/anne-bebek-apk-build.log; then
             echo 'Transient Gradle dependency download failure; retrying once.'
             sleep 15
-            flutter build apk --debug --gradle-flag=--refresh-dependencies
+            flutter build apk --debug
           elif [ "$result" -ne 0 ]; then
             exit "$result"
           fi
