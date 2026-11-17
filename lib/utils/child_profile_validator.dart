@@ -14,6 +14,9 @@ class ChildProfileValidator {
     if (normalized.runes.any((rune) =>
         rune < 32 ||
         (rune >= 127 && rune <= 159) ||
+        rune == 0x00AD || // soft hyphen: görünmez biçimlendirme
+        rune == 0x061C || // Arabic letter mark: metin yönü kontrolü
+        rune == 0x180E || // Mongolian vowel separator
         (rune >= 0x200B && rune <= 0x200F) ||
         rune == 0x2060 ||
         rune == 0xFEFF ||
