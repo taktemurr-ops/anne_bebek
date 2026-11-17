@@ -3,6 +3,19 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('GP-03 growth measurements', () {
+    test('parses localized decimals and rejects ambiguous or unsafe input', () {
+      expect(GrowthMeasurementValidator.parseMeasurement('3,385'), 3.385);
+      expect(GrowthMeasurementValidator.parseMeasurement(' 54.5 '), 54.5);
+      expect(GrowthMeasurementValidator.parseMeasurement('0'), 0);
+      for (final input in <String>[
+        '', ' ', '-1', '+1', '1.234,56', '1,234.56', '1..2',
+        '.5', '5.', 'NaN', 'Infinity', '1e3', '1 000', 'abc',
+      ]) {
+        expect(GrowthMeasurementValidator.parseMeasurement(input), isNull,
+            reason: 'Unexpected accepted input: '+input);
+      }
+    });
+
     test('weight boundaries and nonfinite values', () {
       expect(GrowthMeasurementValidator.validateWeightGrams(3385), isNull);
       expect(GrowthMeasurementValidator.validateWeightGrams(200000), isNull);
