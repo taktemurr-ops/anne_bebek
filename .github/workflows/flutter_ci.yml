@@ -1,10 +1,10 @@
-﻿name: Flutter CI
+name: Flutter CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'feature/gp02-*']
   pull_request:
-    branches: [main]
+    branches: [main, 'feature/gp01-*']
   workflow_dispatch:
 
 permissions:
@@ -46,7 +46,20 @@ jobs:
         run: flutter test
 
       - name: Android APK olustur
-        run: flutter build apk --debug
+        shell: bash
+        run: |
+          # Retry only dependency-download failures; preserve the original exit status otherwise.
+          set +e
+          flutter build apk --debug 2>&1 | tee /tmp/anne-bebek-apk-build.log
+          result=${PIPESTATUS[0]}
+          set -e
+          if [ "$result" -ne 0 ] && grep -Eq 'Could not resolve all artifacts|Could not find org.jetbrains.kotlin|Could not parse POM|Connection reset by peer' /tmp/anne-bebek-apk-build.log; then
+            echo 'Transient Gradle dependency download failure; retrying once.'
+            sleep 15
+            flutter build apk --debug
+          elif [ "$result" -ne 0 ]; then
+            exit "$result"
+          fi
 
       - name: APK dosyasini kaydet
         uses: actions/upload-artifact@v4
@@ -57,12 +70,12 @@ jobs:
           retention-days: 14
 
   gp01-android-emulator:
-    name: GP-01 Android emulatorde ekran ve kayit testi
-    if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'feature/gp01-')
+    name: Android emulatorde ekran ve kayit testi
+    if: github.event_name == 'pull_request' && (startsWith(github.head_ref, 'feature/gp01-') || startsWith(github.head_ref, 'feature/gp02-'))
     runs-on: ubuntu-latest
     timeout-minutes: 45
     concurrency:
-      group: gp01-android-${{ github.head_ref }}
+      group: gp-android-${{ github.head_ref }}
       cancel-in-progress: false
 
     steps:
@@ -98,7 +111,7 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Android emulator GP-01 smoke testleri
+      - name: Android emulator temel smoke testleri
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 34

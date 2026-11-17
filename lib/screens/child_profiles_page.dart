@@ -11,6 +11,7 @@ import '../services/child_journals.dart';
 import '../services/child_care_plans.dart';
 import '../services/secure_health_store.dart';
 import '../utils/baby_age.dart';
+import '../utils/child_profile_validator.dart';
 
 class ChildProfilesPage extends StatefulWidget {
   const ChildProfilesPage({super.key});
@@ -71,14 +72,23 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
           DropdownMenuItem(value: 'male', child: Text('Erkek')),
         ], onChanged: (value) { if (value != null) refresh(() => sex = value); }),
         OutlinedButton.icon(onPressed: () async {
-          final chosen = await showDatePicker(context: dialogContext, initialDate: birth, firstDate: DateTime(1990), lastDate: DateTime.now());
+          final today = DateTime.now();
+          final earliest = DateTime(today.year - 18, today.month, today.day);
+          final chosen = await showDatePicker(context: dialogContext,
+            initialDate: birth, firstDate: earliest, lastDate: today);
           if (chosen != null) refresh(() => birth = chosen);
         }, icon: const Icon(Icons.cake_outlined), label: Text('Doğum: ${birth.day}.${birth.month}.${birth.year}')),
       ]),
       actions: [TextButton(onPressed: () => Navigator.pop(dialogContext), child: const Text('Vazgeç')),
         FilledButton(onPressed: () {
           final value = name.text.trim();
-          if (value.isEmpty) return;
+          final error = ChildProfileValidator.validateName(value) ??
+              ChildProfileValidator.validateBirthDate(birth) ??
+              ChildProfileValidator.validateSex(sex);
+          if (error != null) {
+            ScaffoldMessenger.of(dialogContext).showSnackBar(SnackBar(content: Text(error)));
+            return;
+          }
           Navigator.pop(dialogContext, ChildProfile(id: DateTime.now().microsecondsSinceEpoch.toString(), name: value, birthDate: birth, sex: sex));
         }, child: const Text('Kaydet'))],
     )); });
@@ -98,7 +108,12 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () {
           final name = controller.text.trim();
-          if (name.isNotEmpty) Navigator.pop(ctx, name);
+          final error = ChildProfileValidator.validateName(name);
+          if (error != null) {
+            ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(error)));
+            return;
+          }
+          Navigator.pop(ctx, name);
         }, child: const Text('Kaydet'))],
     ); });
     await renameRoute?.completed;
@@ -119,32 +134,50 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       ],
     ));
     if (selected == null || !mounted || selected == profile.sex) return;
+    if (ChildProfileValidator.validateSex(selected) != null) return;
     await _save(_profiles.map((e) => e.id == profile.id
       ? ChildProfile(id: e.id, name: e.name, birthDate: e.birthDate, sex: selected) : e).toList());
   }
 
   Future<void> _editBirth(ChildProfile profile) async {
+    final today = DateTime.now();
+    final earliest = DateTime(today.year - 18, today.month, today.day);
+    final latest = DateTime(today.year, today.month, today.day);
+    final initial = profile.birthDate.isBefore(earliest)
+        ? earliest
+        : profile.birthDate.isAfter(latest) ? latest : profile.birthDate;
     final chosen = await showDatePicker(
       context: context,
-      initialDate: profile.birthDate.isAfter(DateTime.now()) ? DateTime.now() : profile.birthDate,
-      firstDate: DateTime(1990), lastDate: DateTime.now(),
+      initialDate: initial,
+      firstDate: earliest, lastDate: latest,
     );
     if (chosen == null || !mounted) return;
+    final birthError = ChildProfileValidator.validateBirthDate(chosen);
+    if (birthError != null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(birthError)));
+      return;
+    }
     try {
       final entries = decodeChildJournal(
         await SecureHealthStore.read('child_journal_entries_v59'));
-      final day = DateTime(chosen.year, chosen.month, chosen.day);
-      if (entries.any((e) => e.childId == profile.id && e.at.isBefore(day))) {
+      final careItems = decodeChildCareItems(
+        await SecureHealthStore.read('child_care_plan_v96'));
+      final hasEarlierJournal = ChildProfileValidator.hasRecordsBeforeBirth(
+        chosen, entries.where((e) => e.childId == profile.id).map((e) => e.at));
+      final hasEarlierCare = ChildProfileValidator.hasRecordsBeforeBirth(
+        chosen, careItems.where((item) => item.childId == profile.id)
+            .map((item) => item.date));
+      if (hasEarlierJournal || hasEarlierCare) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Yeni doğum tarihi, kayıtlı günlüklerden sonra olamaz. Önce kayıtları kontrol edin.')));
+            content: Text('Yeni doğum tarihi, mevcut günlük veya sağlık kayıtlarından sonra olamaz. Önce kayıtları kontrol edin.')));
         }
         return;
       }
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Günlükler doğrulanamadı; doğum tarihi değiştirilmedi.')));
+          content: Text('Günlük veya sağlık kayıtları doğrulanamadı; doğum tarihi değiştirilmedi.')));
       }
       return;
     }
