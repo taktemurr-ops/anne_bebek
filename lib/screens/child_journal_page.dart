@@ -45,8 +45,7 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
     if (dateError != null) return dateError;
     switch (category) {
       case 'Kilo (kg)':
-        return GrowthMeasurementValidator.validateWeightGrams(
-          value == null ? null : value * 1000);
+        return GrowthMeasurementValidator.validateWeightKg(value);
       case 'Boy (cm)':
         return GrowthMeasurementValidator.validateHeightCm(value);
       case 'Baş çevresi (cm)':
