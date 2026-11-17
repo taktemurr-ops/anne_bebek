@@ -164,7 +164,8 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
         await SecureHealthStore.read('child_care_plan_v96'));
       final day = DateTime(chosen.year, chosen.month, chosen.day);
       final hasEarlierJournal = entries.any((e) =>
-          e.childId == profile.id && e.at.isBefore(day));
+          e.childId == profile.id &&
+          DateTime(e.at.year, e.at.month, e.at.day).isBefore(day));
       final hasEarlierCare = careItems.any((item) =>
           item.childId == profile.id &&
           DateTime(item.date.year, item.date.month, item.date.day).isBefore(day));
@@ -178,7 +179,7 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Günlükler doğrulanamadı; doğum tarihi değiştirilmedi.')));
+          content: Text('Günlük veya sağlık kayıtları doğrulanamadı; doğum tarihi değiştirilmedi.')));
       }
       return;
     }
