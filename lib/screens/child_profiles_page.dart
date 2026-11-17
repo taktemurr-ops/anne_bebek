@@ -140,10 +140,16 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
   }
 
   Future<void> _editBirth(ChildProfile profile) async {
+    final today = DateTime.now();
+    final earliest = DateTime(today.year - 18, today.month, today.day);
+    final latest = DateTime(today.year, today.month, today.day);
+    final initial = profile.birthDate.isBefore(earliest)
+        ? earliest
+        : profile.birthDate.isAfter(latest) ? latest : profile.birthDate;
     final chosen = await showDatePicker(
       context: context,
-      initialDate: profile.birthDate.isAfter(DateTime.now()) ? DateTime.now() : profile.birthDate,
-      firstDate: DateTime(1990), lastDate: DateTime.now(),
+      initialDate: initial,
+      firstDate: earliest, lastDate: latest,
     );
     if (chosen == null || !mounted) return;
     final birthError = ChildProfileValidator.validateBirthDate(chosen);
