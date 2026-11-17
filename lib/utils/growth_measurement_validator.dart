@@ -2,11 +2,20 @@
 class GrowthMeasurementValidator {
   const GrowthMeasurementValidator._();
 
-  /// Parses Turkish or dot-decimal measurement input without silently
-  /// accepting grouping separators, exponents or non-finite numbers.
+  /// Accepts a single decimal separator (comma or dot), no grouping.
   static double? parseMeasurement(String raw) {
-    final normalized = raw.trim().replaceAll(',', '.');
-    if (!RegExp(r'^\\d+(?:\\.\\d+)?
+    final value = raw.trim().replaceAll(',', '.');
+    if (value.isEmpty || value.split('.').length > 2) return null;
+    final digits = value.replaceAll('.', '');
+    if (digits.isEmpty || !digits.codeUnits.every((c) => c >= 48 && c <= 57)) {
+      return null;
+    }
+    if (value.startsWith('.') || value.endsWith('.')) return null;
+    final parsed = double.tryParse(value);
+    return parsed != null && parsed.isFinite ? parsed : null;
+  }
+
+  static String? validateWeightGrams(num? grams) {
     if (grams == null || !grams.isFinite || grams <= 0 || grams > 200000) {
       return 'Ağırlık 0 ile 200000 gram arasında olmalıdır.';
     }
