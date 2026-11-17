@@ -160,11 +160,18 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
     try {
       final entries = decodeChildJournal(
         await SecureHealthStore.read('child_journal_entries_v59'));
+      final careItems = decodeChildCareItems(
+        await SecureHealthStore.read('child_care_plan_v96'));
       final day = DateTime(chosen.year, chosen.month, chosen.day);
-      if (entries.any((e) => e.childId == profile.id && e.at.isBefore(day))) {
+      final hasEarlierJournal = entries.any((e) =>
+          e.childId == profile.id && e.at.isBefore(day));
+      final hasEarlierCare = careItems.any((item) =>
+          item.childId == profile.id &&
+          DateTime(item.date.year, item.date.month, item.date.day).isBefore(day));
+      if (hasEarlierJournal || hasEarlierCare) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Yeni doğum tarihi, kayıtlı günlüklerden sonra olamaz. Önce kayıtları kontrol edin.')));
+            content: Text('Yeni doğum tarihi, mevcut günlük veya sağlık kayıtlarından sonra olamaz. Önce kayıtları kontrol edin.')));
         }
         return;
       }
