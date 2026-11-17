@@ -11,6 +11,14 @@ void main() {
       }
     });
 
+    test('kilogram input is converted to grams with matching bounds', () {
+      expect(GrowthMeasurementValidator.validateWeightKg(3.385), isNull);
+      expect(GrowthMeasurementValidator.validateWeightKg(200), isNull);
+      for (final value in <num?>[null, 0, -1, 200.001, double.nan, double.infinity, double.negativeInfinity]) {
+        expect(GrowthMeasurementValidator.validateWeightKg(value), isNotNull);
+      }
+    });
+
     test('height and head circumference boundaries', () {
       expect(GrowthMeasurementValidator.validateHeightCm(54), isNull);
       expect(GrowthMeasurementValidator.validateHeadCircumferenceCm(35), isNull);
