@@ -45,7 +45,7 @@ void main() {
       expect(unexpected.single.sex, 'unknown');
     });
     test('rejects blank, padded, and control-character profile identifiers', () {
-      for (final id in ['', '  ', ' child-a', 'child-a ', 'child\\n-a']) {
+      for (final id in ['', '  ', ' child-a', 'child-a ', 'child\n-a']) {
         final raw = encodeChildProfiles([
           ChildProfile(id: id, name: 'Ada', birthDate: DateTime(2025, 1, 1)),
         ]);
