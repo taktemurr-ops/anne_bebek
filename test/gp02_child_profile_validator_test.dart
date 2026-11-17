@@ -47,7 +47,7 @@ void main() {
     });
 
     test('rejects invisible Unicode tag and filler code points', () {
-      for (final codePoint in [0x034F, 0x115F, 0x1160, 0xE0001, 0xE0020, 0xE007F]) {
+      for (final codePoint in [0x034F, 0x115F, 0x1160, 0x3164, 0xFFA0, 0xE0001, 0xE0020, 0xE007F]) {
         expect(
           ChildProfileValidator.validateName(
             'Ada${String.fromCharCode(codePoint)}Naz'),
