@@ -29,6 +29,15 @@ void main() {
       expect(() => decodeChildProfiles('{"id":"not-a-list"}'), throwsFormatException);
     });
 
+
+    test('non-object and non-string-key entries fail with format errors', () {
+      const valid = '{"id":"ok","name":"Ada","birthDate":"2025-01-01"}';
+      expect(() => decodeChildProfiles('[$valid, null]'), throwsFormatException);
+      expect(() => decodeChildProfiles('[$valid, 42]'), throwsFormatException);
+      expect(() => decodeChildProfiles('[$valid, ["not a profile"]]'), throwsFormatException);
+      expect(() => decodeChildProfiles('[$valid, {"id":false}]'), throwsFormatException);
+    });
+
     test('legacy missing and unknown sex values use safe unknown reference', () {
       final legacy = decodeChildProfiles('[{"id":"old","name":"Ada","birthDate":"2025-01-01"}]');
       expect(legacy.single.sex, 'unknown');
