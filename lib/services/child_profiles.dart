@@ -14,7 +14,7 @@ class ChildProfile {
   Map<String, String> toJson() => {'id': id, 'name': name, 'birthDate': birthDate.toIso8601String(), 'sex': sex};
   factory ChildProfile.fromJson(Map<String, dynamic> data) {
     final id = data['id']; final name = data['name']; final rawDate = data['birthDate'];
-    if (id is! String || id.isEmpty || name is! String || name.trim().isEmpty || rawDate is! String) {
+    if (id is! String || id.trim().isEmpty || id != id.trim() || id.runes.any((r) => r < 32 || (r >= 127 && r <= 159)) || name is! String || name.trim().isEmpty || rawDate is! String) {
       throw const FormatException('Geçersiz çocuk profili');
     }
     final date = DateTime.tryParse(rawDate);
