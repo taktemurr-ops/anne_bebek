@@ -142,5 +142,31 @@ void main() {
       );
     });
 
+    test('birth-date validation accepts today regardless of clock time', () {
+      final today = DateTime(2026, 11, 17, 0, 1);
+      expect(
+        ChildProfileValidator.validateBirthDate(
+          DateTime(2026, 11, 17, 23, 59), today: today),
+        isNull,
+      );
+      expect(
+        ChildProfileValidator.validateBirthDate(
+          DateTime(2026, 11, 18), today: today),
+        isNotNull,
+      );
+    });
+
+    test('profile names reject directional isolates without rejecting Turkish', () {
+      for (final codePoint in [0x202A, 0x202B, 0x202C, 0x202D, 0x202E, 0x2066, 0x2067, 0x2068, 0x2069]) {
+        expect(
+          ChildProfileValidator.validateName(
+            'Ayşe${String.fromCharCode(codePoint)}Naz'),
+          isNotNull,
+          reason: 'U+${codePoint.toRadixString(16)} must be rejected',
+        );
+      }
+      expect(ChildProfileValidator.validateName('Ayşe Naz'), isNull);
+    });
+
   });
 }
