@@ -35,7 +35,7 @@ void main() {
     });
 
     test('rejects invisible Unicode formatting in child names', () {
-      for (final codePoint in [0x00AD, 0x061C, 0x180E, 0x200B, 0x200C, 0x200D, 0x200E, 0x200F, 0x2060, 0xFEFF]) {
+      for (final codePoint in [0x00AD, 0x061C, 0x180E, 0x200B, 0x200C, 0x200D, 0x200E, 0x200F, 0x2028, 0x2029, 0x2060, 0x2061, 0x2062, 0x2063, 0x2064, 0xFEFF]) {
         final invisible = String.fromCharCode(codePoint);
         expect(
           ChildProfileValidator.validateName('Ada${invisible}Test'),
