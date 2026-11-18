@@ -7,6 +7,9 @@ void main() {
       expect(GrowthMeasurementValidator.parseMeasurement('3,385'), 3.385);
       expect(GrowthMeasurementValidator.parseMeasurement(' 54.5 '), 54.5);
       expect(GrowthMeasurementValidator.parseMeasurement('0'), 0);
+      expect(GrowthMeasurementValidator.parseMeasurement('0,001'), 0.001);
+      expect(GrowthMeasurementValidator.parseMeasurement('0,0001'), isNull);
+      expect(GrowthMeasurementValidator.parseMeasurement('3.3859'), isNull);
       expect(GrowthMeasurementValidator.parseMeasurement(List.filled(65, '9').join()), isNull);
       expect(GrowthMeasurementValidator.parseMeasurement(List.filled(64, '9').join()), isNotNull);
       for (final input in <String>[
@@ -14,7 +17,7 @@ void main() {
         '.5', '5.', 'NaN', 'Infinity', '1e3', '1 000', 'abc',
       ]) {
         expect(GrowthMeasurementValidator.parseMeasurement(input), isNull,
-            reason: 'Unexpected accepted input: '+input);
+            reason: 'Unexpected accepted input: $input');
       }
     });
 
