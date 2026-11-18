@@ -13,7 +13,7 @@ void main() {
       expect(GrowthMeasurementValidator.parseMeasurement(List.filled(65, '9').join()), isNull);
       expect(GrowthMeasurementValidator.parseMeasurement(List.filled(64, '9').join()), isNotNull);
       for (final input in <String>[
-        '', ' ', '-1', '+1', '1.234,56', '1,234.56', '1..2',
+        '', ' ', '1\n2', '1\t2', '1\r2', '1\u007f2', '-1', '+1', '1.234,56', '1,234.56', '1..2',
         '.5', '5.', 'NaN', 'Infinity', '1e3', '1 000', 'abc',
       ]) {
         expect(GrowthMeasurementValidator.parseMeasurement(input), isNull,
