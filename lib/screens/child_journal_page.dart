@@ -75,7 +75,8 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
             TextField(controller: note, maxLines: 2, maxLength: 300,
               decoration: const InputDecoration(labelText: 'Açıklama / not')),
             if (category == 'Kilo (kg)' || category == 'Boy (cm)' || category == 'Baş çevresi (cm)')
-              TextField(controller: number, keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              TextField(controller: number, maxLength: 64,
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 decoration: const InputDecoration(labelText: 'Ölçüm değeri')),
             OutlinedButton(onPressed: () async {
               final selected = await showDatePicker(context: ctx, initialDate: at,
@@ -120,7 +121,7 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
           Text(original.category),
           TextField(controller: note, maxLines: 2, maxLength: 300,
             decoration: const InputDecoration(labelText: 'Açıklama / not')),
-          if (isMeasure) TextField(controller: number,
+          if (isMeasure) TextField(controller: number, maxLength: 64,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             decoration: const InputDecoration(labelText: 'Ölçüm değeri')),
           OutlinedButton(onPressed: () async {
