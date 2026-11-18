@@ -6,6 +6,8 @@ class GrowthMeasurementValidator {
   static double? parseMeasurement(String raw) {
     // Reject excessively long input before parsing to avoid needless work.
     if (raw.length > 64) return null;
+    // Control characters must never be accepted in health measurement input.
+    if (raw.codeUnits.any((c) => c < 32 || c == 127)) return null;
     final value = raw.trim().replaceAll(',', '.');
     // Limit precision to avoid silently rounding user-entered health data.
     final separator = value.indexOf('.');
