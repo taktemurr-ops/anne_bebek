@@ -141,10 +141,14 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
                 content: Text('Doğum tarihi gelecekte olamaz.')));
               return;
             }
+            final now = DateTime.now();
+            final first = DateTime(widget.child.birthDate.year,
+                widget.child.birthDate.month, widget.child.birthDate.day);
+            final last = DateTime(now.year, now.month, now.day);
+            final initial = at.isBefore(first) ? first :
+                at.isAfter(last) ? last : at;
             final selected = await showDatePicker(context: ctx,
-              initialDate: at.isAfter(DateTime.now()) ? DateTime.now() :
-                at.isBefore(widget.child.birthDate) ? widget.child.birthDate : at,
-              firstDate: widget.child.birthDate, lastDate: DateTime.now());
+              initialDate: initial, firstDate: first, lastDate: last);
             if (selected != null && ctx.mounted) update(() => at = selected);
           }, child: Text('Tarih: ${at.day}.${at.month}.${at.year}')),
         ])),
