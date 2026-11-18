@@ -7,6 +7,8 @@ void main() {
       expect(GrowthMeasurementValidator.parseMeasurement('3,385'), 3.385);
       expect(GrowthMeasurementValidator.parseMeasurement(' 54.5 '), 54.5);
       expect(GrowthMeasurementValidator.parseMeasurement('0'), 0);
+      expect(GrowthMeasurementValidator.parseMeasurement('9' * 65), isNull);
+      expect(GrowthMeasurementValidator.parseMeasurement('9' * 64), isNotNull);
       for (final input in <String>[
         '', ' ', '-1', '+1', '1.234,56', '1,234.56', '1..2',
         '.5', '5.', 'NaN', 'Infinity', '1e3', '1 000', 'abc',
