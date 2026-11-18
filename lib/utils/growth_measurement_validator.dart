@@ -4,6 +4,8 @@ class GrowthMeasurementValidator {
 
   /// Accepts a single decimal separator (comma or dot), no grouping.
   static double? parseMeasurement(String raw) {
+    // Reject excessively long input before parsing to avoid needless work.
+    if (raw.length > 64) return null;
     final value = raw.trim().replaceAll(',', '.');
     if (value.isEmpty || value.split('.').length > 2) return null;
     final digits = value.replaceAll('.', '');
