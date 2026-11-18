@@ -98,6 +98,16 @@ void main() {
         'Doğum tarihi gelecekte olamaz.');
     });
 
+    test('date validation uses calendar dates across timezone offsets', () {
+      final birth = DateTime.parse('2026-01-01T00:30:00+03:00');
+      final measured = DateTime.parse('2026-01-01T22:30:00-02:00');
+      final today = DateTime.parse('2026-01-01T23:59:00+03:00');
+      // The validator compares each supplied DateTime's calendar date,
+      // not the UTC instant; local date fields remain January 1.
+      expect(GrowthMeasurementValidator.validateMeasurementDate(
+        measured, birthDate: birth, today: today), isNull);
+    });
+
     test('measurement date respects birth date and current calendar day', () {
       final birth = DateTime(2025, 8, 26, 23, 59);
       final now = DateTime(2026, 11, 17, 1);
