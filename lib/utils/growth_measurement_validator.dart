@@ -8,7 +8,7 @@ class GrowthMeasurementValidator {
     // characters and invisible separators must not silently change health data.
     if (raw.length > 64) return null;
     final normalized = raw.replaceAll(',', '.');
-    final match = RegExp(r'^ *([0-9]+(?:\\.[0-9]{1,3})?) *$')
+    final match = RegExp(r'^ *([0-9]+(?:[.][0-9]{1,3})?) *$')
         .firstMatch(normalized);
     if (match == null) return null;
     final parsed = double.tryParse(match.group(1)!);
