@@ -89,8 +89,9 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
               final first = DateTime(widget.child.birthDate.year,
                   widget.child.birthDate.month, widget.child.birthDate.day);
               final last = DateTime(now.year, now.month, now.day);
-              final initial = at.isBefore(first) ? first :
-                  at.isAfter(last) ? last : at;
+              final selectedDay = DateTime(at.year, at.month, at.day);
+              final initial = selectedDay.isBefore(first) ? first :
+                  selectedDay.isAfter(last) ? last : selectedDay;
               final selected = await showDatePicker(context: ctx,
                 initialDate: initial, firstDate: first, lastDate: last);
               if (selected != null && ctx.mounted) update(() => at = selected);
@@ -147,8 +148,9 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
             final first = DateTime(widget.child.birthDate.year,
                 widget.child.birthDate.month, widget.child.birthDate.day);
             final last = DateTime(now.year, now.month, now.day);
-            final initial = at.isBefore(first) ? first :
-                at.isAfter(last) ? last : at;
+            final selectedDay = DateTime(at.year, at.month, at.day);
+            final initial = selectedDay.isBefore(first) ? first :
+                selectedDay.isAfter(last) ? last : selectedDay;
             final selected = await showDatePicker(context: ctx,
               initialDate: initial, firstDate: first, lastDate: last);
             if (selected != null && ctx.mounted) update(() => at = selected);
