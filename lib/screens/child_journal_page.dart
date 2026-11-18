@@ -79,7 +79,8 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 decoration: const InputDecoration(labelText: 'Ölçüm değeri')),
             OutlinedButton(onPressed: () async {
-              if (widget.child.birthDate.isAfter(DateTime.now())) {
+              if (DateUtils.dateOnly(widget.child.birthDate)
+                  .isAfter(DateUtils.dateOnly(DateTime.now()))) {
                 ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(
                   content: Text('Doğum tarihi gelecekte olamaz.')));
                 return;
@@ -136,7 +137,8 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             decoration: const InputDecoration(labelText: 'Ölçüm değeri')),
           OutlinedButton(onPressed: () async {
-            if (widget.child.birthDate.isAfter(DateTime.now())) {
+            if (DateUtils.dateOnly(widget.child.birthDate)
+                  .isAfter(DateUtils.dateOnly(DateTime.now()))) {
               ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(
                 content: Text('Doğum tarihi gelecekte olamaz.')));
               return;
