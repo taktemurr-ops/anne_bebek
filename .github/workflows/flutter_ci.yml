@@ -70,6 +70,19 @@ jobs:
             exit "$result"
           fi
 
+      - name: CI adim durumlarini raporla
+        if: always()
+        run: |
+          echo 'Flutter CI diagnostic summary'
+          echo 'Commit: ${{ github.sha }}'
+          echo 'Job status: ${{ job.status }}'
+          for log in /tmp/anne-bebek-*.log; do
+            if [ -f "$log" ]; then
+              echo "=== $log (last 80 lines) ==="
+              tail -n 80 "$log"
+            fi
+          done
+
       - name: Basarisiz adimlar icin tani gunluklerini sakla
         if: failure()
         uses: actions/upload-artifact@v4
