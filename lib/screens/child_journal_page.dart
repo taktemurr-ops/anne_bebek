@@ -79,6 +79,11 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 decoration: const InputDecoration(labelText: 'Ölçüm değeri')),
             OutlinedButton(onPressed: () async {
+              if (widget.child.birthDate.isAfter(DateTime.now())) {
+                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(
+                  content: Text('Doğum tarihi gelecekte olamaz.')));
+                return;
+              }
               final selected = await showDatePicker(context: ctx, initialDate: at,
                 firstDate: widget.child.birthDate, lastDate: DateTime.now());
               if (selected != null) update(() => at = selected);
@@ -125,6 +130,11 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             decoration: const InputDecoration(labelText: 'Ölçüm değeri')),
           OutlinedButton(onPressed: () async {
+            if (widget.child.birthDate.isAfter(DateTime.now())) {
+              ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(
+                content: Text('Doğum tarihi gelecekte olamaz.')));
+              return;
+            }
             final selected = await showDatePicker(context: ctx,
               initialDate: at.isAfter(DateTime.now()) ? DateTime.now() :
                 at.isBefore(widget.child.birthDate) ? widget.child.birthDate : at,
