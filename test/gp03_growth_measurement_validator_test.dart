@@ -37,6 +37,23 @@ void main() {
       }
     });
 
+    test('localized measurement precision remains valid at category boundaries', () {
+      final weight = GrowthMeasurementValidator.parseMeasurement('200,000');
+      final overWeight = GrowthMeasurementValidator.parseMeasurement('200,001');
+      expect(weight, isNotNull);
+      expect(overWeight, isNotNull);
+      expect(GrowthMeasurementValidator.validateWeightKg(weight), isNull);
+      expect(GrowthMeasurementValidator.validateWeightKg(overWeight), isNotNull);
+      expect(GrowthMeasurementValidator.validateHeightCm(
+          GrowthMeasurementValidator.parseMeasurement('250,000')), isNull);
+      expect(GrowthMeasurementValidator.validateHeightCm(
+          GrowthMeasurementValidator.parseMeasurement('250,001')), isNotNull);
+      expect(GrowthMeasurementValidator.validateHeadCircumferenceCm(
+          GrowthMeasurementValidator.parseMeasurement('100,000')), isNull);
+      expect(GrowthMeasurementValidator.validateHeadCircumferenceCm(
+          GrowthMeasurementValidator.parseMeasurement('100,001')), isNotNull);
+    });
+
     test('height and head circumference boundaries', () {
       expect(GrowthMeasurementValidator.validateHeightCm(54), isNull);
       expect(GrowthMeasurementValidator.validateHeadCircumferenceCm(35), isNull);
