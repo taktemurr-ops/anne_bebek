@@ -29,5 +29,29 @@ void main() {
       expect(GrowthMeasurementValidator.validateMeasurementDate(
         DateTime.utc(2026, 1, 2), birthDate: birth, today: today), isNotNull);
     });
+
+    test('oversized inputs and unsupported numeric syntax are rejected', () {
+      expect(GrowthMeasurementValidator.parseMeasurement('1' * 65), isNull);
+      expect(GrowthMeasurementValidator.parseMeasurement('0' * 64), 0);
+      for (final input in <String>[
+        '1,234.5', '1.234,5', '1e3', '+12', '-12', '.5', '5.',
+        '1 000', '3,3851',
+      ]) {
+        expect(GrowthMeasurementValidator.parseMeasurement(input), isNull,
+            reason: 'Ambiguous measurement: $input');
+      }
+      expect(GrowthMeasurementValidator.parseMeasurement(' 72,5 '), 72.5);
+    });
+
+    test('calendar-day comparison ignores clock time within the same day', () {
+      final birth = DateTime(2025, 8, 26, 23, 59);
+      final today = DateTime(2026, 11, 18, 0, 1);
+      expect(GrowthMeasurementValidator.validateMeasurementDate(
+        DateTime(2025, 8, 26, 0, 1),
+        birthDate: birth, today: today), isNull);
+      expect(GrowthMeasurementValidator.validateMeasurementDate(
+        DateTime(2026, 11, 18, 23, 59),
+        birthDate: birth, today: today), isNull);
+    });
   });
 }
