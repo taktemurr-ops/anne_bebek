@@ -7,6 +7,9 @@ class GrowthMeasurementValidator {
     // Reject excessively long input before parsing to avoid needless work.
     if (raw.length > 64) return null;
     final value = raw.trim().replaceAll(',', '.');
+    // Limit precision to avoid silently rounding user-entered health data.
+    final separator = value.indexOf('.');
+    if (separator >= 0 && value.length - separator - 1 > 3) return null;
     if (value.isEmpty || value.split('.').length > 2) return null;
     final digits = value.replaceAll('.', '');
     if (digits.isEmpty || !digits.codeUnits.every((c) => c >= 48 && c <= 57)) {
