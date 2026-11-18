@@ -4,21 +4,14 @@ class GrowthMeasurementValidator {
 
   /// Accepts a single decimal separator (comma or dot), no grouping.
   static double? parseMeasurement(String raw) {
-    // Reject excessively long input before parsing to avoid needless work.
+    // Only ordinary ASCII spaces may surround a measurement. Unicode format
+    // characters and invisible separators must not silently change health data.
     if (raw.length > 64) return null;
-    // Control characters must never be accepted in health measurement input.
-    if (raw.codeUnits.any((c) => c < 32 || c == 127)) return null;
-    final value = raw.trim().replaceAll(',', '.');
-    // Limit precision to avoid silently rounding user-entered health data.
-    final separator = value.indexOf('.');
-    if (separator >= 0 && value.length - separator - 1 > 3) return null;
-    if (value.isEmpty || value.split('.').length > 2) return null;
-    final digits = value.replaceAll('.', '');
-    if (digits.isEmpty || !digits.codeUnits.every((c) => c >= 48 && c <= 57)) {
-      return null;
-    }
-    if (value.startsWith('.') || value.endsWith('.')) return null;
-    final parsed = double.tryParse(value);
+    final normalized = raw.replaceAll(',', '.');
+    final match = RegExp(r'^ *([0-9]+(?:\\.[0-9]{1,3})?) *$')
+        .firstMatch(normalized);
+    if (match == null) return null;
+    final parsed = double.tryParse(match.group(1)!);
     return parsed != null && parsed.isFinite ? parsed : null;
   }
 
