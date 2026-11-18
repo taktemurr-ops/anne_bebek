@@ -111,6 +111,27 @@ void main() {
         birthDate: birth, today: today), isNotNull);
     });
 
+    test('future birth date takes precedence over invalid measurement dates', () {
+      final today = DateTime(2026, 11, 18, 12);
+      final futureBirth = DateTime(2026, 11, 19, 23);
+      expect(
+        GrowthMeasurementValidator.validateMeasurementDate(
+          DateTime(2026, 11, 17),
+          birthDate: futureBirth,
+          today: today,
+        ),
+        'Doğum tarihi gelecekte olamaz.',
+      );
+      expect(
+        GrowthMeasurementValidator.validateMeasurementDate(
+          DateTime(2026, 11, 20),
+          birthDate: futureBirth,
+          today: today,
+        ),
+        'Doğum tarihi gelecekte olamaz.',
+      );
+    });
+
     test('measurement date respects birth date and current calendar day', () {
       final birth = DateTime(2025, 8, 26, 23, 59);
       final now = DateTime(2026, 11, 17, 1);
