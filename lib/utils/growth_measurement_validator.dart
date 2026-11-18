@@ -52,6 +52,7 @@ class GrowthMeasurementValidator {
     final day = DateTime.utc(date.year, date.month, date.day);
     final born = DateTime.utc(birthDate.year, birthDate.month, birthDate.day);
     final now = DateTime.utc(current.year, current.month, current.day);
+    if (born.isAfter(now)) return 'Doğum tarihi gelecekte olamaz.';
     if (day.isBefore(born)) return 'Ölçüm doğumdan önce olamaz.';
     if (day.isAfter(now)) return 'Ölçüm tarihi gelecekte olamaz.';
     return null;
