@@ -2,9 +2,9 @@ name: Flutter CI
 
 on:
   push:
-    branches: [main, 'feature/gp02-*']
+    branches: [main, 'feature/gp*']
   pull_request:
-    branches: [main, 'feature/gp01-*']
+    branches: [main, 'feature/gp*']
   workflow_dispatch:
 
 permissions:
@@ -37,13 +37,22 @@ jobs:
         run: flutter --version
 
       - name: Bagimliliklari yukle
-        run: flutter pub get
+        shell: bash
+        run: |
+          set -o pipefail
+          flutter pub get 2>&1 | tee /tmp/anne-bebek-pub-get.log
 
       - name: Flutter analiz
-        run: flutter analyze
+        shell: bash
+        run: |
+          set -o pipefail
+          flutter analyze 2>&1 | tee /tmp/anne-bebek-analyze.log
 
       - name: Flutter testleri
-        run: flutter test
+        shell: bash
+        run: |
+          set -o pipefail
+          flutter test 2>&1 | tee /tmp/anne-bebek-test.log
 
       - name: Android APK olustur
         shell: bash
@@ -61,6 +70,32 @@ jobs:
             exit "$result"
           fi
 
+      - name: CI adim durumlarini raporla
+        if: always()
+        run: |
+          echo 'Flutter CI diagnostic summary'
+          echo 'Commit: ${{ github.sha }}'
+          echo 'Job status: ${{ job.status }}'
+          for log in /tmp/anne-bebek-*.log; do
+            if [ -f "$log" ]; then
+              echo "=== $log (last 80 lines) ==="
+              tail -n 80 "$log"
+            fi
+          done
+
+      - name: Basarisiz adimlar icin tani gunluklerini sakla
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-failure-logs
+          path: |
+            /tmp/anne-bebek-pub-get.log
+            /tmp/anne-bebek-analyze.log
+            /tmp/anne-bebek-test.log
+            /tmp/anne-bebek-apk-build.log
+          if-no-files-found: ignore
+          retention-days: 7
+
       - name: APK dosyasini kaydet
         uses: actions/upload-artifact@v4
         with:
@@ -71,7 +106,7 @@ jobs:
 
   gp01-android-emulator:
     name: Android emulatorde ekran ve kayit testi
-    if: github.event_name == 'pull_request' && (startsWith(github.head_ref, 'feature/gp01-') || startsWith(github.head_ref, 'feature/gp02-'))
+    if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'feature/gp')
     runs-on: ubuntu-latest
     timeout-minutes: 45
     concurrency:
@@ -119,4 +154,15 @@ jobs:
           arch: x86_64
           profile: pixel_6
           disable-animations: true
-          script: flutter test integration_test/gp01_smoke_test.dart -d emulator-5554
+          script: |
+            set -o pipefail
+            flutter test integration_test/gp01_smoke_test.dart -d emulator-5554 2>&1 | tee /tmp/anne-bebek-emulator-smoke.log
+
+      - name: Emulator smoke hata gunlugunu sakla
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: emulator-smoke-failure-logs
+          path: /tmp/anne-bebek-emulator-smoke.log
+          if-no-files-found: ignore
+          retention-days: 7
