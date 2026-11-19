@@ -17,7 +17,7 @@ void main() {
     });
 
     test('rejects control characters and oversized numeric payloads', () {
-      for (final raw in ['1\n2', '1\t2', '1\u200b2', '9' * 65]) {
+      for (final raw in ['1\n2', '1\t2', '1\u200b2', List.filled(65, '9').join()]) {
         expect(GrowthMeasurementValidator.parseMeasurement(raw), isNull);
       }
     });
