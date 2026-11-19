@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SecureHealthStore {
   static const keys = <String>{
     'child_care_plan_v96', 'child_journal_entries_v59', 'child_profiles_directory_v58', 'family_activity_planner_v57', 'age_guide_checklist_v56', 'baby_health_journal_v41', 'womens_health_journal_v46', 'postpartum_companion_v1', 'cycle_history_v1', 'family_reminders_v40',
+    'reproductive_calendar_v1',
     'baby_feeding_journal_v5',
     'pregnancy_journal_v5',
     'family_calendar_v3',
