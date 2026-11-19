@@ -33,7 +33,9 @@ List<ChildJournalEntry> decodeChildJournal(String? raw) {
   if (value is! List) throw const FormatException('Günlük listesi bozuk');
   final entries = <ChildJournalEntry>[];
   for (final item in value) {
-    if (item is! Map) throw const FormatException('Geçersiz günlük kaydı');
+    if (item is! Map || item.keys.any((key) => key is! String)) {
+      throw const FormatException('Geçersiz günlük kaydı');
+    }
     entries.add(ChildJournalEntry.fromJson(Map<String, dynamic>.from(item)));
   }
   if (entries.map((e) => e.id).toSet().length != entries.length) {
