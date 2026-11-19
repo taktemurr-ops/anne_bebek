@@ -18,7 +18,9 @@ class ChildJournalEntry {
       throw const FormatException('Geçersiz çocuk günlüğü kaydı');
     }
     final value = map['value'];
-    if (value != null && value is! num) throw const FormatException('Geçersiz ölçüm');
+    if (value != null && (value is! num || !value.isFinite)) {
+      throw const FormatException('Geçersiz ölçüm');
+    }
     return ChildJournalEntry(id: id, childId: childId, category: category,
       note: note, at: at, value: (value as num?)?.toDouble());
   }
@@ -29,7 +31,11 @@ List<ChildJournalEntry> decodeChildJournal(String? raw) {
   if (raw == null || raw.isEmpty) return [];
   final value = jsonDecode(raw);
   if (value is! List) throw const FormatException('Günlük listesi bozuk');
-  final entries = value.map((e) => ChildJournalEntry.fromJson(Map<String, dynamic>.from(e as Map))).toList();
+  final entries = <ChildJournalEntry>[];
+  for (final item in value) {
+    if (item is! Map) throw const FormatException('Geçersiz günlük kaydı');
+    entries.add(ChildJournalEntry.fromJson(Map<String, dynamic>.from(item)));
+  }
   if (entries.map((e) => e.id).toSet().length != entries.length) {
     throw const FormatException('Yinelenen günlük kaydı');
   }
