@@ -42,7 +42,9 @@ class DailyRoutineEntry {
     if (startedAt == null || (end != null && endedAt == null) ||
         (endedAt != null && !endedAt.isAfter(startedAt)) ||
         (amount != null && (!amount.isFinite || amount <= 0 || amount > 2000)) ||
+        (kind == 'feeding' && amount == null) ||
         (kind != 'feeding' && amount != null) ||
+        (kind == 'sleep' && endedAt == null) ||
         (kind != 'sleep' && endedAt != null) ||
         (note is String && note.runes.length > 300)) {
       throw const FormatException('Geçersiz günlük rutin verisi');
