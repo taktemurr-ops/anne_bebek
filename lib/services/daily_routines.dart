@@ -39,6 +39,9 @@ class DailyRoutineEntry {
     }
     final startedAt = DateTime.tryParse(start);
     final endedAt = end == null ? null : DateTime.tryParse(end as String);
+    if (startedAt != null && !startedAt.isUtc && startedAt.timeZoneOffset.inMinutes.abs() > 14 * 60) {
+      throw const FormatException('Geçersiz saat dilimi');
+    }
     if (startedAt == null || (end != null && endedAt == null) ||
         (endedAt != null && !endedAt.isAfter(startedAt)) ||
         (amount != null && (!amount.isFinite || amount <= 0 || amount > 2000)) ||
