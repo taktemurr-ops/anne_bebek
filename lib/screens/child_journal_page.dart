@@ -3,6 +3,7 @@ import '../services/child_journals.dart';
 import '../services/child_profiles.dart';
 import '../services/secure_health_store.dart';
 import '../utils/growth_measurement_validator.dart';
+import '../utils/growth_measurement_record_validator.dart';
 
 class ChildJournalPage extends StatefulWidget {
   final ChildProfile child;
@@ -40,18 +41,22 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
     } finally { if (mounted) setState(() => _saving = false); }
   }
   String? _measurementError(String category, double? value, DateTime at) {
-    final dateError = GrowthMeasurementValidator.validateMeasurementDate(
-      at, birthDate: widget.child.birthDate);
-    if (dateError != null) return dateError;
+    // Validate the full record before either creating or editing a measurement.
+    // Non-measurement journal entries retain their existing date validation.
     switch (category) {
       case 'Kilo (kg)':
-        return GrowthMeasurementValidator.validateWeightKg(value);
+        return GrowthMeasurementRecordValidator.validate(
+          birthDate: widget.child.birthDate, measuredAt: at, weightKg: value);
       case 'Boy (cm)':
-        return GrowthMeasurementValidator.validateHeightCm(value);
+        return GrowthMeasurementRecordValidator.validate(
+          birthDate: widget.child.birthDate, measuredAt: at, heightCm: value);
       case 'Baş çevresi (cm)':
-        return GrowthMeasurementValidator.validateHeadCircumferenceCm(value);
+        return GrowthMeasurementRecordValidator.validate(
+          birthDate: widget.child.birthDate, measuredAt: at,
+          headCircumferenceCm: value);
       default:
-        return null;
+        return GrowthMeasurementValidator.validateMeasurementDate(
+          at, birthDate: widget.child.birthDate);
     }
   }
 
