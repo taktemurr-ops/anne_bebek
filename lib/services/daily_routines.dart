@@ -66,6 +66,9 @@ List<DailyRoutineEntry> decodeDailyRoutines(String? raw) {
   final ids = <String>{};
   for (final item in decoded) {
     if (item is! Map) throw const FormatException('Geçersiz günlük rutin kaydı');
+    if (item.keys.any((key) => key is! String)) {
+      throw const FormatException('Geçersiz günlük rutin alanı');
+    }
     final entry = DailyRoutineEntry.fromJson(Map<String, dynamic>.from(item));
     if (!ids.add(entry.id)) throw const FormatException('Yinelenen günlük rutin kaydı');
     entries.add(entry);
