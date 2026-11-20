@@ -1,3 +1,4 @@
+import 'screens/notification_preferences_page.dart';
 import 'screens/family_recipe_notebook_page.dart';
 import 'screens/shopping_checklist_page.dart';
 import 'screens/reproductive_calendar_page.dart';
@@ -417,6 +418,13 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       subtitle: const Text('Önce çocuk profilini seçerek kayıt aç'),
       trailing: const Icon(Icons.chevron_right),
       onTap: _profillerAc)),
+    _panel(color: const Color(0xFFE9F7F5), child: ListTile(
+      leading: const Icon(Icons.notifications_active_outlined, color: mor),
+      title: const Text('Bildirim tercihlerim'),
+      subtitle: const Text('İzinleri ve sessiz saatleri yönet'),
+      trailing: const Icon(Icons.chevron_right),
+      onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (_) => const NotificationPreferencesPage())))),
     _baslik('Yaşam merkezim ✨'),
     _panel(color: const Color(0xFFF3E6FF), child: ListTile(
       leading: const Icon(Icons.dashboard_customize, color: mor),
