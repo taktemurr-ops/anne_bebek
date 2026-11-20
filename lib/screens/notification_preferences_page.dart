@@ -26,7 +26,7 @@ class _NotificationPreferencesPageState extends State<NotificationPreferencesPag
       if (!mounted) return;
       setState(() { _prefs = prefs; _error = null; _busy = false; });
     } catch (_) {
-      if (mounted) { setState(() => {
+      if (mounted) { setState(() {
         _busy = false; _error = 'Bildirim tercihleri okunamadı. Eski veriler korunuyor.';
       }); }
     }
@@ -46,7 +46,7 @@ class _NotificationPreferencesPageState extends State<NotificationPreferencesPag
           content: Text('Tercihler kaydedildi; telefon bildirimleri güncellenemedi.'))); }
       }
     } catch (_) {
-      if (mounted) { setState(() => {
+      if (mounted) { setState(() {
         _error = 'Tercihler kaydedilemedi. Önceki tercihler korunuyor.';
       }); }
     } finally {

@@ -25,7 +25,7 @@ class _RemindersPageState extends State<RemindersPage> {
     setState(() { busy = true; error = null; });
     try {
       final items = await ReminderRepository.load();
-      if (mounted) { setState(() => { reminders = items; busy = false; }); }
+      if (mounted) { setState(() { reminders = items; busy = false; }); }
     } catch (_) {
       if (mounted) { setState(() {
         busy = false;

@@ -53,7 +53,9 @@ class LocalReminderNotifications {
     // Fail closed: no OS notification without persisted opt-in.
     final preferences = await FamilyNotificationRepository.load();
     if (!preferences.remindersEnabled ||
-        preferences.isQuietHour(reminder.due.hour)) return;
+        preferences.isQuietHour(reminder.due.hour)) {
+      return;
+    }
     // Convert local instant to UTC for correct scheduling without device-zone lookup.
     final utcTime = tz.TZDateTime.from(reminder.due.toUtc(), tz.UTC);
     await _plugin.zonedSchedule(notificationId(reminder.id), 'Anne & Bebek',

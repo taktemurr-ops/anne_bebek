@@ -27,7 +27,7 @@ class _FamilyRecipeNotebookPageState extends State<FamilyRecipeNotebookPage> {
       if (!mounted) return;
       setState(() { _recipes = records; _error = null; _busy = false; });
     } catch (_) {
-      if (mounted) { setState(() => {
+      if (mounted) { setState(() {
         _busy = false; _error = 'Tarifler okunamadı; kayıtlar değiştirilmedi.';
       }); }
     }
@@ -37,13 +37,13 @@ class _FamilyRecipeNotebookPageState extends State<FamilyRecipeNotebookPage> {
     setState(() { _busy = true; _error = null; });
     try {
       await FamilyRecipeRepository.save(updated);
-      if (mounted) { setState(() => { _recipes = updated; }); }
+      if (mounted) { setState(() { _recipes = updated; }); }
     } catch (_) {
-      if (mounted) { setState(() => {
+      if (mounted) { setState(() {
         _error = 'Tarif kaydedilemedi; eski kayıtlar korundu.';
       }); }
     } finally {
-      if (mounted) { setState(() => { _busy = false; }); }
+      if (mounted) { setState(() { _busy = false; }); }
     }
   }
 

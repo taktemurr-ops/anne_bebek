@@ -26,7 +26,7 @@ class _ShoppingChecklistPageState extends State<ShoppingChecklistPage> {
       if (!mounted) return;
       setState(() { _items = items; _busy = false; _error = null; });
     } catch (_) {
-      if (mounted) { setState(() => {
+      if (mounted) { setState(() {
         _busy = false;
         _error = 'Liste okunamadı. Kayıtlar korunuyor.';
       }); }
@@ -37,13 +37,13 @@ class _ShoppingChecklistPageState extends State<ShoppingChecklistPage> {
     setState(() { _busy = true; _error = null; });
     try {
       await ShoppingListRepository.save(updated);
-      if (mounted) { setState(() => { _items = updated; }); }
+      if (mounted) { setState(() { _items = updated; }); }
     } catch (_) {
-      if (mounted) { setState(() => {
+      if (mounted) { setState(() {
         _error = 'Değişiklik kaydedilemedi. Önceki liste korunuyor.';
       }); }
     } finally {
-      if (mounted) { setState(() => { _busy = false; }); }
+      if (mounted) { setState(() { _busy = false; }); }
     }
   }
 

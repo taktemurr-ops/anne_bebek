@@ -50,7 +50,7 @@ class _ReproductiveCalendarPageState extends State<ReproductiveCalendarPage> {
       if (!mounted) return;
       setState(() { _error = 'Kaydetme başarısız. Lütfen tekrar deneyin.'; });
     } finally {
-      if (mounted) { setState(() => { _busy = false; }); }
+      if (mounted) { setState(() { _busy = false; }); }
     }
   }
 
