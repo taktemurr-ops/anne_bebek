@@ -25,7 +25,7 @@ class _RemindersPageState extends State<RemindersPage> {
     setState(() { busy = true; error = null; });
     try {
       final items = await ReminderRepository.load();
-      if (mounted) setState(() { reminders = items; busy = false; });
+      if (mounted) { setState(() => { reminders = items; busy = false; }); }
     } catch (_) {
       if (mounted) { setState(() {
         busy = false;
@@ -114,8 +114,8 @@ class _RemindersPageState extends State<RemindersPage> {
               content: Text('Önce Bildirim tercihlerim ekranından aile hatırlatıcılarına izin verin.')));
           }
         } catch (_) {
-          if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Bildirim tercihleri doğrulanamadı. Telefon bildirimi kapalı tutuldu.')));
+          if (mounted) { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Bildirim tercihleri doğrulanamadı. Telefon bildirimi kapalı tutuldu.'))); }
         }
         if (!allowed && mounted) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
