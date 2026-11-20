@@ -1,3 +1,5 @@
+import 'screens/shopping_checklist_page.dart';
+import 'screens/reproductive_calendar_page.dart';
 import 'screens/recipe_explorer_page.dart';
 import 'screens/daily_meal_suggestions_page.dart';
 import 'screens/smart_shopping_page.dart';
@@ -387,6 +389,20 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       subtitle: const Text('Çocuk profilleri ve kişisel günlükler'),
       trailing: const Icon(Icons.chevron_right), onTap: _profillerAc)),
     _panel(color: const Color(0xFFF3E6FF), child: ListTile(leading: const Icon(Icons.insights, color: mor), title: const Text('Bugün ve analizler'), subtitle: const Text('Günlük kayıtlar ve gelişim özeti'), trailing: const Icon(Icons.chevron_right), onTap: _analizAc)),
+    _panel(color: const Color(0xFFFFF0E2), child: ListTile(
+      leading: const Icon(Icons.shopping_basket_outlined, color: mor),
+      title: const Text('Güvenli alışveriş listem'),
+      subtitle: const Text('Ürünleri ekle, tamamla ve kaydet'),
+      trailing: const Icon(Icons.chevron_right),
+      onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (_) => const ShoppingChecklistPage())))),
+    _panel(color: const Color(0xFFFFEAF5), child: ListTile(
+      leading: const Icon(Icons.calendar_month_outlined, color: mor),
+      title: const Text('Gebelik ve döngü takvimi'),
+      subtitle: const Text('Özel takvim ve tahmini tarihler'),
+      trailing: const Icon(Icons.chevron_right),
+      onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (_) => const ReproductiveCalendarPage())))),
     _baslik('Yaşam merkezim ✨'),
     _panel(color: const Color(0xFFF3E6FF), child: ListTile(
       leading: const Icon(Icons.dashboard_customize, color: mor),
