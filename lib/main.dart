@@ -1138,7 +1138,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     leading: Icon(icon, color: mor),
     title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
     trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-      if (badge != null) badge,
+      ?badge,
       const Icon(Icons.chevron_right_rounded, color: mor),
     ]),
     onTap: onTap);
@@ -1219,7 +1219,6 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     )),
   ]);
 
-  @override
   // Bölüm sırası: 0 Ana Sayfa, 1 Bebeğim, 2 Tarifler, 3 Alışveriş, 4 Kadınlar, 5 Profil.
   // Alt menüde referans tasarıma göre Ana Sayfa • Bebeğim • (+) • Tarifler • Profil vardır;
   // Alışveriş ve Kadınlar ana sayfadaki modül kartlarından açılır.
