@@ -1,20 +1,25 @@
-# Anne Bebek — 12 paket toplu aktarım durumu (WIP)
+# GP-01–GP-12: Toplu geliştirme aktarım durumu
 
-Bu dal **tamamlanmamış geliştirmeler dahil** çalışmaları korumak içindir. Ana dala birleştirilmeden önce Flutter analiz/test/Android/iOS doğrulamaları gereklidir.
+**Durum: WIP — üretime hazır değil.** GP-01–GP-12 ayrı açık PR #1–#12 içinde korunmaktadır. Bu entegrasyon dalı ana dala birleştirilmemiştir.
 
-## GitHub'da mevcut geliştirme dalları
-GP-01–GP-12 geliştirmeleri ayrı açık PR'larda (#1–#12) bulunmaktadır. Bunlar tek bir çalışır uygulamaya birleştirilmiş değildir.
+## Bu dalda bulunan ek modüller
+- GP-04: günlük rutin modeli ve şifreli kayıt deposu
+- GP-05: üreme takvimi ayarları, hesaplama, depo ve takvim ekranı
+- GP-06: alışveriş listesi modeli ve şifreli kayıt deposu
+- GP-07: tarif modeli ve şifreli kayıt deposu
+- GP-08: AI için açık onay kontrolü ve temel iletişim bilgisi maskeleme
+- GP-09: bildirim tercihleri modeli ve şifreli kayıt deposu
+- GP-10: sunucu doğrulaması gerektiren premium yetki modeli
+- GP-11: log maskeleme yardımcı aracı
+- GP-12: yayın öncesi kapılar
+- GP-04–09 için SecureHealthStore anahtar izinleri; GP-08/10/12 regresyon testleri
 
-## Çevrimdışı paket
-19–20 Kasım 2026 tarihli çevrimdışı ZIP paketi 39 arşiv girdisi içerir; 23 Dart kaynak/test dosyası ve kurulum/denetim belgeleri bulunmaktadır. Bu WIP dalına ZIP'in **tamamı henüz aktarılmamıştır**. Şu an bu dala aktarılanlar:
-- GP-08: lib/utils/ai_request_guard.dart
-- GP-10: lib/services/premium_entitlement.dart
-- GP-12: lib/utils/release_readiness.dart
+## Henüz tamamlanmamış işler
+- Önceki çevrimdışı ZIP'teki bütün ekran ve test dosyaları bu dala aktarılmadı.
+- GP-03 gelişim/sağlık değişiklikleri ve GP-01/02 alt dal farkları bu entegrasyon dalında birleştirilmedi.
+- Modüllerin ana ekrana bağlanması ve uçtan uca kullanıcı akışları eksik.
+- Canlı AI, ödeme, topluluk/bildirim servisleri ve güvenli backend doğrulamaları eksik.
+- Flutter analyze/test, Android/iOS build, emülatör ve gerçek cihaz testleri bu dal için doğrulanmadı.
+- GP-03/04 CI işleri geçmişte runner başlamadan başarısız oldu.
 
-## Bilinen engeller
-- GP-03 ve GP-04 GitHub Actions işleri runner atanmadan başarısız olmuştu; gerçek Flutter test çıktısı değildir.
-- Gerçek AI sunucusu, ödeme doğrulaması, topluluk/bildirim altyapısı ve cihaz testleri tamamlanmış kabul edilmez.
-- Flutter SDK/Android/iOS derlemeleri doğrulanmadan yayın kararı alınmaz.
-- Bu dal public depoda görünür. Gizli anahtarlar, gerçek kullanıcı/çocuk sağlık verileri eklenmemelidir.
-
-**Durum: Kısmi aktarım; teslim/yayın onayı değildir.**
+**Not:** Public depoya gerçek kullanıcı verisi, gizli anahtar, ödeme bilgisi veya çocuk sağlık verisi gönderilmemelidir.
