@@ -35,8 +35,9 @@ class GeneralRecipe {
 
   /// Toplam süre (hazırlık + pişirme), dakika.
   final int minutes;
-  final int? _servings, _prepMinutes, _cookMinutes;
-  final String? _difficulty;
+  /// Tarifte açıkça belirtilen değerler; null ise kategoriye göre hesaplanır.
+  final int? declaredServings, declaredPrepMinutes, declaredCookMinutes;
+  final String? declaredDifficulty;
 
   /// Fırın gerektiren tariflerde °C; gerekmiyorsa null.
   final int? ovenCelsius;
@@ -62,21 +63,22 @@ class GeneralRecipe {
     this.serving,
     this.storage,
     this.detailed = true,
-  })  : _servings = servings,
-        _prepMinutes = prepMinutes,
-        _cookMinutes = cookMinutes,
-        _difficulty = difficulty;
+  })  : declaredServings = servings,
+        declaredPrepMinutes = prepMinutes,
+        declaredCookMinutes = cookMinutes,
+        declaredDifficulty = difficulty;
 
   /// Kaç kişilik olduğu; belirtilmemişse kategoriye göre tahmin edilir.
-  int get servings => _servings ?? _defaultServings(category);
+  int get servings => declaredServings ?? _defaultServings(category);
 
-  int get prepMinutes => _prepMinutes ?? (minutes * 0.3).round().clamp(5, 30);
+  int get prepMinutes => declaredPrepMinutes ?? (minutes * 0.3).round().clamp(5, 30);
 
-  int get cookMinutes => _cookMinutes ?? (minutes - prepMinutes).clamp(0, 600);
+  int get cookMinutes => declaredCookMinutes ?? (minutes - prepMinutes).clamp(0, 600);
 
   /// Kolay / Orta / Zor.
   String get difficulty {
-    if (_difficulty != null) return _difficulty;
+    final declared = declaredDifficulty;
+    if (declared != null) return declared;
     if (minutes <= 25 && steps.length <= 4) return 'Kolay';
     if (minutes <= 70) return 'Orta';
     return 'Zor';
