@@ -1,3 +1,4 @@
+import '../utils/ai_request_guard.dart';
 import 'package:flutter/material.dart';
 import '../services/ai_assistant_service.dart';
 
@@ -18,10 +19,19 @@ class _AiAssistantPageState extends State<AiAssistantPage> {
   void dispose() { _question.dispose(); super.dispose(); }
 
   Future<void> _ask() async {
-    if (!_consent || _busy) return;
+    if (_busy) return;
+    final validation = AiRequestGuard.validate(
+      prompt: _question.text,
+      consentToExternalProcessing: _consent,
+      maxCharacters: 1200,
+    );
+    if (validation != null) {
+      setState(() => _error = validation);
+      return;
+    }
     setState(() { _busy = true; _answer = null; _error = null; });
     try {
-      final result = await AiAssistantService.ask(_question.text);
+      final result = await AiAssistantService.ask(AiRequestGuard.maskContactDetails(_question.text.trim()));
       if (mounted) setState(() => _answer = result);
     } catch (e) {
       if (mounted) setState(() => _error = e.toString().replaceFirst('Bad state: ', '').replaceFirst('Invalid argument(s): ', ''));
@@ -43,7 +53,7 @@ class _AiAssistantPageState extends State<AiAssistantPage> {
         decoration: const InputDecoration(labelText: 'Sorunuz', hintText: 'Örn. 8 aylık bebek için güvenli oyun önerileri nelerdir?')),
       CheckboxListTile(value: _consent, onChanged: _busy ? null : (v) => setState(() => _consent = v ?? false),
         title: const Text('Sorumu AI hizmetine göndermeyi kabul ediyorum.'),
-        subtitle: const Text('Yalnızca yazdığınız soru gönderilir. Ad, adres, telefon, tahlil veya başka hassas kişisel bilgi yazmayın.'),
+        subtitle: const Text('Yazdığınız soru gönderilir. E-posta ve telefon numaraları otomatik maskelenir; bu tam anonimleştirme değildir. Ad, adres, tahlil veya başka hassas kişisel bilgi yazmayın.'),
         controlAffinity: ListTileControlAffinity.leading),
       FilledButton.icon(onPressed: _busy || !_consent ? null : _ask,
         icon: const Icon(Icons.auto_awesome), label: Text(_busy ? 'Yanıt bekleniyor…' : 'Soruyu gönder')),
