@@ -81,7 +81,8 @@ void main() {
     await tester.pumpWidget(const AnneBebekApp());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.byTooltip('Bebek profilleri'));
+    // Paket 39 tasarımı: bebek profillerine ana sayfadaki çocuk kartından gidilir.
+    await tester.tap(find.text('Bebek profilini tamamla'));
     await tester.pumpAndSettle();
     expect(find.text('Bebek profillerim'), findsOneWidget);
     await tester.pageBack();
