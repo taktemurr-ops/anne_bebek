@@ -7,6 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Do not use this as a general replacement for a database or cloud backup.
 class SecureHealthStore {
   static const keys = <String>{
+    'daily_routines_v1', 'reproductive_calendar_settings_v1',
+    'shopping_checklist_v1', 'family_recipes_v1',
+    'family_notification_preferences_v1',
     'child_care_plan_v96', 'child_journal_entries_v59', 'child_profiles_directory_v58', 'family_activity_planner_v57', 'age_guide_checklist_v56', 'baby_health_journal_v41', 'womens_health_journal_v46', 'postpartum_companion_v1', 'cycle_history_v1', 'family_reminders_v40',
     'baby_feeding_journal_v5',
     'pregnancy_journal_v5',

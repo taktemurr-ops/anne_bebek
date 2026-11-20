@@ -1,3 +1,4 @@
+import '../utils/ai_request_guard.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'cloud_auth_service.dart';
@@ -8,8 +9,8 @@ class AiAssistantService {
   static bool get configured => CloudAuthService.configured;
 
   static Future<String> ask(String question) async {
-    final text = question.trim();
-    if (text.length < 3 || text.length > 1200) {
+    final text = AiRequestGuard.maskContactDetails(question.trim());
+    if (text.runes.length < 3 || text.runes.length > 1200) {
       throw ArgumentError('Sorunuz 3–1200 karakter arasında olmalıdır.');
     }
     if (!configured) throw StateError('AI sunucusu henüz yapılandırılmadı.');

@@ -1,3 +1,4 @@
+import 'family_notification_repository.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
@@ -48,7 +49,11 @@ class LocalReminderNotifications {
   static Future<void> schedule(FamilyReminder reminder) async {
     await initialize();
     await cancel(reminder.id);
-    if (!reminder.notify || reminder.completed || !reminder.due.isAfter(DateTime.now())) return;
+    if (!reminder.notify || reminder.completed || !reminder.due.isAfter(DateTime.now())) { return; }
+    // Fail closed: no OS notification without persisted opt-in.
+    final preferences = await FamilyNotificationRepository.load();
+    if (!preferences.remindersEnabled ||
+        preferences.isQuietHour(reminder.due.hour)) return;
     // Convert local instant to UTC for correct scheduling without device-zone lookup.
     final utcTime = tz.TZDateTime.from(reminder.due.toUtc(), tz.UTC);
     await _plugin.zonedSchedule(notificationId(reminder.id), 'Anne & Bebek',
@@ -63,6 +68,13 @@ class LocalReminderNotifications {
   }
 
   static Future<void> sync(List<FamilyReminder> previous, List<FamilyReminder> next) async {
+    final preferences = await FamilyNotificationRepository.load();
+    if (!preferences.remindersEnabled) {
+      for (final item in [...previous, ...next]) {
+        await cancel(item.id);
+      }
+      return;
+    }
     for (final item in previous) {
       if (!next.any((n) => n.id == item.id)) await cancel(item.id);
     }

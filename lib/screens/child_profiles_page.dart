@@ -1,3 +1,5 @@
+import 'daily_routine_journal_page.dart';
+import '../services/daily_routine_repository.dart';
 import 'official_vaccine_guide_page.dart';
 import 'child_data_audit_page.dart';
 import '../services/legacy_child_import.dart';
@@ -179,9 +181,11 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
         await SecureHealthStore.read('child_journal_entries_v59'));
       final careRaw = await SecureHealthStore.read('child_care_plan_v96');
       final hasJournal = journals.any((entry) => entry.childId == profile.id);
+      final hasRoutine = (await DailyRoutineRepository.load())
+          .any((entry) => entry.childId == profile.id);
       // Care plan may contain records not represented by the journal.
       // Fail closed until a verified cascade/archive workflow exists.
-      if (hasJournal || (careRaw != null && careRaw.contains(profile.id))) {
+      if (hasJournal || hasRoutine || (careRaw != null && careRaw.contains(profile.id))) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Bu çocuğa ait sağlık kayıtları var. Veri kaybını önlemek için profil silinmedi.')));
@@ -246,6 +250,7 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
               else if (choice == 'vaccineGuide') { Navigator.push(context, MaterialPageRoute<void>(builder: (_) => OfficialVaccineGuidePage(child: profile))); }
               else if (choice == 'care') { Navigator.push(context, MaterialPageRoute<void>(builder: (_) => ChildCarePlanPage(child: profile))); }
               else if (choice == 'report') { Navigator.push(context, MaterialPageRoute<void>(builder: (_) => ChildReportPage(child: profile))); }
+              else if (choice == 'routines') { Navigator.push(context, MaterialPageRoute<void>(builder: (_) => DailyRoutineJournalPage(childId: profile.id))); }
               else if (choice == 'import') { _importLegacy(profile); }
               else if (choice == 'delete') { _remove(profile); }
             },
@@ -257,6 +262,7 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
               PopupMenuItem(value: 'care', child: Text('Aşı ve sağlık planı')),
               PopupMenuItem(value: 'vaccineGuide', child: Text('Aşı rehberi')),
               PopupMenuItem(value: 'report', child: Text('Doktor özeti')),
+              PopupMenuItem(value: 'routines', child: Text('Günlük yaşam kayıtları')),
               PopupMenuItem(value: 'import', child: Text('Eski kayıtları kopyala')),
               PopupMenuItem(value: 'delete', child: Text('Profili sil')),
             ],
