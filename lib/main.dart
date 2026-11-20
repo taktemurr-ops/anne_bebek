@@ -43,6 +43,7 @@ import 'services/secure_health_store.dart';
 import 'data/product_catalog.dart';
 import 'data/general_recipe_catalog.dart';
 import 'widgets/recipe_info_sections.dart';
+import 'widgets/pastel_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -403,27 +404,58 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     builder: (_) => Scaffold(appBar: AppBar(title: Text(title)), body: SafeArea(child: child))));
 
   Widget _ana() => ListView(padding: const EdgeInsets.fromLTRB(16, 8, 16, 24), children: [
-    const Padding(padding: EdgeInsets.only(bottom: 4), child: Text('Merhaba Anne 💕', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, color: mor))),
-    Padding(padding: const EdgeInsets.only(bottom: 14), child: Text(bebekAdi.isEmpty ? 'Bugün kendine ve bebeğine güzel bir an ayır 🌷' : '$bebekAdi ile güzel bir gün seni bekliyor 🌷', style: const TextStyle(fontSize: 13, color: mor))),
-    _panel(padding: EdgeInsets.zero, color: const Color(0xFFF7EAF5), child: ListTile(
-      leading: const Icon(Icons.search_rounded, color: mor),
-      title: const Text('Aramak istediğin şeyi yaz...', style: TextStyle(fontSize: 13)),
-      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 15, color: mor),
-      onTap: () => _sayfa('A’dan Z’ye Rehber', _rehber()))),
-    _hero('Bebeğinizin Sağlığı İçin\nTüm Rehber Burada',
-      bebekAdi.isEmpty ? 'Beslenme, bakım, gelişim ve sağlık bir arada.' : '$bebekAdi • $yas',
-      Icons.child_friendly_rounded, onTap: () => setState(() => sekme = 1), button: 'Keşfet →'),
+    PastelGreetingCard(
+      greeting: 'Merhaba 👋',
+      subtitle: bebekAdi.isEmpty ? 'İyi ki buradasın!\nBebek profilini ekleyerek başla.' : 'İyi ki buradasın!'),
+    const SizedBox(height: 12),
     _panel(
-      color: const Color(0xFFFFEAF5),
+      color: const Color(0xFFFFFCFF),
       child: ListTile(
-        leading: const Icon(Icons.face_rounded, color: mor, size: 32),
-        title: Text(bebekAdi.isEmpty ? 'Bebek profilini tamamla' : bebekAdi,
-          style: const TextStyle(fontWeight: FontWeight.w700)),
+        leading: const CircleAvatar(radius: 24, backgroundColor: Color(0xFFFFE3F0),
+          child: Icon(Icons.child_care_rounded, color: Color(0xFFE94791))),
+        title: Text(bebekAdi.isEmpty ? 'Bebek profilini tamamla' : '$bebekAdi 💗',
+          style: const TextStyle(fontWeight: FontWeight.w800, color: mor)),
         subtitle: Text(yas),
-        trailing: const Icon(Icons.edit_outlined, color: mor),
-        onTap: _profil,
+        trailing: const Icon(Icons.chevron_right_rounded, color: mor),
+        onTap: _profillerAc,
       ),
     ),
+    const SizedBox(height: 4),
+    LayoutBuilder(builder: (context, c) {
+      // Dar ekranlarda (ör. 280 px) tek sütuna düşer; taşma olmaz.
+      final columns = c.maxWidth < 300 ? 1 : 2;
+      final tiles = <Widget>[
+        PastelModuleTile(icon: Icons.event_note_rounded, color: const Color(0xFFEDE4FF),
+          title: 'Günlük Takip', subtitle: 'Uyku • Beslenme • Bez',
+          onTap: () => _sayfa('Günlük takip', const TrackingJournalPage())),
+        PastelModuleTile(icon: Icons.child_care_rounded, color: const Color(0xFFFFE3F0),
+          title: 'Bebeğim', subtitle: 'Gelişim • Sağlık',
+          onTap: () => setState(() => sekme = 1)),
+        PastelModuleTile(icon: Icons.restaurant_menu_rounded, color: const Color(0xFFFFEBD9),
+          title: 'Yemek Tarifleri', subtitle: 'Aile için lezzetler',
+          onTap: () => setState(() => sekme = 2)),
+        PastelModuleTile(icon: Icons.pregnant_woman_rounded, color: const Color(0xFFFFE3F0),
+          title: 'Gebelik', subtitle: 'Hafta hafta takip',
+          onTap: () => _sayfa('Gebelik', const PregnancyPage())),
+        PastelModuleTile(icon: Icons.local_florist_rounded, color: const Color(0xFFFFE6EE),
+          title: 'Kadınlar', subtitle: 'Döngü • Sağlık',
+          onTap: () => setState(() => sekme = 4)),
+        PastelModuleTile(icon: Icons.shopping_cart_outlined, color: const Color(0xFFEDE4FF),
+          title: 'Alışveriş', subtitle: 'Bebek • Anne • Aile',
+          onTap: () => setState(() => sekme = 3)),
+      ];
+      return GridView.count(
+        crossAxisCount: columns, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
+        mainAxisSpacing: 10, crossAxisSpacing: 10,
+        childAspectRatio: columns == 1 ? c.maxWidth / 72 : ((c.maxWidth - 10) / 2) / 72,
+        children: tiles);
+    }),
+    const SizedBox(height: 6),
+    _panel(padding: EdgeInsets.zero, color: const Color(0xFFF7EAF5), child: ListTile(
+      leading: const Icon(Icons.search_rounded, color: mor),
+      title: const Text('A’dan Z’ye Rehber’de ara...', style: TextStyle(fontSize: 13)),
+      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 15, color: mor),
+      onTap: () => _sayfa('A’dan Z’ye Rehber', _rehber()))),
     _baslik('Bugünkü takip özeti'),
     _panel(
       child: Row(
@@ -1102,8 +1134,46 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     );
   }
 
+  Widget _profilSatiri(IconData icon, String title, VoidCallback onTap, {Widget? badge}) => ListTile(
+    leading: Icon(icon, color: mor),
+    title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
+    trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+      if (badge != null) badge,
+      const Icon(Icons.chevron_right_rounded, color: mor),
+    ]),
+    onTap: onTap);
+
   Widget _profilSayfasi() => ListView(padding: const EdgeInsets.all(16), children: [
-    _hero('Profilim', 'Kişisel kayıtlar ve uygulama ayarları', Icons.account_circle),
+    _panel(color: const Color(0xFFFFFCFF), child: Column(children: [
+      ListTile(
+        title: const Text('Çocuk Profillerim', style: TextStyle(fontWeight: FontWeight.w800, color: mor, fontSize: 17)),
+        trailing: TextButton.icon(onPressed: _profillerAc, icon: const Icon(Icons.add_rounded),
+          label: const Text('Profil Ekle'))),
+      ListTile(
+        leading: const CircleAvatar(backgroundColor: Color(0xFFFFE3F0),
+          child: Icon(Icons.child_care_rounded, color: Color(0xFFE94791))),
+        title: Text(bebekAdi.isEmpty ? 'Bebek profili oluştur' : bebekAdi,
+          style: const TextStyle(fontWeight: FontWeight.w700)),
+        subtitle: Text(yas),
+        trailing: const Icon(Icons.chevron_right_rounded, color: mor),
+        onTap: _profillerAc),
+    ])),
+    _panel(color: const Color(0xFFFFFCFF), padding: EdgeInsets.zero, child: Column(children: [
+      _profilSatiri(Icons.person_outline_rounded, 'Hesap Bilgilerim', () => Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => const CloudAccountPage()))),
+      _profilSatiri(Icons.workspace_premium_outlined, 'Premium Üyelik', () => Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => const MembershipPage())),
+        badge: Container(margin: const EdgeInsets.only(right: 6), padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+          decoration: BoxDecoration(color: const Color(0xFFE94791), borderRadius: BorderRadius.circular(10)),
+          child: const Text('Pro', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800)))),
+      _profilSatiri(Icons.notifications_none_rounded, 'Bildirim Ayarları', () => Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => const NotificationPreferencesPage()))),
+      _profilSatiri(Icons.shield_outlined, 'Gizlilik ve Güvenlik', () => Navigator.push(context,
+        MaterialPageRoute<void>(builder: (_) => const BackupPage()))),
+      _profilSatiri(Icons.info_outline_rounded, 'Uygulama Hakkında', () => showAboutDialog(context: context,
+        applicationName: 'Anne & Bebek', applicationVersion: '0.136.0',
+        applicationLegalese: 'Takip kayıtları kişisel kullanım içindir; sağlık değerlendirmesi yerine geçmez.')),
+    ])),
     _baslik('Hesabım'), _rehberKart('Bebek profilim', Icons.child_care),
     _panel(child: ListTile(title: Text(bebekAdi.isEmpty ? 'Bebek profili oluştur' : bebekAdi),
       subtitle: Text(yas), trailing: const Icon(Icons.edit), onTap: _profil)),
@@ -1150,18 +1220,58 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   ]);
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  // Bölüm sırası: 0 Ana Sayfa, 1 Bebeğim, 2 Tarifler, 3 Alışveriş, 4 Kadınlar, 5 Profil.
+  // Alt menüde referans tasarıma göre Ana Sayfa • Bebeğim • (+) • Tarifler • Profil vardır;
+  // Alışveriş ve Kadınlar ana sayfadaki modül kartlarından açılır.
+  static const _bolumBasliklari = <(IconData, String)>[
+    (Icons.favorite_rounded, 'Anne & Bebek'),
+    (Icons.child_care_rounded, 'Bebeğim'),
+    (Icons.restaurant_menu_rounded, 'Yemek Tarifleri'),
+    (Icons.shopping_cart_outlined, 'Alışveriş'),
+    (Icons.local_florist_rounded, 'Kadınlar'),
+    (Icons.person_outline_rounded, 'Profil'),
+  ];
+  static const _altMenuBolumleri = [0, 1, 2, 5];
+
+  void _hizliKayitMenusu() => showModalBottomSheet<void>(context: context, showDragHandle: true,
+    builder: (ctx) => SafeArea(child: Column(mainAxisSize: MainAxisSize.min, children: [
+      const Padding(padding: EdgeInsets.only(bottom: 4), child: Text('Hızlı kayıt',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: mor))),
+      ListTile(leading: const Icon(Icons.local_drink, color: Color(0xFFE94791)), title: const Text('Beslenme kaydı'), onTap: () {Navigator.pop(ctx); _olayEkle('Beslenme');}),
+      ListTile(leading: const Icon(Icons.bedtime, color: Color(0xFFE94791)), title: const Text('Uyku kaydı'), onTap: () {Navigator.pop(ctx); _olayEkle('Uyku');}),
+      ListTile(leading: const Icon(Icons.baby_changing_station, color: Color(0xFFE94791)), title: const Text('Bez değişimi'), onTap: () {Navigator.pop(ctx); _olayEkle('Bez değişimi');}),
+      ListTile(leading: const Icon(Icons.medication_outlined, color: Color(0xFFE94791)), title: const Text('İlaç / vitamin'), onTap: () {Navigator.pop(ctx); _olayEkle('İlaç / Vitamin');}),
+      ListTile(leading: const Icon(Icons.monitor_weight, color: Color(0xFFE94791)), title: const Text('Boy / kilo kaydı'), onTap: () {Navigator.pop(ctx); _olcumEkle();}),
+      ListTile(leading: const Icon(Icons.add_shopping_cart, color: Color(0xFFE94791)), title: const Text('Alışveriş listesine ürün'), onTap: () {Navigator.pop(ctx); _urunEkle();}),
+    ])));
+
+  @override
+  Widget build(BuildContext context) {
+    final bolum = sekme.clamp(0, 5);
+    final (baslikIkonu, baslik) = _bolumBasliklari[bolum];
+    final altBolum = bolum == 3 || bolum == 4;
+    return PopScope(
+      // Alt bölümlerdeyken sistem geri tuşu önce ana sayfaya döner.
+      canPop: bolum == 0,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop && mounted) setState(() => sekme = 0);
+      },
+      child: Scaffold(
     appBar: AppBar(
-      title: const Text('Anne & Bebek 💕', style: TextStyle(fontWeight: FontWeight.w900, color: mor, fontSize: 19)),
+      toolbarHeight: 64,
+      leading: altBolum ? IconButton(tooltip: 'Ana sayfaya dön', icon: const Icon(Icons.arrow_back_rounded),
+        onPressed: () => setState(() => sekme = 0)) : null,
+      title: PastelTitle(icon: baslikIkonu, title: baslik),
       actions: [
         IconButton(tooltip: 'Ara ve hızlı erişim', icon: const Icon(Icons.search_rounded), onPressed: _hizliErisim),
-        IconButton(tooltip: 'Bebek profilleri', icon: const Icon(Icons.child_care_rounded), onPressed: _profillerAc),
+        IconButton(tooltip: 'Bildirim ayarları', icon: const Icon(Icons.notifications_none_rounded),
+          onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const NotificationPreferencesPage()))),
         PopupMenuButton<String>(tooltip: 'Diğer bölümler', icon: const Icon(Icons.more_vert_rounded),
           onSelected: (value) {
             switch (value) {
               case 'guide': _sayfa('A’dan Z’ye Rehber', _rehber());
               case 'tools': Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const LifeHubPage()));
-              case 'profile': _sayfa('Profilim', _profilSayfasi());
+              case 'profile': setState(() => sekme = 5);
               case 'membership': Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const MembershipPage()));
             }
           },
@@ -1173,7 +1283,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           ]),
       ],
     ),
-    body: yuklendi ? [_ana, _bebek, _tarif, _alisveris, _kadin][sekme]()
+    body: yuklendi ? [_ana, _bebek, _tarif, _alisveris, _kadin, _profilSayfasi][sekme.clamp(0, 5)]()
       : yuklemeHatasi != null
         ? Center(child: Padding(padding: const EdgeInsets.all(24), child: Column(
             mainAxisSize: MainAxisSize.min, children: [
@@ -1187,26 +1297,13 @@ class _AnaUygulamaState extends State<AnaUygulama> {
               }, icon: const Icon(Icons.refresh), label: const Text('Tekrar dene')),
             ])))
         : const Center(child: CircularProgressIndicator()),
-    floatingActionButton: FloatingActionButton.small(backgroundColor: const Color(0xFFFF5A9C), foregroundColor: Colors.white,
-      onPressed: () => showModalBottomSheet<void>(context: context, showDragHandle: true, builder: (ctx) =>
-        SafeArea(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          ListTile(leading: const Icon(Icons.local_drink), title: const Text('Beslenme kaydı'), onTap: () {Navigator.pop(ctx); _olayEkle('Beslenme');}),
-          ListTile(leading: const Icon(Icons.bedtime), title: const Text('Uyku kaydı'), onTap: () {Navigator.pop(ctx); _olayEkle('Uyku');}),
-          ListTile(leading: const Icon(Icons.monitor_weight), title: const Text('Boy / kilo kaydı'), onTap: () {Navigator.pop(ctx); _olcumEkle();}),
-          ListTile(leading: const Icon(Icons.add_shopping_cart), title: const Text('Alışveriş listesi'), onTap: () {Navigator.pop(ctx); _urunEkle();}),
-        ]))), child: const Icon(Icons.add)),
-    floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-    bottomNavigationBar: NavigationBar(height: 76, selectedIndex: sekme, onDestinationSelected: (i) => setState(() => sekme = i),
-      backgroundColor: const Color(0xFFFFF9FD), indicatorColor: pembe,
-      labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-      destinations: const [
-        NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: 'Ana Sayfa'),
-        NavigationDestination(icon: Icon(Icons.child_care_outlined), selectedIcon: Icon(Icons.child_care), label: 'Bebeğim'),
-        NavigationDestination(icon: Icon(Icons.restaurant_menu), label: 'Tarifler'),
-        NavigationDestination(icon: Icon(Icons.shopping_bag_outlined), label: 'Alışveriş'),
-        NavigationDestination(icon: Icon(Icons.favorite_border), selectedIcon: Icon(Icons.favorite), label: 'Kadınlar'),
-      ]),
-  );
+    bottomNavigationBar: PastelBottomBar(
+      selected: _altMenuBolumleri.indexOf(bolum),
+      onSelect: (i) => setState(() => sekme = _altMenuBolumleri[i]),
+      onAdd: _hizliKayitMenusu,
+    ),
+  ));
+  }
 }
 
 
