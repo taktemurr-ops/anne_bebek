@@ -46,6 +46,8 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
   }
 
   Future<void> _toggleFavorite(String id) async {
+    // Keep the previous selection so a failed disk write cannot appear saved.
+    final previous = Set<String>.from(_favorites);
     setState(() {
       if (!_favorites.add(id)) _favorites.remove(id);
     });
@@ -55,6 +57,11 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
       if (!saved) throw StateError('Favoriler kaydedilemedi');
     } catch (error) {
       if (!mounted) return;
+      setState(() {
+        _favorites
+          ..clear()
+          ..addAll(previous);
+      });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Favori kaydedilemedi. Tekrar deneyin.')),
       );

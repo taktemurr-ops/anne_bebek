@@ -106,9 +106,10 @@ class _BackupPageState extends State<BackupPage> {
               ),
               const SizedBox(height: 8),
               const Text(
-                'DİKKAT: Mevcut uygulama kayıtları değiştirilecek. '
-                'Yedekte olmayan alanlardaki kayıtlar da silinecek. '
-                'Önce mevcut verilerinizi ayrıca yedekleyin.',
+                'DİKKAT: Yedekte bulunan alanlardaki mevcut kayıtlar '
+                'yedekteki değerlerle değiştirilecek. Yedekte olmayan '
+                'alanlardaki kayıtlar korunur. İşlem öncesi yine de '
+                'mevcut verilerinizi ayrıca yedekleyin.',
               ),
               for (final warning in inspection.warnings) ...[
                 const SizedBox(height: 8),

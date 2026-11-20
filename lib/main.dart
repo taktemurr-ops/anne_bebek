@@ -27,6 +27,8 @@ import 'screens/baby_health_page.dart';
 import 'screens/reminders_page.dart';
 import 'screens/release_check_page.dart';
 import 'widgets/quick_access.dart';
+import 'widgets/daily_quick_actions.dart';
+import 'utils/baby_age.dart';
 import 'sleep_journal.dart';
 import 'dart:convert';
 import 'extra_features.dart';
@@ -175,12 +177,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   }
 
   String _tarih(DateTime d) => '${d.day.toString().padLeft(2, '0')}.${d.month.toString().padLeft(2, '0')}.${d.year}';
-  String get yas {
-    if (dogum == null) return 'Doğum tarihi eklenmedi';
-    final gun = DateTime.now().difference(dogum!).inDays;
-    if (gun < 0) return 'Doğum bekleniyor';
-    return gun < 30 ? '$gun günlük' : '${(gun / 30.44).floor()} aylık (yaklaşık)';
-  }
+  String get yas => BabyAge.label(dogum, DateTime.now());
 
   void _profillerAc() => Navigator.of(context).push(
     MaterialPageRoute<void>(builder: (_) => const ChildProfilesPage()));
@@ -188,7 +185,10 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   Future<void> _profil() async {
     final ad = TextEditingController(text: bebekAdi);
     DateTime? secilen = dogum;
-    await showDialog<void>(context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, yenile) => AlertDialog(
+    ModalRoute<dynamic>? profileRoute;
+    await showDialog<void>(context: context, builder: (ctx) {
+      profileRoute = ModalRoute.of(ctx);
+      return StatefulBuilder(builder: (ctx, yenile) => AlertDialog(
       title: const Text('Bebek profili'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: ad, decoration: const InputDecoration(labelText: 'Bebeğin adı')),
@@ -209,13 +209,17 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           if (basarili) Navigator.of(ctx).pop();
           _kayitBildir(basarili, basariMesaji: 'Bebek profili kaydedildi.');
         }, child: const Text('Kaydet'))],
-    )));
+    )); });
+    await profileRoute?.completed;
     ad.dispose();
   }
 
   Future<void> _olayEkle(String tur) async {
     final not = TextEditingController();
-    await showDialog<void>(context: context, builder: (ctx) => AlertDialog(
+    ModalRoute<dynamic>? recordRoute;
+    await showDialog<void>(context: context, builder: (ctx) {
+      recordRoute = ModalRoute.of(ctx);
+      return AlertDialog(
       title: Text('$tur kaydı'),
       content: TextField(controller: not, autofocus: true, decoration: const InputDecoration(labelText: 'Açıklama / miktar (isteğe bağlı)'), maxLines: 2),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
@@ -228,13 +232,17 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           if (basarili) Navigator.of(ctx).pop();
           _kayitBildir(basarili, basariMesaji: '$tur kaydı eklendi.');
         }, child: const Text('Kaydet'))],
-    ));
+    ); });
+    await recordRoute?.completed;
     not.dispose();
   }
 
   Future<void> _olcumEkle() async {
     final boy = TextEditingController(); final kilo = TextEditingController(); final bas = TextEditingController();
-    await showDialog<void>(context: context, builder: (ctx) => AlertDialog(
+    ModalRoute<dynamic>? measureRoute;
+    await showDialog<void>(context: context, builder: (ctx) {
+      measureRoute = ModalRoute.of(ctx);
+      return AlertDialog(
       title: const Text('Büyüme ölçümü'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: boy, keyboardType: const TextInputType.numberWithOptions(decimal: true), decoration: const InputDecoration(labelText: 'Boy (cm)')),
@@ -258,13 +266,31 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           if (basarili) Navigator.of(ctx).pop();
           _kayitBildir(basarili, basariMesaji: 'Büyüme ölçümü kaydedildi.');
         }, child: const Text('Kaydet'))],
-    ));
+    ); });
+    await measureRoute?.completed;
     boy.dispose(); kilo.dispose(); bas.dispose();
   }
 
   // Boş alan serbesttir; girilen değer ise sayısal ve makul aralıkta olmalıdır.
   bool _olcumGecerli(String metin, double? deger, double min, double max) =>
       metin.trim().isEmpty || (deger != null && deger.isFinite && deger >= min && deger <= max);
+
+  // Kayıt başarısız olursa silinen öğeyi eski konumuna geri koy.
+  Future<void> _kayitSil(
+    List<Map<String, String>> liste,
+    Map<String, String> kayit,
+  ) async {
+    final index = liste.indexOf(kayit);
+    if (index < 0) return;
+    setState(() => liste.removeAt(index));
+    final basarili = await _kaydet();
+    if (!mounted) return;
+    if (!basarili) {
+      setState(() => liste.insert(index.clamp(0, liste.length), kayit));
+    }
+    _kayitBildir(basarili,
+        basariMesaji: 'Kayıt silindi.');
+  }
 
   Future<void> _urunEkle() async {
     final urun = TextEditingController();
@@ -364,6 +390,69 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     _hero('Bebeğinizin Sağlığı İçin\nTüm Rehber Burada',
       bebekAdi.isEmpty ? 'Beslenme, bakım, gelişim ve sağlık bir arada.' : '$bebekAdi • $yas',
       Icons.child_friendly_rounded, onTap: () => setState(() => sekme = 1), button: 'Keşfet →'),
+    _panel(
+      color: const Color(0xFFFFEAF5),
+      child: ListTile(
+        leading: const Icon(Icons.face_rounded, color: mor, size: 32),
+        title: Text(bebekAdi.isEmpty ? 'Bebek profilini tamamla' : bebekAdi,
+          style: const TextStyle(fontWeight: FontWeight.w700)),
+        subtitle: Text(yas),
+        trailing: const Icon(Icons.edit_outlined, color: mor),
+        onTap: _profil,
+      ),
+    ),
+    _baslik('Bugünkü takip özeti'),
+    _panel(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _sayac('Beslenme', 'Beslenme'),
+          _sayac('Uyku', 'Uyku'),
+          _sayac('Bez', 'Bez değişimi'),
+        ],
+      ),
+    ),
+    _baslik('Hızlı günlük kayıt ✨'),
+    DailyQuickActions(
+      // Hızlı işlemler, ana ekrandaki günlük sayacıyla aynı kaydı kullanır.
+      onFeeding: () => _olayEkle('Beslenme'),
+      onSleep: () => _olayEkle('Uyku'),
+      onDiaper: () => _olayEkle('Bez değişimi'),
+      onMeasurement: _olcumEkle,
+    ),
+    _baslik('Gelişim ve beslenme'),
+    _panel(
+      child: Column(children: [
+        ListTile(
+          leading: const Icon(Icons.monitor_weight_outlined, color: mor),
+          title: const Text('Büyüme geçmişi'),
+          subtitle: Text(olcumler.isEmpty
+              ? 'Henüz ölçüm eklenmedi'
+              : '${olcumler.length} ölçüm kaydı • grafiklere göz at'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => _sayfa('Büyüme Grafikleri',
+              GrowthChartsPage(measurements: olcumler)),
+        ),
+        const Divider(height: 1),
+        ListTile(
+          leading: const Icon(Icons.restaurant_menu_rounded, color: mor),
+          title: const Text('Bebeğime uygun tarifler'),
+          subtitle: const Text('Yaş, kategori ve malzemeye göre keşfet'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (_) => const BabyRecipesPage())),
+        ),
+        const Divider(height: 1),
+        ListTile(
+          leading: const Icon(Icons.security_outlined, color: mor),
+          title: const Text('Şifreli yedekleme ve geri yükleme'),
+          subtitle: const Text('Kayıtlarını güvenli biçimde dışa aktar'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (_) => const BackupPage())),
+        ),
+      ]),
+    ),
     _baslik('Kategorileri keşfet 🌸'),
     LayoutBuilder(builder: (context, constraints) => GridView.count(
       crossAxisCount: constraints.maxWidth < 350 ? 2 : 4,
@@ -500,7 +589,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     ...olaylar.take(30).map((o) => _panel(child: ListTile(
       leading: const Icon(Icons.check_circle_outline, color: mor), title: Text(o['tur'] ?? ''),
       subtitle: Text('${_guvenliTarih(o['zaman'])}  ${o['not'] ?? ''}'),
-      trailing: IconButton(icon: const Icon(Icons.delete_outline), onPressed: () {setState(() => olaylar.remove(o)); _kaydet();})))),
+      trailing: IconButton(icon: const Icon(Icons.delete_outline), onPressed: () => _kayitSil(olaylar, o))))),
     _panel(color: const Color(0xFFF1E6FF), child: ListTile(
       leading: const Icon(Icons.show_chart, color: mor),
       title: const Text('Boy / kilo grafiklerini görüntüle'),
@@ -512,7 +601,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     ...olcumler.map((o) => _panel(child: ListTile(leading: const Icon(Icons.show_chart, color: mor),
       title: Text('Boy: ${_olcumMetni(o['boy'], 'cm')}  •  Kilo: ${_olcumMetni(o['kilo'], 'kg')}\nBaş çevresi: ${_olcumMetni(o['basCevresi'], 'cm')}'),
       subtitle: Text(_guvenliTarih(o['tarih'])),
-      trailing: IconButton(icon: const Icon(Icons.delete_outline), onPressed: () {setState(() => olcumler.remove(o)); _kaydet();})))),
+      trailing: IconButton(icon: const Icon(Icons.delete_outline), onPressed: () => _kayitSil(olcumler, o))))),
     _baslik('Bakım rehberi'),
     _rehberKart('Bebek Masajı', Icons.spa), _rehberKart('Bebek Gelişimi', Icons.auto_graph),
     _rehberKart('Beslenme', Icons.restaurant), _rehberKart('Uyku Düzeni', Icons.bedtime),

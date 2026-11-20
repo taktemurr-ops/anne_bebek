@@ -9,14 +9,14 @@ String backup(Map<String, Object> data, {String? exportedAt}) => jsonEncode({
 });
 
 void main() {
-  test('partial backup warns that missing fields will be removed', () {
+  test('partial backup confirms missing fields stay unchanged', () {
     final result = BackupInspection.inspect(backup({'bebekAdi': 'Test'}));
     expect(result.fieldCount, 1);
     expect(result.missingFields, BackupService.keys.length - 1);
-    expect(result.warnings.any((v) => v.contains('silecek')), isTrue);
+    expect(result.warnings.any((v) => v.contains('korur')), isTrue);
   });
 
-  test('empty backup has explicit data-loss warning', () {
+  test('empty backup does not claim to delete records', () {
     final result = BackupInspection.inspect(backup({}));
     expect(result.recordCount, 0);
     expect(result.warnings.any((v) => v.contains('boş')), isTrue);
