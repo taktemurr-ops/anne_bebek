@@ -91,7 +91,7 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
   Future<void> _choose(String day, String meal) async {
     final search = TextEditingController();
     String category = 'Tümü';
-    final categories = ['Tümü', ...{for (final r in generalRecipes) r.category}];
+    final categories = ['Tümü', ...generalRecipeCategories];
     final chosen = await showModalBottomSheetAndDispose<GeneralRecipe>(disposables: [search],
       context: context, isScrollControlled: true, showDragHandle: true,
       builder: (ctx) => StatefulBuilder(builder: (ctx, update) {

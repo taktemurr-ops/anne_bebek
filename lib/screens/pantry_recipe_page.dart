@@ -457,7 +457,7 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
 
   @override
   Widget build(BuildContext context) {
-    final categories = ['Tümü', ...{for (final r in generalRecipes) r.category}];
+    final categories = ['Tümü', ...generalRecipeCategories];
     final query = _normalize(_search.text);
     final scored = <({GeneralRecipe recipe, int matched, int total})>[];
     final expiring = _pantry.where((p) { final d = _daysLeft(p); return d != null && d >= 0 && d <= 3; }).toList()..sort();

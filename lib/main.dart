@@ -42,6 +42,7 @@ import 'services/privacy_service.dart';
 import 'services/secure_health_store.dart';
 import 'data/product_catalog.dart';
 import 'data/general_recipe_catalog.dart';
+import 'widgets/recipe_info_sections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -111,6 +112,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   String arama = '';
   String tarifFiltre = 'Tümü';
   int tarifSureSiniri = 0; // 0: tüm süreler
+  int tarifGosterimSiniri = 40; // Izgarada aynı anda çizilen tarif sayısı
   bool sadeceFavoriTarifler = false;
   final List<String> sepet = [];
   final Set<String> tamamlanan = {};
@@ -647,6 +649,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       child: InkWell(
         onTap: () => _sayfa(t.title, ListView(padding: const EdgeInsets.all(18), children: [
           _hero(t.title, '${t.category} • ${t.minutes} dk', simge),
+          RecipeSummaryChips(recipe: t),
+          const SizedBox(height: 8),
           _panel(color: const Color(0xFFFFEAF5), child: ListTile(
             leading: const Icon(Icons.add_shopping_cart, color: mor),
             title: const Text('Malzemeleri alışveriş listeme ekle'),
@@ -674,6 +678,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           ...t.steps.asMap().entries.map((e) => Padding(
             padding: const EdgeInsets.symmetric(vertical: 7),
             child: Text('${e.key + 1}. ${e.value}', style: const TextStyle(fontSize: 15)))),
+          RecipeExtraSections(recipe: t),
+          const SizedBox(height: 24),
         ])),
         child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
           Expanded(child: Container(color: const Color(0xFFFFEAF5), child: Stack(children: [
@@ -715,8 +721,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   }
 
   Widget _tarif() {
-    final categories = <String>['Tümü',
-      ...{for (final t in generalRecipes) t.category}];
+    final categories = <String>['Tümü', ...generalRecipeCategories];
     final selected = categories.contains(tarifFiltre) ? tarifFiltre : 'Tümü';
     final query = arama.trim().toLowerCase();
     final gorunen = generalRecipes.where((t) =>
@@ -792,7 +797,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           child: ChoiceChip(label: Text(f), selected: selected == f,
             selectedColor: const Color(0xFF9E60C8),
             labelStyle: TextStyle(color: selected == f ? Colors.white : mor),
-            onSelected: (_) => setState(() => tarifFiltre = f)),
+            onSelected: (_) => setState(() { tarifFiltre = f; tarifGosterimSiniri = 40; })),
         )).toList())),
       const SizedBox(height: 10),
       Wrap(spacing: 8, runSpacing: 6, crossAxisAlignment: WrapCrossAlignment.center,
@@ -812,11 +817,17 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       _baslik('Genel yemek tarifleri'),
       if (gorunen.isEmpty) _panel(child: const Text('Filtrelere uygun tarif bulunamadı.')),
       GridView.builder(shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
-        itemCount: gorunen.length,
+        // Tüm katalog tek seferde çizilmez; performans için parça parça yüklenir.
+        itemCount: gorunen.length.clamp(0, tarifGosterimSiniri),
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 240, childAspectRatio: .82,
           mainAxisSpacing: 10, crossAxisSpacing: 10),
         itemBuilder: (_, i) => _tarifKarti(gorunen[i])),
+      if (gorunen.length > tarifGosterimSiniri)
+        Padding(padding: const EdgeInsets.only(top: 12), child: OutlinedButton.icon(
+          onPressed: () => setState(() => tarifGosterimSiniri += 40),
+          icon: const Icon(Icons.expand_more),
+          label: Text('Daha fazla tarif göster (${gorunen.length - tarifGosterimSiniri} kaldı)'))),
       _baslik('Favori tariflerim'),
       _panel(child: Text(favoriler.isEmpty
         ? 'Henüz favori tarif eklemedin.'
@@ -829,6 +840,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       _hero(t.title, '${t.category} • ${t.minutes} dk', Icons.restaurant_menu),
+      RecipeSummaryChips(recipe: t),
       _baslik('Malzemeler'),
       ...t.ingredients.map((m) => ListTile(dense: true,
         leading: const Icon(Icons.check_circle_outline, color: mor), title: Text(m))),
@@ -836,6 +848,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       ...t.steps.asMap().entries.map((e) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 7),
         child: Text('${e.key + 1}. ${e.value}'))),
+      RecipeExtraSections(recipe: t),
     ],
   );
 

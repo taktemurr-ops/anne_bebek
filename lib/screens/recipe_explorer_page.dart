@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/general_recipe_catalog.dart';
+import '../widgets/recipe_info_sections.dart';
 import 'weekly_meal_planner_page.dart';
 
 /// Paket 39 / Asama 38-42: Mevcut tarif ve favori kayitlariyla uyumlu kesif ekrani.
@@ -105,7 +106,7 @@ class _RecipeExplorerPageState extends State<RecipeExplorerPage> {
 
   @override
   Widget build(BuildContext context) {
-    final categories = ['Tümü', ...{for (final r in generalRecipes) r.category}];
+    final categories = ['Tümü', ...generalRecipeCategories];
     final q = _search.text.trim().toLowerCase();
     final filtered = generalRecipes.where((r) =>
       (_category == 'Tümü' || r.category == _category) &&
@@ -192,8 +193,8 @@ class _InteractiveRecipeDetailsState extends State<_InteractiveRecipeDetails> {
   final _notes = TextEditingController();
   final Set<int> _completed = {};
   bool _progressLoaded = false;
-  int _portions = 2;
-  int _basePortions = 2;
+  late int _portions = widget.recipe.servings.clamp(1, 12);
+  late int _basePortions = _portions;
   bool _saving = false;
 
   String get _noteKey => 'paket39_recipe_note_v1_${widget.recipe.id}';
@@ -369,17 +370,19 @@ class _InteractiveRecipeDetailsState extends State<_InteractiveRecipeDetails> {
       appBar: AppBar(title: Text(r.title), backgroundColor: _pink),
       body: ListView(padding: const EdgeInsets.all(16), children: [
         Text('${r.category} • ${r.minutes} dakika', style: const TextStyle(color: _purple)),
+        const SizedBox(height: 8),
+        RecipeSummaryChips(recipe: r),
         const SizedBox(height: 12),
         Card(color: _pink, child: Padding(padding: const EdgeInsets.all(12), child: Column(
           crossAxisAlignment: CrossAxisAlignment.start, children: [
             const Text('Porsiyon ayarı', style: TextStyle(fontWeight: FontWeight.bold, color: _purple)),
             const SizedBox(height: 6),
-            const Text('Tariflerde standart porsiyon bilgisi bulunmadığından başlangıç değeri 2 kabul edilir. İstersen değiştirebilirsin.', style: TextStyle(fontSize: 12)),
+            Text('Tarif ${widget.recipe.servings} kişiliktir. Porsiyonu değiştirince sayıyla başlayan ölçüler oransal hesaplanır.', style: const TextStyle(fontSize: 12)),
             Row(children: [
               const Text('Temel:'),
               DropdownButton<int>(value: _basePortions, items: List.generate(12, (i) =>
                 DropdownMenuItem(value: i + 1, child: Text('${i + 1}'))),
-                onChanged: (v) => setState(() { _basePortions = v ?? 2; _portions = _basePortions; })),
+                onChanged: (v) => setState(() { _basePortions = v ?? widget.recipe.servings; _portions = _basePortions; })),
               const Spacer(),
               IconButton(onPressed: _portions > 1 ? () => setState(() => _portions--) : null,
                 icon: const Icon(Icons.remove_circle_outline)),
@@ -430,6 +433,7 @@ class _InteractiveRecipeDetailsState extends State<_InteractiveRecipeDetails> {
           })),
         TextButton.icon(onPressed: !_progressLoaded ? null : () { setState(_completed.clear); _saveProgress(); },
           icon: const Icon(Icons.refresh), label: const Text('Adımları sıfırla')),
+        RecipeExtraSections(recipe: r),
         const Divider(height: 28),
         const Text('Kişisel tarif notum', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
         const SizedBox(height: 8),
