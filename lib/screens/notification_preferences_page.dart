@@ -26,9 +26,9 @@ class _NotificationPreferencesPageState extends State<NotificationPreferencesPag
       if (!mounted) return;
       setState(() { _prefs = prefs; _error = null; _busy = false; });
     } catch (_) {
-      if (mounted) setState(() {
+      if (mounted) { setState(() => {
         _busy = false; _error = 'Bildirim tercihleri okunamadı. Eski veriler korunuyor.';
-      });
+      }); }
     }
   }
 
@@ -42,13 +42,13 @@ class _NotificationPreferencesPageState extends State<NotificationPreferencesPag
         final reminders = await ReminderRepository.load();
         await LocalReminderNotifications.sync(reminders, reminders);
       } catch (_) {
-        if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Tercihler kaydedildi; telefon bildirimleri güncellenemedi.')));
+        if (mounted) { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Tercihler kaydedildi; telefon bildirimleri güncellenemedi.'))); }
       }
     } catch (_) {
-      if (mounted) setState(() {
+      if (mounted) { setState(() => {
         _error = 'Tercihler kaydedilemedi. Önceki tercihler korunuyor.';
-      });
+      }); }
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -93,7 +93,7 @@ class _NotificationPreferencesPageState extends State<NotificationPreferencesPag
         const SizedBox(height: 16),
         const Text('Sessiz saatler', style: TextStyle(fontWeight: FontWeight.bold)),
         DropdownButtonFormField<int>(
-          value: _prefs.quietStartHour,
+          initialValue: _prefs.quietStartHour,
           decoration: const InputDecoration(labelText: 'Başlangıç'),
           items: [for (var h = 0; h < 24; h++)
             DropdownMenuItem(value: h, child: Text('${h.toString().padLeft(2, '0')}:00'))],
@@ -102,7 +102,7 @@ class _NotificationPreferencesPageState extends State<NotificationPreferencesPag
           }),
         const SizedBox(height: 12),
         DropdownButtonFormField<int>(
-          value: _prefs.quietEndHour,
+          initialValue: _prefs.quietEndHour,
           decoration: const InputDecoration(labelText: 'Bitiş'),
           items: [for (var h = 0; h < 24; h++)
             DropdownMenuItem(value: h, child: Text('${h.toString().padLeft(2, '0')}:00'))],
