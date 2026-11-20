@@ -1,3 +1,5 @@
+import '../services/reminder_repository.dart';
+import '../services/local_reminder_notifications.dart';
 import 'package:flutter/material.dart';
 import '../services/family_notification_preferences.dart';
 import '../services/family_notification_repository.dart';
@@ -35,6 +37,14 @@ class _NotificationPreferencesPageState extends State<NotificationPreferencesPag
     try {
       await FamilyNotificationRepository.save(updated);
       if (mounted) setState(() => _prefs = updated);
+      // Reconcile already scheduled notifications after opt-out or quiet-hour changes.
+      try {
+        final reminders = await ReminderRepository.load();
+        await LocalReminderNotifications.sync(reminders, reminders);
+      } catch (_) {
+        if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Tercihler kaydedildi; telefon bildirimleri güncellenemedi.')));
+      }
     } catch (_) {
       if (mounted) setState(() {
         _error = 'Tercihler kaydedilemedi. Önceki tercihler korunuyor.';
