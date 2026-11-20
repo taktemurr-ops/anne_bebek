@@ -1,3 +1,4 @@
+import '../services/family_notification_repository.dart';
 import 'package:flutter/material.dart';
 import '../services/reminder_repository.dart';
 import '../services/local_reminder_notifications.dart';
@@ -104,7 +105,18 @@ class _RemindersPageState extends State<RemindersPage> {
     if (result != null && mounted) {
       if (result.notify) {
         bool allowed = false;
-        try { allowed = await LocalReminderNotifications.requestPermission(); } catch (_) {}
+        try {
+          final preferences = await FamilyNotificationRepository.load();
+          if (preferences.remindersEnabled) {
+            allowed = await LocalReminderNotifications.requestPermission();
+          } else if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Önce Bildirim tercihlerim ekranından aile hatırlatıcılarına izin verin.')));
+          }
+        } catch (_) {
+          if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Bildirim tercihleri doğrulanamadı. Telefon bildirimi kapalı tutuldu.')));
+        }
         if (!allowed && mounted) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Bildirim izni verilmedi. Hatırlatıcı uygulama içinde saklandı.')));
