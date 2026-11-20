@@ -28,9 +28,9 @@ class _DailyRoutineJournalPageState extends State<DailyRoutineJournalPage> {
       if (!mounted) return;
       setState(() { _all = items; _busy = false; _error = null; });
     } catch (_) {
-      if (mounted) setState(() {
+      if (mounted) { setState(() => {
         _busy = false; _error = 'Kayıtlar okunamadı; veriler korunuyor.';
-      });
+      }); }
     }
   }
 
@@ -38,13 +38,13 @@ class _DailyRoutineJournalPageState extends State<DailyRoutineJournalPage> {
     setState(() { _busy = true; _error = null; });
     try {
       await DailyRoutineRepository.save(updated);
-      if (mounted) setState(() { _all = updated; });
+      if (mounted) { setState(() => { _all = updated; }); }
     } catch (_) {
-      if (mounted) setState(() {
+      if (mounted) { setState(() => {
         _error = 'Kaydetme başarısız; önceki kayıtlar korundu.';
-      });
+      }); }
     } finally {
-      if (mounted) setState(() { _busy = false; });
+      if (mounted) { setState(() => { _busy = false; }); }
     }
   }
 
