@@ -50,7 +50,7 @@ class _ReproductiveCalendarPageState extends State<ReproductiveCalendarPage> {
       if (!mounted) return;
       setState(() { _error = 'Kaydetme başarısız. Lütfen tekrar deneyin.'; });
     } finally {
-      if (mounted) setState(() { _busy = false; });
+      if (mounted) { setState(() => { _busy = false; }); }
     }
   }
 
@@ -80,7 +80,7 @@ class _ReproductiveCalendarPageState extends State<ReproductiveCalendarPage> {
           child: Text(_periodStart == null ? 'Son adet tarihini seç' :
             'Son adet: ${_periodStart!.day}.${_periodStart!.month}.${_periodStart!.year}')),
         const SizedBox(height: 12),
-        DropdownButtonFormField<int>(value: _cycleDays,
+        DropdownButtonFormField<int>(initialValue: _cycleDays,
           decoration: const InputDecoration(labelText: 'Döngü uzunluğu (gün)'),
           items: [for (var days = 21; days <= 35; days++)
             DropdownMenuItem(value: days, child: Text('$days gün'))],
