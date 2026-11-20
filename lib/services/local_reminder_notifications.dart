@@ -49,7 +49,7 @@ class LocalReminderNotifications {
   static Future<void> schedule(FamilyReminder reminder) async {
     await initialize();
     await cancel(reminder.id);
-    if (!reminder.notify || reminder.completed || !reminder.due.isAfter(DateTime.now())) return;
+    if (!reminder.notify || reminder.completed || !reminder.due.isAfter(DateTime.now())) { return; }
     // Fail closed: no OS notification without persisted opt-in.
     final preferences = await FamilyNotificationRepository.load();
     if (!preferences.remindersEnabled ||
