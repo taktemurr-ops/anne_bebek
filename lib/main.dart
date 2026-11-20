@@ -1,3 +1,5 @@
+import 'screens/family_recipe_notebook_page.dart';
+import 'screens/daily_routine_journal_page.dart';
 import 'screens/shopping_checklist_page.dart';
 import 'screens/reproductive_calendar_page.dart';
 import 'screens/recipe_explorer_page.dart';
@@ -403,6 +405,21 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       trailing: const Icon(Icons.chevron_right),
       onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
         builder: (_) => const ReproductiveCalendarPage())))),
+    _panel(color: const Color(0xFFFFF3E7), child: ListTile(
+      leading: const Icon(Icons.restaurant_menu, color: mor),
+      title: const Text('Aile tarif defterim'),
+      subtitle: const Text('Kendi tariflerini güvenli şekilde kaydet'),
+      trailing: const Icon(Icons.chevron_right),
+      onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (_) => const FamilyRecipeNotebookPage())))),
+    _panel(color: const Color(0xFFEAF4FF), child: ListTile(
+      leading: const Icon(Icons.nights_stay_outlined, color: mor),
+      title: const Text('Günlük yaşam günlüğü'),
+      subtitle: const Text('Uyku, beslenme, bez ve not kayıtları'),
+      trailing: const Icon(Icons.chevron_right),
+      onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (_) => const DailyRoutineJournalPage(
+          childId: 'legacy-default-child'))))),
     _baslik('Yaşam merkezim ✨'),
     _panel(color: const Color(0xFFF3E6FF), child: ListTile(
       leading: const Icon(Icons.dashboard_customize, color: mor),
