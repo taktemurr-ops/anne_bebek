@@ -1,3 +1,4 @@
+import '../utils/dialog_helpers.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -87,7 +88,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
     final note = TextEditingController(text: original == null ? '' : (_details[original]?['note'] ?? ''));
     var category = original == null ? 'Diğer' : (_details[original]?['category'] ?? _guess(original));
     if (!_categories.contains(category)) category = 'Diğer';
-    final result = await showDialog<(String, String, String)?>(
+    final result = await showDialogAndDispose<(String, String, String)?>(disposables: [name, note],
       context: context,
       builder: (ctx) => StatefulBuilder(builder: (ctx, update) => AlertDialog(
         title: Text(original == null ? 'Ürün ekle' : 'Ürünü düzenle'),
@@ -110,7 +111,6 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         ],
       )),
     );
-    name.dispose(); note.dispose();
     if (result == null || !mounted) return;
     final (newName, newNote, newCategory) = result;
     setState(() {

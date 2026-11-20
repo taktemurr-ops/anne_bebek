@@ -1,3 +1,4 @@
+import '../utils/dialog_helpers.dart';
 import '../services/family_notification_repository.dart';
 import 'package:flutter/material.dart';
 import '../services/reminder_repository.dart';
@@ -58,7 +59,7 @@ class _RemindersPageState extends State<RemindersPage> {
     final controller = TextEditingController();
     DateTime selected = DateTime.now().add(const Duration(days: 1));
     bool notify = false;
-    final result = await showDialog<FamilyReminder>(context: context,
+    final result = await showDialogAndDispose<FamilyReminder>(disposables: [controller], context: context,
       builder: (dialogContext) => StatefulBuilder(
         builder: (dialogContext, update) => AlertDialog(
           title: const Text('Hatırlatıcı ekle'),
@@ -101,7 +102,6 @@ class _RemindersPageState extends State<RemindersPage> {
             }, child: const Text('Ekle')),
           ],
         )));
-    controller.dispose();
     if (result != null && mounted) {
       if (result.notify) {
         bool allowed = false;

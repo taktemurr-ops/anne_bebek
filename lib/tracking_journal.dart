@@ -1,3 +1,4 @@
+import 'utils/dialog_helpers.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'services/secure_health_store.dart';
@@ -45,7 +46,7 @@ class _TrackingJournalPageState extends State<TrackingJournalPage> {
     String type = _type;
     String side = 'Belirtilmedi';
     DateTime date = DateTime.now();
-    final result = await showDialog<Map<String, dynamic>>(
+    final result = await showDialogAndDispose<Map<String, dynamic>>(disposables: [quantity, note],
       context: context,
       builder: (ctx) => StatefulBuilder(builder: (ctx, update) => AlertDialog(
         title: Text(widget.pregnancy ? 'Gebelik kaydı ekle' : 'Beslenme kaydı ekle'),
@@ -87,7 +88,6 @@ class _TrackingJournalPageState extends State<TrackingJournalPage> {
           }, child: const Text('Kaydet'))],
       )),
     );
-    quantity.dispose(); note.dispose();
     if (result == null || !mounted) return;
     setState(() { _entries.insert(0, result); _entries.sort((a, b) =>
       (b['date'] as String).compareTo(a['date'] as String)); });

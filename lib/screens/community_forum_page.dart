@@ -1,3 +1,4 @@
+import '../utils/dialog_helpers.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,14 +42,13 @@ class _CommunityForumPageState extends State<CommunityForumPage> {
   }
   Future<String?> _ask(String title, {int maxLines = 1}) async {
     final controller = TextEditingController();
-    final result = await showDialog<String>(context: context, builder: (ctx) => AlertDialog(
+    final result = await showDialogAndDispose<String>(disposables: [controller], context: context, builder: (ctx) => AlertDialog(
       title: Text(title), content: TextField(controller: controller, autofocus: true,
         maxLines: maxLines, maxLength: maxLines == 1 ? 100 : 2000,
         decoration: const InputDecoration(hintText: 'Buraya yazın')),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () => Navigator.pop(ctx, controller.text.trim()), child: const Text('Devam'))],
     ));
-    controller.dispose();
     return result == null || result.isEmpty ? null : result;
   }
   Future<void> _newPost() async {

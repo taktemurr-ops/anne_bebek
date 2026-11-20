@@ -1,3 +1,4 @@
+import 'utils/dialog_helpers.dart';
 import 'dart:convert';
 import 'dart:math' as math;
 import 'tracking_journal.dart';
@@ -84,7 +85,7 @@ class _PregnancyPageState extends State<PregnancyPage> {
   Future<void> _addAppointment() async {
     final controller = TextEditingController();
     DateTime selected = DateTime.now();
-    final result = await showDialog<Map<String, String>>(context: context,
+    final result = await showDialogAndDispose<Map<String, String>>(disposables: [controller], context: context,
       builder: (ctx) => StatefulBuilder(builder: (ctx, refresh) => AlertDialog(
         title: const Text('Kontrol / randevu ekle'),
         content: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -106,7 +107,6 @@ class _PregnancyPageState extends State<PregnancyPage> {
           }, child: const Text('Kaydet')),
         ],
       )));
-    controller.dispose();
     if (result == null || !mounted) return;
     setState(() => appointments.add(result));
     try {

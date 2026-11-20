@@ -1,3 +1,4 @@
+import '../utils/dialog_helpers.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../services/secure_health_store.dart';
@@ -42,7 +43,7 @@ class _BabyHealthPageState extends State<BabyHealthPage> {
     DateTime date = DateTime.tryParse(existing?['date'] ?? '') ?? DateTime.now();
     bool completed = existing?['completed'] == 'true';
     final sectionName = existing?['section'] ?? _sections[_section];
-    final item = await showDialog<Map<String, String>>(context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, update) => AlertDialog(
+    final item = await showDialogAndDispose<Map<String, String>>(disposables: [title, notes], context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, update) => AlertDialog(
       title: Text(existing == null ? 'Yeni kayıt: $sectionName' : 'Kaydı düzenle: $sectionName'),
       content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: title, maxLength: 100, decoration: const InputDecoration(labelText: 'Başlık / aşı / belirti / gözlem')),
@@ -59,7 +60,6 @@ class _BabyHealthPageState extends State<BabyHealthPage> {
           Navigator.pop(ctx, {'section': sectionName, 'title': title.text.trim(), 'notes': notes.text.trim(), 'date': date.toIso8601String(), 'completed': completed.toString()});
         }, child: const Text('Kaydet'))],
     )));
-    title.dispose(); notes.dispose();
     if (item == null || !mounted) return;
     final previous = List<Map<String, String>>.from(_entries);
     setState(() {

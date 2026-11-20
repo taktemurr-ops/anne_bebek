@@ -1,3 +1,4 @@
+import '../utils/dialog_helpers.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -91,7 +92,7 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
     final search = TextEditingController();
     String category = 'Tümü';
     final categories = ['Tümü', ...{for (final r in generalRecipes) r.category}];
-    final chosen = await showModalBottomSheet<GeneralRecipe>(
+    final chosen = await showModalBottomSheetAndDispose<GeneralRecipe>(disposables: [search],
       context: context, isScrollControlled: true, showDragHandle: true,
       builder: (ctx) => StatefulBuilder(builder: (ctx, update) {
         final q = search.text.trim().toLowerCase();
@@ -120,7 +121,6 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
             })),
           ])));
       }));
-    search.dispose();
     if (chosen == null || !mounted) return;
     setState(() => _plan['$day|$meal'] = chosen.id);
     await _save();

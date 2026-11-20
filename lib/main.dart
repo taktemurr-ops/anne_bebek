@@ -1,3 +1,4 @@
+import 'utils/dialog_helpers.dart';
 import 'screens/notification_preferences_page.dart';
 import 'screens/family_recipe_notebook_page.dart';
 import 'screens/shopping_checklist_page.dart';
@@ -186,6 +187,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     final ad = TextEditingController(text: bebekAdi);
     DateTime? secilen = dogum;
     ModalRoute<dynamic>? profileRoute;
+    var kaydediliyor = false; // Çift dokunuşta ikinci kayıt/pop engellenir.
     await showDialog<void>(context: context, builder: (ctx) {
       profileRoute = ModalRoute.of(ctx);
       return StatefulBuilder(builder: (ctx, yenile) => AlertDialog(
@@ -200,14 +202,20 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       ]),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () async {
+          if (kaydediliyor) return;
+          kaydediliyor = true;
+          try {
           final oncekiAd = bebekAdi;
           final oncekiDogum = dogum;
           setState(() { bebekAdi = ad.text.trim(); dogum = secilen; });
           final basarili = await _kaydet();
           if (!basarili && mounted) setState(() { bebekAdi = oncekiAd; dogum = oncekiDogum; });
           if (!mounted || !ctx.mounted) return;
-          if (basarili) Navigator.of(ctx).pop();
+          if (basarili && (ModalRoute.of(ctx)?.isCurrent ?? false)) Navigator.of(ctx).pop();
           _kayitBildir(basarili, basariMesaji: 'Bebek profili kaydedildi.');
+                  } finally {
+            kaydediliyor = false;
+          }
         }, child: const Text('Kaydet'))],
     )); });
     await profileRoute?.completed;
@@ -217,6 +225,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   Future<void> _olayEkle(String tur) async {
     final not = TextEditingController();
     ModalRoute<dynamic>? recordRoute;
+    var kaydediliyor = false; // Çift dokunuşta ikinci kayıt/pop engellenir.
     await showDialog<void>(context: context, builder: (ctx) {
       recordRoute = ModalRoute.of(ctx);
       return AlertDialog(
@@ -224,13 +233,19 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       content: TextField(controller: not, autofocus: true, decoration: const InputDecoration(labelText: 'Açıklama / miktar (isteğe bağlı)'), maxLines: 2),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () async {
+          if (kaydediliyor) return;
+          kaydediliyor = true;
+          try {
           final yeniKayit = {'tur': tur, 'not': not.text.trim(), 'zaman': DateTime.now().toIso8601String()};
           setState(() => olaylar.insert(0, yeniKayit));
           final basarili = await _kaydet();
           if (!basarili && mounted) setState(() => olaylar.remove(yeniKayit));
           if (!mounted || !ctx.mounted) return;
-          if (basarili) Navigator.of(ctx).pop();
+          if (basarili && (ModalRoute.of(ctx)?.isCurrent ?? false)) Navigator.of(ctx).pop();
           _kayitBildir(basarili, basariMesaji: '$tur kaydı eklendi.');
+                  } finally {
+            kaydediliyor = false;
+          }
         }, child: const Text('Kaydet'))],
     ); });
     await recordRoute?.completed;
@@ -240,6 +255,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   Future<void> _olcumEkle() async {
     final boy = TextEditingController(); final kilo = TextEditingController(); final bas = TextEditingController();
     ModalRoute<dynamic>? measureRoute;
+    var kaydediliyor = false; // Çift dokunuşta ikinci kayıt/pop engellenir.
     await showDialog<void>(context: context, builder: (ctx) {
       measureRoute = ModalRoute.of(ctx);
       return AlertDialog(
@@ -251,6 +267,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       ]),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () async {
+          if (kaydediliyor) return;
+          kaydediliyor = true;
+          try {
           final b = double.tryParse(boy.text.replaceAll(',', '.'));
           final k = double.tryParse(kilo.text.replaceAll(',', '.'));
           final bc = double.tryParse(bas.text.replaceAll(',', '.'));
@@ -263,8 +282,11 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           final basarili = await _kaydet();
           if (!basarili && mounted) setState(() => olcumler.remove(yeniOlcum));
           if (!mounted || !ctx.mounted) return;
-          if (basarili) Navigator.of(ctx).pop();
+          if (basarili && (ModalRoute.of(ctx)?.isCurrent ?? false)) Navigator.of(ctx).pop();
           _kayitBildir(basarili, basariMesaji: 'Büyüme ölçümü kaydedildi.');
+                  } finally {
+            kaydediliyor = false;
+          }
         }, child: const Text('Kaydet'))],
     ); });
     await measureRoute?.completed;
@@ -294,7 +316,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
 
   Future<void> _urunEkle() async {
     final urun = TextEditingController();
-    await showDialog<void>(context: context, builder: (ctx) => AlertDialog(
+    await showDialogAndDispose<void>(disposables: [urun], context: context, builder: (ctx) => AlertDialog(
       title: const Text('Alışveriş listesine ekle'),
       content: TextField(controller: urun, autofocus: true, decoration: const InputDecoration(labelText: 'Ürün adı')),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
@@ -305,11 +327,10 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           final basarili = await _kaydet();
           if (!basarili && mounted) setState(() => alisveris.removeLast());
           if (!mounted || !ctx.mounted) return;
-          if (basarili) Navigator.of(ctx).pop();
+          if (basarili && (ModalRoute.of(ctx)?.isCurrent ?? false)) Navigator.of(ctx).pop();
           _kayitBildir(basarili, basariMesaji: 'Ürün listeye eklendi.');
         }, child: const Text('Ekle'))],
     ));
-    urun.dispose();
   }
 
   Widget _kart(String baslik, String alt, IconData ikon, Color renk, VoidCallback tikla) => Card(

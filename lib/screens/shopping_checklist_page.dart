@@ -1,3 +1,4 @@
+import '../utils/dialog_helpers.dart';
 import 'package:flutter/material.dart';
 import '../services/shopping_list.dart';
 import '../services/shopping_list_repository.dart';
@@ -49,7 +50,7 @@ class _ShoppingChecklistPageState extends State<ShoppingChecklistPage> {
 
   Future<void> _add() async {
     final controller = TextEditingController();
-    final title = await showDialog<String>(context: context,
+    final title = await showDialogAndDispose<String>(disposables: [controller], context: context,
       builder: (dialogContext) => AlertDialog(
         title: const Text('Ürün ekle'),
         content: TextField(
@@ -64,7 +65,6 @@ class _ShoppingChecklistPageState extends State<ShoppingChecklistPage> {
             child: const Text('Ekle')),
         ],
       ));
-    controller.dispose();
     if (!mounted || title == null || title.isEmpty) return;
     final id = DateTime.now().microsecondsSinceEpoch.toString();
     await _persist([..._items, ShoppingListItem(id: id, title: title)]);

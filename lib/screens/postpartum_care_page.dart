@@ -1,3 +1,4 @@
+import '../utils/dialog_helpers.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../services/secure_health_store.dart';
@@ -90,14 +91,13 @@ class _PostpartumCarePageState extends State<PostpartumCarePage> {
 
   Future<void> _addNote() async {
     final controller = TextEditingController();
-    final value = await showDialog<String>(context: context, builder: (ctx) => AlertDialog(
+    final value = await showDialogAndDispose<String>(disposables: [controller], context: context, builder: (ctx) => AlertDialog(
       title: const Text('Yeni kişisel not'),
       content: TextField(controller: controller, maxLength: 500, maxLines: 4,
         decoration: const InputDecoration(hintText: 'Belirti, kontrol sorusu veya günlük gözlem')),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('İptal')),
         FilledButton(onPressed: () => Navigator.pop(ctx, controller.text.trim()), child: const Text('Kaydet'))],
     ));
-    controller.dispose();
     if (value == null || value.isEmpty || !mounted) return;
     setState(() => notes.insert(0, {'date': DateTime.now().toIso8601String(), 'text': value}));
     await _persist();
