@@ -1,3 +1,4 @@
+import '../widgets/coming_soon.dart';
 import 'package:flutter/material.dart';
 import '../services/subscription_service.dart';
 
@@ -21,7 +22,12 @@ class _MembershipPageState extends State<MembershipPage> {
   void _refresh() => setState(() { _status = SubscriptionService.fetchStatus(); });
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    if (!SubscriptionService.configured) {
+      return const ComingSoonView(title: 'Premium Üyelik', icon: Icons.workspace_premium_outlined,
+        description: 'Reklamsız kullanım, aile paylaşımı ve ek içerikler sunan premium üyelik.');
+    }
+    return Scaffold(
     appBar: AppBar(title: const Text('Üyelik ve Premium')),
     body: ListView(padding: const EdgeInsets.all(18), children: [
       Container(
@@ -93,6 +99,7 @@ class _MembershipPageState extends State<MembershipPage> {
       )),
     ]),
   );
+  }
 
   Widget _plan(String title, String price, IconData icon, List<String> benefits, {bool featured = false}) =>
     Card(

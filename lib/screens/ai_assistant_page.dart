@@ -1,3 +1,4 @@
+import '../widgets/coming_soon.dart';
 import '../utils/ai_request_guard.dart';
 import 'package:flutter/material.dart';
 import '../services/ai_assistant_service.dart';
@@ -41,7 +42,12 @@ class _AiAssistantPageState extends State<AiAssistantPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    if (!AiAssistantService.configured) {
+      return const ComingSoonView(title: 'AI Bilgi Asistanı', icon: Icons.auto_awesome_outlined,
+        description: 'Bebek bakımı ve anne sağlığıyla ilgili sorularına yapay zekâ destekli, güvenli yanıtlar.');
+    }
+    return Scaffold(
     appBar: AppBar(title: const Text('AI Bilgi Asistanı')),
     body: ListView(padding: const EdgeInsets.all(16), children: [
       const Card(color: Color(0xFFFFE6F3), child: Padding(padding: EdgeInsets.all(16), child: Text(
@@ -67,4 +73,5 @@ class _AiAssistantPageState extends State<AiAssistantPage> {
         style: const TextStyle(color: Colors.black54)),
     ]),
   );
+  }
 }

@@ -51,6 +51,7 @@ import 'services/cycle_estimate.dart';
 import 'screens/monthly_baby_guide_page.dart';
 import 'screens/baby_activity_catalog_page.dart';
 import 'screens/baby_nutrition_page.dart';
+import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -1502,7 +1503,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           onOpen: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const BackupPage()))),
         QuickAccessItem(title: 'Aile hatırlatıcıları', description: 'Tarihli kontrol ve aile notları', icon: Icons.event_note_outlined,
           onOpen: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const RemindersPage()))),
-        QuickAccessItem(title: 'Yayın öncesi kontrol', description: 'Android test ve yayın kontrol listesi', icon: Icons.fact_check_outlined,
+        if (!kReleaseMode) QuickAccessItem(title: 'Yayın öncesi kontrol', description: 'Android test ve yayın kontrol listesi', icon: Icons.fact_check_outlined,
           onOpen: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const ReleaseCheckPage()))),
         QuickAccessItem(title: 'Rehber', description: 'A’dan Z’ye bilgi rehberi', icon: Icons.menu_book_outlined,
           onOpen: () => _sayfa('A’dan Z’ye Rehber', _rehber())),
@@ -1571,11 +1572,15 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       title: const Text('Akıllı içerik keşfi'), subtitle: const Text('Çevrimdışı konu arama ve öneriler'),
       trailing: const Icon(Icons.chevron_right),
       onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const SmartDiscoveryPage())))),
+    // Yönetici araçları yalnızca geliştirme sürümlerinde görünür.
+    if (!kReleaseMode)
     _panel(child: ListTile(leading: const Icon(Icons.admin_panel_settings, color: mor),
       title: const Text('Merkezi yönetim paneli'),
       subtitle: const Text('Sunucu yetkisi gerektirir; forum ve toplu istatistikler'),
       trailing: const Icon(Icons.chevron_right),
       onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const AdminDashboardPage())))),
+    // Yönetici araçları yalnızca geliştirme sürümlerinde görünür.
+    if (!kReleaseMode)
     _panel(child: ListTile(leading: const Icon(Icons.admin_panel_settings_outlined, color: mor),
       title: const Text('Yerel yönetim özeti (ön izleme)'),
       subtitle: const Text('Bu cihazdaki kayıt sayıları; gerçek yönetici paneli değildir'),

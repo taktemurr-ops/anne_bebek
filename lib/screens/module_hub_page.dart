@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -40,8 +41,9 @@ class _ModuleHubPageState extends State<ModuleHubPage> {
     ('Araçlar', 'Hatırlatıcılar', Icons.notifications_outlined, const RemindersPage()),
     ('Araçlar', 'Yedekleme', Icons.backup_outlined, const BackupPage()),
     ('Araçlar', 'AI asistan', Icons.auto_awesome_outlined, const AiAssistantPage()),
-    ('Yayın', 'Yayın kontrolleri', Icons.fact_check_outlined, const ReleaseCheckPage()),
-    ('Yayın', 'Proje tamamlama', Icons.task_alt_outlined, const ProjectCompletionCenterPage()),
+    // Geliştirici araçları yalnızca geliştirme sürümlerinde.
+    if (!kReleaseMode) ('Yayın', 'Yayın kontrolleri', Icons.fact_check_outlined, const ReleaseCheckPage()),
+    if (!kReleaseMode) ('Yayın', 'Proje tamamlama', Icons.task_alt_outlined, const ProjectCompletionCenterPage()),
   ];
   @override
   void initState() { super.initState(); _loadFavorites(); }

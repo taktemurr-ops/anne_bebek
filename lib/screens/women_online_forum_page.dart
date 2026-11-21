@@ -1,3 +1,5 @@
+import '../widgets/coming_soon.dart';
+import '../services/cloud_auth_service.dart';
 import '../utils/dialog_helpers.dart';
 import 'forum_safety_page.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +78,10 @@ class _WomenOnlineForumPageState extends State<WomenOnlineForumPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (!CloudAuthService.configured) {
+      return const ComingSoonView(title: 'Kadınlar Forumu', icon: Icons.forum_outlined,
+        description: 'Kadın sağlığı, gebelik ve annelik üzerine moderasyonlu topluluk.');
+    }
     final query = search.text.toLowerCase().trim();
     final visible = posts.where((p) => (category == 'Tümü' || p['category'] == category) &&
       ('${p['title']} ${p['body']}').toLowerCase().contains(query)).toList();
