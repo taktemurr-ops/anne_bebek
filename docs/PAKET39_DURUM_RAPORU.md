@@ -15,7 +15,7 @@ Gerçek cihaz testi yapılmamıştır.
 | Tasarım (§1) — referans 8 ekran | Alt menü (Ana Sayfa • Bebeğim • + • Tarifler • Profil). Bebeğim: çocuk kartı + Gelişim/Sağlık/Aşılar/Notlar, büyüme grafiği, Günlük Bakım. Günlük Takip: tarih gezinme, + ile kayıt, günün özeti. Tarifler: arama, pembe kategori çipleri, kart ızgarası (süre, zorluk, favori). Kadınlar: Döngü Takibi/Sağlık/İyi Hisset, adet–yumurtlama–verimli dönem takvimi. Gebelik: hafta kartı, 40 hafta ilerleme. Alışveriş: Bebek/Anne/Aile, alt kategori kutuları, adet seçicili liste, liste toplamı. Önceki tüm bağlantılar ilgili sekmede korundu | `lib/widgets/reference_widgets.dart`, `lib/main.dart`, `lib/extra_features.dart` |
 | Modül ayrımı (§2) | Alışveriş ve Kadınlar ana sayfa kartlarından açılır; geri tuşu ana sayfaya döner; genel ve bebek tarifleri ayrı | `lib/main.dart` |
 | Genel tarifler (§3) | 18 kategori; 54 isim kopyası, 96 yakın kopya, 55 tek malzeme varyantı çıkarıldı; kişi sayısı, süreler, zorluk, fırın, püf, servis, saklama, alerjen; 51 tarif baştan yazıldı | `lib/data/general_recipe_catalog.dart`, `recipe_meta.dart` |
-| Bebek tarifleri (§4) | 6–8, 9–11, 12–18, 18–24, 24–36, 36–72 ay grupları. 300 kalıp varyasyon yerine 30 ayrıntılı tarif (sebze seçenekleriyle, 137 kombinasyon) + 30 yeni tarif (18–72 ay) + 7 özgün tarif = 67 tarif | `lib/data/baby_recipe_catalog.dart` |
+| Bebek tarifleri (§4) | 6–8, 9–11, 12–18, 18–24, 24–36, 36–72 ay grupları. 304 ayrıntılı tarif (6–8: 47, 9–11: 49, 12–18: 54, 18–24: 45, 24–36: 54, 36–72: 55); her tarifte ölçülü malzeme, en az 4 adım, ipucu ve saklama bilgisi. 12 ay altı tariflerde tuz, şeker ve bal yok | `lib/data/baby_recipe_catalog.dart` |
 | Döngü takvimi | Ortalama döngü kayıtlardan; yaz saati güvenli tarih hesabı; sınır testleri | `lib/services/cycle_estimate.dart` |
 | Yedek kapsamı | Yeni alışveriş adetleri yedekte, bozuk veri reddediliyor | `lib/services/backup_service.dart` |
 | Profil doğrulama (GP-02) | Ana ekran bebek profili formu doğrulayıcıdan geçiyor | `lib/main.dart` |
@@ -25,7 +25,7 @@ Gerçek cihaz testi yapılmamıştır.
 
 - **Genel tarif sayısı:** 829 özgün tarif. 1.000 hedefi için yaklaşık 170 yeni özgün tarif gerekiyor.
 - **Kalıp adımlı tarifler:** 167 tarif hâlâ genel adımlarla duruyor; uygulama bunları "ayrıntılı anlatım hazırlanıyor" notuyla gösteriyor.
-- **Bebek tarifleri (§4):** 67 özgün tarif; 300+ hedefi için yaklaşık 230 yeni özgün tarif gerekiyor. Uzman/diyetisyen incelemesi yapılmadı.
+- **Bebek tarifleri (§4):** 304 tarif ile 300+ hedefi tamamlandı. Uzman/diyetisyen incelemesi yapılmadı; yayından önce önerilir.
 - **Tarif ve bebek görselleri:** Lisanslı fotoğraf dosyaları gerekiyor; şu an simge kullanılıyor.
 - **Görseller:** Referanstaki fotoğraf/illüstrasyonlar (bebek, anne, yemek fotoğrafları) lisanslı görsel gerektirir; şu an simge ve renk geçişi kullanılıyor.
 - **Alışveriş (§7):** ürün detay, karşılaştırma ve kategori yapısı; gerçek fiyat/mağaza verisi için veri kaynağı gerekiyor.

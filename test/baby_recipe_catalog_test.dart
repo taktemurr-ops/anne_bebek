@@ -3,7 +3,7 @@ import 'package:anne_bebek/data/baby_recipe_catalog.dart';
 
 void main() {
   test('Bebek tarifleri benzersiz ve eksiksizdir', () {
-    expect(babyRecipes.length, greaterThanOrEqualTo(60));
+    expect(babyRecipes.length, greaterThanOrEqualTo(300));
     expect(babyRecipes.map((r) => r.id).toSet().length, babyRecipes.length);
     expect(babyRecipes.map((r) => r.title.toLowerCase()).toSet().length, babyRecipes.length,
         reason: 'Aynı isimli tarif tekrar etmemeli');
@@ -15,7 +15,7 @@ void main() {
 
   test('Paket 39: tüm yaş grupları (6–72 ay) doludur', () {
     for (final group in babyAgeGroups) {
-      expect(babyRecipes.where((r) => r.ageGroup == group).length, greaterThanOrEqualTo(5),
+      expect(babyRecipes.where((r) => r.ageGroup == group).length, greaterThanOrEqualTo(40),
           reason: group);
     }
   });
