@@ -1,6 +1,9 @@
 // Gerçek Android emülatöründe kabul testleri (docs/CIHAZ_TEST_LISTESI.md).
 // Çalıştırma: flutter test integration_test/device_acceptance_test.dart -d <cihaz>
 // Gerçek şifreli depo (Android Keystore) ve gerçek platform kanalları kullanılır.
+import 'package:anne_bebek/screens/sleep_sounds_page.dart';
+import 'package:anne_bebek/services/loop_player.dart';
+import 'package:anne_bebek/services/sound_synth.dart';
 import 'package:anne_bebek/main.dart';
 import 'package:anne_bebek/screens/ai_assistant_page.dart';
 import 'package:anne_bebek/services/backup_service.dart';
@@ -169,5 +172,22 @@ void main() {
     await BackupService.restore(backup);
     expect(await SecureHealthStore.read('cycle_history_v1'), before);
     expect((await FamilyRecipeRepository.load()).length, recipes);
+  });
+  testWidgets('9) Uyku sesi gerçek ses oynatıcıyla çalar ve durur', (tester) async {
+    final player = AudioLoopPlayer();
+    final wav = synthesizeWav('womb', seconds: 2);
+    await player.playLoop('womb', wav, 0.2);
+    await Future<void>.delayed(const Duration(seconds: 2));
+    await player.stop();
+    await player.dispose();
+
+    await tester.pumpWidget(const MaterialApp(home: Scaffold(body: SleepSoundsPage())));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('uyku_rain')));
+    await pumpUntil(tester, () => find.textContaining('sonra kapanacak').evaluate().isNotEmpty);
+    expect(find.textContaining('Ses çalınamadı'), findsNothing);
+    await tester.tap(find.byKey(const Key('uyku_durdur')));
+    await tester.pumpAndSettle();
+    expect(find.text('Uyku sesleri 🌙'), findsOneWidget);
   });
 }
