@@ -1,0 +1,363 @@
+[
+{
+"id": "p39a16_061",
+"title": "Mantarlı tavuk sote",
+"category": "Tavuk yemekleri",
+"servings": 3,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ingredients": [
+"400 g tavuk göğsü (kuşbaşı doğranmış)",
+"250 g kültür mantarı (dilimlenmiş)",
+"1 kuru soğan (piyaz)",
+"1 yeşil biber (halka)",
+"1 domates (küp)",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı biber salçası",
+"Yarım çay bardağı sıcak su",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"1 çay kaşığı kekik"
+],
+"steps": [
+"Geniş bir tavada 1 yemek kaşığı zeytinyağını yüksek ateşte ısıtın; tavukları ekleyip suyunu salıp tekrar çekene ve hafif kızarana kadar 6–7 dakika soteleyin, tabağa alın.",
+"Aynı tavaya kalan yağı ekleyip mantarları yüksek ateşte 5 dakika, suyunu çekip kızarana kadar pişirin.",
+"Soğan ve biberi ekleyip 3 dakika daha soteleyin.",
+"Salçayı ekleyip 1 dakika kavurun, domatesi ve sıcak suyu ilave edin.",
+"Tavukları tavaya geri alın; tuz, karabiber ve kekikle tatlandırıp kısık ateşte 5 dakika pişirin.",
+"Tavuğun içinin pembe kalmadığından emin olup sıcak servis edin."
+],
+"tips": [
+"Tavuğu ve mantarı ayrı pişirmek ikisinin de kızarmasını sağlar; birlikte koyarsanız haşlanırlar."
+],
+"serving": "Pirinç pilavı veya bulgur pilavı ile servis edin.",
+"storage": "Buzdolabında kapalı kapta 2 gün saklanır."
+},
+{
+"id": "p39a16_066",
+"title": "Brokolili kremalı tavuk",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ingredients": [
+"450 g tavuk göğsü (şerit)",
+"300 g brokoli (küçük çiçekler)",
+"1 küçük soğan",
+"2 diş sarımsak",
+"1 yemek kaşığı tereyağı",
+"1 yemek kaşığı zeytinyağı",
+"1 yemek kaşığı un",
+"1,5 su bardağı süt",
+"2 yemek kaşığı rendelenmiş kaşar",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Brokoliyi kaynar tuzlu suda 3 dakika haşlayıp soğuk suya alın ve süzün.",
+"Tavada zeytinyağıyla tavukları yüksek ateşte 6 dakika soteleyin, tabağa alın.",
+"Aynı tavada tereyağını eritin; soğan ve sarımsağı 3 dakika kavurun.",
+"Unu ekleyip 1 dakika kavurun, sütü çırparak azar azar ilave edin ve koyulaşana kadar 3 dakika karıştırın.",
+"Tavuk ve brokoliyi sosa ekleyin; tuz ve karabiberle tatlandırıp 3 dakika pişirin.",
+"Kaşarı ekleyip eriyince ocaktan alın ve servis edin."
+],
+"tips": [
+"Brokoliyi önceden kısa haşlamak rengini canlı tutar."
+],
+"serving": "Makarna veya pirinç pilavı ile sıcak servis edin.",
+"storage": "Buzdolabında 2 gün saklanır; ısıtırken biraz süt ekleyin."
+},
+{
+"id": "p39a16_069",
+"title": "Domatesli fesleğenli tavuk",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ingredients": [
+"4 parça kemiksiz tavuk but (yaklaşık 500 g)",
+"4 olgun domates (rendelenmiş) veya 400 g konserve domates",
+"2 diş sarımsak",
+"1 küçük soğan",
+"2 yemek kaşığı zeytinyağı",
+"1 avuç taze fesleğen (veya 1 çay kaşığı kuru)",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"1 tutam şeker"
+],
+"steps": [
+"Tavuk butlarını tuz ve karabiberle ovun.",
+"Geniş tavada zeytinyağını ısıtıp butları her iki yüzü altın rengi olana kadar toplam 8 dakika pişirin, tabağa alın.",
+"Aynı tavada soğan ve sarımsağı 3 dakika kavurun.",
+"Domatesi, şekeri ve fesleğenin yarısını ekleyip 5 dakika pişirin.",
+"Tavukları sosa yerleştirin, kapağı kapalı kısık ateşte 12 dakika, tavuğun iç sıcaklığı 74 °C olana kadar pişirin.",
+"Kalan taze fesleğeni üzerine serpip servis edin."
+],
+"tips": [
+"But göğse göre daha sulu kalır; göğüs kullanırsanız süreyi 3–4 dakika kısaltın."
+],
+"serving": "Makarna, patates püresi veya bulgur ile servis edin.",
+"storage": "Buzdolabında 2 gün saklanır."
+},
+{
+"id": "p39a16_071",
+"title": "Zencefilli havuçlu tavuk",
+"category": "Tavuk yemekleri",
+"servings": 3,
+"prepMinutes": 15,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ingredients": [
+"400 g tavuk göğsü (ince şerit)",
+"2 havuç (jülyen)",
+"1 kırmızı kapya biber (şerit)",
+"3 dal taze soğan",
+"1 tatlı kaşığı rendelenmiş taze zencefil",
+"2 diş sarımsak",
+"2 yemek kaşığı soya sosu",
+"1 tatlı kaşığı bal",
+"1 tatlı kaşığı nişasta",
+"2 yemek kaşığı ayçiçek yağı",
+"1 yemek kaşığı susam"
+],
+"steps": [
+"Soya sosu, bal, nişasta ve 3 yemek kaşığı suyu bir kâsede çırparak sosu hazırlayın.",
+"Geniş tava veya wokta yağı çok yüksek ateşte ısıtın; tavukları 5 dakika sürekli çevirerek pişirin, tabağa alın.",
+"Aynı tavada havuç ve biberi 3 dakika diri kalacak şekilde soteleyin.",
+"Zencefil, sarımsak ve taze soğanın beyaz kısımlarını ekleyip 1 dakika çevirin.",
+"Tavukları geri ekleyin, sosu döküp 1–2 dakika parlak ve koyu kıvama gelene kadar karıştırın.",
+"Taze soğanın yeşil kısımları ve susamla servis edin."
+],
+"tips": [
+"Wok yemeklerinde tüm malzemeleri önceden hazırlayın; pişirme çok hızlıdır."
+],
+"serving": "Sade pirinç pilavı ile servis edin.",
+"storage": "Buzdolabında 2 gün saklanır."
+},
+{
+"id": "p39a16_067",
+"title": "Limonlu pırasalı tavuk",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ingredients": [
+"450 g tavuk göğsü (kuşbaşı)",
+"2 pırasa (halka)",
+"1 havuç (halka)",
+"2 yemek kaşığı zeytinyağı",
+"1 su bardağı sıcak su",
+"1 limonun suyu",
+"1 tatlı kaşığı un",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"Yarım demet dereotu"
+],
+"steps": [
+"Pırasaları yıkayıp toprağını iyice temizleyin.",
+"Tencerede zeytinyağıyla tavukları 6 dakika soteleyin.",
+"Pırasa ve havucu ekleyip 5 dakika çevirin.",
+"Sıcak suyu, tuz ve karabiberi ekleyin; kapağı kapalı kısık ateşte 12 dakika pişirin.",
+"Limon suyunu unla pürüzsüz olana kadar çırpıp yemeğe ekleyin ve 2 dakika kaynatarak sosu bağlayın.",
+"Kıyılmış dereotunu serpip servis edin."
+],
+"tips": [
+"Limonlu un karışımı sosu hafifçe koyulaştırır ve terbiye etkisi verir."
+],
+"serving": "Pirinç pilavı ve yoğurtla servis edin.",
+"storage": "Buzdolabında 2 gün saklanır."
+},
+{
+"id": "p39a18_062",
+"title": "Patlıcanlı tavuk tepsi",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": 200,
+"ingredients": [
+"2 patlıcan (iri küp)",
+"500 g kemiksiz tavuk but (iri küp)",
+"2 patates (küp)",
+"1 soğan (iri doğranmış)",
+"2 yeşil biber",
+"2 domates (küp)",
+"3 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı domates salçası",
+"Yarım su bardağı sıcak su",
+"1 tatlı kaşığı tatlı toz biber",
+"1 çay kaşığı kekik",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Patlıcanları alacalı soyup küp doğrayın, tuzlu suda 15 dakika bekletip süzün ve kurulayın.",
+"Fırını 200 °C'ye ısıtın.",
+"Tavuk, patlıcan, patates, soğan ve biberi büyük bir kapta zeytinyağı, toz biber, kekik ve tuzla harmanlayın.",
+"Karışımı fırın tepsisine tek kat yayın; domatesleri aralara dağıtın.",
+"Salçayı sıcak suda eritip tepsiye gezdirin, folyoyla kapatıp 25 dakika pişirin.",
+"Folyoyu kaldırıp 15 dakika daha, üzeri kızarana ve patatesler yumuşayana kadar pişirin."
+],
+"tips": [
+"Patlıcanı tuzlu suda bekletmek acılığını alır ve daha az yağ çekmesini sağlar."
+],
+"serving": "Cacık veya yoğurt ile sıcak servis edin.",
+"storage": "Buzdolabında 2 gün saklanır."
+},
+{
+"id": "p39a18_063",
+"title": "Karnabaharlı baharatlı tavuk tepsi",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 35,
+"difficulty": "Kolay",
+"ovenCelsius": 210,
+"ingredients": [
+"1 küçük karnabahar (çiçeklerine ayrılmış)",
+"500 g kemiksiz tavuk but",
+"1 kırmızı soğan (dilim)",
+"3 yemek kaşığı zeytinyağı",
+"3 yemek kaşığı yoğurt",
+"1 tatlı kaşığı tatlı toz biber",
+"1 çay kaşığı kimyon",
+"Yarım çay kaşığı zerdeçal",
+"1 diş sarımsak (rendelenmiş)",
+"1 çay kaşığı tuz",
+"Yarım limon"
+],
+"steps": [
+"Yoğurt, 1 yemek kaşığı zeytinyağı, toz biber, kimyon, zerdeçal, sarımsak ve yarım çay kaşığı tuzu karıştırıp tavukları bu karışımla 20 dakika marine edin.",
+"Fırını 210 °C'ye ısıtın.",
+"Karnabahar ve soğanı kalan zeytinyağı ve tuzla harmanlayıp tepsiye yayın.",
+"Tavukları karnabaharların arasına yerleştirin.",
+"Fırında 30–35 dakika, karnabaharların kenarları kızarana ve tavuk tamamen pişene kadar pişirin.",
+"Üzerine limon sıkıp servis edin."
+],
+"tips": [
+"Yoğurtlu marinasyon tavuğu yumuşatır; buzdolabında 4 saate kadar bekletebilirsiniz."
+],
+"serving": "Bulgur pilavı veya lavaş ile servis edin.",
+"storage": "Buzdolabında 2 gün saklanır."
+},
+{
+"id": "p39a18_141",
+"title": "Kabaklı patatesli tepsi köftesi",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 25,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": 200,
+"ingredients": [
+"500 g dana kıyma",
+"2 kabak (kalın halka)",
+"2 orta boy patates (halka)",
+"1 küçük soğan (rendelenmiş)",
+"3 yemek kaşığı galeta unu",
+"1 yumurta",
+"2 domates",
+"2 yeşil biber",
+"1 yemek kaşığı domates salçası",
+"1 su bardağı sıcak su",
+"2 yemek kaşığı zeytinyağı",
+"1,5 çay kaşığı tuz",
+"1 çay kaşığı kimyon",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Kıyma, rendelenmiş soğan, galeta unu, yumurta, 1 çay kaşığı tuz, kimyon ve karabiberi 3 dakika yoğurun; 20 dakika buzdolabında dinlendirin.",
+"Fırını 200 °C'ye ısıtın; patates halkalarını zeytinyağı ve kalan tuzla harmanlayın.",
+"Harçtan ceviz büyüklüğünde parçalar alıp yassı köfteler yapın.",
+"Tepsiye köfte, patates ve kabak halkalarını sırayla dik olarak dizin; aralara domates dilimleri ve biber yerleştirin.",
+"Salçayı sıcak suda eritip tepsiye gezdirin; folyoyla kapatıp 25 dakika pişirin.",
+"Folyoyu kaldırıp 15 dakika daha, köfteler kızarana kadar pişirin."
+],
+"tips": [
+"Patatesler kabaktan geç piştiği için ince, kabakları kalın doğrayın."
+],
+"serving": "Pirinç pilavı ve yoğurtla sıcak servis edin.",
+"storage": "Buzdolabında 3 gün saklanır."
+},
+{
+"id": "p39a18_142",
+"title": "Patlıcanlı tepsi köftesi",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 30,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": 200,
+"ingredients": [
+"500 g dana kıyma",
+"3 patlıcan (kalın halka)",
+"1 küçük soğan (rendelenmiş)",
+"1 dilim bayat ekmek içi",
+"1 yumurta",
+"3 domates",
+"4 sivri biber",
+"1 yemek kaşığı biber salçası",
+"1 su bardağı sıcak su",
+"3 yemek kaşığı zeytinyağı",
+"1,5 çay kaşığı tuz",
+"1 çay kaşığı kimyon",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Patlıcanları alacalı soyup 2 cm halka doğrayın; tuzlu suda 15 dakika bekletip kurulayın, 2 yemek kaşığı zeytinyağıyla harmanlayıp 200 °C fırında 15 dakika ön pişirin.",
+"Kıyma, soğan, ıslatıp sıktığınız ekmek içi, yumurta, tuz, kimyon ve karabiberi yoğurun.",
+"Harçtan patlıcan büyüklüğünde yassı köfteler yapın.",
+"Tepsiye bir patlıcan bir köfte olacak şekilde dik dizin; aralara domates dilimleri ve biber yerleştirin.",
+"Salçayı sıcak suda eritip kalan zeytinyağıyla tepsiye gezdirin; 200 °C fırında 25 dakika pişirin.",
+"Üzeri kızarınca 5 dakika dinlendirip servis edin."
+],
+"tips": [
+"Patlıcanı önceden fırınlamak kızartmaya göre daha hafif bir sonuç verir."
+],
+"serving": "Pirinç pilavı ile sıcak servis edin.",
+"storage": "Buzdolabında 3 gün saklanır."
+},
+{
+"id": "p39a19_081",
+"title": "Mantarlı arpacık soğanlı dana güveç",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 100,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"500 g kuşbaşı dana eti",
+"250 g kültür mantarı (ikiye bölünmüş)",
+"12 arpacık soğan (soyulmuş)",
+"2 havuç (iri halka)",
+"2 domates (rendelenmiş)",
+"1 yemek kaşığı domates salçası",
+"2 diş sarımsak",
+"2 yemek kaşığı zeytinyağı",
+"2 su bardağı sıcak su",
+"2 defne yaprağı",
+"1 çay kaşığı kekik",
+"1,5 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Eti kâğıt havluyla kurulayın; tencerede zeytinyağını yüksek ateşte ısıtıp eti iki partide her yüzü kızarana kadar mühürleyin.",
+"Arpacık soğanları ve sarımsağı ekleyip 3 dakika çevirin; salçayı ekleyip 1 dakika kavurun.",
+"Rendelenmiş domates, sıcak su ve defne yaprağını ekleyin; kapağı kapalı kısık ateşte 50 dakika pişirin.",
+"Fırını 180 °C'ye ısıtın; eti ve suyunu güveç kabına aktarın.",
+"Mantar ve havucu ekleyin; tuz, karabiber ve kekikle tatlandırıp kabı kapatarak fırında 40–45 dakika, et lokum gibi olana kadar pişirin.",
+"Defne yapraklarını çıkarıp 10 dakika dinlendirerek servis edin."
+],
+"tips": [
+"Eti tencerede kalabalık etmeyin; aksi hâlde mühürlenmez, suyunu salıp haşlanır.",
+"Tuzu pişirmenin ortasında ekleyin ki et sertleşmesin."
+],
+"serving": "Pirinç pilavı veya fırın patates ile sıcak servis edin.",
+"storage": "Buzdolabında 3 gün, dondurucuda 3 ay saklanır."
+}
+]

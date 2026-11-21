@@ -1,0 +1,412 @@
+[
+{
+"id": "p39a16_001",
+"title": "Kabaklı beyaz fasulye çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ingredients": [
+"2 orta boy kabak (küp doğranmış)",
+"1 su bardağı haşlanmış beyaz fasulye",
+"1 küçük kuru soğan (ince doğranmış)",
+"1 diş sarımsak",
+"1 yemek kaşığı zeytinyağı",
+"1 yemek kaşığı tereyağı",
+"4 su bardağı sıcak su veya sebze suyu",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"1 çay kaşığı kuru nane"
+],
+"steps": [
+"Tencerede zeytinyağını ısıtıp soğanı orta ateşte 4 dakika pembeleşene kadar kavurun, sarımsağı ekleyip 30 saniye çevirin.",
+"Kabak küplerini ekleyin ve 5 dakika ara ara karıştırarak soteleyin.",
+"Beyaz fasulyenin üçte ikisini ve sıcak suyu ekleyin; kaynayınca kısık ateşte kapağı kapalı 15 dakika, kabaklar iyice yumuşayana kadar pişirin.",
+"Tencereyi ocaktan alıp 5 dakika ılıtın, el blenderıyla pürüzsüz hâle getirin.",
+"Kalan bütün fasulyeleri ekleyin, tuz ve karabiberle tatlandırıp 3 dakika daha kaynatın; kıvam koyuysa biraz sıcak su ekleyin.",
+"Küçük tavada tereyağını eritip naneyi 10 saniye çevirin ve servis sırasında çorbanın üzerine gezdirin."
+],
+"tips": [
+"Fasulyenin bir kısmını bütün bırakmak çorbaya doku kazandırır.",
+"Konserve fasulye kullanıyorsanız iyice yıkayıp süzün; tuzu azaltın."
+],
+"serving": "Limon dilimi ve kızarmış ekmekle sıcak servis edin.",
+"storage": "Buzdolabında kapalı kapta 3 gün saklanır."
+},
+{
+"id": "p39a16_002",
+"title": "Kerevizli havuç çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ingredients": [
+"1 orta boy kereviz kökü (yaklaşık 400 g, soyulup küp doğranmış)",
+"2 havuç (halka)",
+"1 küçük kuru soğan",
+"1 küçük patates",
+"1 yemek kaşığı zeytinyağı",
+"4 su bardağı sıcak su",
+"Yarım su bardağı süt",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"1 tutam muskat (isteğe bağlı)"
+],
+"steps": [
+"Kerevizi soyduktan sonra kararmaması için limonlu suda bekletin.",
+"Tencerede zeytinyağıyla doğranmış soğanı 3 dakika kavurun.",
+"Kereviz, havuç ve patatesi ekleyip 4 dakika çevirin.",
+"Sıcak suyu ilave edin; kaynayınca kısık ateşte kapağı kapalı 20 dakika, sebzeler çatalla kolayca ezilene kadar pişirin.",
+"Ocaktan alıp hafifçe ılıtın ve blenderdan geçirin.",
+"Sütü, tuzu, karabiberi ve muskatı ekleyip kaynamaya başlayana kadar ısıtın ve servis edin."
+],
+"tips": [
+"Patates çorbaya krema eklemeden kadifemsi kıvam verir.",
+"Süt ekledikten sonra çorbayı kaynatmayın, kesilebilir."
+],
+"serving": "Üzerine birkaç damla zeytinyağı ve kıyılmış maydanozla servis edin.",
+"storage": "Buzdolabında 3 gün saklanır; sütsüz hâlde dondurulabilir."
+},
+{
+"id": "p39a16_003",
+"title": "Balkabaklı kırmızı mercimek çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ingredients": [
+"300 g balkabağı (soyulup küp doğranmış)",
+"Yarım su bardağı kırmızı mercimek (yıkanmış)",
+"1 küçük kuru soğan",
+"1 havuç",
+"1 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı tereyağı",
+"5 su bardağı sıcak su",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı kimyon",
+"Yarım çay kaşığı pul biber",
+"Yarım limon"
+],
+"steps": [
+"Mercimeği süzgeçte suyu berraklaşana kadar yıkayın.",
+"Tencerede zeytinyağıyla soğan ve havucu 4 dakika kavurun.",
+"Balkabağını ve mercimeği ekleyip 2 dakika karıştırın.",
+"Sıcak suyu ekleyin; kaynayınca köpüğünü alıp kısık ateşte 25 dakika, mercimek dağılana kadar pişirin.",
+"Blenderdan geçirip tuz ve kimyonla tatlandırın; kıvam koyuysa sıcak su ekleyin.",
+"Tereyağında pul biberi kızdırıp servis sırasında çorbanın üzerine gezdirin, limonla servis edin."
+],
+"tips": [
+"Balkabağının tatlılığı limonla dengelenir; servis sırasında mutlaka limon sıkın.",
+"Mercimek pişerken dibi tutabilir; ara ara karıştırın."
+],
+"serving": "Limon ve kıtır ekmekle sıcak servis edin.",
+"storage": "Buzdolabında 3 gün, dondurucuda 2 ay saklanır."
+},
+{
+"id": "p39a16_004",
+"title": "Brokolili patates çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ingredients": [
+"1 küçük brokoli (yaklaşık 350 g, çiçeklerine ayrılmış)",
+"1 orta boy patates (küp)",
+"1 küçük kuru soğan",
+"1 diş sarımsak",
+"1 yemek kaşığı zeytinyağı",
+"4 su bardağı sıcak su",
+"Yarım su bardağı süt",
+"2 yemek kaşığı rendelenmiş kaşar peyniri (isteğe bağlı)",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Brokoliyi çiçeklerine ayırın, sapını soyup küçük doğrayın; ayrı bir kâsede birkaç küçük çiçeği süsleme için ayırın.",
+"Tencerede zeytinyağıyla soğan ve sarımsağı 3 dakika kavurun.",
+"Patates ve brokoli sapını ekleyip sıcak suyu ilave edin; 10 dakika pişirin.",
+"Brokoli çiçeklerini ekleyip 8 dakika daha, brokoli yumuşayana ama rengi solmadan pişirin.",
+"Blenderdan geçirin; süt, tuz ve karabiberi ekleyip kaynamadan ısıtın.",
+"Ayırdığınız brokoli çiçeklerini 2 dakika haşlayın; çorbayı bunlar ve kaşar peyniriyle servis edin."
+],
+"tips": [
+"Brokoliyi uzun pişirmek rengini ve aromasını bozar; çiçekleri sonradan ekleyin."
+],
+"serving": "Üzerine kaşar ve haşlanmış brokoli çiçekleriyle sıcak servis edin.",
+"storage": "Buzdolabında 2 gün saklanır."
+},
+{
+"id": "p39a16_005",
+"title": "Karnabaharlı pırasa çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ingredients": [
+"300 g karnabahar",
+"1 pırasa (sadece beyaz ve açık yeşil kısmı, halka)",
+"1 küçük patates",
+"1 yemek kaşığı tereyağı",
+"1 yemek kaşığı zeytinyağı",
+"4 su bardağı sıcak su veya tavuk suyu",
+"Yarım su bardağı süt",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı beyaz biber",
+"1 yemek kaşığı kıyılmış frenk soğanı veya maydanoz"
+],
+"steps": [
+"Pırasa halkalarını bol suda yıkayıp toprağını iyice temizleyin.",
+"Tencerede tereyağı ve zeytinyağını eritip pırasayı kısık ateşte 6 dakika, rengi koyulaşmadan yumuşatın.",
+"Karnabahar çiçeklerini ve küp patatesi ekleyip 2 dakika çevirin.",
+"Sıcak suyu ekleyip kaynatın; kısık ateşte 18 dakika sebzeler yumuşayana kadar pişirin.",
+"Blenderdan geçirin; süt, tuz ve beyaz biberi ekleyip kaynamaya yakın ısıtın.",
+"Frenk soğanı serperek servis edin."
+],
+"tips": [
+"Pırasayı kavururken renk almaması çorbanın beyaz ve zarif görünmesini sağlar."
+],
+"serving": "Kızarmış ekmek küpleriyle sıcak servis edin.",
+"storage": "Buzdolabında 2 gün saklanır."
+},
+{
+"id": "p39a16_006",
+"title": "Naneli bezelye çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 5,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ingredients": [
+"2 su bardağı bezelye (taze veya dondurulmuş)",
+"1 küçük kuru soğan",
+"1 küçük patates",
+"1 yemek kaşığı zeytinyağı",
+"4 su bardağı sıcak su",
+"1 tatlı kaşığı kuru nane veya 6 yaprak taze nane",
+"3 yemek kaşığı süzme yoğurt",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Tencerede zeytinyağıyla doğranmış soğanı 3 dakika yumuşatın.",
+"Küp patatesi ve sıcak suyu ekleyip 10 dakika pişirin.",
+"Bezelyeyi ekleyin; dondurulmuşsa çözdürmeden kullanın ve 6–7 dakika, bezelye yumuşayana kadar pişirin.",
+"Naneyi ekleyip blenderdan geçirin; tuz ve karabiberle tatlandırın.",
+"Kıvamı çok koyuysa sıcak su ekleyerek 1 dakika daha kaynatın.",
+"Servis kâselerine alıp her birinin ortasına bir kaşık süzme yoğurt koyun."
+],
+"tips": [
+"Bezelyeyi fazla pişirmeyin; rengi canlı yeşil kalmalıdır."
+],
+"serving": "Yoğurt ve birkaç taze nane yaprağıyla sıcak veya ılık servis edin.",
+"storage": "Buzdolabında 2 gün saklanır."
+},
+{
+"id": "p39a16_007",
+"title": "Ispanaklı pirinç çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ingredients": [
+"200 g ıspanak (yıkanıp doğranmış)",
+"3 yemek kaşığı pirinç (yıkanmış)",
+"1 küçük kuru soğan",
+"1 yemek kaşığı zeytinyağı",
+"1 yemek kaşığı un",
+"5 su bardağı sıcak su",
+"1 su bardağı yoğurt",
+"1 yumurta sarısı",
+"1 çay kaşığı tuz",
+"1 çay kaşığı kuru nane"
+],
+"steps": [
+"Tencerede zeytinyağıyla soğanı 3 dakika kavurun, unu ekleyip 1 dakika daha kavurun.",
+"Sıcak suyu çırparak ekleyin, pirinci ilave edip kısık ateşte 12 dakika pişirin.",
+"Ispanağı ekleyin, 5 dakika daha pişirin.",
+"Ayrı bir kâsede yoğurt ve yumurta sarısını çırpın; çorbadan birkaç kepçe alıp yoğurda azar azar ekleyerek ılıştırın.",
+"Ilıştırılmış yoğurdu çorbaya sürekli karıştırarak ekleyin ve kaynamaya başlayınca ocaktan alın; tuzunu ayarlayın.",
+"Servis sırasında üzerine nane serpin."
+],
+"tips": [
+"Yoğurdu ılıştırmadan doğrudan eklerseniz çorba kesilir."
+],
+"serving": "Sıcak olarak, limon sıkarak servis edin.",
+"storage": "Buzdolabında 2 gün saklanır; ısıtırken kaynatmayın."
+},
+{
+"id": "p39a16_008",
+"title": "Mantarlı arpa şehriye çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ingredients": [
+"250 g kültür mantarı (dilimlenmiş)",
+"Yarım çay bardağı arpa şehriye",
+"1 küçük kuru soğan",
+"1 yemek kaşığı tereyağı",
+"1 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı domates salçası",
+"5 su bardağı sıcak su veya tavuk suyu",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"1 çay kaşığı kekik"
+],
+"steps": [
+"Tencerede tereyağı ve zeytinyağını ısıtın; mantarları yüksek ateşte suyunu salıp çekene kadar 6 dakika soteleyin.",
+"Doğranmış soğanı ekleyip 3 dakika kavurun.",
+"Arpa şehriyeyi ekleyip 1 dakika çevirin, salçayı ilave edip 1 dakika daha kavurun.",
+"Sıcak suyu ekleyin; kaynayınca kısık ateşte 10 dakika, şehriye yumuşayana kadar pişirin.",
+"Tuz, karabiber ve kekikle tatlandırın.",
+"5 dakika dinlendirip servis edin."
+],
+"tips": [
+"Mantarları kalabalık olmayan geniş tencerede pişirin; aksi hâlde kızarmaz, haşlanır."
+],
+"serving": "Limon ve kıyılmış maydanozla sıcak servis edin.",
+"storage": "Buzdolabında 2 gün saklanır; şehriye zamanla şişeceği için ısıtırken su ekleyin."
+},
+{
+"id": "p39a16_009",
+"title": "Nohutlu domates çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ingredients": [
+"4 olgun domates (rendelenmiş) veya 400 g konserve domates",
+"1 su bardağı haşlanmış nohut",
+"1 küçük kuru soğan",
+"1 diş sarımsak",
+"1 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı domates salçası",
+"4 su bardağı sıcak su",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı kimyon",
+"1 tutam şeker (domates ekşiyse)"
+],
+"steps": [
+"Tencerede zeytinyağıyla soğanı 4 dakika kavurun, sarımsağı ekleyip 30 saniye çevirin.",
+"Salçayı ekleyip 1 dakika kavurun, ardından rendelenmiş domatesi ilave edip 5 dakika pişirin.",
+"Nohudun yarısını ve sıcak suyu ekleyin; 12 dakika kaynatın.",
+"Blenderdan geçirip pürüzsüz hâle getirin.",
+"Kalan bütün nohutları ekleyin; tuz, kimyon ve gerekiyorsa şekerle tatlandırıp 3 dakika daha pişirin.",
+"Sıcak servis edin."
+],
+"tips": [
+"Domates ekşiliğini dengelemek için bir tutam şeker yeterlidir."
+],
+"serving": "Üzerine rendelenmiş peynir veya yoğurtla servis edin.",
+"storage": "Buzdolabında 3 gün saklanır."
+},
+{
+"id": "p39a16_010",
+"title": "Zencefilli havuç çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ingredients": [
+"5 havuç (yaklaşık 500 g, halka)",
+"1 tatlı kaşığı rendelenmiş taze zencefil",
+"1 küçük kuru soğan",
+"1 küçük patates",
+"1 yemek kaşığı zeytinyağı",
+"4 su bardağı sıcak su",
+"Yarım portakalın suyu",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"2 yemek kaşığı yoğurt"
+],
+"steps": [
+"Tencerede zeytinyağıyla soğanı 3 dakika kavurun, zencefili ekleyip 30 saniye çevirin.",
+"Havuç ve patatesi ekleyip 3 dakika soteleyin.",
+"Sıcak suyu ilave edin; kaynayınca kısık ateşte 20 dakika, havuçlar tamamen yumuşayana kadar pişirin.",
+"Ocaktan alıp ılıtın ve blenderdan geçirin.",
+"Portakal suyu, tuz ve karabiberi ekleyip 2 dakika ısıtın.",
+"Kâselere alıp ortasına yoğurt koyarak servis edin."
+],
+"tips": [
+"Zencefil acılığı kişiden kişiye değişir; önce az koyup tadına bakın."
+],
+"serving": "Yoğurt ve kavrulmuş kabak çekirdeğiyle servis edin.",
+"storage": "Buzdolabında 3 gün, dondurucuda 2 ay saklanır."
+},
+{
+"id": "p39a16_011",
+"title": "Tatlı patatesli mercimek çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ingredients": [
+"1 orta boy tatlı patates (küp)",
+"Yarım su bardağı kırmızı mercimek",
+"1 küçük kuru soğan",
+"1 havuç",
+"1 yemek kaşığı zeytinyağı",
+"5 su bardağı sıcak su",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı köri veya zerdeçal",
+"Yarım limon"
+],
+"steps": [
+"Mercimeği yıkayıp süzün.",
+"Tencerede zeytinyağıyla soğan ve havucu 4 dakika kavurun; köriyi ekleyip 30 saniye çevirin.",
+"Tatlı patates ve mercimeği ekleyin, sıcak suyu ilave edin.",
+"Kaynayınca köpüğünü alıp kısık ateşte 25 dakika pişirin.",
+"Blenderdan geçirip tuzunu ayarlayın.",
+"Limon sıkarak servis edin."
+],
+"tips": [
+"Tatlı patates çorbaya doğal tatlılık verir; tuzu sonradan ayarlayın."
+],
+"serving": "Kavrulmuş susam ve limonla servis edin.",
+"storage": "Buzdolabında 3 gün saklanır."
+},
+{
+"id": "p39a16_012",
+"title": "Pazılı bulgur çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ingredients": [
+"1 demet pazı (yaklaşık 300 g, ince doğranmış)",
+"3 yemek kaşığı ince bulgur",
+"2 yemek kaşığı kırmızı mercimek",
+"1 küçük kuru soğan",
+"1 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı biber salçası",
+"5 su bardağı sıcak su",
+"1 çay kaşığı tuz",
+"1 çay kaşığı kuru nane",
+"Yarım limon"
+],
+"steps": [
+"Pazının saplarını ince, yapraklarını şerit hâlinde doğrayıp yıkayın.",
+"Tencerede zeytinyağıyla soğanı 3 dakika kavurun, salçayı ekleyip 1 dakika daha çevirin.",
+"Pazı saplarını ekleyip 3 dakika soteleyin.",
+"Bulgur, mercimek ve sıcak suyu ekleyin; kaynayınca 15 dakika pişirin.",
+"Pazı yapraklarını ekleyip 5 dakika daha pişirin; tuzunu ve naneyi ekleyin.",
+"Limon sıkarak sıcak servis edin."
+],
+"tips": [
+"Pazının sapları yapraklarından geç piştiği için önce saplarını pişirin."
+],
+"serving": "Limon ve pul biberle sıcak servis edin.",
+"storage": "Buzdolabında 2 gün saklanır."
+}
+]

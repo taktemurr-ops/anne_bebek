@@ -1,0 +1,270 @@
+[
+{
+"id": "p39a18_101",
+"title": "Meyveli yoğurtlu soğuk kup",
+"category": "Tatlılar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 0,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"500 g süzme yoğurt",
+"2 su bardağı mevsim meyvesi (elma, armut, muz, şeftali, kayısı, çilek, vişne veya yaban mersini)",
+"4 yemek kaşığı yulaf ezmesi",
+"2 yemek kaşığı bal veya pekmez",
+"1 çay kaşığı tarçın",
+"2 yemek kaşığı iri kıyılmış ceviz"
+],
+"steps": [
+"Meyveleri yıkayın; elma ve armudu küp küp, muzu halka, çileği dörde doğrayın. Vişnenin çekirdeklerini çıkarın.",
+"Sert meyveleri (elma, armut, ayva) tavada 2 yemek kaşığı su ve tarçınla 5 dakika yumuşatıp soğutun.",
+"Yoğurdu bal veya pekmezle pürüzsüz olana kadar çırpın.",
+"Yulafı kuru tavada 2–3 dakika hafifçe kavurup soğutun.",
+"4 bardağın dibine birer kaşık yulaf, üzerine yoğurt, sonra meyve koyun; katları bir kez daha tekrarlayın.",
+"Üzerine ceviz serpip en az 1 saat buzdolabında bekletin."
+],
+"tips": [
+"Sulu meyveler (çilek, şeftali) yoğurdu sulandırmasın diye süzme yoğurt kullanın.",
+"Yulafı servisten hemen önce eklerseniz çıtır kalır."
+],
+"serving": "Soğuk servis edin; üzerine taze nane yaprağı yakışır.",
+"storage": "Buzdolabında kapalı olarak 1 gün saklanır."
+},
+{
+"id": "p39a18_091",
+"title": "Meyveli yulaflı fırın tatlısı",
+"category": "Tatlılar",
+"servings": 6,
+"prepMinutes": 15,
+"cookMinutes": 35,
+"difficulty": "Kolay",
+"ovenCelsius": 180,
+"ingredients": [
+"4 su bardağı dilimlenmiş meyve (elma, armut, şeftali, kayısı, erik, vişne, böğürtlen veya yaban mersini)",
+"1 yemek kaşığı limon suyu",
+"2 yemek kaşığı esmer şeker",
+"1 tatlı kaşığı tarçın",
+"1 su bardağı yulaf ezmesi",
+"Yarım su bardağı tam buğday unu",
+"4 yemek kaşığı soğuk tereyağı",
+"3 yemek kaşığı bal",
+"Yarım su bardağı iri kıyılmış ceviz"
+],
+"steps": [
+"Fırını 180 °C'ye ısıtın; 20×25 cm fırın kabını tereyağıyla yağlayın.",
+"Meyveleri limon suyu, esmer şeker ve tarçının yarısıyla harmanlayıp kaba yayın.",
+"Yulaf, un ve kalan tarçını karıştırın; soğuk tereyağını ekleyip parmak uçlarınızla iri kum kıvamına gelene kadar ovalayın.",
+"Bal ve cevizi ekleyip karıştırın; bu kırıntıları meyvelerin üzerine eşit serpin.",
+"35 dakika, üstü altın rengi olup kenarlarda meyve suyu fokurdayana kadar pişirin.",
+"15 dakika dinlendirip servis edin."
+],
+"tips": [
+"Sulu meyvelerde (vişne, böğürtlen) meyveye 1 yemek kaşığı nişasta karıştırın; tatlı daha toplu olur.",
+"Tereyağı soğuk olmalı; aksi hâlde kırıntılar çıtırlaşmaz."
+],
+"serving": "Ilık olarak bir top dondurma veya bir kaşık süzme yoğurtla servis edin.",
+"storage": "Oda sıcaklığında 1 gün, buzdolabında 3 gün saklanır; fırında 10 dakika ısıtın."
+},
+{
+"id": "p39a18_031",
+"title": "Sebzeli peynirli omlet",
+"category": "Kahvaltılıklar",
+"servings": 2,
+"prepMinutes": 10,
+"cookMinutes": 10,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"4 yumurta",
+"3 yemek kaşığı süt",
+"1 su bardağı ince doğranmış sebze (kabak, ıspanak, pazı, mantar, pırasa veya brokoli)",
+"1 yemek kaşığı tereyağı",
+"Yarım su bardağı rendelenmiş kaşar veya ufalanmış beyaz peynir",
+"Yarım çay kaşığı tuz",
+"1 tutam karabiber",
+"4–5 dal maydanoz"
+],
+"steps": [
+"Sebzeyi ince doğrayın; brokoli ve karnabaharı küçük çiçeklere ayırıp 3 dakika haşlayın.",
+"Tavada tereyağını eritin, sebzeyi ekleyip suyunu çekene kadar 4–5 dakika soteleyin.",
+"Yumurtaları süt, tuz ve karabiberle köpürene kadar çırpın.",
+"Karışımı sebzelerin üzerine dökün; kısık ateşte kenarlar tutunca spatulayla ortaya doğru itin.",
+"Üst yüzey hafif akışkanken peyniri serpin, kapağı kapatıp 2 dakika pişirin.",
+"Omleti ikiye katlayıp maydanozla servis edin."
+],
+"tips": [
+"Sulu sebzeleri (kabak, ıspanak) önce soteleyip suyunu uçurun; omlet sulanmaz.",
+"Beyaz peynir kullanıyorsanız tuzu azaltın."
+],
+"serving": "Domates, salatalık ve kızarmış ekmekle sıcak servis edin.",
+"storage": "Taze tüketin; bekletmeyin."
+},
+{
+"id": "p39a18_051",
+"title": "Sebze soslu tam buğday makarna",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"350 g tam buğday kalem veya burgu makarna",
+"2 su bardağı küp doğranmış sebze (kabak, patlıcan, brokoli, mantar, ıspanak, kereviz veya havuç)",
+"1 orta boy soğan",
+"2 diş sarımsak",
+"2 adet rendelenmiş domates",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı tuz",
+"Yarım çay kaşığı pul biber",
+"Yarım su bardağı rendelenmiş peynir"
+],
+"steps": [
+"Bol tuzlu suyu kaynatın; makarnayı paketteki süre kadar haşlayın, süzmeden önce 1 su bardağı haşlama suyu ayırın.",
+"Bu sırada zeytinyağında soğanı 3 dakika, ardından sarımsağı 1 dakika kavurun.",
+"Sebzeyi ekleyip 6–8 dakika yumuşayana kadar soteleyin (ıspanak 2 dakika yeterli).",
+"Domatesi, tuzu ve pul biberi ekleyip 5 dakika koyulaşana kadar pişirin.",
+"Makarnayı sosa ekleyin; gerekirse ayırdığınız haşlama suyundan ekleyerek 1 dakika karıştırın.",
+"Peyniri serpip hemen servis edin."
+],
+"tips": [
+"Haşlama suyundaki nişasta sosun makarnaya tutunmasını sağlar.",
+"Tam buğday makarna beyaz makarnadan 1–2 dakika daha uzun pişer."
+],
+"serving": "Yanına yoğurt veya yeşil salata ile sıcak servis edin.",
+"storage": "Buzdolabında 2 gün saklanır; ısıtırken 2 kaşık su ekleyin."
+},
+{
+"id": "p39a18_081",
+"title": "Tahinli köz sebze mezesi",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": 220,
+"ingredients": [
+"500 g sebze (patlıcan, kabak, karnabahar, kereviz, havuç veya brokoli)",
+"3 yemek kaşığı tahin",
+"4 yemek kaşığı süzme yoğurt",
+"1 diş sarımsak (ezilmiş)",
+"1 yemek kaşığı limon suyu",
+"2 yemek kaşığı zeytinyağı",
+"Yarım çay kaşığı tuz",
+"4–5 dal maydanoz"
+],
+"steps": [
+"Fırını 220 °C'ye ısıtın. Patlıcanı bütün olarak çatalla delin; diğer sebzeleri iri doğrayın.",
+"Sebzeleri 1 yemek kaşığı zeytinyağıyla harmanlayıp tepsiye yayın.",
+"25–30 dakika, kenarları kararıp içleri yumuşayana kadar közleyin; patlıcanın kabuğunu soyun.",
+"Sebzeleri bıçakla ince kıyın veya çatalla ezin ve soğumaya bırakın.",
+"Tahin, yoğurt, sarımsak, limon suyu ve tuzu çırpın; sebzelerle karıştırın.",
+"Tabağa yayıp kalan zeytinyağı ve kıyılmış maydanozla süsleyin."
+],
+"tips": [
+"Tahin koyulaşırsa 1–2 kaşık soğuk suyla açın.",
+"Sebzeler tamamen soğumadan yoğurt eklerseniz meze sulanır."
+],
+"serving": "Soğuk servis edin; lavaş veya kızarmış ekmekle sunun.",
+"storage": "Kapalı kapta buzdolabında 3 gün saklanır."
+},
+{
+"id": "p39a18_041",
+"title": "Sebzeli nohutlu bulgur pilavı",
+"category": "Pilavlar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1,5 su bardağı pilavlık bulgur",
+"1 su bardağı haşlanmış nohut",
+"1 su bardağı küp doğranmış sebze (kabak, patlıcan, havuç, mantar, pırasa veya kereviz)",
+"1 orta boy soğan",
+"1 yemek kaşığı biber salçası",
+"2 yemek kaşığı zeytinyağı",
+"1 yemek kaşığı tereyağı",
+"3 su bardağı sıcak su",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Soğanı zeytinyağında 3 dakika kavurun; sebzeyi ekleyip 5 dakika soteleyin.",
+"Salçayı ekleyip kokusu çıkana kadar 1 dakika çevirin.",
+"Bulgur ve nohudu ekleyip 2 dakika kavurun.",
+"Sıcak su ve tuzu ekleyin; kaynayınca kısık ateşte kapağı kapalı 15 dakika suyunu çekene kadar pişirin.",
+"Tereyağını ekleyin, kapağın altına kâğıt havlu koyup 10 dakika demlendirin."
+],
+"tips": [
+"Patlıcan kullanıyorsanız önce tuzlu suda 15 dakika bekletip acısını alın.",
+"Demlenme süresi tanelerin dağılmasını sağlar."
+],
+"serving": "Cacık veya yoğurtla servis edin.",
+"storage": "Buzdolabında 3 gün saklanır."
+},
+{
+"id": "p39a18_111",
+"title": "Yeşil mercimekli sıcak sebze salatası",
+"category": "Salatalar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 su bardağı yeşil mercimek",
+"2 su bardağı doğranmış sebze (kabak, patlıcan, karnabahar, brokoli, havuç veya mantar)",
+"1 kırmızı soğan",
+"3 yemek kaşığı zeytinyağı",
+"2 yemek kaşığı nar ekşisi",
+"1 tatlı kaşığı kimyon",
+"1 tatlı kaşığı tuz",
+"Yarım demet maydanoz"
+],
+"steps": [
+"Mercimeği yıkayıp bol suda 20–25 dakika, diri kalacak şekilde haşlayın ve süzün.",
+"Sebzeyi 1 yemek kaşığı zeytinyağıyla tavada orta-yüksek ateşte 8–10 dakika, kenarları kızarana kadar soteleyin.",
+"Kırmızı soğanı ince piyazlık doğrayın.",
+"Kalan zeytinyağı, nar ekşisi, kimyon ve tuzu çırparak sos hazırlayın.",
+"Sıcak mercimek, sebze, soğan ve kıyılmış maydanozu sosla harmanlayın."
+],
+"tips": [
+"Mercimeği fazla haşlamayın; salata lapa olmasın.",
+"Sos sıcak mercimeğe daha iyi işler."
+],
+"serving": "Ilık servis edin; üzerine ufalanmış beyaz peynir eklenebilir.",
+"storage": "Buzdolabında 2 gün saklanır."
+},
+{
+"id": "p39a18_011",
+"title": "Yoğurtlu sebze salatası (borani usulü)",
+"category": "Salatalar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"500 g sebze (kabak, patlıcan, ıspanak, pazı, pırasa, havuç veya karnabahar)",
+"2 su bardağı süzme yoğurt",
+"2 diş sarımsak (ezilmiş)",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı tuz",
+"1 tatlı kaşığı pul biber",
+"4–5 dal dereotu"
+],
+"steps": [
+"Sebzeyi hazırlayın: kabak ve havucu rendeleyin, ıspanak/pazı/pırasayı ince doğrayın, patlıcanı közleyip doğrayın, karnabaharı küçük çiçeklere ayırıp haşlayın.",
+"Zeytinyağının yarısında sebzeyi suyunu çekene kadar 6–8 dakika soteleyin; tuzunu ekleyip tamamen soğutun.",
+"Yoğurdu sarımsak ve dereotuyla çırpın.",
+"Soğumuş sebzeyi yoğurtla karıştırıp servis tabağına alın.",
+"Kalan zeytinyağını kızdırıp pul biberi ekleyin ve salatanın üzerine gezdirin."
+],
+"tips": [
+"Sebzeler sıcakken yoğurda eklenirse yoğurt kesilir ve sulanır."
+],
+"serving": "Soğuk servis edin; et ve tavuk yemeklerinin yanına yakışır.",
+"storage": "Kapalı kapta buzdolabında 2 gün saklanır."
+}
+]
