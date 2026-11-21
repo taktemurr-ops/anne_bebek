@@ -13,6 +13,9 @@ void main() {
 
   testWidgets('GP-01 Android: ana sayfa, gunluk kaydi ve temel ekranlar',
       (tester) async {
+    // KVKK onay ekranı bu testin kapsamı dışında; onayı önceden ver.
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('privacy_consent_v1', 1);
     await tester.pumpWidget(const AnneBebekApp());
     await tester.pumpAndSettle();
 

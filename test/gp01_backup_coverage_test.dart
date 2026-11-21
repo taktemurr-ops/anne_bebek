@@ -60,13 +60,13 @@ void main() {
     final exported = await BackupService.export();
     await PrivacyService.deleteLocalRecords();
     final prefs = await SharedPreferences.getInstance();
-    expect(prefs.getString('bebekAdi'), isNull);
+    expect(await SecureHealthStore.read('bebekAdi'), isNull);
     expect(await SecureHealthStore.read('family_recipes_v1'), isNull);
     expect(await SecureHealthStore.read('${SecureHealthStore.childSleepPrefix}c1'), isNull);
     expect(prefs.getString('unrelated_setting'), 'keep');
 
     await BackupService.restore(exported);
-    expect(prefs.getString('bebekAdi'), 'Ada');
+    expect(await SecureHealthStore.read('bebekAdi'), 'Ada');
     expect(prefs.getString('general_recipe_favorites_v22'), '["g1"]');
     expect(prefs.getDouble('paket39_shopping_budget_v1'), 1500.0);
     expect(prefs.getStringList('module_hub_favorites_v1'), ['tarif']);
@@ -80,8 +80,7 @@ void main() {
     SharedPreferences.setMockInitialValues({'bebekAdi': 'Eski'});
     await SecureHealthStore.write('family_reminders_v40', '[{"id":"h1"}]');
     await BackupService.restore(_backup({'bebekAdi': 'Yeni'}));
-    final prefs = await SharedPreferences.getInstance();
-    expect(prefs.getString('bebekAdi'), 'Yeni');
+    expect(await SecureHealthStore.read('bebekAdi'), 'Yeni');
     expect(await SecureHealthStore.read('family_reminders_v40'), '[{"id":"h1"}]');
   });
 
@@ -95,7 +94,6 @@ void main() {
     ]) {
       await expectLater(BackupService.restore(_backup(bad)), throwsFormatException);
     }
-    final prefs = await SharedPreferences.getInstance();
-    expect(prefs.getString('bebekAdi'), 'Korunur');
+    expect(await SecureHealthStore.read('bebekAdi'), 'Korunur');
   });
 }
