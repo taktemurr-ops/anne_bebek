@@ -1,0 +1,252 @@
+cb09e9eb	Upgrading from the previous package while keeping user data was tried
+37259227	Usage information could not be saved
+e9961032	I'm taking it
+47fa0e35	Setup required
+9514adb2	Diastolic pressure
+f68e8884	Diastolic pressure (mmHg)
+62ffd53a	Enter the diastolic pressure (30–160 mmHg, lower than the systolic pressure).
+e40f161f	Plan short rest breaks and share care duties. When you are tired, be careful not to fall asleep with your baby on an armchair or sofa.
+35655f65	Short sleep. Try to rest while your baby sleeps and ask for help.
+e7b59089	Partial
+ae082b02	Girl
+b5c81c1a	List Total ({0} items)
+dbe24e03	Invalid list format
+cd0fa897	The list could not be saved; the change was undone.
+25eb3647	The list could not be read. Records are kept.
+b7b7410f	List and basket
+b366ba14	Add to list
+b870c4d0	Postpartum period
+79516eb4	My postpartum guide 💗
+5ccd66e4	Postpartum and Breastfeeding
+5ea219cf	Pasta
+8b9a405d	Pasta dishes
+90e8a422	Rectal
+683fcf25	Search ingredients
+ea08c5ac	Add ingredient
+299deb2d	Ingredient list is in the recipe
+21dcde8f	Ingredients
+ab2954ba	Ingredients (one per line)
+150496b7	Ingredients could not be saved.
+88f5cc75	No common allergens detected in the ingredients.
+d82c7979	Add ingredients to my shopping list
+7d8794ec	Add ingredients one by one. Suggestions are sorted by approximate text matching; check separately whether you have enough.
+4e1cc684	Save your ingredients, find suitable recipes
+381e7f30	Formula
+a4895e04	Formula: {0} ml • {1} entries
+79d2ed12	Mammogram
+a1d147cf	Grocery list
+85276c44	March
+176855d5	May
+dafadd84	Store descriptions and images
+5cb62a84	Store screenshots, permissions and privacy statement are ready
+a178698d	Breast self-examination
+aa69f705	Menu type
+52bc8051	Menu preview
+34873c55	Hello, Mum! 💕
+a1b87fe6	Hello 👋
+4a472b9a	Central Management
+dfbcff0a	Central management
+b2f5822e	Central management panel
+9cab3ce8	Items in your current list are kept.
+fda98d97	Replace the current plan?
+29dd4989	Current membership: {0}
+eae7413b	Current: {0}
+99acc2ce	Fruit
+016adce0	Starters and dips
+d03cf6cd	Amount (ml)
+a748efd8	Quantity (number)
+fc63d2c2	Amount (e.g. 1 tablet)
+14cf0abf	Amount (e.g. 1 kg)
+77504d0a	Amount (e.g. 500 g, 2 pieces)
+74f9d0b5	Add amount / date
+257ab344	Amount must be between 0 and 2000 ml.
+f897c424	Amount and time entry
+1964b52e	Amount or duration is invalid.
+f9db62a7	Amounts in different units are not combined automatically.
+64f04375	Quick add with quantity
+39848a38	Entry in millilitres
+c64d44e8	My little miracles
+3ffcafc7	Minimum stock (e.g. 200 g, 2 pieces)
+afde2de0	Minimum stock (e.g. 500 g)
+26ec34ba	Fashion
+537dc873	Fashion & Style
+8cb59082	Moderation and notifications
+41c13c4e	Moderator reviews
+7b88d2ad	Moderator decision
+49486aab	Moderator panel
+0bd0aeb5	Search modules
+f23a93e4	Acceptance check per module
+c9196de8	Module filter
+946a6bd0	Module list copied to the clipboard.
+d3bb746e	Copy module list
+314f9075	Module centre search and category filters were checked
+a3f9aaf2	Opening all 14 screens from the module centre was verified
+81313a34	Integration between modules • Release readiness
+57127536	Examination and test notes
+98828e52	Kitchen
+06202eda	Kitchen pantry summary
+22242d1d	Kitchen alert centre
+ad49b8e3	Kitchen and shopping
+070c4e4f	What you can do
+d6be9911	When to see a doctor / go to the emergency room
+c5b142de	When to get help?
+e4638b98	What would you like to do?
+cb9d436e	Lullaby
+a9688d53	Lullabies (music box)
+0fb26c4e	April
+ca1dd393	Note
+f49e30a7	Note (symptoms, fluid intake…)
+60caec7d	Note (optional)
+a046074b	Note / health facility
+dc633157	The note cannot be empty.
+eb30291a	Add note
+ac93af89	The note could not be saved.
+98988494	The note could not be saved; existing records are kept.
+a05ff1b8	Delete the note?
+5b9e55ab	The note is too long.
+2155fba2	Note: The recipes in this catalogue are starter ideas. Ingredient amounts and cooking times should not be used as an exact recipe until verified for each recipe.
+059a67e8	Note: This summary only includes the records entered by the user; it is not a diagnosis or clinical evaluation.
+151b4196	Note: Back up before testing on health and child data. Tick the checks only when you have truly verified them.
+97399b02	Notes
+b145d854	Notes (optional)
+192d248d	Delete note
+b659dbff	Save my note
+2038c538	January
+fd6b87cf	Preschool activities
+bd21422d	Reading list
+a3ec8667	Read
+bcbf6bdb	Mark as unread
+7696aad2	Mark as read
+fc251857	Consent could not be saved. Please try again.
+1796bb9a	Permanently deletes app records after confirmation
+d13ec380	Confirm
+32f3045b	History of approved task changes
+ceb66ed8	Oral polio – dose 1
+4efa80b2	Oral polio – dose 2
+ba590b2c	Add original ingredients (previous feature)
+cbcbcf99	Avg. interval
+26724e4b	Avg. duration
+e979e2e7	Medium
+526f5a1c	Add at least two start dates to see an average.
+c2503c73	Session is invalid.
+99befa57	Session is invalid. Sign in again.
+223ff5cb	Signed out.
+c74c6a90	Session could not be read: {0}
+253b9f55	The session has expired.
+6df47542	Session refreshed.
+fb5ef57f	End session
+a9dc217e	Refresh session
+641c1f3d	Refresh your session and try again.
+246ef608	Play
+a5ef3f24	Play and movement
+37dab2d4	Plan games, books and family activities
+54d85194	Plan games, books and family activities. This screen does not assess medical development.
+a825053c	Toy
+74a41785	Learning through play
+f11d9e77	Games
+1a1d1f4a	PCOS symptom journal
+088f6fae	Turkish characters are converted to Latin letters in the PDF output. The report is not for diagnosis.
+11ea92b9	The PDF could not be created or shared. Data was not changed.
+f6c94cea	Clipboard cleared.
+95e6b115	Clear clipboard
+9bfecfbf	Twinkle, Twinkle, Little Star
+813626a7	Wrong password or damaged backup.
+fb4cd790	Posts are visible to other users. Don't share your identity, address or private health information. This forum does not replace medical advice.
+e21fbd02	Posts are visible to other users. Don't share children's identity, address or private health information. This forum does not replace medical advice.
+12917b6d	Sunday
+0ed7fd18	Monday
+b5034c4c	Th
+f405bf8c	Pelvic floor and movement
+c0d9cee5	Pink noise
+87aa93c4	Perimenopause / menopause
+8652cb13	Thursday
+779b5c1e	Rice and grain dishes
+9c260bd8	Cooking {0} min
+f4ac7118	Invalid plan format
+1afd700e	Invalid plan format
+1dfa62d7	The plan could not be saved
+6bc20b2d	The plan could not be saved. Please try again.
+90f1c245	The plan could not be saved. Existing records are kept.
+f236ac64	The plan could not be saved; existing records are kept.
+0cd0e117	The plan could not be read
+301b482e	The plan could not be read. Records were not changed.
+d9c3f24e	Remove the recipe added to the plan
+4eddc3f3	Save to plan
+4098f6cd	Planned
+67423c6a	Planned meals: {0}/21
+25d3fe48	Planned
+a19f6ece	Pneumococcal – dose 1
+36f29ae3	Pneumococcal – dose 2
+602ace15	Pneumococcal – booster
+9869f377	Portion setting
+cca13e8e	Portion and quantity calculation: Because measurements in this starter catalogue are not verified, no automatic portion multiplier is applied.
+85ebc03a	Quick
+4049769f	Quick recipes
+c8feff5b	Practical meal planning
+6c2f2888	Premium
+7982438e	Premium Family
+0cd40cfa	Premium subscription
+478b4611	Real store purchase and restore flows for Premium were verified
+924492c0	Premium Membership
+a1a1b9b6	Premium features (planned)
+669fe25a	Profile
+26e03ae9	Add Profile
+a7d70ad6	Edit profile name
+6d7c7ce7	Profile actions
+23cb8344	Profile saved.
+a0cf4b27	Profile list is corrupted
+051ff1c8	Creating, editing and deleting profiles
+838f50e6	Record without a profile
+6c7e3dad	Delete profile
+049a29f0	My profile
+3b65b61d	Profiles could not be read. Data was not deleted.
+08458d3a	My profiles ({0})
+dd2c9b9a	Project Completion Centre
+b2b1aa8b	Project completion
+ae18578e	Su
+d2dea246	Mon
+51938a17	Tips and tricks
+f40351d5	Relaxation
+755299e7	Cervical screening (HPV/smear)
+8802b21c	The muffled hum of the womb and 70 heartbeats per minute.
+650c7c11	Appointments and plans
+a3262126	Appointment and date
+117f7ab1	Save appointments, birthdays and family plans.
+ceddb0cb	Reject
+c37ba41b	By noting your period start dates and symptoms, you can review past cycle lengths. These records are not a fertility prediction.
+c6ba3105	Period journal
+8c62415f	Guide
+b2fe72e2	Search the guide
+2bf3a82b	Ad-free use (planned feature)
+084722e2	Premium membership with ad-free use, family sharing and extra content.
+5ae86fe9	Release AAB/APK and signing
+b7676370	Official WHO CSV type
+bd3b904f	Official vaccination schedule
+fb8f6f10	I understand the risks, restore
+66c47895	Rhythmic "shhh"; helps soothe crying spells.
+2464b30e	Mental Health
+1f658e8c	Mood
+0bfcab28	Mood and support
+a823e3ae	I have planned support for my mood and sleep
+a9cfb6e2	To withdraw your consent, you can delete all your data via Profile → "Delete all local records".
+50cf95ce	Tu
+2b9d1371	Time(s)
+32c16cf3	A steady, soft fan hum.
+e94a571b	Storage
+f6892779	Storage conditions
+3865a16c	Storage: {0}
+541a38aa	Salads
+3f5c7f6c	Tuesday
+80e4d5c6	Purchases are not active yet
+f47415a5	Row {0}: 4 fields required
+5efdea3d	Row {0}: month missing/repeated/out of range
+35d8cf76	Row {0}: invalid LMS
+8edc4b4e	Row {0}: invalid LMS or sex
+052877d9	Row {0}: invalid sex code
+cd60b01d	Row {0}: wrong number of columns
+54731afc	Start counting
+3a761384	Right
+ae0d0b39	Health
+b111c3bc	Health & Wellness
+83f4972d	Health journal
+cf27e295	The health journal could not be opened. Records were not deleted.

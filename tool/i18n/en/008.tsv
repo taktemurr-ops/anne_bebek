@@ -1,0 +1,185 @@
+7dd4893d	My sleep journal
+d2f221e1	Sleep entry
+6fe54c31	Delete the sleep entry?
+f35a8e57	Edit sleep entry
+dbe666f3	Sleep records
+4c817317	Sleep records could not be read. Existing records were not deleted.
+a10a9f28	Sleep melody
+6b49345f	Sleep routine
+7e3c9066	Sleep sounds
+ea0c18d5	Sleep sounds and lullabies
+4a0c0713	Sleep sounds 🌙
+0ced78e5	Sleep duration (minutes)
+ada26820	Add sleep duration
+a9710c8f	Sleep duration and notes
+379d41de	Sleep tracking and weekly chart
+4f596027	Sleep and rest
+e59fcdb3	Sleep and daily routine
+04af83ce	Sleep and daily life
+c429c486	Sleep • Feeding • Nappies
+95605fed	Sleep, feeding, nappy and medicine records by date
+ede951de	Suitcase and travel list
+cae2f2a4	Fan
+14d24820	Cancel
+fd682e2f	Data integrity check
+fa443a7c	Medicine given and amount (optional)
+1c2d5efd	Data could not be verified. No records were changed.
+0ad85845	Back up or restore data
+38849bc7	My data
+8671b79e	Fertile Window
+8e134e98	Separate with commas: 08:00, 20:00
+97125909	Body mass index: {0} ({1}). It is not a valid measure during pregnancy and breastfeeding.
+31c8b4c6	Body temperature looks low. Warm your baby and measure again; if it stays low or your baby is listless, see a doctor right away.
+51c7c481	The WHO 0–24 month reference must include all 25 months
+dfd2d9ec	Load WHO CSV reference
+1cc4765f	WHO source link required
+fd375b32	Verified CDC/WHO 0–24 month CSV files are required for WHO percentiles. You can import the official CSV content from the clipboard with the upload icon above. Percentiles are not calculated until a reference is loaded.
+c3e129b1	Upcoming
+cc54c201	Set reminders for upcoming appointments
+d7b2d14b	About {0} months old
+89b96cf8	Coming soon
+44bbbb95	Favourites only
+a7afde3d	Only my favourites
+2d1caed9	Only summarises past intervals between the dates you entered. Do not use it for prediction or contraception.
+87aea77d	Only amounts that start with a number are recalculated proportionally. Check fractional, approximate and in-text amounts.
+de7872a4	Only the selected child's records are shown. Data stays on your device; copying sends it to the clipboard.
+1a58d99a	Selected only
+3837ff97	Show only the last 7 days' records
+c7e13701	Only accounts defined as moderators on the server can view reports.
+be4f070d	Only recipes with all ingredients available
+abf54174	Misleading health information
+dd7dfe98	Reply
+11421ad6	Waiting for a reply…
+95c6b0a1	Add a reply
+8d51bcd8	Write a reply
+59dfc0be	Write your reply
+8c62add1	Replies will also be deleted.
+c23d93bb	I had it done
+1d5b3520	My To-do List
+d33f496c	To-dos and completed
+61da8572	Vaccines given and their dates
+0e53067d	Record vaccines given with dates and notes
+9d20e6ef	I have identified people I can ask for help
+6111735e	The sound of waves slowly coming and going.
+697dcaae	Release
+aa04ddbb	Release checks
+76e84489	Release and quality
+2dcf5a8e	Pre-release check
+cfbb1cec	Pre-release checklist
+52d23e7a	The question you write will be sent. Email addresses and phone numbers are masked automatically; this is not full anonymisation. Don't write names, addresses, test results or other sensitive personal information.
+0cdd3141	Your message...
+6a6c247a	Rain
+1375a9ca	Age
+77cef0fd	Age range (months)
+30179530	Age labels are general information. Take allergens, texture and your baby's development into account.
+f57b1aa7	Search by age, category and ingredient
+45918659	Explore by age, category and ingredient
+0bb80b4e	Age-appropriate activities
+50fce414	Age-appropriate baby meals
+5c2f6e29	Age-appropriate nutrition
+f2cfca90	Age-appropriate feeding guide and recipes
+d6ed084c	Age-appropriate development guide
+a2a4f451	Age-appropriate content and guides
+59fbc056	Age-appropriate guide
+70423165	Create an age-appropriate, consistent bedtime routine. Check that the sleep environment is safe; put your baby to sleep on their back.
+9421742d	Age-appropriate life guide
+82974595	Life
+0ed43857	My Life Centre
+6aaeb8f7	Life tools
+622e3358	Life centre entry is invalid.
+705dbd24	My life centre ✨
+30bb8fd8	Number of backup fields is invalid.
+0ce3cbc0	Making backups is up to you; encrypting the backup with a password is recommended.
+e36c65f6	Backup size limit exceeded (3 MB).
+67814e28	The backup is empty; there are no records to restore. Existing records are kept.
+103d6777	The backup file is too large.
+e32ead49	The backup could not be verified: {0}
+86d36476	The backup belongs to a different child
+2264ce25	Backup content is invalid: {0}
+117e220e	The backup text contains the child's personal health information. Content copied to the clipboard can be read by other apps. Continue?
+22a4830d	Creating a backup and restoring with test data
+2839f77d	The backup could not be created: {0}
+5226eeb0	The backup creation date is missing or invalid.
+3c881c49	The backup creation date appears to be in the future.
+2d8e4624	Backup password (at least 12 characters)
+4b8b8dd9	The backup password must be at least 12 characters.
+17846133	The backup password can be at most 256 characters.
+cec9168c	Backup encryption fields are invalid.
+0cdfd711	Backup
+e723e5d5	Backup and restore
+5ca9cc0f	Backups are encrypted with AES-256-GCM using a password. If you forget your password, you can't open the backup. Still keep the backup text copied to the clipboard safe. IMPORTANT: This does not encrypt the live records on the device; it is not a cloud backup.
+fe1295fb	The backup contains another child's records
+d28a2981	The backup contains an invalid record type.
+19c81124	Invalid record in the backup: {0}
+907a7099	The backup contains an invalid list entry.
+9b3640c7	The backup contains an invalid list.
+b2251093	The backup contains a child journal without a profile.
+a6a28d8c	The backup contains a child health plan without a profile.
+9f013a15	The backup contains an unrecognised record field.
+2ae5db22	The backup does not include {0} data fields. Restoring keeps existing records in these fields.
+8b946ea0	The backup contains {0} data fields and about {1} records.
+3306c64f	Verify and restore backup
+13c341fa	Food
+5c3b5359	Recipes
+b43d243d	Meal and solid food recipes
+168078d4	Add a new baby
+1d3da1f4	Add a new baby, switch between profiles; journal and care plan
+d6c0cccf	Create a new baby profile
+76280fb8	New food and meal journal
+f5e5aa21	Create a new feeding entry
+3daa42cd	The new date of birth cannot be after existing journal or health records. Check the records first.
+3ab9c140	New event
+8cd124b2	Create a new account
+2c2c722a	New entry
+78864878	Add new entry
+14139a8e	New entry • {0}
+34482149	New entry: {0}
+c543676f	New personal note
+bbf53b45	New recipe
+60a6e435	Create a new sleep entry
+549bfe99	New replies appear here. Instant phone notifications are not active yet.
+330da458	Add New Item
+e7c85607	New: Family life ✨
+7ba41f54	Try again
+b96d401c	Newest first
+ca2f77a3	Check again
+de5e0d3c	Reload
+e15030ea	Newborn
+255b90ed	Refresh
+051c4abc	Local baby and women's records
+a5a4ba01	Local data read error
+a78fb991	Local management summary (preview)
+56657a1d	The local summary could not be read.
+9fc52a0e	Permission-controlled moderation
+87963f33	Permissions, report flows, spam protection and real notification tests are required. There are no phone push notifications.
+ec1961a9	Duplicate journal entry
+820f82f6	Duplicate daily routine entry
+cd178a76	Duplicate record ID
+af9b0db7	Duplicate profile
+2737e506	Duplicate recipe ID
+6def65cb	Duplicate item ID
+02d24668	Tap one of the boxes above to add your first measurement.
+7c760d68	Egg
+d8f5e465	Ovulation and the fertile window are estimated from your average cycle length. This is not a reliable method for contraception or pregnancy planning, and it does not replace medical evaluation.
+5bf24d05	Could not access management data. Check your admin permission, session and server setup.
+851cf730	Management summary • Preview
+08ece895	Loaded references are only kept while this screen is open. The 0–24 month monthly WHO percentiles are for information; they are not a medical evaluation.
+3be181d6	A general check-up once a year; as your doctor recommends.
+a0584744	Once a year; without waiting for a mole that grows, changes colour or bleeds.
+14282d47	Timer off – repeats continuously
+7a005fd4	Timer: Left {0}, Right {1}
+06ffcdc4	[email hidden]
+4f546c2d	[phone hidden]
+f27daa76	tap to start
+84f4ef71	tap to stop
+f548092e	overweight
+ba242156	iOS device tests
+e5f8828a	iOS build and TestFlight verification done (Mac required)
+76d713f4	iOS build
+bc797ca2	iOS real-device/TestFlight test
+77778cec	underweight
+8c8463b3	{0} ({1}+ months)
+d46506f3	{0} / 40 Weeks
+3ed1d8a2	{0} / {1} checks ticked
+d7d21dc0	{0} / {1} checks completed
+e8d1f06b	{0} / {1} modules

@@ -29,7 +29,7 @@ def main():
     found = {}
     for f in sorted(glob.glob(os.path.join(ROOT, 'lib', '**', '*.dart'), recursive=True)):
         rel = os.path.relpath(f, ROOT)
-        if '/data/' in rel or rel.endswith('_catalog.dart') or os.path.basename(f) in SKIP_FILES or '/i18n/' in rel:
+        if '/data/' in rel or rel.endswith('_catalog.dart') or os.path.basename(f) in SKIP_FILES or ('/i18n/' in rel and not rel.endswith('language_picker.dart')):
             continue
         src = open(f, encoding='utf-8').read()
         # Yorumları at

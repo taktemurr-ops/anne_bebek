@@ -1,0 +1,260 @@
+66d22df9	No matching name found.
+5eac9b70	No matching topic. You can add your question to "Questions for my doctor".
+7e177f54	Different recipe: {0}
+ed0f1bbf	Different units are not added together automatically. The amount in each recipe is shown separately.
+5321195d	Favourite
+6d9f3f86	Toggle favourite
+6cee6850	Favourite could not be saved
+0dd44df2	Favourite could not be saved.
+132bbf3b	Favourite could not be saved. Please try again.
+b77e6f7e	Favourite could not be saved. Try again.
+d9442dfa	Favourite recipe records
+dd08e8b4	My favourite recipes
+6741b673	Favourite preference could not be saved.
+4371350b	Favourites
+909cb5b9	Favourites ({0})
+d97d8055	Favourites could not be saved
+780b8f81	Favourites were kept after restarting the app
+e9f7dcae	Remove from favourites
+360ac512	Add to favourites
+9a401c36	Add / remove favourite
+f459deb1	My favourites
+8440a7d1	No recipe matches the filters.
+ed3532a9	Reset filters
+42ee1c1e	Clear filters
+d3633df4	Price will be set in the store
+7c7a4166	Flutter analysis, automated tests, APK/AAB, real-device and iOS TestFlight verification were not done.
+7400619d	Flutter analyze
+8ccbec88	Flutter analyze is clean
+553a6df8	Flutter tests passed
+2053e7ad	Folic acid, iron, vitamin D, the contraceptive pill, thyroid medicine… you can add them all.
+f2eec4b8	Forum notifications
+35de877e	Sign in to your cloud account first to use the forum.
+fa56fb4a	Forum action failed ({0}). {1}
+99a16ee2	Photo captions and dates
+99321e13	Photo notes
+58659f5e	Oven
+214ae39a	Oven {0} °C
+a506f5fb	Pregnancy
+1aa3f3d5	Pregnancy Tracking
+e4b693ba	Pregnancy symptoms
+ada64bea	Pregnancy guide
+e71307a9	My pregnancy journal
+bb231f29	My pregnancy journal 🤰
+79917068	Add a pregnancy entry
+b979348e	Pregnancy record could not be read. Existing data was not deleted.
+376ca30c	Pregnancy weight tracking
+2ff7b942	Pregnancy checklist is invalid.
+c3c10c03	Pregnancy list is invalid
+1e65b4cc	Pregnancy appointments
+7a351521	Pregnancy and Cycle Calendar
+58c2ab96	Pregnancy and cycle calendar
+605ca28f	Pregnancy and women's health screens open
+4c697383	Pregnancy and check-ups
+6eacf410	Pregnancy: weeks 1–40
+0d9117fb	Pregnancy tracking
+b93e532b	Pregnancy\nWeek {0} 💗
+6f5a6396	Week 20 of pregnancy
+b9adc9b6	Sleep that passes midnight is split across the relevant days. The scale is 24 hours.
+20c51a97	Overdue
+73a45555	A future day cannot be saved as a period start.
+4c964439	Future record
+1ae02021	A future time cannot be saved.
+76c64f40	Traditional French tune, 18th century (public domain).
+bcd47be7	Development
+e0b66877	Development area
+eb59704a	Developmental milestones
+a6d38fb7	Development observation
+46ad2949	Development observations
+6dc7037e	Development and bonding
+3d5a06e0	Development and nutrition
+39eb9cd8	Development • Health
+76f889b5	Games and activities that support development
+1e8d41f4	Advanced reports (planned feature)
+f8ffbc32	Advanced recipe discovery
+5621a1c4	General
+eab73663	For general information; it does not replace diagnosis or treatment. In an emergency, call your local emergency number; for poisoning, call your poison control centre.
+2a71e636	General information • The pregnancy week set by your doctor takes precedence.
+1f3a8a76	Overview
+0b8695e0	General health information
+37c75dce	These are general screening recommendations. Depending on your family history and personal risk, your doctor may suggest different intervals.
+e0c40110	Go back
+0bd8f8b6	Restore
+47491fe5	Restore failed: {0}
+062ca89b	Restart the app after restoring.
+2fc0b2d1	Real Android and iOS build errors were fixed
+dfbe028d	Elapsed time: {0}
+149acb55	A valid growth reference must be selected.
+f125f4fd	Enter a valid email address.
+43996a6f	Enter a valid diastolic pressure (30–160 mmHg).
+801e5990	Enter a valid amount.
+888fa596	Enter a valid {0}.
+cb9b0b9c	Enter a valid number
+d6ae2805	Invalid subscription end date
+97166ddb	Invalid subscription response
+69e21eaa	Invalid shopping list item
+9f64cbe8	Invalid notification record
+e5709677	Invalid notification preferences
+ba8da52b	Invalid notification type
+00a11aae	Invalid date of birth
+605eea30	Invalid cycle settings
+e33e30c6	Invalid cycle record
+86996329	Invalid event
+dd896798	Invalid journal entry
+846a11b6	Invalid daily routine field
+f6e46150	Invalid daily routine entry
+5dec2fe2	Invalid daily routine data
+e0fb506a	Invalid decision
+d46fe72d	Invalid premium end date
+abf03196	Invalid premium record
+8b961bbe	Invalid premium entitlement
+9a1bdd71	Invalid profile field
+69db3677	Invalid profile record
+5a167774	Invalid time zone
+99c192d9	Invalid last period date
+20852e5a	Invalid tracking record
+16fe7e87	Invalid recipe
+cfb1202e	Invalid recipe record
+2782d905	Invalid date
+d565e0a5	Invalid or unsupported backup format.
+a7b67ca3	Invalid admin response
+bfdc114a	Invalid child journal entry
+39d7c644	Invalid child profile
+85ea1994	Invalid measurement
+677125de	Invalid item
+29dd68e8	Past cycle summary
+de69f73c	Signed in.
+a7fbdadb	Sign in
+f64c3b70	Clothing
+dee0f9c2	Privacy review
+899329c3	Privacy notice and store data safety statement were reviewed
+c2d4a0b1	Full privacy policy
+f90cbfa0	Privacy and Security
+a006a330	Privacy and explicit consent
+d4a910e6	Privacy, permissions and store statements
+69d27cf3	Google Play / App Store purchases, server verification, restore and cancel/refund flows are missing.
+1e651706	At least two weight measurements are needed for the chart.
+f99eb9d9	Add measurements to see the chart.
+6a23eb2b	Send
+d0307434	Select visible
+6c1dd346	Showing: {0} / {1} items • Consumption actions: {2}
+ee67bcaa	Eye examination
+47452528	Pick a day
+e6171b32	Sleep by day • last 7 days
+44fe313c	Journal
+28c51d43	Journal (choose a child)
+ba133d3b	Daily Care
+3899f05b	Daily Tracking
+ea86e9b8	Daily Meal Ideas
+921d99c2	Daily care
+baccd749	Daily care journey
+19f07998	Daily symptoms
+80b7709a	Daily mood notes
+760381f6	Daily activity plan
+ff176d12	Track daily development
+1277bea7	Daily tasks
+1cdcfc61	Record your daily movement, communication and play observations. Development pace varies between children.
+33b8161b	Quick daily entries
+15814f47	Daily records and development summary
+89788ba6	Journal list is corrupted
+35f5285e	Daily formula amount • last 7 days
+83390116	My daily notes
+c1823bac	The journal could not be read; records are kept.
+5085c3b6	Daily average • last 7 days
+6169d85c	Daily routine list is corrupted
+1b752867	Daily tracking
+26abb5da	Journal or health records could not be verified; the date of birth was not changed.
+5cf48e30	Daily life journal
+6365f6f8	Daily life records
+0bf19b1a	Daily life tips
+bad501f2	My daily meal ideas
+4445b9d8	Daily summary and doctor report
+14d14534	Today's records
+c73745b0	Recipe of the day
+2d721fd8	Daily Summary
+08665cbe	Noise
+2e196ca3	Noise and nature sounds
+6f785958	My secure shopping list
+7b4aa15a	Save securely
+3f1be33b	Secure record could not be verified: {0}
+cb8504e0	Safe exploration
+bd2ee8bf	Safe use: Don't put the phone in your baby's bed; keep it at least 2 metres away. Keep the volume low; next to your baby it should not be louder than a speaking voice (about 50 dB). Use the timer if possible and don't play loudly all night. Sound keeps playing even when the screen is off.
+ffa22a84	Safe serving
+1595e00c	Safe sleep
+4da0109a	Secure data transfer could not be verified: {0}
+efeda9b6	Secure backup record type is invalid.
+854c3419	Safety
+98376cc3	Safety and First Aid
+b585bcc8	Safety: Don't give honey to babies under 12 months. Whole nuts, whole grapes and hard/round pieces are a choking risk. Ask a health professional about new allergens and special health conditions. Recipes are not personal medical advice.
+4aca39ad	Beauty & Care
+16fd729f	Light
+93031264	Gentle rain patter and drops.
+0dc21151	Pregnancy Week by Week
+6864f6bf	Week-by-week development, changes in the mother-to-be and preparation tips
+0b7c6f2c	Week-by-week tracking
+7483a0f1	Week-by-week tracking, check-ups and preparation list
+d2bd74e4	Choose week
+e779b811	Week summary
+e04463e0	Week: {0} – {1}
+63e90ee3	Weekly shopping analysis
+60f440f7	Weekly shopping plan
+0850af3d	Weekly shopping summary
+f202b908	Add weekly ingredients to my shopping list
+38082a3d	Weekly menu
+7604e65a	Weekly plan format is invalid
+0f580bc9	Add to weekly plan
+24294d39	Weekly meal planner
+c715b129	Weekly meal plan
+76d87574	Weekly meal plan and shopping list
+ceaa943d	My weekly meal plan
+f90214da	View my weekly meal plan
+837284a8	Weekly meal summary
+a82861e5	Choosing your weekly meals in advance can make shopping easier. Take allergies and individual needs into account.
+9e91eac0	Insult / harassment
+f713f62f	Pregnancy
+5d8a9f34	Pastries and breads
+a6726919	Movement
+6c93f121	Returning to movement and exercise depends on the person and the type of birth. Share pain or leakage complaints at your check-up.
+a153c861	Explicit consent is required for external AI processing.
+69bd1520	Backup and restore of sensitive health records was tried
+11e30d4b	Export controls for sensitive data
+c2fee933	Clean install and upgrade with sensitive data was tested
+e0bfb0aa	Illness and symptoms
+d25e81fa	Illnesses and Symptoms
+b7748450	Plan how to get to the hospital
+73a12672	Hospital bag
+cb0f5563	My hospital / where I will give birth
+793d4d47	For reminders, notification permission is needed and reminders must be on in Settings > Notifications.
+e758c635	Reminder fields are invalid
+9393f880	Allow reminder notifications
+622cc2d4	Add reminder
+85430387	Adding, ticking and deleting reminders was tested
+bf4f3850	Invalid reminder
+02221927	Reminder list is invalid
+fc82d6a9	Reminders
+2fd91f0b	Reminders could not be read. Records were not changed.
+5295d2be	June
+a9dfac2b	Ready 7-day menu
+4b0f7eab	Preparation time (min)
+78dfe400	Prepared: {0}.{1}.{2}
+47099062	Method
+5bcfd815	Preparation checklist
+4006afdd	Prep {0} min
+1f0778a5	Goals
+d94a89c2	Gift ideas
+96ab1dbc	Gift and special day ideas
+8e52d448	No start date added yet.
+cd626e87	No baby profile added yet.
+ded093bb	You have no notifications yet.
+0eb5fc2c	No events added yet.
+85b44b64	You haven't added any favourite recipes yet.
+0e110f0d	No reminders added yet.
+8f1e3b9e	You haven't added any medicines or vitamins yet
+3cc8f3b6	Not saved yet
+27aa00e6	Not saved yet.
+0043f3af	No records yet. You can add one with the + button in the middle.
+3e547ccb	No records yet. Start by adding a new entry.
+c86f9b4b	No records added yet.
+ff05fda2	No records yet.
+16645084	No records yet. Add a new entry at the bottom right.
+dd40d191	No records yet. You can add the dates you got from your health provider.
