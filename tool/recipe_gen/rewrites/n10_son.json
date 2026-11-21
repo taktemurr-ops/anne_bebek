@@ -1,0 +1,1344 @@
+[
+{
+"id": "n10_001",
+"title": "Kabak tatlısı (cevizli)",
+"category": "Tatlılar",
+"servings": 6,
+"prepMinutes": 10,
+"cookMinutes": 40,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 kg balkabağı",
+"1,5 su bardağı şeker",
+"Yarım su bardağı ceviz",
+"Kaymak veya tahin için 4 yemek kaşığı"
+],
+"steps": [
+"Kabağı soyup iri dilimleyin.",
+"Tencereye dizip şekeri serpin, 4 saat bekletin.",
+"Kendi suyunda kısık ateşte 40 dakika pişirin.",
+"Soğutun.",
+"Ceviz ve kaymakla servis edin."
+],
+"tips": [
+"Su eklemeyin; kabak suyunu salar."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n10_002",
+"title": "Ayva tatlısı",
+"category": "Tatlılar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 60,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"2 ayva",
+"1 su bardağı şeker",
+"2 su bardağı su",
+"4 karanfil",
+"4 yemek kaşığı kaymak"
+],
+"steps": [
+"Ayvaları ikiye kesip çekirdeklerini oyun.",
+"Tencereye dizip şeker, su ve karanfil ekleyin.",
+"Çekirdekleri tülbente sarıp ekleyin.",
+"Kısık ateşte 60 dakika kırmızılaşana kadar pişirin.",
+"Kaymakla servis edin."
+],
+"tips": [
+"Çekirdekler kırmızı rengi verir."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n10_003",
+"title": "Sütlü irmik tatlısı (kalıp)",
+"category": "Tatlılar",
+"servings": 6,
+"prepMinutes": 5,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 litre süt",
+"1 su bardağı şeker",
+"1 su bardağı irmik",
+"1 yemek kaşığı tereyağı",
+"1 paket vanilin"
+],
+"steps": [
+"Süt ve şekeri ısıtın.",
+"İrmiği yağmur gibi serperek ekleyin.",
+"Koyulaşana kadar karıştırarak 8 dakika pişirin.",
+"Tereyağı ve vanilini ekleyin.",
+"Islak kalıplara döküp soğutun."
+],
+"tips": [
+"Kalıpları ıslatmak tatlının kolay çıkmasını sağlar."
+],
+"serving": "Soğuk, meyve sosuyla.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n10_004",
+"title": "Kemalpaşa tatlısı (hazır)",
+"category": "Tatlılar",
+"servings": 6,
+"prepMinutes": 5,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"12 adet kemalpaşa tatlısı",
+"2 su bardağı şeker",
+"2,5 su bardağı su",
+"Yarım limon",
+"Kaymak için 4 yemek kaşığı"
+],
+"steps": [
+"Şeker ve suyu kaynatın.",
+"Tatlıları ekleyip 15 dakika kısık ateşte pişirin.",
+"Limonu ekleyin.",
+"Soğutun.",
+"Kaymakla servis edin."
+],
+"tips": [
+"Tatlılar şişene kadar pişirilmeli."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n10_005",
+"title": "Meyveli jöle kupu",
+"category": "Tatlılar",
+"servings": 6,
+"prepMinutes": 10,
+"cookMinutes": 5,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 paket meyveli jöle",
+"1 su bardağı mevsim meyvesi",
+"1 su bardağı süzme yoğurt",
+"2 yemek kaşığı bal"
+],
+"steps": [
+"Jöleyi paket talimatına göre hazırlayın.",
+"Meyveleri bardaklara paylaştırın.",
+"Ilık jöleyi dökün.",
+"Donunca balı yoğurdu üzerine koyun.",
+"Soğuk servis edin."
+],
+"tips": [
+"Kivi ve ananas jölenin donmasını engeller."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n10_006",
+"title": "Fırında sütlü muzlu tatlı",
+"category": "Tatlılar",
+"servings": 6,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"3 muz",
+"1 litre süt",
+"1 su bardağı şeker",
+"3 yemek kaşığı nişasta",
+"2 yemek kaşığı un",
+"1 paket bisküvi"
+],
+"steps": [
+"Süt, şeker, nişasta ve unla muhallebi pişirin.",
+"Bisküvileri kaba dizin.",
+"Muhallebinin yarısını dökün, muz dilimlerini yerleştirin.",
+"Kalan muhallebiyi dökün.",
+"Soğutup servis edin."
+],
+"tips": [
+"Muzları en son ekleyin; kararmasın."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n10_007",
+"title": "Tahin helvalı tatlı (kup)",
+"category": "Tatlılar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 0,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"200 g tahin helvası",
+"1 su bardağı süzme yoğurt",
+"4 yemek kaşığı ceviz",
+"2 yemek kaşığı bal"
+],
+"steps": [
+"Helvayı ufalayın.",
+"Bardaklara yoğurt ve helvayı kat kat koyun.",
+"Ceviz serpin.",
+"Bal gezdirin.",
+"Soğuk servis edin."
+],
+"tips": [
+"Pratik ve pişirmesiz bir tatlıdır."
+],
+"serving": "Soğuk.",
+"storage": "Aynı gün."
+},
+{
+"id": "n10_008",
+"title": "Fırında elmalı pankek (dutch baby)",
+"category": "Tatlılar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Orta",
+"ovenCelsius": 220,
+"ingredients": [
+"3 yumurta",
+"Yarım su bardağı un",
+"Yarım su bardağı süt",
+"1 elma",
+"2 yemek kaşığı tereyağı",
+"1 yemek kaşığı şeker",
+"1 çay kaşığı tarçın"
+],
+"steps": [
+"Fırını 220 °C'ye ısıtın; dökme tavada tereyağını eritin.",
+"Elma dilimlerini şeker ve tarçınla tavada 3 dakika çevirin.",
+"Yumurta, un ve sütü pürüzsüz çırpın.",
+"Hamuru elmaların üzerine dökün.",
+"20 dakika kabarana kadar pişirin."
+],
+"tips": [
+"Fırından çıkınca söner; hemen servis edin."
+],
+"serving": "Sıcak.",
+"storage": "Taze tüketin."
+},
+{
+"id": "n10_009",
+"title": "Höşmerim",
+"category": "Tatlılar",
+"servings": 4,
+"prepMinutes": 5,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"250 g taze tatlı peynir (tuzsuz)",
+"3 yemek kaşığı irmik",
+"4 yemek kaşığı şeker",
+"1 yemek kaşığı tereyağı"
+],
+"steps": [
+"Peyniri tavada eritin.",
+"İrmiği ekleyip karıştırın.",
+"Yağını salana kadar 15 dakika pişirin.",
+"Şekeri ekleyip eritin.",
+"Ceviz ile servis edin."
+],
+"tips": [
+"Tuzsuz peynir kullanılmalıdır."
+],
+"serving": "Ilık.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n10_010",
+"title": "Pekmezli irmik helvası",
+"category": "Tatlılar",
+"servings": 6,
+"prepMinutes": 5,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 su bardağı irmik",
+"3 yemek kaşığı tereyağı",
+"Yarım su bardağı üzüm pekmezi",
+"1 su bardağı süt",
+"Yarım su bardağı su",
+"2 yemek kaşığı ceviz"
+],
+"steps": [
+"İrmiği tereyağında kavurun.",
+"Süt, su ve pekmezi ısıtıp ekleyin.",
+"Suyunu çekene kadar karıştırın.",
+"Demlendirin.",
+"Cevizle servis edin."
+],
+"tips": [
+"Pekmez şekerin yerini tutar."
+],
+"serving": "Ilık.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n10_011",
+"title": "Çikolatalı muz dilimleri (dondurulmuş)",
+"category": "Tatlılar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 0,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"3 muz",
+"100 g bitter çikolata",
+"2 yemek kaşığı fındık (kırılmış)"
+],
+"steps": [
+"Muzları kalın dilimleyin.",
+"Çikolatayı eritin.",
+"Dilimleri çikolataya batırın.",
+"Fındık serpin.",
+"1 saat dondurun."
+],
+"tips": [
+"Çocuklar için sağlıklı atıştırmalık."
+],
+"serving": "Soğuk.",
+"storage": "Dondurucuda 1 hafta."
+},
+{
+"id": "n10_012",
+"title": "Çilekli sütlü tatlı (pratik)",
+"category": "Tatlılar",
+"servings": 6,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 litre süt",
+"1 su bardağı şeker",
+"3 yemek kaşığı nişasta",
+"2 yemek kaşığı un",
+"1 su bardağı çilek"
+],
+"steps": [
+"Muhallebiyi pişirin.",
+"Çilekleri dilimleyin.",
+"Kaselere muhallebi ve çileği dizin.",
+"Soğutun.",
+"Servis edin."
+],
+"tips": [
+"Çilek sosu da hazırlanabilir."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n10_013",
+"title": "Yoğurt tatlısı (şerbetli)",
+"category": "Tatlılar",
+"servings": 10,
+"prepMinutes": 15,
+"cookMinutes": 35,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"1 su bardağı yoğurt",
+"1 su bardağı şeker",
+"3 yumurta",
+"1 su bardağı un",
+"1 paket kabartma tozu",
+"Şerbet: 2,5 su bardağı şeker, 3 su bardağı su"
+],
+"steps": [
+"Şerbeti kaynatıp soğutun.",
+"Hamur malzemelerini çırpın.",
+"180 °C'de 35 dakika pişirin.",
+"Sıcak tatlıya soğuk şerbeti dökün.",
+"Dilimleyin."
+],
+"tips": [
+"Şerbet soğuk, tatlı sıcak olmalı."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n10_014",
+"title": "Elmalı yulaflı fırın kurabiye kup",
+"category": "Tatlılar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": 180,
+"ingredients": [
+"2 elma",
+"6 yemek kaşığı yulaf",
+"2 yemek kaşığı bal",
+"1 yemek kaşığı tereyağı",
+"1 çay kaşığı tarçın"
+],
+"steps": [
+"Elmaları küp doğrayıp kaplara koyun.",
+"Yulaf, bal, tereyağı ve tarçını karıştırın.",
+"Elmaların üzerine yayın.",
+"180 °C'de 20 dakika pişirin.",
+"Ilık servis edin."
+],
+"tips": [
+"Tek kişilik porsiyonlar pratiktir."
+],
+"serving": "Ilık.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n10_015",
+"title": "Karpuz ve beyaz peynir tabağı (tatlı)",
+"category": "Tatlılar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 0,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"Yarım küçük karpuz",
+"200 g beyaz peynir",
+"4–5 dal nane",
+"1 yemek kaşığı bal"
+],
+"steps": [
+"Karpuzu üçgen dilimleyin.",
+"Peyniri küp doğrayın.",
+"Tabağa dizin.",
+"Nane ve bal gezdirin.",
+"Soğuk servis edin."
+],
+"tips": [
+"Yaz akşamlarının klasiğidir."
+],
+"serving": "Soğuk.",
+"storage": "Aynı gün."
+},
+{
+"id": "n10_101",
+"title": "Zeytinyağlı enginar kalbi mezesi",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"6 enginar kalbi",
+"1 havuç",
+"1 patates",
+"1 limon",
+"4 yemek kaşığı zeytinyağı",
+"Yarım demet dereotu",
+"1 tatlı kaşığı şeker, tuz"
+],
+"steps": [
+"Enginarları limonlu suda bekletin.",
+"Havuç ve patatesi küp doğrayın.",
+"Enginarlara yerleştirip tencereye dizin.",
+"Yağ, limon, şeker, tuz ve 1 bardak suyla 25 dakika pişirin.",
+"Dereotuyla soğuk servis edin."
+],
+"tips": [
+"Limonlu su kararmayı önler."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 2–3 gün."
+},
+{
+"id": "n10_102",
+"title": "Zeytinyağlı lahana sarma",
+"category": "Mezeler",
+"servings": 6,
+"prepMinutes": 40,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"1 lahana",
+"1 su bardağı pirinç",
+"2 soğan",
+"Yarım su bardağı zeytinyağı",
+"1 tatlı kaşığı nane, pul biber, tuz",
+"1 limon"
+],
+"steps": [
+"Lahana yapraklarını haşlayın.",
+"Soğan, pirinç ve baharatlarla harç yapın.",
+"Yapraklara sarın.",
+"Tencereye dizip yağ, limon ve 2 bardak su ekleyin.",
+"40 dakika pişirip soğutun."
+],
+"tips": [
+"Kışlık bir mezedir."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 2–3 gün."
+},
+{
+"id": "n10_103",
+"title": "Fava ezmesi (dereotlu)",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 40,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 su bardağı kuru bakla",
+"1 soğan",
+"4 yemek kaşığı zeytinyağı",
+"Yarım demet dereotu",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Baklayı soğanla 40 dakika pişirin.",
+"Blenderdan geçirin.",
+"Zeytinyağı ve tuz ekleyin.",
+"Kaba döküp soğutun.",
+"Dereotuyla servis edin."
+],
+"tips": [
+"Soğuyunca dilimlenir."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 2–3 gün."
+},
+{
+"id": "n10_104",
+"title": "Ezme biber salatası (Antep usulü)",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 0,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 domates",
+"2 köz biber",
+"1 soğan",
+"Yarım demet maydanoz",
+"2 yemek kaşığı nar ekşisi",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı isot, tuz"
+],
+"steps": [
+"Tüm sebzeleri bıçakla çok ince kıyın.",
+"Nar ekşisi ve yağı ekleyin.",
+"İsot ve tuzla tatlandırın.",
+"Karıştırın.",
+"Soğuk servis edin."
+],
+"tips": [
+"Közlü biber mezeye derinlik katar."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 2–3 gün."
+},
+{
+"id": "n10_105",
+"title": "Yoğurtlu havuç tarator",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 10,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"3 havuç",
+"1,5 su bardağı yoğurt",
+"1 diş sarımsak",
+"2 yemek kaşığı ceviz",
+"1 yemek kaşığı zeytinyağı",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Havucu rendeleyip yağda 6 dakika soteleyin.",
+"Soğutun.",
+"Yoğurt ve sarımsakla karıştırın.",
+"Ceviz ekleyin.",
+"Servis edin."
+],
+"tips": [
+"Havucu soteleyince tatlanır."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 2–3 gün."
+},
+{
+"id": "n10_106",
+"title": "Antakya usulü fıstıklı humus",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 0,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı haşlanmış nohut",
+"3 yemek kaşığı tahin",
+"1 limon",
+"1 diş sarımsak",
+"2 yemek kaşığı Antep fıstığı",
+"3 yemek kaşığı zeytinyağı",
+"1 çay kaşığı kimyon, tuz"
+],
+"steps": [
+"Nohut, tahin, limon, sarımsak ve baharatları robotta çekin.",
+"Buzlu suyla kıvamı ayarlayın.",
+"Tabağa yayın.",
+"Kıyılmış fıstık serpin.",
+"Zeytinyağıyla servis edin."
+],
+"tips": [
+"Fıstık humusa renk ve çıtırlık katar."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 2–3 gün."
+},
+{
+"id": "n10_107",
+"title": "Patlıcan biber kızartması (yoğurtlu)",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": 210,
+"ingredients": [
+"2 patlıcan",
+"4 sivri biber",
+"1,5 su bardağı yoğurt",
+"1 diş sarımsak",
+"2 domates",
+"2 yemek kaşığı zeytinyağı",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Patlıcanları dilimleyip yağ sürerek 210 °C'de 20 dakika fırınlayın.",
+"Biberleri tavada çevirin.",
+"Domatesten sos yapın.",
+"Tabağa patlıcan ve biberleri dizin.",
+"Sarımsaklı yoğurt ve domates sosla servis edin."
+],
+"tips": [
+"Fırında yapmak kızartmadan hafiftir."
+],
+"serving": "Ilık.",
+"storage": "Buzdolabında 2–3 gün."
+},
+{
+"id": "n10_108",
+"title": "Kereviz yaprağı salatası (yoğurtlu)",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 0,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 demet kereviz yaprağı ve sapı",
+"1 su bardağı yoğurt",
+"1 diş sarımsak",
+"2 yemek kaşığı ceviz",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Kereviz yaprak ve saplarını ince doğrayın.",
+"Yoğurdu sarımsak ve tuzla çırpın.",
+"Karıştırın.",
+"Ceviz serpin.",
+"Servis edin."
+],
+"tips": [
+"Kerevizin yapraklarını değerlendirir."
+],
+"serving": "Soğuk.",
+"storage": "Aynı gün."
+},
+{
+"id": "n10_109",
+"title": "Yoğurtlu ıspanak kökü",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 10,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 demet ıspanak kökü",
+"1 su bardağı yoğurt",
+"1 diş sarımsak",
+"2 yemek kaşığı zeytinyağı",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Kökleri çok iyi yıkayın.",
+"3 dakika haşlayın.",
+"Soğutup doğrayın.",
+"Sarımsaklı yoğurtla karıştırın.",
+"Zeytinyağıyla servis edin."
+],
+"tips": [
+"Kökler topraklı olur; birkaç suda yıkayın."
+],
+"serving": "Soğuk.",
+"storage": "Aynı gün."
+},
+{
+"id": "n10_110",
+"title": "Közlenmiş kırmızı biber ve beyaz peynir",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"4 köz kırmızı biber",
+"150 g beyaz peynir",
+"2 yemek kaşığı zeytinyağı",
+"1 diş sarımsak",
+"1 çay kaşığı kekik"
+],
+"steps": [
+"Biberleri soyup şerit doğrayın.",
+"Peyniri ufalayın.",
+"Tabağa biberleri yayın.",
+"Peynir, sarımsak ve kekik serpin.",
+"Zeytinyağı gezdirin."
+],
+"tips": [
+"Rakı sofrasının klasiği."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 2–3 gün."
+},
+{
+"id": "n10_201",
+"title": "Ispanaklı mantarlı lazanya (vejetaryen)",
+"category": "Makarnalar",
+"servings": 8,
+"prepMinutes": 30,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"12 lazanya yaprağı",
+"500 g ıspanak",
+"250 g mantar",
+"250 g lor",
+"Beşamel: 3 yemek kaşığı tereyağı, 3 yemek kaşığı un, 3 su bardağı süt",
+"1,5 su bardağı rendelenmiş kaşar",
+"1 çay kaşığı tuz, muskat"
+],
+"steps": [
+"Ispanak ve mantarı soteleyip lorla karıştırın.",
+"Beşamel hazırlayın.",
+"Kaba beşamel, yaprak, sebze ve kaşarı kat kat dizin.",
+"Folyoyla 180 °C'de 30 dakika pişirin.",
+"Folyoyu açıp 10 dakika kızartın."
+],
+"tips": [
+"Etsiz ve doyurucu bir lazanyadır."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n10_202",
+"title": "Yeşil mercimekli makarna salatası",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"250 g kısa makarna",
+"1 su bardağı haşlanmış yeşil mercimek",
+"1 kırmızı biber",
+"Yarım demet maydanoz",
+"3 yemek kaşığı zeytinyağı",
+"2 yemek kaşığı nar ekşisi",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Makarnayı haşlayıp soğutun.",
+"Mercimeği ekleyin.",
+"Biberi doğrayın.",
+"Sos malzemeleriyle harmanlayın.",
+"Soğuk servis edin."
+],
+"tips": [
+"Protein açısından zengin bir salatadır."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n10_203",
+"title": "Domates soslu köfteli spagetti",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"350 g spagetti",
+"300 g kıyma",
+"2 yemek kaşığı galeta unu",
+"400 g domates",
+"2 diş sarımsak",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı tuz, kekik"
+],
+"steps": [
+"Kıymayı galeta unu ve tuzla yoğurup küçük köfteler yapın.",
+"Köfteleri tavada kızartın.",
+"Sarımsak ve domatesle sos yapın, köfteleri ekleyip 15 dakika pişirin.",
+"Spagettiyi haşlayın.",
+"Sosla servis edin."
+],
+"tips": [
+"Köfteler sosu lezzetlendirir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n10_204",
+"title": "Fesleğenli tavuklu penne",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"350 g penne",
+"300 g tavuk göğsü",
+"10 çeri domates",
+"1 avuç fesleğen",
+"3 yemek kaşığı zeytinyağı",
+"3 yemek kaşığı rendelenmiş parmesan",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Makarnayı haşlayın.",
+"Tavuğu küp doğrayıp yağda pişirin.",
+"Domatesleri ekleyip 3 dakika çevirin.",
+"Makarnayı ekleyin.",
+"Fesleğen ve parmesanla servis edin."
+],
+"tips": [
+"Fesleğeni ocaktan alınca ekleyin."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n10_205",
+"title": "Kabaklı kremalı fettuccine",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"350 g fettuccine",
+"2 kabak (jülyen)",
+"Yarım su bardağı krema",
+"1 diş sarımsak",
+"2 yemek kaşığı tereyağı",
+"3 yemek kaşığı parmesan",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Makarnayı haşlayın.",
+"Kabak ve sarımsağı tereyağında 4 dakika soteleyin.",
+"Kremayı ekleyin.",
+"Makarnayı ekleyip karıştırın.",
+"Parmesanla servis edin."
+],
+"tips": [
+"Kabak jülyenleri makarnayla uyumlu doku verir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n10_206",
+"title": "Brokolili fırın makarna",
+"category": "Makarnalar",
+"servings": 6,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"400 g burgu makarna",
+"1 brokoli",
+"2 su bardağı beşamel",
+"1,5 su bardağı rendelenmiş kaşar",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Makarna ve brokoliyi birlikte haşlayın.",
+"Beşamelle karıştırın.",
+"Kaba alıp kaşar serpin.",
+"200 °C'de 25 dakika pişirin.",
+"Dinlendirip servis edin."
+],
+"tips": [
+"Çocukların sebze yemesini kolaylaştırır."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n10_207",
+"title": "Ton balıklı domatesli makarna",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 5,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"350 g spagetti",
+"1 kutu ton balığı",
+"400 g domates",
+"2 diş sarımsak",
+"10 zeytin",
+"2 yemek kaşığı zeytinyağı",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Makarnayı haşlayın.",
+"Sarımsağı yağda çevirin, domatesi ekleyip 8 dakika pişirin.",
+"Ton balığı ve zeytini ekleyin.",
+"Makarnayla karıştırın.",
+"Maydanozla servis edin."
+],
+"tips": [
+"Kiler malzemeleriyle pratik yemek."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n10_208",
+"title": "Mantı soslu makarna (yoğurtlu kıymalı)",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"350 g kısa makarna",
+"200 g kıyma",
+"1,5 su bardağı sarımsaklı yoğurt",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı pul biber, nane, tuz"
+],
+"steps": [
+"Makarnayı haşlayın.",
+"Kıymayı kavurun.",
+"Makarnayı tabağa alıp yoğurt dökün.",
+"Kıymayı ekleyin.",
+"Pul biberli tereyağı gezdirin."
+],
+"tips": [
+"Mantı tadını pratik şekilde verir."
+],
+"serving": "Sıcak.",
+"storage": "Taze tüketin."
+},
+{
+"id": "n10_209",
+"title": "Limonlu sarımsaklı spagetti",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 5,
+"cookMinutes": 12,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"350 g spagetti",
+"4 diş sarımsak",
+"4 yemek kaşığı zeytinyağı",
+"1 limon (kabuğu ve suyu)",
+"Yarım demet maydanoz",
+"3 yemek kaşığı parmesan",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Makarnayı haşlayın.",
+"Sarımsağı yağda 1 dakika çevirin.",
+"Makarna, limon kabuğu ve suyunu ekleyin.",
+"Biraz haşlama suyuyla karıştırın.",
+"Maydanoz ve parmesanla servis edin."
+],
+"tips": [
+"Sade ama aromatik bir makarnadır."
+],
+"serving": "Sıcak.",
+"storage": "Taze tüketin."
+},
+{
+"id": "n10_210",
+"title": "Sebzeli soya soslu erişte (wok)",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 12,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"300 g erişte",
+"1 havuç",
+"1 kabak",
+"1 biber",
+"4 mantar",
+"3 yemek kaşığı soya sosu",
+"2 yemek kaşığı sıvı yağ",
+"1 tatlı kaşığı susam"
+],
+"steps": [
+"Erişteyi haşlayın.",
+"Sebzeleri jülyen doğrayın.",
+"Yüksek ateşte yağda 4 dakika çevirin.",
+"Erişte ve soyayı ekleyin.",
+"Susamla servis edin."
+],
+"tips": [
+"Soya sosu tuzludur."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n10_301",
+"title": "Kaşarlı sosisli milföy",
+"category": "Hamur işleri",
+"servings": 8,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"8 kare milföy",
+"4 sosis",
+"8 dilim kaşar",
+"1 yumurta",
+"1 tatlı kaşığı susam"
+],
+"steps": [
+"Sosisleri ikiye kesin.",
+"Milföylere kaşar ve sosis koyup sarın.",
+"Yumurta sürün.",
+"Susam serpin.",
+"200 °C'de 20 dakika pişirin."
+],
+"tips": [
+"Çocuk partileri için idealdir."
+],
+"serving": "Sıcak.",
+"storage": "Taze tüketin."
+},
+{
+"id": "n10_302",
+"title": "Ispanaklı peynirli kare börek (milföy)",
+"category": "Hamur işleri",
+"servings": 8,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"8 kare milföy",
+"200 g ıspanak",
+"150 g beyaz peynir",
+"1 yumurta"
+],
+"steps": [
+"Ispanağı soldurup peynirle karıştırın.",
+"Milföylerin ortasına koyun.",
+"Köşeleri ortaya katlayın.",
+"Yumurta sürün.",
+"200 °C'de 25 dakika pişirin."
+],
+"tips": [
+"Ispanak suyunu iyice sıkın."
+],
+"serving": "Sıcak.",
+"storage": "Taze tüketin."
+},
+{
+"id": "n10_303",
+"title": "Zeytinli açma (mayasız, pratik)",
+"category": "Hamur işleri",
+"servings": 12,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": 180,
+"ingredients": [
+"1 su bardağı yoğurt",
+"Yarım su bardağı sıvı yağ",
+"1 paket kabartma tozu",
+"Yaklaşık 3 su bardağı un",
+"Yarım su bardağı doğranmış zeytin",
+"1 yumurta"
+],
+"steps": [
+"Yoğurt, yağ ve kabartma tozunu karıştırın.",
+"Un ve zeytinle hamur yapın.",
+"Şekil verin.",
+"Yumurta sürün.",
+"180 °C'de 25 dakika pişirin."
+],
+"tips": [
+"Mayasız olduğu için hızlıdır."
+],
+"serving": "Çayla.",
+"storage": "Kapalı kapta 2 gün."
+},
+{
+"id": "n10_304",
+"title": "Tepsi pizza (ev yapımı hamur)",
+"category": "Hamur işleri",
+"servings": 6,
+"prepMinutes": 90,
+"cookMinutes": 20,
+"difficulty": "Orta",
+"ovenCelsius": 230,
+"ingredients": [
+"3 su bardağı un",
+"1 paket instant maya",
+"1 su bardağı ılık su",
+"3 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı tuz, şeker",
+"1 su bardağı domates sosu",
+"2 su bardağı rendelenmiş kaşar",
+"Üzeri için 1 biber, 6 mantar, 10 zeytin"
+],
+"steps": [
+"Hamuru yoğurup 1 saat mayalandırın.",
+"Tepsiye yayın.",
+"Sos, kaşar ve malzemeleri yerleştirin.",
+"230 °C'de 18–20 dakika pişirin.",
+"Dilimleyin."
+],
+"tips": [
+"Fırını iyice ısıtın."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 1 gün."
+},
+{
+"id": "n10_305",
+"title": "Kıymalı çıtır börek (yufka, fırında)",
+"category": "Hamur işleri",
+"servings": 6,
+"prepMinutes": 20,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": 190,
+"ingredients": [
+"4 yufka",
+"300 g kıyma",
+"1 soğan",
+"1 su bardağı süt",
+"Yarım su bardağı sıvı yağ",
+"1 yumurta",
+"1 tatlı kaşığı tuz, karabiber"
+],
+"steps": [
+"Kıymayı soğanla kavurup soğutun.",
+"Süt ve yağı karıştırın.",
+"Yufkaları sosla ıslatıp harçla katlayarak tepsiye dizin.",
+"Yumurta sürün.",
+"190 °C'de 30 dakika pişirin."
+],
+"tips": [
+"Harç soğuk olmalı."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n10_401",
+"title": "Tahinli kurabiye (çay saati)",
+"category": "Kek ve kurabiyeler",
+"servings": 20,
+"prepMinutes": 15,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": 180,
+"ingredients": [
+"Yarım su bardağı tahin",
+"Yarım su bardağı sıvı yağ",
+"Yarım su bardağı şeker",
+"1 paket kabartma tozu",
+"Yaklaşık 2,5 su bardağı un"
+],
+"steps": [
+"Tahin, yağ ve şekeri karıştırın.",
+"Kabartma tozu ve unla hamur yapın.",
+"Şekil verip tepsiye dizin.",
+"180 °C'de 15 dakika pişirin.",
+"Soğutun."
+],
+"tips": [
+"Yumurtasız bir kurabiyedir."
+],
+"serving": "Çayla.",
+"storage": "Kapalı kapta 1 hafta."
+},
+{
+"id": "n10_402",
+"title": "Kakaolu muffin",
+"category": "Kek ve kurabiyeler",
+"servings": 12,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": 180,
+"ingredients": [
+"2 yumurta",
+"Yarım su bardağı şeker",
+"1 su bardağı süt",
+"Yarım su bardağı sıvı yağ",
+"3 yemek kaşığı kakao",
+"2 su bardağı un",
+"1 paket kabartma tozu"
+],
+"steps": [
+"Fırını 180 °C'ye ısıtın.",
+"Islak malzemeleri çırpın.",
+"Kuru malzemeleri ekleyin.",
+"Kalıplara paylaştırın.",
+"20 dakika pişirin."
+],
+"tips": [
+"Fazla karıştırmayın."
+],
+"serving": "Sütle.",
+"storage": "Kapalı kapta 3 gün."
+},
+{
+"id": "n10_403",
+"title": "Hindistan cevizli kurabiye",
+"category": "Kek ve kurabiyeler",
+"servings": 20,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": 170,
+"ingredients": [
+"2 yumurta akı",
+"Yarım su bardağı şeker",
+"2 su bardağı hindistan cevizi",
+"1 yemek kaşığı un"
+],
+"steps": [
+"Yumurta aklarını şekerle kar gibi çırpın.",
+"Hindistan cevizi ve unu nazikçe katın.",
+"Kaşıkla tepsiye bırakın.",
+"170 °C'de 15 dakika pişirin.",
+"Soğutun."
+],
+"tips": [
+"Kalan yumurta aklarını değerlendirir."
+],
+"serving": "Çayla.",
+"storage": "Kapalı kapta 1 hafta."
+},
+{
+"id": "n10_404",
+"title": "Pekmezli tarçınlı kek",
+"category": "Kek ve kurabiyeler",
+"servings": 10,
+"prepMinutes": 15,
+"cookMinutes": 40,
+"difficulty": "Kolay",
+"ovenCelsius": 175,
+"ingredients": [
+"3 yumurta",
+"Yarım su bardağı şeker",
+"Yarım su bardağı pekmez",
+"1 su bardağı süt",
+"Yarım su bardağı sıvı yağ",
+"2,5 su bardağı un",
+"1 paket kabartma tozu",
+"1 tatlı kaşığı tarçın"
+],
+"steps": [
+"Yumurta ve şekeri çırpın.",
+"Pekmez, süt ve yağı ekleyin.",
+"Kuru malzemeleri ekleyin.",
+"175 °C'de 40 dakika pişirin.",
+"Soğutun."
+],
+"tips": [
+"Pekmez kekin rengini koyulaştırır."
+],
+"serving": "Çayla.",
+"storage": "Kapalı kapta 3 gün."
+},
+{
+"id": "n10_405",
+"title": "Cevizli üzümlü kurabiye (yulaflı)",
+"category": "Kek ve kurabiyeler",
+"servings": 16,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": 180,
+"ingredients": [
+"100 g tereyağı",
+"Yarım su bardağı esmer şeker",
+"1 yumurta",
+"1 su bardağı yulaf",
+"1 su bardağı un",
+"Yarım su bardağı kuru üzüm",
+"Yarım su bardağı ceviz",
+"Yarım çay kaşığı karbonat"
+],
+"steps": [
+"Tereyağı ve şekeri çırpın.",
+"Yumurtayı ekleyin.",
+"Kuru malzemeleri, üzüm ve cevizi ekleyin.",
+"Kaşıkla tepsiye bırakın.",
+"180 °C'de 15 dakika pişirin."
+],
+"tips": [
+"Ortası yumuşak kalmalı."
+],
+"serving": "Sütle.",
+"storage": "Kapalı kapta 5 gün."
+}
+]

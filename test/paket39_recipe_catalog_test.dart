@@ -76,4 +76,9 @@ void main() {
       ingredients: ['1 yufka'], steps: ['Fırını 180 °C ısıtın.', 'b', 'c'], minutes: 40);
     expect(RecipeMeta.ovenCelsius(r), 180);
   });
+
+  test('Paket 39: 1000+ özgün genel tarif, hepsi ayrıntılı', () {
+    expect(generalRecipes.length, greaterThanOrEqualTo(1000));
+    expect(generalRecipes.where((r) => !r.detailed), isEmpty);
+  });
 }

@@ -507,6 +507,51 @@ n09_502	sebzeli tavuk çorbası (şehriyesiz)
 n09_503	kabak çorbası (kremasız)
 n09_504	arpa şehriye çorbası
 n09_505	bezelye çorbası
+n10_001	kabak tatlısı (cevizli)
+n10_002	ayva tatlısı
+n10_003	sütlü irmik tatlısı (kalıp)
+n10_004	kemalpaşa tatlısı (hazır)
+n10_005	meyveli jöle kupu
+n10_006	fırında sütlü muzlu tatlı
+n10_007	tahin helvalı tatlı (kup)
+n10_008	fırında elmalı pankek (dutch baby)
+n10_009	höşmerim
+n10_010	pekmezli irmik helvası
+n10_011	çikolatalı muz dilimleri (dondurulmuş)
+n10_012	çilekli sütlü tatlı (pratik)
+n10_013	yoğurt tatlısı (şerbetli)
+n10_014	elmalı yulaflı fırın kurabiye kup
+n10_015	karpuz ve beyaz peynir tabağı (tatlı)
+n10_101	zeytinyağlı enginar kalbi mezesi
+n10_102	zeytinyağlı lahana sarma
+n10_103	fava ezmesi (dereotlu)
+n10_104	ezme biber salatası (antep usulü)
+n10_105	yoğurtlu havuç tarator
+n10_106	antakya usulü fıstıklı humus
+n10_107	patlıcan biber kızartması (yoğurtlu)
+n10_108	kereviz yaprağı salatası (yoğurtlu)
+n10_109	yoğurtlu ıspanak kökü
+n10_110	közlenmiş kırmızı biber ve beyaz peynir
+n10_201	ıspanaklı mantarlı lazanya (vejetaryen)
+n10_202	yeşil mercimekli makarna salatası
+n10_203	domates soslu köfteli spagetti
+n10_204	fesleğenli tavuklu penne
+n10_205	kabaklı kremalı fettuccine
+n10_206	brokolili fırın makarna
+n10_207	ton balıklı domatesli makarna
+n10_208	mantı soslu makarna (yoğurtlu kıymalı)
+n10_209	limonlu sarımsaklı spagetti
+n10_210	sebzeli soya soslu erişte (wok)
+n10_301	kaşarlı sosisli milföy
+n10_302	ıspanaklı peynirli kare börek (milföy)
+n10_303	zeytinli açma (mayasız, pratik)
+n10_304	tepsi pizza (ev yapımı hamur)
+n10_305	kıymalı çıtır börek (yufka, fırında)
+n10_401	tahinli kurabiye (çay saati)
+n10_402	kakaolu muffin
+n10_403	hindistan cevizli kurabiye
+n10_404	pekmezli tarçınlı kek
+n10_405	cevizli üzümlü kurabiye (yulaflı)
 p39a10_001	fırında sebzeli tavuk güveç
 p39a10_002	cevizli yoğurtlu semizotu kasesi
 p39a10_005	kırmızı mercimekli kabak çorbası
