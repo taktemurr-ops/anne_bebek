@@ -97,7 +97,8 @@ void main() {
       for (var i = 0; i < 10; i++) {
         await tester.pump(const Duration(milliseconds: 100));
       }
-      expect(tester.takeException(), isNull, reason: name);
+      final error = tester.takeException();
+      expect(error, isNull, reason: '$name: ${error is FlutterError ? error.diagnostics.map((d) => d.toString()).join('\n') : error}');
       final texts = find.byType(Text).evaluate().length;
       expect(texts, greaterThanOrEqualTo(3), reason: '$name: ekran neredeyse boş ($texts metin)');
       final interactive = find.byWidgetPredicate((w) =>
@@ -107,7 +108,15 @@ void main() {
           w is TextField || w is EditableText ||
           (w is ListTile && w.onTap != null) ||
           (w is InkWell && w.onTap != null) ||
-          w is Checkbox || w is Switch || w is ChoiceChip || w is FilterChip || w is Tab);
+          w is Checkbox || w is Switch || w is ChoiceChip || w is FilterChip || w is Tab ||
+          w is DropdownButton || w is Slider || w is PopupMenuButton ||
+          (w is GestureDetector && w.onTap != null));
+      // Etkileşimli öğe ekranın altında olabilir; tembel listeyi aşağı kaydırarak ara.
+      final scrollables = find.byType(Scrollable);
+      for (var i = 0; i < 8 && interactive.evaluate().isEmpty && scrollables.evaluate().isNotEmpty; i++) {
+        await tester.drag(scrollables.first, const Offset(0, -500), warnIfMissed: false);
+        await tester.pump(const Duration(milliseconds: 200));
+      }
       expect(interactive, findsWidgets, reason: '$name: dokunulacak ya da kayıt girilecek bir öğe yok');
       await tester.pumpWidget(const SizedBox());
       await tester.pump(const Duration(seconds: 1));

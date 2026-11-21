@@ -85,6 +85,16 @@ class _ShoppingChecklistPageState extends State<ShoppingChecklistPage> {
               color: Theme.of(context).colorScheme.error)),
             TextButton(onPressed: _load, child: const Text('Yeniden dene')),
           ])),
+        if (_items.isEmpty && _error == null) const Padding(
+          padding: EdgeInsets.fromLTRB(24, 32, 24, 8),
+          child: Column(children: [
+            Text('🛒', style: TextStyle(fontSize: 48)),
+            SizedBox(height: 8),
+            Text('Alışveriş listen boş', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700)),
+            SizedBox(height: 6),
+            Text('“Ürün ekle” ile listeye ekle; aldıklarını işaretle. Bebek bezi, mama, ıslak mendil gibi '
+                'düzenli ihtiyaçlarını buraya yazabilirsin.', textAlign: TextAlign.center),
+          ])),
         Expanded(child: ListView.builder(
           itemCount: _items.length,
           itemBuilder: (context, index) {

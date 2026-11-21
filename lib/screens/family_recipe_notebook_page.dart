@@ -196,6 +196,20 @@ class _FamilyRecipeNotebookPageState extends State<FamilyRecipeNotebookPage> {
                     ],
                   ),
                 ),
+              if (_recipes.isEmpty && _error == null)
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(24, 32, 24, 8),
+                  child: Column(children: [
+                    Text('📖', style: TextStyle(fontSize: 48)),
+                    SizedBox(height: 8),
+                    Text('Aile tarif defterin henüz boş',
+                        style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700)),
+                    SizedBox(height: 6),
+                    Text('Annenden, kayınvalidenden öğrendiğin tarifleri “Tarif ekle” ile yaz. '
+                        'Tarif detaylarındaki “Aile tarif defterime ekle” ile hazır tarifleri de buraya kaydedebilirsin.',
+                        textAlign: TextAlign.center),
+                  ]),
+                ),
               Expanded(
                 child: ListView.builder(
                   itemCount: _recipes.length,

@@ -116,7 +116,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.enterText(find.byKey(const Key('profil_name')), 'Ayşe');
       await tester.enterText(find.byKey(const Key('profil_blood')), 'A Rh+');
-      await tester.ensureVisible(find.byKey(const Key('profil_kaydet')));
+      await tester.scrollUntilVisible(find.byKey(const Key('profil_kaydet')), 300, scrollable: find.byType(Scrollable).first);
       await tester.tap(find.byKey(const Key('profil_kaydet')));
       await tester.pumpAndSettle();
       expect(find.byKey(const Key('profil_kart_ad')), findsOneWidget);
