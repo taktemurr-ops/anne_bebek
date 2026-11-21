@@ -1706,8 +1706,10 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   ];
   static const _altMenuBolumleri = [0, 1, 2, 5];
 
+  // Seçenekler küçük ekranlara sığmayabilir: menü kaydırılabilir.
   void _hizliKayitMenusu() => showModalBottomSheet<void>(context: context, showDragHandle: true,
-    builder: (ctx) => SafeArea(child: Column(mainAxisSize: MainAxisSize.min, children: [
+    isScrollControlled: true,
+    builder: (ctx) => SafeArea(child: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
       const Padding(padding: EdgeInsets.only(bottom: 4), child: Text('Hızlı kayıt',
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: mor))),
       ListTile(leading: const Icon(Icons.local_drink, color: Color(0xFFE94791)), title: const Text('Beslenme kaydı'), onTap: () {Navigator.pop(ctx); _olayEkle('Beslenme');}),
@@ -1718,7 +1720,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       ListTile(leading: const Icon(Icons.add_shopping_cart, color: Color(0xFFE94791)), title: const Text('Alışveriş listesine ürün'), onTap: () {Navigator.pop(ctx); _urunEkle();}),
       ListTile(leading: const Icon(Icons.water_drop_rounded, color: Color(0xFFE94791)), title: const Text('Adet başlangıcı'), onTap: () {Navigator.pop(ctx); _adetGunuSec();}),
       ListTile(leading: const Icon(Icons.edit_note_rounded, color: Color(0xFFE94791)), title: const Text('Kadın sağlığı notu'), onTap: () {Navigator.pop(ctx); Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomensHealthJournalPage()));}),
-    ])));
+    ]))));
 
   @override
   Widget build(BuildContext context) {

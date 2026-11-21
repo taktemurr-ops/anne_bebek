@@ -96,6 +96,8 @@ void main() {
     await startApp(tester);
     await tester.tap(find.byTooltip('Hızlı kayıt ekle'));
     await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Uyku kaydı'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Uyku kaydı'));
     await tester.pumpAndSettle();
     await tester.enterText(find.descendant(of: find.byType(AlertDialog), matching: find.byType(TextField)), 'cihaz testi uyku');
@@ -110,6 +112,8 @@ void main() {
     await tester.tap(find.text('Tarifler').last);
     await tester.pumpAndSettle();
     final recipe = find.textContaining('çorbası').first;
+    await tester.ensureVisible(recipe);
+    await tester.pumpAndSettle();
     await tester.tap(recipe);
     await tester.pumpAndSettle();
     final add = find.byKey(const ValueKey('add_to_notebook'));
@@ -129,7 +133,9 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Bebeklerde ateş'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('Ne zaman doktora'), findsOneWidget);
+    final doctor = find.textContaining('Ne zaman doktora');
+    await tester.scrollUntilVisible(doctor, 300, scrollable: find.byType(Scrollable).first);
+    expect(doctor, findsOneWidget);
   });
 
   testWidgets('7) Bilgi asistanı cihazda yanıt verir', (tester) async {

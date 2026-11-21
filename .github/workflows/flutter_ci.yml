@@ -154,9 +154,7 @@ jobs:
           arch: x86_64
           profile: pixel_6
           disable-animations: true
-          script: |
-            set -o pipefail
-            flutter test integration_test/gp01_smoke_test.dart -d emulator-5554 2>&1 | tee /tmp/anne-bebek-emulator-smoke.log
+          script: bash -o pipefail -c "flutter test integration_test/gp01_smoke_test.dart -d emulator-5554 2>&1 | tee /tmp/anne-bebek-emulator-smoke.log"
 
       - name: Emulator smoke hata gunlugunu sakla
         if: failure()

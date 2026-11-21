@@ -55,6 +55,6 @@ jobs:
           arch: x86_64
           profile: ${{ matrix.profile }}
           disable-animations: true
-          script: |
-            set -o pipefail
-            flutter test integration_test/device_acceptance_test.dart -d emulator-5554 --reporter expanded 2>&1 | tee /tmp/cihaz.log
+          # Emülatör aracı betiği satır satır çalıştırır; hata kodu kaybolmasın
+          # diye tüm komut tek satırda bash -o pipefail ile çalışır.
+          script: bash -o pipefail -c "flutter test integration_test/device_acceptance_test.dart -d emulator-5554 --reporter expanded 2>&1 | tee /tmp/cihaz.log"
