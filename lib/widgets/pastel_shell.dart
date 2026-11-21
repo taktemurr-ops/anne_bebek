@@ -113,12 +113,16 @@ class PastelTitle extends StatelessWidget {
   Widget build(BuildContext context) => Row(mainAxisSize: MainAxisSize.min, children: [
         Icon(icon, color: PastelPalette.primary, size: 24),
         const SizedBox(width: 8),
+        // Geri tuşu ve eylemlerle dar kalan çubukta kesilmek yerine küçülür.
         Flexible(
-          child: Text(title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.w900, color: PastelPalette.primary)),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(title,
+                maxLines: 1,
+                style: const TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.w900, color: PastelPalette.primary)),
+          ),
         ),
       ]);
 }

@@ -71,6 +71,14 @@ const mor = Color(0xFF48235F);
 const pembe = Color(0xFFFFD9ED);
 const arka = Color(0xFFFFF7FC);
 
+/// Paket 39 referansı: liste satırları daha küçük ve yoğun yazı kullanır.
+ThemeData _kompaktListeler(ThemeData base) => base.copyWith(
+  listTileTheme: ListTileThemeData(
+    titleTextStyle: base.textTheme.bodyLarge!.copyWith(fontSize: 14.5, fontWeight: FontWeight.w600, color: mor),
+    subtitleTextStyle: base.textTheme.bodyMedium!.copyWith(fontSize: 12.5, color: Colors.black54),
+  ),
+);
+
 class AnneBebekApp extends StatelessWidget {
   const AnneBebekApp({super.key});
   @override
@@ -84,7 +92,7 @@ class AnneBebekApp extends StatelessWidget {
       GlobalCupertinoLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
     ],
-    theme: ThemeData(
+    theme: _kompaktListeler(ThemeData(
       useMaterial3: true,
       // Renkli simgeler: sistemin emoji yazı tipi (cihazda zaten mevcut).
       fontFamilyFallback: const ['Noto Color Emoji', 'Apple Color Emoji'],
@@ -108,7 +116,7 @@ class AnneBebekApp extends StatelessWidget {
         filled: true, fillColor: const Color(0xFFF7EAF4),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(22), borderSide: BorderSide.none),
         enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(22), borderSide: BorderSide.none)),
-    ),
+    )),
     home: const ConsentGate(child: AnaUygulama()),
   );
 }
@@ -405,8 +413,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
 
 
   Widget _baslik(String s, {String? action, VoidCallback? onTap}) => Padding(
-    padding: const EdgeInsets.fromLTRB(3, 20, 3, 12),
-    child: Row(children: [Expanded(child: Text(s, style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w800, color: mor))),
+    padding: const EdgeInsets.fromLTRB(3, 16, 3, 8),
+    child: Row(children: [Expanded(child: Text(s, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: mor))),
       if (action != null) TextButton(onPressed: onTap, child: Text(action))]));
 
   Widget _panel({required Widget child, Color color = Colors.white, EdgeInsets? padding}) =>
@@ -739,10 +747,20 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const BabyActivityCatalogPage()))),
       _baslik('Büyüme ölçümleri', action: 'Ölçüm ekle', onTap: _olcumEkle),
       if (olcumler.isEmpty) _panel(child: const Text('Boy ve kilo ölçümü eklediğinde burada görünecek.')),
-      ...olcumler.map((o) => _panel(child: ListTile(leading: const Icon(Icons.show_chart, color: mor),
-        title: Text('Boy: ${_olcumMetni(o['boy'], 'cm')}  •  Kilo: ${_olcumMetni(o['kilo'], 'kg')}\nBaş çevresi: ${_olcumMetni(o['basCevresi'], 'cm')}'),
-        subtitle: Text(_guvenliTarih(o['tarih'])),
-        trailing: IconButton(tooltip: 'Ölçümü sil', icon: const Icon(Icons.delete_outline), onPressed: () => _kayitSil(olcumler, o))))),
+      // En yeni ölçüm üstte; kompakt satır.
+      ...([...olcumler]..sort((a, b) => (b['tarih'] ?? '').compareTo(a['tarih'] ?? ''))).map((o) => PastelCard(
+        padding: const EdgeInsets.fromLTRB(14, 10, 4, 10),
+        child: Row(children: [
+          const EmojiBadge('📏', size: 40, background: Color(0xFFEDE4FF)),
+          const SizedBox(width: 12),
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(_guvenliTarih(o['tarih']), style: const TextStyle(fontWeight: FontWeight.w800, color: mor)),
+            const SizedBox(height: 2),
+            Text('Boy ${_olcumMetni(o['boy'], 'cm')} · Kilo ${_olcumMetni(o['kilo'], 'kg')} · Baş ${_olcumMetni(o['basCevresi'], 'cm')}',
+              style: const TextStyle(fontSize: 12.5, color: Colors.black87)),
+          ])),
+          IconButton(tooltip: 'Ölçümü sil', icon: const Icon(Icons.delete_outline, size: 20), onPressed: () => _kayitSil(olcumler, o)),
+        ]))),
       _baslik('Bakım rehberi'),
       _rehberKart('Bebek Masajı', Icons.spa), _rehberKart('Bebek Gelişimi', Icons.auto_graph),
       _rehberKart('Uyku Düzeni', Icons.bedtime),
@@ -861,7 +879,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     ]);
   }
 
-  String _olcumMetni(String? deger, String birim) => (deger == null || deger.isEmpty) ? '—' : '$deger $birim';
+  // Türkçe ondalık ayırıcı (7,4 kg).
+  String _olcumMetni(String? deger, String birim) => (deger == null || deger.isEmpty) ? '—' : '${deger.replaceAll('.', ',')} $birim';
   String _guvenliTarih(String? s) {final d = DateTime.tryParse(s ?? ''); return d == null ? '' : _tarih(d);}
   Widget _sayac(String label, String type) => Column(children: [Text('${olaylar.where((e) => e['tur'] == type && _guvenliTarih(e['zaman']) == _tarih(DateTime.now())).length}',
     style: const TextStyle(fontSize: 23, color: mor, fontWeight: FontWeight.bold)), Text(label)]);
@@ -1596,7 +1615,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   Widget _profilSayfasi() => ListView(padding: const EdgeInsets.all(16), children: [
     _panel(color: const Color(0xFFFFFCFF), child: Column(children: [
       ListTile(
-        title: const Text('Çocuk Profillerim', style: TextStyle(fontWeight: FontWeight.w800, color: mor, fontSize: 17)),
+        title: const Text('Çocuk Profillerim', maxLines: 1, style: TextStyle(fontWeight: FontWeight.w800, color: mor, fontSize: 15.5)),
         trailing: TextButton.icon(onPressed: _profillerAc, icon: const Icon(Icons.add_rounded),
           label: const Text('Profil Ekle'))),
       ListTile(
