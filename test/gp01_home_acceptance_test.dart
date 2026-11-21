@@ -85,12 +85,7 @@ void main() {
     await tester.tap(find.text('Bebek profilini tamamla'));
     await tester.pumpAndSettle();
     expect(find.text('Bebek profillerim'), findsOneWidget);
-    debugPrint('TANI: AppBar=${find.byType(AppBar).evaluate().length} '
-        'BackButton=${find.byType(BackButton).evaluate().length} '
-        'BackButtonIcon=${find.byType(BackButtonIcon).evaluate().length} '
-        'Scaffold=${find.byType(Scaffold).evaluate().length} '
-        'canPop=${Navigator.of(tester.element(find.text('Bebek profillerim'))).canPop()}');
-    await tester.pageBack();
+    await tester.tap(find.byType(BackButton).last);
     await tester.pumpAndSettle();
 
     final recipes = find.text('Bebeğime uygun tarifler');
@@ -101,7 +96,7 @@ void main() {
     await tester.tap(recipes);
     await tester.pumpAndSettle();
     expect(find.text('Bebek tarifleri'), findsOneWidget);
-    await tester.pageBack();
+    await tester.tap(find.byType(BackButton).last);
     await tester.pumpAndSettle();
 
     final backup = find.text('Şifreli yedekleme ve geri yükleme');
@@ -112,7 +107,7 @@ void main() {
     await tester.tap(backup);
     await tester.pumpAndSettle();
     expect(find.text('Yedekleme ve geri yükleme'), findsOneWidget);
-    await tester.pageBack();
+    await tester.tap(find.byType(BackButton).last);
     await tester.pumpAndSettle();
     await tester.scrollUntilVisible(
       find.byType(DailyQuickActions), -220,

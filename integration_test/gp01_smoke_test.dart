@@ -81,7 +81,7 @@ void main() {
     await tester.tap(find.byTooltip('Bebek profilleri'));
     await tester.pumpAndSettle();
     expect(find.text('Bebek profillerim'), findsOneWidget);
-    await tester.pageBack();
+    await tester.tap(find.byType(BackButton).last);
     await tester.pumpAndSettle();
 
     final recipes = find.text('Bebeğime uygun tarifler');
@@ -92,7 +92,7 @@ void main() {
     await tester.tap(recipes);
     await tester.pumpAndSettle();
     expect(find.text('Bebek tarifleri'), findsOneWidget);
-    await tester.pageBack();
+    await tester.tap(find.byType(BackButton).last);
     await tester.pumpAndSettle();
 
     final backup = find.text('Şifreli yedekleme ve geri yükleme');

@@ -63,6 +63,14 @@ if __name__ == '__main__':
         src = sources(); a, b = int(sys.argv[2]), int(sys.argv[3])
         for s in src[a:b]:
             print(hid(s) + '\t' + s.replace('\n', '\\n'))
+    elif len(sys.argv) > 1 and sys.argv[1] == 'pairs':
+        # İngilizce çevirisi olan kimlikleri sırayla gösterir: pairs <hedef_dil> A B
+        src = sources(); en = load('en'); have = load(sys.argv[2])
+        ids = [hid(s) for s in src if hid(s) in en and hid(s) not in have]
+        a, b = int(sys.argv[3]), int(sys.argv[4])
+        print(len(ids), 'eksik')
+        for k in ids[a:b]:
+            print(k + '\t' + en[k].replace('\n', '\\n'))
     elif len(sys.argv) > 1 and sys.argv[1] == 'missing':
         src = sources(); have = load(sys.argv[2])
         miss = [s for s in src if hid(s) not in have]
