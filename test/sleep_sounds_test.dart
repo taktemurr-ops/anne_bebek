@@ -91,6 +91,7 @@ void main() {
     expect(players, hasLength(2));
     await tester.tap(find.byKey(const Key('uyku_sure_15')));
     await tester.pump();
+    await tester.scrollUntilVisible(find.byKey(const Key('uyku_womb')), 200, scrollable: find.byType(Scrollable).first);
     await tester.tap(find.byKey(const Key('uyku_womb')));
     await tester.pump(const Duration(milliseconds: 100));
     await tester.scrollUntilVisible(find.byKey(const Key('uyku_brahms')), 200, scrollable: find.byType(Scrollable).first);
