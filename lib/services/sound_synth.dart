@@ -32,7 +32,7 @@ const sleepSounds = <SleepSound>[
 ];
 
 /// [id] için döngüye uygun (başı ve sonu dikişsiz) mono 16 bit WAV üretir.
-Uint8List synthesizeWav(String id, {int seconds = 24, int seed = 7}) {
+Uint8List synthesizeWav(String id, {int seconds = 12, int seed = 7}) {
   final samples = switch (id) {
     'brahms' => _melody(_brahms, bpm: 66),
     'twinkle' => _melody(_twinkle, bpm: 76),
@@ -98,8 +98,8 @@ Float64List _noise(String id, int n, int seed) {
         lp += 0.08 * (white() - lp);
         out[i] = lp + 0.02 * math.sin(2 * math.pi * 100 * t);
       case 'waves':
-        // 8 saniyelik dalga döngüsü (24 sn'ye tam bölünür).
-        final s = math.sin(math.pi * t / 8);
+        // 6 saniyelik dalga döngüsü (12 sn'ye tam bölünür).
+        final s = math.sin(math.pi * t / 6);
         out[i] = brown() * (0.25 + 0.75 * s * s) + pink() * 0.25 * s * s;
       case 'shush':
         // Yüksek geçiren filtre ile "ş" rengi, 1,5 sn'lik ritim.

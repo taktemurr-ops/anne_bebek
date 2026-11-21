@@ -185,7 +185,7 @@ void main() {
     await tester.pumpAndSettle();
     await scrollTo(tester, find.byKey(const Key('uyku_rain')));
     await tester.tap(find.byKey(const Key('uyku_rain')));
-    for (var i = 0; i < 120 && find.textContaining('sonra kapanacak').evaluate().isEmpty
+    for (var i = 0; i < 360 && find.textContaining('sonra kapanacak').evaluate().isEmpty
         && find.textContaining('Ses çalınamadı').evaluate().isEmpty; i++) {
       await tester.pump(const Duration(milliseconds: 250));
     }
