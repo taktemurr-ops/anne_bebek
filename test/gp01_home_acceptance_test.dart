@@ -85,6 +85,11 @@ void main() {
     await tester.tap(find.text('Bebek profilini tamamla'));
     await tester.pumpAndSettle();
     expect(find.text('Bebek profillerim'), findsOneWidget);
+    debugPrint('TANI: AppBar=${find.byType(AppBar).evaluate().length} '
+        'BackButton=${find.byType(BackButton).evaluate().length} '
+        'BackButtonIcon=${find.byType(BackButtonIcon).evaluate().length} '
+        'Scaffold=${find.byType(Scaffold).evaluate().length} '
+        'canPop=${Navigator.of(tester.element(find.text('Bebek profillerim'))).canPop()}');
     await tester.pageBack();
     await tester.pumpAndSettle();
 

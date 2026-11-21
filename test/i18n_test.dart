@@ -34,7 +34,7 @@ void main() {
   testWidgets('dil değişince metin ve yön değişir', (tester) async {
     I18n.setForTest('en', exact: const {'Merhaba': 'Hello'});
     await tester.pumpWidget(ValueListenableBuilder<String>(valueListenable: I18n.language, builder: (_, lang, _) =>
-        MaterialApp(locale: Locale(lang), supportedLocales: [for (final l in appLanguages) Locale(l.code)],
+        MaterialApp(key: ValueKey(lang), locale: Locale(lang), supportedLocales: [for (final l in appLanguages) Locale(l.code)],
             home: const Scaffold(body: i18n.Text('Merhaba')))));
     expect(find.text('Hello'), findsOneWidget);
     I18n.setForTest('tr', exact: const {});

@@ -13,6 +13,7 @@ void main() {
     final button = tester.widget<FilledButton>(find.byKey(const ValueKey('consent_accept')));
     expect(button.onPressed, isNull);
 
+    await tester.ensureVisible(find.byKey(const ValueKey('consent_checkbox')));
     await tester.tap(find.byKey(const ValueKey('consent_checkbox')));
     await tester.pump();
     await tester.ensureVisible(find.byKey(const ValueKey('consent_accept')));
