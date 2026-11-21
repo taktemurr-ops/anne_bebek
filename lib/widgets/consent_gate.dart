@@ -60,8 +60,10 @@ class _ConsentGateState extends State<ConsentGate> {
     }
     return Scaffold(
       body: SafeArea(
-        child: ListView(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(24, 32, 24, 24),
+          child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Icon(Icons.favorite_rounded, size: 48, color: Color(0xFFF0449B)),
             const SizedBox(height: 12),
@@ -86,6 +88,7 @@ class _ConsentGateState extends State<ConsentGate> {
               child: const Text('Devam et'),
             ),
           ],
+        ),
         ),
       ),
     );
