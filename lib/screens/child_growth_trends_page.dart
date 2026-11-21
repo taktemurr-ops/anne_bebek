@@ -20,6 +20,8 @@ class _ChildGrowthTrendsPageState extends State<ChildGrowthTrendsPage> {
   bool loading = true;
   final Map<String, List<CdcWhoRow>> whoReferences = {};
   String? whoMessage;
+  // Dönem filtresi: null = tümü.
+  int? periodMonths;
   @override void initState() { super.initState(); _load(); }
   Future<void> _load() async {
     try {
@@ -71,8 +73,21 @@ class _ChildGrowthTrendsPageState extends State<ChildGrowthTrendsPage> {
               ? 'WHO persentili için doğrulanmış CDC/WHO 0–24 ay CSV dosyaları gereklidir. Üstteki yükleme simgesiyle resmi CSV içeriğini panodan içe aktarabilirsiniz. Referans yüklenmeden persentil hesaplanmaz.'
               : 'Yüklenen referanslar yalnızca bu ekran açıkken tutulur. 0–24 ay aylık WHO persentilleri bilgi amaçlıdır; tıbbi değerlendirme değildir.'))),
         if (whoMessage != null) Padding(padding: const EdgeInsets.all(8), child: Text(whoMessage!)),
+        Padding(padding: const EdgeInsets.symmetric(vertical: 8), child: SegmentedButton<int>(
+          key: const ValueKey('growth_period'),
+          segments: const [
+            ButtonSegment(value: 0, label: Text('Tümü')),
+            ButtonSegment(value: 3, label: Text('3 ay')),
+            ButtonSegment(value: 6, label: Text('6 ay')),
+            ButtonSegment(value: 12, label: Text('12 ay')),
+          ],
+          selected: {periodMonths ?? 0},
+          onSelectionChanged: (v) => setState(() => periodMonths = v.first == 0 ? null : v.first),
+        )),
         for (final category in const ['Kilo (kg)', 'Boy (cm)', 'Baş çevresi (cm)'])
-          _MeasurementSection(category: category, entries: entries, child: widget.child, reference: whoReferences[category]),
+          _MeasurementSection(category: category,
+            entries: growthEntriesInPeriod(entries, periodMonths, DateTime.now()),
+            child: widget.child, reference: whoReferences[category]),
       ]),
   );
 }

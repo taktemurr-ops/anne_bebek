@@ -42,6 +42,8 @@ import 'tracking_journal.dart';
 import 'screens/backup_page.dart';
 import 'services/privacy_service.dart';
 import 'widgets/consent_gate.dart';
+import 'widgets/add_to_notebook_tile.dart';
+import 'services/recipe_notebook_bridge.dart';
 import 'services/local_reminder_notifications.dart';
 import 'services/secure_health_store.dart';
 import 'data/product_catalog.dart';
@@ -881,6 +883,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           _hero(t.title, '${t.category} • ${t.minutes} dk', simge),
           RecipeSummaryChips(recipe: t),
           const SizedBox(height: 8),
+          AddToNotebookTile(build: () => RecipeNotebookBridge.fromGeneral(t)),
           _panel(color: const Color(0xFFFFEAF5), child: ListTile(
             leading: const Icon(Icons.add_shopping_cart, color: mor),
             title: const Text('Malzemeleri alışveriş listeme ekle'),

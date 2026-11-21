@@ -1,4 +1,6 @@
 import '../utils/privacy_log_sanitizer.dart';
+import '../services/recipe_notebook_bridge.dart';
+import '../widgets/add_to_notebook_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/baby_recipe_catalog.dart';
@@ -298,7 +300,9 @@ class _BabyRecipeDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 18),
+            const SizedBox(height: 12),
+            AddToNotebookTile(build: () => RecipeNotebookBridge.fromBaby(recipe)),
+            const SizedBox(height: 12),
             Text('Malzemeler', style: Theme.of(context).textTheme.titleLarge),
             ...ingredients.map((item) => ListTile(
               dense: true,
