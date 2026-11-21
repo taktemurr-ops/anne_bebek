@@ -58,6 +58,7 @@ import 'screens/baby_activity_catalog_page.dart';
 import 'screens/baby_nutrition_page.dart';
 import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -122,6 +123,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   final List<String> alisveris = [];
   final Set<String> favoriler = {};
   bool yuklendi = false;
+  Object? _sonKayitHatasi;
   String? yuklemeHatasi;
   String arama = '';
   String tarifFiltre = 'Tümü';
@@ -193,17 +195,22 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         p.setString('tamamlanan', jsonEncode(tamamlanan.toList())),
         p.setString('alisveris_adet', jsonEncode(alisverisAdet)),
       ]);
+      _sonKayitHatasi = null;
       return true;
     } catch (error) {
+      _sonKayitHatasi = error;
       logSafeError('Kayıt başarısız', error);
       return false;
     }
   }
 
-  void _kayitBildir(bool basarili, {String basariMesaji = 'Kayıt tamamlandı.'}) {
+  void _kayitBildir(bool basarili, {String basariMesaji = 'Kayıt tamamlandı.', Object? hata}) {
     if (!mounted) return;
+    // Hata türü (içerik değil) gösterilir; cihazdaki sorunları bildirmek için.
+    final e = hata ?? _sonKayitHatasi;
+    final kod = e == null ? '' : ' (Hata kodu: ${e is PlatformException ? 'PE-${e.code}' : e.runtimeType})';
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(basarili ? basariMesaji : 'Kayıt kaydedilemedi. Lütfen tekrar deneyin.'),
+      content: Text(basarili ? basariMesaji : 'Kayıt kaydedilemedi. Lütfen tekrar deneyin.$kod'),
     ));
   }
 
@@ -1252,11 +1259,6 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     const Text('Bu sepet yalnızca taslak kaydıdır. Sipariş veya ödeme işlemi yapmaz.'),
   ]);
 
-  Future<void> _adetTarihi() async {
-    final d = await showDatePicker(context: context, initialDate: sonAdet ?? DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime.now());
-    if (d != null) {setState(() => sonAdet = d); _kaydet();}
-  }
-
   // Döngü geçmişi CycleTrackerPage ile aynı güvenli anahtarda tutulur.
   static const _donguAnahtari = 'cycle_history_v1';
 
@@ -1275,13 +1277,26 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     ?sonAdet,
   ]);
 
-  Future<void> _adetBaslangiciKaydet(DateTime gun) async {
+  /// Tarih seçtirip adet başlangıcı olarak kaydeder (düğmeler ve + menüsü).
+  Future<void> _adetGunuSec() async {
+    final now = DateTime.now();
+    final d = await showDatePicker(context: context,
+      helpText: 'Adet başlangıç günü',
+      initialDate: now, firstDate: DateTime(now.year - 3), lastDate: now);
+    if (d != null && mounted) await _adetBaslangiciKaydet(d, onayIste: false);
+  }
+
+  Future<void> _adetBaslangiciKaydet(DateTime gun, {bool onayIste = true}) async {
     final secilen = DateTime(gun.year, gun.month, gun.day);
     if (secilen.isAfter(DateTime.now())) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Gelecek bir gün adet başlangıcı olarak kaydedilemez.')));
       return;
     }
-    final onay = await showDialog<bool>(context: context, builder: (ctx) => AlertDialog(
+    if (donguTarihleri.any((d) => d.year == secilen.year && d.month == secilen.month && d.day == secilen.day)) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${_tarih(secilen)} zaten kayıtlı. Silmek için "Adet döngüsü geçmişim"i aç.')));
+      return;
+    }
+    final onay = !onayIste ? true : await showDialog<bool>(context: context, builder: (ctx) => AlertDialog(
       title: const Text('Adet başlangıcı'),
       content: Text('${_tarih(secilen)} adet başlangıç günü olarak kaydedilsin mi?'),
       actions: [
@@ -1299,12 +1314,12 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     try {
       await SecureHealthStore.write(_donguAnahtari, jsonEncode(yeni.map((d) => d.toIso8601String()).toList()));
       final basarili = await _kaydet();
-      if (!basarili) throw StateError('kayıt');
-      _kayitBildir(true, basariMesaji: 'Adet başlangıcı kaydedildi.');
-    } catch (_) {
+      if (!basarili) throw _sonKayitHatasi ?? StateError('kayıt');
+      _kayitBildir(true, basariMesaji: 'Adet başlangıcı kaydedildi: ${_tarih(secilen)}');
+    } catch (e) {
       if (!mounted) return;
       setState(() { donguTarihleri..clear()..addAll(onceki); sonAdet = oncekiSonAdet; });
-      _kayitBildir(false);
+      _kayitBildir(false, hata: e);
     }
   }
 
@@ -1328,6 +1343,22 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     final sonraki = tahmin.nextPeriod;
     final yumurtlama = tahmin.nextOvulation;
     return [
+      Row(children: [
+        Expanded(child: FilledButton.icon(
+          key: const ValueKey('adet_bugun'),
+          onPressed: () => _adetBaslangiciKaydet(DateTime.now()),
+          icon: const Icon(Icons.water_drop_rounded, size: 18),
+          label: const Text('Adetim bugün başladı'))),
+        const SizedBox(width: 8),
+        Expanded(child: OutlinedButton.icon(
+          key: const ValueKey('adet_tarih'),
+          onPressed: _adetGunuSec,
+          icon: const Icon(Icons.edit_calendar_rounded, size: 18),
+          label: const Text('Başka gün ekle'))),
+      ]),
+      const Padding(padding: EdgeInsets.fromLTRB(4, 6, 4, 10), child: Text(
+        'İpucu: takvimde bir güne dokunarak da adet başlangıcı ekleyebilirsin.',
+        style: TextStyle(fontSize: 11.5, color: Colors.black54))),
       CycleMonthCalendar(
         month: donguAyi,
         today: DateTime.now(),
@@ -1361,7 +1392,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         }),
       PastelLinkCard(icon: Icons.calendar_month_outlined, title: 'Son adet başlangıç tarihi',
         subtitle: sonAdet == null ? 'Henüz kaydedilmedi' : '${_tarih(sonAdet!)} • ${DateTime.now().difference(sonAdet!).inDays} gün önce',
-        iconColor: const Color(0xFFFFEBD9), onTap: _adetTarihi),
+        iconColor: const Color(0xFFFFEBD9), onTap: _adetGunuSec),
       const Padding(padding: EdgeInsets.all(10), child: Text(
         'Yumurtlama ve verimli dönem, ortalama döngü süresine göre yaklaşık hesaplanır. '
         'Doğum kontrolü veya gebelik planlaması için güvenilir bir yöntem değildir; tıbbi değerlendirme yerine geçmez.',
@@ -1635,6 +1666,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       ListTile(leading: const Icon(Icons.medication_outlined, color: Color(0xFFE94791)), title: const Text('İlaç / vitamin'), onTap: () {Navigator.pop(ctx); _olayEkle('İlaç / Vitamin');}),
       ListTile(leading: const Icon(Icons.monitor_weight, color: Color(0xFFE94791)), title: const Text('Boy / kilo kaydı'), onTap: () {Navigator.pop(ctx); _olcumEkle();}),
       ListTile(leading: const Icon(Icons.add_shopping_cart, color: Color(0xFFE94791)), title: const Text('Alışveriş listesine ürün'), onTap: () {Navigator.pop(ctx); _urunEkle();}),
+      ListTile(leading: const Icon(Icons.water_drop_rounded, color: Color(0xFFE94791)), title: const Text('Adet başlangıcı'), onTap: () {Navigator.pop(ctx); _adetGunuSec();}),
+      ListTile(leading: const Icon(Icons.edit_note_rounded, color: Color(0xFFE94791)), title: const Text('Kadın sağlığı notu'), onTap: () {Navigator.pop(ctx); Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomensHealthJournalPage()));}),
     ])));
 
   @override
