@@ -8,6 +8,7 @@ import 'services/growth_analysis.dart';
 import 'services/monthly_growth.dart';
 import 'services/pregnancy_timeline.dart';
 import 'services/pregnancy_week_guide.dart';
+import 'widgets/reference_widgets.dart';
 
 const _mor = Color(0xFF764A72);
 const _pembe = Color(0xFFF8DDEB);
@@ -29,6 +30,7 @@ class PregnancyPage extends StatefulWidget {
   State<PregnancyPage> createState() => _PregnancyPageState();
 }
 class _PregnancyPageState extends State<PregnancyPage> {
+  final _checklistKey = GlobalKey();
   DateTime? period;
   final Set<String> done = {};
   final List<Map<String, String>> appointments = [];
@@ -152,21 +154,34 @@ class _PregnancyPageState extends State<PregnancyPage> {
   Widget build(BuildContext context) {
     final timeline = period == null ? null : pregnancyTimeline(period!, DateTime.now());
     final valid = timeline != null;
+    final week = timeline?.week;
+    void openGuide() => Navigator.of(context).push(MaterialPageRoute<void>(
+      builder: (_) => PregnancyWeekGuidePage(initialWeek: (week ?? 1).clamp(1, 40))));
+    // Paket 39 referansı: hafta kartı, 40 haftalık ilerleme ve üç bağlantı kartı.
     return ListView(padding: const EdgeInsets.all(16), children: [
-      _header('Hamilelik takibi 🤰', valid ? '${timeline.week} hafta ${timeline.dayOfWeek} gün (yaklaşık)' :
-        'Son adet başlangıç tarihini girerek haftalık takibe başla.'),
-      const SizedBox(height: 16),
-      FilledButton.icon(onPressed: _choose, icon: const Icon(Icons.calendar_month),
-        label: Text(period == null ? 'Tarih seç' : 'Tarihi değiştir: ${_date(period!)}')),
+      PregnancyWeekCard(
+        week: week,
+        dueDate: period == null ? null : _date(period!.add(const Duration(days: 280))),
+        progress: timeline?.progress ?? 0,
+        onChangeDate: _choose,
+      ),
+      const SizedBox(height: 14),
+      PastelLinkCard(icon: Icons.child_friendly_outlined, title: 'Bebeğin Gelişimi',
+        subtitle: valid ? pregnancyWeekNote(timeline.week) : 'Tarih girildiğinde bu haftanın gelişimi gösterilir',
+        onTap: openGuide),
+      PastelLinkCard(icon: Icons.calendar_view_week_rounded, title: 'Hafta Hafta Gebelik',
+        subtitle: valid ? '${timeline.week}. haftada seni neler bekliyor?' : '1–40 hafta gebelik rehberi',
+        iconColor: _lila, onTap: openGuide),
+      PastelLinkCard(icon: Icons.menu_book_rounded, title: 'Yapılacaklar Listem',
+        subtitle: 'Kontroller, testler ve hazırlıklar', iconColor: const Color(0xFFFFEBD9),
+        onTap: () {
+          final ctx = _checklistKey.currentContext;
+          if (ctx != null) Scrollable.ensureVisible(ctx, duration: const Duration(milliseconds: 350));
+        }),
       if (timeline != null) ...[
-        const SizedBox(height: 18),
-        LinearProgressIndicator(value: timeline.progress, minHeight: 12,
-          borderRadius: BorderRadius.circular(10), color: _mor, backgroundColor: _pembe),
-        ListTile(leading: const Icon(Icons.event, color: _mor), title: const Text('Tahmini doğum tarihi'),
-          subtitle: Text(_date(period!.add(const Duration(days: 280))))),
         Card(child: ListTile(leading: const Icon(Icons.auto_awesome, color: _mor),
-          title: Text('${timeline.trimester} • ${timeline.week}. hafta'),
-          subtitle: Text(pregnancyWeekNote(timeline.week)))),
+          title: Text('${timeline.trimester} • ${timeline.week} hafta ${timeline.dayOfWeek} gün (yaklaşık)'),
+          subtitle: Text('Son adet başlangıcı: ${_date(period!)}'))),
         Card(child: ListTile(leading: const Icon(Icons.today, color: _mor),
           title: const Text('Tahmini doğuma kalan süre'),
           subtitle: Text(timeline.daysUntilEstimatedDueDate >= 0
@@ -187,7 +202,7 @@ class _PregnancyPageState extends State<PregnancyPage> {
           body: const TrackingJournalPage(pregnancy: true)))),
         icon: const Icon(Icons.edit_note), label: const Text('Kilo, belirti ve kontrol günlüğüm')),
       const SizedBox(height: 16),
-      Row(children: [
+      Row(key: _checklistKey, children: [
         const Expanded(child: Text('Kontrol ve randevularım',
           style: TextStyle(fontSize: 20, color: _mor, fontWeight: FontWeight.bold))),
         IconButton(tooltip: 'Kontrol ekle', onPressed: _addAppointment,
