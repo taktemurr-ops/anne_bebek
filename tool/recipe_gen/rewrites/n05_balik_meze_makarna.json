@@ -12,7 +12,7 @@
 "1 kg hamsi (temizlenmiş)",
 "1 su bardağı mısır unu",
 "1 tatlı kaşığı tuz",
-"Kızartmak için sıvı yağ",
+"Kızartmak için 2 su bardağı sıvı yağ",
 "1 limon"
 ],
 "steps": [
@@ -135,7 +135,7 @@
 "1 su bardağı un",
 "1 su bardağı soğuk bira veya maden suyu",
 "1 çay kaşığı tuz, karbonat",
-"Kızartmak için sıvı yağ",
+"Kızartmak için 2 su bardağı sıvı yağ",
 "Tarator: 1 dilim ekmek, yarım su bardağı ceviz, 1 diş sarımsak, 2 yemek kaşığı yoğurt"
 ],
 "steps": [
@@ -318,7 +318,7 @@
 "1 havuç",
 "1 limon",
 "2 yemek kaşığı zeytinyağı",
-"Dereotu, tuz"
+"Yarım demet dereotu, 1 çay kaşığı tuz"
 ],
 "steps": [
 "Fırını 200 °C'ye ısıtın.",
@@ -438,7 +438,7 @@
 "2 yemek kaşığı zeytinyağı",
 "1 limon",
 "1 çay kaşığı tuz",
-"Roka, kırmızı soğan"
+"1 demet roka, 1 kırmızı soğan"
 ],
 "steps": [
 "Balıklara çapraz çizik atın.",
@@ -770,7 +770,7 @@
 "Yarım su bardağı ceviz",
 "1 diş sarımsak",
 "4 yemek kaşığı zeytinyağı",
-"Dereotu, nane, maydanoz"
+"Yarım demet dereotu, 4–5 dal nane, yarım demet maydanoz"
 ],
 "steps": [
 "Peynir ve loru ezin.",

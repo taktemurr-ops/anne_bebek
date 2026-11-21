@@ -462,7 +462,7 @@
 "1 su bardağı mısır",
 "1 domates",
 "1 avokado",
-"Yoğurt",
+"4 yemek kaşığı yoğurt",
 "1 tatlı kaşığı kimyon, tatlı toz biber, tuz"
 ],
 "steps": [
@@ -493,7 +493,7 @@
 "1 kutu ton balığı",
 "2 yemek kaşığı yoğurt",
 "1 çay kaşığı tuz",
-"Susam"
+"1 yemek kaşığı susam"
 ],
 "steps": [
 "Pirinci pişirip ılıtın.",
@@ -739,7 +739,7 @@
 "Yarım su bardağı süt",
 "1 tatlı kaşığı tarçın",
 "1 yemek kaşığı tereyağı",
-"Bal veya pekmez"
+"2 yemek kaşığı bal veya pekmez"
 ],
 "steps": [
 "Yumurta, süt ve tarçını çırpın.",
@@ -1093,7 +1093,7 @@
 "4 su bardağı çekirdeksiz karpuz",
 "1 limon",
 "4–5 dal nane",
-"Buz"
+"1 su bardağı buz"
 ],
 "steps": [
 "Karpuzu blenderda çekin.",
@@ -1150,7 +1150,7 @@
 "4 limon",
 "Yarım su bardağı şeker",
 "5 su bardağı su",
-"Buz"
+"1 su bardağı buz"
 ],
 "steps": [
 "Çilekleri şekerle ezin.",

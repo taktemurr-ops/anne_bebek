@@ -1,5 +1,5 @@
 """Compact helper to write detailed recipes and dump them to rewrites/*.json."""
-import json, os
+import json, os, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'rewrites')
@@ -15,9 +15,21 @@ QTY = {'Tuz':'1 tatlı kaşığı tuz','Tuz, karabiber':'1 tatlı kaşığı tuz
 'Üzeri için çörek otu ve susam':'Üzeri için 1 tatlı kaşığı çörek otu ve 1 tatlı kaşığı susam','Üzeri için mantar, biber, zeytin':'Üzeri için 4 mantar, 1 biber, 8 zeytin',
 'Üzeri için Antep fıstığı veya hindistan cevizi':'Üzeri için 2 yemek kaşığı Antep fıstığı veya hindistan cevizi','Üzeri için zeytinyağı ve pul biber':'Üzeri için 1 yemek kaşığı zeytinyağı ve 1 çay kaşığı pul biber'}
 
+QTY.update({'Birkaç dal dereotu veya maydanoz':'4–5 dal dereotu veya maydanoz','Birkaç yaprak kekik':'1 çay kaşığı taze kekik yaprağı','Kekik':'1 çay kaşığı kekik',
+'Birkaç damla limon':'1 tatlı kaşığı limon suyu','Buz':'1 su bardağı buz','Üzeri için susam ve çörek otu':'Üzeri için 1 tatlı kaşığı susam ve 1 tatlı kaşığı çörek otu',
+'Yoğurt ve avokado ezmesi':'4 yemek kaşığı yoğurt ve 4 yemek kaşığı avokado ezmesi','Yoğurtlu tahin sos':'4 yemek kaşığı yoğurt ve 1 yemek kaşığı tahinle hazırlanmış sos',
+'Dereotu, tuz':'Yarım demet dereotu, 1 çay kaşığı tuz','Kızartmak için sıvı yağ':'Kızartmak için 2 su bardağı sıvı yağ','Hindistan cevizi ve Antep fıstığı':'2 yemek kaşığı hindistan cevizi ve 2 yemek kaşığı Antep fıstığı',
+'Ceviz, nar, tarçın':'Yarım su bardağı ceviz, 3 yemek kaşığı nar tanesi, 1 çay kaşığı tarçın','Nar':'Yarım su bardağı nar tanesi','Kaymak veya süzme yoğurt':'200 g kaymak veya süzme yoğurt',
+'Antep fıstığı':'3 yemek kaşığı Antep fıstığı','Roka, kırmızı soğan':'1 demet roka, 1 kırmızı soğan','Dereotu, nane, maydanoz':'Yarım demet dereotu, 4–5 dal nane, yarım demet maydanoz',
+'Susam':'1 yemek kaşığı susam','Rendelenmiş peynir':'3 yemek kaşığı rendelenmiş peynir','Yoğurt':'4 yemek kaşığı yoğurt','Bal veya pekmez':'2 yemek kaşığı bal veya pekmez'})
+
+MEASURE = re.compile(r'\d|yarım|çeyrek|tutam|isteğe|az', re.I)
+
 def R(id, title, category, servings, prep, cook, difficulty, oven, ingredients, steps, tips, serving, storage):
     ingredients = [QTY.get(i, i) for i in ingredients]
     assert len(steps) >= 4, title
+    unmeasured = [i for i in ingredients if not MEASURE.search(i)]
+    assert not unmeasured, (title, unmeasured)
     assert len(ingredients) >= 3, title
     return dict(id=id, title=title, category=category, servings=servings, prepMinutes=prep,
                 cookMinutes=cook, difficulty=difficulty, ovenCelsius=oven, ingredients=ingredients,
