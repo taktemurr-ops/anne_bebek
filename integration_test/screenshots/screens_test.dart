@@ -1,6 +1,6 @@
 // Tasarım incelemesi için ana ekranların PNG görüntülerini üretir.
 // Normal CI'da çalışmaz; .github/workflows/screens.yml ile
-// `flutter test screenshot_test --update-goldens` olarak çalıştırılır.
+// `flutter test integration_test/screenshots --update-goldens` olarak çalıştırılır.
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -11,7 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../test/support/secure_storage_mock.dart';
+import '../../test/support/secure_storage_mock.dart';
 
 Future<void> _loadFonts() async {
   final root = Platform.environment['FLUTTER_ROOT'];

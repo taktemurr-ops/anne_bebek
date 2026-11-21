@@ -5,7 +5,7 @@ name: Ekran görüntüleri
 on:
   push:
     branches: [claude/tum-duzeltmeler]
-    paths: ['lib/**', 'screenshot_test/**', '.github/workflows/screens.yml']
+    paths: ['lib/**', 'integration_test/screenshots/**', '.github/workflows/screens.yml']
   workflow_dispatch:
 
 permissions:
@@ -28,12 +28,12 @@ jobs:
           cache: true
       - run: flutter pub get
       - name: Görüntüleri üret
-        run: flutter test screenshot_test --update-goldens || true
+        run: flutter test integration_test/screenshots --update-goldens || true
       - name: Görüntüleri dala yaz
         run: |
           set -e
           mkdir -p /tmp/shots
-          cp screenshot_test/goldens/*.png /tmp/shots/ 2>/dev/null || true
+          cp integration_test/screenshots/goldens/*.png /tmp/shots/ 2>/dev/null || true
           ls -la /tmp/shots
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
