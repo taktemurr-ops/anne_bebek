@@ -1,3 +1,4 @@
+import '../utils/dialog_helpers.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../services/activity_plan.dart';
@@ -47,7 +48,7 @@ class _ActivityPlannerPageState extends State<ActivityPlannerPage> {
   Future<void> _add() async {
     final controller = TextEditingController();
     var category = 'Oyun';
-    final result = await showDialog<(String, String)>(context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, refresh) => AlertDialog(
+    final result = await showDialogAndDispose<(String, String)>(disposables: [controller], context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, refresh) => AlertDialog(
       title: const Text('Yeni etkinlik'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: controller, maxLength: 120, autofocus: true, decoration: const InputDecoration(labelText: 'Etkinlik adı')),
@@ -55,7 +56,6 @@ class _ActivityPlannerPageState extends State<ActivityPlannerPage> {
       ]),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')), FilledButton(onPressed: () { final value = controller.text.trim(); if (value.isNotEmpty) Navigator.pop(ctx, (value, category)); }, child: const Text('Ekle'))],
     )));
-    controller.dispose();
     if (result == null || !mounted) return;
     await _change(() => _items.add(ActivityPlan(id: DateTime.now().microsecondsSinceEpoch.toString(), title: result.$1, category: result.$2, day: _day)));
   }

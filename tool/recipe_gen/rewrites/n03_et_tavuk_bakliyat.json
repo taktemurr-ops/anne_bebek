@@ -1,0 +1,1234 @@
+[
+{
+"id": "n03_001",
+"title": "Hünkar beğendi",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 90,
+"difficulty": "Zor",
+"ovenCelsius": null,
+"ingredients": [
+"600 g kuşbaşı dana eti",
+"1 soğan",
+"2 domates",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı tereyağı",
+"Beğendi: 4 patlıcan, 2 yemek kaşığı tereyağı, 2 yemek kaşığı un, 1,5 su bardağı süt, yarım su bardağı rendelenmiş kaşar",
+"1 tatlı kaşığı tuz, karabiber"
+],
+"steps": [
+"Eti tereyağında suyunu çekene kadar kavurun, soğan ve salçayı ekleyin.",
+"Domates ve 2 bardak sıcak suyla kısık ateşte 75 dakika, et yumuşayana kadar pişirin.",
+"Patlıcanları közleyip soyun, ince kıyın.",
+"Tereyağında unu kavurun, sütü ekleyip koyulaştırın; patlıcan ve kaşarı karıştırın.",
+"Beğendiyi tabağa yayıp eti ortasına koyun."
+],
+"tips": [
+"Patlıcanı limonlu suda bekletirseniz kararmaz."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_002",
+"title": "Orman kebabı",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 75,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"600 g kuşbaşı dana eti",
+"2 havuç",
+"2 patates",
+"1 su bardağı bezelye",
+"10 arpacık soğan",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı tuz, kekik"
+],
+"steps": [
+"Eti tereyağında kavurun.",
+"Arpacık soğanları ve salçayı ekleyin.",
+"2 bardak sıcak suyla 45 dakika pişirin.",
+"Küp havuç, patates ve bezelyeyi ekleyip 25 dakika daha pişirin.",
+"Kekikle servis edin."
+],
+"tips": [
+"Et yumuşamadan sebzeleri eklemeyin."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_003",
+"title": "Kuzu tandır (fırında)",
+"category": "Et yemekleri",
+"servings": 6,
+"prepMinutes": 15,
+"cookMinutes": 180,
+"difficulty": "Zor",
+"ovenCelsius": 160,
+"ingredients": [
+"1,5 kg kuzu kol veya but",
+"6 diş sarımsak",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı kekik ve biberiye",
+"1 tatlı kaşığı tuz, karabiber",
+"1 su bardağı su"
+],
+"steps": [
+"Etin üzerine bıçakla delikler açıp sarımsakları yerleştirin.",
+"Yağ ve baharatlarla ovun.",
+"Fırın kabına su ile koyup folyoyla sıkıca kapatın.",
+"160 °C fırında 2,5–3 saat, kemikten ayrılacak kadar pişirin.",
+"Folyoyu açıp 220 °C'de 15 dakika kızartın."
+],
+"tips": [
+"Düşük ısı ve uzun süre yumuşaklığın sırrıdır."
+],
+"serving": "Pilav ve közlenmiş sebzeyle.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_004",
+"title": "İzmir köfte",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 25,
+"cookMinutes": 45,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"500 g kıyma",
+"1 soğan (rendelenmiş)",
+"1 yumurta",
+"3 yemek kaşığı galeta unu",
+"3 patates",
+"2 biber",
+"2 domates",
+"1 yemek kaşığı salça",
+"1 tatlı kaşığı tuz, kimyon, karabiber"
+],
+"steps": [
+"Kıyma, soğan, yumurta, galeta unu ve baharatları yoğurup parmak köfteler yapın.",
+"Köfteleri ve elma dilim patatesleri fırında 200 °C'de 15 dakika ön pişirin.",
+"Tepsiye köfte, patates, biber ve domatesi sırayla dizin.",
+"Salçayı 1,5 bardak sıcak suda açıp üzerine dökün.",
+"180 °C'de 30 dakika pişirin."
+],
+"tips": [
+"Ön pişirme köftelerin dağılmasını önler."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_005",
+"title": "Tas kebabı",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 80,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"600 g kuşbaşı dana",
+"2 soğan",
+"2 domates",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı kekik, tuz",
+"2 su bardağı sıcak su"
+],
+"steps": [
+"Eti kendi suyunu çekene kadar pişirin.",
+"Tereyağı ve soğanı ekleyip 5 dakika kavurun.",
+"Salça ve domatesi ekleyin.",
+"Sıcak suyla kısık ateşte 70 dakika pişirin.",
+"Kekikle servis edin."
+],
+"tips": [
+"Düdüklü tencerede 30 dakika yeterlidir."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_006",
+"title": "Kıymalı patlıcan musakka",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 25,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"4 patlıcan",
+"300 g kıyma",
+"1 soğan",
+"2 biber",
+"2 domates",
+"1 yemek kaşığı salça",
+"3 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı tuz, karabiber"
+],
+"steps": [
+"Patlıcanları alacalı soyup halka kesin, tuzlu suda 15 dakika bekletip kurulayın.",
+"Patlıcanları fırında yağ sürüp 200 °C'de 15 dakika kızartın.",
+"Kıymayı soğan, biber ve salçayla kavurun.",
+"Fırın kabına patlıcan ve kıymayı kat kat dizin, domates dilimleri ekleyin.",
+"1 bardak sıcak su ekleyip 180 °C'de 25 dakika pişirin."
+],
+"tips": [
+"Patlıcanı fırınlamak kızartmadan daha hafiftir."
+],
+"serving": "Pilav ve yoğurtla.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_007",
+"title": "Islama köfte",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 20,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"500 g kıyma",
+"1 soğan",
+"3 yemek kaşığı galeta unu",
+"1 tatlı kaşığı kimyon, tuz",
+"2 pide",
+"2 su bardağı et suyu",
+"1 tatlı kaşığı salça",
+"2 yemek kaşığı tereyağı"
+],
+"steps": [
+"Köfte harcını yoğurup yassı köfteler yapın.",
+"Izgarada veya tavada her yüzü 4 dakika pişirin.",
+"Et suyunu salçayla kaynatın.",
+"Pide dilimlerini et suyuna batırıp tabağa dizin.",
+"Köfteleri üzerine yerleştirip tereyağı gezdirin."
+],
+"tips": [
+"Pide sıcak et suyunu kısa süre emmeli; hamurlaşmamalı."
+],
+"serving": "Domates ve biberle.",
+"storage": "Köfte buzdolabında 2 gün."
+},
+{
+"id": "n03_008",
+"title": "Kadınbudu köfte",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 30,
+"cookMinutes": 20,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"400 g kıyma",
+"Yarım su bardağı pirinç (haşlanmış)",
+"1 soğan",
+"1 yumurta (harca)",
+"2 yumurta (bulamak için)",
+"Yarım su bardağı un",
+"1 tatlı kaşığı tuz, karabiber, kimyon",
+"Kızartmak için 2 su bardağı sıvı yağ"
+],
+"steps": [
+"Kıymanın yarısını soğanla kavurup soğutun.",
+"Kalan çiğ kıyma, pirinç, yumurta ve baharatlarla yoğurun.",
+"Oval yassı köfteler yapın.",
+"Una, sonra çırpılmış yumurtaya bulayın.",
+"Kızgın yağda her yüzü 3–4 dakika kızartın."
+],
+"tips": [
+"Kıymanın yarısının pişmiş olması köfteye yumuşaklık verir."
+],
+"serving": "Patates püresiyle.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n03_009",
+"title": "Etli kuru fasulye",
+"category": "Et yemekleri",
+"servings": 6,
+"prepMinutes": 15,
+"cookMinutes": 90,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı kuru fasulye (bir gece ıslatılmış)",
+"300 g kuşbaşı dana",
+"1 soğan",
+"2 yemek kaşığı salça",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı tuz, pul biber",
+"5 su bardağı sıcak su"
+],
+"steps": [
+"Fasulyeyi 30 dakika ön haşlayıp süzün.",
+"Eti tereyağında kavurun, soğan ve salçayı ekleyin.",
+"Fasulye ve sıcak suyu ekleyin.",
+"Kısık ateşte 60 dakika, fasulyeler yumuşayana kadar pişirin.",
+"Tuzu son 10 dakikada ekleyin."
+],
+"tips": [
+"Tuzu erken eklemek fasulyenin yumuşamasını geciktirir."
+],
+"serving": "Pilav ve turşuyla.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_010",
+"title": "Ali Nazik kebabı",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 25,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"500 g kıyma",
+"4 patlıcan",
+"1,5 su bardağı süzme yoğurt",
+"2 diş sarımsak",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı tuz, kimyon, pul biber"
+],
+"steps": [
+"Patlıcanları közleyip soyun ve ince kıyın.",
+"Sarımsaklı yoğurdu patlıcanla karıştırın.",
+"Kıymayı baharatlarla tavada topaklanmadan kavurun.",
+"Patlıcanlı yoğurdu tabağa yayın, kıymayı ortaya koyun.",
+"Pul biberli tereyağı gezdirin."
+],
+"tips": [
+"Patlıcanı süzmek yoğurdun sulanmasını önler."
+],
+"serving": "Sıcak.",
+"storage": "Kıyma buzdolabında 2 gün."
+},
+{
+"id": "n03_011",
+"title": "Fırında kuzu pirzola",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"8 kuzu pirzola",
+"2 diş sarımsak",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı kekik, biberiye",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Pirzolaları yağ, sarımsak ve otlarla 30 dakika marine edin.",
+"Izgara tavayı iyice kızdırın.",
+"Her yüzü 3–4 dakika pişirin.",
+"Tuzu pişirdikten sonra serpin.",
+"5 dakika dinlendirip servis edin."
+],
+"tips": [
+"Dinlendirme suyunun içte kalmasını sağlar."
+],
+"serving": "Közlenmiş sebzeyle.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n03_012",
+"title": "Patatesli et yemeği",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 70,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"500 g kuşbaşı dana",
+"3 patates",
+"1 soğan",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı sıvı yağ",
+"1 tatlı kaşığı tuz, karabiber",
+"3 su bardağı sıcak su"
+],
+"steps": [
+"Eti suyunu çekene kadar kavurun.",
+"Soğan ve salçayı ekleyin.",
+"Sıcak suyla 45 dakika pişirin.",
+"Küp patatesleri ekleyip 20 dakika daha pişirin.",
+"Sıcak servis edin."
+],
+"tips": [
+"Patatesi geç ekleyin; dağılmasın."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_013",
+"title": "Kıymalı lahana sarması",
+"category": "Et yemekleri",
+"servings": 6,
+"prepMinutes": 40,
+"cookMinutes": 50,
+"difficulty": "Zor",
+"ovenCelsius": null,
+"ingredients": [
+"1 lahana",
+"300 g kıyma",
+"Yarım su bardağı pirinç",
+"1 soğan",
+"1 yemek kaşığı salça",
+"1 tatlı kaşığı tuz, karabiber, nane",
+"2 yemek kaşığı tereyağı"
+],
+"steps": [
+"Lahana yapraklarını haşlayıp kalın damarlarını açın.",
+"Kıyma, pirinç, rendelenmiş soğan ve baharatları yoğurun.",
+"Yapraklara harç koyup sarın.",
+"Tencereye dizip salçalı sıcak su ve tereyağı ekleyin.",
+"Üzerine tabak kapatıp kısık ateşte 45 dakika pişirin."
+],
+"tips": [
+"Tabak sarmaların açılmasını önler."
+],
+"serving": "Sarımsaklı yoğurtla.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_014",
+"title": "Taze fasulyeli kuşbaşı",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 60,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"400 g kuşbaşı dana",
+"500 g taze fasulye",
+"1 soğan",
+"2 domates",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı sıvı yağ",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Eti kavurup soğan ve salçayı ekleyin.",
+"1 bardak suyla 30 dakika pişirin.",
+"Doğranmış fasulye ve domatesi ekleyin.",
+"Kısık ateşte 30 dakika pişirin.",
+"Tuzunu ayarlayın."
+],
+"tips": [
+"Fasulyenin kılçıklarını ayıklayın."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_015",
+"title": "Dana rosto",
+"category": "Et yemekleri",
+"servings": 6,
+"prepMinutes": 15,
+"cookMinutes": 120,
+"difficulty": "Zor",
+"ovenCelsius": null,
+"ingredients": [
+"1 kg dana nuar",
+"4 diş sarımsak",
+"2 havuç",
+"2 soğan",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı kekik, tuz, karabiber",
+"1 su bardağı et suyu"
+],
+"steps": [
+"Eti baharatlarla ovup kızgın tencerede her yüzünü mühürleyin.",
+"İri doğranmış sebzeleri ve sarımsağı ekleyin.",
+"Et suyunu ekleyip kapağı kapatın.",
+"Kısık ateşte 2 saat, ara ara çevirerek pişirin.",
+"Dinlendirip ince dilimleyin, suyunu sos yapın."
+],
+"tips": [
+"Mühürlemek lezzeti hapseder."
+],
+"serving": "Patates püresiyle.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_016",
+"title": "Kıymalı börülce",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı haşlanmış börülce",
+"200 g kıyma",
+"1 soğan",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı sıvı yağ",
+"1,5 su bardağı sıcak su",
+"1 tatlı kaşığı tuz, pul biber"
+],
+"steps": [
+"Kıymayı soğanla kavurun.",
+"Salçayı ekleyin.",
+"Börülce ve suyu ekleyin.",
+"25 dakika pişirin.",
+"Pul biberle servis edin."
+],
+"tips": [
+"Börülce kuru baklagiller arasında en çabuk pişenlerdendir."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_017",
+"title": "Etli enginar",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 45,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"6 enginar",
+"300 g kuşbaşı kuzu",
+"1 soğan",
+"1 havuç",
+"1 limon",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Enginarları limonlu suda bekletin.",
+"Eti kavurup soğan ve havucu ekleyin.",
+"1 bardak suyla 25 dakika pişirin.",
+"Enginarları ekleyip limon suyu ilave edin.",
+"20 dakika daha pişirin."
+],
+"tips": [
+"Limon enginarın kararmasını önler."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_018",
+"title": "Kuzu incik (fırında)",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 150,
+"difficulty": "Zor",
+"ovenCelsius": 170,
+"ingredients": [
+"4 kuzu incik",
+"1 soğan",
+"2 domates",
+"4 diş sarımsak",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı kekik, tuz",
+"2 su bardağı su"
+],
+"steps": [
+"İncikleri tencerede mühürleyin.",
+"Fırın kabına soğan, domates ve sarımsakla yerleştirin.",
+"Su ve baharatları ekleyip folyoyla kapatın.",
+"170 °C'de 2,5 saat pişirin.",
+"Folyoyu açıp 15 dakika kızartın."
+],
+"tips": [
+"Kemikten ayrılıyorsa hazırdır."
+],
+"serving": "Bulgur pilavıyla.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_019",
+"title": "Sebzeli et haşlama",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 90,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"600 g kemikli dana eti",
+"2 patates",
+"2 havuç",
+"1 kabak",
+"1 soğan",
+"1 tatlı kaşığı tuz, karabiber",
+"6 su bardağı su"
+],
+"steps": [
+"Eti suyla kaynatıp köpüğünü alın.",
+"Bütün soğanı ekleyip 60 dakika pişirin.",
+"İri doğranmış sebzeleri ekleyin.",
+"25 dakika daha pişirin.",
+"Limonla servis edin."
+],
+"tips": [
+"Köpüğü almak suyu berrak tutar."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_020",
+"title": "Kıymalı ıspanaklı pide dürümü",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"300 g kıyma",
+"300 g ıspanak",
+"1 soğan",
+"4 lavaş",
+"1 su bardağı rendelenmiş kaşar",
+"1 tatlı kaşığı tuz, pul biber"
+],
+"steps": [
+"Kıymayı soğanla kavurun.",
+"Ispanağı ekleyip soldurun.",
+"Lavaşlara harcı ve kaşarı yayıp sarın.",
+"Tavada her yüzü 2 dakika kızartın.",
+"Dilimleyin."
+],
+"tips": [
+"Ispanağın suyu çekilmeli."
+],
+"serving": "Ayranla.",
+"storage": "Taze tüketin."
+},
+{
+"id": "n03_101",
+"title": "Tavuk şiş (yoğurtlu marine)",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 15,
+"difficulty": "Orta",
+"ovenCelsius": 220,
+"ingredients": [
+"600 g tavuk göğsü",
+"3 yemek kaşığı yoğurt",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı kekik, pul biber, tuz",
+"1 biber, 1 soğan"
+],
+"steps": [
+"Tavuğu küp doğrayıp yoğurt, salça, yağ ve baharatla en az 1 saat marine edin.",
+"Tavuk ve sebzeleri şişlere dizin.",
+"Izgarada veya fırında 220 °C'de 15 dakika çevirerek pişirin.",
+"İç sıcaklık 74 °C olmalı.",
+"Lavaş ve sumaklı soğanla servis edin."
+],
+"tips": [
+"Ahşap şişleri 30 dakika suda bekletin."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n03_102",
+"title": "Tavuk sote (domatesli biberli)",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"600 g tavuk göğsü",
+"2 biber",
+"2 domates",
+"1 soğan",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı sıvı yağ",
+"1 tatlı kaşığı tuz, kekik"
+],
+"steps": [
+"Tavuğu yüksek ateşte mühürleyin.",
+"Soğan ve biberi ekleyip 5 dakika soteleyin.",
+"Salça ve domatesi ekleyin.",
+"Kısık ateşte 12 dakika pişirin.",
+"Kekikle servis edin."
+],
+"tips": [
+"Tavuğu kalabalık etmeyin."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n03_103",
+"title": "Fırında patatesli tavuk but",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 50,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"8 tavuk baget",
+"4 patates",
+"1 soğan",
+"3 yemek kaşığı zeytinyağı",
+"1 yemek kaşığı salça",
+"1 tatlı kaşığı kekik, tatlı toz biber, tuz"
+],
+"steps": [
+"Tavukları yağ, salça ve baharatla ovun.",
+"Patates ve soğanı iri doğrayın.",
+"Tepsiye dizip 1 bardak su ekleyin.",
+"200 °C'de 50 dakika pişirin.",
+"Yarısında çevirin."
+],
+"tips": [
+"Tavuk kemiğinin dibi pembe kalmamalı."
+],
+"serving": "Salatayla.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n03_104",
+"title": "Tavuk haşlama ve sebze çorbası",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 45,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 tavuk but ve göğüs",
+"2 havuç",
+"1 patates",
+"1 soğan",
+"Yarım su bardağı şehriye",
+"8 su bardağı su",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Tavuğu suyla haşlayıp köpüğünü alın.",
+"45 dakika pişirip tavuğu çıkarın, didikleyin.",
+"Suya doğranmış sebzeleri ekleyip 15 dakika pişirin.",
+"Şehriye ve tavuğu ekleyip 8 dakika pişirin.",
+"Limonla servis edin."
+],
+"tips": [
+"Haşlama suyu soğuyunca üstündeki yağı alın."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n03_105",
+"title": "Tavuk tantuni",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"500 g tavuk göğsü (ince şerit)",
+"2 domates",
+"1 soğan",
+"Yarım demet maydanoz",
+"4 lavaş",
+"2 yemek kaşığı sıvı yağ",
+"1 tatlı kaşığı pul biber, kimyon, tuz"
+],
+"steps": [
+"Tavuğu baharatlarla yüksek ateşte 8 dakika pişirin.",
+"Domatesi küçük doğrayıp ekleyin, 3 dakika pişirin.",
+"Lavaşları tavada ısıtın.",
+"Tavuk, sumaklı soğan ve maydanozla sarın.",
+"Dilimleyip servis edin."
+],
+"tips": [
+"Lavaşı tavuğun suyuna bastırarak ısıtın."
+],
+"serving": "Ayranla.",
+"storage": "Taze tüketin."
+},
+{
+"id": "n03_106",
+"title": "Çerkez tavuğu",
+"category": "Tavuk yemekleri",
+"servings": 6,
+"prepMinutes": 20,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"1 tavuk göğsü",
+"2 dilim bayat ekmek",
+"1,5 su bardağı ceviz",
+"2 diş sarımsak",
+"1 tatlı kaşığı tatlı toz biber",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Tavuğu haşlayıp didikleyin; suyunu saklayın.",
+"Ekmeği haşlama suyuyla ıslatın.",
+"Ceviz, ekmek ve sarımsağı robotta çekip haşlama suyuyla krema kıvamına getirin.",
+"Tavuğun yarısını sosla karıştırın.",
+"Üzerine tereyağında kızdırılmış toz biber gezdirin."
+],
+"tips": [
+"Cevizi taze kullanın; acımaz."
+],
+"serving": "Soğuk meze olarak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n03_107",
+"title": "Tavuklu güveç",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 60,
+"difficulty": "Kolay",
+"ovenCelsius": 190,
+"ingredients": [
+"600 g tavuk but (kemiksiz)",
+"2 patates",
+"1 patlıcan",
+"2 biber",
+"2 domates",
+"1 soğan",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı tuz, kekik"
+],
+"steps": [
+"Tüm sebzeleri iri doğrayın.",
+"Tavukla birlikte güvece dizin.",
+"Yağ, tuz ve kekik ekleyin.",
+"1 bardak su ekleyip kapağını kapatın.",
+"Soğuk fırına koyup 190 °C'de 60 dakika pişirin."
+],
+"tips": [
+"Güveci soğuk fırına koymak çatlamasını önler."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n03_108",
+"title": "Tavuk pane (fırında)",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": 210,
+"ingredients": [
+"4 tavuk göğsü (inceltilmiş)",
+"1 su bardağı galeta unu",
+"2 yumurta",
+"Yarım su bardağı un",
+"2 yemek kaşığı rendelenmiş parmesan",
+"1 tatlı kaşığı tuz, kekik",
+"2 yemek kaşığı zeytinyağı"
+],
+"steps": [
+"Fırını 210 °C'ye ısıtın.",
+"Tavukları una, yumurtaya, sonra galeta-parmesan karışımına bulayın.",
+"Kâğıtlı tepsiye dizip üzerlerine yağ gezdirin.",
+"20 dakika, yarısında çevirerek pişirin.",
+"Limonla servis edin."
+],
+"tips": [
+"Fırında pane kızartmadan çok daha az yağ içerir."
+],
+"serving": "Salatayla.",
+"storage": "Buzdolabında 1 gün."
+},
+{
+"id": "n03_109",
+"title": "Limonlu kekikli tavuk kanat",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 40,
+"difficulty": "Kolay",
+"ovenCelsius": 220,
+"ingredients": [
+"1 kg tavuk kanat",
+"2 yemek kaşığı zeytinyağı",
+"1 limon",
+"2 diş sarımsak",
+"1 tatlı kaşığı kekik, tuz, karabiber"
+],
+"steps": [
+"Kanatları marine malzemeleriyle 1 saat bekletin.",
+"Fırını 220 °C'ye ısıtın.",
+"Izgara teline dizin.",
+"40 dakika, yarısında çevirerek pişirin.",
+"Limon dilimleriyle servis edin."
+],
+"tips": [
+"Izgara teli kanatların her yanının kızarmasını sağlar."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n03_110",
+"title": "Bezelyeli tavuk yemeği",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"500 g tavuk göğsü",
+"2 su bardağı bezelye",
+"1 havuç",
+"1 soğan",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı sıvı yağ",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Tavuğu küp doğrayıp mühürleyin.",
+"Soğan, havuç ve salçayı ekleyin.",
+"Bezelye ve 1,5 bardak sıcak su ekleyin.",
+"25 dakika pişirin.",
+"Dereotuyla servis edin."
+],
+"tips": [
+"Dondurulmuş bezelye de kullanılabilir."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n03_201",
+"title": "Etli nohut (fırında güveçte)",
+"category": "Bakliyat yemekleri",
+"servings": 6,
+"prepMinutes": 15,
+"cookMinutes": 90,
+"difficulty": "Orta",
+"ovenCelsius": 190,
+"ingredients": [
+"2 su bardağı nohut (ıslatılmış)",
+"300 g kuşbaşı",
+"1 soğan",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı tereyağı",
+"5 su bardağı sıcak su",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Nohudu 40 dakika ön haşlayın.",
+"Eti tereyağında kavurup soğan ve salçayı ekleyin.",
+"Güvece nohut, et ve suyu alın.",
+"190 °C fırında 50 dakika pişirin.",
+"Tuzunu ayarlayın."
+],
+"tips": [
+"Güveçte yavaş pişirmek nohudu kremamsı yapar."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında kapalı kapta 3 gün; dondurucuda 3 ay."
+},
+{
+"id": "n03_202",
+"title": "Zeytinyağlı barbunya (taze)",
+"category": "Bakliyat yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 45,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"500 g taze barbunya",
+"2 havuç",
+"2 patates",
+"1 soğan",
+"2 domates",
+"5 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı şeker, tuz"
+],
+"steps": [
+"Soğanı yağda kavurun.",
+"Havuç ve patatesi ekleyin.",
+"Barbunya ve domatesi ekleyin.",
+"1,5 bardak sıcak suyla kısık ateşte 40 dakika pişirin.",
+"Tencerede soğutun."
+],
+"tips": [
+"Taze barbunyayı kabuğundan ayıklayın."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n03_203",
+"title": "Mercimekli kabak dolması",
+"category": "Bakliyat yemekleri",
+"servings": 4,
+"prepMinutes": 25,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"6 kabak",
+"1 su bardağı kırmızı mercimek",
+"Yarım su bardağı pirinç",
+"1 soğan",
+"1 yemek kaşığı salça",
+"3 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı nane, tuz"
+],
+"steps": [
+"Kabakların içini oyun.",
+"Mercimek, pirinç, rendelenmiş soğan, salça ve baharatı karıştırın.",
+"Kabakları doldurun.",
+"Tencereye dizip 2 bardak sıcak su ve yağ ekleyin.",
+"Kısık ateşte 40 dakika pişirin."
+],
+"tips": [
+"Kabak içini mercimekli çorbada kullanabilirsiniz."
+],
+"serving": "Yoğurtla.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n03_204",
+"title": "Nohutlu pilav üstü yahni",
+"category": "Bakliyat yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 40,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı haşlanmış nohut",
+"2 soğan",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı tuz, karabiber",
+"2 su bardağı sıcak su"
+],
+"steps": [
+"Soğanları piyazlık doğrayıp tereyağında 10 dakika yavaşça kavurun.",
+"Salçayı ekleyin.",
+"Nohut ve suyu ekleyin.",
+"30 dakika kısık ateşte pişirin.",
+"Pilavın üzerinde servis edin."
+],
+"tips": [
+"Soğanın tatlılaşması yahninin lezzetidir."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n03_205",
+"title": "Mercimek kavurması (bulgurlu)",
+"category": "Bakliyat yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 su bardağı yeşil mercimek",
+"Yarım su bardağı bulgur",
+"2 soğan",
+"3 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı pul biber, tuz"
+],
+"steps": [
+"Mercimeği 20 dakika haşlayın.",
+"Bulguru ekleyip 10 dakika daha pişirin; süzün.",
+"Soğanları yağda kızarana kadar kavurun.",
+"Mercimekli bulguru soğanla karıştırın.",
+"Pul biberle servis edin."
+],
+"tips": [
+"Soğanın karamelize olması tat verir."
+],
+"serving": "Yoğurtla.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n03_206",
+"title": "Humuslu sebze tabağı",
+"category": "Bakliyat yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı humus",
+"1 kabak",
+"1 havuç",
+"1 kırmızı biber",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı sumak"
+],
+"steps": [
+"Sebzeleri şerit doğrayıp yağla tavada 8 dakika kızartın.",
+"Humusu tabağa yayın.",
+"Sebzeleri üzerine dizin.",
+"Sumak ve zeytinyağı gezdirin.",
+"Lavaşla servis edin."
+],
+"tips": [
+"Humus oda sıcaklığında daha lezzetlidir."
+],
+"serving": "Ilık.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n03_207",
+"title": "Fava (bakla ezmesi)",
+"category": "Bakliyat yemekleri",
+"servings": 6,
+"prepMinutes": 10,
+"cookMinutes": 45,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1,5 su bardağı kuru bakla",
+"1 soğan",
+"5 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı şeker, tuz",
+"Yarım demet dereotu"
+],
+"steps": [
+"Baklayı yıkayıp soğan ve 4 bardak suyla 40 dakika, dağılana kadar pişirin.",
+"Blenderdan pürüzsüz geçirin.",
+"Zeytinyağı, şeker ve tuzu ekleyin.",
+"Kaba döküp soğutun.",
+"Dereotu ve zeytinyağıyla servis edin."
+],
+"tips": [
+"Soğuyunca dilimlenebilir kıvama gelir."
+],
+"serving": "Soğuk meze.",
+"storage": "Buzdolabında 4 gün."
+},
+{
+"id": "n03_208",
+"title": "Siyah fasulyeli sebze yahnisi",
+"category": "Bakliyat yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı haşlanmış siyah fasulye",
+"1 tatlı patates",
+"1 kırmızı biber",
+"1 soğan",
+"2 domates",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı kimyon, tuz"
+],
+"steps": [
+"Soğan ve biberi kavurun.",
+"Küp tatlı patatesi ekleyin.",
+"Domates, fasulye ve 1 bardak suyu ekleyin.",
+"25 dakika pişirin.",
+"Kimyonla servis edin."
+],
+"tips": [
+"Tatlı patates yahniye doğal tatlılık katar."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n03_209",
+"title": "Bezelye ve nohutlu köri",
+"category": "Bakliyat yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1,5 su bardağı haşlanmış nohut",
+"1 su bardağı bezelye",
+"1 soğan",
+"1 su bardağı hindistan cevizi sütü",
+"1 yemek kaşığı köri",
+"2 yemek kaşığı sıvı yağ",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Soğanı yağda kavurun, köriyi ekleyin.",
+"Nohut ve bezelyeyi ekleyin.",
+"Hindistan cevizi sütünü dökün.",
+"15 dakika kısık ateşte pişirin.",
+"Pilavla servis edin."
+],
+"tips": [
+"Hindistan cevizi sütü yerine yoğurt kullanılabilir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n03_210",
+"title": "Mercimekli ekşili köfte",
+"category": "Bakliyat yemekleri",
+"servings": 4,
+"prepMinutes": 25,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"1 su bardağı kırmızı mercimek",
+"Yarım su bardağı ince bulgur",
+"1 soğan",
+"1 yemek kaşığı salça",
+"1 limon",
+"2 yemek kaşığı sıvı yağ",
+"1 tatlı kaşığı nane, tuz"
+],
+"steps": [
+"Mercimeği haşlayıp bulguru ekleyin, şişirin.",
+"Yoğurup nohut büyüklüğünde köfteler yapın.",
+"Soğan ve salçayı kavurup 4 bardak suyla kaynatın.",
+"Köfteleri ekleyip 10 dakika pişirin.",
+"Limon ve nane ekleyin."
+],
+"tips": [
+"Köfteler kaynar suya atılmalı; dağılmaz."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+}
+]

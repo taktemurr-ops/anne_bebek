@@ -1,3 +1,9 @@
+import 'utils/privacy_log_sanitizer.dart';
+import 'utils/dialog_helpers.dart';
+import 'screens/notification_preferences_page.dart';
+import 'screens/family_recipe_notebook_page.dart';
+import 'screens/shopping_checklist_page.dart';
+import 'screens/reproductive_calendar_page.dart';
 import 'screens/recipe_explorer_page.dart';
 import 'screens/daily_meal_suggestions_page.dart';
 import 'screens/smart_shopping_page.dart';
@@ -23,6 +29,9 @@ import 'screens/baby_health_page.dart';
 import 'screens/reminders_page.dart';
 import 'screens/release_check_page.dart';
 import 'widgets/quick_access.dart';
+import 'widgets/daily_quick_actions.dart';
+import 'utils/baby_age.dart';
+import 'utils/child_profile_validator.dart';
 import 'sleep_journal.dart';
 import 'dart:convert';
 import 'extra_features.dart';
@@ -32,10 +41,29 @@ import 'cycle_tracker.dart';
 import 'tracking_journal.dart';
 import 'screens/backup_page.dart';
 import 'services/privacy_service.dart';
+import 'widgets/consent_gate.dart';
+import 'screens/encyclopedia_page.dart';
+import 'screens/mom_tools_page.dart';
+import 'screens/fever_log_page.dart';
+import 'data/encyclopedia/encyclopedia.dart';
+import 'widgets/visuals.dart';
+import 'widgets/add_to_notebook_tile.dart';
+import 'services/recipe_notebook_bridge.dart';
+import 'services/local_reminder_notifications.dart';
 import 'services/secure_health_store.dart';
 import 'data/product_catalog.dart';
 import 'data/general_recipe_catalog.dart';
+import 'data/shopping_needs.dart';
+import 'widgets/recipe_info_sections.dart';
+import 'widgets/pastel_shell.dart';
+import 'widgets/reference_widgets.dart';
+import 'services/cycle_estimate.dart';
+import 'screens/monthly_baby_guide_page.dart';
+import 'screens/baby_activity_catalog_page.dart';
+import 'screens/baby_nutrition_page.dart';
+import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,6 +72,14 @@ void main() => runApp(const AnneBebekApp());
 const mor = Color(0xFF48235F);
 const pembe = Color(0xFFFFD9ED);
 const arka = Color(0xFFFFF7FC);
+
+/// Paket 39 referansı: liste satırları daha küçük ve yoğun yazı kullanır.
+ThemeData _kompaktListeler(ThemeData base) => base.copyWith(
+  listTileTheme: ListTileThemeData(
+    titleTextStyle: base.textTheme.bodyLarge!.copyWith(fontSize: 14.5, fontWeight: FontWeight.w600, color: mor),
+    subtitleTextStyle: base.textTheme.bodyMedium!.copyWith(fontSize: 12.5, color: Colors.black54),
+  ),
+);
 
 class AnneBebekApp extends StatelessWidget {
   const AnneBebekApp({super.key});
@@ -58,8 +94,10 @@ class AnneBebekApp extends StatelessWidget {
       GlobalCupertinoLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
     ],
-    theme: ThemeData(
+    theme: _kompaktListeler(ThemeData(
       useMaterial3: true,
+      // Renkli simgeler: sistemin emoji yazı tipi (cihazda zaten mevcut).
+      fontFamilyFallback: const ['Noto Color Emoji', 'Apple Color Emoji'],
       scaffoldBackgroundColor: arka,
       colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF0449B), brightness: Brightness.light),
       dividerColor: const Color(0xFFF2E5F0),
@@ -71,7 +109,8 @@ class AnneBebekApp extends StatelessWidget {
       cardTheme: CardThemeData(color: const Color(0xFFFFFCFF), elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26))),
       appBarTheme: const AppBarTheme(backgroundColor: arka, foregroundColor: mor,
-        elevation: 0, centerTitle: false),
+        elevation: 0, scrolledUnderElevation: 0, surfaceTintColor: Colors.transparent,
+        centerTitle: false),
       filledButtonTheme: FilledButtonThemeData(style: FilledButton.styleFrom(
         backgroundColor: const Color(0xFFF0449B), foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)))),
@@ -79,8 +118,8 @@ class AnneBebekApp extends StatelessWidget {
         filled: true, fillColor: const Color(0xFFF7EAF4),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(22), borderSide: BorderSide.none),
         enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(22), borderSide: BorderSide.none)),
-    ),
-    home: const AnaUygulama(),
+    )),
+    home: const ConsentGate(child: AnaUygulama()),
   );
 }
 
@@ -100,17 +139,27 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   final List<String> alisveris = [];
   final Set<String> favoriler = {};
   bool yuklendi = false;
+  Object? _sonKayitHatasi;
   String? yuklemeHatasi;
   String arama = '';
   String tarifFiltre = 'Tümü';
   int tarifSureSiniri = 0; // 0: tüm süreler
+  int tarifGosterimSiniri = 40; // Izgarada aynı anda çizilen tarif sayısı
   bool sadeceFavoriTarifler = false;
+  DateTime takipGunu = DateTime.now(); // Günlük Takip ekranındaki gün
+  int bebekSekme = 0;
+  int kadinSekme = 0; // Kadınlar: Döngü Takibi/Sağlık/İyi Hisset
+  DateTime donguAyi = DateTime.now();
+  final List<DateTime> donguTarihleri = []; // Bebeğim: Gelişim/Sağlık/Aşılar/Notlar
   final List<String> sepet = [];
+  final Map<String, int> alisverisAdet = {}; // Alışveriş listesindeki adetler
+  int alisverisSekme = 0; // Bebek/Anne/Aile Ürünleri
+  String? alisverisAltKategori;
   final Set<String> tamamlanan = {};
 
 
   @override
-  void initState() { super.initState(); _yukle(); }
+  void initState() { super.initState(); _yukle(); _donguYukle(); }
 
   Future<void> _yukle() async {
     try {
@@ -131,6 +180,12 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       favoriler.addAll((jsonDecode(p.getString('favoriler') ?? '[]') as List).cast<String>());
       sepet.addAll((jsonDecode(p.getString('sepet') ?? '[]') as List).cast<String>());
       tamamlanan.addAll((jsonDecode(p.getString('tamamlanan') ?? '[]') as List).cast<String>());
+      final adetler = jsonDecode(p.getString('alisveris_adet') ?? '{}');
+      if (adetler is Map) {
+        for (final e in adetler.entries) {
+          if (e.key is String && e.value is int && (e.value as int) >= 1) alisverisAdet[e.key as String] = e.value as int;
+        }
+      }
       yuklendi = true;
       yuklemeHatasi = null;
     });
@@ -154,29 +209,30 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         p.setString('favoriler', jsonEncode(favoriler.toList())),
         p.setString('sepet', jsonEncode(sepet)),
         p.setString('tamamlanan', jsonEncode(tamamlanan.toList())),
+        p.setString('alisveris_adet', jsonEncode(alisverisAdet)),
       ]);
+      _sonKayitHatasi = null;
       return true;
-    } catch (error, stackTrace) {
-      debugPrint('Kayıt başarısız: $error');
-      debugPrintStack(stackTrace: stackTrace);
+    } catch (error) {
+      _sonKayitHatasi = error;
+      logSafeError('Kayıt başarısız', error);
       return false;
     }
   }
 
-  void _kayitBildir(bool basarili, {String basariMesaji = 'Kayıt tamamlandı.'}) {
+  void _kayitBildir(bool basarili, {String basariMesaji = 'Kayıt tamamlandı.', Object? hata}) {
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(basarili ? basariMesaji : 'Kayıt kaydedilemedi. Lütfen tekrar deneyin.'),
+    // Hata türü (içerik değil) gösterilir; cihazdaki sorunları bildirmek için.
+    final e = hata ?? _sonKayitHatasi;
+    final kod = e == null ? '' : ' (Hata kodu: ${e is PlatformException ? 'PE-${e.code}' : e.runtimeType})';
+    // Önceki bildirim beklemeden yenisi gösterilir (art arda işlemler).
+    ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(SnackBar(
+      content: Text(basarili ? basariMesaji : 'Kayıt kaydedilemedi. Lütfen tekrar deneyin.$kod'),
     ));
   }
 
   String _tarih(DateTime d) => '${d.day.toString().padLeft(2, '0')}.${d.month.toString().padLeft(2, '0')}.${d.year}';
-  String get yas {
-    if (dogum == null) return 'Doğum tarihi eklenmedi';
-    final gun = DateTime.now().difference(dogum!).inDays;
-    if (gun < 0) return 'Doğum bekleniyor';
-    return gun < 30 ? '$gun günlük' : '${(gun / 30.44).floor()} aylık (yaklaşık)';
-  }
+  String get yas => BabyAge.label(dogum, DateTime.now());
 
   void _profillerAc() => Navigator.of(context).push(
     MaterialPageRoute<void>(builder: (_) => const ChildProfilesPage()));
@@ -184,7 +240,11 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   Future<void> _profil() async {
     final ad = TextEditingController(text: bebekAdi);
     DateTime? secilen = dogum;
-    await showDialog<void>(context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, yenile) => AlertDialog(
+    ModalRoute<dynamic>? profileRoute;
+    var kaydediliyor = false; // Çift dokunuşta ikinci kayıt/pop engellenir.
+    await showDialog<void>(context: context, builder: (ctx) {
+      profileRoute = ModalRoute.of(ctx);
+      return StatefulBuilder(builder: (ctx, yenile) => AlertDialog(
       title: const Text('Bebek profili'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: ad, decoration: const InputDecoration(labelText: 'Bebeğin adı')),
@@ -196,41 +256,78 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       ]),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () async {
+          if (kaydediliyor) return;
+          kaydediliyor = true;
+          try {
+          // GP-02: ad ve doğum tarihi kaydetmeden önce doğrulanır.
+          final adHatasi = ChildProfileValidator.validateName(ad.text);
+          if (adHatasi != null) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(adHatasi)));
+            return;
+          }
+          final kayitTarihleri = [
+            for (final o in [...olaylar, ...olcumler])
+              ?DateTime.tryParse(o['zaman'] ?? o['tarih'] ?? ''),
+          ];
+          if (secilen != null && ChildProfileValidator.hasRecordsBeforeBirth(secilen!, kayitTarihleri)) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text(
+              'Bu doğum tarihinden önceye ait kayıtlar var. Tarihi kontrol edin veya önce o kayıtları düzenleyin.')));
+            return;
+          }
           final oncekiAd = bebekAdi;
           final oncekiDogum = dogum;
           setState(() { bebekAdi = ad.text.trim(); dogum = secilen; });
           final basarili = await _kaydet();
           if (!basarili && mounted) setState(() { bebekAdi = oncekiAd; dogum = oncekiDogum; });
           if (!mounted || !ctx.mounted) return;
-          if (basarili) Navigator.of(ctx).pop();
+          if (basarili && (ModalRoute.of(ctx)?.isCurrent ?? false)) Navigator.of(ctx).pop();
           _kayitBildir(basarili, basariMesaji: 'Bebek profili kaydedildi.');
+                  } finally {
+            kaydediliyor = false;
+          }
         }, child: const Text('Kaydet'))],
-    )));
+    )); });
+    await profileRoute?.completed;
     ad.dispose();
   }
 
-  Future<void> _olayEkle(String tur) async {
+  Future<void> _olayEkle(String tur, {DateTime? zaman}) async {
     final not = TextEditingController();
-    await showDialog<void>(context: context, builder: (ctx) => AlertDialog(
+    ModalRoute<dynamic>? recordRoute;
+    var kaydediliyor = false; // Çift dokunuşta ikinci kayıt/pop engellenir.
+    await showDialog<void>(context: context, builder: (ctx) {
+      recordRoute = ModalRoute.of(ctx);
+      return AlertDialog(
       title: Text('$tur kaydı'),
       content: TextField(controller: not, autofocus: true, decoration: const InputDecoration(labelText: 'Açıklama / miktar (isteğe bağlı)'), maxLines: 2),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () async {
-          final yeniKayit = {'tur': tur, 'not': not.text.trim(), 'zaman': DateTime.now().toIso8601String()};
+          if (kaydediliyor) return;
+          kaydediliyor = true;
+          try {
+          final yeniKayit = {'tur': tur, 'not': not.text.trim(), 'zaman': (zaman ?? DateTime.now()).toIso8601String()};
           setState(() => olaylar.insert(0, yeniKayit));
           final basarili = await _kaydet();
           if (!basarili && mounted) setState(() => olaylar.remove(yeniKayit));
           if (!mounted || !ctx.mounted) return;
-          if (basarili) Navigator.of(ctx).pop();
+          if (basarili && (ModalRoute.of(ctx)?.isCurrent ?? false)) Navigator.of(ctx).pop();
           _kayitBildir(basarili, basariMesaji: '$tur kaydı eklendi.');
+                  } finally {
+            kaydediliyor = false;
+          }
         }, child: const Text('Kaydet'))],
-    ));
+    ); });
+    await recordRoute?.completed;
     not.dispose();
   }
 
   Future<void> _olcumEkle() async {
     final boy = TextEditingController(); final kilo = TextEditingController(); final bas = TextEditingController();
-    await showDialog<void>(context: context, builder: (ctx) => AlertDialog(
+    ModalRoute<dynamic>? measureRoute;
+    var kaydediliyor = false; // Çift dokunuşta ikinci kayıt/pop engellenir.
+    await showDialog<void>(context: context, builder: (ctx) {
+      measureRoute = ModalRoute.of(ctx);
+      return AlertDialog(
       title: const Text('Büyüme ölçümü'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: boy, keyboardType: const TextInputType.numberWithOptions(decimal: true), decoration: const InputDecoration(labelText: 'Boy (cm)')),
@@ -239,6 +336,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       ]),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () async {
+          if (kaydediliyor) return;
+          kaydediliyor = true;
+          try {
           final b = double.tryParse(boy.text.replaceAll(',', '.'));
           final k = double.tryParse(kilo.text.replaceAll(',', '.'));
           final bc = double.tryParse(bas.text.replaceAll(',', '.'));
@@ -251,10 +351,14 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           final basarili = await _kaydet();
           if (!basarili && mounted) setState(() => olcumler.remove(yeniOlcum));
           if (!mounted || !ctx.mounted) return;
-          if (basarili) Navigator.of(ctx).pop();
+          if (basarili && (ModalRoute.of(ctx)?.isCurrent ?? false)) Navigator.of(ctx).pop();
           _kayitBildir(basarili, basariMesaji: 'Büyüme ölçümü kaydedildi.');
+                  } finally {
+            kaydediliyor = false;
+          }
         }, child: const Text('Kaydet'))],
-    ));
+    ); });
+    await measureRoute?.completed;
     boy.dispose(); kilo.dispose(); bas.dispose();
   }
 
@@ -262,9 +366,26 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   bool _olcumGecerli(String metin, double? deger, double min, double max) =>
       metin.trim().isEmpty || (deger != null && deger.isFinite && deger >= min && deger <= max);
 
+  // Kayıt başarısız olursa silinen öğeyi eski konumuna geri koy.
+  Future<void> _kayitSil(
+    List<Map<String, String>> liste,
+    Map<String, String> kayit,
+  ) async {
+    final index = liste.indexOf(kayit);
+    if (index < 0) return;
+    setState(() => liste.removeAt(index));
+    final basarili = await _kaydet();
+    if (!mounted) return;
+    if (!basarili) {
+      setState(() => liste.insert(index.clamp(0, liste.length), kayit));
+    }
+    _kayitBildir(basarili,
+        basariMesaji: 'Kayıt silindi.');
+  }
+
   Future<void> _urunEkle() async {
     final urun = TextEditingController();
-    await showDialog<void>(context: context, builder: (ctx) => AlertDialog(
+    await showDialogAndDispose<void>(disposables: [urun], context: context, builder: (ctx) => AlertDialog(
       title: const Text('Alışveriş listesine ekle'),
       content: TextField(controller: urun, autofocus: true, decoration: const InputDecoration(labelText: 'Ürün adı')),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
@@ -275,11 +396,10 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           final basarili = await _kaydet();
           if (!basarili && mounted) setState(() => alisveris.removeLast());
           if (!mounted || !ctx.mounted) return;
-          if (basarili) Navigator.of(ctx).pop();
+          if (basarili && (ModalRoute.of(ctx)?.isCurrent ?? false)) Navigator.of(ctx).pop();
           _kayitBildir(basarili, basariMesaji: 'Ürün listeye eklendi.');
         }, child: const Text('Ekle'))],
     ));
-    urun.dispose();
   }
 
   Widget _kart(String baslik, String alt, IconData ikon, Color renk, VoidCallback tikla) => Card(
@@ -295,8 +415,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
 
 
   Widget _baslik(String s, {String? action, VoidCallback? onTap}) => Padding(
-    padding: const EdgeInsets.fromLTRB(3, 20, 3, 12),
-    child: Row(children: [Expanded(child: Text(s, style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w800, color: mor))),
+    padding: const EdgeInsets.fromLTRB(3, 16, 3, 8),
+    child: Row(children: [Expanded(child: Text(s, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: mor))),
       if (action != null) TextButton(onPressed: onTap, child: Text(action))]));
 
   Widget _panel({required Widget child, Color color = Colors.white, EdgeInsets? padding}) =>
@@ -315,7 +435,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       ),
     );
 
-  Widget _hero(String title, String subtitle, IconData icon, {VoidCallback? onTap, String button = 'Keşfet'}) =>
+  Widget _hero(String title, String subtitle, IconData icon, {VoidCallback? onTap, String button = 'Keşfet', String? emoji}) =>
     Container(
       constraints: const BoxConstraints(minHeight: 184),
       padding: const EdgeInsets.all(20),
@@ -337,7 +457,10 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         const SizedBox(width: 8),
         Container(width: 96, height: 112, decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: .33), borderRadius: BorderRadius.circular(25)),
-          child: Icon(icon, size: 68, color: const Color(0xFFD44A9A))),
+          alignment: Alignment.center,
+          child: emoji != null
+            ? Text(emoji, textScaler: TextScaler.noScaling, style: const TextStyle(fontSize: 60))
+            : IconGlyph(icon, size: 66, color: const Color(0xFFD44A9A))),
       ]),
     );
 
@@ -347,19 +470,114 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         borderSide: BorderSide.none, borderRadius: BorderRadius.circular(28))));
 
   void _sayfa(String title, Widget child) => Navigator.of(context).push(MaterialPageRoute<void>(
-    builder: (_) => Scaffold(appBar: AppBar(title: Text(title)), body: SafeArea(child: child))));
+    builder: (_) => Scaffold(appBar: AppBar(title: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis,
+      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Color(0xFFE94791)))),
+      body: SafeArea(child: child))));
 
   Widget _ana() => ListView(padding: const EdgeInsets.fromLTRB(16, 8, 16, 24), children: [
-    const Padding(padding: EdgeInsets.only(bottom: 4), child: Text('Merhaba Anne 💕', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, color: mor))),
-    Padding(padding: const EdgeInsets.only(bottom: 14), child: Text(bebekAdi.isEmpty ? 'Bugün kendine ve bebeğine güzel bir an ayır 🌷' : '$bebekAdi ile güzel bir gün seni bekliyor 🌷', style: const TextStyle(fontSize: 13, color: mor))),
+    PastelGreetingCard(
+      greeting: 'Merhaba 👋',
+      subtitle: bebekAdi.isEmpty ? 'İyi ki buradasın!\nBebek profilini ekleyerek başla.' : 'İyi ki buradasın!'),
+    const SizedBox(height: 12),
+    _panel(
+      color: const Color(0xFFFFFCFF),
+      child: ListTile(
+        leading: const BabyFaceAvatar(size: 48),
+        title: Text(bebekAdi.isEmpty ? 'Bebek profilini tamamla' : '$bebekAdi 💗',
+          style: const TextStyle(fontWeight: FontWeight.w800, color: mor)),
+        subtitle: Text(yas),
+        trailing: const Icon(Icons.chevron_right_rounded, color: mor),
+        onTap: _profillerAc,
+      ),
+    ),
+    const SizedBox(height: 4),
+    LayoutBuilder(builder: (context, c) {
+      // Dar ekranlarda (ör. 280 px) tek sütuna düşer; taşma olmaz.
+      final columns = c.maxWidth < 300 ? 1 : 2;
+      final tiles = <Widget>[
+        PastelModuleTile(icon: Icons.event_note_rounded, color: const Color(0xFFEDE4FF),
+          title: 'Günlük Takip', subtitle: 'Uyku • Beslenme • Bez',
+          onTap: () => setState(() { takipGunu = DateTime.now(); sekme = 6; })),
+        PastelModuleTile(icon: Icons.child_care_rounded, color: const Color(0xFFFFE3F0),
+          title: 'Bebeğim', subtitle: 'Gelişim • Sağlık',
+          onTap: () => setState(() => sekme = 1)),
+        PastelModuleTile(icon: Icons.restaurant_menu_rounded, color: const Color(0xFFFFEBD9),
+          title: 'Yemek Tarifleri', subtitle: 'Aile için lezzetler',
+          onTap: () => setState(() => sekme = 2)),
+        PastelModuleTile(icon: Icons.pregnant_woman_rounded, color: const Color(0xFFFFE3F0),
+          title: 'Gebelik', subtitle: 'Hafta hafta takip',
+          onTap: () => _sayfa('Gebelik', const PregnancyPage())),
+        PastelModuleTile(icon: Icons.local_florist_rounded, color: const Color(0xFFFFE6EE),
+          title: 'Kadınlar', subtitle: 'Döngü • Sağlık',
+          onTap: () => setState(() => sekme = 4)),
+        PastelModuleTile(icon: Icons.shopping_cart_outlined, color: const Color(0xFFEDE4FF),
+          title: 'Alışveriş', subtitle: 'Bebek • Anne • Aile',
+          onTap: () => setState(() => sekme = 3)),
+      ];
+      return GridView.count(
+        crossAxisCount: columns, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
+        mainAxisSpacing: 10, crossAxisSpacing: 10,
+        childAspectRatio: columns == 1 ? c.maxWidth / 72 : ((c.maxWidth - 10) / 2) / 72,
+        children: tiles);
+    }),
+    const SizedBox(height: 6),
     _panel(padding: EdgeInsets.zero, color: const Color(0xFFF7EAF5), child: ListTile(
       leading: const Icon(Icons.search_rounded, color: mor),
-      title: const Text('Aramak istediğin şeyi yaz...', style: TextStyle(fontSize: 13)),
+      title: const Text('A’dan Z’ye Rehber’de ara...', style: TextStyle(fontSize: 13)),
       trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 15, color: mor),
-      onTap: () => _sayfa('A’dan Z’ye Rehber', _rehber()))),
-    _hero('Bebeğinizin Sağlığı İçin\nTüm Rehber Burada',
-      bebekAdi.isEmpty ? 'Beslenme, bakım, gelişim ve sağlık bir arada.' : '$bebekAdi • $yas',
-      Icons.child_friendly_rounded, onTap: () => setState(() => sekme = 1), button: 'Keşfet →'),
+      onTap: () => _ansiklopediAc())),
+    _baslik('Bugünkü takip özeti'),
+    _panel(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _sayac('Beslenme', 'Beslenme'),
+          _sayac('Uyku', 'Uyku'),
+          _sayac('Bez', 'Bez değişimi'),
+        ],
+      ),
+    ),
+    _baslik('Hızlı günlük kayıt ✨'),
+    DailyQuickActions(
+      // Hızlı işlemler, ana ekrandaki günlük sayacıyla aynı kaydı kullanır.
+      onFeeding: () => _olayEkle('Beslenme'),
+      onSleep: () => _olayEkle('Uyku'),
+      onDiaper: () => _olayEkle('Bez değişimi'),
+      onMeasurement: _olcumEkle,
+    ),
+    _baslik('Gelişim ve beslenme'),
+    _panel(
+      child: Column(children: [
+        ListTile(
+          leading: const Icon(Icons.monitor_weight_outlined, color: mor),
+          title: const Text('Büyüme geçmişi'),
+          subtitle: Text(olcumler.isEmpty
+              ? 'Henüz ölçüm eklenmedi'
+              : '${olcumler.length} ölçüm kaydı • grafiklere göz at'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => _sayfa('Büyüme Grafikleri',
+              GrowthChartsPage(measurements: olcumler)),
+        ),
+        const Divider(height: 1),
+        ListTile(
+          leading: const Icon(Icons.restaurant_menu_rounded, color: mor),
+          title: const Text('Bebeğime uygun tarifler'),
+          subtitle: const Text('Yaş, kategori ve malzemeye göre keşfet'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (_) => const BabyRecipesPage())),
+        ),
+        const Divider(height: 1),
+        ListTile(
+          leading: const Icon(Icons.security_outlined, color: mor),
+          title: const Text('Şifreli yedekleme ve geri yükleme'),
+          subtitle: const Text('Kayıtlarını güvenli biçimde dışa aktar'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (_) => const BackupPage())),
+        ),
+      ]),
+    ),
     _baslik('Kategorileri keşfet 🌸'),
     LayoutBuilder(builder: (context, constraints) => GridView.count(
       crossAxisCount: constraints.maxWidth < 350 ? 2 : 4,
@@ -373,12 +591,12 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         _mini('Moda', Icons.checkroom, const Color(0xFFF7DDF0), () => _rehberKonuAc('Moda & Stil')),
         _mini('Eğitim', Icons.school, const Color(0xFFE3E6FF), () => _rehberKonuAc('Eğitim & Oyun')),
         _mini('Oyunlar', Icons.toys, const Color(0xFFFFE3D6), () => _rehberKonuAc('Eğitim & Oyun')),
-        _mini('Tüm Kategoriler', Icons.apps, const Color(0xFFEDE0FF), () => _sayfa('A’dan Z’ye Rehber', _rehber())),
+        _mini('Tüm Kategoriler', Icons.apps, const Color(0xFFEDE0FF), () => _ansiklopediAc()),
       ])),
-    _panel(color: const Color(0xFFFFE6F3), child: ListTile(leading: const Icon(Icons.auto_awesome_outlined, color: mor), title: const Text('AI Bilgi Asistanı'), subtitle: const Text('İsteğe bağlı soru gönderimi · sunucu kurulumu gerekir'), trailing: const Icon(Icons.chevron_right), onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const AiAssistantPage())))),
+    _panel(color: const Color(0xFFFFE6F3), child: ListTile(leading: const Icon(Icons.auto_awesome_outlined, color: mor), title: const Text('Bilgi Asistanı'), subtitle: const Text('Bebek, gebelik, aşı ve tarif soruların · çevrimdışı'), trailing: const Icon(Icons.chevron_right), onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const AiAssistantPage())))),
     _panel(color: const Color(0xFFF3E6FF), child: ListTile(leading: const Icon(Icons.manage_search_outlined, color: mor), title: const Text('Akıllı içerik keşfi'), subtitle: const Text('Bebek, kadın ve yaşam konularında çevrimdışı arama'), trailing: const Icon(Icons.chevron_right), onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const SmartDiscoveryPage())))),
     _baslik('Bugünün önerileri ✨', action: 'Tümünü gör', onTap: () => setState(() => sekme = 2)),
-    Row(children: [Expanded(child: _oner('Bebeğiniz için 5 sağlıklı tarif', 'Pratik ve besleyici öneriler', Icons.ramen_dining_rounded, () => setState(() => sekme = 2))),
+    Row(children: [Expanded(child: _oner('Bebeğiniz için sağlıklı tarifler', 'Yaşa uygun bebek yemekleri', Icons.ramen_dining_rounded, () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const BabyRecipesPage())))),
       const SizedBox(width: 10), Expanded(child: _oner('Bebek bakımı', 'Günlük gelişimi takip et', Icons.child_care_rounded, () => setState(() => sekme = 1)))]),
     _baslik('Bebek profilleri 💗'),
     _panel(color: const Color(0xFFFFEAF5), child: ListTile(
@@ -387,6 +605,40 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       subtitle: const Text('Çocuk profilleri ve kişisel günlükler'),
       trailing: const Icon(Icons.chevron_right), onTap: _profillerAc)),
     _panel(color: const Color(0xFFF3E6FF), child: ListTile(leading: const Icon(Icons.insights, color: mor), title: const Text('Bugün ve analizler'), subtitle: const Text('Günlük kayıtlar ve gelişim özeti'), trailing: const Icon(Icons.chevron_right), onTap: _analizAc)),
+    _panel(color: const Color(0xFFFFF0E2), child: ListTile(
+      leading: const Icon(Icons.shopping_basket_outlined, color: mor),
+      title: const Text('Güvenli alışveriş listem'),
+      subtitle: const Text('Ürünleri ekle, tamamla ve kaydet'),
+      trailing: const Icon(Icons.chevron_right),
+      onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (_) => const ShoppingChecklistPage())))),
+    _panel(color: const Color(0xFFFFEAF5), child: ListTile(
+      leading: const Icon(Icons.calendar_month_outlined, color: mor),
+      title: const Text('Gebelik ve döngü takvimi'),
+      subtitle: const Text('Özel takvim ve tahmini tarihler'),
+      trailing: const Icon(Icons.chevron_right),
+      onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (_) => const ReproductiveCalendarPage())))),
+    _panel(color: const Color(0xFFFFF3E7), child: ListTile(
+      leading: const Icon(Icons.restaurant_menu, color: mor),
+      title: const Text('Aile tarif defterim'),
+      subtitle: const Text('Kendi tariflerini güvenli şekilde kaydet'),
+      trailing: const Icon(Icons.chevron_right),
+      onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (_) => const FamilyRecipeNotebookPage())))),
+    _panel(color: const Color(0xFFEAF4FF), child: ListTile(
+      leading: const Icon(Icons.nights_stay_outlined, color: mor),
+      title: const Text('Günlük yaşam günlüğü'),
+      subtitle: const Text('Önce çocuk profilini seçerek kayıt aç'),
+      trailing: const Icon(Icons.chevron_right),
+      onTap: _profillerAc)),
+    _panel(color: const Color(0xFFE9F7F5), child: ListTile(
+      leading: const Icon(Icons.notifications_active_outlined, color: mor),
+      title: const Text('Bildirim tercihlerim'),
+      subtitle: const Text('İzinleri ve sessiz saatleri yönet'),
+      trailing: const Icon(Icons.chevron_right),
+      onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (_) => const NotificationPreferencesPage())))),
     _baslik('Yaşam merkezim ✨'),
     _panel(color: const Color(0xFFF3E6FF), child: ListTile(
       leading: const Icon(Icons.dashboard_customize, color: mor),
@@ -410,8 +662,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       trailing: const Icon(Icons.chevron_right),
       onTap: () => _sayfa('Büyüme Grafikleri', GrowthChartsPage(measurements: olcumler)),
     )),
-    _baslik('A’dan Z’ye rehber', action: 'Hepsini aç', onTap: () => _sayfa('A’dan Z’ye Rehber', _rehber())),
-    _panel(child: ListTile(leading: const Icon(Icons.auto_stories_rounded, color: mor), title: const Text('Konuları alfabetik keşfet'), subtitle: const Text('Arama, kategori ve detaylı rehber içerikleri'), trailing: const Icon(Icons.chevron_right), onTap: () => _sayfa('A’dan Z’ye Rehber', _rehber()))),
+    _baslik('A’dan Z’ye rehber', action: 'Hepsini aç', onTap: () => _ansiklopediAc()),
+    _panel(child: ListTile(leading: const Icon(Icons.auto_stories_rounded, color: mor), title: const Text('Konuları alfabetik keşfet'), subtitle: const Text('Arama, kategori ve detaylı rehber içerikleri'), trailing: const Icon(Icons.chevron_right), onTap: () => _ansiklopediAc())),
     const SizedBox(height: 15),
   ]);
 
@@ -428,77 +680,255 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   Widget _oner(String title, String desc, IconData icon, VoidCallback tap) => ExpandedSuggestionCard(
     title: title, description: desc, icon: icon, onTap: tap);
 
-  Widget _bebek() => ListView(padding: const EdgeInsets.all(15), children: [
-    _hero('Bebek Bakımı 👶', 'Bebeğinin tüm bakım ihtiyaçlarını takip edin.', Icons.child_care,
-      onTap: _profillerAc, button: 'Bebek profillerim'),
-    const SizedBox(height: 8),
-    _panel(color: const Color(0xFFFFEAF5), child: const Text(
-      'Beslenme, uyku, bez değişimi ve büyüme kayıtlarını tek yerden takip et.',
-      textAlign: TextAlign.center, style: TextStyle(color: mor, fontWeight: FontWeight.w600))),
-    _panel(color: const Color(0xFFFFE6F3), child: ListTile(
-      leading: const Icon(Icons.group_add_rounded, color: mor, size: 32),
-      title: const Text('Bebek profillerini yönet', style: TextStyle(fontWeight: FontWeight.bold)),
-      subtitle: const Text('Yeni bebek ekle, profiller arasında geçiş yap ve kayıtları görüntüle'),
-      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 18), onTap: _profillerAc)),
-    _panel(color: const Color(0xFFF1E5FF), child: ListTile(leading: const Icon(Icons.forum_outlined, color: mor), title: const Text('Bebeğim Forumu'), subtitle: const Text('Sorular ve ebeveyn deneyimleri'), trailing: const Icon(Icons.chevron_right), onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const BabyOnlineForumPage())))),
-    _baslik('Bebek profili'),
-    _panel(color: pembe, child: ListTile(leading: const Icon(Icons.face, size: 37, color: mor),
-      title: Text(bebekAdi.isEmpty ? 'Bebek profili ekle' : bebekAdi), subtitle: Text(yas),
-      trailing: const Icon(Icons.edit), onTap: _profil)),
-    _panel(color: const Color(0xFFFFEAF5), child: ListTile(leading: const Icon(Icons.restaurant_menu, color: mor), title: const Text('300 bebek tarifi varyasyonu'), subtitle: const Text('Yaş, kategori ve malzemeye göre arama'), trailing: const Icon(Icons.chevron_right), onTap: () => _sayfa('Bebek Tarifleri', const BabyRecipesPage()))),
-    _baslik('Günlük takip'),
-    GridView.count(crossAxisCount: 4, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
-      crossAxisSpacing: 8, mainAxisSpacing: 8, childAspectRatio: .86, children: [
-      _mini('Beslenme', Icons.local_drink, const Color(0xFFFFE5D4), () => _sayfa('Beslenme günlüğüm', const TrackingJournalPage())),
-      _mini('Uyku', Icons.bedtime, const Color(0xFFE4DFFF), () => _sayfa('Uyku günlüğüm', const SleepJournalPage())),
-      _mini('Bez', Icons.baby_changing_station, const Color(0xFFE0E9FF), () => _olayEkle('Bez değişimi')),
-      _mini('Büyüme', Icons.trending_up, const Color(0xFFFFDFEB), _olcumEkle),
-    ]),
-    _baslik('Bugünkü özet'),
-    _panel(child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-      _sayac('Beslenme', 'Beslenme'), _sayac('Uyku', 'Uyku'), _sayac('Bez', 'Bez değişimi')])),
+  // Paket 39 referansı: çocuk kartı + Gelişim/Sağlık/Aşılar/Notlar sekmeleri.
+  // Önceki sürümdeki tüm bağlantılar ilgili sekmenin altında korunur.
+  Widget _bebek() {
+    final ay = BabyAge.completedMonths(dogum, DateTime.now()) ?? 0;
+    return ListView(padding: const EdgeInsets.fromLTRB(16, 8, 16, 24), children: [
+      ChildHeaderCard(
+        name: bebekAdi.isEmpty ? 'Bebek profili ekle' : bebekAdi,
+        age: yas,
+        onTap: bebekAdi.isEmpty ? _profil : _profillerAc,
+      ),
+      PastelSegmentTabs(
+        labels: const ['Gelişim', 'Sağlık', 'Aşılar', 'Notlar'],
+        selected: bebekSekme,
+        onChanged: (i) => setState(() => bebekSekme = i),
+      ),
+      const SizedBox(height: 12),
+      ...switch (bebekSekme) {
+        1 => _bebekSaglik(ay),
+        2 => _bebekAsilar(),
+        3 => _bebekNotlar(),
+        _ => _bebekGelisim(ay),
+      },
+      const Padding(padding: EdgeInsets.all(10), child: Text('Takip kayıtları kişisel kullanım içindir; sağlık değerlendirmesi yerine geçmez.', style: TextStyle(fontSize: 11))),
+    ]);
+  }
+
+  List<Widget> _bebekGelisim(int ay) {
+    final sirali = [...olcumler]..sort((a, b) => (a['tarih'] ?? '').compareTo(b['tarih'] ?? ''));
+    String son(String alan, String birim) {
+      for (final o in sirali.reversed) {
+        final v = double.tryParse(o[alan] ?? '');
+        if (v != null) return '${v.toStringAsFixed(v == v.roundToDouble() ? 0 : 1).replaceAll('.', ',')} $birim';
+      }
+      return '—';
+    }
+    final kilolar = sirali.map((o) => double.tryParse(o['kilo'] ?? '')).whereType<double>().toList();
+    return [
+      GrowthSummaryCard(
+        weights: kilolar,
+        weight: son('kilo', 'kg'),
+        height: son('boy', 'cm'),
+        head: son('basCevresi', 'cm'),
+        onOpen: () => _sayfa('Büyüme Grafikleri', GrowthChartsPage(measurements: olcumler)),
+        onAdd: _olcumEkle,
+      ),
+      PastelCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const PastelSectionHeader(icon: Icons.volunteer_activism_outlined, title: 'Günlük Bakım'),
+        const SizedBox(height: 10),
+        Row(children: [
+          Expanded(child: CareShortcut(icon: Icons.local_drink_outlined, label: 'Beslenme', color: const Color(0xFFFFE9D2), onTap: () => _olayEkle('Beslenme'))),
+          const SizedBox(width: 8),
+          Expanded(child: CareShortcut(icon: Icons.bedtime_outlined, label: 'Uyku', color: const Color(0xFFEDE4FF), onTap: () => _olayEkle('Uyku'))),
+          const SizedBox(width: 8),
+          Expanded(child: CareShortcut(icon: Icons.baby_changing_station_outlined, label: 'Bez', color: const Color(0xFFE0EEFF), onTap: () => _olayEkle('Bez değişimi'))),
+          const SizedBox(width: 8),
+          Expanded(child: CareShortcut(icon: Icons.medication_outlined, label: 'İlaç / Vitamin', color: const Color(0xFFFFE3EC), onTap: () => _olayEkle('İlaç / Vitamin'))),
+        ]),
+      ])),
+      PastelLinkCard(icon: Icons.event_note_rounded, title: 'Günlük Takip',
+        subtitle: 'Uyku, beslenme, bez ve ilaç kayıtları tarih tarih',
+        iconColor: const Color(0xFFEDE4FF), onTap: () => setState(() => sekme = 6)),
+      PastelLinkCard(icon: Icons.auto_graph_rounded, title: 'Aylık gelişim rehberi',
+        subtitle: dogum == null ? 'Doğum tarihi girildiğinde bebeğin ayına göre açılır' : '$ay. ay için gelişim, oyun ve bakım önerileri',
+        onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => MonthlyBabyGuidePage(initialMonth: ay.clamp(0, 72))))),
+      PastelLinkCard(icon: Icons.toys_outlined, title: 'Yaşa uygun aktiviteler',
+        subtitle: 'Gelişimi destekleyen oyun ve etkinlikler', iconColor: const Color(0xFFFFEBD9),
+        onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const BabyActivityCatalogPage()))),
+      _baslik('Büyüme ölçümleri', action: 'Ölçüm ekle', onTap: _olcumEkle),
+      if (olcumler.isEmpty) _panel(child: const Text('Boy ve kilo ölçümü eklediğinde burada görünecek.')),
+      // En yeni ölçüm üstte; kompakt satır.
+      ...([...olcumler]..sort((a, b) => (b['tarih'] ?? '').compareTo(a['tarih'] ?? ''))).map((o) => PastelCard(
+        padding: const EdgeInsets.fromLTRB(14, 10, 4, 10),
+        child: Row(children: [
+          const EmojiBadge('📏', size: 40, background: Color(0xFFEDE4FF)),
+          const SizedBox(width: 12),
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(_guvenliTarih(o['tarih']), style: const TextStyle(fontWeight: FontWeight.w800, color: mor)),
+            const SizedBox(height: 2),
+            Text('Boy ${_olcumMetni(o['boy'], 'cm')} · Kilo ${_olcumMetni(o['kilo'], 'kg')} · Baş ${_olcumMetni(o['basCevresi'], 'cm')}',
+              style: const TextStyle(fontSize: 12.5, color: Colors.black87)),
+          ])),
+          IconButton(tooltip: 'Ölçümü sil', icon: const Icon(Icons.delete_outline, size: 20), onPressed: () => _kayitSil(olcumler, o)),
+        ]))),
+      _baslik('Bakım rehberi'),
+      _rehberKart('Bebek Masajı', Icons.spa), _rehberKart('Bebek Gelişimi', Icons.auto_graph),
+      _rehberKart('Uyku Düzeni', Icons.bedtime),
+    ];
+  }
+
+  List<Widget> _bebekSaglik(int ay) => [
+    PastelLinkCard(icon: Icons.health_and_safety_outlined, title: 'Bebek sağlık günlüğü',
+      subtitle: 'Kontrol, belirti, alerji ve gelişim kayıtları',
+      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const BabyHealthPage()))),
+    PastelLinkCard(key: const Key('ates_takibi'), icon: Icons.thermostat_outlined, title: 'Ateş ve ilaç takibi',
+      subtitle: 'Ölçüm, verilen ilaç saati ve yaşa göre uyarılar', iconColor: const Color(0xFFFFE0E0),
+      onTap: () => _sayfa('Ateş ve ilaç takibi', FeverLogPage(birth: dogum))),
+    PastelLinkCard(icon: Icons.auto_stories_outlined, title: 'Yaşa uygun gelişim rehberi',
+      subtitle: 'Beslenme, uyku, oyun ve güvenlik önerileri', iconColor: const Color(0xFFEDE4FF),
+      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => AgeGuidesPage(birth: dogum)))),
+    PastelLinkCard(icon: Icons.restaurant_outlined, title: 'Bebek beslenme rehberi',
+      subtitle: 'Aya göre ek gıda ve öğün önerileri', iconColor: const Color(0xFFFFEBD9),
+      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => BabyNutritionPage(initialMonth: ay.clamp(6, 72))))),
+    PastelLinkCard(icon: Icons.restaurant_menu_rounded, title: 'Bebek tarifleri',
+      subtitle: 'Yaş, kategori ve malzemeye göre arama',
+      onTap: () => _sayfa('Bebek Tarifleri', const BabyRecipesPage())),
+    _baslik('Sık kullanılan sağlık konuları'),
+    for (final t in ['Hastalıklar ve Belirtiler', 'Alerji', 'Beslenme', 'Uyku Düzeni']) _rehberKart(t, Icons.health_and_safety_outlined),
+  ];
+
+  List<Widget> _bebekAsilar() => [
+    PastelCard(color: const Color(0xFFFFF4FA), child: const Text(
+      'Aşı kayıtlarını bebeğin sağlık günlüğünde, resmî aşı takvimini ise çocuk profilinde görebilirsin. '
+      'Aşı zamanlaması için her zaman doktorunun ve Sağlık Bakanlığı takviminin önerisini esas al.',
+      style: TextStyle(fontSize: 13))),
+    PastelLinkCard(icon: Icons.vaccines_outlined, title: 'Aşı kayıtlarım',
+      subtitle: 'Yapılan aşıları tarih ve notla kaydet',
+      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const BabyHealthPage()))),
+    PastelLinkCard(icon: Icons.calendar_month_outlined, title: 'Resmî aşı takvimi',
+      subtitle: 'Çocuk profilini seç, yaşına göre aşı takvimini aç', iconColor: const Color(0xFFEDE4FF),
+      onTap: _profillerAc),
+    PastelLinkCard(icon: Icons.notifications_active_outlined, title: 'Aşı ve kontrol hatırlatıcıları',
+      subtitle: 'Yaklaşan randevular için hatırlatıcı kur', iconColor: const Color(0xFFFFEBD9),
+      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const RemindersPage()))),
+    _rehberKart('Aşı Takvimi', Icons.vaccines_outlined),
+  ];
+
+  List<Widget> _bebekNotlar() => [
+    PastelLinkCard(icon: Icons.group_add_rounded, title: 'Bebek profillerini yönet',
+      subtitle: 'Yeni bebek ekle, profiller arasında geçiş yap; günlük ve bakım planı',
+      onTap: _profillerAc),
+    PastelLinkCard(icon: Icons.edit_outlined, title: 'Bebek profilini düzenle',
+      subtitle: bebekAdi.isEmpty ? 'Ad ve doğum tarihi ekle' : '$bebekAdi • $yas', iconColor: const Color(0xFFEDE4FF),
+      onTap: _profil),
+    PastelLinkCard(icon: Icons.forum_outlined, title: 'Bebeğim Forumu',
+      subtitle: 'Sorular ve ebeveyn deneyimleri', iconColor: const Color(0xFFEDE4FF),
+      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const BabyOnlineForumPage()))),
     _baslik('Son kayıtlar'),
-    if (olaylar.isEmpty) _panel(child: const Text('Henüz kayıt bulunmuyor. Yukarıdan bir takip ekleyebilirsin.')),
+    if (olaylar.isEmpty) _panel(child: const Text('Henüz kayıt bulunmuyor. Ortadaki + butonundan kayıt ekleyebilirsin.')),
     ...olaylar.take(30).map((o) => _panel(child: ListTile(
       leading: const Icon(Icons.check_circle_outline, color: mor), title: Text(o['tur'] ?? ''),
       subtitle: Text('${_guvenliTarih(o['zaman'])}  ${o['not'] ?? ''}'),
-      trailing: IconButton(icon: const Icon(Icons.delete_outline), onPressed: () {setState(() => olaylar.remove(o)); _kaydet();})))),
-    _panel(color: const Color(0xFFF1E6FF), child: ListTile(
-      leading: const Icon(Icons.show_chart, color: mor),
-      title: const Text('Boy / kilo grafiklerini görüntüle'),
-      trailing: const Icon(Icons.chevron_right),
-      onTap: () => _sayfa('Büyüme Grafikleri', GrowthChartsPage(measurements: olcumler)),
-    )),
-    _baslik('Büyüme ölçümleri', action: 'Ölçüm ekle', onTap: _olcumEkle),
-    if (olcumler.isEmpty) _panel(child: const Text('Boy ve kilo ölçümü eklediğinde burada görünecek.')),
-    ...olcumler.map((o) => _panel(child: ListTile(leading: const Icon(Icons.show_chart, color: mor),
-      title: Text('Boy: ${_olcumMetni(o['boy'], 'cm')}  •  Kilo: ${_olcumMetni(o['kilo'], 'kg')}\nBaş çevresi: ${_olcumMetni(o['basCevresi'], 'cm')}'),
-      subtitle: Text(_guvenliTarih(o['tarih'])),
-      trailing: IconButton(icon: const Icon(Icons.delete_outline), onPressed: () {setState(() => olcumler.remove(o)); _kaydet();})))),
-    _baslik('Bakım rehberi'),
-    _rehberKart('Bebek Masajı', Icons.spa), _rehberKart('Bebek Gelişimi', Icons.auto_graph),
-    _rehberKart('Beslenme', Icons.restaurant), _rehberKart('Uyku Düzeni', Icons.bedtime),
-    const Padding(padding: EdgeInsets.all(10), child: Text('Takip kayıtları kişisel kullanım içindir; sağlık değerlendirmesi yerine geçmez.', style: TextStyle(fontSize: 11))),
-  ]);
+      trailing: IconButton(tooltip: 'Kaydı sil', icon: const Icon(Icons.delete_outline), onPressed: () => _kayitSil(olaylar, o))))),
+  ];
 
-  String _olcumMetni(String? deger, String birim) => (deger == null || deger.isEmpty) ? '—' : '$deger $birim';
+  // Paket 39 referansı: Günlük Takip (tarih gezinme, + ile kayıt, günün özeti).
+  Widget _gunlukTakip() {
+    final bugun = DateTime.now();
+    final gun = takipGunu;
+    final bugunMu = DateUtils.isSameDay(gun, bugun);
+    final gunKayitlari = olaylar.where((o) {
+      final z = DateTime.tryParse(o['zaman'] ?? '');
+      return z != null && DateUtils.isSameDay(z, gun);
+    }).toList()
+      ..sort((a, b) => (b['zaman'] ?? '').compareTo(a['zaman'] ?? ''));
+    int say(String tur) => gunKayitlari.where((o) => o['tur'] == tur).length;
+    String sonKayit(String tur) {
+      for (final o in gunKayitlari) {
+        if (o['tur'] != tur) continue;
+        final z = DateTime.parse(o['zaman']!);
+        final saat = '${z.hour.toString().padLeft(2, '0')}:${z.minute.toString().padLeft(2, '0')}';
+        final not = (o['not'] ?? '').trim();
+        return not.isEmpty ? 'Son: $saat' : 'Son: $saat – $not';
+      }
+      return bugunMu ? 'Bugün kayıt yok' : 'Bu gün kayıt yok';
+    }
+    // Geçmiş bir gün görüntülenirken eklenen kayıt o güne, şimdiki saatle yazılır.
+    DateTime kayitZamani() => bugunMu ? DateTime.now()
+        : DateTime(gun.year, gun.month, gun.day, bugun.hour, bugun.minute);
+    const satirlar = <(IconData, Color, String, String)>[
+      (Icons.bed_outlined, Color(0xFFEDE4FF), 'Uyku', 'Uyku'),
+      (Icons.local_drink_outlined, Color(0xFFFFE9D2), 'Beslenme', 'Beslenme'),
+      (Icons.baby_changing_station_outlined, Color(0xFFE0EEFF), 'Bez', 'Bez değişimi'),
+      (Icons.medication_outlined, Color(0xFFFFE3EC), 'İlaç / Vitamin', 'İlaç / Vitamin'),
+    ];
+    return ListView(padding: const EdgeInsets.fromLTRB(16, 8, 16, 24), children: [
+      DateNavigator(date: gun, today: bugun, onChanged: (d) => setState(() => takipGunu = d)),
+      for (final (ikon, renk, baslik, tur) in satirlar)
+        TrackingRow(icon: ikon, color: renk, title: baslik, subtitle: sonKayit(tur),
+          onAdd: () => _olayEkle(tur, zaman: kayitZamani())),
+      SummaryStatsCard(title: bugunMu ? 'Bugünkü Özet' : 'Günün Özeti', items: [
+        (Icons.bed_outlined, '${say('Uyku')} uyku'),
+        (Icons.local_drink_outlined, '${say('Beslenme')} beslenme'),
+        (Icons.baby_changing_station_outlined, '${say('Bez değişimi')} bez'),
+      ]),
+      _baslik('Günün kayıtları'),
+      if (gunKayitlari.isEmpty) _panel(child: const Text('Bu güne ait kayıt yok. Satırlardaki + butonuyla ekleyebilirsin.')),
+      ...gunKayitlari.map((o) {
+        final z = DateTime.parse(o['zaman']!);
+        return _panel(child: ListTile(
+          leading: const Icon(Icons.check_circle_outline, color: mor),
+          title: Text(o['tur'] ?? ''),
+          subtitle: Text('${z.hour.toString().padLeft(2, '0')}:${z.minute.toString().padLeft(2, '0')}  ${o['not'] ?? ''}'),
+          trailing: IconButton(tooltip: 'Kaydı sil', icon: const Icon(Icons.delete_outline), onPressed: () => _kayitSil(olaylar, o))));
+      }),
+      _baslik('Ayrıntılı günlükler'),
+      PastelLinkCard(icon: Icons.local_drink_outlined, title: 'Beslenme günlüğüm',
+        subtitle: 'Emzirme, mama ve ek gıda ayrıntıları', iconColor: const Color(0xFFFFE9D2),
+        onTap: () => _sayfa('Beslenme günlüğüm', const TrackingJournalPage())),
+      PastelLinkCard(key: const Key('emzirme_zamanlayici'), icon: Icons.timer_outlined, title: 'Emzirme zamanlayıcısı',
+        subtitle: 'Sol / sağ süre, sıradaki taraf önerisi', iconColor: const Color(0xFFFFE3F0),
+        onTap: () => _sayfa('Emzirme zamanlayıcısı', const MomToolsPage(initialTab: 2))),
+      PastelLinkCard(icon: Icons.bedtime_outlined, title: 'Uyku günlüğüm',
+        subtitle: 'Başlangıç–bitiş saatleri ve toplam uyku', iconColor: const Color(0xFFEDE4FF),
+        onTap: () => _sayfa('Uyku günlüğüm', const SleepJournalPage())),
+    ]);
+  }
+
+  // Türkçe ondalık ayırıcı (7,4 kg).
+  String _olcumMetni(String? deger, String birim) => (deger == null || deger.isEmpty) ? '—' : '${deger.replaceAll('.', ',')} $birim';
   String _guvenliTarih(String? s) {final d = DateTime.tryParse(s ?? ''); return d == null ? '' : _tarih(d);}
   Widget _sayac(String label, String type) => Column(children: [Text('${olaylar.where((e) => e['tur'] == type && _guvenliTarih(e['zaman']) == _tarih(DateTime.now())).length}',
     style: const TextStyle(fontSize: 23, color: mor, fontWeight: FontWeight.bold)), Text(label)]);
 
   // Genel tarifler ayrı katalogdan gelir; bebek tarifleri Bebeğim bölümündedir.
+  // Tarif kartı görseli: lisanslı fotoğraf eklenene kadar kategoriye özgü
+  // simge ve renk geçişi kullanılır.
+  static (IconData, List<Color>) _tarifGorseli(String kategori) => switch (kategori) {
+    'Çorbalar' => (Icons.soup_kitchen_rounded, const [Color(0xFFFFC37A), Color(0xFFF29A4A)]),
+    'Et yemekleri' => (Icons.kebab_dining_rounded, const [Color(0xFFE59A8C), Color(0xFFC0614F)]),
+    'Tavuk yemekleri' => (Icons.set_meal_rounded, const [Color(0xFFFFD39A), Color(0xFFE8A15A)]),
+    'Balık ve deniz ürünleri' => (Icons.phishing_rounded, const [Color(0xFF9FD3E8), Color(0xFF5BA4C7)]),
+    'Sebze yemekleri' => (Icons.eco_rounded, const [Color(0xFFB7E3A1), Color(0xFF6FB35A)]),
+    'Bakliyat yemekleri' => (Icons.grain_rounded, const [Color(0xFFE8C99A), Color(0xFFBF8E4F)]),
+    'Makarnalar' => (Icons.ramen_dining_rounded, const [Color(0xFFFFE29A), Color(0xFFE9B949)]),
+    'Pilavlar' => (Icons.rice_bowl_rounded, const [Color(0xFFF3E6C8), Color(0xFFD6B97A)]),
+    'Kahvaltılıklar' => (Icons.egg_alt_rounded, const [Color(0xFFFFE9A8), Color(0xFFF5C84C)]),
+    'Hamur işleri' => (Icons.bakery_dining_rounded, const [Color(0xFFF2CF9E), Color(0xFFD39B57)]),
+    'Salatalar' => (Icons.grass_rounded, const [Color(0xFFC8EBA8), Color(0xFF86C26A)]),
+    'Mezeler' => (Icons.tapas_rounded, const [Color(0xFFF7C6D6), Color(0xFFE38AA8)]),
+    'Tatlılar' => (Icons.cake_rounded, const [Color(0xFFF8C6DD), Color(0xFFE07FAE)]),
+    'Kek ve kurabiyeler' => (Icons.cookie_rounded, const [Color(0xFFE8C4A6), Color(0xFFB5835C)]),
+    'İçecekler' => (Icons.local_cafe_rounded, const [Color(0xFFD9C8FF), Color(0xFFA084E8)]),
+    'Dünya mutfağı' => (Icons.public_rounded, const [Color(0xFFBFD7FF), Color(0xFF7E9FE6)]),
+    'Diyet ve sağlıklı tarifler' => (Icons.spa_rounded, const [Color(0xFFC9F0E0), Color(0xFF72C6A4)]),
+    _ => (Icons.restaurant_menu_rounded, const [Color(0xFFFFD6E8), Color(0xFFE94791)]),
+  };
+
   Widget _tarifKarti(GeneralRecipe t) {
     final isFavorite = favoriler.contains(t.title);
-    final simge = t.category.contains('Çorba') ? Icons.soup_kitchen_outlined
-        : t.category.contains('Tatlı') ? Icons.cake_outlined
-        : t.category.contains('Kahvaltı') ? Icons.breakfast_dining_outlined
-        : Icons.restaurant_menu;
+    final (simge, renkler) = _tarifGorseli(t.category);
     return Card(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       child: InkWell(
         onTap: () => _sayfa(t.title, ListView(padding: const EdgeInsets.all(18), children: [
-          _hero(t.title, '${t.category} • ${t.minutes} dk', simge),
+          _hero(t.title, '${t.category} • ${t.minutes} dk', simge, emoji: recipeEmoji(t.title, t.category)),
+          RecipeSummaryChips(recipe: t),
+          const SizedBox(height: 8),
+          AddToNotebookTile(build: () => RecipeNotebookBridge.fromGeneral(t)),
           _panel(color: const Color(0xFFFFEAF5), child: ListTile(
             leading: const Icon(Icons.add_shopping_cart, color: mor),
             title: const Text('Malzemeleri alışveriş listeme ekle'),
@@ -526,12 +956,22 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           ...t.steps.asMap().entries.map((e) => Padding(
             padding: const EdgeInsets.symmetric(vertical: 7),
             child: Text('${e.key + 1}. ${e.value}', style: const TextStyle(fontSize: 15)))),
+          RecipeExtraSections(recipe: t),
+          const SizedBox(height: 24),
         ])),
         child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          Expanded(child: Container(color: const Color(0xFFFFEAF5), child: Stack(children: [
-            Center(child: Icon(simge, size: 56, color: mor)),
-            Positioned(right: 2, top: 2, child: IconButton(
-              tooltip: 'Favorilere ekle / çıkar',
+          Expanded(child: Container(
+            decoration: BoxDecoration(gradient: LinearGradient(colors: renkler,
+              begin: Alignment.topLeft, end: Alignment.bottomRight)),
+            child: Stack(children: [
+            Center(child: Container(
+              width: 84, height: 84, alignment: Alignment.center,
+              decoration: BoxDecoration(color: Colors.white.withValues(alpha: .55), shape: BoxShape.circle),
+              child: Text(recipeEmoji(t.title, t.category), textScaler: TextScaler.noScaling,
+                style: const TextStyle(fontSize: 46)))),
+            Positioned(right: 4, top: 4, child: IconButton(
+              tooltip: isFavorite ? 'Favorilerden çıkar' : 'Favorilere ekle',
+              style: IconButton.styleFrom(backgroundColor: Colors.white.withValues(alpha: .9)),
               icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border,
                 color: const Color(0xFFF0449B)),
               onPressed: () {
@@ -546,9 +986,17 @@ class _AnaUygulamaState extends State<AnaUygulama> {
             crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(t.title, maxLines: 2, overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontWeight: FontWeight.bold, color: mor)),
-              const SizedBox(height: 5),
-              Text('${t.category} • ${t.minutes} dk', maxLines: 1,
-                overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11)),
+              const SizedBox(height: 6),
+              Row(children: [
+                const Icon(Icons.schedule_rounded, size: 14, color: Colors.black54),
+                const SizedBox(width: 3),
+                Text('${t.minutes} dk', style: const TextStyle(fontSize: 11.5, color: Colors.black54)),
+                const SizedBox(width: 10),
+                const Icon(Icons.restaurant_outlined, size: 14, color: Colors.black54),
+                const SizedBox(width: 3),
+                Flexible(child: Text(t.difficulty, maxLines: 1, overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontSize: 11.5, color: Colors.black54))),
+              ]),
             ],
           )),
         ]),
@@ -567,8 +1015,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   }
 
   Widget _tarif() {
-    final categories = <String>['Tümü',
-      ...{for (final t in generalRecipes) t.category}];
+    final categories = <String>['Tümü', ...generalRecipeCategories];
     final selected = categories.contains(tarifFiltre) ? tarifFiltre : 'Tümü';
     final query = arama.trim().toLowerCase();
     final gorunen = generalRecipes.where((t) =>
@@ -580,15 +1027,49 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         t.ingredients.any((m) => m.toLowerCase().contains(query)))).toList();
     final gununTarifi = generalRecipes.isEmpty ? null :
       generalRecipes[DateTime.now().difference(DateTime(2026, 1, 1)).inDays.abs() % generalRecipes.length];
-    return ListView(padding: const EdgeInsets.all(15), children: [
-      const Center(child: Icon(Icons.soup_kitchen_outlined, size: 57, color: mor)),
-      const SizedBox(height: 7),
-      const Center(child: Text('Bugün Ne Pişirsem?', style: TextStyle(
-        fontSize: 24, fontWeight: FontWeight.w900, color: mor))),
-      const SizedBox(height: 6),
-      Center(child: Text('${generalRecipes.length} genel tarif • ${gorunen.length} sonuç',
-        style: const TextStyle(color: mor))),
+    return ListView(padding: const EdgeInsets.fromLTRB(16, 8, 16, 24), children: [
+      _search('Tarif ara (ör. mercimek çorbası)', (v) => setState(() { arama = v; tarifGosterimSiniri = 40; })),
       const SizedBox(height: 12),
+      SingleChildScrollView(scrollDirection: Axis.horizontal,
+        child: Row(children: categories.map((f) => Padding(
+          padding: const EdgeInsets.only(right: 8),
+          child: ChoiceChip(label: Text(f), selected: selected == f,
+            selectedColor: const Color(0xFFE94791),
+            shape: const StadiumBorder(), showCheckmark: false,
+            labelStyle: TextStyle(color: selected == f ? Colors.white : mor),
+            onSelected: (_) => setState(() { tarifFiltre = f; tarifGosterimSiniri = 40; })),
+        )).toList())),
+      const SizedBox(height: 10),
+      Wrap(spacing: 8, runSpacing: 6, crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          ChoiceChip(label: const Text('Tüm süreler'), selected: tarifSureSiniri == 0,
+            onSelected: (_) => setState(() => tarifSureSiniri = 0)),
+          ChoiceChip(label: const Text('≤ 15 dk'), selected: tarifSureSiniri == 15,
+            onSelected: (_) => setState(() => tarifSureSiniri = 15)),
+          ChoiceChip(label: const Text('≤ 30 dk'), selected: tarifSureSiniri == 30,
+            onSelected: (_) => setState(() => tarifSureSiniri = 30)),
+          ChoiceChip(label: const Text('≤ 60 dk'), selected: tarifSureSiniri == 60,
+            onSelected: (_) => setState(() => tarifSureSiniri = 60)),
+          FilterChip(label: const Text('Yalnızca favorilerim'),
+            selected: sadeceFavoriTarifler,
+            onSelected: (v) => setState(() => sadeceFavoriTarifler = v)),
+        ]),
+      Padding(padding: const EdgeInsets.symmetric(vertical: 8), child: Text('${generalRecipes.length} genel tarif • ${gorunen.length} sonuç',
+        style: const TextStyle(color: mor, fontSize: 12.5))),
+      if (gorunen.isEmpty) _panel(child: const Text('Filtrelere uygun tarif bulunamadı.')),
+      GridView.builder(shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
+        // Tüm katalog tek seferde çizilmez; performans için parça parça yüklenir.
+        itemCount: gorunen.length.clamp(0, tarifGosterimSiniri),
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 240, childAspectRatio: .82,
+          mainAxisSpacing: 10, crossAxisSpacing: 10),
+        itemBuilder: (_, i) => _tarifKarti(gorunen[i])),
+      if (gorunen.length > tarifGosterimSiniri)
+        Padding(padding: const EdgeInsets.only(top: 12), child: OutlinedButton.icon(
+          onPressed: () => setState(() => tarifGosterimSiniri += 40),
+          icon: const Icon(Icons.expand_more),
+          label: Text('Daha fazla tarif göster (${gorunen.length - tarifGosterimSiniri} kaldı)'))),
+      _baslik('Tarif araçları'),
       if (gununTarifi != null) _panel(color: const Color(0xFFFFEAF5),
         child: ListTile(
           leading: const Icon(Icons.auto_awesome, color: mor),
@@ -602,7 +1083,6 @@ class _AnaUygulamaState extends State<AnaUygulama> {
             ],
           )),
         )),
-      const SizedBox(height: 12),
       _panel(color: const Color(0xFFFFF0F8), child: ListTile(
         leading: const Icon(Icons.wb_sunny_outlined, color: mor),
         title: const Text('Günlük yemek önerilerim', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -635,40 +1115,6 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
           builder: (_) => const PantryRecipePage())),
       )),
-      const SizedBox(height: 12),
-      _search('Tarif veya malzeme ara...', (v) => setState(() => arama = v)),
-      const SizedBox(height: 12),
-      SingleChildScrollView(scrollDirection: Axis.horizontal,
-        child: Row(children: categories.map((f) => Padding(
-          padding: const EdgeInsets.only(right: 8),
-          child: ChoiceChip(label: Text(f), selected: selected == f,
-            selectedColor: const Color(0xFF9E60C8),
-            labelStyle: TextStyle(color: selected == f ? Colors.white : mor),
-            onSelected: (_) => setState(() => tarifFiltre = f)),
-        )).toList())),
-      const SizedBox(height: 10),
-      Wrap(spacing: 8, runSpacing: 6, crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          ChoiceChip(label: const Text('Tüm süreler'), selected: tarifSureSiniri == 0,
-            onSelected: (_) => setState(() => tarifSureSiniri = 0)),
-          ChoiceChip(label: const Text('≤ 15 dk'), selected: tarifSureSiniri == 15,
-            onSelected: (_) => setState(() => tarifSureSiniri = 15)),
-          ChoiceChip(label: const Text('≤ 30 dk'), selected: tarifSureSiniri == 30,
-            onSelected: (_) => setState(() => tarifSureSiniri = 30)),
-          ChoiceChip(label: const Text('≤ 60 dk'), selected: tarifSureSiniri == 60,
-            onSelected: (_) => setState(() => tarifSureSiniri = 60)),
-          FilterChip(label: const Text('Yalnızca favorilerim'),
-            selected: sadeceFavoriTarifler,
-            onSelected: (v) => setState(() => sadeceFavoriTarifler = v)),
-        ]),
-      _baslik('Genel yemek tarifleri'),
-      if (gorunen.isEmpty) _panel(child: const Text('Filtrelere uygun tarif bulunamadı.')),
-      GridView.builder(shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
-        itemCount: gorunen.length,
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 240, childAspectRatio: .82,
-          mainAxisSpacing: 10, crossAxisSpacing: 10),
-        itemBuilder: (_, i) => _tarifKarti(gorunen[i])),
       _baslik('Favori tariflerim'),
       _panel(child: Text(favoriler.isEmpty
         ? 'Henüz favori tarif eklemedin.'
@@ -681,6 +1127,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       _hero(t.title, '${t.category} • ${t.minutes} dk', Icons.restaurant_menu),
+      RecipeSummaryChips(recipe: t),
       _baslik('Malzemeler'),
       ...t.ingredients.map((m) => ListTile(dense: true,
         leading: const Icon(Icons.check_circle_outline, color: mor), title: Text(m))),
@@ -688,6 +1135,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       ...t.steps.asMap().entries.map((e) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 7),
         child: Text('${e.key + 1}. ${e.value}'))),
+      RecipeExtraSections(recipe: t),
     ],
   );
 
@@ -700,83 +1148,149 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     try {
       final items = (jsonDecode(p.getString('alisveris') ?? '[]') as List).cast<String>();
       final done = (jsonDecode(p.getString('tamamlanan') ?? '[]') as List).cast<String>();
+      // Akıllı Alışveriş aynı adet kaydını değiştirebilir; ikisi tek kaynaktır.
+      final adetler = jsonDecode(p.getString('alisveris_adet') ?? '{}');
       if (!mounted) return;
       setState(() {
         alisveris..clear()..addAll(items);
         tamamlanan..clear()..addAll(done);
+        alisverisAdet.clear();
+        if (adetler is Map) {
+          for (final e in adetler.entries) {
+            if (e.key is String && e.value is int && (e.value as int) >= 1 && (e.value as int) <= 99) {
+              alisverisAdet[e.key as String] = e.value as int;
+            }
+          }
+        }
       });
-    } catch (e) { debugPrint('Alışveriş yenileme hatası: $e'); }
+    } catch (e) { logSafeError('Alışveriş yenileme hatası', e); }
   }
 
-  Widget _alisveris() => ListView(padding: const EdgeInsets.all(15), children: [
-    Row(children: [const Expanded(child: Text('Alışveriş', style: TextStyle(
-      fontSize: 25, fontWeight: FontWeight.w900, color: mor))),
-      IconButton(tooltip: 'Sepetim', onPressed: () => _sayfa('Sepetim', _sepet()),
-        icon: Badge(label: Text('${sepet.length}'), isLabelVisible: sepet.isNotEmpty,
-          child: const Icon(Icons.shopping_cart_outlined, color: mor)))]),
-    const SizedBox(height: 12),
-    _panel(color: const Color(0xFFF7EAF5), child: const Row(children: [
-      Icon(Icons.search, color: mor), SizedBox(width: 10),
-      Expanded(child: Text('Bir kategori seçerek ürünleri keşfet',
-        style: TextStyle(color: mor, fontSize: 13)))])),
-    _baslik('Kategoriler'),
-    GridView.count(crossAxisCount: 4, shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 8,
-      crossAxisSpacing: 8, childAspectRatio: .76, children: [
-        _mini('Bebek Ürünleri', Icons.child_care, const Color(0xFFDDF4EF),
-          () => _sayfa('Bebek Ürünleri', _urunKategori('Bebek Ürünleri'))),
-        _mini('Anne Ürünleri', Icons.pregnant_woman, const Color(0xFFFFD9EE),
-          () => _sayfa('Anne Ürünleri', _urunKategori('Anne Ürünleri'))),
-        _mini('Ev & Yaşam', Icons.home_outlined, const Color(0xFFE2E9FF),
-          () => _sayfa('Ev & Yaşam', _urunKategori('Ev & Yaşam'))),
-        _mini('Kozmetik', Icons.spa, const Color(0xFFFFE5D7),
-          () => _sayfa('Kozmetik & Bakım', _urunKategori('Kozmetik & Bakım'))),
-        _mini('Giyim', Icons.checkroom, const Color(0xFFE6D8FF),
-          () => _sayfa('Giyim', _urunKategori('Giyim'))),
-        _mini('Oyuncak', Icons.toys, const Color(0xFFFFE8B7),
-          () => _sayfa('Oyuncak', _urunKategori('Oyuncak'))),
-        _mini('Sağlık', Icons.medical_services_outlined, const Color(0xFFD7F3EF),
-          () => _sayfa('Sağlık', _urunKategori('Sağlık'))),
-        _mini('Diğer', Icons.apps, const Color(0xFFF9DBEE),
-          () => _sayfa('Diğer', _urunKategori('Diğer'))),
-      ]),
-    _baslik('Fırsat ürünleri ✨', action: 'Sepetim (${sepet.length})',
-      onTap: () => _sayfa('Sepetim', _sepet())),
-    GridView.builder(itemCount: urunler.length, shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, childAspectRatio: .83, mainAxisSpacing: 10, crossAxisSpacing: 10),
-      itemBuilder: (ctx, i) => _urunKarti(urunler[i])),
-    _panel(color: const Color(0xFFF8D7ED), child: const ListTile(
-      leading: Icon(Icons.card_giftcard, color: mor, size: 34),
-      title: Text('Sana özel bir alışveriş listesi 💝',
-        style: TextStyle(fontWeight: FontWeight.w800, color: mor)),
-      subtitle: Text('İhtiyaçlarını kaydet, alışverişte kolayca işaretle.'))),
-    _panel(color: const Color(0xFFFFEAF5), child: ListTile(
-      leading: const Icon(Icons.auto_awesome, color: mor),
-      title: const Text('Akıllı alışveriş listesi', style: TextStyle(fontWeight: FontWeight.w800)),
-      subtitle: const Text('Kategoriler, miktar notları, arama ve tamamlananlar'),
-      trailing: const Icon(Icons.chevron_right),
-      onTap: () async {
-        await Navigator.of(context).push(MaterialPageRoute<void>(
-          builder: (_) => const SmartShoppingPage()));
-        await _alisverisYenile();
-      },
-    )),
-    _baslik('Alışveriş listem', action: 'Ürün ekle', onTap: _urunEkle),
-    FilledButton.icon(onPressed: _urunEkle, icon: const Icon(Icons.add),
-      label: const Text('Listeye ürün ekle')),
-    if (alisveris.isEmpty) _panel(child: const Text('Alışveriş listen boş.')),
-    ...alisveris.map((u) => _panel(child: CheckboxListTile(title: Text(u),
-      value: tamamlanan.contains(u), onChanged: (v) {
-        setState(() {if (v == true) {tamamlanan.add(u);} else {tamamlanan.remove(u);}});
-        _kaydet();
-      }, secondary: IconButton(icon: const Icon(Icons.delete_outline), onPressed: () {
-        setState(() {alisveris.remove(u); tamamlanan.remove(u);}); _kaydet();
-      })))),
-    const Text('Ürünler örnek katalogdur; gerçek satış, stok, fiyat veya ödeme bağlantısı henüz yoktur.',
-      style: TextStyle(fontSize: 12)),
-  ]);
+  int _adet(String urun) => alisverisAdet[urun] ?? 1;
+
+  Future<void> _listeyeEkle(String urun) async {
+    final vardi = alisveris.contains(urun);
+    final oncekiAdet = alisverisAdet[urun];
+    setState(() {
+      if (vardi) {
+        alisverisAdet[urun] = (_adet(urun) + 1).clamp(1, 99);
+      } else {
+        alisveris.add(urun);
+      }
+    });
+    final basarili = await _kaydet();
+    if (!mounted) return;
+    if (!basarili) {
+      setState(() {
+        if (!vardi) alisveris.remove(urun);
+        if (oncekiAdet == null) { alisverisAdet.remove(urun); } else { alisverisAdet[urun] = oncekiAdet; }
+      });
+    }
+    _kayitBildir(basarili, basariMesaji: vardi ? '$urun adedi artırıldı.' : '$urun listeye eklendi.');
+  }
+
+  // Paket 39 referansı: Bebek / Anne / Aile sekmeleri, kategori kutuları,
+  // adet seçicili liste ve liste toplamı. Önceki bölümler alttadır.
+  Widget _alisveris() {
+    final segment = shoppingSegments[alisverisSekme.clamp(0, shoppingSegments.length - 1)];
+    final altKategori = segment.subcategories.where((c) => c.name == alisverisAltKategori).firstOrNull;
+    final toplamAdet = alisveris.fold<int>(0, (t, u) => t + _adet(u));
+    return ListView(padding: const EdgeInsets.fromLTRB(16, 8, 16, 24), children: [
+      PastelSegmentTabs(
+        labels: [for (final s in shoppingSegments) s.name],
+        selected: alisverisSekme,
+        onChanged: (i) => setState(() { alisverisSekme = i; alisverisAltKategori = null; }),
+      ),
+      const SizedBox(height: 12),
+      SizedBox(height: 82, child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: segment.subcategories.length,
+        separatorBuilder: (_, _) => const SizedBox(width: 8),
+        itemBuilder: (_, i) {
+          final c = segment.subcategories[i];
+          return CategoryIconTile(icon: c.icon, label: c.name,
+            selected: c.name == alisverisAltKategori,
+            onTap: () => setState(() => alisverisAltKategori = c.name == alisverisAltKategori ? null : c.name));
+        })),
+      if (altKategori != null) PastelCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text('${altKategori.name}: listeye eklemek için dokun',
+          style: const TextStyle(fontWeight: FontWeight.w700, color: mor)),
+        const SizedBox(height: 8),
+        Wrap(spacing: 6, runSpacing: 6, children: [
+          for (final urun in altKategori.items)
+            ActionChip(
+              avatar: Icon(alisveris.contains(urun) ? Icons.check_rounded : Icons.add_rounded, size: 18, color: const Color(0xFFE94791)),
+              label: Text(urun),
+              onPressed: () => _listeyeEkle(urun)),
+        ]),
+      ])) else const SizedBox(height: 4),
+      PastelCard(child: Column(children: [
+        PastelSectionHeader(icon: Icons.checklist_rounded, title: 'Alışveriş Listem',
+          action: 'Yeni Ürün Ekle', onAction: _urunEkle),
+        const SizedBox(height: 4),
+        if (alisveris.isEmpty) const Padding(padding: EdgeInsets.symmetric(vertical: 12),
+          child: Text('Alışveriş listen boş. Kategorilerden veya "Yeni Ürün Ekle" ile ekleyebilirsin.')),
+        for (final u in alisveris) Row(children: [
+          Checkbox(value: tamamlanan.contains(u), activeColor: const Color(0xFFE94791),
+            onChanged: (v) {
+              setState(() {if (v == true) {tamamlanan.add(u);} else {tamamlanan.remove(u);}});
+              _kaydet();
+            }),
+          Expanded(child: Text(u, style: TextStyle(
+            decoration: tamamlanan.contains(u) ? TextDecoration.lineThrough : null))),
+          QuantityStepper(value: _adet(u), onChanged: (v) {
+            setState(() => alisverisAdet[u] = v);
+            _kaydet();
+          }),
+          IconButton(tooltip: '$u ürününü sil', visualDensity: VisualDensity.compact,
+            icon: const Icon(Icons.delete_outline, size: 20), onPressed: () {
+            setState(() {alisveris.remove(u); tamamlanan.remove(u); alisverisAdet.remove(u);}); _kaydet();
+          }),
+        ]),
+      ])),
+      PastelLinkCard(icon: Icons.shopping_cart_outlined,
+        title: 'Liste Toplamı (${alisveris.length} ürün)',
+        subtitle: '$toplamAdet adet • ${alisveris.where(tamamlanan.contains).length} ürün alındı',
+        onTap: () async {
+          await Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const SmartShoppingPage()));
+          await _alisverisYenile();
+        }),
+      _baslik('Diğer alışveriş araçları'),
+      PastelLinkCard(icon: Icons.auto_awesome, title: 'Akıllı alışveriş listesi',
+        subtitle: 'Kategoriler, miktar notları, arama ve tamamlananlar', iconColor: const Color(0xFFEDE4FF),
+        onTap: () async {
+          await Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const SmartShoppingPage()));
+          await _alisverisYenile();
+        }),
+      PastelLinkCard(icon: Icons.shopping_bag_outlined, title: 'Sepetim (${sepet.length})',
+        subtitle: 'Taslak sepet; sipariş veya ödeme yapılmaz', iconColor: const Color(0xFFFFEBD9),
+        onTap: () => _sayfa('Sepetim', _sepet())),
+      _baslik('Ürün kataloğu'),
+      GridView.count(crossAxisCount: 4, shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 8,
+        crossAxisSpacing: 8, childAspectRatio: .76, children: [
+          _mini('Bebek Ürünleri', Icons.child_care, const Color(0xFFDDF4EF),
+            () => _sayfa('Bebek Ürünleri', _urunKategori('Bebek Ürünleri'))),
+          _mini('Anne Ürünleri', Icons.pregnant_woman, const Color(0xFFFFD9EE),
+            () => _sayfa('Anne Ürünleri', _urunKategori('Anne Ürünleri'))),
+          _mini('Ev & Yaşam', Icons.home_outlined, const Color(0xFFE2E9FF),
+            () => _sayfa('Ev & Yaşam', _urunKategori('Ev & Yaşam'))),
+          _mini('Kozmetik', Icons.spa, const Color(0xFFFFE5D7),
+            () => _sayfa('Kozmetik & Bakım', _urunKategori('Kozmetik & Bakım'))),
+          _mini('Giyim', Icons.checkroom, const Color(0xFFE6D8FF),
+            () => _sayfa('Giyim', _urunKategori('Giyim'))),
+          _mini('Oyuncak', Icons.toys, const Color(0xFFFFE8B7),
+            () => _sayfa('Oyuncak', _urunKategori('Oyuncak'))),
+          _mini('Sağlık', Icons.medical_services_outlined, const Color(0xFFD7F3EF),
+            () => _sayfa('Sağlık', _urunKategori('Sağlık'))),
+          _mini('Diğer', Icons.apps, const Color(0xFFF9DBEE),
+            () => _sayfa('Diğer', _urunKategori('Diğer'))),
+        ]),
+      const SizedBox(height: 10),
+      const Text('Ürünler ihtiyaç listesi içindir; gerçek satış, stok, fiyat veya ödeme bağlantısı yoktur.',
+        style: TextStyle(fontSize: 12)),
+    ]);
+  }
 
   Widget _urunKategori(String cat) => ListView(padding: const EdgeInsets.all(15), children: [
     ...urunler.where((u) => u[1] == cat).map(_urunKarti),
@@ -797,14 +1311,166 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     const Text('Bu sepet yalnızca taslak kaydıdır. Sipariş veya ödeme işlemi yapmaz.'),
   ]);
 
-  Future<void> _adetTarihi() async {
-    final d = await showDatePicker(context: context, initialDate: sonAdet ?? DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime.now());
-    if (d != null) {setState(() => sonAdet = d); _kaydet();}
+  // Döngü geçmişi CycleTrackerPage ile aynı güvenli anahtarda tutulur.
+  static const _donguAnahtari = 'cycle_history_v1';
+
+  Future<void> _donguYukle() async {
+    try {
+      final tarihler = decodeCycleDates(await SecureHealthStore.read(_donguAnahtari));
+      if (!mounted) return;
+      setState(() => donguTarihleri..clear()..addAll(tarihler));
+    } catch (_) {
+      // Döngü geçmişi okunamazsa takvim yalnızca son adet tarihini kullanır.
+    }
   }
-  Widget _kadin() => ListView(padding: const EdgeInsets.all(15), children: [
-    _hero('Kadınlara Özel 👑', 'Sağlıklı, mutlu ve güçlü senin için...', Icons.favorite),
-    _panel(color: const Color(0xFFF1E5FF), child: ListTile(leading: const Icon(Icons.forum_outlined, color: mor), title: const Text('Kadınlar Forumu'), subtitle: const Text('Konular, deneyimler ve sohbet'), trailing: const Icon(Icons.chevron_right), onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomenOnlineForumPage())))),
-    _baslik('Kendine iyi bak'),
+
+  CycleEstimate get _donguTahmini => CycleEstimate.from([
+    ...donguTarihleri,
+    ?sonAdet,
+  ]);
+
+  /// Tarih seçtirip adet başlangıcı olarak kaydeder (düğmeler ve + menüsü).
+  Future<void> _adetGunuSec() async {
+    final now = DateTime.now();
+    final d = await showDatePicker(context: context,
+      helpText: 'Adet başlangıç günü',
+      initialDate: now, firstDate: DateTime(now.year - 3), lastDate: now);
+    if (d != null && mounted) await _adetBaslangiciKaydet(d, onayIste: false);
+  }
+
+  Future<void> _adetBaslangiciKaydet(DateTime gun, {bool onayIste = true}) async {
+    final secilen = DateTime(gun.year, gun.month, gun.day);
+    if (secilen.isAfter(DateTime.now())) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Gelecek bir gün adet başlangıcı olarak kaydedilemez.')));
+      return;
+    }
+    if (donguTarihleri.any((d) => d.year == secilen.year && d.month == secilen.month && d.day == secilen.day)) {
+      ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(SnackBar(content: Text('${_tarih(secilen)} zaten kayıtlı. Silmek için "Adet döngüsü geçmişim"i aç.')));
+      return;
+    }
+    final onay = !onayIste ? true : await showDialog<bool>(context: context, builder: (ctx) => AlertDialog(
+      title: const Text('Adet başlangıcı'),
+      content: Text('${_tarih(secilen)} adet başlangıç günü olarak kaydedilsin mi?'),
+      actions: [
+        TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Vazgeç')),
+        FilledButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Kaydet')),
+      ]));
+    if (onay != true || !mounted) return;
+    final onceki = List<DateTime>.of(donguTarihleri);
+    final oncekiSonAdet = sonAdet;
+    final yeni = {...donguTarihleri, secilen}.toList()..sort((a, b) => b.compareTo(a));
+    setState(() {
+      donguTarihleri..clear()..addAll(yeni);
+      if (sonAdet == null || secilen.isAfter(sonAdet!)) sonAdet = secilen;
+    });
+    try {
+      await SecureHealthStore.write(_donguAnahtari, jsonEncode(yeni.map((d) => d.toIso8601String()).toList()));
+      final basarili = await _kaydet();
+      if (!basarili) throw _sonKayitHatasi ?? StateError('kayıt');
+      _kayitBildir(true, basariMesaji: 'Adet başlangıcı kaydedildi: ${_tarih(secilen)}');
+    } catch (e) {
+      if (!mounted) return;
+      setState(() { donguTarihleri..clear()..addAll(onceki); sonAdet = oncekiSonAdet; });
+      _kayitBildir(false, hata: e);
+    }
+  }
+
+  // Paket 39 referansı: Döngü Takibi / Sağlık / İyi Hisset sekmeleri.
+  Widget _kadin() => ListView(padding: const EdgeInsets.fromLTRB(16, 8, 16, 24), children: [
+    PastelSegmentTabs(
+      labels: const ['Döngü Takibi', 'Sağlık', 'İyi Hisset'],
+      selected: kadinSekme,
+      onChanged: (i) => setState(() => kadinSekme = i),
+    ),
+    const SizedBox(height: 12),
+    ...switch (kadinSekme) {
+      1 => _kadinSaglik(),
+      2 => _kadinIyiHisset(),
+      _ => _kadinDongu(),
+    },
+  ]);
+
+  List<Widget> _kadinDongu() {
+    final tahmin = _donguTahmini;
+    final sonraki = tahmin.nextPeriod;
+    final yumurtlama = tahmin.nextOvulation;
+    return [
+      Row(children: [
+        Expanded(child: FilledButton.icon(
+          key: const ValueKey('adet_bugun'),
+          onPressed: () => _adetBaslangiciKaydet(DateTime.now()),
+          icon: const Icon(Icons.water_drop_rounded, size: 18),
+          label: const Text('Bugün başladı'))),
+        const SizedBox(width: 8),
+        Expanded(child: OutlinedButton.icon(
+          key: const ValueKey('adet_tarih'),
+          onPressed: _adetGunuSec,
+          icon: const Icon(Icons.edit_calendar_rounded, size: 18),
+          label: const Text('Gün seç'))),
+      ]),
+      const Padding(padding: EdgeInsets.fromLTRB(4, 6, 4, 10), child: Text(
+        'İpucu: takvimde bir güne dokunarak da adet başlangıcı ekleyebilirsin.',
+        style: TextStyle(fontSize: 11.5, color: Colors.black54))),
+      CycleMonthCalendar(
+        month: donguAyi,
+        today: DateTime.now(),
+        kindOf: tahmin.kindOf,
+        onMonthChanged: (m) => setState(() => donguAyi = m),
+        onDayTap: _adetBaslangiciKaydet,
+      ),
+      if (!tahmin.hasData)
+        PastelCard(color: const Color(0xFFFFF4FA), child: const Text(
+          'Takvimde adet başladığı güne dokunarak ilk kaydını ekle. '
+          'İki veya daha fazla kayıttan sonra döngü süren kayıtlarından hesaplanır.',
+          style: TextStyle(fontSize: 13)))
+      else
+        PastelCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text('Sonraki adet (tahmini): ${_tarih(sonraki!)}',
+            style: const TextStyle(fontWeight: FontWeight.w800, color: mor)),
+          const SizedBox(height: 4),
+          Text('Tahmini yumurtlama: ${_tarih(yumurtlama!)}'),
+          Text(tahmin.measured
+            ? 'Döngü süresi: ortalama ${tahmin.cycleLength} gün (${tahmin.starts.length} kayıttan)'
+            : 'Döngü süresi: ${tahmin.cycleLength} gün (varsayılan; daha fazla kayıt girince ölçülür)'),
+        ])),
+      PastelLinkCard(icon: Icons.edit_note_rounded, title: 'Bugünkü Notun',
+        leading: const WomanPortraitArt(size: 56), background: const Color(0xFFFFEEF6),
+        subtitle: 'Enerji seviyen nasıl? Belirti ve ruh halini kaydet',
+        onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomensHealthJournalPage()))),
+      PastelLinkCard(icon: Icons.history_rounded, title: 'Adet döngüsü geçmişim',
+        subtitle: 'Başlangıç tarihlerini ekle, görüntüle ve sil', iconColor: const Color(0xFFEDE4FF),
+        onTap: () async {
+          await Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const CycleTrackerPage()));
+          await _donguYukle();
+        }),
+      PastelLinkCard(icon: Icons.calendar_month_outlined, title: 'Son adet başlangıç tarihi',
+        subtitle: sonAdet == null ? 'Henüz kaydedilmedi' : '${_tarih(sonAdet!)} • ${DateTime.now().difference(sonAdet!).inDays} gün önce',
+        iconColor: const Color(0xFFFFEBD9), onTap: _adetGunuSec),
+      const Padding(padding: EdgeInsets.all(10), child: Text(
+        'Yumurtlama ve verimli dönem, ortalama döngü süresine göre yaklaşık hesaplanır. '
+        'Doğum kontrolü veya gebelik planlaması için güvenilir bir yöntem değildir; tıbbi değerlendirme yerine geçmez.',
+        style: TextStyle(fontSize: 11.5, color: Colors.black54))),
+    ];
+  }
+
+  List<Widget> _kadinSaglik() => [
+    PastelLinkCard(icon: Icons.favorite_border_rounded, title: 'Kadın sağlığı günlüğüm',
+      subtitle: 'Döngü, gebelik, doğum sonrası ve belirtiler',
+      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomensHealthJournalPage()))),
+    PastelLinkCard(icon: Icons.pregnant_woman_rounded, title: 'Gebelik',
+      subtitle: 'Hafta hafta takip, kontroller ve hazırlık listesi', iconColor: const Color(0xFFEDE4FF),
+      onTap: () => _sayfa('Gebelik', const PregnancyPage())),
+    PastelLinkCard(icon: Icons.spa_outlined, title: 'Doğum sonrası ve annelik',
+      subtitle: '12 haftalık rehber, destek listesi ve kişisel notlar', iconColor: const Color(0xFFFFEBD9),
+      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const PostpartumCarePage()))),
+    PastelLinkCard(icon: Icons.medical_services_outlined, title: 'Sağlık merkezi',
+      subtitle: 'Bebek ve kadın sağlığı araçları bir arada',
+      onTap: () => _sayfa('Sağlık', _saglik())),
+    _baslik('Kadın sağlığı konuları'),
+    for (final t in ['Adet Dönemi', 'Gebelik', 'Doğum Sonrası', 'Anne Sütü']) _rehberKart(t, Icons.favorite_outline),
+  ];
+
+  List<Widget> _kadinIyiHisset() => [
     GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
       mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 1.15, children: [
         _kart('Güzellik & Bakım', 'Öneriler', Icons.spa, const Color(0xFFFFE0E8), () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomenLifestylePage(initialCategory: 'Güzellik & Bakım')))),
@@ -814,22 +1480,15 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         _kart('Kişisel Gelişim', 'Kendine yatırım', Icons.psychology, const Color(0xFFE3F3FF), () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomenLifestylePage(initialCategory: 'Kişisel Gelişim')))),
         _kart('Rahatlama', 'Stres yönetimi', Icons.self_improvement, const Color(0xFFE3F3E5), () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomenLifestylePage(initialCategory: 'Rahatlama')))),
     ]),
-    _panel(color: const Color(0xFFFFE5F0), child: ListTile(leading: const Icon(Icons.spa_outlined, color: mor), title: const Text('Doğum sonrası ve annelik'), subtitle: const Text('12 haftalık rehber, destek listesi ve kişisel notlar'), trailing: const Icon(Icons.chevron_right), onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const PostpartumCarePage())))),
-    _panel(color: const Color(0xFFF3E7FF), child: ListTile(leading: const Icon(Icons.menu_book_outlined, color: mor), title: const Text('Kadın yaşamı içerik kütüphanesi'), subtitle: const Text('42 konu, arama, favoriler ve okundu takibi'), trailing: const Icon(Icons.chevron_right), onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomenLifestylePage())))),
-    _baslik('Kadın sağlığı takibim'),
-    _panel(color: const Color(0xFFFFE3F1), child: ListTile(leading: const Icon(Icons.edit_note, color: mor), title: const Text('Kadın sağlığı günlüğüm'), subtitle: const Text('Döngü, gebelik, doğum sonrası ve belirtiler'), trailing: const Icon(Icons.chevron_right), onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomensHealthJournalPage())))),
-    _panel(color: pembe, child: ListTile(leading: const Icon(Icons.calendar_month, color: mor),
-      title: const Text('Son adet başlangıç tarihi'), subtitle: Text(sonAdet == null ? 'Henüz kaydedilmedi' : _tarih(sonAdet!)),
-      trailing: const Icon(Icons.edit), onTap: _adetTarihi)),
-    if (sonAdet != null) _panel(child: Text('Son kayıt üzerinden ${DateTime.now().difference(sonAdet!).inDays} gün geçti.')),
-    _panel(child: ListTile(leading: const Icon(Icons.history, color: mor),
-      title: const Text('Adet döngüsü geçmişim'),
-      subtitle: const Text('Başlangıç tarihlerini ekle, görüntüle ve sil'),
-      trailing: const Icon(Icons.chevron_right),
-      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const CycleTrackerPage())))),
+    const SizedBox(height: 12),
+    PastelLinkCard(icon: Icons.menu_book_outlined, title: 'Kadın yaşamı içerik kütüphanesi',
+      subtitle: '42 konu, arama, favoriler ve okundu takibi', iconColor: const Color(0xFFEDE4FF),
+      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomenLifestylePage()))),
+    PastelLinkCard(icon: Icons.forum_outlined, title: 'Kadınlar Forumu',
+      subtitle: 'Konular, deneyimler ve sohbet',
+      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomenOnlineForumPage()))),
     _hero('Kendinize zaman ayırın 💕', 'Çünkü siz de değerlisiniz!', Icons.spa),
-    const Padding(padding: EdgeInsets.all(12), child: Text('Döngü veya doğurganlık tahmini yapılmaz. Bu alan tıbbi danışmanlık sunmaz.', style: TextStyle(fontSize: 12))),
-  ]);
+  ];
 
   Widget _saglik() => ListView(padding: const EdgeInsets.all(15), children: [
     _hero('Sağlık 💗', 'Bebeğinizin ve sizin sağlığınız için güvenilir takip araçları', Icons.medical_services_outlined),
@@ -862,12 +1521,18 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     'Eğitim & Oyun', 'Ev Düzeni', 'Gebelik', 'Güzellik & Bakım', 'Hastalıklar ve Belirtiler',
     'Kişisel Gelişim', 'Moda & Stil', 'Rahatlama', 'Uyku Düzeni'];
 
-  void _rehberKonuAc(String konu) => _sayfa(konu, _icerik(konu));
+  // Ansiklopedide karşılığı olan konular orada, diğerleri kısa rehberde açılır.
+  void _rehberKonuAc(String konu) => searchEncyclopedia(konu).isEmpty
+    ? _sayfa(konu, _icerik(konu))
+    : Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (_) => EncyclopediaPage(initialQuery: konu)));
 
-  Widget _rehber() => _RehberSayfasi(konular: rehberKonular, ac: (konu) => _sayfa(konu, _icerik(konu)));
+  void _ansiklopediAc() => Navigator.of(context).push(
+    MaterialPageRoute<void>(builder: (_) => const EncyclopediaPage()));
+
   Widget _rehberKart(String t, IconData icon) => _panel(child: ListTile(
     leading: Icon(icon, color: mor), title: Text(t), trailing: const Icon(Icons.chevron_right),
-    onTap: () => _sayfa(t, _icerik(t))));
+    onTap: () => _rehberKonuAc(t)));
   Widget _icerik(String konu) => ListView(padding: const EdgeInsets.all(16), children: [
     _hero(konu, 'Anne & Bebek yaşam rehberi', Icons.menu_book),
     _baslik('Bu bölüm hakkında'),
@@ -891,9 +1556,14 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     if (confirmed != true || !mounted) return;
     try {
       await PrivacyService.deleteLocalRecords();
+      try {
+        await LocalReminderNotifications.cancelAll();
+      } catch (_) {
+        // Bildirim eklentisi olmayan platformlarda (web) yok sayılır.
+      }
       if (!mounted) return;
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute<void>(builder: (_) => const AnaUygulama()),
+        MaterialPageRoute<void>(builder: (_) => const ConsentGate(child: AnaUygulama())),
         (_) => false,
       );
     } catch (_) {
@@ -923,6 +1593,11 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         QuickAccessItem(title: 'Alışveriş', description: 'Liste ve sepet', icon: Icons.shopping_bag_outlined, onOpen: () => sekmeyeGit(3)),
         QuickAccessItem(title: 'Kadın sağlığı günlüğü', description: 'Döngü, gebelik, doğum sonrası ve menopoz notları', icon: Icons.health_and_safety_outlined, onOpen: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomensHealthJournalPage()))),
         QuickAccessItem(title: 'Kadınlar', description: 'Kadın sağlığı ve gebelik', icon: Icons.favorite_outline, onOpen: () => sekmeyeGit(4)),
+        QuickAccessItem(title: 'Ateş takibi', description: 'Ateş ölçümü ve ilaç saati kaydı', icon: Icons.thermostat_outlined, onOpen: () => _sayfa('Ateş ve ilaç takibi', FeverLogPage(birth: dogum))),
+        QuickAccessItem(title: 'Kasılma sayacı', description: 'Doğum kasılmalarının süresi ve aralığı', icon: Icons.timer_outlined, onOpen: () => _sayfa('Kasılma sayacı', const MomToolsPage())),
+        QuickAccessItem(title: 'Tekme sayacı', description: 'Bebek hareketlerini say (10 hareket)', icon: Icons.touch_app_outlined, onOpen: () => _sayfa('Tekme sayacı', const MomToolsPage(initialTab: 1))),
+        QuickAccessItem(title: 'Emzirme zamanlayıcısı', description: 'Sol / sağ süre takibi', icon: Icons.timer, onOpen: () => _sayfa('Emzirme zamanlayıcısı', const MomToolsPage(initialTab: 2))),
+        QuickAccessItem(title: 'Bebek isimleri', description: 'Anlamıyla isim önerileri', icon: Icons.badge_outlined, onOpen: () => _sayfa('Bebek isimleri', const MomToolsPage(initialTab: 3))),
         QuickAccessItem(title: 'Beslenme kaydı', description: 'Yeni beslenme kaydı oluştur', icon: Icons.local_drink_outlined, onOpen: () => _olayEkle('Beslenme')),
         QuickAccessItem(title: 'Uyku kaydı', description: 'Yeni uyku kaydı oluştur', icon: Icons.bedtime_outlined, onOpen: () => _olayEkle('Uyku')),
         QuickAccessItem(title: 'Büyüme ölçümü', description: 'Boy, kilo ve baş çevresi', icon: Icons.monitor_weight_outlined, onOpen: _olcumEkle),
@@ -933,16 +1608,53 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           onOpen: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const BackupPage()))),
         QuickAccessItem(title: 'Aile hatırlatıcıları', description: 'Tarihli kontrol ve aile notları', icon: Icons.event_note_outlined,
           onOpen: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const RemindersPage()))),
-        QuickAccessItem(title: 'Yayın öncesi kontrol', description: 'Android test ve yayın kontrol listesi', icon: Icons.fact_check_outlined,
+        if (!kReleaseMode) QuickAccessItem(title: 'Yayın öncesi kontrol', description: 'Android test ve yayın kontrol listesi', icon: Icons.fact_check_outlined,
           onOpen: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const ReleaseCheckPage()))),
         QuickAccessItem(title: 'Rehber', description: 'A’dan Z’ye bilgi rehberi', icon: Icons.menu_book_outlined,
-          onOpen: () => _sayfa('A’dan Z’ye Rehber', _rehber())),
+          onOpen: () => _ansiklopediAc()),
       ]),
     );
   }
 
+  Widget _profilSatiri(IconData icon, String title, VoidCallback onTap, {Widget? badge}) => ListTile(
+    leading: Icon(icon, color: mor),
+    title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
+    trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+      ?badge,
+      const Icon(Icons.chevron_right_rounded, color: mor),
+    ]),
+    onTap: onTap);
+
   Widget _profilSayfasi() => ListView(padding: const EdgeInsets.all(16), children: [
-    _hero('Profilim', 'Kişisel kayıtlar ve uygulama ayarları', Icons.account_circle),
+    _panel(color: const Color(0xFFFFFCFF), child: Column(children: [
+      ListTile(
+        title: const Text('Çocuk Profillerim', maxLines: 1, style: TextStyle(fontWeight: FontWeight.w800, color: mor, fontSize: 15.5)),
+        trailing: TextButton.icon(onPressed: _profillerAc, icon: const Icon(Icons.add_rounded),
+          label: const Text('Profil Ekle'))),
+      ListTile(
+        leading: const BabyFaceAvatar(size: 44),
+        title: Text(bebekAdi.isEmpty ? 'Bebek profili oluştur' : bebekAdi,
+          style: const TextStyle(fontWeight: FontWeight.w700)),
+        subtitle: Text(yas),
+        trailing: const Icon(Icons.chevron_right_rounded, color: mor),
+        onTap: _profillerAc),
+    ])),
+    _panel(color: const Color(0xFFFFFCFF), padding: EdgeInsets.zero, child: Column(children: [
+      _profilSatiri(Icons.person_outline_rounded, 'Hesap Bilgilerim', () => Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => const CloudAccountPage()))),
+      _profilSatiri(Icons.workspace_premium_outlined, 'Premium Üyelik', () => Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => const MembershipPage())),
+        badge: Container(margin: const EdgeInsets.only(right: 6), padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+          decoration: BoxDecoration(color: const Color(0xFFE94791), borderRadius: BorderRadius.circular(10)),
+          child: const Text('Pro', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800)))),
+      _profilSatiri(Icons.notifications_none_rounded, 'Bildirim Ayarları', () => Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => const NotificationPreferencesPage()))),
+      _profilSatiri(Icons.shield_outlined, 'Gizlilik ve Güvenlik', () => Navigator.push(context,
+        MaterialPageRoute<void>(builder: (_) => const BackupPage()))),
+      _profilSatiri(Icons.info_outline_rounded, 'Uygulama Hakkında', () => showAboutDialog(context: context,
+        applicationName: 'Anne & Bebek', applicationVersion: '1.0.0',
+        applicationLegalese: 'Takip kayıtları kişisel kullanım içindir; sağlık değerlendirmesi yerine geçmez.')),
+    ])),
     _baslik('Hesabım'), _rehberKart('Bebek profilim', Icons.child_care),
     _panel(child: ListTile(title: Text(bebekAdi.isEmpty ? 'Bebek profili oluştur' : bebekAdi),
       subtitle: Text(yas), trailing: const Icon(Icons.edit), onTap: _profil)),
@@ -964,11 +1676,15 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       title: const Text('Akıllı içerik keşfi'), subtitle: const Text('Çevrimdışı konu arama ve öneriler'),
       trailing: const Icon(Icons.chevron_right),
       onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const SmartDiscoveryPage())))),
+    // Yönetici araçları yalnızca geliştirme sürümlerinde görünür.
+    if (!kReleaseMode)
     _panel(child: ListTile(leading: const Icon(Icons.admin_panel_settings, color: mor),
       title: const Text('Merkezi yönetim paneli'),
       subtitle: const Text('Sunucu yetkisi gerektirir; forum ve toplu istatistikler'),
       trailing: const Icon(Icons.chevron_right),
       onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const AdminDashboardPage())))),
+    // Yönetici araçları yalnızca geliştirme sürümlerinde görünür.
+    if (!kReleaseMode)
     _panel(child: ListTile(leading: const Icon(Icons.admin_panel_settings_outlined, color: mor),
       title: const Text('Yerel yönetim özeti (ön izleme)'),
       subtitle: const Text('Bu cihazdaki kayıt sayıları; gerçek yönetici paneli değildir'),
@@ -979,7 +1695,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       title: const Text('Yedekleme ve geri yükleme'),
       subtitle: const Text('Kayıtları dışa aktar veya geri yükle'),
       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const BackupPage())))),
-    _baslik('Gizlilik'), _panel(child: const Text('Sağlık kayıtları güvenli depolama üzerinden korunur; bazı tercihler ve alışveriş verileri cihazın yerel depolamasında tutulur. Uygulama hesap, bulut eşitleme veya otomatik bulut yedekleme sunmaz. Daha önce dışa aktarılan yedekler ve panoya kopyalanan içerikler ayrıca silinmelidir.')),
+    _baslik('Gizlilik ve açık rıza'), _panel(child: const Column(children: [PrivacySummary(), PrivacyPolicyLink()])),
+    _panel(child: const Text('Daha önce dışa aktarılan yedekler ve panoya kopyalanan içerikler ayrıca silinmelidir. Kayıtları silmek açık rızanı geri almak anlamına gelir; uygulama bir sonraki açılışta yeniden onay ister.')),
     _panel(child: ListTile(
       leading: const Icon(Icons.delete_forever_outlined, color: Colors.red),
       title: const Text('Bu cihazdaki kayıtlarımı sil'),
@@ -988,19 +1705,63 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     )),
   ]);
 
+  // Bölüm sırası: 0 Ana Sayfa, 1 Bebeğim, 2 Tarifler, 3 Alışveriş, 4 Kadınlar, 5 Profil.
+  // Alt menüde referans tasarıma göre Ana Sayfa • Bebeğim • (+) • Tarifler • Profil vardır;
+  // Alışveriş ve Kadınlar ana sayfadaki modül kartlarından açılır.
+  static const _bolumBasliklari = <(IconData, String)>[
+    (Icons.favorite_rounded, 'Anne & Bebek'),
+    (Icons.child_care_rounded, 'Bebeğim'),
+    (Icons.restaurant_menu_rounded, 'Yemek Tarifleri'),
+    (Icons.shopping_cart_outlined, 'Alışveriş'),
+    (Icons.local_florist_rounded, 'Kadınlar'),
+    (Icons.person_outline_rounded, 'Profil'),
+    (Icons.event_note_rounded, 'Günlük Takip'),
+  ];
+  static const _altMenuBolumleri = [0, 1, 2, 5];
+
+  // Seçenekler küçük ekranlara sığmayabilir: menü kaydırılabilir.
+  void _hizliKayitMenusu() => showModalBottomSheet<void>(context: context, showDragHandle: true,
+    isScrollControlled: true,
+    builder: (ctx) => SafeArea(child: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
+      const Padding(padding: EdgeInsets.only(bottom: 4), child: Text('Hızlı kayıt',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: mor))),
+      ListTile(leading: const Icon(Icons.local_drink, color: Color(0xFFE94791)), title: const Text('Beslenme kaydı'), onTap: () {Navigator.pop(ctx); _olayEkle('Beslenme');}),
+      ListTile(leading: const Icon(Icons.bedtime, color: Color(0xFFE94791)), title: const Text('Uyku kaydı'), onTap: () {Navigator.pop(ctx); _olayEkle('Uyku');}),
+      ListTile(leading: const Icon(Icons.baby_changing_station, color: Color(0xFFE94791)), title: const Text('Bez değişimi'), onTap: () {Navigator.pop(ctx); _olayEkle('Bez değişimi');}),
+      ListTile(leading: const Icon(Icons.medication_outlined, color: Color(0xFFE94791)), title: const Text('İlaç / vitamin'), onTap: () {Navigator.pop(ctx); _olayEkle('İlaç / Vitamin');}),
+      ListTile(leading: const Icon(Icons.monitor_weight, color: Color(0xFFE94791)), title: const Text('Boy / kilo kaydı'), onTap: () {Navigator.pop(ctx); _olcumEkle();}),
+      ListTile(leading: const Icon(Icons.add_shopping_cart, color: Color(0xFFE94791)), title: const Text('Alışveriş listesine ürün'), onTap: () {Navigator.pop(ctx); _urunEkle();}),
+      ListTile(leading: const Icon(Icons.water_drop_rounded, color: Color(0xFFE94791)), title: const Text('Adet başlangıcı'), onTap: () {Navigator.pop(ctx); _adetGunuSec();}),
+      ListTile(leading: const Icon(Icons.edit_note_rounded, color: Color(0xFFE94791)), title: const Text('Kadın sağlığı notu'), onTap: () {Navigator.pop(ctx); Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomensHealthJournalPage()));}),
+    ]))));
+
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    final bolum = sekme.clamp(0, 6);
+    final (baslikIkonu, baslik) = _bolumBasliklari[bolum];
+    final altBolum = bolum == 3 || bolum == 4 || bolum == 6;
+    return PopScope(
+      // Alt bölümlerdeyken sistem geri tuşu önce ana sayfaya döner.
+      canPop: bolum == 0,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop && mounted) setState(() => sekme = 0);
+      },
+      child: Scaffold(
     appBar: AppBar(
-      title: const Text('Anne & Bebek 💕', style: TextStyle(fontWeight: FontWeight.w900, color: mor, fontSize: 19)),
+      toolbarHeight: 64,
+      leading: altBolum ? IconButton(tooltip: 'Ana sayfaya dön', icon: const Icon(Icons.arrow_back_rounded),
+        onPressed: () => setState(() => sekme = 0)) : null,
+      title: PastelTitle(icon: baslikIkonu, title: baslik),
       actions: [
         IconButton(tooltip: 'Ara ve hızlı erişim', icon: const Icon(Icons.search_rounded), onPressed: _hizliErisim),
-        IconButton(tooltip: 'Bebek profilleri', icon: const Icon(Icons.child_care_rounded), onPressed: _profillerAc),
+        IconButton(tooltip: 'Bildirim ayarları', icon: const Icon(Icons.notifications_none_rounded),
+          onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const NotificationPreferencesPage()))),
         PopupMenuButton<String>(tooltip: 'Diğer bölümler', icon: const Icon(Icons.more_vert_rounded),
           onSelected: (value) {
             switch (value) {
-              case 'guide': _sayfa('A’dan Z’ye Rehber', _rehber());
+              case 'guide': _ansiklopediAc();
               case 'tools': Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const LifeHubPage()));
-              case 'profile': _sayfa('Profilim', _profilSayfasi());
+              case 'profile': setState(() => sekme = 5);
               case 'membership': Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const MembershipPage()));
             }
           },
@@ -1012,7 +1773,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           ]),
       ],
     ),
-    body: yuklendi ? [_ana, _bebek, _tarif, _alisveris, _kadin][sekme]()
+    body: yuklendi ? [_ana, _bebek, _tarif, _alisveris, _kadin, _profilSayfasi, _gunlukTakip][bolum]()
       : yuklemeHatasi != null
         ? Center(child: Padding(padding: const EdgeInsets.all(24), child: Column(
             mainAxisSize: MainAxisSize.min, children: [
@@ -1026,26 +1787,13 @@ class _AnaUygulamaState extends State<AnaUygulama> {
               }, icon: const Icon(Icons.refresh), label: const Text('Tekrar dene')),
             ])))
         : const Center(child: CircularProgressIndicator()),
-    floatingActionButton: FloatingActionButton.small(backgroundColor: const Color(0xFFFF5A9C), foregroundColor: Colors.white,
-      onPressed: () => showModalBottomSheet<void>(context: context, showDragHandle: true, builder: (ctx) =>
-        SafeArea(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          ListTile(leading: const Icon(Icons.local_drink), title: const Text('Beslenme kaydı'), onTap: () {Navigator.pop(ctx); _olayEkle('Beslenme');}),
-          ListTile(leading: const Icon(Icons.bedtime), title: const Text('Uyku kaydı'), onTap: () {Navigator.pop(ctx); _olayEkle('Uyku');}),
-          ListTile(leading: const Icon(Icons.monitor_weight), title: const Text('Boy / kilo kaydı'), onTap: () {Navigator.pop(ctx); _olcumEkle();}),
-          ListTile(leading: const Icon(Icons.add_shopping_cart), title: const Text('Alışveriş listesi'), onTap: () {Navigator.pop(ctx); _urunEkle();}),
-        ]))), child: const Icon(Icons.add)),
-    floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-    bottomNavigationBar: NavigationBar(height: 76, selectedIndex: sekme, onDestinationSelected: (i) => setState(() => sekme = i),
-      backgroundColor: const Color(0xFFFFF9FD), indicatorColor: pembe,
-      labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-      destinations: const [
-        NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: 'Ana Sayfa'),
-        NavigationDestination(icon: Icon(Icons.child_care_outlined), selectedIcon: Icon(Icons.child_care), label: 'Bebeğim'),
-        NavigationDestination(icon: Icon(Icons.restaurant_menu), label: 'Tarifler'),
-        NavigationDestination(icon: Icon(Icons.shopping_bag_outlined), label: 'Alışveriş'),
-        NavigationDestination(icon: Icon(Icons.favorite_border), selectedIcon: Icon(Icons.favorite), label: 'Kadınlar'),
-      ]),
-  );
+    bottomNavigationBar: PastelBottomBar(
+      selected: _altMenuBolumleri.indexOf(bolum),
+      onSelect: (i) => setState(() => sekme = _altMenuBolumleri[i]),
+      onAdd: _hizliKayitMenusu,
+    ),
+  ));
+  }
 }
 
 

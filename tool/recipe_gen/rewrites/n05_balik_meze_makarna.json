@@ -1,0 +1,1211 @@
+[
+{
+"id": "n05_001",
+"title": "Hamsi tava",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 10,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 kg hamsi (temizlenmiş)",
+"1 su bardağı mısır unu",
+"1 tatlı kaşığı tuz",
+"Kızartmak için 2 su bardağı sıvı yağ",
+"1 limon"
+],
+"steps": [
+"Hamsileri yıkayıp süzün.",
+"Mısır unu ve tuzu karıştırın.",
+"Hamsileri una bulayıp tavaya yelpaze şeklinde dizin.",
+"Kızgın yağda her yüzü 2 dakika kızartın.",
+"Limon ve soğanla servis edin."
+],
+"tips": [
+"Unu fazla bulaştırmayın; silkeleyin."
+],
+"serving": "Sıcak, mısır ekmeğiyle.",
+"storage": "Aynı gün tüketin."
+},
+{
+"id": "n05_002",
+"title": "Buğulama levrek",
+"category": "Balık ve deniz ürünleri",
+"servings": 2,
+"prepMinutes": 15,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 levrek fileto",
+"1 domates",
+"2 sivri biber",
+"1 soğan",
+"4 mantar",
+"2 yemek kaşığı zeytinyağı",
+"Yarım limon",
+"1 çay kaşığı tuz, dereotu"
+],
+"steps": [
+"Soğanı halka, sebzeleri dilim doğrayın.",
+"Tavaya sebzeleri yayıp balıkları üzerine koyun.",
+"Yağ, limon, tuz ve yarım bardak su ekleyin.",
+"Kapağı kapalı kısık ateşte 15–18 dakika pişirin.",
+"Dereotuyla servis edin."
+],
+"tips": [
+"Buğulama kendi buharında pişer; fazla su eklemeyin."
+],
+"serving": "Sıcak.",
+"storage": "Aynı gün tüketin."
+},
+{
+"id": "n05_003",
+"title": "Kremalı karides sote",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 12,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"400 g ayıklanmış karides",
+"2 diş sarımsak",
+"1 kırmızı biber",
+"Yarım su bardağı krema",
+"2 yemek kaşığı tereyağı",
+"1 çay kaşığı tuz, pul biber",
+"Yarım demet maydanoz"
+],
+"steps": [
+"Tereyağında sarımsak ve biberi 2 dakika çevirin.",
+"Karidesleri ekleyip 2 dakika, pembeleşene kadar pişirin.",
+"Kremayı ekleyip 2 dakika kaynatın.",
+"Tuz ve pul biberi ekleyin.",
+"Maydanozla servis edin."
+],
+"tips": [
+"Karides pembeleşince pişmiştir; fazlası sertleştirir."
+],
+"serving": "Pilav veya ekmekle sıcak.",
+"storage": "Aynı gün tüketin."
+},
+{
+"id": "n05_004",
+"title": "Fırında palamut",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"4 dilim palamut",
+"2 soğan",
+"2 domates",
+"3 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 tatlı kaşığı tuz, karabiber"
+],
+"steps": [
+"Fırını 200 °C'ye ısıtın.",
+"Soğanları halka doğrayıp tepsiye yayın.",
+"Balıkları üzerine dizin, domates dilimleri koyun.",
+"Yağ, limon ve baharatları ekleyin.",
+"25 dakika pişirin."
+],
+"tips": [
+"Soğan yatağı balığın yapışmasını önler."
+],
+"serving": "Roka ile.",
+"storage": "Aynı gün tüketin."
+},
+{
+"id": "n05_005",
+"title": "Midye tava (evde)",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 30,
+"cookMinutes": 10,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"500 g ayıklanmış midye içi",
+"1 su bardağı un",
+"1 su bardağı soğuk bira veya maden suyu",
+"1 çay kaşığı tuz, karbonat",
+"Kızartmak için 2 su bardağı sıvı yağ",
+"Tarator: 1 dilim ekmek, yarım su bardağı ceviz, 1 diş sarımsak, 2 yemek kaşığı yoğurt"
+],
+"steps": [
+"Un, tuz, karbonat ve soğuk sıvıyla akışkan hamur yapın.",
+"Midyeleri kurulayıp hamura batırın.",
+"Kızgın yağda 2 dakika kızartın.",
+"Tarator malzemelerini robotta çekin.",
+"Midyeleri taratorla servis edin."
+],
+"tips": [
+"Sıvının soğuk olması hamuru çıtır yapar."
+],
+"serving": "Sıcak.",
+"storage": "Aynı gün tüketin."
+},
+{
+"id": "n05_006",
+"title": "Somon ızgara (limon tereyağlı)",
+"category": "Balık ve deniz ürünleri",
+"servings": 2,
+"prepMinutes": 5,
+"cookMinutes": 10,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 dilim somon",
+"1 yemek kaşığı tereyağı",
+"1 limon",
+"1 diş sarımsak",
+"1 çay kaşığı tuz, karabiber"
+],
+"steps": [
+"Somonu tuz ve karabiberle tatlandırın.",
+"Izgara tavada derili tarafı altta 5 dakika pişirin.",
+"Çevirip 3 dakika daha pişirin.",
+"Tereyağında sarımsak ve limonu eritip sos yapın.",
+"Sosu somona gezdirin."
+],
+"tips": [
+"Derili taraf çıtırlaşınca kendiliğinden ayrılır."
+],
+"serving": "Pilav ve sebzeyle.",
+"storage": "Aynı gün tüketin."
+},
+{
+"id": "n05_007",
+"title": "Fırında sardalya",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": 220,
+"ingredients": [
+"1 kg sardalya (temizlenmiş)",
+"3 yemek kaşığı zeytinyağı",
+"2 limon",
+"3 diş sarımsak",
+"1 tatlı kaşığı kekik, tuz"
+],
+"steps": [
+"Fırını 220 °C'ye ısıtın.",
+"Sardalyaları kurulayıp tepsiye dizin.",
+"Yağ, limon suyu, ezilmiş sarımsak, kekik ve tuzu karıştırıp üzerine dökün.",
+"12–15 dakika pişirin.",
+"Limon dilimleriyle servis edin."
+],
+"tips": [
+"Sardalya omega-3 açısından çok zengindir."
+],
+"serving": "Roka ile sıcak.",
+"storage": "Aynı gün tüketin."
+},
+{
+"id": "n05_008",
+"title": "Kalamar tava (fırında)",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 15,
+"difficulty": "Orta",
+"ovenCelsius": 220,
+"ingredients": [
+"500 g kalamar halka",
+"1 su bardağı galeta unu",
+"2 yumurta",
+"Yarım su bardağı un",
+"1 çay kaşığı tuz",
+"2 yemek kaşığı zeytinyağı"
+],
+"steps": [
+"Fırını 220 °C'ye ısıtın.",
+"Kalamarı kurulayın.",
+"Una, yumurtaya ve galeta ununa bulayın.",
+"Tepsiye dizip yağ gezdirin.",
+"12–15 dakika pişirin."
+],
+"tips": [
+"Kalamar ya çok kısa ya çok uzun pişmeli; arası sert olur."
+],
+"serving": "Tarator veya limonla.",
+"storage": "Aynı gün tüketin."
+},
+{
+"id": "n05_009",
+"title": "Balık çorbası",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"500 g kılçıksız beyaz balık",
+"1 havuç",
+"1 patates",
+"1 soğan",
+"1 kereviz sapı",
+"2 yemek kaşığı zeytinyağı",
+"6 su bardağı su",
+"1 limon",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Sebzeleri küp doğrayıp yağda 5 dakika çevirin.",
+"Suyu ekleyip 15 dakika pişirin.",
+"Balığı parçalayıp ekleyin, 8 dakika pişirin.",
+"Limon ve tuzla tatlandırın.",
+"Maydanozla servis edin."
+],
+"tips": [
+"Balığı en son ekleyin; dağılmasın."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 1 gün."
+},
+{
+"id": "n05_010",
+"title": "Uskumru dolması (fırında)",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 30,
+"cookMinutes": 25,
+"difficulty": "Zor",
+"ovenCelsius": 190,
+"ingredients": [
+"4 uskumru (kılçığı ayıklanmış)",
+"1 soğan",
+"2 yemek kaşığı pirinç",
+"2 yemek kaşığı kuş üzümü",
+"2 yemek kaşığı çam fıstığı",
+"1 tatlı kaşığı yenibahar, tuz",
+"2 yemek kaşığı zeytinyağı"
+],
+"steps": [
+"Soğanı yağda kavurup pirinç, üzüm, fıstık ve baharatı ekleyin; yarım bardak suyla 10 dakika pişirin.",
+"Uskumruların içini harçla doldurun.",
+"Tepsiye dizip yağ sürün.",
+"190 °C'de 25 dakika pişirin.",
+"Limonla servis edin."
+],
+"tips": [
+"Balıkçıdan kılçığını ayıklatmanız işi kolaylaştırır."
+],
+"serving": "Sıcak.",
+"storage": "Aynı gün tüketin."
+},
+{
+"id": "n05_011",
+"title": "Levrek kağıtta (papillote)",
+"category": "Balık ve deniz ürünleri",
+"servings": 2,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"2 levrek fileto",
+"1 kabak",
+"1 havuç",
+"1 limon",
+"2 yemek kaşığı zeytinyağı",
+"Yarım demet dereotu, 1 çay kaşığı tuz"
+],
+"steps": [
+"Fırını 200 °C'ye ısıtın.",
+"Sebzeleri jülyen doğrayıp pişirme kâğıdına yerleştirin.",
+"Balığı üzerine koyup yağ, limon, dereotu ve tuz ekleyin.",
+"Kâğıdı paket şeklinde kapatın.",
+"20 dakika pişirin."
+],
+"tips": [
+"Paket içindeki buhar balığı nemli tutar."
+],
+"serving": "Paketi masada açarak servis edin.",
+"storage": "Aynı gün tüketin."
+},
+{
+"id": "n05_012",
+"title": "Karidesli sebzeli pilav",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"300 g karides",
+"1,5 su bardağı pirinç",
+"1 su bardağı bezelye",
+"1 kırmızı biber",
+"2 yemek kaşığı tereyağı",
+"2,5 su bardağı sıcak su",
+"1 tatlı kaşığı tuz, zerdeçal"
+],
+"steps": [
+"Karidesleri tereyağında 2 dakika çevirip alın.",
+"Biber ve pirinci kavurun.",
+"Su, tuz, zerdeçal ve bezelyeyi ekleyin.",
+"15 dakika pişirin.",
+"Karidesleri ekleyip 10 dakika demlendirin."
+],
+"tips": [
+"Karidesi demlenme sırasında ısıtmak yeterlidir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 1 gün."
+},
+{
+"id": "n05_013",
+"title": "Somonlu ıspanaklı makarna",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"350 g penne",
+"200 g somon",
+"200 g ıspanak",
+"Yarım su bardağı krema",
+"1 diş sarımsak",
+"1 yemek kaşığı zeytinyağı",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Makarnayı haşlayın.",
+"Somonu küp doğrayıp yağda 4 dakika pişirin.",
+"Sarımsak ve ıspanağı ekleyip soldurun.",
+"Kremayı ekleyin.",
+"Makarnayla karıştırın."
+],
+"tips": [
+"Füme somon da kullanılabilir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 1 gün."
+},
+{
+"id": "n05_014",
+"title": "Alabalık ızgara (bademli)",
+"category": "Balık ve deniz ürünleri",
+"servings": 2,
+"prepMinutes": 5,
+"cookMinutes": 12,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 alabalık",
+"2 yemek kaşığı tereyağı",
+"3 yemek kaşığı badem dilimi",
+"1 limon",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Balıkları tuzlayıp ızgarada her yüzü 5 dakika pişirin.",
+"Tereyağında bademleri 2 dakika kızartın.",
+"Limon suyunu ekleyin.",
+"Balığın üzerine gezdirin.",
+"Servis edin."
+],
+"tips": [
+"Bademi yakmamaya dikkat edin."
+],
+"serving": "Roka ile.",
+"storage": "Aynı gün tüketin."
+},
+{
+"id": "n05_015",
+"title": "Çipura ızgara",
+"category": "Balık ve deniz ürünleri",
+"servings": 2,
+"prepMinutes": 5,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 çipura",
+"2 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 çay kaşığı tuz",
+"1 demet roka, 1 kırmızı soğan"
+],
+"steps": [
+"Balıklara çapraz çizik atın.",
+"Yağ ve tuzla ovun.",
+"Kızgın ızgarada her yüzü 6–7 dakika pişirin.",
+"Limon sıkın.",
+"Roka ve soğanla servis edin."
+],
+"tips": [
+"Izgara iyice ısınmazsa balık yapışır."
+],
+"serving": "Sıcak.",
+"storage": "Aynı gün tüketin."
+},
+{
+"id": "n05_101",
+"title": "Pancarlı humus",
+"category": "Mezeler",
+"servings": 6,
+"prepMinutes": 15,
+"cookMinutes": 0,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı haşlanmış nohut",
+"1 haşlanmış pancar",
+"3 yemek kaşığı tahin",
+"1 limon suyu",
+"1 diş sarımsak",
+"3 yemek kaşığı zeytinyağı",
+"1 çay kaşığı kimyon, tuz"
+],
+"steps": [
+"Pancarı doğrayın.",
+"Tüm malzemeyi robota alın.",
+"Pürüzsüz olana kadar çekin; gerekirse buzlu su ekleyin.",
+"Tabağa yayın.",
+"Zeytinyağıyla servis edin."
+],
+"tips": [
+"Pancar humusa canlı renk ve tatlılık verir."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n05_102",
+"title": "Deniz börülcesi salatası",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 5,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"300 g deniz börülcesi",
+"2 diş sarımsak",
+"3 yemek kaşığı zeytinyağı",
+"1 limon"
+],
+"steps": [
+"Börülceleri yıkayıp kaynar suda 4 dakika haşlayın.",
+"Soğuk suya alın.",
+"Lifli kısımlarını sıyırarak ayıklayın.",
+"Sarımsak, yağ ve limonla karıştırın.",
+"Soğuk servis edin."
+],
+"tips": [
+"Deniz börülcesi tuzludur; tuz eklemeyin."
+],
+"serving": "Soğuk, balıkla.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n05_103",
+"title": "Muhammara",
+"category": "Mezeler",
+"servings": 6,
+"prepMinutes": 10,
+"cookMinutes": 0,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"3 köz kırmızı biber",
+"1 su bardağı ceviz",
+"3 yemek kaşığı galeta unu",
+"2 yemek kaşığı nar ekşisi",
+"1 diş sarımsak",
+"3 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı kimyon, pul biber"
+],
+"steps": [
+"Biberleri soyun.",
+"Cevizi iri kıyın.",
+"Tüm malzemeyi robotta kısa kısa çekin.",
+"Kıvamı galeta unuyla ayarlayın.",
+"Zeytinyağıyla servis edin."
+],
+"tips": [
+"Dokulu kalması için fazla çekmeyin."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 4 gün."
+},
+{
+"id": "n05_104",
+"title": "Kabak çiçeği dolması",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 30,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"16 kabak çiçeği",
+"1 su bardağı pirinç",
+"1 soğan",
+"Yarım demet dereotu ve nane",
+"4 yemek kaşığı zeytinyağı",
+"1 çay kaşığı tuz, şeker"
+],
+"steps": [
+"Çiçeklerin içindeki pistilleri dikkatle alın.",
+"Soğanı yağda kavurup pirinç, otlar ve baharatla harç yapın.",
+"Çiçekleri yarısına kadar doldurup uçlarını kıvırın.",
+"Tencereye dizip 1 bardak sıcak su ve yağ ekleyin.",
+"Kısık ateşte 30 dakika pişirip soğutun."
+],
+"tips": [
+"Pirinç şişeceğinden tam doldurmayın."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n05_105",
+"title": "Atom (yoğurtlu kuru biber)",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 5,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı süzme yoğurt",
+"4 kuru acı biber",
+"2 yemek kaşığı tereyağı",
+"1 diş sarımsak"
+],
+"steps": [
+"Yoğurdu sarımsakla çırpıp tabağa yayın.",
+"Tereyağını eritin.",
+"Kuru biberleri 1 dakika yağda kızartın.",
+"Biberleri yoğurdun üzerine koyun.",
+"Yağı gezdirin."
+],
+"tips": [
+"Biberler çok acıysa sayısını azaltın."
+],
+"serving": "Soğuk.",
+"storage": "Aynı gün."
+},
+{
+"id": "n05_106",
+"title": "Zeytinyağlı yaprak sarma",
+"category": "Mezeler",
+"servings": 8,
+"prepMinutes": 60,
+"cookMinutes": 50,
+"difficulty": "Zor",
+"ovenCelsius": null,
+"ingredients": [
+"500 g asma yaprağı",
+"1,5 su bardağı pirinç",
+"3 soğan",
+"Yarım su bardağı zeytinyağı",
+"2 yemek kaşığı kuş üzümü ve çam fıstığı",
+"1 tatlı kaşığı nane, yenibahar, tarçın, tuz, şeker",
+"1 limon"
+],
+"steps": [
+"Soğanları yağda kavurup fıstık, pirinç ve baharatları ekleyin; yarım bardak suyla 5 dakika pişirin.",
+"Yaprakları haşlayıp sap kısmını kesin.",
+"Harcı yapraklara koyup sıkıca sarın.",
+"Tencereye dizip limon ve 2 bardak sıcak su ekleyin, tabakla bastırın.",
+"Kısık ateşte 45 dakika pişirip tencerede soğutun."
+],
+"tips": [
+"Sıkı sarmak pişerken açılmayı önler."
+],
+"serving": "Soğuk, limonla.",
+"storage": "Buzdolabında 4 gün."
+},
+{
+"id": "n05_107",
+"title": "Zeytinyağlı biber dolması",
+"category": "Mezeler",
+"servings": 6,
+"prepMinutes": 30,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"10 dolmalık biber",
+"1 su bardağı pirinç",
+"2 soğan",
+"1 domates",
+"Yarım su bardağı zeytinyağı",
+"1 tatlı kaşığı nane, tuz, şeker"
+],
+"steps": [
+"Soğanı yağda kavurup pirinç, domates ve baharatı ekleyin.",
+"Yarım bardak suyla 5 dakika pişirin.",
+"Biberleri doldurup kapaklarını kapatın.",
+"Tencereye dizip 1,5 bardak sıcak su ekleyin.",
+"40 dakika pişirip soğutun."
+],
+"tips": [
+"İç harç yarı pişmiş olmalı; tencerede tamamlanır."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n05_108",
+"title": "Babagannuş (közlü patlıcan)",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"3 patlıcan",
+"2 domates",
+"1 sivri biber",
+"1 diş sarımsak",
+"2 yemek kaşığı nar ekşisi",
+"2 yemek kaşığı zeytinyağı",
+"Yarım demet maydanoz"
+],
+"steps": [
+"Patlıcanları közleyip soyun.",
+"Domates ve biberi küçük doğrayın.",
+"Patlıcanı bıçakla kıyın.",
+"Hepsini sarımsak, nar ekşisi ve yağla karıştırın.",
+"Maydanozla servis edin."
+],
+"tips": [
+"Antakya usulü tahinsiz yapılır."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n05_109",
+"title": "Cevizli kereviz salatası (yoğurtlu)",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 0,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 kereviz kökü",
+"1 su bardağı yoğurt",
+"2 yemek kaşığı mayonez",
+"Yarım su bardağı ceviz",
+"1 diş sarımsak",
+"Yarım limon"
+],
+"steps": [
+"Kerevizi rendeleyip limonla harmanlayın.",
+"Yoğurt, mayonez ve sarımsağı karıştırın.",
+"Kerevizi ekleyin.",
+"Cevizi katın.",
+"1 saat dinlendirin."
+],
+"tips": [
+"Dinlenince kereviz yumuşar."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n05_110",
+"title": "Fasulye pilaki (zeytinyağlı)",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı haşlanmış kuru fasulye",
+"2 havuç",
+"1 patates",
+"1 soğan",
+"3 diş sarımsak",
+"4 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 tatlı kaşığı şeker, tuz"
+],
+"steps": [
+"Soğan ve sarımsağı yağda kavurun.",
+"Havuç ve patatesi ekleyin.",
+"Fasulye ve 1 bardak suyu ekleyin.",
+"20 dakika pişirin.",
+"Limon ve maydanozla soğuk servis edin."
+],
+"tips": [
+"Pilaki dinlendikçe lezzetlenir."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 4 gün."
+},
+{
+"id": "n05_111",
+"title": "Girit ezmesi",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 0,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"200 g beyaz peynir",
+"100 g lor",
+"Yarım su bardağı ceviz",
+"1 diş sarımsak",
+"4 yemek kaşığı zeytinyağı",
+"Yarım demet dereotu, 4–5 dal nane, yarım demet maydanoz"
+],
+"steps": [
+"Peynir ve loru ezin.",
+"Kıyılmış yeşillikleri ekleyin.",
+"Ceviz ve sarımsağı katın.",
+"Zeytinyağıyla karıştırın.",
+"Soğuk servis edin."
+],
+"tips": [
+"Peynirin tuzu yeterlidir."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n05_112",
+"title": "Közlenmiş biber salatası",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"6 kapya biber",
+"2 diş sarımsak",
+"3 yemek kaşığı zeytinyağı",
+"1 yemek kaşığı sirke",
+"1 çay kaşığı tuz",
+"Yarım demet maydanoz"
+],
+"steps": [
+"Biberleri fırında veya ocakta közleyin.",
+"Poşette 10 dakika bekletip soyun.",
+"Şeritler hâlinde doğrayın.",
+"Sarımsak, yağ, sirke ve tuzla karıştırın.",
+"Maydanozla servis edin."
+],
+"tips": [
+"Biberler dinlendikçe lezzetlenir."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 4 gün."
+},
+{
+"id": "n05_113",
+"title": "Topik",
+"category": "Mezeler",
+"servings": 6,
+"prepMinutes": 30,
+"cookMinutes": 60,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı haşlanmış nohut",
+"4 soğan",
+"3 yemek kaşığı tahin",
+"1 tatlı kaşığı tarçın, kimyon, yenibahar",
+"2 yemek kaşığı kuş üzümü",
+"2 yemek kaşığı çam fıstığı",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Soğanları bütün hâlde 30 dakika haşlayıp ince kıyın ve suyunu sıkın.",
+"Nohudu ezin.",
+"Soğan, tahin, baharatlar, üzüm ve fıstıkla karıştırın.",
+"Tülbente sarıp top şekli verin.",
+"Buzdolabında soğutup dilimleyin."
+],
+"tips": [
+"Ermeni mutfağının klasik soğuk mezesidir."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 4 gün."
+},
+{
+"id": "n05_114",
+"title": "Patlıcan söğürme",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"3 patlıcan",
+"1 kırmızı soğan",
+"Yarım demet maydanoz",
+"3 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 çay kaşığı tuz, pul biber"
+],
+"steps": [
+"Patlıcanları közleyip soyun.",
+"Soğanı ince doğrayın.",
+"Patlıcanı bıçakla kıyın.",
+"Hepsini yağ, limon ve baharatla karıştırın.",
+"Maydanozla servis edin."
+],
+"tips": [
+"Közün dumanlı tadı mezenin karakteridir."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n05_115",
+"title": "Cacık",
+"category": "Mezeler",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 0,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı yoğurt",
+"2 salatalık",
+"1 diş sarımsak",
+"1 su bardağı soğuk su",
+"1 tatlı kaşığı kuru nane",
+"1 yemek kaşığı zeytinyağı",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Salatalığı küçük doğrayın veya rendeleyin.",
+"Yoğurdu sarımsak ve tuzla çırpın.",
+"Suyu ekleyip kıvamını ayarlayın.",
+"Salatalığı ekleyin.",
+"Nane ve zeytinyağıyla servis edin."
+],
+"tips": [
+"Koyu cacık için su eklemeyin."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 1 gün."
+},
+{
+"id": "n05_201",
+"title": "Fırın makarna (beşamelli)",
+"category": "Makarnalar",
+"servings": 6,
+"prepMinutes": 20,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"500 g kalem makarna",
+"Beşamel: 3 yemek kaşığı tereyağı, 3 yemek kaşığı un, 4 su bardağı süt",
+"2 yumurta",
+"1,5 su bardağı rendelenmiş kaşar",
+"1 çay kaşığı tuz, karabiber, muskat"
+],
+"steps": [
+"Makarnayı haşlayıp süzün.",
+"Beşamel sosu hazırlayın, biraz ılıyınca yumurtaları ekleyin.",
+"Makarnayı sosun yarısı ve kaşarın yarısıyla karıştırıp kaba yayın.",
+"Kalan sos ve kaşarı üzerine dökün.",
+"180 °C'de 30 dakika pişirin."
+],
+"tips": [
+"Yumurta fırın makarnanın dilimlenmesini sağlar."
+],
+"serving": "Ilık.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n05_202",
+"title": "Mantı (pratik, hazır yaprakla)",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 40,
+"cookMinutes": 15,
+"difficulty": "Zor",
+"ovenCelsius": null,
+"ingredients": [
+"300 g yufka veya gyoza yaprağı",
+"250 g kıyma",
+"1 soğan (rendelenmiş)",
+"1 tatlı kaşığı tuz, karabiber",
+"2 su bardağı sarımsaklı yoğurt",
+"3 yemek kaşığı tereyağı",
+"1 tatlı kaşığı pul biber, nane"
+],
+"steps": [
+"Kıyma, soğan ve baharatı yoğurun.",
+"Yufkayı küçük karelere kesip ortasına harç koyun ve uçlarını birleştirin.",
+"Kaynar tuzlu suda 10 dakika haşlayın.",
+"Tabağa alıp sarımsaklı yoğurt dökün.",
+"Tereyağında pul biber ve naneyi kızdırıp gezdirin."
+],
+"tips": [
+"Mantıları dondurup sonra pişirebilirsiniz."
+],
+"serving": "Sıcak.",
+"storage": "Pişmemiş hâli dondurucuda 2 ay."
+},
+{
+"id": "n05_203",
+"title": "Kıymalı domatesli spagetti",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"350 g spagetti",
+"250 g kıyma",
+"1 soğan",
+"400 g domates",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı tuz, kekik"
+],
+"steps": [
+"Kıymayı soğanla kavurun.",
+"Salça ve domatesi ekleyip 15 dakika pişirin.",
+"Spagettiyi haşlayın.",
+"Sosla karıştırın.",
+"Rendelenmiş peynirle servis edin."
+],
+"tips": [
+"Haşlama suyundan bir kepçe sosa eklenebilir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n05_204",
+"title": "Pesto soslu makarna",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 12,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"350 g linguine",
+"2 demet fesleğen",
+"3 yemek kaşığı çam fıstığı veya ceviz",
+"1 diş sarımsak",
+"Yarım su bardağı parmesan",
+"Yarım su bardağı zeytinyağı",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Fesleğen, fıstık, sarımsak ve tuzu robotta çekin.",
+"Zeytinyağını yavaşça ekleyin.",
+"Parmesanı karıştırın.",
+"Haşlanmış makarnayı pestoyla harmanlayın.",
+"Biraz haşlama suyuyla açın."
+],
+"tips": [
+"Pestoyu ısıtmayın; rengi kararır."
+],
+"serving": "Sıcak veya ılık.",
+"storage": "Pesto buzdolabında 4 gün."
+},
+{
+"id": "n05_205",
+"title": "Arabiata (acılı domates soslu penne)",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 5,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"350 g penne",
+"400 g domates",
+"3 diş sarımsak",
+"1 tatlı kaşığı pul biber",
+"3 yemek kaşığı zeytinyağı",
+"1 çay kaşığı tuz",
+"Yarım demet maydanoz"
+],
+"steps": [
+"Sarımsak ve pul biberi yağda 1 dakika çevirin.",
+"Domatesi ekleyip 15 dakika pişirin.",
+"Makarnayı haşlayın.",
+"Sosla karıştırın.",
+"Maydanozla servis edin."
+],
+"tips": [
+"Acı seviyesini pul biberle ayarlayın."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n05_206",
+"title": "Tavuklu kremalı penne",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"350 g penne",
+"300 g tavuk göğsü",
+"200 g mantar",
+"1 su bardağı krema",
+"1 diş sarımsak",
+"2 yemek kaşığı tereyağı",
+"1 çay kaşığı tuz, kekik"
+],
+"steps": [
+"Tavuğu küp doğrayıp tereyağında pişirin.",
+"Mantar ve sarımsağı ekleyin.",
+"Kremayı ekleyip 5 dakika pişirin.",
+"Haşlanmış makarnayı ekleyin.",
+"Kekikle servis edin."
+],
+"tips": [
+"Krema yerine yarım yarım süt ve krema kullanılabilir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n05_207",
+"title": "Ev yapımı erişte (kuru)",
+"category": "Makarnalar",
+"servings": 8,
+"prepMinutes": 60,
+"cookMinutes": 0,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"4 su bardağı un",
+"3 yumurta",
+"Yarım su bardağı süt",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Tüm malzemeyle sert bir hamur yoğurun.",
+"Bezelere ayırıp 20 dakika dinlendirin.",
+"İnce yufkalar açıp yarı kuruyana kadar bekletin.",
+"Şeritler hâlinde kesin.",
+"Tamamen kurutup kavanozda saklayın."
+],
+"tips": [
+"İyice kurumamış erişte küflenebilir."
+],
+"serving": "Haşlayıp tereyağı ve cevizle.",
+"storage": "Kuru hâli kavanozda 3 ay."
+},
+{
+"id": "n05_208",
+"title": "Cevizli erişte",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 5,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"300 g erişte",
+"3 yemek kaşığı tereyağı",
+"Yarım su bardağı ceviz",
+"Yarım su bardağı rendelenmiş tulum veya beyaz peynir"
+],
+"steps": [
+"Erişteyi tuzlu suda haşlayın.",
+"Tereyağını eritin.",
+"Cevizi tereyağında 1 dakika çevirin.",
+"Erişteyi ekleyip karıştırın.",
+"Peynirle servis edin."
+],
+"tips": [
+"Erişte haşlarken sık karıştırın; yapışmasın."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n05_209",
+"title": "Mercimekli makarna (Anadolu usulü)",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"250 g kısa makarna",
+"1 su bardağı yeşil mercimek",
+"1 soğan",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı pul biber, tuz"
+],
+"steps": [
+"Mercimeği 20 dakika haşlayın.",
+"Makarnayı ayrı haşlayın.",
+"Soğanı tereyağında kızartın.",
+"Mercimek ve makarnayı soğanla karıştırın.",
+"Pul biberle servis edin."
+],
+"tips": [
+"Yoğurtla çok yakışır."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n05_210",
+"title": "Sebzeli makarna salatası",
+"category": "Makarnalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 10,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"250 g burgu makarna",
+"1 salatalık",
+"10 çeri domates",
+"1 kırmızı biber",
+"Yarım su bardağı zeytin",
+"3 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 çay kaşığı tuz, kekik"
+],
+"steps": [
+"Makarnayı haşlayıp soğuk sudan geçirin.",
+"Sebzeleri küçük doğrayın.",
+"Zeytinyağı, limon ve baharatla sos yapın.",
+"Hepsini karıştırın.",
+"30 dakika soğutun."
+],
+"tips": [
+"Piknik ve beslenme çantası için idealdir."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 2 gün."
+}
+]

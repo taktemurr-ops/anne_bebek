@@ -1,3 +1,6 @@
+import '../widgets/coming_soon.dart';
+import '../services/cloud_auth_service.dart';
+import '../utils/dialog_helpers.dart';
 import 'forum_safety_page.dart';
 import 'package:flutter/material.dart';
 import '../services/baby_forum_service.dart';
@@ -35,13 +38,12 @@ class _BabyOnlineForumPageState extends State<BabyOnlineForumPage> {
 
   Future<String?> _input(String title, {int lines = 1}) async {
     final controller = TextEditingController();
-    final value = await showDialog<String>(context: context, builder: (ctx) => AlertDialog(
+    final value = await showDialogAndDispose<String>(disposables: [controller], context: context, builder: (ctx) => AlertDialog(
       title: Text(title), content: TextField(controller: controller, maxLines: lines,
         maxLength: lines == 1 ? 100 : 2000, decoration: const InputDecoration(hintText: 'Yazınız...')),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () => Navigator.pop(ctx, controller.text.trim()), child: const Text('Kaydet'))],
     ));
-    controller.dispose();
     return value == null || value.isEmpty ? null : value;
   }
 
@@ -76,6 +78,10 @@ class _BabyOnlineForumPageState extends State<BabyOnlineForumPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (!CloudAuthService.configured) {
+      return const ComingSoonView(title: 'Bebeğim Forumu', icon: Icons.forum_outlined,
+        description: 'Ebeveynlerle soru sor, deneyim paylaş; moderasyonlu ve güvenli topluluk.');
+    }
     final query = search.text.toLowerCase().trim();
     final visible = posts.where((p) => (category == 'Tümü' || p['category'] == category) &&
       ('${p['title']} ${p['body']}').toLowerCase().contains(query)).toList();
@@ -140,13 +146,12 @@ class _BabyForumDetailState extends State<_BabyForumDetail> {
   }
   Future<void> _reply() async {
     final controller = TextEditingController();
-    final message = await showDialog<String>(context: context, builder: (ctx) => AlertDialog(
+    final message = await showDialogAndDispose<String>(disposables: [controller], context: context, builder: (ctx) => AlertDialog(
       title: const Text('Yanıt yaz'), content: TextField(controller: controller,
         maxLines: 4, maxLength: 2000), actions: [
         TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () => Navigator.pop(ctx, controller.text.trim()), child: const Text('Gönder')),
       ]));
-    controller.dispose();
     if (message == null || message.isEmpty) return;
     try { await BabyForumService.createReply(widget.post['id'].toString(), message); await _load(); }
     catch (e) { if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$e'))); }

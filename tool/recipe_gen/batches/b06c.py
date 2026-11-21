@@ -1,0 +1,21 @@
+import sys; sys.path.insert(0,__import__('os').path.dirname(__import__('os').path.dirname(__import__('os').path.abspath(__file__))))
+from recipes_dsl import R, dump
+rs=[
+R('p39a19_003','Kabaklı dereotlu çorba','Çorbalar',4,10,25,'Kolay',None,['4 kabak','1 patates','1 soğan','2 yemek kaşığı tereyağı','5 su bardağı sıcak su veya tavuk suyu','Yarım demet dereotu','Yarım su bardağı süt','Tuz, karabiber'],
+ ['Soğanı tereyağında 3 dakika kavurun.','Küp doğranmış kabak ve patatesi ekleyip 5 dakika çevirin.','Sıcak suyu ve tuzu ekleyip 20 dakika pişirin.','Blenderdan geçirip sütü ekleyin, 2 dakika kaynatın.','Kıyılmış dereotuyla servis edin.'],['Patates çorbaya un kullanmadan kıvam verir.'],'Sıcak, limonla.','Buzdolabında 2 gün.'),
+R('p39a19_013','Zeytinyağlı pırasa ve kereviz','Sebze yemekleri',4,15,30,'Kolay',None,['2 pırasa','1 kereviz kökü','1 havuç','1 soğan','4 yemek kaşığı zeytinyağı','1 limon suyu','1 su bardağı sıcak su','1 tatlı kaşığı şeker, tuz'],
+ ['Kerevizi küp doğrayıp limonlu suda bekletin.','Soğanı yağda kavurun, havuç ve kerevizi ekleyip 5 dakika çevirin.','Pırasayı ekleyin.','Su, limon, şeker ve tuzla kısık ateşte 25 dakika pişirin.','Tencerede soğutun.'],['Limonlu su kerevizin kararmasını önler.'],'Soğuk servis edin.','Buzdolabında 3 gün.'),
+R('p39a19_032','Mantarlı kekikli bulgur pilavı','Pilavlar',4,10,25,'Kolay',None,['1,5 su bardağı bulgur','250 g mantar','1 soğan','2 yemek kaşığı zeytinyağı','1 yemek kaşığı tereyağı','1 tatlı kaşığı kekik','3 su bardağı sıcak su','Tuz'],
+ ['Soğan ve mantarı yağda suyunu çekene kadar soteleyin.','Kekiği ekleyin.','Bulguru ekleyip 2 dakika kavurun.','Su ve tuzla 15 dakika pişirin.','Tereyağıyla 10 dakika demlendirin.'],['Mantarı yüksek ateşte pişirin.'],'Yoğurtla.','Buzdolabında 3 gün.'),
+R('p39a19_042','Nohutlu avokado domates salatası','Salatalar',4,15,0,'Kolay',None,['1 avokado','1,5 su bardağı haşlanmış nohut','1 su bardağı çeri domates','Yarım kırmızı soğan','Maydanoz','3 yemek kaşığı zeytinyağı','1 limon suyu','Tuz'],
+ ['Avokadoyu küp doğrayıp limon gezdirin.','Domatesleri ikiye kesin.','Soğanı ince doğrayın.','Zeytinyağı, limon ve tuzla sos yapın.','Hepsini nazikçe karıştırın.'],['Avokadoyu en son ekleyin.'],'Hemen servis edin.','Aynı gün tüketin.'),
+R('p39a19_073','Zencefilli susamlı fırın somon','Balık ve deniz ürünleri',4,10,15,'Kolay',200,['4 dilim somon','2 yemek kaşığı soya sosu','1 yemek kaşığı bal','1 tatlı kaşığı rendelenmiş zencefil','1 diş sarımsak','1 yemek kaşığı susam','1 yemek kaşığı zeytinyağı'],
+ ["Fırını 200 °C'ye ısıtın.",'Soya sosu, bal, zencefil, sarımsak ve yağı karıştırın.','Somonları sosla 10 dakika marine edin.','Tepsiye dizip susam serpin.','12–15 dakika pişirin.'],['Soya sosu tuzludur; ayrıca tuz eklemeyin.'],'Pilav ve buharda sebzeyle.','Aynı gün tüketin.'),
+R('p39a19_083','Bamyalı limonlu dana güveç','Et yemekleri',4,20,90,'Orta',180,['500 g kuşbaşı dana','400 g bamya','2 domates','1 soğan','1 limon suyu','2 yemek kaşığı zeytinyağı','Tuz'],
+ ['Bamyaların başını kozalak gibi yontup limonlu suda bekletin.','Eti yağda kavurun, soğanı ekleyin.','Güvece et, bamya ve domatesi yerleştirin.','1 su bardağı sıcak su ve limon suyunu ekleyip kapatın.',"180 °C'de 90 dakika pişirin."],['Limon bamyanın salyalanmasını azaltır.'],'Pilavla.','Buzdolabında 3 gün.'),
+R('p39a19_122','Yeşil mercimekli kabak yemeği','Bakliyat yemekleri',4,15,30,'Kolay',None,['1 su bardağı yeşil mercimek','2 kabak','1 soğan','1 yemek kaşığı salça','2 yemek kaşığı zeytinyağı','3 su bardağı sıcak su','Tuz, nane'],
+ ['Mercimeği 15 dakika ön haşlayın.','Soğanı yağda kavurup salçayı ekleyin.','Mercimek ve suyu ekleyip 10 dakika pişirin.','Küp kabakları ekleyip 10 dakika daha pişirin.','Naneyle servis edin.'],['Kabağı geç ekleyin; dağılmasın.'],'Yoğurtla.','Buzdolabında 3 gün.'),
+R('p39a19_133','Karnabaharlı havuçlu fırın tepsi','Sebze yemekleri',4,15,35,'Kolay',210,['1 karnabahar','3 havuç','1 kırmızı soğan','4 yemek kaşığı zeytinyağı','1 tatlı kaşığı zerdeçal','1 tatlı kaşığı kimyon','Tuz'],
+ ["Fırını 210 °C'ye ısıtın.",'Karnabaharı çiçeklere, havucu çubuklara ayırın.','Yağ ve baharatlarla harmanlayın.','Tek kat yayın.','35 dakika pişirin.'],['Zerdeçal güzel bir renk verir.'],'Yoğurtla.','Buzdolabında 2 gün.'),
+]
+dump('06c_tekil',rs,['p39a19_092','p39a19_106','p39a19_062','p39a19_052'])

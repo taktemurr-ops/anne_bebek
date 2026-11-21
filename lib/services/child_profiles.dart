@@ -14,7 +14,7 @@ class ChildProfile {
   Map<String, String> toJson() => {'id': id, 'name': name, 'birthDate': birthDate.toIso8601String(), 'sex': sex};
   factory ChildProfile.fromJson(Map<String, dynamic> data) {
     final id = data['id']; final name = data['name']; final rawDate = data['birthDate'];
-    if (id is! String || id.isEmpty || name is! String || name.trim().isEmpty || rawDate is! String) {
+    if (id is! String || id.trim().isEmpty || id != id.trim() || id.runes.any((r) => r < 32 || (r >= 127 && r <= 159)) || name is! String || name.trim().isEmpty || rawDate is! String) {
       throw const FormatException('Geçersiz çocuk profili');
     }
     final date = DateTime.tryParse(rawDate);
@@ -31,7 +31,18 @@ List<ChildProfile> decodeChildProfiles(String? raw) {
   if (raw == null || raw.isEmpty) return [];
   final decoded = jsonDecode(raw);
   if (decoded is! List) throw const FormatException('Profil listesi bozuk');
-  final profiles = decoded.map((e) => ChildProfile.fromJson(Map<String, dynamic>.from(e as Map))).toList();
+  // Validate the entire payload before exposing any profiles to callers.
+  // A non-object entry is corrupt input, not a recoverable partial profile.
+  final profiles = <ChildProfile>[];
+  for (final entry in decoded) {
+    if (entry is! Map) throw const FormatException('Geçersiz profil kaydı');
+    final data = <String, dynamic>{};
+    for (final key in entry.keys) {
+      if (key is! String) throw const FormatException('Geçersiz profil alanı');
+      data[key] = entry[key];
+    }
+    profiles.add(ChildProfile.fromJson(data));
+  }
   if (profiles.map((e) => e.id).toSet().length != profiles.length) throw const FormatException('Yinelenen profil');
   return profiles;
 }

@@ -1,3 +1,4 @@
+import '../utils/dialog_helpers.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../services/secure_health_store.dart';
@@ -74,7 +75,7 @@ class _WomensHealthJournalPageState extends State<WomensHealthJournalPage> {
     DateTime date = DateTime.now();
     int severity = 0;
     final selectedCategory = categories[category];
-    final result = await showDialog<Map<String, String>>(context: context,
+    final result = await showDialogAndDispose<Map<String, String>>(disposables: [title, note], context: context,
       builder: (dialogContext) => StatefulBuilder(builder: (dialogContext, refresh) => AlertDialog(
         title: Text('Yeni kayıt • $selectedCategory'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -92,7 +93,6 @@ class _WomensHealthJournalPageState extends State<WomensHealthJournalPage> {
             'date': date.toIso8601String(), 'severity': severity.toString(),
           }); }, child: const Text('Kaydet'))],
       )));
-    title.dispose(); note.dispose();
     if (result == null || !mounted) return;
     final before = entries.map((e) => Map<String, String>.from(e)).toList();
     setState(() { entries.add(result); entries.sort((a, b) => (b['date'] ?? '').compareTo(a['date'] ?? '')); });
@@ -102,7 +102,7 @@ class _WomensHealthJournalPageState extends State<WomensHealthJournalPage> {
   Future<void> _edit(Map<String, String> entry) async {
     final title = TextEditingController(text: entry['title'] ?? '');
     final note = TextEditingController(text: entry['note'] ?? '');
-    final changed = await showDialog<Map<String, String>>(context: context,
+    final changed = await showDialogAndDispose<Map<String, String>>(disposables: [title, note], context: context,
       builder: (ctx) => AlertDialog(
         title: const Text('Kaydı düzenle'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -115,7 +115,6 @@ class _WomensHealthJournalPageState extends State<WomensHealthJournalPage> {
             Navigator.pop(ctx, {...entry, 'title': title.text.trim(), 'note': note.text.trim()});
           }, child: const Text('Kaydet'))],
       ));
-    title.dispose(); note.dispose();
     if (changed == null || !mounted) return;
     final before = entries.map((e) => Map<String, String>.from(e)).toList();
     setState(() { final index = entries.indexOf(entry); if (index >= 0) entries[index] = changed; });

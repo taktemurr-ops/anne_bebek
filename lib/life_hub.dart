@@ -1,3 +1,4 @@
+import 'utils/dialog_helpers.dart';
 import 'services/secure_health_store.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -182,7 +183,7 @@ class _LifeRecordsPageState extends State<_LifeRecordsPage> {
     final amount = TextEditingController();
     final form = GlobalKey<FormState>();
     DateTime chosen = DateTime.now();
-    final result = await showDialog<Map<String, dynamic>>(context: context, builder: (dialogCtx) => StatefulBuilder(
+    final result = await showDialogAndDispose<Map<String, dynamic>>(disposables: [title, note, amount], context: context, builder: (dialogCtx) => StatefulBuilder(
       builder: (context, update) => AlertDialog(
         title: Text('${widget.tool.name} • Yeni kayıt'),
         content: SizedBox(width: 400, child: SingleChildScrollView(child: Form(key: form,
@@ -214,7 +215,6 @@ class _LifeRecordsPageState extends State<_LifeRecordsPage> {
             });
           }, child: const Text('Kaydet'))],
       )));
-    title.dispose(); note.dispose(); amount.dispose();
     if (result == null || !mounted) return;
     setState(() => entries.insert(0, result));
     await widget.onChanged(entries);

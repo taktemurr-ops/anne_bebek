@@ -1,3 +1,4 @@
+import '../widgets/coming_soon.dart';
 import 'package:flutter/material.dart';
 import '../services/cloud_auth_service.dart';
 
@@ -63,7 +64,12 @@ class _CloudAccountPageState extends State<CloudAccountPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    if (!CloudAuthService.configured) {
+      return const ComingSoonView(title: 'Bulut hesabım', icon: Icons.cloud_outlined,
+        description: 'Hesap oluşturup kayıtlarını cihazlar arasında güvenle eşitleme.');
+    }
+    return Scaffold(
     appBar: AppBar(title: const Text('Bulut hesabım')),
     body: ListView(padding: const EdgeInsets.all(18), children: [
       const Card(child: Padding(padding: EdgeInsets.all(16), child: Text('Üyelik için Supabase projesi gerekir. Sağlık kayıtları ve bebek verileri bu aşamada buluta gönderilmez; yalnızca hesap oturumu yönetilir.'))),
@@ -85,4 +91,5 @@ class _CloudAccountPageState extends State<CloudAccountPage> {
       if (feedback != null) Padding(padding: const EdgeInsets.symmetric(vertical: 12), child: Text(feedback!, style: const TextStyle(color: Color(0xFF48235F)))),
     ]),
   );
+  }
 }

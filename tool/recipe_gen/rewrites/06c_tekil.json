@@ -1,0 +1,254 @@
+[
+{
+"id": "p39a19_003",
+"title": "Kabaklı dereotlu çorba",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"4 kabak",
+"1 patates",
+"1 soğan",
+"2 yemek kaşığı tereyağı",
+"5 su bardağı sıcak su veya tavuk suyu",
+"Yarım demet dereotu",
+"Yarım su bardağı süt",
+"1 tatlı kaşığı tuz, yarım çay kaşığı karabiber"
+],
+"steps": [
+"Soğanı tereyağında 3 dakika kavurun.",
+"Küp doğranmış kabak ve patatesi ekleyip 5 dakika çevirin.",
+"Sıcak suyu ve tuzu ekleyip 20 dakika pişirin.",
+"Blenderdan geçirip sütü ekleyin, 2 dakika kaynatın.",
+"Kıyılmış dereotuyla servis edin."
+],
+"tips": [
+"Patates çorbaya un kullanmadan kıvam verir."
+],
+"serving": "Sıcak, limonla.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "p39a19_013",
+"title": "Zeytinyağlı pırasa ve kereviz",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 pırasa",
+"1 kereviz kökü",
+"1 havuç",
+"1 soğan",
+"4 yemek kaşığı zeytinyağı",
+"1 limon suyu",
+"1 su bardağı sıcak su",
+"1 tatlı kaşığı şeker, tuz"
+],
+"steps": [
+"Kerevizi küp doğrayıp limonlu suda bekletin.",
+"Soğanı yağda kavurun, havuç ve kerevizi ekleyip 5 dakika çevirin.",
+"Pırasayı ekleyin.",
+"Su, limon, şeker ve tuzla kısık ateşte 25 dakika pişirin.",
+"Tencerede soğutun."
+],
+"tips": [
+"Limonlu su kerevizin kararmasını önler."
+],
+"serving": "Soğuk servis edin.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "p39a19_032",
+"title": "Mantarlı kekikli bulgur pilavı",
+"category": "Pilavlar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1,5 su bardağı bulgur",
+"250 g mantar",
+"1 soğan",
+"2 yemek kaşığı zeytinyağı",
+"1 yemek kaşığı tereyağı",
+"1 tatlı kaşığı kekik",
+"3 su bardağı sıcak su",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Soğan ve mantarı yağda suyunu çekene kadar soteleyin.",
+"Kekiği ekleyin.",
+"Bulguru ekleyip 2 dakika kavurun.",
+"Su ve tuzla 15 dakika pişirin.",
+"Tereyağıyla 10 dakika demlendirin."
+],
+"tips": [
+"Mantarı yüksek ateşte pişirin."
+],
+"serving": "Yoğurtla.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "p39a19_042",
+"title": "Nohutlu avokado domates salatası",
+"category": "Salatalar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 0,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 avokado",
+"1,5 su bardağı haşlanmış nohut",
+"1 su bardağı çeri domates",
+"Yarım kırmızı soğan",
+"Yarım demet maydanoz",
+"3 yemek kaşığı zeytinyağı",
+"1 limon suyu",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Avokadoyu küp doğrayıp limon gezdirin.",
+"Domatesleri ikiye kesin.",
+"Soğanı ince doğrayın.",
+"Zeytinyağı, limon ve tuzla sos yapın.",
+"Hepsini nazikçe karıştırın."
+],
+"tips": [
+"Avokadoyu en son ekleyin."
+],
+"serving": "Hemen servis edin.",
+"storage": "Aynı gün tüketin."
+},
+{
+"id": "p39a19_073",
+"title": "Zencefilli susamlı fırın somon",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"4 dilim somon",
+"2 yemek kaşığı soya sosu",
+"1 yemek kaşığı bal",
+"1 tatlı kaşığı rendelenmiş zencefil",
+"1 diş sarımsak",
+"1 yemek kaşığı susam",
+"1 yemek kaşığı zeytinyağı"
+],
+"steps": [
+"Fırını 200 °C'ye ısıtın.",
+"Soya sosu, bal, zencefil, sarımsak ve yağı karıştırın.",
+"Somonları sosla 10 dakika marine edin.",
+"Tepsiye dizip susam serpin.",
+"12–15 dakika pişirin."
+],
+"tips": [
+"Soya sosu tuzludur; ayrıca tuz eklemeyin."
+],
+"serving": "Pilav ve buharda sebzeyle.",
+"storage": "Aynı gün tüketin."
+},
+{
+"id": "p39a19_083",
+"title": "Bamyalı limonlu dana güveç",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 90,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"500 g kuşbaşı dana",
+"400 g bamya",
+"2 domates",
+"1 soğan",
+"1 limon suyu",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Bamyaların başını kozalak gibi yontup limonlu suda bekletin.",
+"Eti yağda kavurun, soğanı ekleyin.",
+"Güvece et, bamya ve domatesi yerleştirin.",
+"1 su bardağı sıcak su ve limon suyunu ekleyip kapatın.",
+"180 °C'de 90 dakika pişirin."
+],
+"tips": [
+"Limon bamyanın salyalanmasını azaltır."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "p39a19_122",
+"title": "Yeşil mercimekli kabak yemeği",
+"category": "Bakliyat yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 su bardağı yeşil mercimek",
+"2 kabak",
+"1 soğan",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı zeytinyağı",
+"3 su bardağı sıcak su",
+"1 tatlı kaşığı tuz, 1 çay kaşığı kuru nane"
+],
+"steps": [
+"Mercimeği 15 dakika ön haşlayın.",
+"Soğanı yağda kavurup salçayı ekleyin.",
+"Mercimek ve suyu ekleyip 10 dakika pişirin.",
+"Küp kabakları ekleyip 10 dakika daha pişirin.",
+"Naneyle servis edin."
+],
+"tips": [
+"Kabağı geç ekleyin; dağılmasın."
+],
+"serving": "Yoğurtla.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "p39a19_133",
+"title": "Karnabaharlı havuçlu fırın tepsi",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 35,
+"difficulty": "Kolay",
+"ovenCelsius": 210,
+"ingredients": [
+"1 karnabahar",
+"3 havuç",
+"1 kırmızı soğan",
+"4 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı zerdeçal",
+"1 tatlı kaşığı kimyon",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Fırını 210 °C'ye ısıtın.",
+"Karnabaharı çiçeklere, havucu çubuklara ayırın.",
+"Yağ ve baharatlarla harmanlayın.",
+"Tek kat yayın.",
+"35 dakika pişirin."
+],
+"tips": [
+"Zerdeçal güzel bir renk verir."
+],
+"serving": "Yoğurtla.",
+"storage": "Buzdolabında 2 gün."
+}
+]

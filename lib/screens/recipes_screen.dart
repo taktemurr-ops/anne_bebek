@@ -80,7 +80,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
       (!_onlyFavorites || _favorites.contains(r.id)) &&
       (query.isEmpty || r.title.toLowerCase().contains(query) || r.ingredients.join(' ').toLowerCase().contains(query))
     ).toList();
-    final categories = ['Tümü', ...{for (final r in generalRecipes) r.category}];
+    final categories = ['Tümü', ...generalRecipeCategories];
     return ListView(padding: const EdgeInsets.all(16), children: [
       sectionTitle('Bugün Ne Pişirsem? 🍲'),
       const Text('155 tarif kaydı; bunların 35 tanesi ölçülü tarif, 120 tanesi başlangıç fikridir. 1.000 özgün tarif hedefi henüz tamamlanmadı.'),

@@ -1,3 +1,4 @@
+import '../utils/dialog_helpers.dart';
 import 'package:flutter/services.dart';
 import '../services/child_calendar_export.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,7 @@ class _ChildCarePlanPageState extends State<ChildCarePlanPage> {
     if (original != null) { title.text = original.title; note.text = original.note; }
     var category = original?.category ?? 'Aşı';
     var date = original?.date ?? DateTime.now();
-    final result = await showDialog<ChildCareItem>(context: context, builder: (ctx) =>
+    final result = await showDialogAndDispose<ChildCareItem>(disposables: [title, note], context: context, builder: (ctx) =>
       StatefulBuilder(builder: (ctx, refresh) => AlertDialog(
         title: Text(original == null ? 'Takip kaydı ekle' : 'Takip kaydını düzenle'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -82,7 +83,6 @@ class _ChildCarePlanPageState extends State<ChildCarePlanPage> {
               note: note.text.trim(), date: date, completed: original?.completed ?? false));
           }, child: const Text('Kaydet'))],
       )));
-    title.dispose(); note.dispose();
     if (result != null && mounted) {
       final next = original == null ? [..._all, result] :
           _all.map((item) => item.id == original.id ? result : item).toList();

@@ -1,3 +1,4 @@
+import '../utils/dialog_helpers.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -199,7 +200,7 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
     final name = TextEditingController();
     final amount = TextEditingController();
     final minimum = TextEditingController();
-    final result = await showDialog<bool>(context: context, builder: (ctx) => AlertDialog(
+    final result = await showDialogAndDispose<bool>(disposables: [name, amount, minimum], context: context, builder: (ctx) => AlertDialog(
       title: const Text('Hızlı ürün ekle'),
       content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: name, decoration: const InputDecoration(labelText: 'Ürün adı')),
@@ -221,7 +222,6 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
         await _save();
       }
     }
-    name.dispose(); amount.dispose(); minimum.dispose();
   }
 
   Future<void> _showConsumptionReport() async {
@@ -310,7 +310,7 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
     final available = double.tryParse(match.group(1)!.replaceAll(',', '.')) ?? 0;
     final unit = match.group(2)!.trim();
     final controller = TextEditingController();
-    final used = await showDialog<double>(context: context, builder: (ctx) => AlertDialog(
+    final used = await showDialogAndDispose<double>(disposables: [controller], context: context, builder: (ctx) => AlertDialog(
       title: Text('$item • Tüketim kaydı'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         Text('Mevcut: $current'),
@@ -329,7 +329,6 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
         }, child: const Text('Tüketimi kaydet')),
       ],
     ));
-    controller.dispose();
     if (used == null || !mounted) return;
     final remaining = available - used;
     String fmt(double value) => value == value.roundToDouble() ? value.toInt().toString() : value.toStringAsFixed(2);
@@ -346,7 +345,7 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
     final quantity = TextEditingController(text: _details[item]?['quantity'] ?? '');
     final minimum = TextEditingController(text: _details[item]?['minimum'] ?? '');
     DateTime? selectedDate = _expiry(item);
-    final result = await showDialog<Map<String, String>>(
+    final result = await showDialogAndDispose<Map<String, String>>(disposables: [quantity, minimum],
       context: context,
       builder: (dialogContext) => StatefulBuilder(
         builder: (dialogContext, update) => AlertDialog(
@@ -382,8 +381,6 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
         ),
       ),
     );
-    quantity.dispose();
-    minimum.dispose();
     if (result != null && mounted) {
       setState(() => _details[item] = result);
       await _save();
@@ -460,7 +457,7 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
 
   @override
   Widget build(BuildContext context) {
-    final categories = ['Tümü', ...{for (final r in generalRecipes) r.category}];
+    final categories = ['Tümü', ...generalRecipeCategories];
     final query = _normalize(_search.text);
     final scored = <({GeneralRecipe recipe, int matched, int total})>[];
     final expiring = _pantry.where((p) { final d = _daysLeft(p); return d != null && d >= 0 && d <= 3; }).toList()..sort();

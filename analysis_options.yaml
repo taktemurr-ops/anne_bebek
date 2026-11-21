@@ -18,6 +18,7 @@ analyzer:
     - windows/**
     - macos/**
     - linux/**
+    - tool/recipe_gen/**
 
 linter:
   # The lint rules applied to this project can be customized in the

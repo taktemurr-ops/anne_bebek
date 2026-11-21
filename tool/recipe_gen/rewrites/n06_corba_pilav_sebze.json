@@ -1,0 +1,1228 @@
+[
+{
+"id": "n06_001",
+"title": "Ezogelin çorbası",
+"category": "Çorbalar",
+"servings": 6,
+"prepMinutes": 10,
+"cookMinutes": 35,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 su bardağı kırmızı mercimek",
+"2 yemek kaşığı pirinç",
+"2 yemek kaşığı ince bulgur",
+"1 soğan",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı tereyağı",
+"8 su bardağı sıcak su",
+"1 tatlı kaşığı nane, pul biber, tuz"
+],
+"steps": [
+"Soğanı tereyağında kavurup salçayı ekleyin.",
+"Yıkanmış mercimek, pirinç ve bulguru ekleyin.",
+"Sıcak suyla 30 dakika pişirin.",
+"Nane ve pul biberi ekleyin.",
+"Limonla servis edin."
+],
+"tips": [
+"Blenderdan geçirmeyin; taneli dokusu karakteridir."
+],
+"serving": "Sıcak, limonla.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_002",
+"title": "Tarhana çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 5,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"4 yemek kaşığı tarhana",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı tereyağı",
+"5 su bardağı sıcak su",
+"1 tatlı kaşığı nane, tuz"
+],
+"steps": [
+"Tarhanayı 1 bardak soğuk suda 10 dakika ıslatın.",
+"Tereyağında salçayı kavurun.",
+"Tarhanayı ve kalan suyu ekleyip karıştırarak kaynatın.",
+"Kısık ateşte 10 dakika pişirin.",
+"Nane ekleyip servis edin."
+],
+"tips": [
+"Topaklanmaması için sürekli karıştırın."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_003",
+"title": "Düğün çorbası",
+"category": "Çorbalar",
+"servings": 6,
+"prepMinutes": 15,
+"cookMinutes": 60,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"300 g kemikli kuzu eti",
+"2 yemek kaşığı un",
+"1 su bardağı yoğurt",
+"1 yumurta sarısı",
+"1 limon",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı pul biber, tuz",
+"8 su bardağı su"
+],
+"steps": [
+"Eti suyla 50 dakika haşlayıp didikleyin.",
+"Un, yoğurt, yumurta sarısı ve limonu çırpıp terbiye yapın.",
+"Terbiyeye sıcak et suyundan azar azar ekleyerek ılıştırın.",
+"Terbiyeyi tencereye ekleyip karıştırarak kaynatın, eti ekleyin.",
+"Pul biberli tereyağıyla servis edin."
+],
+"tips": [
+"Terbiyeyi ılıştırmak kesilmeyi önler."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_004",
+"title": "Kekikli mantar çorbası (sütlü)",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"400 g mantar",
+"1 soğan",
+"2 yemek kaşığı tereyağı",
+"2 yemek kaşığı un",
+"4 su bardağı sıcak su veya tavuk suyu",
+"1 su bardağı süt",
+"1 çay kaşığı tuz, karabiber, kekik"
+],
+"steps": [
+"Soğan ve mantarı tereyağında suyunu çekene kadar soteleyin.",
+"Unu ekleyip 2 dakika kavurun.",
+"Suyu ekleyip 15 dakika pişirin.",
+"Blenderdan geçirip sütü ekleyin.",
+"Kekikle servis edin."
+],
+"tips": [
+"Birkaç mantar dilimini süslemek için ayırın."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_005",
+"title": "Brokoli çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 brokoli",
+"1 patates",
+"1 soğan",
+"2 yemek kaşığı zeytinyağı",
+"5 su bardağı su",
+"Yarım su bardağı süt",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Soğanı yağda kavurun.",
+"Brokoli ve patatesi ekleyin.",
+"Suyla 20 dakika pişirin.",
+"Blenderdan geçirip sütü ekleyin.",
+"Sıcak servis edin."
+],
+"tips": [
+"Brokoli saplarını da kullanabilirsiniz."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_006",
+"title": "Tavuk suyu şehriye çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"5 su bardağı tavuk suyu",
+"Yarım su bardağı tel şehriye",
+"1 su bardağı didiklenmiş tavuk",
+"1 havuç (rendelenmiş)",
+"1 yemek kaşığı tereyağı",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Tereyağında şehriyeyi pembeleşene kadar kavurun.",
+"Havucu ekleyin.",
+"Tavuk suyunu ekleyip 10 dakika pişirin.",
+"Tavuğu ekleyin.",
+"Limonla servis edin."
+],
+"tips": [
+"Şehriyeyi kavurmak lezzet verir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_007",
+"title": "Patates çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"4 patates",
+"1 soğan",
+"1 havuç",
+"2 yemek kaşığı tereyağı",
+"5 su bardağı su",
+"1 su bardağı süt",
+"1 çay kaşığı tuz, karabiber"
+],
+"steps": [
+"Soğanı tereyağında kavurun.",
+"Patates ve havucu ekleyin.",
+"Suyla 20 dakika pişirin.",
+"Blenderdan geçirip sütü ekleyin.",
+"Maydanozla servis edin."
+],
+"tips": [
+"Unlu patates çorbayı kremamsı yapar."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_008",
+"title": "Soğan çorbası (fırında peynirli)",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 50,
+"difficulty": "Orta",
+"ovenCelsius": 220,
+"ingredients": [
+"5 soğan",
+"3 yemek kaşığı tereyağı",
+"1 yemek kaşığı un",
+"5 su bardağı et suyu",
+"4 dilim ekmek",
+"1 su bardağı rendelenmiş kaşar",
+"1 çay kaşığı tuz, kekik"
+],
+"steps": [
+"Soğanları ince piyazlık doğrayıp tereyağında kısık ateşte 30 dakika karamelize edin.",
+"Unu ekleyip 1 dakika kavurun.",
+"Et suyunu ekleyip 15 dakika pişirin.",
+"Kaselere alıp üzerine ekmek ve kaşar koyun.",
+"220 °C'de 5 dakika gratine edin."
+],
+"tips": [
+"Soğanı aceleye getirmeyin; tatlılık zamanla gelir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_009",
+"title": "Sütlü mısır çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı mısır",
+"1 soğan",
+"2 yemek kaşığı tereyağı",
+"1 yemek kaşığı un",
+"3 su bardağı su",
+"1 su bardağı süt",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Soğanı tereyağında kavurun, unu ekleyin.",
+"Mısır ve suyu ekleyip 15 dakika pişirin.",
+"Yarısını blenderdan geçirin.",
+"Sütü ekleyip 2 dakika kaynatın.",
+"Sıcak servis edin."
+],
+"tips": [
+"Yarısını çekmek hem kıvam hem doku sağlar."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_010",
+"title": "Lahana çorbası (Karadeniz usulü)",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 40,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"Yarım karalahana demeti",
+"Yarım su bardağı barbunya (haşlanmış)",
+"2 yemek kaşığı mısır unu",
+"1 soğan",
+"2 yemek kaşığı tereyağı",
+"6 su bardağı su",
+"1 çay kaşığı tuz, pul biber"
+],
+"steps": [
+"Karalahanayı ince doğrayın.",
+"Soğanı tereyağında kavurun.",
+"Lahana, barbunya ve suyu ekleyip 30 dakika pişirin.",
+"Mısır ununu suyla açıp ekleyin, 10 dakika pişirin.",
+"Pul biberle servis edin."
+],
+"tips": [
+"Mısır unu çorbaya kıvam verir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_011",
+"title": "Erişte çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 5,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 su bardağı erişte",
+"1 soğan",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı tereyağı",
+"6 su bardağı sıcak su",
+"1 tatlı kaşığı nane, tuz"
+],
+"steps": [
+"Soğan ve salçayı tereyağında kavurun.",
+"Suyu ekleyip kaynatın.",
+"Erişteyi ekleyip 12 dakika pişirin.",
+"Nane ekleyin.",
+"Sıcak servis edin."
+],
+"tips": [
+"Erişte çorbayı bekledikçe koyulaştırır."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_012",
+"title": "Toyga çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"Yarım su bardağı buğday",
+"Yarım su bardağı haşlanmış nohut",
+"1 su bardağı yoğurt",
+"1 yumurta",
+"1 yemek kaşığı un",
+"5 su bardağı su",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı nane"
+],
+"steps": [
+"Buğdayı 20 dakika haşlayın, nohudu ekleyin.",
+"Yoğurt, yumurta ve unu çırpıp ılıştırın.",
+"Terbiyeyi tencereye ekleyip karıştırarak kaynatın.",
+"5 dakika pişirin.",
+"Naneli tereyağıyla servis edin."
+],
+"tips": [
+"Terbiye ılıştırılmazsa kesilir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_013",
+"title": "Havuçlu zencefilli çorba",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"6 havuç",
+"1 soğan",
+"1 tatlı kaşığı rendelenmiş zencefil",
+"2 yemek kaşığı zeytinyağı",
+"5 su bardağı su",
+"Yarım su bardağı süt",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Soğanı yağda kavurun.",
+"Havuç ve zencefili ekleyin.",
+"Suyla 20 dakika pişirin.",
+"Blenderdan geçirip sütü ekleyin.",
+"Sıcak servis edin."
+],
+"tips": [
+"Zencefil soğuk havalarda ısıtıcıdır."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_014",
+"title": "Kremalı tavuk çorbası",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 tavuk göğsü",
+"2 yemek kaşığı un",
+"2 yemek kaşığı tereyağı",
+"6 su bardağı tavuk suyu",
+"1 su bardağı süt",
+"1 limon",
+"1 çay kaşığı tuz, karabiber"
+],
+"steps": [
+"Tavuğu haşlayıp didikleyin.",
+"Tereyağında unu kavurun.",
+"Tavuk suyunu çırparak ekleyin.",
+"Sütü ve tavuğu ekleyip 10 dakika pişirin.",
+"Limonla servis edin."
+],
+"tips": [
+"Un kavurmak çorbaya kadife doku verir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_015",
+"title": "Kırmızı biberli domates çorbası (közlü)",
+"category": "Çorbalar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"4 domates",
+"2 köz kırmızı biber",
+"1 soğan",
+"2 yemek kaşığı zeytinyağı",
+"4 su bardağı su",
+"1 çay kaşığı tuz, kekik"
+],
+"steps": [
+"Soğanı yağda kavurun.",
+"Domates ve biberi ekleyin.",
+"Suyla 20 dakika pişirin.",
+"Blenderdan geçirin.",
+"Kekikle servis edin."
+],
+"tips": [
+"Közlü biber dumanlı bir tat katar."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün; ısıtırken kaynayana kadar ısıtın."
+},
+{
+"id": "n06_101",
+"title": "İç pilav",
+"category": "Pilavlar",
+"servings": 6,
+"prepMinutes": 20,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı pirinç",
+"150 g tavuk ciğeri",
+"2 yemek kaşığı çam fıstığı",
+"2 yemek kaşığı kuş üzümü",
+"1 soğan",
+"3 yemek kaşığı tereyağı",
+"3 su bardağı sıcak tavuk suyu",
+"1 tatlı kaşığı yenibahar, tarçın, tuz, şeker"
+],
+"steps": [
+"Pirinci ıslatıp yıkayın.",
+"Tereyağında fıstığı kavurun, soğanı ekleyin.",
+"Küçük doğranmış ciğeri ekleyip 3 dakika pişirin.",
+"Pirinç, üzüm ve baharatları ekleyin, suyla 15 dakika pişirin.",
+"Dereotu ekleyip 15 dakika demlendirin."
+],
+"tips": [
+"Ciğeri fazla pişirmeyin; sertleşir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n06_102",
+"title": "Perde pilavı",
+"category": "Pilavlar",
+"servings": 8,
+"prepMinutes": 40,
+"cookMinutes": 40,
+"difficulty": "Zor",
+"ovenCelsius": 180,
+"ingredients": [
+"3 su bardağı pirinç",
+"1 tavuk (haşlanmış, didiklenmiş)",
+"3 yemek kaşığı badem",
+"Hamur: 2 su bardağı un, 1 yumurta, yarım su bardağı yoğurt, 100 g tereyağı",
+"4 su bardağı tavuk suyu",
+"1 tatlı kaşığı tuz, karabiber"
+],
+"steps": [
+"Tavuk suyuyla pirinci yarı pişirin; tavuk, badem ve baharatla karıştırın.",
+"Hamur malzemelerini yoğurup açın.",
+"Yağlı kaba hamuru serip pilavı doldurun, kapatın.",
+"180 °C'de 40 dakika pişirin.",
+"Ters çevirip dilimleyin."
+],
+"tips": [
+"Hamur pilavın buharıyla pişer, kenarlar çıtırlaşır."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n06_103",
+"title": "Firik pilavı",
+"category": "Pilavlar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1,5 su bardağı firik",
+"1 soğan",
+"1 biber",
+"1 domates",
+"2 yemek kaşığı tereyağı",
+"3 su bardağı sıcak et suyu",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Firiği yıkayın.",
+"Soğan ve biberi tereyağında kavurun.",
+"Domatesi ekleyin.",
+"Firik ve suyu ekleyip 20 dakika pişirin.",
+"10 dakika demlendirin."
+],
+"tips": [
+"Firiğin is kokusu pilava karakter verir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n06_104",
+"title": "Meyhane pilavı",
+"category": "Pilavlar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1,5 su bardağı bulgur",
+"1 soğan",
+"2 domates",
+"1 sivri biber",
+"1 yemek kaşığı biber salçası",
+"2 yemek kaşığı tereyağı",
+"3 su bardağı sıcak su",
+"1 tatlı kaşığı tuz, pul biber"
+],
+"steps": [
+"Soğan ve biberi tereyağında kavurun.",
+"Salça ve domatesi ekleyip 3 dakika pişirin.",
+"Bulgur, su ve tuzu ekleyin.",
+"15 dakika pişirin.",
+"10 dakika demlendirin."
+],
+"tips": [
+"Domatesi rendelemek pilavı daha sulu yapar."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n06_105",
+"title": "Patlıcanlı pirinç pilavı",
+"category": "Pilavlar",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1,5 su bardağı pirinç",
+"2 patlıcan",
+"1 domates",
+"2 yemek kaşığı tereyağı",
+"3 yemek kaşığı zeytinyağı",
+"2,5 su bardağı sıcak su",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Patlıcanları küp doğrayıp tuzlu suda bekletin, kurulayın ve zeytinyağında kızartın.",
+"Pirinci tereyağında kavurun.",
+"Domatesi ve suyu ekleyin.",
+"15 dakika pişirin, patlıcanları ekleyin.",
+"15 dakika demlendirin."
+],
+"tips": [
+"Patlıcanı en son eklemek dağılmasını önler."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n06_106",
+"title": "Domatesli pirinç pilavı",
+"category": "Pilavlar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1,5 su bardağı pirinç",
+"2 domates (rendelenmiş)",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı tereyağı",
+"2,5 su bardağı sıcak su",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Pirinci yıkayın.",
+"Tereyağında salça ve domatesi pişirin.",
+"Pirinci ekleyip kavurun.",
+"Su ve tuzla 15 dakika pişirin.",
+"Demlendirin."
+],
+"tips": [
+"Domates pilava hafif ekşilik katar."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n06_107",
+"title": "Sebzeli esmer pirinç pilavı",
+"category": "Pilavlar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 40,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1,5 su bardağı esmer pirinç",
+"1 havuç",
+"1 su bardağı bezelye",
+"1 kırmızı biber",
+"2 yemek kaşığı zeytinyağı",
+"3 su bardağı sıcak su",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Esmer pirinci 1 saat ıslatın.",
+"Sebzeleri yağda 4 dakika soteleyin.",
+"Pirinci ekleyip kavurun.",
+"Su ve tuzla 35 dakika pişirin.",
+"10 dakika demlendirin."
+],
+"tips": [
+"Esmer pirinç lif açısından zengindir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n06_108",
+"title": "Kestaneli pilav",
+"category": "Pilavlar",
+"servings": 6,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı pirinç",
+"200 g haşlanmış kestane",
+"3 yemek kaşığı tereyağı",
+"3 su bardağı sıcak tavuk suyu",
+"1 tatlı kaşığı tuz, tarçın"
+],
+"steps": [
+"Pirinci yıkayın.",
+"Tereyağında pirinci kavurun.",
+"Su ve tuzla 15 dakika pişirin.",
+"İri kıyılmış kestaneleri ekleyin.",
+"Tarçınla 15 dakika demlendirin."
+],
+"tips": [
+"Hindi veya tavukla yakışır."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n06_109",
+"title": "Bulgurlu mercimekli kuskus pilavı",
+"category": "Pilavlar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 su bardağı bulgur",
+"Yarım su bardağı kuskus",
+"Yarım su bardağı yeşil mercimek",
+"1 soğan",
+"2 yemek kaşığı tereyağı",
+"3 su bardağı sıcak su",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Mercimeği 15 dakika ön haşlayın.",
+"Soğanı tereyağında kavurun.",
+"Bulgur ve kuskusu ekleyip kavurun.",
+"Mercimek, su ve tuzla 12 dakika pişirin.",
+"Demlendirin."
+],
+"tips": [
+"Kuskus pilava farklı doku katar."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n06_110",
+"title": "Kuruyemişli safranlı pilav",
+"category": "Pilavlar",
+"servings": 6,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı basmati pirinç",
+"2 yemek kaşığı badem",
+"2 yemek kaşığı kuru üzüm",
+"1 tutam safran veya 1 çay kaşığı zerdeçal",
+"3 yemek kaşığı tereyağı",
+"3 su bardağı sıcak su",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Safranı sıcak suda bekletin.",
+"Bademi tereyağında kavurun.",
+"Pirinci ekleyip 2 dakika çevirin.",
+"Safranlı su, üzüm ve tuzla 15 dakika pişirin.",
+"10 dakika demlendirin."
+],
+"tips": [
+"Safran yerine zerdeçal ekonomik alternatiftir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n06_111",
+"title": "Kabaklı bulgur pilavı (taneli)",
+"category": "Pilavlar",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1,5 su bardağı bulgur",
+"2 kabak",
+"1 soğan",
+"1 yemek kaşığı biber salçası",
+"2 yemek kaşığı zeytinyağı",
+"3 su bardağı sıcak su",
+"1 tatlı kaşığı tuz, nane"
+],
+"steps": [
+"Soğanı kavurup salçayı ekleyin.",
+"Küp kabağı ekleyip 3 dakika çevirin.",
+"Bulgur ve suyu ekleyin.",
+"15 dakika pişirin.",
+"Nane ile demlendirin."
+],
+"tips": [
+"Kabağı iri doğrayın; dağılmasın."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n06_112",
+"title": "Sade tereyağlı pirinç pilavı",
+"category": "Pilavlar",
+"servings": 4,
+"prepMinutes": 25,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı baldo pirinç",
+"3 yemek kaşığı tereyağı",
+"3 su bardağı sıcak tavuk suyu veya su",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Pirinci sıcak tuzlu suda 20 dakika bekletin, nişastası gidene kadar yıkayın.",
+"Tereyağında pirinci 5 dakika şeffaflaşana kadar kavurun.",
+"Sıcak suyu ve tuzu ekleyin.",
+"Kısık ateşte suyunu çekene kadar 15 dakika pişirin.",
+"Kâğıt havluyla 20 dakika demlendirin."
+],
+"tips": [
+"Su pirincin 1,5 katı olmalı."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n06_201",
+"title": "Türlü",
+"category": "Sebze yemekleri",
+"servings": 6,
+"prepMinutes": 25,
+"cookMinutes": 50,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 patlıcan",
+"2 kabak",
+"2 patates",
+"200 g taze fasulye",
+"2 biber",
+"2 domates",
+"1 soğan",
+"1 yemek kaşığı salça",
+"4 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Tüm sebzeleri iri küp doğrayın.",
+"Soğanı kavurup salçayı ekleyin.",
+"Sert sebzeleri (patates, fasulye) önce ekleyin.",
+"Diğer sebzeleri ve 1 bardak suyu ilave edin.",
+"Kısık ateşte 45 dakika pişirin."
+],
+"tips": [
+"Fırında güveçte de pişirilebilir."
+],
+"serving": "Pilav ve yoğurtla.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n06_202",
+"title": "Ispanak yemeği (yumurtalı)",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 kg ıspanak",
+"1 soğan",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı pirinç",
+"3 yemek kaşığı zeytinyağı",
+"1 çay kaşığı tuz",
+"2 yumurta"
+],
+"steps": [
+"Soğanı kavurup salçayı ekleyin.",
+"Doğranmış ıspanağı ve pirinci ekleyin.",
+"15 dakika pişirin.",
+"Yumurtaları kırıp kapağı kapatın.",
+"5 dakika pişirin."
+],
+"tips": [
+"Ispanak suyunu bırakır; su eklemeyin."
+],
+"serving": "Yoğurtla.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n06_203",
+"title": "Havuçlu zeytinyağlı kereviz",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 35,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 kereviz kökü",
+"2 havuç",
+"1 patates",
+"1 soğan",
+"5 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 tatlı kaşığı şeker, tuz"
+],
+"steps": [
+"Kerevizleri küp doğrayıp limonlu suda bekletin.",
+"Soğanı yağda kavurun.",
+"Havuç, patates ve kerevizi ekleyin.",
+"1,5 bardak su, limon, şeker ve tuzla 30 dakika pişirin.",
+"Dereotuyla soğutun."
+],
+"tips": [
+"Limonlu su kerevizin rengini korur."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n06_204",
+"title": "Fırında karnabahar mücver",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"Yarım karnabahar (haşlanmış)",
+"2 yumurta",
+"4 yemek kaşığı un",
+"100 g beyaz peynir",
+"Yarım demet dereotu",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Fırını 200 °C'ye ısıtın.",
+"Karnabaharı ezin.",
+"Diğer malzemeleri ekleyip karıştırın.",
+"Kaşıkla tepsiye yassı yuvarlaklar bırakın.",
+"25 dakika pişirin."
+],
+"tips": [
+"Karnabaharın suyunu iyice süzün."
+],
+"serving": "Yoğurtla.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n06_205",
+"title": "Kabak sinkonta (Bodrum usulü)",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"4 kabak",
+"1 soğan",
+"2 domates",
+"4 yemek kaşığı zeytinyağı",
+"1 çay kaşığı tuz",
+"Yarım demet dereotu"
+],
+"steps": [
+"Kabakları kabuklarını soymadan iri doğrayın.",
+"Soğanı yağda kavurun.",
+"Kabak ve rendelenmiş domatesi ekleyin.",
+"Kapağı kapalı 25 dakika pişirin.",
+"Dereotuyla soğutun."
+],
+"tips": [
+"Kabak kendi suyunda pişer; su eklemeyin."
+],
+"serving": "Ilık veya soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n06_206",
+"title": "Kıymasız patlıcan oturtma",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 35,
+"difficulty": "Kolay",
+"ovenCelsius": 180,
+"ingredients": [
+"4 patlıcan",
+"2 domates",
+"2 biber",
+"1 soğan",
+"3 diş sarımsak",
+"4 yemek kaşığı zeytinyağı",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Patlıcanları halka kesip fırında kızartın.",
+"Soğan, sarımsak, biber ve domatesle sos yapın.",
+"Patlıcanları kaba dizip sosu üzerine dökün.",
+"180 °C'de 25 dakika pişirin.",
+"Yoğurtla servis edin."
+],
+"tips": [
+"Vejetaryen bir ana yemektir."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n06_207",
+"title": "Biberli mantar sote",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"500 g mantar",
+"1 soğan",
+"2 sivri biber",
+"2 yemek kaşığı tereyağı",
+"1 çay kaşığı tuz, kekik, karabiber"
+],
+"steps": [
+"Mantarları dilimleyin.",
+"Tereyağında soğan ve biberi kavurun.",
+"Mantarları ekleyip yüksek ateşte suyunu çekene kadar pişirin.",
+"Baharatları ekleyin.",
+"Sıcak servis edin."
+],
+"tips": [
+"Tuzu en son ekleyin; mantar su salmaz."
+],
+"serving": "Pilavla.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n06_208",
+"title": "Fırında sebze graten",
+"category": "Sebze yemekleri",
+"servings": 6,
+"prepMinutes": 20,
+"cookMinutes": 35,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"1 brokoli",
+"Yarım karnabahar",
+"2 havuç",
+"Beşamel: 2 yemek kaşığı tereyağı, 2 yemek kaşığı un, 2 su bardağı süt",
+"1 su bardağı rendelenmiş kaşar",
+"1 çay kaşığı tuz, muskat"
+],
+"steps": [
+"Sebzeleri 5 dakika haşlayın.",
+"Beşamel sos yapın.",
+"Sebzeleri fırın kabına dizip sosu dökün.",
+"Kaşar serpin.",
+"200 °C'de 25 dakika pişirin."
+],
+"tips": [
+"Sebzeleri fazla haşlamayın."
+],
+"serving": "Sıcak.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n06_209",
+"title": "Zeytinyağlı limonlu bamya",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 35,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"500 g bamya",
+"2 domates",
+"1 soğan",
+"5 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 çay kaşığı tuz, şeker"
+],
+"steps": [
+"Bamyaların başlarını yontup limonlu suda 30 dakika bekletin.",
+"Soğanı yağda kavurun.",
+"Domates ve bamyaları ekleyin.",
+"1 bardak su, limon, tuz ve şekerle 30 dakika pişirin.",
+"Soğutun."
+],
+"tips": [
+"Az karıştırın; bamya salyalanmasın."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n06_210",
+"title": "Zeytinyağlı pırasa (havuçlu pirinçli)",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"4 pırasa",
+"2 havuç",
+"2 yemek kaşığı pirinç",
+"5 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 tatlı kaşığı şeker, tuz"
+],
+"steps": [
+"Pırasayı 2 cm halka, havucu dilim doğrayın.",
+"Yağda 5 dakika soteleyin.",
+"Pirinç, limon, şeker, tuz ve 1 bardak su ekleyin.",
+"25 dakika pişirin.",
+"Soğutun."
+],
+"tips": [
+"Pırasanın arasını iyice yıkayın."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n06_211",
+"title": "Fırında kabak dolması (kıymasız)",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 25,
+"cookMinutes": 40,
+"difficulty": "Kolay",
+"ovenCelsius": 190,
+"ingredients": [
+"6 kabak",
+"1 su bardağı pirinç",
+"1 soğan",
+"2 domates",
+"4 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı nane, tuz"
+],
+"steps": [
+"Kabakların içini oyun.",
+"Soğan, pirinç, domates ve baharatla harç yapın.",
+"Kabakları doldurun.",
+"Fırın kabına dizip 1 bardak su ekleyin.",
+"190 °C'de 40 dakika pişirin."
+],
+"tips": [
+"Oyduğunuz kabak içini harca katabilirsiniz."
+],
+"serving": "Yoğurtla.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n06_212",
+"title": "Közlenmiş patlıcanlı biber kavurma",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"3 patlıcan",
+"4 sivri biber",
+"2 domates",
+"3 diş sarımsak",
+"3 yemek kaşığı zeytinyağı",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Patlıcanları közleyip soyun, iri doğrayın.",
+"Biberleri yağda kavurun.",
+"Sarımsak ve domatesi ekleyin.",
+"Patlıcanı ekleyip 5 dakika pişirin.",
+"Sıcak veya ılık servis edin."
+],
+"tips": [
+"Köz patlıcan yemeğe dumanlı tat verir."
+],
+"serving": "Ekmekle.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n06_213",
+"title": "Kereviz sapı soteli havuç",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"4 kereviz sapı",
+"3 havuç",
+"2 yemek kaşığı zeytinyağı",
+"1 yemek kaşığı bal",
+"1 limon",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Kereviz saplarını ve havucu çubuk doğrayın.",
+"Yağda 8 dakika soteleyin.",
+"Bal ve limonu ekleyin.",
+"2 dakika çevirin.",
+"Garnitür olarak servis edin."
+],
+"tips": [
+"Sebzeler diri kalmalı."
+],
+"serving": "Sıcak, garnitür.",
+"storage": "Buzdolabında 2 gün."
+}
+]
