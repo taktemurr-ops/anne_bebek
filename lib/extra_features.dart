@@ -19,7 +19,7 @@ Widget _header(String title, String subtitle) => Container(
   decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),
     gradient: const LinearGradient(colors: [_pembe, _lila])),
   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-    Text(title, style: const TextStyle(fontSize: 24, color: _mor, fontWeight: FontWeight.bold)),
+    Text(title, style: const TextStyle(fontSize: 20, color: _mor, fontWeight: FontWeight.bold)),
     const SizedBox(height: 8), Text(subtitle, style: const TextStyle(color: _mor)),
   ]));
 String _date(DateTime d) => '${d.day.toString().padLeft(2, '0')}.${d.month.toString().padLeft(2, '0')}.${d.year}';
@@ -204,7 +204,7 @@ class _PregnancyPageState extends State<PregnancyPage> {
       const SizedBox(height: 16),
       Row(key: _checklistKey, children: [
         const Expanded(child: Text('Kontrol ve randevularım',
-          style: TextStyle(fontSize: 20, color: _mor, fontWeight: FontWeight.bold))),
+          style: TextStyle(fontSize: 17, color: _mor, fontWeight: FontWeight.bold))),
         IconButton(tooltip: 'Kontrol ekle', onPressed: _addAppointment,
           icon: const Icon(Icons.add_circle_outline, color: _mor)),
       ]),
@@ -217,8 +217,8 @@ class _PregnancyPageState extends State<PregnancyPage> {
           subtitle: Text(_date(DateTime.parse(a['date']!))),
           trailing: IconButton(tooltip: 'Kontrolü sil', icon: const Icon(Icons.delete_outline),
             onPressed: () => _removeAppointment(a))))),
-      const Padding(padding: EdgeInsets.symmetric(vertical: 16), child: Text('Doğuma hazırlık listesi',
-        style: TextStyle(fontSize: 20, color: _mor, fontWeight: FontWeight.bold))),
+      const Padding(padding: EdgeInsets.symmetric(vertical: 10), child: Text('Doğuma hazırlık listesi',
+        style: TextStyle(fontSize: 17, color: _mor, fontWeight: FontWeight.bold))),
       ...tasks.map((task) => Card(color: Colors.white, child: CheckboxListTile(
         title: Text(task), value: done.contains(task), activeColor: _mor,
         onChanged: (v) async {
