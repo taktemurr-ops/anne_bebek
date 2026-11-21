@@ -121,7 +121,8 @@ void main() {
   testWidgets('5) Tarif detayından aile tarif defterine ekleme', (tester) async {
     await startApp(tester);
     await openTile(tester, 'Yemek Tarifleri');
-    final recipe = find.textContaining('çorbası');
+    // Arama kutusunun ipucunda da "çorbası" geçer; yalnızca tarif kartları.
+    final recipe = find.descendant(of: find.byType(Card), matching: find.textContaining('çorbası'));
     await scrollTo(tester, recipe);
     await tester.tap(recipe.first);
     await tester.pumpAndSettle();
