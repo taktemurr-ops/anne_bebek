@@ -29,7 +29,13 @@ def _low(t):
 
 
 def dump(name, recipes, drops=()):
-    existing = set(open(os.path.join(HERE, 'existing_titles.txt')).read().split('\n'))
+    mine = {r['id'] for r in recipes}
+    existing = set()
+    for line in open(os.path.join(HERE, 'existing_titles.txt')).read().split('\n'):
+        if '\t' in line:
+            rid, title = line.split('\t', 1)
+            if rid not in mine:
+                existing.add(title)
     if name.startswith('n'):
         clash = [r['title'] for r in recipes if _low(r['title']) in existing]
         assert not clash, clash
