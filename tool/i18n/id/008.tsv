@@ -1,0 +1,213 @@
+b27b5d6f	{0}: {1} pengukuran • Terakhir: {2} {3}
+808f2ff2	{0}–{1} bulan
+a896ccb4	{0}–{1} bulan • {2} • {3} menit
+90a8f74c	{1} (kurang {2} {0})
+c8c3fd10	{1} buah • {0} barang dibeli
+ba8db48f	Tambahkan {0} ke {1} • {2}?
+c15e133b	Minggu {1} · Trimester {0}
+42cd6a5d	RINGKASAN PEMANTAUAN ANAK
+7f4c3978	Rab
+8bae1de9	Catatan lama dan catatan aman bertentangan: {0}
+7ae50242	Rabu
+a2b80208	Forum online belum dikonfigurasi.
+797e9d4f	Pencarian topik dan saran offline
+d65f69df	Penggunaan offline
+220e6b06	Peralihan modul dan status galat offline telah diperiksa
+904bbab8	Anak (1–6 tahun)
+41b623d8	Profil Anak Saya
+1116ac39	Nama anak tidak boleh kosong.
+8b6ee7e9	Nama anak maksimal {0} karakter.
+4480f84d	Nama anak tidak boleh berisi karakter kontrol.
+63dc7819	Catatan jurnal khusus anak
+de989419	Jurnal anak (pilih anak)
+beff0b4d	Jurnal anak dan rencana perawatan
+93bbd96a	Cadangkan catatan anak sebagai JSON
+b19d16d0	Profil anak
+41739cd5	Tambah profil anak
+7e5d63ab	Batas usia profil anak adalah 18 tahun.
+667a4e39	Profil anak harus dipilih
+61dacb87	Profil atau jurnal anak tidak valid.
+17f07456	Pilih profil anak untuk membuka jadwal imunisasi sesuai usianya
+884bedbf	Profil anak
+8e36b660	Profil anak dan jurnal pribadi
+81191bcf	Rencana kesehatan anak tidak valid.
+e108f841	Pemeriksaan data anak
+70f7e10e	Pengelolaan anak bersama (direncanakan)
+16ecb930	Jurnal khusus anak
+6dcbb337	Tekanan darah sangat tinggi. Jika ada sakit kepala, nyeri dada, sesak napas, atau bicara pelo, segera hubungi nomor darurat setempat.
+0e8e35d0	Tekanan darah sangat tinggi: hubungi nomor darurat setempat atau segera ke ruang bersalin tanpa menunggu.
+843fc8c9	Sup
+6b054743	Sup
+290f9902	Skala batang adalah 1.000 ml; bukan asupan yang direkomendasikan.
+e440a26e	Uji crash, kinerja, dan peluncuran
+08086945	Karena Anda juga berharga!
+8d1ab12a	Keluar
+67669d43	PENTING: MPASI biasanya dimulai sekitar usia 6 bulan, sesuai kesiapan perkembangan. Jangan beri madu sebelum 12 bulan; jangan tambahkan garam atau gula. Kacang utuh dan potongan keras/bulat berisiko membuat tersedak. Perhatikan alergen, sajikan dengan tekstur yang sesuai, dan jangan pernah meninggalkan bayi sendirian saat makan.
+f3eb8943	Rentang terukur: {0} • Rata-rata: {1} hari\nTerpendek: {2} hari • Terpanjang: {3} hari
+876cf0c4	Pengukuran
+65c8a57a	Tambah suhu / obat
+b217ca06	Data CSV pengukuran disalin ke papan klip.
+23760529	Interval pengukuran: {0} hari
+5ea568b5	Nilai di bawah ambang demam.
+77043d55	Catatan pengukuran
+2998b307	Nilai terukur
+ea8a87d7	Pengukuran tidak boleh sebelum tanggal lahir.
+1012c19b	Tambah pengukuran
+9d12b654	Riwayat pengukuran
+36c2ac59	Riwayat pengukuran (bukan evaluasi diagnostik)
+9abd4180	Tanggal pengukuran tidak boleh di masa depan.
+396c0d73	Tanggal pengukuran wajib diisi.
+8c08e2dd	Pengukuran dan keterangan
+060a92af	Lokasi pengukuran
+e8b596d0	Suhu, waktu obat, dan peringatan berdasarkan usia
+fdb0d655	Pengukuran tidak dapat dibaca. Data tetap disimpan.
+e39206f4	Pengukuran, obat dan vitamin, pemeriksaan
+c3b327ba	Salin pengukuran sebagai CSV
+3c63e527	Periksa pengukuran: tinggi 20–230 cm, berat 0,3–200 kg, lingkar kepala 15–75 cm.
+4bbd114c	Catat suhu dan obat yang diberikan beserta waktunya; semuanya siap saat ke dokter.
+fe1df323	Pengukuran saya
+b846de32	Hapus pengukuran
+5b845cbc	Izinkan dulu pengingat keluarga di layar Preferensi notifikasi saya.
+edb2dd0c	Masuk ke akun Anda terlebih dahulu.
+80df10d2	Tambahkan resep ke rencana terlebih dahulu.
+e5397c21	Resep dengan barang yang sebaiknya dipakai lebih dulu
+f4b8667c	Tetapkan dulu jenis kelamin di profil anak.
+27317deb	Pilih profil anak terlebih dahulu untuk membuka catatan
+5e8d50f6	Masukkan dulu jumlah barang sebagai angka dan satuan (mis. 500 g).
+97d58ddb	Bulan sebelumnya
+a7cff434	Hari sebelumnya
+ec67d0e3	Minggu sebelumnya
+b850d96a	Tidak ditemukan rencana tersimpan untuk minggu sebelumnya.
+7fabbc58	Minggu sebelumnya tidak dapat dibaca. Catatan lama tetap disimpan.
+7e97ec2d	Pindahkan waktu makan kosong minggu lalu
+57d3ec6a	Salin minggu lalu
+59bcee57	{0} setelah kontraksi sebelumnya
+1d4c187d	Sesi sebelumnya
+e840007a	Tanggal penting
+4cb54f5b	Penting: buat cadangan sebelum menguji dengan catatan kesehatan. Coba pemulihan hanya dengan data uji. Flutter analyze, flutter test, dan uji perangkat nyata juga diperlukan.
+bd68db91	Direkomendasikan
+3c3ff2a3	Saran
+3996f32f	Saran berdasarkan kategori resep; bukan saran gizi atau kesehatan pribadi. Memindahkan ke rencana mingguan memperbarui hari yang sama di minggu yang dipilih.
+12e2a05b	Buat saran
+4430b014	Mis. Apa ide bermain yang aman untuk bayi 8 bulan?
+ac8e1b72	Mis. Deniz
+57cd94d5	Mis. tomat, telur, susu
+bdeb4722	Mis. tidur, haid, resep
+e221d458	Contoh pertanyaan
+91b5a9df	Contoh: "Berapa lama saya harus minum suplemen zat besi?", "Feses bayi saya hijau, apakah normal?"
+11f349c5	Kalender pribadi dan tanggal perkiraan
+40c778ab	Ringkasan disalin ke papan klip. Periksa informasi pribadi sebelum membagikan.
+dd479a2c	Makan siang
+fb937b49	Waktu makan
+3a0ba659	Perencanaan makan
+680431ed	Waktu makan sudah direncanakan
+03d41708	Ganti makanan
+e1743a7d	Gratis
+2b1681e6	Di produksi, panel admin memerlukan login terpisah, akses berbasis peran, log audit, dan verifikasi di sisi server.
+29973836	Nama barang
+383bd517	Tambah barang
+46b0bd97	Katalog produk
+c85d9607	Katalog dan perbandingan produk
+f0037199	Katalog penemuan produk
+c0bca32f	Barang ditambahkan ke daftar.
+8236c9fc	Jumlah produk bersifat informasi; kecukupan untuk resep tidak diverifikasi otomatis.
+052daf91	Ketuk barang untuk mengubah jumlah dan tanggal kedaluwarsanya.
+6ded1e0a	Katalog jenis produk dan perbandingan fitur telah ditambahkan. Harga nyata, stok, penjual, dan integrasi pembayaran belum tersedia.
+3139bbd2	Cari produk atau fitur
+f64a5ac1	Perbandingan fitur produk
+dd982f3c	Produk berfungsi sebagai daftar kebutuhan; tidak ada penjualan nyata, stok, harga, atau tautan pembayaran.
+08e05062	Tambah, selesaikan, dan simpan barang
+17384021	Hapus barang
+50963139	Keanggotaan tidak dapat diverifikasi
+38558e31	Memeriksa status keanggotaan…
+513e65b8	Keanggotaan memerlukan proyek Supabase. Saat ini catatan kesehatan dan data bayi tidak dikirim ke cloud; hanya sesi akun yang dikelola.
+7fa57377	Pilihan keanggotaan
+977740ee	Keanggotaan dan Premium
+61a6ad23	Trimester ketiga: tinjau rencana persalinan dan persiapan rumah sakit.
+1d879dbb	mis. 165
+6cbc1b4f	mis. 38,4
+7ba041db	Cari alat yang Anda butuhkan
+ae472a83	Berkas SQL, kebijakan RLS, dan uji multipengguna untuk kedua forum diperlukan.
+b994f500	Koneksi Supabase langsung dan kebijakan RLS kedua forum telah diverifikasi
+3de13b55	Kontak kedua
+a0fd68e7	Trimester kedua: lanjutkan pemeriksaan rutin dan skrining yang direkomendasikan dokter.
+140e56ad	Obat & vitamin
+caaed636	Obat / Vitamin
+82f94b61	Obat / vitamin
+da4c274e	Tambah obat / vitamin
+023a986c	Jurnal obat
+80d5b6e7	Pemantauan obat
+1f8c2a59	Obat dan vitamin
+3a0e523f	Pengingat obat dan vitamin
+c2b0f10e	Kontak dan catatan penting
+f542a6d8	Bidang terkait
+a769efd8	Topik terkait
+7be06ec8	Inspirasi
+f7e4f590	Hubungan
+67d2b128	12 minggu pertama
+b021ae05	12 minggu pertama telah selesai; pemantauan dan dukungan dapat berlanjut.
+18b6cdc6	Langkah pertama, kata pertama, dan kenangan
+3d319203	Tambah bayi pertama saya
+b7cc8489	Hari-hari pertama: ikuti saran saat pulang, pantau jumlah perdarahan dan pengendalian nyeri. Buat rencana dukungan di rumah.
+9c8ad1ad	Trimester pertama: bicarakan pemeriksaan, gizi, dan obat yang Anda minum dengan dokter.
+1d89be93	Selisih pertama–terakhir: {1}{0} {2}
+08c23f7d	Pertama: {0} · {1}  |  Terakhir: {2} · {3}
+b746efe1	Momen pertama
+4eb9f130	Penandatanganan dan identitas rilis
+b5c01a4f	Ada catatan yang perlu ditinjau
+4ead752b	Catatan lokal dan peralihan layar telah dicoba tanpa internet
+85e2d087	Batal
+e8181f34	Tips: Anda juga dapat menambahkan awal haid dengan mengetuk hari di kalender.
+ba2ea095	Tambahkan nama dan tanggal lahir
+522e5cd1	Cari nama atau arti
+4a2afac5	Nama: A → Z
+48c7db33	Nama
+22711906	Pengingat kalender keluarga opsional
+a4a548b9	Merasa Nyaman
+dbea3a4e	Senang Anda di sini!
+85e0dc14	Senang Anda di sini!\nMulailah dengan menambahkan profil bayi Anda.
+83698d09	Pemulihan dan istirahat
+b19b0d67	Pemulihan dan kehidupan
+0329f33c	Catat pemulihan, tidur, suasana hati, dan catatan pemeriksaan dokter.
+d8b63190	Kelola izin dan jam tenang
+cd16ba0c	Minuman
+accad8dd	Minuman
+ca6e7e3c	Konten bersifat informasi, bukan saran medis. Prediksi siklus bersifat perkiraan dan tidak boleh digunakan untuk kontrasepsi. Dalam keadaan darurat, hubungi nomor darurat setempat.
+c8bb0f7d	Konten untuk informasi umum. Minta saran ahli untuk masalah kesehatan.
+1329a2aa	Hapus konten
+fa88a9f5	Hapus konten?
+86f920d7	Tindakan gagal ({0}).
+6ff95d8b	Tindakan tidak dapat diselesaikan.
+780d96ee	Tindakan tidak dapat diselesaikan. Periksa izin dan koneksi.
+5d8f6cd3	Tingkat keparahan / dampak
+95a654a9	Berat
+6f26a444	Kata sandi
+f8db6da4	Kata sandi minimal 6 karakter.
+59dc2b49	Format cadangan terenkripsi tidak didukung.
+a3f58601	Teks cadangan terenkripsi
+59d4cba5	Cadangan terenkripsi disalin ke papan klip. Simpan kata sandi Anda terpisah di tempat aman.
+23aacf98	Cadangan terenkripsi melebihi batas data.
+7a6a7262	Cadangan terenkripsi dan pemulihan
+3065a659	Tempel cadangan terenkripsi di bawah dan masukkan kata sandi yang digunakan saat membuatnya. Cadangan lama tanpa enkripsi tidak dapat diimpor di layar ini.
+483ac6a7	Salin cadangan terenkripsi ke papan klip
+35c0e4e9	Lupa kata sandi
+eb392d49	Hapus konten yang dilaporkan?
+1c958933	Laporkan
+3aa8d279	Laporan tidak dapat dikirim: {0}
+190ee311	Alasan laporan
+a0138bb1	Tolak laporan?
+62d1b0f4	Laporan dan keamanan konten
+570d82a2	Tolak laporan?
+dd58ae67	Laporan Anda telah dikirim untuk ditinjau.
+a4283cc2	Sedang diputar
+c045d371	Februari
+2678b35b	Suara "shhh"
+00d28b0c	Tambahkan barang dengan "Tambah barang" dan centang yang sudah dibeli. Anda dapat mencatat kebutuhan rutin di sini, seperti popok, susu formula, dan tisu basah.
+5e94b390	≤ 15 mnt
+ad8e347d	≤ 30 mnt
+c8dbdc0c	≤ 60 mnt
+5ed1ebf1	⚠️ Akun online belum aktif. Aplikasi harus dibangun dengan konfigurasi SUPABASE_URL dan SUPABASE_ANON_KEY. Tidak ada akun palsu yang dibuat.
+c39ecb1f	🌸 Saya
+8cbd8b3e	👣\nGerakan
+4c748608	👶 Bayiku
+4235a8e3	💧 {0} gelas air hari ini. Targetnya 8 gelas (lebih jika menyusui).
