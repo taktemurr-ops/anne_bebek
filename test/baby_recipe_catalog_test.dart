@@ -23,7 +23,7 @@ void main() {
   test('Yeniden yazılan tariflerde ölçü ve en az 4 adım vardır', () {
     for (final r in babyRecipes.where((r) => r.tips.isNotEmpty)) {
       expect(r.steps.length, greaterThanOrEqualTo(4), reason: r.title);
-      expect(r.ingredients.every((i) => RegExp(r'\d|yarım|tutam|birkaç|ihtiyaç', caseSensitive: false).hasMatch(i)),
+      expect(r.ingredients.every((i) => RegExp(r'\d|yarım|çeyrek|tutam|birkaç|ihtiyaç', caseSensitive: false).hasMatch(i)),
           isTrue, reason: r.title);
     }
   });
