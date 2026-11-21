@@ -29,7 +29,9 @@ jobs:
       - run: flutter pub get
       - name: Emoji yazı tipini indir
         run: |
-          curl -fsSL -o /tmp/emoji.ttf https://github.com/googlefonts/noto-emoji/raw/main/fonts/Noto-COLRv1.ttf || true
+          curl -fsSL -o /tmp/emoji.ttf https://github.com/google/fonts/raw/main/ofl/notocoloremoji/NotoColorEmoji-Regular.ttf \
+            || curl -fsSL -o /tmp/emoji.ttf https://github.com/googlefonts/noto-emoji/raw/main/fonts/NotoColorEmoji.ttf \
+            || (sudo apt-get install -y -qq fonts-noto-color-emoji && cp /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf /tmp/emoji.ttf) || true
           ls -la /tmp/emoji.ttf || true
       - name: Görüntüleri üret
         run: |

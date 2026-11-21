@@ -162,11 +162,15 @@ class PastelModuleTile extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w800, color: PastelPalette.text, fontSize: 13.5)),
+                  // Dar ekranlarda kesilmek yerine hafifçe küçülür.
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: Text(title,
+                        maxLines: 1,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w800, color: PastelPalette.text, fontSize: 13.5)),
+                  ),
                   const SizedBox(height: 2),
                   Text(subtitle,
                       maxLines: 1,

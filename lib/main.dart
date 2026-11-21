@@ -97,6 +97,7 @@ class AnneBebekApp extends StatelessWidget {
       cardTheme: CardThemeData(color: const Color(0xFFFFFCFF), elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26))),
       appBarTheme: const AppBarTheme(backgroundColor: arka, foregroundColor: mor,
+        titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Color(0xFFE94791)),
         elevation: 0, scrolledUnderElevation: 0, surfaceTintColor: Colors.transparent,
         centerTitle: false),
       filledButtonTheme: FilledButtonThemeData(style: FilledButton.styleFrom(
@@ -457,7 +458,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         borderSide: BorderSide.none, borderRadius: BorderRadius.circular(28))));
 
   void _sayfa(String title, Widget child) => Navigator.of(context).push(MaterialPageRoute<void>(
-    builder: (_) => Scaffold(appBar: AppBar(title: Text(title)), body: SafeArea(child: child))));
+    builder: (_) => Scaffold(appBar: AppBar(title: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis,
+      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Color(0xFFE94791)))),
+      body: SafeArea(child: child))));
 
   Widget _ana() => ListView(padding: const EdgeInsets.fromLTRB(16, 8, 16, 24), children: [
     PastelGreetingCard(
