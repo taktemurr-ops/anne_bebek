@@ -30,18 +30,18 @@ jobs:
       - name: Görüntüleri üret
         run: flutter test integration_test/screenshots --update-goldens || true
       - name: Görüntüleri dala yaz
+        env:
+          TOKEN: ${{ github.token }}
         run: |
           set -e
           mkdir -p /tmp/shots
           cp integration_test/screenshots/goldens/*.png /tmp/shots/ 2>/dev/null || true
           ls -la /tmp/shots
+          cd /tmp/shots
+          echo "Kaynak: ${GITHUB_SHA}" > KAYNAK.txt
+          git init -q
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
-          git switch --orphan ekran-goruntuleri
-          git rm -rf --quiet . || true
-          rm -rf ./* .github 2>/dev/null || true
-          cp /tmp/shots/*.png . 2>/dev/null || true
-          echo "Kaynak: ${GITHUB_SHA}" > KAYNAK.txt
           git add -A
-          git commit -m "Ekran görüntüleri ${GITHUB_SHA::7}"
-          git push -f origin ekran-goruntuleri
+          git commit -qm "Ekran görüntüleri ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:ekran-goruntuleri
