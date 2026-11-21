@@ -227,6 +227,76 @@ n02_207	peynirli pişi
 n02_208	mayalı açma (zeytinli)
 n02_209	kol böreği (patatesli)
 n02_210	bazlama
+n03_001	hünkar beğendi
+n03_002	orman kebabı
+n03_003	kuzu tandır (fırında)
+n03_004	izmir köfte
+n03_005	tas kebabı
+n03_006	kıymalı patlıcan musakka
+n03_007	ıslama köfte
+n03_008	kadınbudu köfte
+n03_009	etli kuru fasulye
+n03_010	ali nazik kebabı
+n03_011	fırında kuzu pirzola
+n03_012	patatesli et yemeği
+n03_013	kıymalı lahana sarması
+n03_014	taze fasulyeli kuşbaşı
+n03_015	dana rosto
+n03_016	kıymalı börülce
+n03_017	etli enginar
+n03_018	kuzu incik (fırında)
+n03_019	sebzeli et haşlama
+n03_020	kıymalı ıspanaklı pide dürümü
+n03_101	tavuk şiş (yoğurtlu marine)
+n03_102	tavuk sote (domatesli biberli)
+n03_103	fırında patatesli tavuk but
+n03_104	tavuk haşlama ve sebze çorbası
+n03_105	tavuk tantuni
+n03_106	çerkez tavuğu
+n03_107	tavuklu güveç
+n03_108	tavuk pane (fırında)
+n03_109	limonlu kekikli tavuk kanat
+n03_110	bezelyeli tavuk yemeği
+n03_201	etli nohut (fırında güveçte)
+n03_202	zeytinyağlı barbunya (taze)
+n03_203	mercimekli kabak dolması
+n03_204	nohutlu pilav üstü yahni
+n03_205	mercimek kavurması (bulgurlu)
+n03_206	humuslu sebze tabağı
+n03_207	fava (bakla ezmesi)
+n03_208	siyah fasulyeli sebze yahnisi
+n03_209	bezelye ve nohutlu köri
+n03_210	mercimekli ekşili köfte
+n04_001	çılbır
+n04_002	pankek (klasik)
+n04_003	kaygana (otlu)
+n04_004	fırında yumurtalı avokado
+n04_005	peynirli ıspanaklı muffin (tuzlu)
+n04_006	sucuklu kaşarlı omlet
+n04_007	haşhaşlı çörek (kahvaltılık)
+n04_008	kahvaltılık patates salatası
+n04_009	fırında kaşarlı ekmek (bruschetta usulü)
+n04_010	tahin pekmez ezmesi
+n04_011	yumurtalı kabak (kahvaltılık)
+n04_012	mısır ekmeği (kahvaltılık)
+n04_013	kuymak (mıhlama)
+n04_014	fırında granola
+n04_015	peynirli patatesli rösti
+n04_101	kazandibi (tavada)
+n04_102	keşkül
+n04_103	supangle
+n04_104	aşure
+n04_105	profiterol
+n04_106	tiramisu (yumurtasız)
+n04_107	elmalı turta
+n04_108	cheesecake (fırında)
+n04_109	trileçe
+n04_110	güllaç
+n04_111	irmikli portakal tatlısı (şerbetli)
+n04_112	ekmek kadayıfı (pratik)
+n04_113	çikolatalı mousse (avokadolu)
+n04_114	fırında elmalı tarçınlı yulaf tatlısı (kase)
+n04_115	lokma (evde)
 p39a10_001	fırında sebzeli tavuk güveç
 p39a10_002	cevizli yoğurtlu semizotu kasesi
 p39a10_005	kırmızı mercimekli kabak çorbası
