@@ -190,6 +190,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 250));
     }
     expect(find.textContaining('Ses çalınamadı'), findsNothing);
+    expect(find.byType(CircularProgressIndicator), findsNothing, reason: 'ses hazırlığı bitmeliydi');
     expect(find.textContaining('sonra kapanacak'), findsOneWidget);
     await tester.pump(const Duration(seconds: 2));
     await tester.ensureVisible(find.byKey(const Key('uyku_durdur')));

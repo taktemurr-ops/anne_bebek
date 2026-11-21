@@ -70,7 +70,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage> {
     try {
       final wav = _cache[s.id] ??= widget.synth != null
           ? await widget.synth!(s.id)
-          : kIsWeb ? _synth(s.id) : await compute(_synth, s.id);
+          : await Future<Uint8List>.delayed(const Duration(milliseconds: 16), () => _synth(s.id));
       if (!mounted) return;
       await _player.playLoop(s.id, wav, _volume).timeout(const Duration(seconds: 15));
       if (!mounted) return;
