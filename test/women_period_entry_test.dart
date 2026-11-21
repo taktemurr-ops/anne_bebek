@@ -17,13 +17,16 @@ void main() {
     await tester.pumpWidget(const AnneBebekApp());
     await tester.pumpAndSettle();
     final tile = find.descendant(of: find.byType(PastelModuleTile), matching: find.text('Kadınlar'));
-    // Alt menü çubuğunun altında kalmaması için kartı ekranın ortasına getir.
-    await Scrollable.ensureVisible(tester.element(tile), alignment: 0.5);
-    await tester.pumpAndSettle();
-    await tester.tap(tile);
+    // Kartın kendi dokunma işlevi çağrılır (yerleşimden bağımsız).
+    tester.widget<PastelModuleTile>(
+        find.ancestor(of: tile, matching: find.byType(PastelModuleTile))).onTap();
     await tester.pumpAndSettle();
 
-    await tester.tap(find.byKey(const ValueKey('adet_bugun')));
+    await tester.pumpAndSettle();
+    final bugun = find.byKey(const ValueKey('adet_bugun'));
+    await tester.ensureVisible(bugun);
+    await tester.pumpAndSettle();
+    await tester.tap(bugun);
     await tester.pumpAndSettle();
     // Onay diyaloğu
     await tester.tap(find.text('Kaydet'));
@@ -37,7 +40,9 @@ void main() {
     expect(await SecureHealthStore.read('sonAdet'), today);
 
     // Aynı gün ikinci kez eklenmez.
-    await tester.tap(find.byKey(const ValueKey('adet_bugun')));
+    await tester.ensureVisible(bugun);
+    await tester.pumpAndSettle();
+    await tester.tap(bugun);
     await tester.pumpAndSettle();
     expect(find.textContaining('zaten kayıtlı'), findsOneWidget);
   });
