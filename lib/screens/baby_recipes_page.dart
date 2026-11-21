@@ -38,7 +38,8 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
       setState(() {
         _favorites
           ..clear()
-          ..addAll(prefs.getStringList(_favoritesKey) ?? const <String>[]);
+          // Eski varyasyon kimlikleri yeni tarif kimliğine taşınır.
+          ..addAll((prefs.getStringList(_favoritesKey) ?? const <String>[]).map(babyRecipeIdFor));
       });
     } catch (error) {
       debugPrint('Bebek tarifi favorileri yüklenemedi: $error');
@@ -77,11 +78,11 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
     ];
     final ages = <String>[
       'Tümü',
-      ...{for (final recipe in babyRecipes) recipe.age},
+      ...babyAgeGroups,
     ];
     final normalizedQuery = _query.trim().toLowerCase();
     final visible = babyRecipes.where((recipe) {
-      final ageMatches = _age == 'Tümü' || recipe.age == _age;
+      final ageMatches = _age == 'Tümü' || recipe.ageGroup == _age;
       final categoryMatches =
           _category == 'Tümü' || recipe.category == _category;
       final favoriteMatches = !_favoritesOnly || _favorites.contains(recipe.id);
@@ -89,6 +90,7 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
         recipe.title,
         recipe.ingredient,
         recipe.vegetable,
+        ...recipe.variants,
         ...recipe.ingredients,
       ].join(' ').toLowerCase();
       return ageMatches && categoryMatches && favoriteMatches &&
@@ -119,7 +121,7 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800,
                                 color: Color(0xFF48235F))),
                         const SizedBox(height: 6),
-                        Text('${babyRecipes.length} tarif varyasyonu • Yaşa ve malzemeye göre keşfet'),
+                        Text('${babyRecipes.length} tarif • 6–72 ay • Yaşa ve malzemeye göre keşfet'),
                         const SizedBox(height: 5),
                         const Text(
                           'Yaş etiketleri genel bilgi içindir. Alerjenleri, kıvamı ve bebeğinizin gelişimini dikkate alın.',
@@ -155,7 +157,7 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
                         decoration: const InputDecoration(labelText: 'Yaş'),
                         items: ages.map((value) => DropdownMenuItem(
                           value: value,
-                          child: Text(value == 'Tümü' ? 'Tüm yaşlar' : '$value ay',
+                          child: Text(value == 'Tümü' ? 'Tüm yaşlar' : value,
                               overflow: TextOverflow.ellipsis),
                         )).toList(),
                         onChanged: (value) {
@@ -235,7 +237,9 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
                             ),
                             title: Text(recipe.title,
                                 style: const TextStyle(fontWeight: FontWeight.w700)),
-                            subtitle: Text('${recipe.age} ay • ${recipe.category}'),
+                            subtitle: Text(recipe.variants.isEmpty
+                                ? '${recipe.ageGroup} • ${recipe.category}'
+                                : '${recipe.ageGroup} • ${recipe.category} • ${recipe.variants.length} sebze seçeneği'),
                             trailing: IconButton(
                               tooltip: _favorites.contains(recipe.id)
                                   ? 'Favorilerden çıkar' : 'Favorilere ekle',
@@ -265,14 +269,14 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
 // aynı dosyada kurulur; mevcut katalog alanları korunur.
 class _BabyRecipeDetailPage extends StatelessWidget {
   const _BabyRecipeDetailPage({required this.recipe});
-  final dynamic recipe;
+  final BabyRecipe recipe;
 
   @override
   Widget build(BuildContext context) {
-    final ingredients = (recipe.ingredients as List).cast<String>();
-    final steps = (recipe.steps as List).cast<String>();
+    final ingredients = recipe.ingredients;
+    final steps = recipe.steps;
     return Scaffold(
-      appBar: AppBar(title: Text(recipe.title as String)),
+      appBar: AppBar(title: Text(recipe.title)),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(18),
@@ -286,10 +290,10 @@ class _BabyRecipeDetailPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(recipe.title as String,
+                  Text(recipe.title,
                       style: Theme.of(context).textTheme.headlineSmall),
                   const SizedBox(height: 8),
-                  Text('${recipe.age} ay ve üzeri • ${recipe.category}'),
+                  Text('${recipe.minMonths} ay ve üzeri (${recipe.ageGroup}) • ${recipe.category}'),
                 ],
               ),
             ),
@@ -312,6 +316,30 @@ class _BabyRecipeDetailPage extends StatelessWidget {
               ),
               title: Text(entry.value),
             )),
+            if (recipe.variants.isNotEmpty) ...[
+              const SizedBox(height: 14),
+              Text('Sebze seçenekleri', style: Theme.of(context).textTheme.titleLarge),
+              const SizedBox(height: 6),
+              Text('Tarifte "seçtiğiniz" yazan yere bunlardan birini kullanabilirsiniz:',
+                  style: Theme.of(context).textTheme.bodySmall),
+              const SizedBox(height: 6),
+              Wrap(spacing: 6, runSpacing: 6, children: [
+                for (final v in recipe.variants)
+                  Chip(label: Text(v), backgroundColor: const Color(0xFFFFEAF5), side: BorderSide.none),
+              ]),
+            ],
+            if (recipe.tips.isNotEmpty) ...[
+              const SizedBox(height: 14),
+              Text('Püf noktaları', style: Theme.of(context).textTheme.titleLarge),
+              ...recipe.tips.map((t) => ListTile(dense: true,
+                leading: const Icon(Icons.lightbulb_outline, color: Color(0xFF48235F)),
+                title: Text(t))),
+            ],
+            if (recipe.storage != null) ...[
+              const SizedBox(height: 8),
+              Text('Saklama', style: Theme.of(context).textTheme.titleLarge),
+              Padding(padding: const EdgeInsets.symmetric(vertical: 6), child: Text(recipe.storage!)),
+            ],
             const SizedBox(height: 18),
             const Card(
               color: Color(0xFFFFF1F7),
