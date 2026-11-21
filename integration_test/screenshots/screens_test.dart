@@ -3,7 +3,6 @@
 // `flutter test integration_test/screenshots --update-goldens` olarak çalıştırılır.
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:anne_bebek/main.dart';
 import 'package:flutter/material.dart';
