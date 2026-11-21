@@ -1,0 +1,300 @@
+5e2b30d9	Wenn es Warnungen gibt, korrigiere Einträge nicht automatisch. Sichere zuerst die vorhandenen Daten und prüfe die betreffenden Daten/Profile.
+8dc1c4cf	App
+3a16868d	Über die App
+d88e9abc	Datenerhalt bei App-Updates
+a4aa4146	Benachrichtigungen in der App
+20b7b415	Schlaf
+56b0e369	Schlafrhythmus
+3cc4a433	Schlaf hinzufügen
+6cad5e41	Schlaftagebuch
+d0a4bd21	Schlaftagebuch 🌙
+7dd4893d	Mein Schlaftagebuch
+d2f221e1	Schlafeintrag
+6fe54c31	Schlafeintrag löschen?
+f35a8e57	Schlafeintrag bearbeiten
+dbe666f3	Schlafeinträge
+4c817317	Schlafeinträge konnten nicht gelesen werden. Vorhandene Einträge wurden nicht gelöscht.
+a10a9f28	Schlafmelodie
+6b49345f	Schlafroutine
+7e3c9066	Schlafklänge
+ea0c18d5	Schlafklänge und Schlaflieder
+4a0c0713	Schlafklänge 🌙
+0ced78e5	Schlafdauer (Minuten)
+ada26820	Schlafdauer hinzufügen
+a9710c8f	Schlafdauer und Notizen
+379d41de	Schlaf-Tracking und Wochendiagramm
+4f596027	Schlaf und Ruhe
+e59fcdb3	Schlaf und Tagesablauf
+04af83ce	Schlaf und Alltag
+c429c486	Schlaf • Ernährung • Windeln
+95605fed	Schlaf-, Ernährungs-, Windel- und Medikamenteneinträge nach Datum
+ede951de	Koffer- und Reiseliste
+cae2f2a4	Ventilator
+14d24820	Abbrechen
+fd682e2f	Datenintegritätsprüfung
+fa443a7c	Gegebenes Medikament und Menge (optional)
+1c2d5efd	Daten konnten nicht geprüft werden. Keine Einträge wurden geändert.
+0ad85845	Daten sichern oder wiederherstellen
+38849bc7	Meine Daten
+8671b79e	Fruchtbare Tage
+8e134e98	Mit Komma trennen: 08:00, 20:00
+97125909	Body-Mass-Index: {0} ({1}). In Schwangerschaft und Stillzeit kein gültiger Maßstab.
+31c8b4c6	Die Körpertemperatur scheint niedrig. Wärme dein Baby und miss erneut; bleibt sie niedrig oder ist das Baby schlapp, geh sofort zum Arzt.
+51c7c481	Die WHO-Referenz für 0–24 Monate muss alle 25 Monate enthalten
+dfd2d9ec	WHO-CSV-Referenz laden
+1cc4765f	WHO-Quellenlink erforderlich
+fd375b32	Für WHO-Perzentilen sind geprüfte CDC/WHO-CSV-Dateien für 0–24 Monate nötig. Mit dem Upload-Symbol oben kannst du den offiziellen CSV-Inhalt aus der Zwischenablage importieren. Ohne Referenz werden keine Perzentilen berechnet.
+c3e129b1	Anstehend
+cc54c201	Erinnerungen für anstehende Termine einrichten
+d7b2d14b	Etwa {0} Monate alt
+89b96cf8	Demnächst
+44bbbb95	Nur Favoriten
+a7afde3d	Nur meine Favoriten
+2d1caed9	Fasst nur frühere Abstände zwischen deinen eingegebenen Daten zusammen. Nicht zur Vorhersage oder Verhütung verwenden.
+87aea77d	Nur Mengen, die mit einer Zahl beginnen, werden anteilig umgerechnet. Prüfe Brüche, ungefähre Angaben und Mengen im Text.
+de7872a4	Es werden nur die Einträge des gewählten Kindes angezeigt. Die Daten bleiben auf deinem Gerät; Kopieren legt sie in die Zwischenablage.
+1a58d99a	Nur ausgewählte
+3837ff97	Nur Einträge der letzten 7 Tage anzeigen
+c7e13701	Nur auf dem Server als Moderatoren eingetragene Konten können Meldungen sehen.
+be4f070d	Nur Rezepte, für die alle Zutaten vorhanden sind
+abf54174	Irreführende Gesundheitsinformation
+dd7dfe98	Antwort
+11421ad6	Warte auf Antwort…
+95c6b0a1	Antwort hinzufügen
+8d51bcd8	Antwort schreiben
+59dfc0be	Schreib deine Antwort
+8c62add1	Die Antworten werden ebenfalls gelöscht.
+c23d93bb	Erledigt
+1d5b3520	Meine Aufgabenliste
+d33f496c	Aufgaben und Erledigtes
+61da8572	Erhaltene Impfungen und Daten
+0e53067d	Erhaltene Impfungen mit Datum und Notiz erfassen
+9d20e6ef	Ich weiß, wen ich um Hilfe bitten kann
+6111735e	Das Geräusch langsam kommender und gehender Wellen.
+697dcaae	Veröffentlichung
+aa04ddbb	Veröffentlichungsprüfungen
+76e84489	Veröffentlichung und Qualität
+2dcf5a8e	Prüfung vor Veröffentlichung
+cfbb1cec	Checkliste vor Veröffentlichung
+52d23e7a	Die von dir geschriebene Frage wird gesendet. E-Mail-Adressen und Telefonnummern werden automatisch maskiert; das ist keine vollständige Anonymisierung. Schreib keine Namen, Adressen, Befunde oder andere sensible persönliche Daten.
+0cdd3141	Deine Nachricht...
+6a6c247a	Regen
+1375a9ca	Alter
+77cef0fd	Altersbereich (Monate)
+30179530	Altersangaben sind allgemeine Information. Berücksichtige Allergene, Konsistenz und die Entwicklung deines Babys.
+f57b1aa7	Nach Alter, Kategorie und Zutat suchen
+45918659	Nach Alter, Kategorie und Zutat entdecken
+0bb80b4e	Altersgerechte Aktivitäten
+50fce414	Altersgerechte Babygerichte
+5c2f6e29	Altersgerechte Ernährung
+f2cfca90	Altersgerechter Ernährungsratgeber und Rezepte
+d6ed084c	Altersgerechter Entwicklungsratgeber
+a2a4f451	Altersgerechte Inhalte und Ratgeber
+59fbc056	Altersgerechter Ratgeber
+70423165	Schaffe eine altersgerechte, gleichbleibende Abendroutine. Prüfe die Sicherheit der Schlafumgebung; leg dein Baby zum Schlafen auf den Rücken.
+9421742d	Altersgerechter Lebensratgeber
+82974595	Leben
+0ed43857	Mein Lebenszentrum
+6aaeb8f7	Lebenswerkzeuge
+622e3358	Eintrag im Lebenszentrum ist ungültig.
+705dbd24	Mein Lebenszentrum ✨
+30bb8fd8	Anzahl der Sicherungsfelder ist ungültig.
+0ce3cbc0	Sicherungen liegen in deiner Hand; wir empfehlen, sie mit einem Passwort zu verschlüsseln.
+e36c65f6	Größenlimit der Sicherung überschritten (3 MB).
+67814e28	Die Sicherung ist leer; es gibt nichts wiederherzustellen. Vorhandene Einträge bleiben erhalten.
+103d6777	Die Sicherungsdatei ist zu groß.
+e32ead49	Die Sicherung konnte nicht geprüft werden: {0}
+86d36476	Die Sicherung gehört zu einem anderen Kind
+2264ce25	Sicherungsinhalt ist ungültig: {0}
+117e220e	Der Sicherungstext enthält persönliche Gesundheitsdaten des Kindes. In die Zwischenablage kopierte Inhalte können von anderen Apps gelesen werden. Fortfahren?
+22a4830d	Sicherung erstellen und mit Testdaten wiederherstellen
+2839f77d	Die Sicherung konnte nicht erstellt werden: {0}
+5226eeb0	Das Erstellungsdatum der Sicherung fehlt oder ist ungültig.
+3c881c49	Das Erstellungsdatum der Sicherung scheint in der Zukunft zu liegen.
+2d8e4624	Sicherungspasswort (mindestens 12 Zeichen)
+4b8b8dd9	Das Sicherungspasswort muss mindestens 12 Zeichen haben.
+17846133	Das Sicherungspasswort darf höchstens 256 Zeichen haben.
+cec9168c	Verschlüsselungsfelder der Sicherung sind ungültig.
+0cdfd711	Sicherung
+e723e5d5	Sichern und wiederherstellen
+5ca9cc0f	Sicherungen werden mit AES-256-GCM und einem Passwort verschlüsselt. Wenn du das Passwort vergisst, kannst du die Sicherung nicht öffnen. Bewahre den in die Zwischenablage kopierten Sicherungstext dennoch sicher auf. WICHTIG: Die aktuellen Einträge auf dem Gerät werden dadurch nicht verschlüsselt; es ist keine Cloud-Sicherung.
+fe1295fb	Die Sicherung enthält Einträge eines anderen Kindes
+d28a2981	Die Sicherung enthält einen ungültigen Eintragstyp.
+19c81124	Ungültiger Eintrag in der Sicherung: {0}
+907a7099	Die Sicherung enthält einen ungültigen Listeneintrag.
+9b3640c7	Die Sicherung enthält eine ungültige Liste.
+b2251093	Die Sicherung enthält ein Kindertagebuch ohne Profil.
+a6a28d8c	Die Sicherung enthält einen Gesundheitsplan ohne Profil.
+9f013a15	Die Sicherung enthält ein unbekanntes Feld.
+2ae5db22	Die Sicherung enthält {0} Datenbereiche nicht. Die Wiederherstellung behält vorhandene Einträge in diesen Bereichen.
+8b946ea0	Die Sicherung enthält {0} Datenbereiche und etwa {1} Einträge.
+3306c64f	Sicherung prüfen und wiederherstellen
+13c341fa	Essen
+5c3b5359	Rezepte
+b43d243d	Rezepte für Mahlzeiten und Beikost
+168078d4	Neues Baby hinzufügen
+1d3da1f4	Neues Baby hinzufügen, zwischen Profilen wechseln; Tagebuch und Pflegeplan
+d6c0cccf	Neues Babyprofil erstellen
+76280fb8	Neues Ernährungs- und Mahlzeitentagebuch
+f5e5aa21	Neuen Fütterungseintrag erstellen
+3daa42cd	Das neue Geburtsdatum darf nicht nach vorhandenen Tagebuch- oder Gesundheitseinträgen liegen. Prüfe zuerst die Einträge.
+3ab9c140	Neuer Termin
+8cd124b2	Neues Konto erstellen
+2c2c722a	Neuer Eintrag
+78864878	Neuen Eintrag hinzufügen
+14139a8e	Neuer Eintrag • {0}
+34482149	Neuer Eintrag: {0}
+c543676f	Neue persönliche Notiz
+bbf53b45	Neues Rezept
+60a6e435	Neuen Schlafeintrag erstellen
+549bfe99	Neue Antworten erscheinen hier. Sofortige Telefonbenachrichtigungen sind noch nicht aktiv.
+330da458	Neuen Artikel hinzufügen
+e7c85607	Neu: Familienleben ✨
+7ba41f54	Erneut versuchen
+b96d401c	Neueste zuerst
+ca2f77a3	Erneut prüfen
+de5e0d3c	Neu laden
+e15030ea	Neugeborenes
+255b90ed	Aktualisieren
+051c4abc	Lokale Baby- und Fraueneinträge
+a5a4ba01	Fehler beim Lesen lokaler Daten
+a78fb991	Lokale Verwaltungsübersicht (Vorschau)
+56657a1d	Die lokale Übersicht konnte nicht gelesen werden.
+9fc52a0e	Berechtigungsgesteuerte Moderation
+87963f33	Berechtigungen, Meldeabläufe, Spamschutz und echte Benachrichtigungstests sind nötig. Es gibt keine Push-Benachrichtigungen.
+ec1961a9	Doppelter Tagebucheintrag
+820f82f6	Doppelter Eintrag im Tagesablauf
+cd178a76	Doppelte Eintrags-ID
+af9b0db7	Doppeltes Profil
+2737e506	Doppelte Rezept-ID
+6def65cb	Doppelte Artikel-ID
+02d24668	Tippe auf eines der Felder oben, um deine erste Messung hinzuzufügen.
+7c760d68	Ei
+d8f5e465	Eisprung und fruchtbare Tage werden aus deiner durchschnittlichen Zykluslänge geschätzt. Das ist keine verlässliche Methode zur Verhütung oder Schwangerschaftsplanung und ersetzt keine ärztliche Beurteilung.
+5bf24d05	Auf Verwaltungsdaten konnte nicht zugegriffen werden. Prüfe Admin-Berechtigung, Sitzung und Servereinrichtung.
+851cf730	Verwaltungsübersicht • Vorschau
+08ece895	Geladene Referenzen bleiben nur, solange dieser Bildschirm offen ist. Die monatlichen WHO-Perzentilen für 0–24 Monate dienen der Information; sie sind keine ärztliche Beurteilung.
+3be181d6	Einmal im Jahr eine allgemeine Kontrolle; nach ärztlicher Empfehlung.
+a0584744	Einmal im Jahr; bei einem Muttermal, das wächst, die Farbe ändert oder blutet, sofort.
+14282d47	Timer aus – wiederholt sich fortlaufend
+7a005fd4	Timer: Links {0}, Rechts {1}
+06ffcdc4	[E-Mail verborgen]
+4f546c2d	[Telefon verborgen]
+f27daa76	zum Starten tippen
+84f4ef71	zum Stoppen tippen
+f548092e	Übergewicht
+ba242156	iOS-Gerätetests
+e5f8828a	iOS-Build und TestFlight-Prüfung durchgeführt (Mac nötig)
+76d713f4	iOS-Build
+bc797ca2	Test auf echtem iOS-Gerät/TestFlight
+77778cec	Untergewicht
+8c8463b3	{0} ({1}+ Monate)
+d46506f3	{0} / 40 Wochen
+3ed1d8a2	{0} / {1} Prüfungen abgehakt
+d7d21dc0	{0} / {1} Prüfungen erledigt
+e8d1f06b	{0} / {1} Module
+4c047fc9	{0} / {1} Rezepte
+1e9bc45f	Menge von {0} erhöht.
+6e31f528	{0} als Periodenbeginn speichern?
+9e3b35cb	{0} Werkzeuge
+39dcb346	Ab {0} Monaten ({1}) • {2}
+76d132a2	{0} Monate alt
+a9e63ce1	{0} Monatsthemen • {1} gelesen
+1d4ccb16	{0} Minuten
+b956e17b	{0} Min.
+1ed27a97	{0} redaktionelle Einstiegsartikel • {1} gelesen
+b01aab41	{0} Aktivitäten werden angezeigt
+33d59205	{0} verschiedene Zutaten • {1} zu Hause • {2} fehlen
+77d1adfb	{0} Lieblingsrezepte • {1} Pflegeeinträge • {2} Wachstumsmessungen
+a281475b	{0} überfällig • {1} heute
+6923ddc3	{0} Rezepte • {1} Ergebnisse
+867b5915	{0} Tage
+ddc1685d	{0} Tage (ungefähr)
+6148359a	{0} Tage alt
+620745ed	{0} Alltagswerkzeuge • Deine Einträge bleiben auf diesem Gerät
+344c841b	{0} Namen
+25eed84e	{0} Inhalte
+e89655ea	{1} Einträge für {0}
+d6b3d33a	Gib für {0} einen Wert zwischen {1} und {2} {3} ein.
+33edf2af	{0} gespeichert.
+66332aef	{0}-Eintrag
+32cd6bf1	{0}-Eintrag hinzufügen
+ebffeb23	{0}-Eintrag hinzugefügt.
+409e949d	{0} Einträge
+8d1220da	{0} Datenbereiche wiederhergestellt. Schließe die App vollständig und öffne sie erneut.
+f2d88b06	{0} Einträge kopiert. Alte Einträge blieben erhalten.
+0e5bf71a	{0} Einträge · {1} Kategorien
+7167c108	{0} Einträge • Erster: {1} {3} • Letzter: {2} {4}
+65f7f6f0	{0} kg
+b28623e0	Für {0} Personen
+d773d924	{0} Vorsorgeuntersuchungen sind fällig oder wurden nie erfasst
+2004d198	{0} Themen
+8d7173f7	{0} zur Liste hinzugefügt.
+a3972015	{0} Zutaten zu deiner Einkaufsliste hinzugefügt.
+2a0e9db5	{0} Zutaten zur Einkaufsliste hinzugefügt.
+327d8d8e	{0} Zutaten für {1} Portionen zur Einkaufsliste hinzugefügt.
+c16337a7	{0} mg/dL
+86e23524	{0} ml
+c7fba814	{0} Portionen
+be8c429b	Zutaten für {0} Portionen zur Einkaufsliste hinzufügen
+7672293f	Möchtest du das Profil {0} entfernen? Das kann nicht rückgängig gemacht werden.
+b7d695c3	{0} Std. {1} Min.
+eba9aabb	{0} Stunden {1} Minuten
+1728cbd2	{0} in den Warenkorb gelegt
+699debf7	{0} Ergebnisse
+5cbd73d1	{0} Rezepte
+7829d135	{0} Rezepte gefunden
+93479447	{0} Rezepte • 6–72 Monate • Nach Alter und Zutat entdecken
+5843347a	{0} Rezepte • Eignung ist eine ungefähre Zutatenübereinstimmung
+9c4c13d3	{0} Datum
+c336a2fe	{0} Jahre {1} Monate alt
+4edb960f	Allgemeine Vorsorgeempfehlungen für das Alter {0}.
+5fd8a997	{0} Jahre alt
+57c717e5	{0} neue Zutaten zur Einkaufsliste hinzugefügt. Wechsle zum Tab Einkaufen, um die Liste zu sehen.
+f2fb22d8	{0} neue Artikel zur bestehenden Einkaufsliste hinzugefügt.
+57563a37	{0} ist bereits gespeichert. Öffne „Mein Periodenverlauf“, um es zu löschen.
+5f0f5e61	{0} {1}  •  {2} Bewegungen
+6b41fb39	Das für {0} {1} gespeicherte Rezept wird überschrieben.
+a028deba	{0} zum Plan {1} hinzugefügt.
+920918f4	{0} · Wachstumsverlauf
+e318d639	{0} · Arztzusammenfassung
+41928c4c	{0} · Übersicht
+66f73dce	{0} · Tagebuch
+5fbc9967	{0} · Eintrag bearbeiten
+301cdf03	{0} · Schlaftagebuch 🌙
+e4f276cd	{0} · Neuer Eintrag
+5ef40115	{0} Messungen
+758375a3	{0} Messeinträge • Diagramme ansehen
+b382e9ed	Vor {0} gegeben. Lege den nächsten Dosisabstand nach dem Beipackzettel und der Empfehlung deines Arztes fest.
+9d0904fd	{0} Tipps • {1} gelesen
+8254be8c	{0} Mahlzeiten werden in freie Plätze eingefügt. Die bestehende Auswahl dieser Woche bleibt.
+4110f091	Vorschläge für {0} Mahlzeiten erstellt.
+a162d32a	{0} Mahlzeiten aus der Vorwoche übernommen.
+108a21c3	{0} Artikel zur Einkaufsliste hinzugefügt.
+fb448456	{0} löschen
+05eed817	{0} • Impfkalender
+2ad16cdb	{0} • Information
+1f0c7254	{0} • Gesundheitsplan
+09672e22	{0} • Bestandsinfo
+8de7664e	{0} • Gemeinschaft
+1493394e	{0} • Verbrauchseintrag
+6e0fa32d	{0} • Etwa {1} Min.
+cadd7921	{0} • Neuer Eintrag
+cd3f9664	{0} • {1} Minuten
+64d6642e	{0} • {1} Min.
+c50903f6	{0} • {1} Min. • {2}
+cad4b532	{0} • {1} Min. • {2} Zutaten
+1ded6f2a	{0} • {1} Min. • ab {2} Monaten
+51d7899c	{0} • {1} Min. • {2}/{3} Zutaten vorhanden
+22f78654	{0} • vor {1} Tagen
+53a1b1e9	{0} • {1} Wochen {2} Tage (ungefähr)
+b4492db8	{0} • Alternativen für {1}
+bd4b1b59	{0} • {1} Einträge
+b15ad4c5	{0} • {1} • {2} Gemüseoptionen
+7d785621	{0} • {1}–{2} Monate\n{3}
+92c332c1	{0} • ~{1} Min.
+1dba9703	Ab {0} Monaten • {1} Minuten • {2}
+252e384b	Monat {0}
+c0b84528	Ernährungsratgeber Monat {0}
+5a325e25	Tipps zu Entwicklung, Spiel und Pflege für Monat {0}
+70773554	Woche {0}
