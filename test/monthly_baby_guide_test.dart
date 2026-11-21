@@ -16,4 +16,12 @@ void main() {
     expect(babyGuideForMonth(-5).month, 0);
     expect(babyGuideForMonth(90).month, 72);
   });
+  test('0–24 ay her ay kendine özgü gelişim içeriği; aşılar ilgili ayda', () {
+    final devs = {for (var m = 0; m <= 24; m++) babyGuideForMonth(m).sections['Gelişim']};
+    expect(devs.length, 25);
+    expect(babyGuideForMonth(2).sections['Sağlık'], contains('BCG'));
+    expect(babyGuideForMonth(12).sections['Sağlık'], contains('KKK'));
+    expect(babyGuideForMonth(8).sections['Beslenme'], contains('lerjen'));
+    expect(babyGuideForMonth(72).sections['Gelişim'], contains('5–6 yaş'));
+  });
 }
