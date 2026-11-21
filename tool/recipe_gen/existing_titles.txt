@@ -377,6 +377,46 @@ n06_210	zeytinyağlı pırasa (havuçlu pirinçli)
 n06_211	fırında kabak dolması (kıymasız)
 n06_212	közlenmiş patlıcanlı biber kavurma
 n06_213	kereviz sapı soteli havuç
+n07_001	bol limonlu çoban salatası
+n07_002	gavurdağı salatası
+n07_003	mevsim salatası (yeşil)
+n07_004	patates salatası (yoğurtlu)
+n07_005	rus salatası (yoğurtlu, hafif)
+n07_006	ton balıklı fasulye salatası
+n07_007	kısır (bol yeşillikli)
+n07_008	narlı peynirli roka salatası
+n07_009	fırınlanmış balkabağı salatası
+n07_010	tavuklu yeşil salata
+n07_011	piyaz (antalya usulü tahinli)
+n07_012	kırmızı lahana turşulu salata
+n07_101	ev yufkasından peynirli kol böreği
+n07_102	milföy peynirli börek
+n07_103	talaş böreği (kıymalı)
+n07_104	ıspanaklı gözleme
+n07_105	kıymalı gözleme
+n07_106	pizza poğaça
+n07_107	patatesli puf börek
+n07_108	ev yapımı tost ekmeği
+n07_109	su böreği (klasik, ev açması)
+n07_110	kaşarlı mısır poğaçası
+n07_201	elmalı kurabiye (pudra şekerli)
+n07_202	cevizli tereyağlı kurabiye
+n07_203	yoğurtlu kek (klasik)
+n07_204	brownie
+n07_205	kakaolu fındıklı kurabiye
+n07_206	havuçlu tarçınlı muffin (yoğurtlu)
+n07_207	limonlu kurabiye (pudralı)
+n07_208	portakallı ıslak kek
+n07_301	pratik peynirli pide (lavaştan)
+n07_302	fırında fincan kek
+n07_303	tavada yumurtalı patates köftesi
+n07_304	10 dakikada makarna (domatesli)
+n07_305	peynirli omlet sandviç
+n07_306	hazır yufkadan elmalı rulo tatlı
+n07_307	fırında sebzeli yumurta (tek tava)
+n07_308	yoğurtlu meyveli dondurma kasesi
+n07_309	pratik tavuk çorbası (hazır suyla)
+n07_310	fırında peynirli patlıcan dilimleri
 p39a10_001	fırında sebzeli tavuk güveç
 p39a10_002	cevizli yoğurtlu semizotu kasesi
 p39a10_005	kırmızı mercimekli kabak çorbası
