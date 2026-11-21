@@ -24,6 +24,12 @@ Gerçek cihaz testi yapılmamıştır.
 | KVKK açık rıza (GP-11) | İlk açılışta aydınlatma özeti ve açık rıza ekranı; Profil'de gizlilik özeti; kayıt silme rızayı geri alır | `lib/widgets/consent_gate.dart` |
 | Mağaza/KVKK taslakları (GP-12) | Mağaza metinleri, Play veri güvenliği yanıtları, veri envanteri, gizlilik politikası taslağı | `docs/MAGAZA_VE_KVKK_TASLAKLARI.md` |
 | Sürüm | 1.0.0 (137) | `pubspec.yaml` |
+| Mutfak modülü (Paket 39) | Uygulamaya hiç bağlanmamış ~25.000 satırlık tam Akıllı Alışveriş/Mutfak sayfası (`smart_shopping_page.dart.dart`) asıl sayfanın yerine alındı: bütçe, kiler, menü, fiyat geçmişi, israf, mutfak yedeği. 65 diyalogda kırmızı ekran kalıbı giderildi. 122 araç kategorili ve aranabilir "Mutfak araçları" ekranına taşındı; QA aracı yalnızca geliştirmede. Eski 4 kopya dosya silindi | `lib/screens/smart_shopping_page.dart`, `test/paket39_kitchen_tools_test.dart` |
+| Sürüm yükseltme göçü (GP-02) | Eski düz kayıtların şifreli depoya kayıpsız taşınması, çelişen kopyada veri korunması ve ana ekranın eski profili göstermesi testli | `test/gp02_upgrade_migration_test.dart` |
+| Günlük sızıntısı (GP-11) | `debugPrint` yayın sürümünde logcat'e yazıyordu ve JSON hataları kayıt içeriği taşıyabiliyordu; yayında günlük kapalı, geliştirmede maskeli | `lib/utils/privacy_log_sanitizer.dart` |
+| Büyüme filtresi (GP-03) | Çocuk başına büyüme geçmişinde 3/6/12 ay filtresi | `child_growth_trends_page.dart` |
+| Tarif defteri bağlantısı (GP-07) | Genel ve bebek tariflerinden "Aile tarif defterime ekle" | `lib/services/recipe_notebook_bridge.dart` |
+| Cihaz test listesi | Gerçek cihazda yapılacak 30+ kontrol | `docs/CIHAZ_TEST_LISTESI.md` |
 | Profil doğrulama (GP-02) | Ana ekran bebek profili formu doğrulayıcıdan geçiyor | `lib/main.dart` |
 | Performans | Tarifler sekmesi 40'arlık sayfalama | `lib/main.dart` |
 
@@ -35,4 +41,4 @@ Gerçek cihaz testi yapılmamıştır.
 - **Görseller:** Referanstaki fotoğraf/illüstrasyonlar (bebek, anne, yemek fotoğrafları) lisanslı görsel gerektirir; şu an simge ve renk geçişi kullanılıyor.
 - **Alışveriş (§7):** ürün detay, karşılaştırma ve kategori yapısı; gerçek fiyat/mağaza verisi için veri kaynağı gerekiyor.
 - **Excel'deki backend/mağaza maddeleri:** AI backend, push, topluluk moderasyonu, Google Play / App Store satın alma ve sunucu makbuz doğrulaması, iOS imzalama, KVKK metinlerinin hukukçu onayı ve yayımlanması: hesap/anahtar ve yönetim kararı gerektirir; kodla tek başına kapatılamaz.
-- **Gerçek cihaz testi:** Yapılmadı.
+- **Gerçek cihaz testi:** Yapılmadı; kontrol listesi `docs/CIHAZ_TEST_LISTESI.md`.
