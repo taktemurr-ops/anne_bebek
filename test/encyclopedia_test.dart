@@ -4,11 +4,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('ansiklopedi: en az 90 konu, benzersiz kimlik ve başlık, her kategori dolu', () {
-    expect(encyclopediaTopics.length, greaterThanOrEqualTo(90));
+    expect(encyclopediaTopics.length, greaterThanOrEqualTo(115));
     expect(encyclopediaTopics.map((t) => t.id).toSet().length, encyclopediaTopics.length);
     expect(encyclopediaTopics.map((t) => t.title.toLowerCase()).toSet().length, encyclopediaTopics.length);
     for (final (name, _) in encyclopediaCategories) {
-      expect(encyclopediaTopics.where((t) => t.category == name).length, greaterThanOrEqualTo(3), reason: name);
+      expect(encyclopediaTopics.where((t) => t.category == name).length, greaterThanOrEqualTo(8), reason: name);
     }
     for (final t in encyclopediaTopics) {
       expect(encyclopediaCategories.any((c) => c.$1 == t.category), isTrue, reason: t.id);

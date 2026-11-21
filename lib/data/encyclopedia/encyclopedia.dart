@@ -2,6 +2,7 @@ import 'baby.dart';
 import 'child.dart';
 import 'life.dart';
 import 'model.dart';
+import 'more.dart';
 import 'mother.dart';
 import 'pregnancy.dart';
 
@@ -14,6 +15,7 @@ const encyclopediaTopics = <EncyclopediaTopic>[
   ...pregnancyTopics,
   ...motherTopics,
   ...lifeTopics,
+  ...moreTopics,
 ];
 
 String _norm(String s) => s
