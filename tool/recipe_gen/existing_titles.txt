@@ -337,6 +337,46 @@ n05_207	ev yapımı erişte (kuru)
 n05_208	cevizli erişte
 n05_209	mercimekli makarna (anadolu usulü)
 n05_210	sebzeli makarna salatası
+n06_001	ezogelin çorbası
+n06_002	tarhana çorbası
+n06_003	düğün çorbası
+n06_004	kekikli mantar çorbası (sütlü)
+n06_005	brokoli çorbası
+n06_006	tavuk suyu şehriye çorbası
+n06_007	patates çorbası
+n06_008	soğan çorbası (fırında peynirli)
+n06_009	sütlü mısır çorbası
+n06_010	lahana çorbası (karadeniz usulü)
+n06_011	erişte çorbası
+n06_012	toyga çorbası
+n06_013	havuçlu zencefilli çorba
+n06_014	kremalı tavuk çorbası
+n06_015	kırmızı biberli domates çorbası (közlü)
+n06_101	iç pilav
+n06_102	perde pilavı
+n06_103	firik pilavı
+n06_104	meyhane pilavı
+n06_105	patlıcanlı pirinç pilavı
+n06_106	domatesli pirinç pilavı
+n06_107	sebzeli esmer pirinç pilavı
+n06_108	kestaneli pilav
+n06_109	bulgurlu mercimekli kuskus pilavı
+n06_110	kuruyemişli safranlı pilav
+n06_111	kabaklı bulgur pilavı (taneli)
+n06_112	sade tereyağlı pirinç pilavı
+n06_201	türlü
+n06_202	ıspanak yemeği (yumurtalı)
+n06_203	havuçlu zeytinyağlı kereviz
+n06_204	fırında karnabahar mücver
+n06_205	kabak sinkonta (bodrum usulü)
+n06_206	kıymasız patlıcan oturtma
+n06_207	biberli mantar sote
+n06_208	fırında sebze graten
+n06_209	zeytinyağlı limonlu bamya
+n06_210	zeytinyağlı pırasa (havuçlu pirinçli)
+n06_211	fırında kabak dolması (kıymasız)
+n06_212	közlenmiş patlıcanlı biber kavurma
+n06_213	kereviz sapı soteli havuç
 p39a10_001	fırında sebzeli tavuk güveç
 p39a10_002	cevizli yoğurtlu semizotu kasesi
 p39a10_005	kırmızı mercimekli kabak çorbası
