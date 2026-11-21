@@ -40,6 +40,7 @@ import 'cycle_tracker.dart';
 import 'tracking_journal.dart';
 import 'screens/backup_page.dart';
 import 'services/privacy_service.dart';
+import 'widgets/consent_gate.dart';
 import 'services/local_reminder_notifications.dart';
 import 'services/secure_health_store.dart';
 import 'data/product_catalog.dart';
@@ -98,7 +99,7 @@ class AnneBebekApp extends StatelessWidget {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(22), borderSide: BorderSide.none),
         enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(22), borderSide: BorderSide.none)),
     ),
-    home: const AnaUygulama(),
+    home: const ConsentGate(child: AnaUygulama()),
   );
 }
 
@@ -1469,7 +1470,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       }
       if (!mounted) return;
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute<void>(builder: (_) => const AnaUygulama()),
+        MaterialPageRoute<void>(builder: (_) => const ConsentGate(child: AnaUygulama())),
         (_) => false,
       );
     } catch (_) {
@@ -1554,7 +1555,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       _profilSatiri(Icons.shield_outlined, 'Gizlilik ve Güvenlik', () => Navigator.push(context,
         MaterialPageRoute<void>(builder: (_) => const BackupPage()))),
       _profilSatiri(Icons.info_outline_rounded, 'Uygulama Hakkında', () => showAboutDialog(context: context,
-        applicationName: 'Anne & Bebek', applicationVersion: '0.136.0',
+        applicationName: 'Anne & Bebek', applicationVersion: '1.0.0',
         applicationLegalese: 'Takip kayıtları kişisel kullanım içindir; sağlık değerlendirmesi yerine geçmez.')),
     ])),
     _baslik('Hesabım'), _rehberKart('Bebek profilim', Icons.child_care),
@@ -1597,7 +1598,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       title: const Text('Yedekleme ve geri yükleme'),
       subtitle: const Text('Kayıtları dışa aktar veya geri yükle'),
       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const BackupPage())))),
-    _baslik('Gizlilik'), _panel(child: const Text('Sağlık kayıtları güvenli depolama üzerinden korunur; bazı tercihler ve alışveriş verileri cihazın yerel depolamasında tutulur. Uygulama hesap, bulut eşitleme veya otomatik bulut yedekleme sunmaz. Daha önce dışa aktarılan yedekler ve panoya kopyalanan içerikler ayrıca silinmelidir.')),
+    _baslik('Gizlilik ve açık rıza'), _panel(child: const PrivacySummary()),
+    _panel(child: const Text('Daha önce dışa aktarılan yedekler ve panoya kopyalanan içerikler ayrıca silinmelidir. Kayıtları silmek açık rızanı geri almak anlamına gelir; uygulama bir sonraki açılışta yeniden onay ister.')),
     _panel(child: ListTile(
       leading: const Icon(Icons.delete_forever_outlined, color: Colors.red),
       title: const Text('Bu cihazdaki kayıtlarımı sil'),

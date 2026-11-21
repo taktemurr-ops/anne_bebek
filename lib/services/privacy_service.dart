@@ -9,6 +9,8 @@ class PrivacyService {
   static const extraKeys = <String>[
     'cloud_auth_session_v1', 'paket39_weekly_migration_v2',
     'anne_bebek_completion_center_v1',
+    // Rıza geri alınmış sayılır; sonraki açılışta yeniden sorulur.
+    'privacy_consent_v1',
   ];
 
   static Future<int> deleteLocalRecords() async {
