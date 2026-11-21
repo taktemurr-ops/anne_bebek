@@ -76,6 +76,28 @@ class LocalReminderNotifications {
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
   }
 
+  /// Her gün aynı saatte tekrarlanan hatırlatma (ilaç/vitamin). Kullanıcı
+  /// bildirimleri açmadıysa planlanmaz.
+  static Future<void> scheduleDaily(String id, String title, int hour, int minute) async {
+    await initialize();
+    await cancel(id);
+    final preferences = await FamilyNotificationRepository.load();
+    if (!preferences.remindersEnabled) return;
+    final now = DateTime.now();
+    var next = DateTime(now.year, now.month, now.day, hour, minute);
+    if (!next.isAfter(now)) next = next.add(const Duration(days: 1));
+    final utcTime = tz.TZDateTime.from(next.toUtc(), tz.UTC);
+    await _plugin.zonedSchedule(notificationId(id), 'Anne & Bebek', title, utcTime,
+      const NotificationDetails(android: AndroidNotificationDetails(
+        'daily_medicine', 'İlaç ve vitamin',
+        channelDescription: 'Her gün tekrarlanan ilaç ve vitamin hatırlatmaları',
+        importance: Importance.high, priority: Priority.high),
+        iOS: DarwinNotificationDetails()),
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      matchDateTimeComponents: DateTimeComponents.time,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
+  }
+
   static Future<void> sync(List<FamilyReminder> previous, List<FamilyReminder> next) async {
     final preferences = await FamilyNotificationRepository.load();
     if (!preferences.remindersEnabled) {

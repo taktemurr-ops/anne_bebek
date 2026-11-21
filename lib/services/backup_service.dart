@@ -48,7 +48,7 @@ class BackupService {
     'paket39_pantry_usage_v1', 'paket39_pantry_consumption_history_v1',
     'paket39_weekly_meal_plan_v1', 'paket39_recipe_recent_v1',
     'paket39_kitchen_manual_qa_v1', 'paket44_weekly_action_estimates_v1',
-    'mom_tools_v1', 'baby_name_favorites_v1', 'baby_fever_log_v1',
+    'mom_tools_v1', 'baby_name_favorites_v1', 'baby_fever_log_v1', 'my_health_v1', 'mother_profile_v1', 'doctor_questions_v1',
   };
 
   /// Sabit anahtarlar ve çocuk başına uyku günlükleri yedeklenebilir.

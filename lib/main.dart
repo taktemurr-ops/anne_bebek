@@ -46,6 +46,9 @@ import 'screens/encyclopedia_page.dart';
 import 'screens/mom_tools_page.dart';
 import 'screens/fever_log_page.dart';
 import 'screens/sleep_sounds_page.dart';
+import 'screens/my_health_page.dart';
+import 'screens/mother_profile_page.dart';
+import 'screens/questions_page.dart';
 import 'data/encyclopedia/encyclopedia.dart';
 import 'widgets/visuals.dart';
 import 'widgets/add_to_notebook_tile.dart';
@@ -814,9 +817,10 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     PastelLinkCard(icon: Icons.edit_outlined, title: 'Bebek profilini düzenle',
       subtitle: bebekAdi.isEmpty ? 'Ad ve doğum tarihi ekle' : '$bebekAdi • $yas', iconColor: const Color(0xFFEDE4FF),
       onTap: _profil),
-    PastelLinkCard(icon: Icons.forum_outlined, title: 'Bebeğim Forumu',
-      subtitle: 'Sorular ve ebeveyn deneyimleri', iconColor: const Color(0xFFEDE4FF),
-      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const BabyOnlineForumPage()))),
+    PastelLinkCard(key: const Key('bebek_sorular'), icon: Icons.question_answer_outlined, title: 'Soru defterim ve sık sorulanlar',
+      subtitle: 'Doktoruna soracaklarını yaz; sık sorulan soruların cevaplarını oku', iconColor: const Color(0xFFEDE4FF),
+      onTap: () => _sayfa('Sorular', const QuestionsPage(defaultAbout: 'Bebeğim',
+          categories: ['Bebek (0–12 ay)', 'Çocuk (1–6 yaş)', 'Beslenme', 'Güvenlik ve İlk Yardım']))),
     _baslik('Son kayıtlar'),
     if (olaylar.isEmpty) _panel(child: const Text('Henüz kayıt bulunmuyor. Ortadaki + butonundan kayıt ekleyebilirsin.')),
     ...olaylar.take(30).map((o) => _panel(child: ListTile(
@@ -1467,6 +1471,12 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     PastelLinkCard(icon: Icons.spa_outlined, title: 'Doğum sonrası ve annelik',
       subtitle: '12 haftalık rehber, destek listesi ve kişisel notlar', iconColor: const Color(0xFFFFEBD9),
       onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const PostpartumCarePage()))),
+    PastelLinkCard(key: const Key('kadin_sagligim'), icon: Icons.monitor_heart_outlined, title: 'Sağlığım',
+      subtitle: 'Kilo, su, tansiyon, şeker, uyku, ruh hâli; ilaç-vitamin hatırlatma; kontrollerim',
+      iconColor: const Color(0xFFFFE0E0), onTap: () => _sayfa('Sağlığım', const MyHealthPage())),
+    PastelLinkCard(icon: Icons.person_outline_rounded, title: 'Anne profilim ve acil kartım',
+      subtitle: 'Kan grubu, alerjiler, doktor ve acil durum kişileri', iconColor: const Color(0xFFEDE4FF),
+      onTap: () => _sayfa('Anne profilim', const MotherProfilePage())),
     PastelLinkCard(icon: Icons.medical_services_outlined, title: 'Sağlık merkezi',
       subtitle: 'Bebek ve kadın sağlığı araçları bir arada',
       onTap: () => _sayfa('Sağlık', _saglik())),
@@ -1488,9 +1498,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     PastelLinkCard(icon: Icons.menu_book_outlined, title: 'Kadın yaşamı içerik kütüphanesi',
       subtitle: '42 konu, arama, favoriler ve okundu takibi', iconColor: const Color(0xFFEDE4FF),
       onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomenLifestylePage()))),
-    PastelLinkCard(icon: Icons.forum_outlined, title: 'Kadınlar Forumu',
-      subtitle: 'Konular, deneyimler ve sohbet',
-      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomenOnlineForumPage()))),
+    PastelLinkCard(key: const Key('kadin_sorular'), icon: Icons.question_answer_outlined, title: 'Soru defterim ve sık sorulanlar',
+      subtitle: 'Doktoruna soracaklarını yaz; kadın sağlığı soruları',
+      onTap: () => _sayfa('Sorular', const QuestionsPage(categories: ['Kadın Sağlığı', 'Gebelik', 'Doğum', 'Lohusalık ve Emzirme', 'Ruh Sağlığı']))),
     _hero('Kendinize zaman ayırın 💕', 'Çünkü siz de değerlisiniz!', Icons.spa),
   ];
 
@@ -1597,6 +1607,10 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         QuickAccessItem(title: 'Alışveriş', description: 'Liste ve sepet', icon: Icons.shopping_bag_outlined, onOpen: () => sekmeyeGit(3)),
         QuickAccessItem(title: 'Kadın sağlığı günlüğü', description: 'Döngü, gebelik, doğum sonrası ve menopoz notları', icon: Icons.health_and_safety_outlined, onOpen: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomensHealthJournalPage()))),
         QuickAccessItem(title: 'Kadınlar', description: 'Kadın sağlığı ve gebelik', icon: Icons.favorite_outline, onOpen: () => sekmeyeGit(4)),
+        QuickAccessItem(title: 'Sağlığım', description: 'Ölçümler, ilaç-vitamin, kontroller', icon: Icons.monitor_heart_outlined, onOpen: () => _sayfa('Sağlığım', const MyHealthPage())),
+        QuickAccessItem(title: 'İlaç ve vitamin hatırlatma', description: 'Her gün aynı saatte hatırlat', icon: Icons.medication_outlined, onOpen: () => _sayfa('Sağlığım', const MyHealthPage(initialTab: 1))),
+        QuickAccessItem(title: 'Anne profilim', description: 'Acil durum kartı', icon: Icons.person_outline_rounded, onOpen: () => _sayfa('Anne profilim', const MotherProfilePage())),
+        QuickAccessItem(title: 'Soru defteri', description: 'Doktoruma soracaklarım', icon: Icons.question_answer_outlined, onOpen: () => _sayfa('Sorular', const QuestionsPage())),
         QuickAccessItem(title: 'Uyku sesleri', description: 'Beyaz gürültü ve ninniler', icon: Icons.music_note_outlined, onOpen: () => _sayfa('Uyku sesleri ve ninniler', const SleepSoundsPage())),
         QuickAccessItem(title: 'Ateş takibi', description: 'Ateş ölçümü ve ilaç saati kaydı', icon: Icons.thermostat_outlined, onOpen: () => _sayfa('Ateş ve ilaç takibi', FeverLogPage(birth: dogum))),
         QuickAccessItem(title: 'Kasılma sayacı', description: 'Doğum kasılmalarının süresi ve aralığı', icon: Icons.timer_outlined, onOpen: () => _sayfa('Kasılma sayacı', const MomToolsPage())),
@@ -1645,13 +1659,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         onTap: _profillerAc),
     ])),
     _panel(color: const Color(0xFFFFFCFF), padding: EdgeInsets.zero, child: Column(children: [
-      _profilSatiri(Icons.person_outline_rounded, 'Hesap Bilgilerim', () => Navigator.of(context).push(
-        MaterialPageRoute<void>(builder: (_) => const CloudAccountPage()))),
-      _profilSatiri(Icons.workspace_premium_outlined, 'Premium Üyelik', () => Navigator.of(context).push(
-        MaterialPageRoute<void>(builder: (_) => const MembershipPage())),
-        badge: Container(margin: const EdgeInsets.only(right: 6), padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-          decoration: BoxDecoration(color: const Color(0xFFE94791), borderRadius: BorderRadius.circular(10)),
-          child: const Text('Pro', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800)))),
+      _profilSatiri(Icons.person_outline_rounded, 'Anne profilim ve acil kartım', () => _sayfa('Anne profilim', const MotherProfilePage())),
+      _profilSatiri(Icons.monitor_heart_outlined, 'Sağlığım', () => _sayfa('Sağlığım', const MyHealthPage())),
       _profilSatiri(Icons.notifications_none_rounded, 'Bildirim Ayarları', () => Navigator.of(context).push(
         MaterialPageRoute<void>(builder: (_) => const NotificationPreferencesPage()))),
       _profilSatiri(Icons.shield_outlined, 'Gizlilik ve Güvenlik', () => Navigator.push(context,
@@ -1663,19 +1672,6 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     _baslik('Hesabım'), _rehberKart('Bebek profilim', Icons.child_care),
     _panel(child: ListTile(title: Text(bebekAdi.isEmpty ? 'Bebek profili oluştur' : bebekAdi),
       subtitle: Text(yas), trailing: const Icon(Icons.edit), onTap: _profil)),
-    _baslik('Üyelik'), _panel(child: ListTile(
-      leading: const Icon(Icons.account_circle_outlined, color: Color(0xFFF0449B)),
-      title: const Text('Bulut hesabım'),
-      subtitle: const Text('Kayıt ol, giriş yap, şifreni sıfırla'),
-      trailing: const Icon(Icons.chevron_right),
-      onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const CloudAccountPage())),
-    )), _panel(child: ListTile(
-      leading: const Icon(Icons.workspace_premium_outlined, color: Color(0xFFF0449B)),
-      title: const Text('Üyelik seçenekleri'),
-      subtitle: const Text('Ücretsiz, Premium ve Aile paketlerini incele'),
-      trailing: const Icon(Icons.chevron_right),
-      onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const MembershipPage())),
-    )),
     _baslik('Keşif ve yönetim'),
     _panel(child: ListTile(leading: const Icon(Icons.manage_search_outlined, color: mor),
       title: const Text('Akıllı içerik keşfi'), subtitle: const Text('Çevrimdışı konu arama ve öneriler'),
@@ -1767,7 +1763,6 @@ class _AnaUygulamaState extends State<AnaUygulama> {
               case 'guide': _ansiklopediAc();
               case 'tools': Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const LifeHubPage()));
               case 'profile': setState(() => sekme = 5);
-              case 'membership': Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const MembershipPage()));
             }
           },
           itemBuilder: (context) => const [
