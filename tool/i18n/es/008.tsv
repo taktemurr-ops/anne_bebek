@@ -1,0 +1,213 @@
+b27b5d6f	{0}: {1} mediciones • Última: {2} {3}
+808f2ff2	{0}–{1} meses
+a896ccb4	{0}–{1} meses • {2} • {3} minutos
+90a8f74c	{1} (faltan {2} {0})
+c8c3fd10	{1} unidades • {0} artículos comprados
+ba8db48f	¿Añadir {0} a {1} • {2}?
+c15e133b	Semana {1} · Trimestre {0}
+42cd6a5d	RESUMEN DE SEGUIMIENTO DEL NIÑO
+7f4c3978	Mi
+8bae1de9	Conflicto entre registro antiguo y seguro: {0}
+7ae50242	Miércoles
+a2b80208	El foro en línea aún no está configurado.
+797e9d4f	Búsqueda de temas y sugerencias sin conexión
+d65f69df	Uso sin conexión
+220e6b06	Se comprobaron las transiciones de módulos y los estados de error sin conexión
+904bbab8	Niño (1–6 años)
+41b623d8	Perfiles de mis hijos
+1116ac39	El nombre del niño no puede estar vacío.
+8b6ee7e9	El nombre del niño puede tener como máximo {0} caracteres.
+4480f84d	El nombre del niño no puede contener caracteres de control.
+63dc7819	Registro de diario específico del niño
+de989419	Diario del niño (elige un niño)
+beff0b4d	Diario del niño y plan de cuidados
+93bbd96a	Copiar registros del niño como JSON
+b19d16d0	Perfil del niño
+41739cd5	Añadir perfil de niño
+7e5d63ab	El límite de edad de un perfil de niño es 18 años.
+667a4e39	Debe seleccionarse un perfil de niño
+61dacb87	El perfil o el diario del niño no es válido.
+17f07456	Elige un perfil de niño para abrir el calendario de vacunación según su edad
+884bedbf	Perfiles de niños
+8e36b660	Perfiles de niños y diarios personales
+81191bcf	El plan de salud del niño no es válido.
+e108f841	Comprobación de datos del niño
+70f7e10e	Gestión compartida de los niños (prevista)
+16ecb930	Diario específico del niño
+6dcbb337	Tensión muy alta. Si tienes dolor de cabeza, dolor en el pecho, falta de aire o habla arrastrada, llama de inmediato al número de emergencias local.
+0e8e35d0	Tensión muy alta: llama al número de emergencias local o ve a la maternidad sin esperar.
+843fc8c9	Sopa
+6b054743	Sopas
+290f9902	La escala de barras es de 1.000 ml; no es una ingesta recomendada.
+e440a26e	Prueba de cierres, rendimiento e inicio
+08086945	¡Porque tú también importas!
+8d1ab12a	Cerrar sesión
+67669d43	IMPORTANTE: La alimentación complementaria suele empezar hacia los 6 meses, según la madurez del desarrollo. No des miel antes de los 12 meses; no añadas sal ni azúcar. Los frutos secos enteros y los trozos duros/redondos tienen riesgo de atragantamiento. Ten en cuenta los alérgenos, ofrece texturas adecuadas y nunca dejes a tu bebé solo mientras come.
+f3eb8943	Rango medido: {0} • Promedio: {1} días\nMás corto: {2} días • Más largo: {3} días
+876cf0c4	Medición
+65c8a57a	Añadir temperatura / medicamento
+b217ca06	Datos CSV de las mediciones copiados al portapapeles.
+23760529	Intervalo de medición: {0} días
+5ea568b5	El valor está por debajo del umbral de fiebre.
+77043d55	Notas de medición
+2998b307	Valor medido
+ea8a87d7	Una medición no puede ser anterior al nacimiento.
+1012c19b	Añadir medición
+9d12b654	Historial de mediciones
+36c2ac59	Historial de mediciones (no es una valoración diagnóstica)
+9abd4180	La fecha de medición no puede ser futura.
+396c0d73	Se requiere la fecha de medición.
+8c08e2dd	Medición y descripción
+060a92af	Lugar de medición
+e8b596d0	Temperatura, horas de medicamentos y alertas según la edad
+fdb0d655	No se pudieron leer las mediciones. Se conservan los datos.
+e39206f4	Mediciones, medicamentos y vitaminas, controles
+c3b327ba	Copiar mediciones como CSV
+3c63e527	Revisa las mediciones: talla 20–230 cm, peso 0,3–200 kg, perímetro cefálico 15–75 cm.
+4bbd114c	Registra las temperaturas y los medicamentos que das, con la hora; tenlo todo a mano al ir al médico.
+fe1df323	Mis mediciones
+b846de32	Eliminar medición
+5b845cbc	Primero permite los recordatorios familiares en la pantalla Mis preferencias de notificación.
+edb2dd0c	Primero inicia sesión en tu cuenta.
+80df10d2	Primero añade una receta al plan.
+e5397c21	Recetas con artículos que conviene usar primero
+f4b8667c	Primero indica el sexo en el perfil del niño.
+27317deb	Elige primero un perfil de niño para abrir los registros
+5e8d50f6	Primero ingresa la cantidad del artículo como número y unidad (p. ej., 500 g).
+97d58ddb	Mes anterior
+a7cff434	Día anterior
+ec67d0e3	Semana anterior
+b850d96a	No se encontró un plan guardado para la semana anterior.
+7fabbc58	No se pudo leer la semana anterior. Se conservaron los registros antiguos.
+7e97ec2d	Traer las comidas vacías de la semana pasada
+57d3ec6a	Copiar la semana pasada
+59bcee57	{0} después de la contracción anterior
+1d4c187d	Sesiones anteriores
+e840007a	Fechas importantes
+4cb54f5b	Importante: haz una copia antes de probar con registros de salud. Prueba la restauración solo con datos de prueba. También se requieren flutter analyze, flutter test y pruebas en dispositivo real.
+bd68db91	Recomendado
+3c3ff2a3	Sugerencias
+3996f32f	Las sugerencias se basan en las categorías de recetas; no son consejos personales de nutrición ni de salud. Pasarlas al plan semanal actualiza el mismo día de la semana elegida.
+12e2a05b	Crear sugerencias
+4430b014	P. ej., ¿qué ideas de juego seguras hay para un bebé de 8 meses?
+ac8e1b72	P. ej., Deniz
+57cd94d5	P. ej., tomate, huevo, leche
+bdeb4722	P. ej., sueño, menstruación, receta
+e221d458	Preguntas de ejemplo
+91b5a9df	Ejemplo: «¿Cuánto tiempo debo tomar el suplemento de hierro?», «La caca de mi bebé es verde, ¿es normal?»
+11f349c5	Calendario personal y fechas estimadas
+40c778ab	Resumen copiado al portapapeles. Revisa la información personal antes de compartirlo.
+dd479a2c	Almuerzo
+fb937b49	Comida
+3a0ba659	Planificación de comidas
+680431ed	Comida ya planificada
+03d41708	Cambiar la comida
+e1743a7d	Gratis
+2b1681e6	En producción, el panel de administración necesita un inicio de sesión aparte, acceso por roles, registros de auditoría y verificación en el servidor.
+29973836	Nombre del artículo
+383bd517	Añadir artículo
+46b0bd97	Catálogo de productos
+c85d9607	Catálogo y comparación de productos
+f0037199	Catálogo de descubrimiento de productos
+c0bca32f	Artículo añadido a la lista.
+8236c9fc	Las cantidades de productos son informativas; no se comprueba automáticamente si alcanzan para una receta.
+052daf91	Toca un artículo para editar su cantidad y fecha de caducidad.
+6ded1e0a	Se añadieron un catálogo de tipos de productos y una comparación de características. Aún no hay precios reales, stock, vendedores ni integración de pagos.
+3139bbd2	Buscar productos o características
+f64a5ac1	Comparación de características de productos
+dd982f3c	Los productos sirven como lista de necesidades; no hay ventas reales, stock, precios ni enlaces de pago.
+08e05062	Añadir, completar y guardar artículos
+17384021	Eliminar artículo
+50963139	No se pudo verificar la membresía
+38558e31	Comprobando el estado de la membresía…
+513e65b8	La membresía requiere un proyecto Supabase. Por ahora, los registros de salud y los datos del bebé no se envían a la nube; solo se gestiona la sesión de la cuenta.
+7fa57377	Opciones de membresía
+977740ee	Membresía y Premium
+61a6ad23	Tercer trimestre: revisa tu plan de parto y los preparativos para el hospital.
+1d879dbb	p. ej., 165
+6cbc1b4f	p. ej., 38,4
+7ba041db	Busca la herramienta que necesitas
+ae472a83	Se requieren archivos SQL, políticas RLS y pruebas multiusuario para ambos foros.
+b994f500	Se verificaron la conexión Supabase en vivo y las políticas RLS de ambos foros
+3de13b55	Segundo contacto
+a0fd68e7	Segundo trimestre: continúa con los controles regulares y las pruebas que recomiende tu médico.
+140e56ad	Medicamentos y vitaminas
+caaed636	Medicamento / Vitamina
+82f94b61	Medicamento / vitamina
+da4c274e	Añadir medicamento / vitamina
+023a986c	Diario de medicamentos
+80d5b6e7	Seguimiento de medicamentos
+1f8c2a59	Medicamentos y vitaminas
+3a0e523f	Recordatorios de medicamentos y vitaminas
+c2b0f10e	Contactos y notas importantes
+f542a6d8	Áreas relacionadas
+a769efd8	Temas relacionados
+7be06ec8	Inspiración
+f7e4f590	Relaciones
+67d2b128	Primeras 12 semanas
+b021ae05	Las primeras 12 semanas han terminado; el seguimiento y el apoyo pueden continuar.
+18b6cdc6	Primeros pasos, palabras y recuerdos
+3d319203	Añadir mi primer bebé
+b7cc8489	Primeros días: sigue las indicaciones del alta, la cantidad de sangrado y el control del dolor. Haz un plan de apoyo en casa.
+9c8ad1ad	Primer trimestre: habla con tu médico sobre los controles, la alimentación y los medicamentos que tomas.
+1d89be93	Diferencia primera–última: {1}{0} {2}
+08c23f7d	Primera: {0} · {1}  |  Última: {2} · {3}
+b746efe1	Primeras veces
+4eb9f130	Firma e identificadores de publicación
+b5c01a4f	Hay registros que requieren revisión
+4ead752b	Se probaron los registros locales y las transiciones de pantalla sin internet
+85e2d087	Cancelar
+e8181f34	Consejo: también puedes añadir un inicio de menstruación tocando un día en el calendario.
+ba2ea095	Añadir nombre y fecha de nacimiento
+522e5cd1	Buscar un nombre o significado
+4a2afac5	Nombre: A → Z
+48c7db33	Nombres
+22711906	Recordatorios opcionales del calendario familiar
+a4a548b9	Sentirse bien
+dbea3a4e	¡Qué bien que estés aquí!
+85e0dc14	¡Qué bien que estés aquí!\nEmpieza añadiendo el perfil de tu bebé.
+83698d09	Recuperación y descanso
+b19b0d67	Recuperación y vida
+0329f33c	Registra tu recuperación, sueño, ánimo y notas de los controles médicos.
+d8b63190	Gestionar permisos y horas de silencio
+cd16ba0c	Bebida
+accad8dd	Bebidas
+ca6e7e3c	El contenido es informativo, no un consejo médico. Las predicciones del ciclo son aproximadas y no deben usarse como anticonceptivo. En una emergencia, llama al número de emergencias local.
+c8bb0f7d	El contenido es de información general. Consulta a un experto en temas de salud.
+1329a2aa	Quitar contenido
+fa88a9f5	¿Quitar el contenido?
+86f920d7	La acción falló ({0}).
+6ff95d8b	No se pudo completar la acción.
+780d96ee	No se pudo completar la acción. Revisa los permisos y la conexión.
+5d8f6cd3	Gravedad / impacto
+95a654a9	Grave
+6f26a444	Contraseña
+f8db6da4	La contraseña debe tener al menos 6 caracteres.
+59dc2b49	El formato de copia cifrada no es compatible.
+a3f58601	Texto de copia cifrada
+59d4cba5	Copia cifrada copiada al portapapeles. Guarda tu contraseña por separado en un lugar seguro.
+23aacf98	La copia cifrada supera el límite de datos.
+7a6a7262	Copia cifrada y restauración
+3065a659	Pega la copia cifrada abajo e ingresa la contraseña que usaste al crearla. Las copias antiguas sin cifrar no se pueden importar en esta pantalla.
+483ac6a7	Copiar la copia cifrada al portapapeles
+35c0e4e9	Olvidé mi contraseña
+eb392d49	¿Eliminar el contenido denunciado?
+1c958933	Denunciar
+3aa8d279	No se pudo enviar la denuncia: {0}
+190ee311	Motivo de la denuncia
+a0138bb1	¿Rechazar la denuncia?
+62d1b0f4	Denuncias y seguridad del contenido
+570d82a2	¿Rechazar la denuncia?
+dd58ae67	Tu denuncia se envió para revisión.
+a4283cc2	Reproduciendo
+c045d371	Febrero
+2678b35b	Sonido «shhh»
+00d28b0c	Añade artículos con «Añadir artículo» y marca lo que hayas comprado. Puedes anotar aquí tus necesidades habituales, como pañales, fórmula y toallitas.
+5e94b390	≤ 15 min
+ad8e347d	≤ 30 min
+c8dbdc0c	≤ 60 min
+5ed1ebf1	⚠️ Las cuentas en línea aún no están activas. La app debe compilarse con la configuración SUPABASE_URL y SUPABASE_ANON_KEY. No se crean cuentas falsas.
+c39ecb1f	🌸 Yo
+8cbd8b3e	👣\nMovimiento
+4c748608	👶 Mi bebé
+4235a8e3	💧 Hoy {0} vasos de agua. El objetivo son 8 vasos (más si das el pecho).
