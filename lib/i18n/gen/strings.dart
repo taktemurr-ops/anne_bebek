@@ -6,6 +6,7 @@ import 'strings_fr.dart';
 import 'strings_es.dart';
 import 'strings_ru.dart';
 import 'strings_pt.dart';
+import 'strings_fa.dart';
 import 'strings_id.dart';
 
 const Map<String, Map<String, String>> translationTables = {
@@ -16,5 +17,6 @@ const Map<String, Map<String, String>> translationTables = {
   'es': stringsEs,
   'ru': stringsRu,
   'pt': stringsPt,
+  'fa': stringsFa,
   'id': stringsId,
 };
