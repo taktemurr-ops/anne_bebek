@@ -1121,10 +1121,20 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     try {
       final items = (jsonDecode(p.getString('alisveris') ?? '[]') as List).cast<String>();
       final done = (jsonDecode(p.getString('tamamlanan') ?? '[]') as List).cast<String>();
+      // Akıllı Alışveriş aynı adet kaydını değiştirebilir; ikisi tek kaynaktır.
+      final adetler = jsonDecode(p.getString('alisveris_adet') ?? '{}');
       if (!mounted) return;
       setState(() {
         alisveris..clear()..addAll(items);
         tamamlanan..clear()..addAll(done);
+        alisverisAdet.clear();
+        if (adetler is Map) {
+          for (final e in adetler.entries) {
+            if (e.key is String && e.value is int && (e.value as int) >= 1 && (e.value as int) <= 99) {
+              alisverisAdet[e.key as String] = e.value as int;
+            }
+          }
+        }
       });
     } catch (e) { logSafeError('Alışveriş yenileme hatası', e); }
   }

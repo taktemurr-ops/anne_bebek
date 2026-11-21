@@ -2,6 +2,7 @@ import '../utils/dialog_helpers.dart';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import '../widgets/reference_widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,6 +24,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
   final _items = <String>[];
   final _done = <String>{};
   final _details = <String, Map<String, String>>{};
+  // Ana Alışveriş sekmesiyle ortak adet kaydı ('alisveris_adet', 1–99).
+  final _counts = <String, int>{};
   // Büyük alışveriş listelerinde aynı anda yalnızca bir sayfa oluşturulur.
   static const int _shoppingPageSize = 30;
   int _shoppingPage = 0;
@@ -86,6 +89,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       final done = (jsonDecode(prefs.getString('tamamlanan') ?? '[]') as List)
           .map((e) => e.toString()).toSet();
       final raw = jsonDecode(prefs.getString('paket39_shopping_details_v1') ?? '{}') as Map;
+      final rawCounts = jsonDecode(prefs.getString('alisveris_adet') ?? '{}');
       final budget = prefs.getDouble('paket39_shopping_budget_v1') ?? 0;
       final rawPrices = jsonDecode(prefs.getString('paket39_shopping_prices_v1') ?? '{}') as Map;
       final rawActual = jsonDecode(prefs.getString('paket39_shopping_actual_prices_v1') ?? '{}') as Map;
@@ -120,6 +124,14 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         _actualPrices..clear()..addAll(rawActual.map((k, v) => MapEntry(k.toString(), (v as num).toDouble())));
         _history..clear()..addAll(rawHistory.whereType<Map>().map((e) => Map<String, dynamic>.from(e)));
         _prices..clear()..addAll(rawPrices.map((k, v) => MapEntry(k.toString(), (v as num).toDouble())));
+        _counts.clear();
+        if (rawCounts is Map) {
+          for (final e in rawCounts.entries) {
+            if (e.key is String && e.value is int && (e.value as int) >= 1 && (e.value as int) <= 99) {
+              _counts[e.key as String] = e.value as int;
+            }
+          }
+        }
         _items..clear()..addAll(items);
         _done..clear()..addAll(done);
         _details.clear();
@@ -144,6 +156,9 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       final ok1 = await prefs.setString('alisveris', jsonEncode(_items));
       final ok2 = await prefs.setString('tamamlanan', jsonEncode(_done.toList()));
       final ok3 = await prefs.setString('paket39_shopping_details_v1', jsonEncode(_details));
+      _counts.removeWhere((k, v) => !_items.contains(k) || v == 1);
+      final okCounts = await prefs.setString('alisveris_adet', jsonEncode(_counts));
+      if (!okCounts) throw StateError('Adetler kaydedilemedi');
       final ok4 = await prefs.setDouble('paket39_shopping_budget_v1', _budget);
       final ok5 = await prefs.setString('paket39_shopping_prices_v1', jsonEncode(_prices));
       final ok6 = await prefs.setString('paket39_shopping_actual_prices_v1', jsonEncode(_actualPrices));
@@ -3725,6 +3740,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         if (_prices.containsKey(original)) _prices[newName] = _prices.remove(original)!;
         if (_actualPrices.containsKey(original)) _actualPrices[newName] = _actualPrices.remove(original)!;
         if (_done.remove(original)) _done.add(newName);
+        if (_counts.containsKey(original)) _counts[newName] = _counts.remove(original)!;
       }
       if (!_items.contains(newName)) _items.add(newName);
       _details[newName] = {'note': newNote, 'category': newCategory};
@@ -24914,7 +24930,13 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               setState(() { if (checked == true) { _done.add(name); } else { _done.remove(name); } });
               await _save();
             },
-            title: Text(name, style: TextStyle(decoration: _done.contains(name) ? TextDecoration.lineThrough : null)),
+            title: Row(children: [
+              Expanded(child: Text(name, style: TextStyle(decoration: _done.contains(name) ? TextDecoration.lineThrough : null))),
+              QuantityStepper(value: _counts[name] ?? 1, onChanged: (v) async {
+                setState(() => _counts[name] = v);
+                await _save();
+              }),
+            ]),
             subtitle: Text('${_details[name]?['category'] ?? _guess(name)}${(_details[name]?['note'] ?? '').isEmpty ? '' : '  •  ${_details[name]!['note']}'}\nTahmini: ${_prices.containsKey(name) ? _money(_prices[name]!) : 'Girilmedi'}  •  Gerçek: ${_actualPrices.containsKey(name) ? _money(_actualPrices[name]!) : 'Girilmedi'}'),
             secondary: PopupMenuButton<String>(tooltip: 'Ürün işlemleri',
               onSelected: (action) async {
@@ -24930,7 +24952,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                       ? null : Map<String, dynamic>.from(_details[name]!);
                   final oldPrice = _prices[name];
                   final oldActual = _actualPrices[name];
-                  setState(() { _items.remove(name); _done.remove(name); _details.remove(name); _prices.remove(name); _actualPrices.remove(name); });
+                  final oldCount = _counts[name];
+                  setState(() { _items.remove(name); _done.remove(name); _details.remove(name); _prices.remove(name); _actualPrices.remove(name); _counts.remove(name); });
                   await _save();
                   if (!context.mounted) return;
                   final messenger = ScaffoldMessenger.of(context);
@@ -24943,6 +24966,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                       setState(() {
                         _items.insert(originalIndex.clamp(0, _items.length), name);
                         if (wasDone) _done.add(name);
+                        if (oldCount != null) _counts[name] = oldCount;
                         if (oldDetails != null) _details[name] = Map<String, String>.from(oldDetails);
                         if (oldPrice != null) _prices[name] = oldPrice;
                         if (oldActual != null) _actualPrices[name] = oldActual;
