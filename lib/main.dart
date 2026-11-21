@@ -45,6 +45,7 @@ import 'widgets/consent_gate.dart';
 import 'screens/encyclopedia_page.dart';
 import 'screens/mom_tools_page.dart';
 import 'screens/fever_log_page.dart';
+import 'screens/sleep_sounds_page.dart';
 import 'data/encyclopedia/encyclopedia.dart';
 import 'widgets/visuals.dart';
 import 'widgets/add_to_notebook_tile.dart';
@@ -881,6 +882,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       PastelLinkCard(key: const Key('emzirme_zamanlayici'), icon: Icons.timer_outlined, title: 'Emzirme zamanlayıcısı',
         subtitle: 'Sol / sağ süre, sıradaki taraf önerisi', iconColor: const Color(0xFFFFE3F0),
         onTap: () => _sayfa('Emzirme zamanlayıcısı', const MomToolsPage(initialTab: 2))),
+      PastelLinkCard(key: const Key('uyku_sesleri'), icon: Icons.music_note_outlined, title: 'Uyku sesleri ve ninniler',
+        subtitle: 'Beyaz gürültü, anne karnı, yağmur, ninniler; zamanlayıcılı', iconColor: const Color(0xFFEDE4FF),
+        onTap: () => _sayfa('Uyku sesleri ve ninniler', const SleepSoundsPage())),
       PastelLinkCard(icon: Icons.bedtime_outlined, title: 'Uyku günlüğüm',
         subtitle: 'Başlangıç–bitiş saatleri ve toplam uyku', iconColor: const Color(0xFFEDE4FF),
         onTap: () => _sayfa('Uyku günlüğüm', const SleepJournalPage())),
@@ -1593,6 +1597,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         QuickAccessItem(title: 'Alışveriş', description: 'Liste ve sepet', icon: Icons.shopping_bag_outlined, onOpen: () => sekmeyeGit(3)),
         QuickAccessItem(title: 'Kadın sağlığı günlüğü', description: 'Döngü, gebelik, doğum sonrası ve menopoz notları', icon: Icons.health_and_safety_outlined, onOpen: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomensHealthJournalPage()))),
         QuickAccessItem(title: 'Kadınlar', description: 'Kadın sağlığı ve gebelik', icon: Icons.favorite_outline, onOpen: () => sekmeyeGit(4)),
+        QuickAccessItem(title: 'Uyku sesleri', description: 'Beyaz gürültü ve ninniler', icon: Icons.music_note_outlined, onOpen: () => _sayfa('Uyku sesleri ve ninniler', const SleepSoundsPage())),
         QuickAccessItem(title: 'Ateş takibi', description: 'Ateş ölçümü ve ilaç saati kaydı', icon: Icons.thermostat_outlined, onOpen: () => _sayfa('Ateş ve ilaç takibi', FeverLogPage(birth: dogum))),
         QuickAccessItem(title: 'Kasılma sayacı', description: 'Doğum kasılmalarının süresi ve aralığı', icon: Icons.timer_outlined, onOpen: () => _sayfa('Kasılma sayacı', const MomToolsPage())),
         QuickAccessItem(title: 'Tekme sayacı', description: 'Bebek hareketlerini say (10 hareket)', icon: Icons.touch_app_outlined, onOpen: () => _sayfa('Tekme sayacı', const MomToolsPage(initialTab: 1))),
