@@ -120,9 +120,9 @@ class PastelSectionHeader extends StatelessWidget {
         const SizedBox(width: 8),
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(title,
+            Text(title, maxLines: 1, overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.w800, color: PastelPalette.text)),
+                    fontSize: 15.5, fontWeight: FontWeight.w800, color: PastelPalette.text)),
             if (subtitle != null)
               Text(subtitle!, style: const TextStyle(fontSize: 12, color: Colors.black54)),
           ]),

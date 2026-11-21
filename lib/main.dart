@@ -99,7 +99,6 @@ class AnneBebekApp extends StatelessWidget {
       cardTheme: CardThemeData(color: const Color(0xFFFFFCFF), elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26))),
       appBarTheme: const AppBarTheme(backgroundColor: arka, foregroundColor: mor,
-        titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Color(0xFFE94791)),
         elevation: 0, scrolledUnderElevation: 0, surfaceTintColor: Colors.transparent,
         centerTitle: false),
       filledButtonTheme: FilledButtonThemeData(style: FilledButton.styleFrom(
@@ -1363,13 +1362,13 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           key: const ValueKey('adet_bugun'),
           onPressed: () => _adetBaslangiciKaydet(DateTime.now()),
           icon: const Icon(Icons.water_drop_rounded, size: 18),
-          label: const Text('Adetim bugün başladı'))),
+          label: const Text('Bugün başladı'))),
         const SizedBox(width: 8),
         Expanded(child: OutlinedButton.icon(
           key: const ValueKey('adet_tarih'),
           onPressed: _adetGunuSec,
           icon: const Icon(Icons.edit_calendar_rounded, size: 18),
-          label: const Text('Başka gün ekle'))),
+          label: const Text('Gün seç'))),
       ]),
       const Padding(padding: EdgeInsets.fromLTRB(4, 6, 4, 10), child: Text(
         'İpucu: takvimde bir güne dokunarak da adet başlangıcı ekleyebilirsin.',

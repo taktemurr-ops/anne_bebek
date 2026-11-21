@@ -29,6 +29,10 @@ Gerçek cihaz testi yapılmamıştır.
 | Günlük sızıntısı (GP-11) | `debugPrint` yayın sürümünde logcat'e yazıyordu ve JSON hataları kayıt içeriği taşıyabiliyordu; yayında günlük kapalı, geliştirmede maskeli | `lib/utils/privacy_log_sanitizer.dart` |
 | Büyüme filtresi (GP-03) | Çocuk başına büyüme geçmişinde 3/6/12 ay filtresi | `child_growth_trends_page.dart` |
 | Tarif defteri bağlantısı (GP-07) | Genel ve bebek tariflerinden "Aile tarif defterime ekle" | `lib/services/recipe_notebook_bridge.dart` |
+| Tasarım (referans 8 ekran, 2. tur) | Renkli simgeler (platform emoji yazı tipi), özgün çizimler (anne–bebek, gebelik, kadın portresi, bebek avatarı), tarif görselleri, küçültülmüş yazılar; CI her değişiklikte ekran görüntüsü üretip `ekran-goruntuleri` dalına yazıyor | `lib/widgets/visuals.dart`, `.github/workflows/screens.yml` |
+| A'dan Z'ye ansiklopedi | 101 konu, 10 kategori (bebek, çocuk, gebelik, doğum, lohusalık/emzirme, kadın sağlığı, ruh sağlığı, beslenme, güvenlik/ilk yardım, aile); her konuda bilmen gerekenler / ne yapabilirsin / ne zaman doktora; arama ve harf dizini | `lib/data/encyclopedia/`, `lib/screens/encyclopedia_page.dart` |
+| Bilgi Asistanı (sunucusuz) | "Yakında" yerine cihaz içi asistan: ansiklopedi, gebelik haftaları, aşı takvimi, etkinlik ve tariflerden kaynaklı yanıt; acil belirtide 112 uyarısı | `lib/services/offline_assistant.dart` |
+| Adet girişi | Belirgin "Bugün başladı / Gün seç" düğmeleri, + menüsünde adet kaydı, mükerrer gün engeli; kayıt hatasında hata kodu | `lib/main.dart` |
 | Cihaz test listesi | Gerçek cihazda yapılacak 30+ kontrol | `docs/CIHAZ_TEST_LISTESI.md` |
 | Profil doğrulama (GP-02) | Ana ekran bebek profili formu doğrulayıcıdan geçiyor | `lib/main.dart` |
 | Performans | Tarifler sekmesi 40'arlık sayfalama | `lib/main.dart` |
