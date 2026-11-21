@@ -105,8 +105,17 @@ void main() {
       expect(searchBabyNames('yağmur').length, greaterThanOrEqualTo(2), reason: 'isim + anlam');
       final names = babyNames.map((n) => n.name).toList();
       expect(names.toSet().length, names.length, reason: 'tekrar eden isim yok');
-      expect(babyNames.where((n) => n.gender == 'K').length, greaterThanOrEqualTo(50));
-      expect(babyNames.where((n) => n.gender == 'E').length, greaterThanOrEqualTo(50));
+      expect(babyNames.length, greaterThanOrEqualTo(600));
+      expect(babyNames.where((n) => n.gender == 'K').length, greaterThanOrEqualTo(250));
+      expect(babyNames.where((n) => n.gender == 'E').length, greaterThanOrEqualTo(250));
+      for (final n in babyNames) {
+        expect(n.meaning.trim(), isNotEmpty, reason: n.name);
+        expect(n.origin.trim(), isNotEmpty, reason: n.name);
+      }
+      final c = searchBabyNames('', initial: 'Ç');
+      expect(c, isNotEmpty);
+      expect(c.every((n) => n.name.startsWith('Ç')), isTrue);
+      expect(searchBabyNames('', initial: 'C').any((n) => n.name.startsWith('Ç')), isFalse);
     });
   });
 

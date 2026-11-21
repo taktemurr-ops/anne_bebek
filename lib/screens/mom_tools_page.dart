@@ -35,6 +35,7 @@ class _MomToolsPageState extends State<MomToolsPage> {
   Timer? _ticker;
   final _nameSearch = TextEditingController();
   String? _gender;
+  String? _initial;
   Set<String> _favorites = {};
   bool _onlyFavorites = false;
 
@@ -326,7 +327,7 @@ class _MomToolsPageState extends State<MomToolsPage> {
 
   // ---------------- İsimler ----------------
   Widget _namesTab() {
-    var names = searchBabyNames(_nameSearch.text, gender: _gender);
+    var names = searchBabyNames(_nameSearch.text, gender: _gender, initial: _initial);
     if (_onlyFavorites) names = names.where((n) => _favorites.contains(n.name)).toList();
     return Column(children: [
       Padding(padding: const EdgeInsets.fromLTRB(16, 12, 16, 4), child: TextField(
@@ -345,6 +346,16 @@ class _MomToolsPageState extends State<MomToolsPage> {
             label: Text('Favoriler (${_favorites.length})'), selected: _onlyFavorites,
             onSelected: (v) => setState(() => _onlyFavorites = v))),
         ])),
+      SizedBox(height: 40, child: ListView(scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 12), children: [
+          for (final letter in const ['A','B','C','Ç','D','E','F','G','H','I','İ','K','L','M','N','O','Ö','P','R','S','Ş','T','U','Ü','V','Y','Z'])
+            Padding(padding: const EdgeInsets.symmetric(horizontal: 2), child: ChoiceChip(
+              key: Key('isim_harf_$letter'), visualDensity: VisualDensity.compact,
+              label: Text(letter), selected: _initial == letter,
+              onSelected: (v) => setState(() => _initial = v ? letter : null))),
+        ])),
+      Padding(padding: const EdgeInsets.only(top: 4), child: Text('${names.length} isim',
+          key: const Key('isim_sayisi'), style: const TextStyle(fontSize: 12, color: Colors.black54))),
       Expanded(child: names.isEmpty
           ? const Center(child: Text('Eşleşen isim bulunamadı.'))
           : ListView.builder(itemCount: names.length, itemBuilder: (_, i) {
