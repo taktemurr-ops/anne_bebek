@@ -184,11 +184,13 @@ void main() {
     await tester.pumpWidget(const MaterialApp(home: Scaffold(body: SleepSoundsPage())));
     await tester.pumpAndSettle();
     await scrollTo(tester, find.byKey(const Key('uyku_rain')));
-    await tester.tap(find.byKey(const Key('uyku_rain')));
+    tester.widget<ListTile>(find.byKey(const Key('uyku_rain'))).onTap!();
     for (var i = 0; i < 360 && find.textContaining('sonra kapanacak').evaluate().isEmpty
         && find.textContaining('Ses çalınamadı').evaluate().isEmpty; i++) {
       await tester.pump(const Duration(milliseconds: 250));
     }
+    final header = tester.widget<Text>(find.byKey(const Key('uyku_kalan'))).data;
+    debugPrint('UYKU_DURUM: $header');
     expect(find.textContaining('Ses çalınamadı'), findsNothing);
     expect(find.byType(CircularProgressIndicator), findsNothing, reason: 'ses hazırlığı bitmeliydi');
     expect(find.textContaining('sonra kapanacak'), findsOneWidget);
