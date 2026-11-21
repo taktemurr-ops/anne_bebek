@@ -21,7 +21,45 @@ class BackupService {
     'pregnancy_checklist_v3', 'family_calendar_v3',
     'cycle_history_v1', 'baby_feeding_journal_v5',
     'pregnancy_journal_v5', 'baby_sleep_journal_v1', 'baby_v2', 'entries_v2', 'shopping_v2',
+    // Önceki sürümde yedeğe girmeyen ve yeni cihazda kaybolan kayıtlar:
+    ...jsonAnyKeys,
+    'module_hub_favorites_v1', 'paket39_shopping_budget_v1',
   };
+
+  /// JSON liste veya nesne içeren metin kayıtları (sağlık günlükleri,
+  /// hatırlatıcılar, aile tarifleri, mutfak/kiler/bütçe verileri ...).
+  static const jsonAnyKeys = <String>{
+    'baby_health_journal_v41', 'daily_routines_v1',
+    'family_activity_planner_v57', 'family_notification_preferences_v1',
+    'family_recipes_v1', 'family_reminders_v40', 'postpartum_companion_v1',
+    'product_catalog_v1', 'reproductive_calendar_v1', 'shopping_checklist_v1',
+    'women_lifestyle_v1', 'womens_health_journal_v46',
+    'age_guide_checklist_v56', 'pregnancy_appointments_v3',
+    'general_recipe_favorites_v22', 'kitchen_savings_scenarios_v1',
+    'paket39_shopping_details_v1', 'paket39_shopping_prices_v1',
+    'paket39_shopping_actual_prices_v1', 'paket39_shopping_history_v1',
+    'paket39_monthly_shopping_budgets_v1', 'paket39_named_shopping_lists_v1',
+    'paket39_shopping_plans_v1', 'paket39_consumption_goals_v1',
+    'paket39_kitchen_waste_v1', 'paket39_kitchen_meals_v1',
+    'paket39_custom_recipes_v1', 'paket39_ingredient_unit_prices_v1',
+    'paket39_meal_templates_v1', 'paket39_kitchen_weekly_budgets_v1',
+    'paket39_saved_menu_drafts_v1', 'paket39_kitchen_trash_v1',
+    'paket39_pantry_ingredients_v1', 'paket39_pantry_details_v1',
+    'paket39_pantry_usage_v1', 'paket39_pantry_consumption_history_v1',
+    'paket39_weekly_meal_plan_v1', 'paket39_recipe_recent_v1',
+    'paket39_kitchen_manual_qa_v1', 'paket44_weekly_action_estimates_v1',
+  };
+
+  /// Sabit anahtarlar ve çocuk başına uyku günlükleri yedeklenebilir.
+  static bool isBackupKey(String key) =>
+      keys.contains(key) || key.startsWith(SecureHealthStore.childSleepPrefix) &&
+          SecureHealthStore.isAllowed(key);
+
+  static bool _isSecure(String key) => SecureHealthStore.isAllowed(key);
+
+  /// Dışa aktarma/silme sırasında işlenecek tüm anahtarlar.
+  static Future<List<String>> allKeys() async =>
+      [...keys, ...await SecureHealthStore.dynamicKeys()];
 
   /// Fields expected to contain a JSON list, rather than a primitive string.
   static const jsonListKeys = <String>{
@@ -47,6 +85,10 @@ class BackupService {
         result[entry.key] = decodeChildCareItems(entry.value as String).length;
       } else if (jsonListKeys.contains(entry.key)) {
         result[entry.key] = (jsonDecode(entry.value as String) as List).length;
+      } else if (jsonAnyKeys.contains(entry.key) ||
+          entry.key.startsWith(SecureHealthStore.childSleepPrefix)) {
+        final any = jsonDecode(entry.value as String);
+        result[entry.key] = any is List ? any.length : 1;
       } else if (jsonMapKeys.contains(entry.key)) {
         final map = jsonDecode(entry.value as String) as Map;
         result[entry.key] = map.values.fold<int>(0,
@@ -68,12 +110,12 @@ class BackupService {
     if (decoded is! Map || decoded['format'] != format || decoded['version'] != version || decoded['data'] is! Map) {
       throw const FormatException('Geçersiz veya desteklenmeyen yedek biçimi.');
     }
-    if ((decoded['data'] as Map).length > keys.length) {
+    if ((decoded['data'] as Map).length > keys.length + 64) {
       throw const FormatException('Yedek alan sayısı geçersiz.');
     }
     final data = <String, Object>{};
     for (final entry in (decoded['data'] as Map).entries) {
-      if (entry.key is! String || !keys.contains(entry.key)) {
+      if (entry.key is! String || !isBackupKey(entry.key as String)) {
         throw const FormatException('Yedekte tanınmayan kayıt alanı var.');
       }
       final value = entry.value;
@@ -86,7 +128,7 @@ class BackupService {
       // SecureHealthStore.write requires a String for every secure key
       // except the checklist, which is serialized as a string on restore.
       // Reject invalid types before any storage write starts.
-      if (SecureHealthStore.keys.contains(entry.key) &&
+      if (_isSecure(entry.key) &&
           entry.key != 'pregnancy_checklist_v3' && value is! String) {
         throw const FormatException('Güvenli yedek kayıt türü geçersiz.');
       }
@@ -137,6 +179,29 @@ class BackupService {
           throw const FormatException('Alışveriş adetleri geçersiz.');
         }
       }
+      final key = entry.key as String;
+      if (jsonAnyKeys.contains(key) ||
+          key.startsWith(SecureHealthStore.childSleepPrefix)) {
+        if (value is! String) {
+          throw FormatException('Yedekte geçersiz kayıt: $key');
+        }
+        try {
+          final parsedAny = jsonDecode(value);
+          if (parsedAny is! List && parsedAny is! Map) {
+            throw FormatException('Yedekte geçersiz kayıt: $key');
+          }
+          if (key.startsWith(SecureHealthStore.childSleepPrefix) &&
+              parsedAny is! List) {
+            throw FormatException('Yedekte geçersiz kayıt: $key');
+          }
+        } on FormatException {
+          throw FormatException('Yedekte geçersiz kayıt: $key');
+        }
+      }
+      if (key == 'paket39_shopping_budget_v1' &&
+          (value is! num || value < 0 || !value.isFinite)) {
+        throw const FormatException('Alışveriş bütçesi geçersiz.');
+      }
       if (entry.key == 'baby_v2') {
         if (value is! String || jsonDecode(value) is! Map) {
           throw const FormatException('Bebek profili geçersiz.');
@@ -177,7 +242,11 @@ class BackupService {
           throw const FormatException('Yedekte geçersiz liste kaydı var.');
         }
       }
-      data[entry.key as String] = value is List ? List<String>.from(value) : value as Object;
+      data[key] = value is List
+          ? List<String>.from(value)
+          : key == 'paket39_shopping_budget_v1'
+              ? (value as num).toDouble()
+              : value as Object;
     }
     // When a backup includes both collections, every journal must belong to
     // a profile in that same snapshot. Reject inconsistent snapshots before
@@ -210,12 +279,12 @@ class BackupService {
   static Future<String> export() async {
     final p = await SharedPreferences.getInstance();
     final data = <String, Object>{};
-    for (final key in keys) {
-      final secureValue = SecureHealthStore.keys.contains(key)
+    for (final key in await allKeys()) {
+      final secureValue = _isSecure(key)
           ? await SecureHealthStore.read(key) : null;
       final value = key == 'pregnancy_checklist_v3'
           ? (secureValue == null ? null : List<String>.from(jsonDecode(secureValue) as List))
-          : (SecureHealthStore.keys.contains(key) ? secureValue : p.get(key));
+          : (_isSecure(key) ? secureValue : p.get(key));
       if (value is String || value is bool || value is int || value is double) {
         data[key] = value as Object;
       } else if (value is List<String>) {
@@ -236,11 +305,11 @@ class BackupService {
     final p = await SharedPreferences.getInstance();
     final before = <String, Object?>{};
     for (final key in data.keys) {
-      final secureBefore = SecureHealthStore.keys.contains(key)
+      final secureBefore = _isSecure(key)
           ? await SecureHealthStore.read(key) : null;
       before[key] = key == 'pregnancy_checklist_v3'
           ? (secureBefore == null ? null : List<String>.from(jsonDecode(secureBefore) as List))
-          : (SecureHealthStore.keys.contains(key) ? secureBefore : p.get(key));
+          : (_isSecure(key) ? secureBefore : p.get(key));
     }
     final attempted = <String>[];
     try {
@@ -251,7 +320,7 @@ class BackupService {
         final value = entry.value;
         // Include the currently attempted key: a failed write may be partial.
         attempted.add(key);
-        if (SecureHealthStore.keys.contains(key)) {
+        if (_isSecure(key)) {
           await SecureHealthStore.write(key, key == 'pregnancy_checklist_v3'
               ? jsonEncode(value) : value as String);
         } else {
@@ -264,13 +333,13 @@ class BackupService {
       for (final key in attempted.reversed) {
         final oldValue = before[key];
         if (oldValue == null) {
-          if (SecureHealthStore.keys.contains(key)) {
+          if (_isSecure(key)) {
             await SecureHealthStore.delete(key);
           } else {
             await p.remove(key);
           }
         } else {
-          if (SecureHealthStore.keys.contains(key)) {
+          if (_isSecure(key)) {
             await SecureHealthStore.write(key, key == 'pregnancy_checklist_v3'
                 ? jsonEncode(oldValue) : oldValue as String);
           } else {

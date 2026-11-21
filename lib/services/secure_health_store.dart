@@ -8,6 +8,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SecureHealthStore {
   static const keys = <String>{
     'daily_routines_v1', 'reproductive_calendar_settings_v1',
+    // GP-05 takvim deposu ve gebelik randevuları bu anahtarlarla yazılıyor;
+    // listede olmadıkları için kayıt/okuma ArgumentError ile düşüyordu.
+    'reproductive_calendar_v1', 'pregnancy_appointments_v3',
     'shopping_checklist_v1', 'family_recipes_v1',
     'family_notification_preferences_v1',
     'child_care_plan_v96', 'child_journal_entries_v59', 'child_profiles_directory_v58', 'family_activity_planner_v57', 'age_guide_checklist_v56', 'baby_health_journal_v41', 'womens_health_journal_v46', 'postpartum_companion_v1', 'cycle_history_v1', 'family_reminders_v40',
@@ -19,6 +22,29 @@ class SecureHealthStore {
     'olaylar', 'olcumler', 'baby_sleep_journal_v1',
     'baby_v2', 'entries_v2', 'anne_bebek_lifehub_v1', 'women_lifestyle_v1', 'product_catalog_v1', 'cloud_auth_session_v1',
   };
+  /// Çocuğa özel uyku günlüğü anahtarlarının öneki (bkz. SleepJournalPage).
+  static const childSleepPrefix = 'baby_sleep_journal_v1_child_';
+
+  /// Sabit anahtarlar ve çocuk başına üretilen uyku günlüğü anahtarları.
+  static bool isAllowed(String key) {
+    if (keys.contains(key)) return true;
+    if (!key.startsWith(childSleepPrefix)) return false;
+    final id = key.substring(childSleepPrefix.length);
+    return id.isNotEmpty && id.length <= 128 &&
+        !id.runes.any((r) => r < 32 || (r >= 127 && r <= 159));
+  }
+
+  /// Cihazda bulunan çocuk başına uyku günlüğü anahtarları (güvenli depo ve
+  /// henüz taşınmamış eski düz kayıtlar). Yedek ve silme işlemleri için.
+  static Future<List<String>> dynamicKeys() async {
+    final found = <String>{};
+    final all = await _storage.readAll();
+    found.addAll(all.keys.where((k) => k.startsWith(childSleepPrefix) && isAllowed(k)));
+    final prefs = await SharedPreferences.getInstance();
+    found.addAll(prefs.getKeys().where((k) => k.startsWith(childSleepPrefix) && isAllowed(k)));
+    return found.toList()..sort();
+  }
+
   static const FlutterSecureStorage _storage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
   );
@@ -86,6 +112,6 @@ class SecureHealthStore {
   static String _encodeList(List<String> values) => jsonEncode(values);
 
   static void _checkKey(String key) {
-    if (!keys.contains(key)) throw ArgumentError.value(key, 'key');
+    if (!isAllowed(key)) throw ArgumentError.value(key, 'key');
   }
 }

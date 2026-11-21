@@ -22,7 +22,7 @@ class BackupInspection {
     if (timestamp is String) {
       exported = DateTime.tryParse(timestamp);
     }
-    final missing = BackupService.keys.length - data.length;
+    final missing = BackupService.keys.where((k) => !data.containsKey(k)).length;
     final warnings = <String>[];
     if (missing > 0) {
       warnings.add('Yedekte $missing veri alanı bulunmuyor. Geri yükleme '
