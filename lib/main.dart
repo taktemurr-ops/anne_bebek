@@ -42,6 +42,8 @@ import 'tracking_journal.dart';
 import 'screens/backup_page.dart';
 import 'services/privacy_service.dart';
 import 'widgets/consent_gate.dart';
+import 'screens/encyclopedia_page.dart';
+import 'data/encyclopedia/encyclopedia.dart';
 import 'widgets/visuals.dart';
 import 'widgets/add_to_notebook_tile.dart';
 import 'services/recipe_notebook_bridge.dart';
@@ -513,7 +515,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       leading: const Icon(Icons.search_rounded, color: mor),
       title: const Text('A’dan Z’ye Rehber’de ara...', style: TextStyle(fontSize: 13)),
       trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 15, color: mor),
-      onTap: () => _sayfa('A’dan Z’ye Rehber', _rehber()))),
+      onTap: () => _ansiklopediAc())),
     _baslik('Bugünkü takip özeti'),
     _panel(
       child: Row(
@@ -579,7 +581,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         _mini('Moda', Icons.checkroom, const Color(0xFFF7DDF0), () => _rehberKonuAc('Moda & Stil')),
         _mini('Eğitim', Icons.school, const Color(0xFFE3E6FF), () => _rehberKonuAc('Eğitim & Oyun')),
         _mini('Oyunlar', Icons.toys, const Color(0xFFFFE3D6), () => _rehberKonuAc('Eğitim & Oyun')),
-        _mini('Tüm Kategoriler', Icons.apps, const Color(0xFFEDE0FF), () => _sayfa('A’dan Z’ye Rehber', _rehber())),
+        _mini('Tüm Kategoriler', Icons.apps, const Color(0xFFEDE0FF), () => _ansiklopediAc()),
       ])),
     _panel(color: const Color(0xFFFFE6F3), child: ListTile(leading: const Icon(Icons.auto_awesome_outlined, color: mor), title: const Text('Bilgi Asistanı'), subtitle: const Text('Bebek, gebelik, aşı ve tarif soruların · çevrimdışı'), trailing: const Icon(Icons.chevron_right), onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const AiAssistantPage())))),
     _panel(color: const Color(0xFFF3E6FF), child: ListTile(leading: const Icon(Icons.manage_search_outlined, color: mor), title: const Text('Akıllı içerik keşfi'), subtitle: const Text('Bebek, kadın ve yaşam konularında çevrimdışı arama'), trailing: const Icon(Icons.chevron_right), onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const SmartDiscoveryPage())))),
@@ -650,8 +652,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       trailing: const Icon(Icons.chevron_right),
       onTap: () => _sayfa('Büyüme Grafikleri', GrowthChartsPage(measurements: olcumler)),
     )),
-    _baslik('A’dan Z’ye rehber', action: 'Hepsini aç', onTap: () => _sayfa('A’dan Z’ye Rehber', _rehber())),
-    _panel(child: ListTile(leading: const Icon(Icons.auto_stories_rounded, color: mor), title: const Text('Konuları alfabetik keşfet'), subtitle: const Text('Arama, kategori ve detaylı rehber içerikleri'), trailing: const Icon(Icons.chevron_right), onTap: () => _sayfa('A’dan Z’ye Rehber', _rehber()))),
+    _baslik('A’dan Z’ye rehber', action: 'Hepsini aç', onTap: () => _ansiklopediAc()),
+    _panel(child: ListTile(leading: const Icon(Icons.auto_stories_rounded, color: mor), title: const Text('Konuları alfabetik keşfet'), subtitle: const Text('Arama, kategori ve detaylı rehber içerikleri'), trailing: const Icon(Icons.chevron_right), onTap: () => _ansiklopediAc())),
     const SizedBox(height: 15),
   ]);
 
@@ -1482,12 +1484,18 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     'Eğitim & Oyun', 'Ev Düzeni', 'Gebelik', 'Güzellik & Bakım', 'Hastalıklar ve Belirtiler',
     'Kişisel Gelişim', 'Moda & Stil', 'Rahatlama', 'Uyku Düzeni'];
 
-  void _rehberKonuAc(String konu) => _sayfa(konu, _icerik(konu));
+  // Ansiklopedide karşılığı olan konular orada, diğerleri kısa rehberde açılır.
+  void _rehberKonuAc(String konu) => searchEncyclopedia(konu).isEmpty
+    ? _sayfa(konu, _icerik(konu))
+    : Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (_) => EncyclopediaPage(initialQuery: konu)));
 
-  Widget _rehber() => _RehberSayfasi(konular: rehberKonular, ac: (konu) => _sayfa(konu, _icerik(konu)));
+  void _ansiklopediAc() => Navigator.of(context).push(
+    MaterialPageRoute<void>(builder: (_) => const EncyclopediaPage()));
+
   Widget _rehberKart(String t, IconData icon) => _panel(child: ListTile(
     leading: Icon(icon, color: mor), title: Text(t), trailing: const Icon(Icons.chevron_right),
-    onTap: () => _sayfa(t, _icerik(t))));
+    onTap: () => _rehberKonuAc(t)));
   Widget _icerik(String konu) => ListView(padding: const EdgeInsets.all(16), children: [
     _hero(konu, 'Anne & Bebek yaşam rehberi', Icons.menu_book),
     _baslik('Bu bölüm hakkında'),
@@ -1561,7 +1569,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         if (!kReleaseMode) QuickAccessItem(title: 'Yayın öncesi kontrol', description: 'Android test ve yayın kontrol listesi', icon: Icons.fact_check_outlined,
           onOpen: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const ReleaseCheckPage()))),
         QuickAccessItem(title: 'Rehber', description: 'A’dan Z’ye bilgi rehberi', icon: Icons.menu_book_outlined,
-          onOpen: () => _sayfa('A’dan Z’ye Rehber', _rehber())),
+          onOpen: () => _ansiklopediAc()),
       ]),
     );
   }
@@ -1707,7 +1715,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         PopupMenuButton<String>(tooltip: 'Diğer bölümler', icon: const Icon(Icons.more_vert_rounded),
           onSelected: (value) {
             switch (value) {
-              case 'guide': _sayfa('A’dan Z’ye Rehber', _rehber());
+              case 'guide': _ansiklopediAc();
               case 'tools': Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const LifeHubPage()));
               case 'profile': setState(() => sekme = 5);
               case 'membership': Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const MembershipPage()));

@@ -1,5 +1,6 @@
 import '../data/baby_recipe_catalog.dart';
 import '../data/general_recipe_catalog.dart';
+import '../data/encyclopedia/encyclopedia.dart';
 import '../guide_content.dart';
 import 'baby_activity_catalog.dart';
 import 'pregnancy_week_guide.dart';
@@ -41,6 +42,7 @@ class OfflineAssistant {
     'yok', 'olur', 'olan', 'ben', 'benim', 'bebeğim', 'bebek', 'bebeğe',
     'yapmalıyım', 'nedir', 'nelerdir', 'hangi', 'kaç', 'zaman', 'ne zaman',
     'öneri', 'önerisi', 'öneriler', 'önerileri', 'verebilir', 'yapabilirim', 'olmalı',
+    'sık', 'belirti', 'belirtisi', 'belirtileri', 'iyi', 'kötü', 'normal', 'mıdır', 'midir',
   };
 
   /// Gündelik ifadeleri rehber başlıklarına bağlar (kök → başlıklar).
@@ -181,7 +183,33 @@ class OfflineAssistant {
       }
     }
 
-    // Rehber konuları: eş anlamlı ipucu veya başlık eşleşmesi önceliklidir.
+    // Ansiklopedi: başlık veya etiket eşleşmesi olan en iyi 2 konu.
+    int headMatches(EncyclopediaTopic t) {
+      final head = normalize('${t.title} ${t.tags.join(' ')}');
+      return tokens.where((tok) => _matches(head, tok)).length;
+    }
+    final candidates = tokens.isEmpty ? const <EncyclopediaTopic>[] : searchEncyclopedia(tokens.join(' '))
+        .where((t) => headMatches(t) > 0)
+        // Acil durumda yalnızca acil başvuru bilgisi içeren konular.
+        .where((t) => urgent == null || t.doctor.any((d) => d.contains('112')))
+        .take(6)
+        .toList();
+    // Yalnızca en çok anahtar kelimeyi karşılayan konular (gürültüyü azaltır).
+    final best = candidates.isEmpty ? 0 : candidates.map(headMatches).reduce((a, b) => a > b ? a : b);
+    final encyclopediaHits = candidates
+        .where((t) => headMatches(t) == best)
+        .take(sections.isEmpty ? 2 : 1)
+        .toList();
+    for (final t in encyclopediaHits) {
+      sections.add(AssistantSection(t.title, [
+        t.summary,
+        ...t.know.take(2),
+        ...t.todo.take(2),
+        if (t.doctor.isNotEmpty) 'Doktora başvur: ${t.doctor.first}',
+      ], 'A\'dan Z\'ye Rehber · ${t.category}'));
+    }
+
+    // Kısa rehber konuları: eş anlamlı ipucu veya başlık eşleşmesi önceliklidir.
     final hinted = <String>{
       for (final e in _topicHints.entries)
         if (q.contains(e.key)) ...e.value,
@@ -200,9 +228,10 @@ class OfflineAssistant {
     guides.sort((a, b) => b.$1.compareTo(a.$1));
     // Başka bölüm varsa yalnızca güçlü eşleşmeler; acil durumda yalnızca sağlık.
     final minScore = sections.isEmpty ? 2 : 3;
+    final maxGuides = encyclopediaHits.isNotEmpty ? 1 : (sections.isEmpty ? 3 : 2);
     final allowed = guides.where((g) => g.$1 >= minScore &&
         (urgent == null || g.$2 == 'Hastalıklar ve Belirtiler' || g.$2 == 'Sağlık'));
-    for (final (_, topic) in allowed.take(sections.isEmpty ? 3 : 2)) {
+    for (final (_, topic) in allowed.take(maxGuides)) {
       sections.add(AssistantSection(topic, guideContent[topic]!, 'Uygulama içi rehber'));
     }
 
