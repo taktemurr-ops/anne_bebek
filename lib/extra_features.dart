@@ -9,6 +9,7 @@ import 'services/monthly_growth.dart';
 import 'services/pregnancy_timeline.dart';
 import 'services/pregnancy_week_guide.dart';
 import 'widgets/reference_widgets.dart';
+import 'screens/mom_tools_page.dart';
 
 const _mor = Color(0xFF764A72);
 const _pembe = Color(0xFFF8DDEB);
@@ -150,6 +151,8 @@ class _PregnancyPageState extends State<PregnancyPage> {
       }
     }
   }
+  void _openTools(int tab, String title) => Navigator.of(context).push(MaterialPageRoute<void>(
+    builder: (_) => Scaffold(appBar: AppBar(title: Text(title)), body: MomToolsPage(initialTab: tab))));
   @override
   Widget build(BuildContext context) {
     final timeline = period == null ? null : pregnancyTimeline(period!, DateTime.now());
@@ -178,6 +181,12 @@ class _PregnancyPageState extends State<PregnancyPage> {
           final ctx = _checklistKey.currentContext;
           if (ctx != null) Scrollable.ensureVisible(ctx, duration: const Duration(milliseconds: 350));
         }),
+      PastelLinkCard(key: const Key('gebelik_kasilma'), icon: Icons.timer_outlined, title: 'Kasılma ve Tekme Sayacı',
+        subtitle: 'Kasılma aralığı, 5-1-1 uyarısı ve 10 hareket takibi', iconColor: const Color(0xFFFFE0E0),
+        onTap: () => _openTools(0, 'Kasılma ve Tekme Sayacı')),
+      PastelLinkCard(key: const Key('gebelik_isimler'), icon: Icons.badge_outlined, title: 'Bebek İsimleri',
+        subtitle: 'Anlamıyla isim önerileri ve favori listen', iconColor: _lila,
+        onTap: () => _openTools(3, 'Bebek İsimleri')),
       if (timeline != null) ...[
         Card(child: ListTile(leading: const Icon(Icons.auto_awesome, color: _mor),
           title: Text('${timeline.trimester} • ${timeline.week} hafta ${timeline.dayOfWeek} gün (yaklaşık)'),

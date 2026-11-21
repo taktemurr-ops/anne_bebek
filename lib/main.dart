@@ -43,6 +43,7 @@ import 'screens/backup_page.dart';
 import 'services/privacy_service.dart';
 import 'widgets/consent_gate.dart';
 import 'screens/encyclopedia_page.dart';
+import 'screens/mom_tools_page.dart';
 import 'data/encyclopedia/encyclopedia.dart';
 import 'widgets/visuals.dart';
 import 'widgets/add_to_notebook_tile.dart';
@@ -873,6 +874,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       PastelLinkCard(icon: Icons.local_drink_outlined, title: 'Beslenme günlüğüm',
         subtitle: 'Emzirme, mama ve ek gıda ayrıntıları', iconColor: const Color(0xFFFFE9D2),
         onTap: () => _sayfa('Beslenme günlüğüm', const TrackingJournalPage())),
+      PastelLinkCard(key: const Key('emzirme_zamanlayici'), icon: Icons.timer_outlined, title: 'Emzirme zamanlayıcısı',
+        subtitle: 'Sol / sağ süre, sıradaki taraf önerisi', iconColor: const Color(0xFFFFE3F0),
+        onTap: () => _sayfa('Emzirme zamanlayıcısı', const MomToolsPage(initialTab: 2))),
       PastelLinkCard(icon: Icons.bedtime_outlined, title: 'Uyku günlüğüm',
         subtitle: 'Başlangıç–bitiş saatleri ve toplam uyku', iconColor: const Color(0xFFEDE4FF),
         onTap: () => _sayfa('Uyku günlüğüm', const SleepJournalPage())),
@@ -1585,6 +1589,10 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         QuickAccessItem(title: 'Alışveriş', description: 'Liste ve sepet', icon: Icons.shopping_bag_outlined, onOpen: () => sekmeyeGit(3)),
         QuickAccessItem(title: 'Kadın sağlığı günlüğü', description: 'Döngü, gebelik, doğum sonrası ve menopoz notları', icon: Icons.health_and_safety_outlined, onOpen: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomensHealthJournalPage()))),
         QuickAccessItem(title: 'Kadınlar', description: 'Kadın sağlığı ve gebelik', icon: Icons.favorite_outline, onOpen: () => sekmeyeGit(4)),
+        QuickAccessItem(title: 'Kasılma sayacı', description: 'Doğum kasılmalarının süresi ve aralığı', icon: Icons.timer_outlined, onOpen: () => _sayfa('Kasılma sayacı', const MomToolsPage())),
+        QuickAccessItem(title: 'Tekme sayacı', description: 'Bebek hareketlerini say (10 hareket)', icon: Icons.touch_app_outlined, onOpen: () => _sayfa('Tekme sayacı', const MomToolsPage(initialTab: 1))),
+        QuickAccessItem(title: 'Emzirme zamanlayıcısı', description: 'Sol / sağ süre takibi', icon: Icons.timer, onOpen: () => _sayfa('Emzirme zamanlayıcısı', const MomToolsPage(initialTab: 2))),
+        QuickAccessItem(title: 'Bebek isimleri', description: 'Anlamıyla isim önerileri', icon: Icons.badge_outlined, onOpen: () => _sayfa('Bebek isimleri', const MomToolsPage(initialTab: 3))),
         QuickAccessItem(title: 'Beslenme kaydı', description: 'Yeni beslenme kaydı oluştur', icon: Icons.local_drink_outlined, onOpen: () => _olayEkle('Beslenme')),
         QuickAccessItem(title: 'Uyku kaydı', description: 'Yeni uyku kaydı oluştur', icon: Icons.bedtime_outlined, onOpen: () => _olayEkle('Uyku')),
         QuickAccessItem(title: 'Büyüme ölçümü', description: 'Boy, kilo ve baş çevresi', icon: Icons.monitor_weight_outlined, onOpen: _olcumEkle),
