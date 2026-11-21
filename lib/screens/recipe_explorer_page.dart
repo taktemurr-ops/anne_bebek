@@ -152,8 +152,8 @@ class _RecipeExplorerPageState extends State<RecipeExplorerPage> {
             onSelected: (v) => setState(() => _onlyRecent = v)),
         ])),
         Padding(padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4), child: Row(children: [
-          Text('${filtered.length} / ${generalRecipes.length} tarif', style: const TextStyle(color: _purple)),
-          const Spacer(),
+          Expanded(child: Text('${filtered.length} / ${generalRecipes.length} tarif',
+              maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: _purple))),
           TextButton(onPressed: () => setState(() {
             _search.clear(); _category = 'Tümü'; _sort = 'Önerilen'; _maxMinutes = 0; _onlyFavorites = false; _onlyRecent = false;
           }), child: const Text('Filtreleri sıfırla')),
