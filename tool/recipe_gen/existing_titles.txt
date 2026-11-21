@@ -457,6 +457,56 @@ n08_302	karpuz naneli içecek
 n08_303	kakaolu muzlu süt
 n08_304	çilekli limonata
 n08_305	tarçınlı elma çayı (meyveli)
+n09_001	kuzu kapama
+n09_002	kıymalı patates musakka
+n09_003	sebzeli kıymalı tava
+n09_004	fırında kuzu kol (sebzeli)
+n09_005	et döner (ev usulü, tavada)
+n09_006	kıymalı makarna güveç
+n09_007	kuşbaşılı patlıcan kebabı
+n09_008	köfteli patates yemeği
+n09_009	dana bonfile (tavada)
+n09_010	kıymalı karnabahar graten
+n09_101	levrek şiş (fırında)
+n09_102	somon köftesi
+n09_103	hamsili pilav
+n09_104	mezgit buğulama
+n09_105	karidesli makarna (sarımsaklı)
+n09_106	fırında hamsi (kiremitte)
+n09_107	füme somonlu krep
+n09_108	lüfer ızgara
+n09_109	ton balıklı patates salatası
+n09_110	çupra kâğıt kebabı
+n09_201	tavada nohut köftesi
+n09_202	etsiz pişmiş çiğ köfte
+n09_203	nohutlu tavuk yahni
+n09_204	yeşil mercimekli ıspanak
+n09_205	börülceli pazı kavurma
+n09_206	barbunyalı bulgur pilavı
+n09_207	mercimek çorbası (süzme, klasik)
+n09_208	fasulye pilaki (fırında)
+n09_209	nohut salatası (tahinli)
+n09_210	mercimekli patates yemeği
+n09_301	yulaflı muzlu kahvaltı kurabiyesi
+n09_302	avokadolu menemen
+n09_303	peynirli kabak çiçeği (kahvaltılık)
+n09_304	fırında yumurtalı ekmek kasesi
+n09_305	muzlu yulaf lapası (sütlü)
+n09_306	patatesli peynirli börek (tavada)
+n09_307	kahvaltılık ezme (domatesli biberli)
+n09_308	lorlu dereotlu börek (kahvaltılık rulo)
+n09_309	yumurtalı pide
+n09_310	mısır unlu krep (glutensiz)
+n09_401	tavuklu pilav (nohutlu, sokak usulü)
+n09_402	kuskus pilavı (sade)
+n09_403	mantarlı pirinç pilavı
+n09_404	havuçlu kuru üzümlü pilav
+n09_405	ıspanaklı pirinç pilavı
+n09_501	yayla çorbası (pirinçli, naneli)
+n09_502	sebzeli tavuk çorbası (şehriyesiz)
+n09_503	kabak çorbası (kremasız)
+n09_504	arpa şehriye çorbası
+n09_505	bezelye çorbası
 p39a10_001	fırında sebzeli tavuk güveç
 p39a10_002	cevizli yoğurtlu semizotu kasesi
 p39a10_005	kırmızı mercimekli kabak çorbası
