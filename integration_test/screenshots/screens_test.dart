@@ -79,9 +79,13 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  // STORE_SHOTS=1: mağaza için 1080x1920 (9:16), yalnızca üst görünüm.
+  final store = Platform.environment['STORE_SHOTS'] == '1';
+
   Future<void> capture(WidgetTester tester, String name) async {
     try {
-      await expectLater(find.byType(MaterialApp), matchesGoldenFile('goldens/$name.png'));
+      await expectLater(find.byType(MaterialApp),
+          matchesGoldenFile(store ? 'goldens/magaza/$name.png' : 'goldens/$name.png'));
     } catch (e) {
       // Bir ekranın çekilememesi diğerlerini engellemesin.
       // ignore: avoid_print
@@ -94,7 +98,7 @@ void main() {
     await toTop(tester);
     await capture(tester, name);
     final main = vertical().where((s) => s.position.maxScrollExtent > 0).toList();
-    if (main.isNotEmpty) {
+    if (!store && main.isNotEmpty) {
       final st = main.first;
       st.position.jumpTo((st.position.pixels + 650).clamp(0, st.position.maxScrollExtent).toDouble());
       await tester.pumpAndSettle();
@@ -119,7 +123,7 @@ void main() {
   }
 
   testWidgets('ekran görüntüleri', (tester) async {
-    tester.view.physicalSize = const Size(1080, 2340);
+    tester.view.physicalSize = store ? const Size(1080, 1920) : const Size(1080, 2340);
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
     SharedPreferences.setMockInitialValues(_sampleData());
