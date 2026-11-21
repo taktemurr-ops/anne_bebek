@@ -1,3 +1,4 @@
+import '../i18n/i18n.dart';
 import 'family_notification_repository.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tzdata;
@@ -65,11 +66,11 @@ class LocalReminderNotifications {
     }
     // Convert local instant to UTC for correct scheduling without device-zone lookup.
     final utcTime = tz.TZDateTime.from(reminder.due.toUtc(), tz.UTC);
-    await _plugin.zonedSchedule(notificationId(reminder.id), 'Anne & Bebek',
+    await _plugin.zonedSchedule(notificationId(reminder.id), t('Anne & Bebek'),
       reminder.title, utcTime,
-      const NotificationDetails(android: AndroidNotificationDetails(
-        'family_reminders', 'Aile hatırlatıcıları',
-        channelDescription: 'İsteğe bağlı aile takvimi hatırlatıcıları',
+      NotificationDetails(android: AndroidNotificationDetails(
+        'family_reminders', t('Aile hatırlatıcıları'),
+        channelDescription: t('İsteğe bağlı aile takvimi hatırlatıcıları'),
         importance: Importance.high, priority: Priority.high),
         iOS: DarwinNotificationDetails()),
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
@@ -87,10 +88,10 @@ class LocalReminderNotifications {
     var next = DateTime(now.year, now.month, now.day, hour, minute);
     if (!next.isAfter(now)) next = next.add(const Duration(days: 1));
     final utcTime = tz.TZDateTime.from(next.toUtc(), tz.UTC);
-    await _plugin.zonedSchedule(notificationId(id), 'Anne & Bebek', title, utcTime,
-      const NotificationDetails(android: AndroidNotificationDetails(
-        'daily_medicine', 'İlaç ve vitamin',
-        channelDescription: 'Her gün tekrarlanan ilaç ve vitamin hatırlatmaları',
+    await _plugin.zonedSchedule(notificationId(id), t('Anne & Bebek'), title, utcTime,
+      NotificationDetails(android: AndroidNotificationDetails(
+        'daily_medicine', t('İlaç ve vitamin'),
+        channelDescription: t('Her gün tekrarlanan ilaç ve vitamin hatırlatmaları'),
         importance: Importance.high, priority: Priority.high),
         iOS: DarwinNotificationDetails()),
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
