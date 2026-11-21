@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../services/fever_log.dart';
 import '../services/secure_health_store.dart';
+import '../utils/dialog_helpers.dart';
 
 const _mor = Color(0xFF764A72);
 
@@ -68,7 +69,7 @@ class _FeverLogPageState extends State<FeverLogPage> {
     final medicine = TextEditingController();
     final note = TextEditingController();
     var method = 'Koltuk altı';
-    final result = await showDialog<FeverEntry>(context: context, builder: (ctx) => StatefulBuilder(
+    final result = await showDialogAndDispose<FeverEntry>(disposables: [temp, medicine, note], context: context, builder: (ctx) => StatefulBuilder(
       builder: (ctx, update) => AlertDialog(
         title: const Text('Ateş / ilaç kaydı'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -102,7 +103,6 @@ class _FeverLogPageState extends State<FeverLogPage> {
           }, child: const Text('Kaydet')),
         ],
       )));
-    temp.dispose(); medicine.dispose(); note.dispose();
     if (result == null || !mounted) return;
     final ok = await _save([result, ..._entries]);
     if (ok && result.temperature != null && mounted) {
