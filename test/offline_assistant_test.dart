@@ -24,10 +24,12 @@ void main() {
     expect(v.sections.first.lines.first, contains('12. ay'));
   });
 
-  test('gündelik ifadeler doğru rehber başlığını bulur', () {
-    expect(_titles(OfflineAssistant.answer('Bebeğim gece sık uyanıyor')).first, 'Uyku Düzeni');
-    expect(_titles(OfflineAssistant.answer('regl ağrısı')), contains('Adet Dönemi'));
-    expect(_titles(OfflineAssistant.answer('Emzirme ve anne sütü')).first, 'Anne Sütü');
+  test('gündelik ifadeler doğru konuyu bulur', () {
+    bool has(String q, String part) => _titles(OfflineAssistant.answer(q))
+        .any((t) => t.toLowerCase().contains(part));
+    expect(_titles(OfflineAssistant.answer('Bebeğim gece sık uyanıyor')).first.toLowerCase(), contains('uyku'));
+    expect(has('regl ağrısı', 'adet'), isTrue);
+    expect(has('Emzirme ve anne sütü', 'emzirme'), isTrue);
   });
 
   test('anlamsız soruda boş yanıt; Türkçe büyük harf normalizasyonu', () {

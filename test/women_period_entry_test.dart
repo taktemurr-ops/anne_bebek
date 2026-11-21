@@ -1,5 +1,6 @@
 import 'package:anne_bebek/main.dart';
 import 'package:anne_bebek/services/secure_health_store.dart';
+import 'package:anne_bebek/widgets/pastel_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,8 +16,10 @@ void main() {
   testWidgets('Kadınlar: "Adetim bugün başladı" kaydı kalıcı olarak ekler', (tester) async {
     await tester.pumpWidget(const AnneBebekApp());
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.text('Kadınlar').first);
-    await tester.tap(find.text('Kadınlar').first);
+    final tile = find.descendant(of: find.byType(PastelModuleTile), matching: find.text('Kadınlar'));
+    await tester.ensureVisible(tile);
+    await tester.pumpAndSettle();
+    await tester.tap(tile);
     await tester.pumpAndSettle();
 
     await tester.tap(find.byKey(const ValueKey('adet_bugun')));
