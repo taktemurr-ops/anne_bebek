@@ -42,6 +42,30 @@ Uint8List synthesizeWav(String id, {int seconds = 12, int seed = 7}) {
   return encodeWav(samples);
 }
 
+/// Melodi kimlikleri; sıralı / karışık çalma için.
+List<String> get melodyIds => [for (final s in sleepSounds) if (s.melody) s.id];
+
+/// Birden fazla ninniyi aralarında 2 sn sessizlikle tek döngüde birleştirir.
+Uint8List synthesizeMelodyPlaylist(List<String> ids) {
+  final parts = <Float64List>[];
+  for (final id in ids) {
+    final m = switch (id) {
+      'brahms' => _melody(_brahms, bpm: 66),
+      'twinkle' => _melody(_twinkle, bpm: 76),
+      'ninni' => _melody(_ninni, bpm: 60),
+      _ => throw ArgumentError.value(id, 'id', 'melodi değil'),
+    };
+    parts..add(m)..add(Float64List(2 * sampleRate));
+  }
+  final out = Float64List(parts.fold<int>(0, (n, p) => n + p.length));
+  var o = 0;
+  for (final p in parts) {
+    out.setAll(o, p);
+    o += p.length;
+  }
+  return encodeWav(out);
+}
+
 // ---------------- Gürültüler ----------------
 
 Float64List _noiseLoop(String id, int seconds, int seed) {

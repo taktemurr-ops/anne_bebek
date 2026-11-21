@@ -16,9 +16,33 @@ abstract class LoopPlayer {
 
 class AudioLoopPlayer implements LoopPlayer {
   final AudioPlayer _player = AudioPlayer();
+  bool _contextSet = false;
+
+  /// Ekran kapanınca da çalsın; gürültü ve ninni aynı anda karışabilsin.
+  Future<void> _ensureContext() async {
+    if (_contextSet || kIsWeb) return;
+    _contextSet = true;
+    try {
+      await _player.setAudioContext(AudioContext(
+        android: const AudioContextAndroid(
+          stayAwake: true,
+          contentType: AndroidContentType.music,
+          usageType: AndroidUsageType.media,
+          audioFocus: AndroidAudioFocus.none,
+        ),
+        iOS: AudioContextIOS(
+          category: AVAudioSessionCategory.playback,
+          options: const {AVAudioSessionOptions.mixWithOthers},
+        ),
+      ));
+    } catch (_) {
+      // Bazı platformlarda desteklenmeyebilir; varsayılan ayarla çalmaya devam et.
+    }
+  }
 
   @override
   Future<void> playLoop(String id, Uint8List wav, double volume) async {
+    await _ensureContext();
     await _player.stop();
     await _player.setReleaseMode(ReleaseMode.loop);
     await _player.setVolume(volume);

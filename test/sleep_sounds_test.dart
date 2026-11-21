@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:anne_bebek/screens/sleep_sounds_page.dart';
@@ -64,26 +65,58 @@ void main() {
     });
   });
 
-  testWidgets('ses çalınır, ikinci dokunuşta durur; zamanlayıcı ve ses düzeyi kaydedilir', (tester) async {
+  test('çalma sırası: tekrar, sırayla, karışık', () {
+    expect(melodyOrder('twinkle', RepeatMode.one), ['twinkle']);
+    expect(melodyOrder('twinkle', RepeatMode.all), ['twinkle', 'ninni', 'brahms']);
+    final shuffled = melodyOrder('ninni', RepeatMode.shuffle, random: Random(1));
+    expect(shuffled.first, 'ninni');
+    expect(shuffled.toSet(), {'brahms', 'twinkle', 'ninni'});
+  });
+
+  test('ninni listesi tek döngüde birleşir', () {
+    final one = synthesizeWav('ninni');
+    final list = synthesizeMelodyPlaylist(['ninni', 'brahms']);
+    expect(list.length, greaterThan(one.length * 2));
+    expect(() => synthesizeMelodyPlaylist(['rain']), throwsArgumentError);
+  });
+
+  testWidgets('gürültü ve ninni aynı anda çalar; tekrar biçimi değişince sıra yenilenir', (tester) async {
     SharedPreferences.setMockInitialValues({});
-    final player = FakePlayer();
+    final players = <FakePlayer>[];
+    final synthCalls = <String>[];
     await tester.pumpWidget(MaterialApp(home: Scaffold(body: SleepSoundsPage(
-      playerFactory: () => player,
-      synth: (id) async => synthesizeWav(id, seconds: 1)))));
+      playerFactory: () { final p = FakePlayer(); players.add(p); return p; },
+      synth: (ids) async { synthCalls.add(ids.join(',')); return synthesizeWav('white', seconds: 1); }))));
     await tester.pumpAndSettle();
+    expect(players, hasLength(2));
     await tester.tap(find.byKey(const Key('uyku_sure_15')));
     await tester.pump();
     await tester.tap(find.byKey(const Key('uyku_womb')));
-    await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
-    expect(player.calls.last, startsWith('play:womb:'));
-    expect(find.textContaining('sonra kapanacak'), findsOneWidget);
-    expect(find.text('🤰 Anne karnı ve kalp atışı'), findsOneWidget);
-    await tester.tap(find.byKey(const Key('uyku_womb')));
+    await tester.scrollUntilVisible(find.byKey(const Key('uyku_brahms')), 200, scrollable: find.byType(Scrollable).first);
+    await tester.tap(find.byKey(const Key('uyku_brahms')));
+    await tester.pump(const Duration(milliseconds: 100));
+    final noise = players[0], music = players[1];
+    expect(noise.calls.last, startsWith('play:womb:'));
+    expect(music.calls.last, startsWith('play:brahms_twinkle_ninni:'), reason: 'varsayılan: hepsini sırayla');
+    expect(noise.calls.where((c) => c == 'stop'), isEmpty, reason: 'ninni başlayınca gürültü durmamalı');
+
+    await tester.ensureVisible(find.byKey(const Key('uyku_tekrar_one')));
+    await tester.tap(find.byKey(const Key('uyku_tekrar_one')));
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(music.calls.last, startsWith('play:brahms:'));
+    expect(synthCalls, containsAll(['womb', 'brahms,twinkle,ninni', 'brahms']));
+
+    await tester.drag(find.byType(Scrollable).first, const Offset(0, 3000));
     await tester.pump();
-    expect(player.calls.last, 'stop');
+    expect(find.text('Şimdi çalıyor'), findsOneWidget);
+    expect(find.textContaining('sonra kapanacak'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('uyku_durdur')));
+    await tester.pump();
+    expect(noise.calls.last, 'stop');
+    expect(music.calls.last, 'stop');
     expect(find.text('Uyku sesleri 🌙'), findsOneWidget);
     final prefs = await SharedPreferences.getInstance();
-    expect(prefs.getString(SleepSoundsPage.prefsKey), '0.50|15');
+    expect(prefs.getString(SleepSoundsPage.prefsKey), '0.50|0.60|15|one');
   });
 }
