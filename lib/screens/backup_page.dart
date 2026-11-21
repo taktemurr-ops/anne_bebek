@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import '../services/backup_service.dart';
 import '../services/encrypted_backup.dart';
 import '../services/backup_inspection.dart';
+import '../services/local_reminder_notifications.dart';
+import '../services/reminder_repository.dart';
 
 class BackupPage extends StatefulWidget {
   const BackupPage({super.key});
@@ -150,6 +152,13 @@ class _BackupPageState extends State<BackupPage> {
 
     try {
       final count = await BackupService.restore(plain);
+      // Geri yüklenen hatırlatıcıları, bildirim tercihine göre yeniden planla.
+      try {
+        final reminders = await ReminderRepository.load();
+        await LocalReminderNotifications.sync(reminders, reminders);
+      } catch (_) {
+        // Bildirim desteği olmayan platformlarda kayıtlar yine geri yüklenir.
+      }
 
       password.clear();
       input.clear();

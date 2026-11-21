@@ -40,6 +40,7 @@ import 'cycle_tracker.dart';
 import 'tracking_journal.dart';
 import 'screens/backup_page.dart';
 import 'services/privacy_service.dart';
+import 'services/local_reminder_notifications.dart';
 import 'services/secure_health_store.dart';
 import 'data/product_catalog.dart';
 import 'data/general_recipe_catalog.dart';
@@ -1461,6 +1462,11 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     if (confirmed != true || !mounted) return;
     try {
       await PrivacyService.deleteLocalRecords();
+      try {
+        await LocalReminderNotifications.cancelAll();
+      } catch (_) {
+        // Bildirim eklentisi olmayan platformlarda (web) yok sayılır.
+      }
       if (!mounted) return;
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute<void>(builder: (_) => const AnaUygulama()),

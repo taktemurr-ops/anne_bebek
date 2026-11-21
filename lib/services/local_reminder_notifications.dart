@@ -46,6 +46,13 @@ class LocalReminderNotifications {
     await _plugin.cancel(notificationId(id));
   }
 
+  /// "Tüm yerel kayıtları sil" sonrasında planlanmış hiçbir hatırlatıcı
+  /// kalmamalı; silinen kayda ait bildirim teslim edilmemeli.
+  static Future<void> cancelAll() async {
+    await initialize();
+    await _plugin.cancelAll();
+  }
+
   static Future<void> schedule(FamilyReminder reminder) async {
     await initialize();
     await cancel(reminder.id);
