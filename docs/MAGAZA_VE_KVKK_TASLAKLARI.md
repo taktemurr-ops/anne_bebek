@@ -66,7 +66,7 @@ Telefon (1080×1920 veya üstü) ve 7"/10" tablet görüntüleri gerekir. Görse
 
 ### İletişim
 - Destek e-postası: `[destek@...]`
-- Gizlilik politikası URL'si: `[https://.../gizlilik]` (aşağıdaki metin yayımlanmalı)
+- Gizlilik politikası URL'si: `https://taktemurr-ops.github.io/anne_bebek/` (`gh-pages` dalı; GitHub → Settings → Pages → Branch: gh-pages / root ile etkinleştirilmeli)
 - Web sitesi (isteğe bağlı): `[...]`
 
 ---

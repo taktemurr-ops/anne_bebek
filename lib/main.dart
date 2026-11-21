@@ -1682,7 +1682,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       title: const Text('Yedekleme ve geri yükleme'),
       subtitle: const Text('Kayıtları dışa aktar veya geri yükle'),
       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const BackupPage())))),
-    _baslik('Gizlilik ve açık rıza'), _panel(child: const PrivacySummary()),
+    _baslik('Gizlilik ve açık rıza'), _panel(child: const Column(children: [PrivacySummary(), PrivacyPolicyLink()])),
     _panel(child: const Text('Daha önce dışa aktarılan yedekler ve panoya kopyalanan içerikler ayrıca silinmelidir. Kayıtları silmek açık rızanı geri almak anlamına gelir; uygulama bir sonraki açılışta yeniden onay ister.')),
     _panel(child: ListTile(
       leading: const Icon(Icons.delete_forever_outlined, color: Colors.red),

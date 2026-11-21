@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// KVKK m.6: sağlık verileri açık rıza ile işlenir. İlk açılışta (ve metin
@@ -72,7 +73,8 @@ class _ConsentGateState extends State<ConsentGate> {
                 style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 20),
             const PrivacySummary(),
-            const SizedBox(height: 12),
+            const PrivacyPolicyLink(),
+            const SizedBox(height: 4),
             CheckboxListTile(
               key: const ValueKey('consent_checkbox'),
               value: _checked,
@@ -93,6 +95,31 @@ class _ConsentGateState extends State<ConsentGate> {
       ),
     );
   }
+}
+
+/// Gizlilik politikasının tam metni (GitHub Pages).
+const privacyPolicyUrl = 'https://taktemurr-ops.github.io/anne_bebek/';
+
+/// Tam metnin adresini gösterir ve kopyalatır (ek bağımlılık gerektirmez).
+class PrivacyPolicyLink extends StatelessWidget {
+  const PrivacyPolicyLink({super.key});
+  @override
+  Widget build(BuildContext context) => ListTile(
+    contentPadding: EdgeInsets.zero,
+    leading: const Icon(Icons.description_outlined),
+    title: const Text('Gizlilik politikasının tamamı'),
+    subtitle: const SelectableText(privacyPolicyUrl),
+    trailing: IconButton(
+      tooltip: 'Adresi kopyala',
+      icon: const Icon(Icons.copy_rounded),
+      onPressed: () async {
+        await Clipboard.setData(const ClipboardData(text: privacyPolicyUrl));
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Adres kopyalandı; tarayıcına yapıştırabilirsin.')));
+        }
+      }),
+  );
 }
 
 /// Gizlilik özetinin tek kaynağı: onay ekranında ve Profil'de gösterilir.
