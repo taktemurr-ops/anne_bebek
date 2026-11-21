@@ -19,7 +19,8 @@ void main() {
     await tester.pumpAndSettle();
 
     final stepper = find.byType(QuantityStepper);
-    await tester.ensureVisible(stepper);
+    // Liste, bütçe kartlarının altında; tembel oluşturulan satıra kaydır.
+    await tester.scrollUntilVisible(stepper, 400, scrollable: find.byType(Scrollable).first);
     await tester.pumpAndSettle();
     expect(tester.widget<QuantityStepper>(stepper).value, 3);
 
