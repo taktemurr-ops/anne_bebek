@@ -51,7 +51,7 @@ class SecureHealthStore {
     return found.toList()..sort();
   }
 
-  static const FlutterSecureStorage _storage = FlutterSecureStorage(
+  static FlutterSecureStorage _storage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
   );
 

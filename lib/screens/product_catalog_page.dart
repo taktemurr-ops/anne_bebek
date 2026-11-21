@@ -1,5 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../services/product_catalog.dart';
 import '../services/secure_health_store.dart';
 
@@ -93,9 +95,9 @@ class _ProductCatalogPageState extends State<ProductCatalogPage> {
         const Text('36 ürün türü • 6 kategori • Bağımsız seçim rehberi'),
         const SizedBox(height: 8),
         if (error != null) Text(error!, style: const TextStyle(color: Colors.red)),
-        TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Ürün veya özellik ara', border: OutlineInputBorder()), onChanged: (v) => setState(() => search = v)),
+        TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Ürün veya özellik ara'), border: OutlineInputBorder()), onChanged: (v) => setState(() => search = v)),
         const SizedBox(height: 10),
-        DropdownButtonFormField<String>(initialValue: category, decoration: const InputDecoration(labelText: 'Kategori'), items: ['Tümü', ...ProductCatalog.categories].map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(), onChanged: (v) => setState(() => category = v ?? 'Tümü')),
+        DropdownButtonFormField<String>(initialValue: category, decoration: InputDecoration(labelText: t('Kategori')), items: ['Tümü', ...ProductCatalog.categories].map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(), onChanged: (v) => setState(() => category = v ?? 'Tümü')),
         SwitchListTile(title: const Text('Yalnızca favoriler'), value: onlyFavorites, onChanged: (v) => setState(() => onlyFavorites = v)),
         FilledButton.icon(onPressed: _compare, icon: const Icon(Icons.compare_arrows), label: Text('Karşılaştır (${compared.length}/3)')),
         const SizedBox(height: 8),
@@ -103,8 +105,8 @@ class _ProductCatalogPageState extends State<ProductCatalogPage> {
           title: Text(p.name), subtitle: Text('${p.category} • ${p.features.join(', ')}', maxLines: 2, overflow: TextOverflow.ellipsis),
           onTap: () => _details(p),
           trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-            IconButton(tooltip: 'Favori', icon: Icon(favorites.contains(p.id) ? Icons.favorite : Icons.favorite_border), onPressed: () => _toggle(p.id, comparison: false)),
-            IconButton(tooltip: 'Karşılaştır', icon: Icon(compared.contains(p.id) ? Icons.check_box : Icons.check_box_outline_blank), onPressed: () => _toggle(p.id, comparison: true)),
+            IconButton(tooltip: t('Favori'), icon: Icon(favorites.contains(p.id) ? Icons.favorite : Icons.favorite_border), onPressed: () => _toggle(p.id, comparison: false)),
+            IconButton(tooltip: t('Karşılaştır'), icon: Icon(compared.contains(p.id) ? Icons.check_box : Icons.check_box_outline_blank), onPressed: () => _toggle(p.id, comparison: true)),
           ]),
         )),
         if (visible.isEmpty) const Padding(padding: EdgeInsets.all(20), child: Text('Aramaya uygun ürün bulunamadı.')),

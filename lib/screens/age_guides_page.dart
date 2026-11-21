@@ -1,5 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../data/age_guides.dart';
 import '../data/monthly_age_content.dart';
 import '../services/secure_health_store.dart';
@@ -70,16 +72,16 @@ class _AgeGuidesPageState extends State<AgeGuidesPage> {
             const SizedBox(height: 6),
             const Text('Her ay için gelişim, beslenme, uyku, oyun, bakım ve güvenlik. İçerikler genel öneridir; aylık gelişim kontrol listesi değildir.'),
             Row(children: [
-              IconButton(tooltip: 'Önceki ay', onPressed: _displayMonth > 0 ? () => setState(() => _selectedMonth = _displayMonth - 1) : null, icon: const Icon(Icons.chevron_left)),
+              IconButton(tooltip: t('Önceki ay'), onPressed: _displayMonth > 0 ? () => setState(() => _selectedMonth = _displayMonth - 1) : null, icon: const Icon(Icons.chevron_left)),
               Expanded(child: DropdownButton<int>(isExpanded: true, value: _displayMonth, items: List.generate(73, (m) => DropdownMenuItem(value: m, child: Text('$m. ay'))), onChanged: (v) => setState(() => _selectedMonth = v))),
-              IconButton(tooltip: 'Sonraki ay', onPressed: _displayMonth < 72 ? () => setState(() => _selectedMonth = _displayMonth + 1) : null, icon: const Icon(Icons.chevron_right)),
+              IconButton(tooltip: t('Sonraki ay'), onPressed: _displayMonth < 72 ? () => setState(() => _selectedMonth = _displayMonth + 1) : null, icon: const Icon(Icons.chevron_right)),
             ]),
             SwitchListTile(contentPadding: EdgeInsets.zero, title: const Text('Aylık rehberi göster'), value: _showMonthly, onChanged: (v) => setState(() => _showMonthly = v)),
           ]))),
           const SizedBox(height: 12),
-          TextField(controller: _search, decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Rehberde ara', border: OutlineInputBorder()), onChanged: (_) => setState(() {})),
+          TextField(controller: _search, decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Rehberde ara'), border: OutlineInputBorder()), onChanged: (_) => setState(() {})),
           const SizedBox(height: 8),
-          DropdownButtonFormField<String>(initialValue: _category, decoration: const InputDecoration(labelText: 'Kategori'),
+          DropdownButtonFormField<String>(initialValue: _category, decoration: InputDecoration(labelText: t('Kategori')),
             items: ['Tümü', 'Gelişim', 'Beslenme', 'Uyku', 'Oyun', 'Bakım', 'Güvenlik', 'Sağlık', 'Aile'].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
             onChanged: (v) => setState(() => _category = v ?? 'Tümü')),
           const SizedBox(height: 12),

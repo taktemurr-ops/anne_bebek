@@ -1,4 +1,5 @@
 import 'utils/privacy_log_sanitizer.dart';
+import 'i18n/text.dart';
 import 'utils/dialog_helpers.dart';
 import 'screens/notification_preferences_page.dart';
 import 'screens/family_recipe_notebook_page.dart';
@@ -62,12 +63,18 @@ import 'screens/monthly_baby_guide_page.dart';
 import 'screens/baby_activity_catalog_page.dart';
 import 'screens/baby_nutrition_page.dart';
 import 'package:flutter/foundation.dart' show kReleaseMode;
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import 'i18n/i18n.dart';
+import 'i18n/language_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(const AnneBebekApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await I18n.load();
+  runApp(const AnneBebekApp());
+}
 
 const mor = Color(0xFF48235F);
 const pembe = Color(0xFFFFD9ED);
@@ -84,12 +91,15 @@ ThemeData _kompaktListeler(ThemeData base) => base.copyWith(
 class AnneBebekApp extends StatelessWidget {
   const AnneBebekApp({super.key});
   @override
-  Widget build(BuildContext context) => MaterialApp(
+  Widget build(BuildContext context) => ValueListenableBuilder<String>(
+    valueListenable: I18n.language,
+    builder: (context, lang, _) => MaterialApp(
+    key: ValueKey('app_$lang'),
     title: 'Anne & Bebek', debugShowCheckedModeBanner: false,
-    // Cihaz diline göre Türkçe veya İngilizce; desteklenmeyen dillerde Türkçe.
-    localeResolutionCallback: (device, supported) => device?.languageCode == 'en' ? const Locale('en', 'US') : const Locale('tr', 'TR'),
-    supportedLocales: const [Locale('tr', 'TR'), Locale('en', 'US')],
-    localizationsDelegates: const [
+    // Seçilen dil; Arapça ve Farsçada yazı yönü sağdan sola olur.
+    locale: Locale(lang),
+    supportedLocales: [for (final l in appLanguages) Locale(l.code)],
+    localizationsDelegates: [
       GlobalMaterialLocalizations.delegate,
       GlobalCupertinoLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
@@ -120,7 +130,7 @@ class AnneBebekApp extends StatelessWidget {
         enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(22), borderSide: BorderSide.none)),
     )),
     home: const ConsentGate(child: AnaUygulama()),
-  );
+  ));
 }
 
 class AnaUygulama extends StatefulWidget {
@@ -247,7 +257,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       return StatefulBuilder(builder: (ctx, yenile) => AlertDialog(
       title: const Text('Bebek profili'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
-        TextField(controller: ad, decoration: const InputDecoration(labelText: 'Bebeğin adı')),
+        TextField(controller: ad, decoration: InputDecoration(labelText: t('Bebeğin adı'))),
         const SizedBox(height: 12),
         OutlinedButton.icon(onPressed: () async {
           final d = await showDatePicker(context: ctx, initialDate: secilen ?? DateTime.now(), firstDate: DateTime(2010), lastDate: DateTime.now());
@@ -299,7 +309,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       recordRoute = ModalRoute.of(ctx);
       return AlertDialog(
       title: Text('$tur kaydı'),
-      content: TextField(controller: not, autofocus: true, decoration: const InputDecoration(labelText: 'Açıklama / miktar (isteğe bağlı)'), maxLines: 2),
+      content: TextField(controller: not, autofocus: true, decoration: InputDecoration(labelText: t('Açıklama / miktar (isteğe bağlı)')), maxLines: 2),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () async {
           if (kaydediliyor) return;
@@ -330,9 +340,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       return AlertDialog(
       title: const Text('Büyüme ölçümü'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
-        TextField(controller: boy, keyboardType: const TextInputType.numberWithOptions(decimal: true), decoration: const InputDecoration(labelText: 'Boy (cm)')),
-        TextField(controller: kilo, keyboardType: const TextInputType.numberWithOptions(decimal: true), decoration: const InputDecoration(labelText: 'Kilo (kg)')),
-        TextField(controller: bas, keyboardType: const TextInputType.numberWithOptions(decimal: true), decoration: const InputDecoration(labelText: 'Baş çevresi (cm)')),
+        TextField(controller: boy, keyboardType: const TextInputType.numberWithOptions(decimal: true), decoration: InputDecoration(labelText: t('Boy (cm)'))),
+        TextField(controller: kilo, keyboardType: const TextInputType.numberWithOptions(decimal: true), decoration: InputDecoration(labelText: t('Kilo (kg)'))),
+        TextField(controller: bas, keyboardType: const TextInputType.numberWithOptions(decimal: true), decoration: InputDecoration(labelText: t('Baş çevresi (cm)'))),
       ]),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () async {
@@ -387,7 +397,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     final urun = TextEditingController();
     await showDialogAndDispose<void>(disposables: [urun], context: context, builder: (ctx) => AlertDialog(
       title: const Text('Alışveriş listesine ekle'),
-      content: TextField(controller: urun, autofocus: true, decoration: const InputDecoration(labelText: 'Ürün adı')),
+      content: TextField(controller: urun, autofocus: true, decoration: InputDecoration(labelText: t('Ürün adı'))),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () async {
           final yeniUrun = urun.text.trim();
@@ -761,7 +771,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
             Text('Boy ${_olcumMetni(o['boy'], 'cm')} · Kilo ${_olcumMetni(o['kilo'], 'kg')} · Baş ${_olcumMetni(o['basCevresi'], 'cm')}',
               style: const TextStyle(fontSize: 12.5, color: Colors.black87)),
           ])),
-          IconButton(tooltip: 'Ölçümü sil', icon: const Icon(Icons.delete_outline, size: 20), onPressed: () => _kayitSil(olcumler, o)),
+          IconButton(tooltip: t('Ölçümü sil'), icon: const Icon(Icons.delete_outline, size: 20), onPressed: () => _kayitSil(olcumler, o)),
         ]))),
       _baslik('Bakım rehberi'),
       _rehberKart('Bebek Masajı', Icons.spa), _rehberKart('Bebek Gelişimi', Icons.auto_graph),
@@ -822,7 +832,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     ...olaylar.take(30).map((o) => _panel(child: ListTile(
       leading: const Icon(Icons.check_circle_outline, color: mor), title: Text(o['tur'] ?? ''),
       subtitle: Text('${_guvenliTarih(o['zaman'])}  ${o['not'] ?? ''}'),
-      trailing: IconButton(tooltip: 'Kaydı sil', icon: const Icon(Icons.delete_outline), onPressed: () => _kayitSil(olaylar, o))))),
+      trailing: IconButton(tooltip: t('Kaydı sil'), icon: const Icon(Icons.delete_outline), onPressed: () => _kayitSil(olaylar, o))))),
   ];
 
   // Paket 39 referansı: Günlük Takip (tarih gezinme, + ile kayıt, günün özeti).
@@ -873,7 +883,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           leading: const Icon(Icons.check_circle_outline, color: mor),
           title: Text(o['tur'] ?? ''),
           subtitle: Text('${z.hour.toString().padLeft(2, '0')}:${z.minute.toString().padLeft(2, '0')}  ${o['not'] ?? ''}'),
-          trailing: IconButton(tooltip: 'Kaydı sil', icon: const Icon(Icons.delete_outline), onPressed: () => _kayitSil(olaylar, o))));
+          trailing: IconButton(tooltip: t('Kaydı sil'), icon: const Icon(Icons.delete_outline), onPressed: () => _kayitSil(olaylar, o))));
       }),
       _baslik('Ayrıntılı günlükler'),
       PastelLinkCard(icon: Icons.local_drink_outlined, title: 'Beslenme günlüğüm',
@@ -1246,7 +1256,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
             setState(() => alisverisAdet[u] = v);
             _kaydet();
           }),
-          IconButton(tooltip: '$u ürününü sil', visualDensity: VisualDensity.compact,
+          IconButton(tooltip: t('$u ürününü sil'), visualDensity: VisualDensity.compact,
             icon: const Icon(Icons.delete_outline, size: 20), onPressed: () {
             setState(() {alisveris.remove(u); tamamlanan.remove(u); alisverisAdet.remove(u);}); _kaydet();
           }),
@@ -1337,7 +1347,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   Future<void> _adetGunuSec() async {
     final now = DateTime.now();
     final d = await showDatePicker(context: context,
-      helpText: 'Adet başlangıç günü',
+      helpText: t('Adet başlangıç günü'),
       initialDate: now, firstDate: DateTime(now.year - 3), lastDate: now);
     if (d != null && mounted) await _adetBaslangiciKaydet(d, onayIste: false);
   }
@@ -1657,13 +1667,14 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     _panel(color: const Color(0xFFFFFCFF), padding: EdgeInsets.zero, child: Column(children: [
       _profilSatiri(Icons.person_outline_rounded, 'Anne profilim ve acil kartım', () => _sayfa('Anne profilim', const MotherProfilePage())),
       _profilSatiri(Icons.monitor_heart_outlined, 'Sağlığım', () => _sayfa('Sağlığım', const MyHealthPage())),
+      _profilSatiri(Icons.language_rounded, 'Dil', () => showLanguagePicker(context)),
       _profilSatiri(Icons.notifications_none_rounded, 'Bildirim Ayarları', () => Navigator.of(context).push(
         MaterialPageRoute<void>(builder: (_) => const NotificationPreferencesPage()))),
       _profilSatiri(Icons.shield_outlined, 'Gizlilik ve Güvenlik', () => Navigator.push(context,
         MaterialPageRoute<void>(builder: (_) => const BackupPage()))),
       _profilSatiri(Icons.info_outline_rounded, 'Uygulama Hakkında', () => showAboutDialog(context: context,
-        applicationName: 'Anne & Bebek', applicationVersion: '1.0.0',
-        applicationLegalese: 'Takip kayıtları kişisel kullanım içindir; sağlık değerlendirmesi yerine geçmez.')),
+        applicationName: t('Anne & Bebek'), applicationVersion: '1.0.0',
+        applicationLegalese: t('Takip kayıtları kişisel kullanım içindir; sağlık değerlendirmesi yerine geçmez.'))),
     ])),
     _baslik('Hesabım'), _rehberKart('Bebek profilim', Icons.child_care),
     _panel(child: ListTile(title: Text(bebekAdi.isEmpty ? 'Bebek profili oluştur' : bebekAdi),
@@ -1746,14 +1757,14 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       child: Scaffold(
     appBar: AppBar(
       toolbarHeight: 64,
-      leading: altBolum ? IconButton(tooltip: 'Ana sayfaya dön', icon: const Icon(Icons.arrow_back_rounded),
+      leading: altBolum ? IconButton(tooltip: t('Ana sayfaya dön'), icon: const Icon(Icons.arrow_back_rounded),
         onPressed: () => setState(() => sekme = 0)) : null,
       title: PastelTitle(icon: baslikIkonu, title: baslik),
       actions: [
-        IconButton(tooltip: 'Ara ve hızlı erişim', icon: const Icon(Icons.search_rounded), onPressed: _hizliErisim),
-        IconButton(tooltip: 'Bildirim ayarları', icon: const Icon(Icons.notifications_none_rounded),
+        IconButton(tooltip: t('Ara ve hızlı erişim'), icon: const Icon(Icons.search_rounded), onPressed: _hizliErisim),
+        IconButton(tooltip: t('Bildirim ayarları'), icon: const Icon(Icons.notifications_none_rounded),
           onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const NotificationPreferencesPage()))),
-        PopupMenuButton<String>(tooltip: 'Diğer bölümler', icon: const Icon(Icons.more_vert_rounded),
+        PopupMenuButton<String>(tooltip: t('Diğer bölümler'), icon: const Icon(Icons.more_vert_rounded),
           onSelected: (value) {
             switch (value) {
               case 'guide': _ansiklopediAc();
@@ -1856,7 +1867,7 @@ class _RehberSayfasiState extends State<_RehberSayfasi> {
         ])), SizedBox(width: 10), Icon(Icons.auto_stories_rounded, color: mor, size: 54)])),
       const SizedBox(height: 18),
       TextField(onChanged: (v) => setState(() => q = v),
-        decoration: InputDecoration(hintText: 'Konu ara: uyku, beslenme, gelişim...', prefixIcon: const Icon(Icons.search),
+        decoration: InputDecoration(hintText: t('Konu ara: uyku, beslenme, gelişim...'), prefixIcon: const Icon(Icons.search),
           filled: true, fillColor: Colors.white, border: OutlineInputBorder(borderRadius: BorderRadius.circular(22), borderSide: BorderSide.none))),
       const SizedBox(height: 14),
       SingleChildScrollView(scrollDirection: Axis.horizontal, child: Row(children: ['Tümü', 'A-H', 'I-R', 'S-Z'].map((f) =>

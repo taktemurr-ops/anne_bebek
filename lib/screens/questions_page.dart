@@ -1,7 +1,9 @@
 import 'dart:async';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 
 import '../data/encyclopedia/encyclopedia.dart';
 import '../services/secure_health_store.dart';
@@ -105,12 +107,12 @@ class _QuestionsPageState extends State<QuestionsPage> {
             ButtonSegment(value: 'Bebeğim', label: Text('Bebeğim için')),
           ], selected: {about}, onSelectionChanged: (s) => update(() => about = s.first)),
           TextField(key: const Key('soru_metin'), controller: text, maxLines: 3, maxLength: 300,
-              decoration: const InputDecoration(labelText: 'Sorum')),
+              decoration: InputDecoration(labelText: t('Sorum'))),
           if (q != null) ...[
             SwitchListTile(contentPadding: EdgeInsets.zero, value: asked, title: const Text('Sordum'),
                 onChanged: (v) => update(() => asked = v)),
             TextField(controller: answer, maxLines: 4, maxLength: 1000,
-                decoration: const InputDecoration(labelText: 'Aldığım cevap')),
+                decoration: InputDecoration(labelText: t('Aldığım cevap'))),
           ],
         ])),
         actions: [
@@ -182,7 +184,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
     return Column(children: [
       Padding(padding: const EdgeInsets.fromLTRB(14, 12, 14, 6), child: TextField(controller: _search,
         key: const Key('sss_ara'),
-        decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Sorunu yaz (ör. gaz sancısı, kasık ağrısı)',
+        decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('Sorunu yaz (ör. gaz sancısı, kasık ağrısı)'),
             border: OutlineInputBorder()),
         onChanged: (_) => setState(() {}))),
       Expanded(child: topics.isEmpty

@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../services/forum_safety_service.dart';
 
 class ForumReportButton extends StatelessWidget {
@@ -9,7 +11,7 @@ class ForumReportButton extends StatelessWidget {
     required this.contentId});
   @override
   Widget build(BuildContext context) => IconButton(
-    tooltip: 'Şikâyet et', icon: const Icon(Icons.flag_outlined),
+    tooltip: t('Şikâyet et'), icon: const Icon(Icons.flag_outlined),
     onPressed: () async {
       const reasons = ['Spam / reklam', 'Hakaret / taciz', 'Kişisel veri paylaşımı',
         'Yanıltıcı sağlık bilgisi', 'Diğer'];

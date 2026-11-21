@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../services/reproductive_calendar_repository.dart';
 import '../services/reproductive_calendar_settings.dart';
 import '../utils/reproductive_calendar.dart';
@@ -81,7 +83,7 @@ class _ReproductiveCalendarPageState extends State<ReproductiveCalendarPage> {
             'Son adet: ${_periodStart!.day}.${_periodStart!.month}.${_periodStart!.year}')),
         const SizedBox(height: 12),
         DropdownButtonFormField<int>(initialValue: _cycleDays,
-          decoration: const InputDecoration(labelText: 'Döngü uzunluğu (gün)'),
+          decoration: InputDecoration(labelText: t('Döngü uzunluğu (gün)')),
           items: [for (var days = 21; days <= 35; days++)
             DropdownMenuItem(value: days, child: Text('$days gün'))],
           onChanged: (value) { if (value != null) setState(() => _cycleDays = value); }),

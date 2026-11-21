@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/text.dart';
 import '../widgets/ui.dart';
 import 'module_hub_page.dart';
 

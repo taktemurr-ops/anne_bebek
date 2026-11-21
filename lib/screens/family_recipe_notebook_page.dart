@@ -1,6 +1,8 @@
 import '../utils/dialog_helpers.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 
 import '../services/family_recipes.dart';
 import '../services/family_recipe_repository.dart';
@@ -89,27 +91,27 @@ class _FamilyRecipeNotebookPageState extends State<FamilyRecipeNotebookPage> {
                 TextField(
                   controller: title,
                   maxLength: 120,
-                  decoration: const InputDecoration(labelText: 'Tarif adı'),
+                  decoration: InputDecoration(labelText: t('Tarif adı')),
                 ),
                 TextField(
                   controller: ingredients,
                   maxLines: 3,
-                  decoration: const InputDecoration(
-                    labelText: 'Malzemeler (her satıra bir tane)',
+                  decoration: InputDecoration(
+                    labelText: t('Malzemeler (her satıra bir tane)'),
                   ),
                 ),
                 TextField(
                   controller: minutes,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: 'Hazırlama süresi (dk)',
+                  decoration: InputDecoration(
+                    labelText: t('Hazırlama süresi (dk)'),
                   ),
                 ),
                 TextField(
                   controller: instructions,
                   maxLines: 4,
                   maxLength: 5000,
-                  decoration: const InputDecoration(labelText: 'Hazırlanışı'),
+                  decoration: InputDecoration(labelText: t('Hazırlanışı')),
                 ),
               ],
             ),

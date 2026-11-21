@@ -1,5 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/general_recipe_catalog.dart';
 
@@ -136,9 +138,9 @@ class _DailyMealSuggestionsPageState extends State<DailyMealSuggestionsPage> {
                   const Text('Bugün ne pişirsem?', style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold, color: _purple)),
                   const SizedBox(height: 8),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    IconButton(tooltip: 'Önceki gün', onPressed: () => setState(() { _date = _date.subtract(const Duration(days: 1)); _shift = 0; }), icon: const Icon(Icons.chevron_left)),
+                    IconButton(tooltip: t('Önceki gün'), onPressed: () => setState(() { _date = _date.subtract(const Duration(days: 1)); _shift = 0; }), icon: const Icon(Icons.chevron_left)),
                     Text(_dateLabel(_date), style: const TextStyle(fontWeight: FontWeight.bold)),
-                    IconButton(tooltip: 'Sonraki gün', onPressed: () => setState(() { _date = _date.add(const Duration(days: 1)); _shift = 0; }), icon: const Icon(Icons.chevron_right)),
+                    IconButton(tooltip: t('Sonraki gün'), onPressed: () => setState(() { _date = _date.add(const Duration(days: 1)); _shift = 0; }), icon: const Icon(Icons.chevron_right)),
                   ]),
                   OutlinedButton.icon(onPressed: () => setState(() => _shift++), icon: const Icon(Icons.refresh), label: const Text('Başka öneriler göster')),
                 ]),

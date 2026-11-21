@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../data/monthly_baby_guide.dart';
 import 'baby_nutrition_page.dart';
 
@@ -38,14 +40,14 @@ class _MonthlyBabyGuidePageState extends State<MonthlyBabyGuidePage> {
             Text('$month. ay', style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFF713B72))),
             const SizedBox(height: 12),
             Row(children: [
-              IconButton(tooltip: 'Önceki ay', onPressed: month > 0 ? () => setState(() => month--) : null, icon: const Icon(Icons.chevron_left)),
+              IconButton(tooltip: t('Önceki ay'), onPressed: month > 0 ? () => setState(() => month--) : null, icon: const Icon(Icons.chevron_left)),
               Expanded(child: DropdownButtonFormField<int>(
                 key: ValueKey(month), initialValue: month, isExpanded: true,
-                decoration: const InputDecoration(labelText: 'Ay seçin', filled: true, fillColor: Colors.white, border: OutlineInputBorder()),
+                decoration: InputDecoration(labelText: t('Ay seçin'), filled: true, fillColor: Colors.white, border: OutlineInputBorder()),
                 items: List.generate(73, (i) => DropdownMenuItem(value: i, child: Text('$i. ay'))),
                 onChanged: (v) { if (v != null) setState(() => month = v); },
               )),
-              IconButton(tooltip: 'Sonraki ay', onPressed: month < 72 ? () => setState(() => month++) : null, icon: const Icon(Icons.chevron_right)),
+              IconButton(tooltip: t('Sonraki ay'), onPressed: month < 72 ? () => setState(() => month++) : null, icon: const Icon(Icons.chevron_right)),
             ]),
           ]),
         ),

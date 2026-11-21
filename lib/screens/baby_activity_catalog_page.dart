@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../services/baby_activity_catalog.dart';
 
 class BabyActivityCatalogPage extends StatefulWidget {
@@ -25,13 +27,13 @@ class _BabyActivityCatalogPageState extends State<BabyActivityCatalogPage> {
         Padding(padding: const EdgeInsets.all(16), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Text('52 temel etkinlik, 11 yaş dönemi için uyarlanmıştır (572 yaşa göre varyasyon). Her etkinlik her yaşta uygun olmayabilir; açıklamaları okuyun.'),
           const SizedBox(height: 12),
-          DropdownButtonFormField<int>(initialValue: _band, decoration: const InputDecoration(labelText: 'Yaş aralığı (ay)', border: OutlineInputBorder()),
+          DropdownButtonFormField<int>(initialValue: _band, decoration: InputDecoration(labelText: t('Yaş aralığı (ay)'), border: OutlineInputBorder()),
             items: [for (var i = 0; i < ages.length; i++) DropdownMenuItem(value: i, child: Text('${ages[i].$1}–${ages[i].$2} ay'))],
             onChanged: (value) => setState(() => _band = value ?? 0)),
           const SizedBox(height: 8),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Etkinlik veya malzeme ara', border: OutlineInputBorder()), onChanged: (value) => setState(() => _query = value.trim())),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('Etkinlik veya malzeme ara'), border: OutlineInputBorder()), onChanged: (value) => setState(() => _query = value.trim())),
           const SizedBox(height: 8),
-          DropdownButtonFormField<String>(initialValue: _area, decoration: const InputDecoration(labelText: 'Gelişim alanı', border: OutlineInputBorder()),
+          DropdownButtonFormField<String>(initialValue: _area, decoration: InputDecoration(labelText: t('Gelişim alanı'), border: OutlineInputBorder()),
             items: areas.map((area) => DropdownMenuItem(value: area, child: Text(area))).toList(), onChanged: (value) => setState(() => _area = value ?? 'Tümü')),
           const SizedBox(height: 8),
           Text('${filtered.length} etkinlik gösteriliyor', style: Theme.of(context).textTheme.labelLarge),

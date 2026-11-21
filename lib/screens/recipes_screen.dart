@@ -1,5 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/general_recipe_catalog.dart';
 import '../widgets/ui.dart';
@@ -87,7 +89,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
       const SizedBox(height: 12),
       FilledButton.icon(onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const WeeklyMealPlannerPage())), icon: const Icon(Icons.calendar_month), label: const Text('Haftalık yemek planı ve alışveriş listesi')),
       const SizedBox(height: 12),
-      TextField(controller: _search, decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Tarif veya malzeme ara', border: OutlineInputBorder())),
+      TextField(controller: _search, decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('Tarif veya malzeme ara'), border: OutlineInputBorder())),
       const SizedBox(height: 8),
       SingleChildScrollView(scrollDirection: Axis.horizontal, child: Row(children: [
         for (final category in categories) Padding(padding: const EdgeInsets.only(right: 6), child: ChoiceChip(label: Text(category), selected: _category == category, onSelected: (_) => setState(() => _category = category))),

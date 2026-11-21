@@ -1,6 +1,8 @@
 import '../services/reminder_repository.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../services/local_reminder_notifications.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../services/family_notification_preferences.dart';
 import '../services/family_notification_repository.dart';
 
@@ -94,7 +96,7 @@ class _NotificationPreferencesPageState extends State<NotificationPreferencesPag
         const Text('Sessiz saatler', style: TextStyle(fontWeight: FontWeight.bold)),
         DropdownButtonFormField<int>(
           initialValue: _prefs.quietStartHour,
-          decoration: const InputDecoration(labelText: 'Başlangıç'),
+          decoration: InputDecoration(labelText: t('Başlangıç')),
           items: [for (var h = 0; h < 24; h++)
             DropdownMenuItem(value: h, child: Text('${h.toString().padLeft(2, '0')}:00'))],
           onChanged: _error != null ? null : (v) {
@@ -103,7 +105,7 @@ class _NotificationPreferencesPageState extends State<NotificationPreferencesPag
         const SizedBox(height: 12),
         DropdownButtonFormField<int>(
           initialValue: _prefs.quietEndHour,
-          decoration: const InputDecoration(labelText: 'Bitiş'),
+          decoration: InputDecoration(labelText: t('Bitiş')),
           items: [for (var h = 0; h < 24; h++)
             DropdownMenuItem(value: h, child: Text('${h.toString().padLeft(2, '0')}:00'))],
           onChanged: _error != null ? null : (v) {

@@ -1,5 +1,7 @@
 import '../utils/dialog_helpers.dart';
-import 'package:flutter/material.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../services/shopping_list.dart';
 import '../services/shopping_list_repository.dart';
 
@@ -57,7 +59,7 @@ class _ShoppingChecklistPageState extends State<ShoppingChecklistPage> {
           controller: controller,
           autofocus: true,
           maxLength: 120,
-          decoration: const InputDecoration(labelText: 'Ürün adı')),
+          decoration: InputDecoration(labelText: t('Ürün adı'))),
         actions: [
           TextButton(onPressed: () => Navigator.pop(dialogContext),
             child: const Text('Vazgeç')),
@@ -113,7 +115,7 @@ class _ShoppingChecklistPageState extends State<ShoppingChecklistPage> {
                 _persist(updated);
               },
               secondary: IconButton(
-                tooltip: 'Ürünü sil',
+                tooltip: t('Ürünü sil'),
                 onPressed: _error != null ? null : () {
                   _persist([..._items]..removeAt(index));
                 },

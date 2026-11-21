@@ -1,8 +1,9 @@
 import 'dart:async';
+import '../i18n/text.dart';
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/loop_player.dart';

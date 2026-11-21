@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/text.dart';
 
 /// GP-01: Ana ekrandan günlük kayıt işlemlerine hızlı erişim.
 class DailyQuickActions extends StatelessWidget {

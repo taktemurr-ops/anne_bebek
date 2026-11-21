@@ -1,4 +1,6 @@
 import 'daily_routine_journal_page.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../services/daily_routine_repository.dart';
 import 'official_vaccine_guide_page.dart';
 import 'child_data_audit_page.dart';
@@ -7,7 +9,7 @@ import 'child_overview_page.dart';
 import 'child_care_plan_page.dart';
 import 'child_growth_trends_page.dart';
 import 'child_report_page.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../services/child_profiles.dart';
 import '../services/child_journals.dart';
 import '../services/child_care_plans.dart';
@@ -67,8 +69,8 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       return StatefulBuilder(builder: (dialogContext, refresh) => AlertDialog(
       title: const Text('Çocuk profili ekle'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
-        TextField(controller: name, maxLength: 60, decoration: const InputDecoration(labelText: 'Adı')),
-        DropdownButtonFormField<String>(initialValue: sex, decoration: const InputDecoration(labelText: 'Büyüme referansı için cinsiyet'), items: const [
+        TextField(controller: name, maxLength: 60, decoration: InputDecoration(labelText: t('Adı'))),
+        DropdownButtonFormField<String>(initialValue: sex, decoration: InputDecoration(labelText: t('Büyüme referansı için cinsiyet')), items: const [
           DropdownMenuItem(value: 'unknown', child: Text('Belirtilmedi')),
           DropdownMenuItem(value: 'female', child: Text('Kız')),
           DropdownMenuItem(value: 'male', child: Text('Erkek')),
@@ -106,7 +108,7 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       renameRoute = ModalRoute.of(ctx);
       return AlertDialog(
       title: const Text('Profil adını düzenle'),
-      content: TextField(controller: controller, maxLength: 60, decoration: const InputDecoration(labelText: 'Ad')),
+      content: TextField(controller: controller, maxLength: 60, decoration: InputDecoration(labelText: t('Ad'))),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () {
           final name = controller.text.trim();
@@ -299,7 +301,7 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
           onTap: () => Navigator.push(context, MaterialPageRoute<void>(
               builder: (_) => ChildOverviewPage(child: profile))),
           trailing: PopupMenuButton<String>(
-            tooltip: 'Profil işlemleri',
+            tooltip: t('Profil işlemleri'),
             onSelected: (choice) {
               if (choice == 'rename') { _rename(profile); }
               else if (choice == 'birth') { _editBirth(profile); }
@@ -337,7 +339,7 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       backgroundColor: const Color(0xFFFFF8FC),
       title: const Text('Bebek profillerim'),
       actions: [IconButton(
-        tooltip: 'Veri bütünlüğü kontrolü',
+        tooltip: t('Veri bütünlüğü kontrolü'),
         icon: const Icon(Icons.fact_check_outlined),
         onPressed: () => Navigator.push(context, MaterialPageRoute<void>(
             builder: (_) => const ChildDataAuditPage())),
@@ -380,7 +382,7 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       TextField(
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.search, color: Color(0xFFD64B91)),
-          hintText: 'Bebeklerimde ara...',
+          hintText: t('Bebeklerimde ara...'),
           filled: true,
           fillColor: Colors.white,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(18),

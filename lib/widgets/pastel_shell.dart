@@ -1,5 +1,7 @@
 import 'visuals.dart';
-import 'package:flutter/material.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'pastel_design.dart';
 
 /// Paket 39 referans tasarımı: Ana Sayfa • Bebeğim • (+) • Tarifler • Profil.
@@ -74,7 +76,7 @@ class PastelBottomBar extends StatelessWidget {
             Expanded(
               child: Center(
                 child: Tooltip(
-                  message: 'Hızlı kayıt ekle',
+                  message: t('Hızlı kayıt ekle'),
                   child: Material(
                     color: PastelPalette.primary,
                     shape: const CircleBorder(),

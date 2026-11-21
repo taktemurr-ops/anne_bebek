@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'package:flutter/services.dart';
 
 import '../services/backup_service.dart';
@@ -209,7 +211,7 @@ class _BackupPageState extends State<BackupPage> {
             enableSuggestions: false,
             autocorrect: false,
             decoration: InputDecoration(
-              labelText: 'Yedek parolası (en az 12 karakter)',
+              labelText: t('Yedek parolası (en az 12 karakter)'),
               border: const OutlineInputBorder(),
               suffixIcon: IconButton(
                 onPressed: () {
@@ -279,9 +281,9 @@ class _BackupPageState extends State<BackupPage> {
             controller: input,
             minLines: 3,
             maxLines: 6,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               border: OutlineInputBorder(),
-              hintText: 'Şifreli yedek metni',
+              hintText: t('Şifreli yedek metni'),
             ),
           ),
 

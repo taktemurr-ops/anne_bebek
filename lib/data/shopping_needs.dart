@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 
 /// Alışveriş ekranındaki ihtiyaç kataloğu (Paket 39 Alışveriş referansı).
 ///

@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'package:flutter/services.dart';
 import 'package:printing/printing.dart';
 import '../services/child_pdf_report.dart';
@@ -51,7 +53,7 @@ class _ChildReportPageState extends State<ChildReportPage> {
           const Text('Yalnızca seçilen çocuğun kayıtları gösterilir. Veriler cihazınızda kalır; kopyalama işlemi panoya aktarır.'),
           const SizedBox(height: 12),
           DropdownButtonFormField<int>(initialValue: _days,
-            decoration: const InputDecoration(labelText: 'Tarih aralığı'),
+            decoration: InputDecoration(labelText: t('Tarih aralığı')),
             items: const [DropdownMenuItem(value: 7, child: Text('Son 7 gün')),
               DropdownMenuItem(value: 30, child: Text('Son 30 gün')),
               DropdownMenuItem(value: 90, child: Text('Son 90 gün')),
@@ -60,7 +62,7 @@ class _ChildReportPageState extends State<ChildReportPage> {
           const SizedBox(height: 12),
           DropdownButtonFormField<String>(key: ValueKey('${_days}_${categories.join("|")}'),
             initialValue: categories.contains(_category) ? _category : 'Tümü',
-            decoration: const InputDecoration(labelText: 'Kategori'),
+            decoration: InputDecoration(labelText: t('Kategori')),
             items: categories.map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(),
             onChanged: (v) { if (v != null) setState(() => _category = v); }),
           const SizedBox(height: 16),

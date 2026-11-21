@@ -1,7 +1,9 @@
 import '../utils/dialog_helpers.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../widgets/reference_widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -195,7 +197,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
     final name = await showDialog<String>(context: context, builder: (ctx) => AlertDialog(
       title: const Text('Alışveriş listesi adı'),
       content: TextField(controller: controller, maxLength: 60,
-        decoration: const InputDecoration(hintText: 'Örn. Haftalık market'),
+        decoration: InputDecoration(hintText: t('Örn. Haftalık market')),
         autofocus: true),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () {
@@ -321,14 +323,14 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         title: Text('$name • Miktar ve birim fiyat'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
           TextField(controller: amountInput, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: const InputDecoration(labelText: 'Miktar (0’dan büyük)')),
+            decoration: InputDecoration(labelText: t('Miktar (0’dan büyük)'))),
           DropdownButtonFormField<String>(initialValue: unit,
             items: _units.map((u) => DropdownMenuItem(value: u, child: Text(u))).toList(),
             onChanged: (v) { if (v != null) update(() => unit = v); },
-            decoration: const InputDecoration(labelText: 'Birim')),
+            decoration: InputDecoration(labelText: t('Birim'))),
           TextField(controller: priceInput, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: const InputDecoration(labelText: 'Birim fiyatı (TL)',
-              helperText: 'Boş bırakılırsa eski toplam tahmini fiyat kullanılır.')),
+            decoration: InputDecoration(labelText: t('Birim fiyatı (TL)'),
+              helperText: t('Boş bırakılırsa eski toplam tahmini fiyat kullanılır.'))),
         ])),
         actions: [TextButton(onPressed: () => Navigator.pop(dialog), child: const Text('Vazgeç')),
           FilledButton(onPressed: () {
@@ -376,9 +378,9 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       title: Text('$name • Ürün detayları'),
       content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: brand, maxLength: 80,
-          decoration: const InputDecoration(labelText: 'Marka', hintText: 'Örn. marka adı')),
+          decoration: InputDecoration(labelText: t('Marka'), hintText: t('Örn. marka adı'))),
         TextField(controller: store, maxLength: 80,
-          decoration: const InputDecoration(labelText: 'Market / mağaza', hintText: 'Örn. market adı')),
+          decoration: InputDecoration(labelText: t('Market / mağaza'), hintText: t('Örn. market adı'))),
         const Text('Bilgiler yalnızca bu kayıtlı listedeki ürün için geçerlidir.'),
       ])),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Vazgeç')),
@@ -462,7 +464,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           TextButton(onPressed: () => update(() => selectedDate = null),
             child: const Text('Tarihi temizle')),
           DropdownButtonFormField<String>(initialValue: storage,
-            decoration: const InputDecoration(labelText: 'Saklama yeri'),
+            decoration: InputDecoration(labelText: t('Saklama yeri')),
             items: _storagePlaces.map((place) => DropdownMenuItem(value: place, child: Text(place))).toList(),
             onChanged: (value) { if (value != null) update(() => storage = value); }),
         ]),
@@ -565,8 +567,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
             Text(record['title']?.toString() ?? ''),
             const SizedBox(height: 8),
-            TextField(decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.search), labelText: 'Ürün ara'),
+            TextField(decoration: InputDecoration(
+              prefixIcon: Icon(Icons.search), labelText: t('Ürün ara')),
               onChanged: (v) => refresh(() => query = v)),
             Wrap(spacing: 6, children: ['Tümü', 'Günlük', 'Haftalık', 'Aylık'].map((p) =>
               ChoiceChip(label: Text(p), selected: period == p,
@@ -625,9 +627,9 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             ButtonSegment(value: false, label: Text('Çıkış'))],
             selected: {incoming}, onSelectionChanged: (v) => update(() => incoming = v.first)),
           TextField(controller: qty, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: const InputDecoration(labelText: 'Miktar')),
+            decoration: InputDecoration(labelText: t('Miktar'))),
           TextField(controller: note, maxLength: 120,
-            decoration: const InputDecoration(labelText: 'Açıklama (isteğe bağlı)')),
+            decoration: InputDecoration(labelText: t('Açıklama (isteğe bağlı)'))),
         ])),
         actions: [TextButton(onPressed: () => Navigator.pop(dialog, false), child: const Text('Vazgeç')),
           FilledButton(onPressed: () {
@@ -733,7 +735,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             const Text('Hareket filtreleri ve istatistikleri',
               style: TextStyle(fontWeight: FontWeight.bold)),
             DropdownButtonFormField<String>(initialValue: product,
-              decoration: const InputDecoration(labelText: 'Ürün'),
+              decoration: InputDecoration(labelText: t('Ürün')),
               items: ['Tümü', ...names].map((n) => DropdownMenuItem(value: n, child: Text(n))).toList(),
               onChanged: (v) => refresh(() => product = v ?? 'Tümü')),
             Wrap(spacing: 8, children: [
@@ -784,8 +786,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       title: Text('$name • Hedef stok'),
       content: TextField(controller: controller,
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        decoration: const InputDecoration(labelText: 'Hedef miktar',
-          helperText: 'Boş bırakılırsa hedef kaldırılır.')),
+        decoration: InputDecoration(labelText: t('Hedef miktar'),
+          helperText: t('Boş bırakılırsa hedef kaldırılır.'))),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Vazgeç')),
         FilledButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Kaydet'))],
     ));
@@ -854,7 +856,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
     final ok = await showDialog<bool>(context: context, builder: (ctx) => AlertDialog(
       title: const Text('Hareket açıklamasını düzenle'),
       content: TextField(controller: controller, maxLength: 120,
-        decoration: const InputDecoration(labelText: 'Açıklama')),
+        decoration: InputDecoration(labelText: t('Açıklama'))),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Vazgeç')),
         FilledButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Kaydet'))],
     ));
@@ -916,14 +918,14 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             const Text('Stok sayımı ve fark kontrolü',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
             Text(record['title']?.toString() ?? ''),
-            TextField(controller: countNote, decoration: const InputDecoration(labelText: 'Sayım açıklaması (isteğe bağlı)')),
+            TextField(controller: countNote, decoration: InputDecoration(labelText: t('Sayım açıklaması (isteğe bağlı)'))),
             const Text('Fiziksel miktarları girin. Kaydetmeden önce farkları kontrol edin.'),
             ...names.map((name) => ListTile(
               title: Text(name),
               subtitle: Text('Sistem: ${_namedStock(record, name)['amount']?.isEmpty == true ? 'Tanımsız' : _namedStock(record, name)['amount']} • Hedef: ${_stockTarget(record, name)}'),
               trailing: SizedBox(width: 110, child: TextField(controller: controllers[name],
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                decoration: const InputDecoration(labelText: 'Fiziksel'),
+                decoration: InputDecoration(labelText: t('Fiziksel')),
                 onChanged: (v) => refresh(() {
                   final parsed = double.tryParse(v.replaceAll(',', '.'));
                   if (parsed != null && parsed.isFinite && parsed >= 0) {
@@ -1059,8 +1061,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           ListView(padding: const EdgeInsets.all(16), children: [
             const Text('Stok sayım analizleri', style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold, color: _purple)),
             Text(record['title']?.toString() ?? ''),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-              labelText: 'Ürün, açıklama veya tarih ara'), onChanged: (v) => refresh(() => search = v.toLowerCase().trim())),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+              labelText: t('Ürün, açıklama veya tarih ara')), onChanged: (v) => refresh(() => search = v.toLowerCase().trim())),
             Wrap(spacing: 8, children: [
               OutlinedButton(onPressed: () async {
                 final d = await showDatePicker(context: ctx, initialDate: from ?? DateTime.now(),
@@ -1254,11 +1256,11 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
             Text(record['title']?.toString() ?? ''),
             const SizedBox(height: 8),
-            TextField(decoration: const InputDecoration(
-              labelText: 'Ürün ara', prefixIcon: Icon(Icons.search)),
+            TextField(decoration: InputDecoration(
+              labelText: t('Ürün ara'), prefixIcon: Icon(Icons.search)),
               onChanged: (v) => refresh(() => query = v)),
             DropdownButtonFormField<String>(initialValue: sort,
-              decoration: const InputDecoration(labelText: 'Sıralama'),
+              decoration: InputDecoration(labelText: t('Sıralama')),
               items: ['En çok tüketilen', 'Yenileme maliyeti', 'Ürün A–Z']
                   .map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
               onChanged: (v) => refresh(() => sort = v ?? sort)),
@@ -1362,8 +1364,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             const SizedBox(height: 8),
             const Text('Hedef stok varsa hedefe, yoksa minimum seviyeye tamamlar. '
                 'Miktarı tanımsız ürünler değiştirilmez. Birimler ürün bazında korunur.'),
-            TextField(decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.search), labelText: 'Ürün ara'),
+            TextField(decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search), labelText: t('Ürün ara')),
               onChanged: (value) => refresh(() => search = value)),
             SwitchListTile(title: const Text('Yalnızca yenilenmesi gerekenler'),
               value: onlyBelowTarget,
@@ -1471,9 +1473,9 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       title: Text('$name • Stok miktarı'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: amount, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: const InputDecoration(labelText: 'Mevcut stok miktarı')),
+          decoration: InputDecoration(labelText: t('Mevcut stok miktarı'))),
         TextField(controller: minimum, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: const InputDecoration(labelText: 'Minimum stok miktarı')),
+          decoration: InputDecoration(labelText: t('Minimum stok miktarı'))),
         const SizedBox(height: 8),
         const Text('Miktarlar ürünün kayıtlı birimiyle değerlendirilir.'),
       ]),
@@ -1706,11 +1708,11 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             Wrap(spacing: 8, children: [1,2,3,4,6,8].map((n) => ChoiceChip(
               label: Text('$n porsiyon'), selected: portions == n,
               onSelected: (_) => refresh(() {portions = n; selected.clear();}))).toList()),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-              labelText: 'Tarif veya malzeme ara'),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+              labelText: t('Tarif veya malzeme ara')),
               onChanged: (v) => refresh(() => query = v)),
             DropdownButtonFormField<String>(initialValue: filter,
-              decoration: const InputDecoration(labelText: 'Tarif durumu'),
+              decoration: InputDecoration(labelText: t('Tarif durumu')),
               items: ['Tümü','Hazır','Eksik','Kontrol gerekli'].map((v) =>
                 DropdownMenuItem(value: v, child: Text(v))).toList(),
               onChanged: (v) => refresh(() => filter = v ?? 'Tümü')),
@@ -1913,8 +1915,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               Chip(label: Text('SKT eksik: $noDate')),
               Chip(label: Text('Tahmini israf riski: $atRisk')),
             ]),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-              labelText: 'Ürün ara'), onChanged: (v) => refresh(() => query = v.trim())),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+              labelText: t('Ürün ara')), onChanged: (v) => refresh(() => query = v.trim())),
             const SizedBox(height: 8),
             Wrap(spacing: 8, runSpacing: 4, children: [
               DropdownButton<String>(value: filter, items: filters.map((v) =>
@@ -2091,9 +2093,9 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       title: Text(oldName == null ? 'Kayıtlı listeye ürün ekle' : 'Ürünü düzenle'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: nameController, autofocus: true,
-          decoration: const InputDecoration(labelText: 'Ürün adı')),
+          decoration: InputDecoration(labelText: t('Ürün adı'))),
         TextField(controller: priceController, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: const InputDecoration(labelText: 'Tahmini toplam fiyat (TL, isteğe bağlı)')),
+          decoration: InputDecoration(labelText: t('Tahmini toplam fiyat (TL, isteğe bağlı)'))),
       ]),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Vazgeç')),
         FilledButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Kaydet'))],
@@ -2254,7 +2256,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               'İşlemler mevcut stok hareketi geçmişine kaydedilir.'),
             Text('Stok kaydı: ${available.length} • Tüketim seçimi: ${selected.length} '
               '• Geçersiz giriş: $invalid • Yenileme ihtiyacı: ${low.length}'),
-            TextField(decoration: const InputDecoration(labelText: 'Ürün ara',
+            TextField(decoration: InputDecoration(labelText: t('Ürün ara'),
               prefixIcon: Icon(Icons.search)), onChanged: (v) => refresh(() => query = v)),
             SwitchListTile(title: const Text('Yalnızca hedefin altında olanları göster'),
               value: onlyLow, onChanged: (v) => refresh(() => onlyLow = v)),
@@ -2272,7 +2274,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                     '• Hedef eksik: ${needed(name).toStringAsFixed(2)} $unit'),
                   TextFormField(initialValue: quantities[name] ?? '',
                     keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                    decoration: InputDecoration(labelText: 'Tüketilen miktar ($unit)',
+                    decoration: InputDecoration(labelText: t('Tüketilen miktar ($unit)'),
                       errorText: invalidValue ? '0’dan büyük ve stoktan fazla olmayan miktar gir' : null),
                     onChanged: (v) => refresh(() => quantities[name] = v)),
                   if (value != null && value <= current(name))
@@ -2420,16 +2422,16 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             const Text('Kayıtlı stok hareketlerine göre günlük tüketim ve kalan gün '
               'hesaplanır. Tahminler yaklaşık değerlerdir; birim dönüşümü yapılmaz.'),
             DropdownButtonFormField<int>(initialValue: horizon,
-              decoration: const InputDecoration(labelText: 'Planlama süresi'),
+              decoration: InputDecoration(labelText: t('Planlama süresi')),
               items: const [7, 14, 30, 60].map((d) => DropdownMenuItem(
                 value: d, child: Text('$d gün'))).toList(),
               onChanged: (v) { if (v != null) refresh(() => horizon = v); }),
             DropdownButtonFormField<int>(initialValue: safetyDays,
-              decoration: const InputDecoration(labelText: 'Güvenlik payı'),
+              decoration: InputDecoration(labelText: t('Güvenlik payı')),
               items: const [0, 3, 7, 14].map((d) => DropdownMenuItem(
                 value: d, child: Text('$d gün'))).toList(),
               onChanged: (v) { if (v != null) refresh(() => safetyDays = v); }),
-            TextField(decoration: const InputDecoration(labelText: 'Ürün ara',
+            TextField(decoration: InputDecoration(labelText: t('Ürün ara'),
               prefixIcon: Icon(Icons.search)),
               onChanged: (v) => refresh(() => query = v)),
             SwitchListTile(title: const Text('Yalnızca alım gereken ürünler'),
@@ -2540,8 +2542,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               'Yeni alışveriş için işareti kaldırıp tekrar tamamlandı yapabilirsin.'),
             Text('Tamamlanan: ${done.length} • Aktarılan: ${done.where((n) => imported().containsKey(n)).length} '
               '• Aktarılabilir: ${done.where(eligible).length}'),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-              labelText: 'Ürün ara'), onChanged: (v) => refresh(() => search = v)),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+              labelText: t('Ürün ara')), onChanged: (v) => refresh(() => search = v)),
             SwitchListTile(title: const Text('Yalnızca bekleyenleri göster'),
               value: onlyPending, onChanged: (v) => refresh(() => onlyPending = v)),
             if (visible.isEmpty) const ListTile(title: Text('Bu filtrede tamamlanan ürün bulunamadı.')),
@@ -2645,7 +2647,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
     final result = await showDialog<String>(context: context, builder: (dialog) => AlertDialog(
       title: const Text('Liste bütçesi'),
       content: TextField(controller: input, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        decoration: const InputDecoration(labelText: 'Bütçe (TL)', hintText: '0 = bütçe yok')),
+        decoration: InputDecoration(labelText: t('Bütçe (TL)'), hintText: t('0 = bütçe yok'))),
       actions: [TextButton(onPressed: () => Navigator.pop(dialog), child: const Text('Vazgeç')),
         FilledButton(onPressed: () => Navigator.pop(dialog, input.text), child: const Text('Kaydet'))],
     ));
@@ -2727,8 +2729,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             const Text('Toplam, listelerdeki fiyatı girilmiş ürünleri kapsar. Aynı ürün farklı listelerde tekrar sayılır.', style: TextStyle(fontSize: 11)),
           ]))),
           TextField(onChanged: (v) => refresh(() { search = v; archivePage = 0; }),
-            decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-              labelText: 'Liste veya ürün ara')),
+            decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+              labelText: t('Liste veya ürün ara'))),
           _kitchenPageControls(filtered.length, archivePage, 15,
             (p) => refresh(() => archivePage = p)),
           if (_namedLists.isEmpty) const Padding(padding: EdgeInsets.all(20),
@@ -2797,7 +2799,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                   child: DropdownButtonFormField<String>(
                     key: ValueKey('store-$listId-$selectedStore'),
                     initialValue: stores.contains(selectedStore) ? selectedStore : '',
-                    decoration: const InputDecoration(labelText: 'Markete göre filtrele'),
+                    decoration: InputDecoration(labelText: t('Markete göre filtrele')),
                     items: [const DropdownMenuItem(value: '', child: Text('Tüm marketler')),
                       ...stores.map((store) => DropdownMenuItem(value: store, child: Text(store)))],
                     onChanged: (v) => refresh(() => storeFilterByList[listId] = v ?? ''),
@@ -2806,7 +2808,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                   child: DropdownButtonFormField<String>(
                     key: ValueKey('storage-$listId-$storageFilter'),
                     initialValue: _storagePlaces.contains(storageFilter) ? storageFilter : '',
-                    decoration: const InputDecoration(labelText: 'Saklama yerine göre filtrele'),
+                    decoration: InputDecoration(labelText: t('Saklama yerine göre filtrele')),
                     items: [const DropdownMenuItem(value: '', child: Text('Tüm saklama yerleri')),
                       ..._storagePlaces.map((place) => DropdownMenuItem(value: place, child: Text(place)))],
                     onChanged: (v) => refresh(() => storageFilterByList[listId] = v ?? ''),
@@ -2820,7 +2822,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 Padding(padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: DropdownButtonFormField<String>(
                     initialValue: sortByList[listId] ?? 'name',
-                    decoration: const InputDecoration(labelText: 'Ürün sıralaması'),
+                    decoration: InputDecoration(labelText: t('Ürün sıralaması')),
                     items: const [
                       DropdownMenuItem(value: 'name', child: Text('Ürün adı (A–Z)')),
                       DropdownMenuItem(value: 'price', child: Text('Tahmini fiyat (yüksekten düşüğe)')),
@@ -2837,7 +2839,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                       }), child: Text(selected.length == displayed.length && displayed.isNotEmpty
                           ? 'Seçimi kaldır' : 'Görünenleri seç')),
                       PopupMenuButton<String>(enabled: selected.isNotEmpty,
-                        tooltip: 'Toplu işlemler',
+                        tooltip: t('Toplu işlemler'),
                         onSelected: (action) => _bulkNamedAction(record, selected, action, refresh),
                         itemBuilder: (_) => const [
                           PopupMenuItem(value: 'done', child: Text('Seçilenleri alındı işaretle')),
@@ -2857,7 +2859,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                       onPressed: () => refresh(() {
                         if (!selected.add(name)) selected.remove(name);
                       })),
-                    PopupMenuButton<String>(tooltip: 'Ürün işlemleri',
+                    PopupMenuButton<String>(tooltip: t('Ürün işlemleri'),
                     onSelected: (action) {
                       if (action == 'edit') { _editNamedItem(record, refresh, oldName: name); }
                       if (action == 'quantity') { _editNamedQuantity(record, name, refresh); }
@@ -2977,7 +2979,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
     final value = await showDialog<double>(context: context, builder: (ctx) => AlertDialog(
       title: Text('$month aylık alışveriş bütçesi'),
       content: TextField(controller: input, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        decoration: const InputDecoration(labelText: 'Aylık bütçe (TL)', hintText: 'Örn. 6000')),
+        decoration: InputDecoration(labelText: t('Aylık bütçe (TL)'), hintText: t('Örn. 6000'))),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () {
           final n = double.tryParse(input.text.trim().replaceAll(',', '.'));
@@ -3042,7 +3044,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
     final value = await showDialog<double>(context: context, builder: (ctx) => AlertDialog(
       title: const Text('Alışveriş bütçesi'),
       content: TextField(controller: input, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        decoration: const InputDecoration(labelText: 'Bütçe (TL)', hintText: 'Örn. 1500')),
+        decoration: InputDecoration(labelText: t('Bütçe (TL)'), hintText: t('Örn. 1500'))),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () {
           final n = double.tryParse(input.text.trim().replaceAll(',', '.'));
@@ -3060,7 +3062,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
     final value = await showDialog<double>(context: context, builder: (ctx) => AlertDialog(
       title: Text('$name • Tahmini fiyat'),
       content: TextField(controller: input, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        decoration: const InputDecoration(labelText: 'Ürün toplam fiyatı (TL)', helperText: 'Birim fiyat değil, listedeki ürünün toplam fiyatı')),
+        decoration: InputDecoration(labelText: t('Ürün toplam fiyatı (TL)'), helperText: t('Birim fiyat değil, listedeki ürünün toplam fiyatı'))),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () {
           final n = double.tryParse(input.text.trim().replaceAll(',', '.'));
@@ -3078,7 +3080,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
     final value = await showDialog<double>(context: context, builder: (ctx) => AlertDialog(
       title: Text('$name • Gerçek satın alma fiyatı'),
       content: TextField(controller: input, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        decoration: const InputDecoration(labelText: 'Kasada ödenen tutar (TL)', helperText: 'Bu ürünün toplam gerçek fiyatını girin.')),
+        decoration: InputDecoration(labelText: t('Kasada ödenen tutar (TL)'), helperText: t('Bu ürünün toplam gerçek fiyatını girin.'))),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () {
           final n = double.tryParse(input.text.trim().replaceAll(',', '.'));
@@ -3136,7 +3138,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             const Text('Alışveriş geçmişi ve aylık rapor', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
             const SizedBox(height: 8),
             TextField(onChanged: (value) => update(() { _historyQuery = value; archivePage = 0; }),
-              decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Tarih veya ürün ara')),
+              decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('Tarih veya ürün ara'))),
             if (_history.isEmpty) const Text('Henüz arşivlenmiş alışveriş bulunmuyor.'),
             ..._monthlyTotals().entries.map((entry) => ListTile(
               leading: const Icon(Icons.calendar_month), title: Text(entry.key),
@@ -3164,7 +3166,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                   ...items.whereType<Map>().map((item) => ListTile(
                     title: Text(item['name']?.toString() ?? ''),
                     subtitle: Text('Tahmini: ${item['estimated'] == null ? 'Girilmedi' : _money((item['estimated'] as num).toDouble())}'),
-                    trailing: IconButton(tooltip: 'Yeniden listeye ekle', icon: const Icon(Icons.add_shopping_cart),
+                    trailing: IconButton(tooltip: t('Yeniden listeye ekle'), icon: const Icon(Icons.add_shopping_cart),
                       onPressed: () async {
                         Navigator.pop(ctx);
                         await _addFromHistory([Map<String, dynamic>.from(item)]);
@@ -3271,7 +3273,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               subtitle: Text('${records.length} kez • Son fiyat: $latest'),
               children: [
                 ListTile(title: const Text('İlk / son kayıtlı gerçek fiyat'), subtitle: Text('$oldest → $latest'),
-                  trailing: IconButton(tooltip: 'Alışveriş listesine ekle', icon: const Icon(Icons.add_shopping_cart),
+                  trailing: IconButton(tooltip: t('Alışveriş listesine ekle'), icon: const Icon(Icons.add_shopping_cart),
                     onPressed: () async { Navigator.pop(ctx); await _addFromHistory([last]); })),
                 ...records.where((e) => e['actual'] is num).take(10).map((e) => ListTile(
                   dense: true, title: Text(e['date']?.toString().split('T').first ?? ''),
@@ -3433,14 +3435,14 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               Text('${_kitchenTrash.length} kayıt • ${filtered.length} gösteriliyor'),
               const SizedBox(height: 8),
               TextField(
-                decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-                  labelText: 'Silinen kayıt ara', border: OutlineInputBorder()),
+                decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+                  labelText: t('Silinen kayıt ara'), border: OutlineInputBorder()),
                 onChanged: (v) => refresh(() { query = v; trashPage = 0; }),
               ),
               const SizedBox(height: 8),
               DropdownButtonFormField<String>(
                 initialValue: selectedType,
-                decoration: const InputDecoration(labelText: 'Kayıt türü',
+                decoration: InputDecoration(labelText: t('Kayıt türü'),
                   border: OutlineInputBorder()),
                 items: typeNames.entries.map((e) => DropdownMenuItem<String>(
                   value: e.key, child: Text(e.value))).toList(),
@@ -3712,12 +3714,12 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       builder: (ctx) => StatefulBuilder(builder: (ctx, update) => AlertDialog(
         title: Text(original == null ? 'Ürün ekle' : 'Ürünü düzenle'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          TextField(controller: name, decoration: const InputDecoration(labelText: 'Ürün / malzeme')),
+          TextField(controller: name, decoration: InputDecoration(labelText: t('Ürün / malzeme'))),
           const SizedBox(height: 10),
-          TextField(controller: note, decoration: const InputDecoration(labelText: 'Miktar / not (ör. 2 kg)')),
+          TextField(controller: note, decoration: InputDecoration(labelText: t('Miktar / not (ör. 2 kg)'))),
           const SizedBox(height: 10),
           DropdownButtonFormField<String>(initialValue: category,
-            decoration: const InputDecoration(labelText: 'Kategori'),
+            decoration: InputDecoration(labelText: t('Kategori')),
             items: _categories.skip(1).map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(),
             onChanged: (v) { if (v != null) update(() => category = v); }),
         ])),
@@ -3965,7 +3967,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             FilledButton.tonal(onPressed: () async { await _editPlanLine(plan); refresh(() {}); }, child: const Text('Ürün ekle')),
             OutlinedButton(onPressed: () async { await _planImport(plan); refresh(() {}); }, child: const Text('Aktif listeye aktar')),
           ]),
-          TextField(decoration: const InputDecoration(labelText: 'Plan içinde ürün ara', prefixIcon: Icon(Icons.search)),
+          TextField(decoration: InputDecoration(labelText: t('Plan içinde ürün ara'), prefixIcon: Icon(Icons.search)),
             onChanged: (v) => refresh(() => search = v)),
           SwitchListTile(title: const Text('Tamamlananları gizle'), value: onlyPending,
             onChanged: (v) => refresh(() => onlyPending = v)),
@@ -3987,7 +3989,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 TextButton(onPressed: () async { final v = await _planText('Gerçek tutar (TL)','${line['actual'] ?? 0}',numeric:true);
                   if (v == null || !mounted || _planNum(v)<0) return; final updated = _planLines(plan);
                   updated[entry.key]['actual'] = _planNum(v); setState(() => plan['lines'] = updated); refresh(() {}); await _save(); }, child: const Text('Gerçek fiyat')),
-                PopupMenuButton<String>(tooltip:'Öncelik', onSelected: (v) async { final updated = _planLines(plan);
+                PopupMenuButton<String>(tooltip:t('Öncelik'), onSelected: (v) async { final updated = _planLines(plan);
                   updated[entry.key]['priority'] = v; setState(() => plan['lines'] = updated); refresh(() {}); await _save(); },
                   itemBuilder: (_) => ['Acil','Yüksek','Normal','Düşük'].map((v) => PopupMenuItem(value:v,child:Text(v))).toList(),child: const Text('Öncelik')),
                 TextButton(onPressed: () async {final v=await showDialog<String>(context:context,builder:(c)=>SimpleDialog(title:const Text('Birim'),children:['adet','kg','g','L','ml','paket','kutu'].map((u)=>SimpleDialogOption(onPressed:()=>Navigator.pop(c,u),child:Text(u))).toList()));if(v!=null&&mounted){final updated=_planLines(plan);updated[entry.key]['unit']=v;setState(()=>plan['lines']=updated);await _save();refresh((){});}},child:const Text('Birim')),
@@ -4015,7 +4017,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             OutlinedButton(onPressed: () => _copyPlanCsv(plan), child: const Text('CSV kopyala')),
             OutlinedButton(onPressed: () => _copyPlanText(plan), child: const Text('Metin kopyala')),
             OutlinedButton(onPressed: () async { await _planResetChecks(plan); refresh(() {}); }, child: const Text('İşaretleri sıfırla')),
-            PopupMenuButton<String>(tooltip: 'Plan durumu', onSelected: (v) async {
+            PopupMenuButton<String>(tooltip: t('Plan durumu'), onSelected: (v) async {
               await _planSetStatus(plan, v); refresh(() {});
             }, itemBuilder: (_) => ['Taslak', 'Aktif', 'Tamamlandı'].map((v) =>
               PopupMenuItem(value: v, child: Text(v))).toList(),
@@ -4195,7 +4197,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             OutlinedButton(onPressed: () { _showConsumptionGoals(); },child:const Text('Tüketim hedefleri')),
             OutlinedButton(onPressed: () async {await _planFromGoals();refresh((){});},child:const Text('Hedeflerden plan')),
           ]),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Plan, not veya ürün ara'),onChanged:(v)=>refresh(() { search=v; archivePage=0; })),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Plan, not veya ürün ara')),onChanged:(v)=>refresh(() { search=v; archivePage=0; })),
           Wrap(spacing:8,children:[
             DropdownButton<String>(value:period,items:['Tümü','Haftalık','Aylık'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(() { period=v??'Tümü'; archivePage=0; })),
             DropdownButton<String>(value:status,items:['Tümü','Taslak','Aktif','Tamamlandı'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(() { status=v??'Tümü'; archivePage=0; })),
@@ -4365,7 +4367,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             const Divider(),
             TextFormField(initialValue: budget == 0 ? '' : budget.toString(),
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
-              decoration: const InputDecoration(labelText: 'Plan bütçesi (TL, isteğe bağlı)'),
+              decoration: InputDecoration(labelText: t('Plan bütçesi (TL, isteğe bağlı)')),
               onChanged: (v) => refresh(() => budget = double.tryParse(v.replaceAll(',', '.')) ?? 0)),
             SwitchListTile(title: const Text('Bütçeye sığan ürünlerle plan oluştur'),
               subtitle: const Text('Öncelik sırasıyla eklenir; fiyatı bilinmeyenler atlanır.'),
@@ -4376,11 +4378,11 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             }, icon: const Icon(Icons.playlist_add_check),
               label: const Text('Önerilerden yeni plan oluştur')),
             const SizedBox(height: 8),
-            TextField(decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.search), hintText: 'Önerilerde ürün ara'),
+            TextField(decoration: InputDecoration(
+              prefixIcon: Icon(Icons.search), hintText: t('Önerilerde ürün ara')),
               onChanged: (v) => refresh(() => query = v)),
             DropdownButtonFormField<String>(initialValue: filter,
-              decoration: const InputDecoration(labelText: 'Öncelik filtresi'),
+              decoration: InputDecoration(labelText: t('Öncelik filtresi')),
               items: ['Tümü', 'Acil', 'Yüksek', 'Orta', 'Normal'].map((v) =>
                 DropdownMenuItem(value: v, child: Text(v))).toList(),
               onChanged: (v) => refresh(() => filter = v ?? 'Tümü')),
@@ -4462,12 +4464,12 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         title: Text(existing == null ? 'Kendi tarifimi oluştur' : 'Tarifi düzenle'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
           TextField(controller: title, maxLength: 60,
-            decoration: const InputDecoration(labelText: 'Tarif adı')),
+            decoration: InputDecoration(labelText: t('Tarif adı'))),
           TextField(controller: portions, keyboardType: TextInputType.number,
-            decoration: const InputDecoration(labelText: 'Temel porsiyon sayısı')),
+            decoration: InputDecoration(labelText: t('Temel porsiyon sayısı'))),
           TextField(controller: ingredients, minLines: 4, maxLines: 9,
-            decoration: const InputDecoration(labelText: 'Her satıra: Malzeme;Miktar;Birim',
-              hintText: 'Süt;0.5;L\nYumurta;2;adet')),
+            decoration: InputDecoration(labelText: t('Her satıra: Malzeme;Miktar;Birim'),
+              hintText: t('Süt;0.5;L\nYumurta;2;adet'))),
           const Text('Miktarlar temel tarifin tamamı içindir. Birimler: adet, g, kg, ml, L.',
             style: TextStyle(fontSize: 12)),
         ])),
@@ -4523,8 +4525,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           FilledButton.tonalIcon(onPressed: () async {
             await _createCustomRecipe(); refresh(() {});
           }, icon: const Icon(Icons.add), label: const Text('Tarif ekle')),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-              labelText: 'Tarif veya malzeme ara'),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+              labelText: t('Tarif veya malzeme ara')),
             onChanged: (v) => refresh(() { query = v.trim().toLowerCase(); page = 0; })),
           if (_customRecipes.isEmpty) const Text('Henüz kişisel tarif oluşturulmadı.'),
           Builder(builder: (_) {
@@ -4849,7 +4851,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         Text('1 $unit için TL tutarı. Örnek: 1 kg = 100 TL ise 1 g = 0,10 TL.'),
         TextField(controller: controller, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: InputDecoration(labelText: 'TL / $unit')),
+          decoration: InputDecoration(labelText: t('TL / $unit'))),
       ]),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () => Navigator.pop(ctx,
@@ -5045,7 +5047,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             ..._mealTemplates.map((template) => Card(child: ListTile(
               title: Text(template['name']?.toString() ?? 'Şablon'),
               subtitle: Text('${(template['meals'] as List? ?? []).length} öğün'),
-              trailing: IconButton(tooltip: 'Şablonu sil', icon: const Icon(Icons.delete_outline),
+              trailing: IconButton(tooltip: t('Şablonu sil'), icon: const Icon(Icons.delete_outline),
                 onPressed: () async {
                   final yes = await showDialog<bool>(context: ctx, builder: (d) => AlertDialog(
                     title: const Text('Şablonu sil?'),
@@ -5299,11 +5301,11 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       builder: (ctx) => StatefulBuilder(builder: (ctx, refresh) => AlertDialog(
         title: const Text('Gıda israfı kaydet'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          TextField(controller: name, decoration: const InputDecoration(labelText: 'Ürün adı')),
+          TextField(controller: name, decoration: InputDecoration(labelText: t('Ürün adı'))),
           TextField(controller: amount, keyboardType: TextInputType.number,
-            decoration: const InputDecoration(labelText: 'Atılan miktar')),
+            decoration: InputDecoration(labelText: t('Atılan miktar'))),
           TextField(controller: cost, keyboardType: TextInputType.number,
-            decoration: const InputDecoration(labelText: 'Tahmini kayıp (TL)')),
+            decoration: InputDecoration(labelText: t('Tahmini kayıp (TL)'))),
           DropdownButtonFormField<String>(initialValue: reason,
             items: ['SKT geçti', 'Bozuldu', 'Fazla hazırlandı', 'Diğer']
               .map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
@@ -5338,17 +5340,17 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
           Text(recipe),
           TextField(controller: portions, keyboardType: TextInputType.number,
-            decoration: const InputDecoration(labelText: 'Porsiyon sayısı')),
+            decoration: InputDecoration(labelText: t('Porsiyon sayısı'))),
           DropdownButtonFormField<String>(initialValue: mealType,
             items: ['Kahvaltı', 'Öğle', 'Akşam', 'Ara öğün'].map((e) =>
               DropdownMenuItem(value: e, child: Text(e))).toList(),
             onChanged: (v) { if (v != null) refresh(() => mealType = v); },
-            decoration: const InputDecoration(labelText: 'Öğün')),
+            decoration: InputDecoration(labelText: t('Öğün'))),
           DropdownButtonFormField<String>(initialValue: family,
             items: ['Aile', 'Yetişkinler', 'Çocuklar'].map((e) =>
               DropdownMenuItem(value: e, child: Text(e))).toList(),
             onChanged: (v) { if (v != null) refresh(() => family = v); },
-            decoration: const InputDecoration(labelText: 'Kimler için?')),
+            decoration: InputDecoration(labelText: t('Kimler için?'))),
         ])),
         actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
           FilledButton(onPressed: () {
@@ -5514,12 +5516,12 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           final pages = total == 0 ? 1 : (total + pageSize - 1) ~/ pageSize;
           final current = page.clamp(0, pages - 1);
           return Row(children: [
-            IconButton(tooltip: 'Önceki sayfa', onPressed: current > 0
+            IconButton(tooltip: t('Önceki sayfa'), onPressed: current > 0
               ? () => refresh(() => change(current - 1)) : null,
               icon: const Icon(Icons.chevron_left)),
             Expanded(child: Text('$total kayıt • ${current + 1}/$pages sayfa',
               textAlign: TextAlign.center)),
-            IconButton(tooltip: 'Sonraki sayfa', onPressed: current + 1 < pages
+            IconButton(tooltip: t('Sonraki sayfa'), onPressed: current + 1 < pages
               ? () => refresh(() => change(current + 1)) : null,
               icon: const Icon(Icons.chevron_right)),
           ]);
@@ -5548,8 +5550,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               const Text('Tarif eşleştirme', style: TextStyle(fontWeight: FontWeight.bold)),
               const Text('Örnek tariflerdir; porsiyon, alerjen ve yaş uygunluğu ayrıca kontrol edilmelidir.',
                 style: TextStyle(fontSize: 12)),
-              TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-                labelText: 'Tarif ara'), onChanged: (v) => refresh(() { query = v; suggestionPage = 0; })),
+              TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+                labelText: t('Tarif ara')), onChanged: (v) => refresh(() { query = v; suggestionPage = 0; })),
               SwitchListTile(title: const Text('Yalnızca tüm malzemeleri bulunanlar'),
                 value: onlyReady, onChanged: (v) => refresh(() { onlyReady = v; suggestionPage = 0; })),
               pageControls(suggestions.length, suggestionPage, (v) => suggestionPage = v),
@@ -5587,9 +5589,9 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 style: const TextStyle(color: Colors.red)),
               if (expired.isNotEmpty) ...[
                 TextField(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search),
-                    labelText: 'Geçmiş SKT ürünlerinde ara',
+                    labelText: t('Geçmiş SKT ürünlerinde ara'),
                   ),
                   onChanged: (value) => refresh(() {
                     expiredQuery = value;
@@ -5686,8 +5688,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 style: TextStyle(fontWeight: FontWeight.bold)),
               ...reasons.entries.map((r) => ListTile(title: Text(r.key),
                 trailing: Text(_money(r.value)))),
-              TextField(decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.search), labelText: 'İsraf kaydı ara (ürün / neden / tarih)'),
+              TextField(decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search), labelText: t('İsraf kaydı ara (ürün / neden / tarih)')),
                 onChanged: (v) => refresh(() { wasteQuery = v; wastePage = 0; })),
               pageControls(filteredWaste.length, wastePage, (v) => wastePage = v),
               ...slice(filteredWaste, wastePage).map((r) => ListTile(
@@ -5696,7 +5698,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                   '${r['reason']} • Miktar: ${r['quantity']} • '
                   '${_money(_planNum(r['cost']))}'),
                 trailing: IconButton(
-                  tooltip: 'İsraf kaydını sil',
+                  tooltip: t('İsraf kaydını sil'),
                   icon: const Icon(Icons.delete_outline),
                   onPressed: () async {
                     final label = '${r['name'] ?? 'Ürün'} • ${r['date'] ?? ''}';
@@ -5819,8 +5821,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             Wrap(spacing: 8, children: [7, 14, 30].map((n) => ChoiceChip(
               label: Text('$n gün'), selected: days == n,
               onSelected: (_) => refresh(() => days = n))).toList()),
-            TextField(decoration: const InputDecoration(
-              labelText: 'Malzeme ara', prefixIcon: Icon(Icons.search)),
+            TextField(decoration: InputDecoration(
+              labelText: t('Malzeme ara'), prefixIcon: Icon(Icons.search)),
               onChanged: (v) => refresh(() => search = v)),
             SwitchListTile(title: const Text('Stokta görünmeyenleri göster'),
               value: onlyMissing, onChanged: (v) => refresh(() => onlyMissing = v)),
@@ -6565,8 +6567,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           const Text('Taslaklar aktif yemek planından bağımsızdır. Düzenleme yeni bir taslak olarak kaydedilebilir.'),
           OutlinedButton.icon(onPressed: _showSavedDraftComparison,
             icon: const Icon(Icons.compare_arrows), label: const Text('Taslakları karşılaştır')),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-              labelText: 'Menü taslağı ara'),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+              labelText: t('Menü taslağı ara')),
             onChanged: (v) => refresh(() { query = v.trim().toLowerCase(); page = 0; })),
           if (_savedMenuDrafts.isEmpty) const ListTile(title: Text('Henüz taslak kaydedilmedi.')),
           Builder(builder: (_) {
@@ -6793,7 +6795,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                     style: const TextStyle(fontWeight: FontWeight.bold, color: _purple)),
                   DropdownButtonFormField<String>(
                     initialValue: names.contains(currentName) ? currentName : null,
-                    isExpanded: true, decoration: const InputDecoration(labelText: 'Tarif seç'),
+                    isExpanded: true, decoration: InputDecoration(labelText: t('Tarif seç')),
                     items: names.map((name) => DropdownMenuItem(value: name,
                       child: Text(name, overflow: TextOverflow.ellipsis))).toList(),
                     onChanged: (value) { if (value != null) {
@@ -6811,7 +6813,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                     label: const Text('Alternatifleri maliyete göre karşılaştır')),
                   Row(children: [
                     Expanded(child: Text('Bilinen maliyet: ${_money(_planNum(row['cost']))}')),
-                    IconButton(tooltip: 'Bu öğünü taslaktan çıkar',
+                    IconButton(tooltip: t('Bu öğünü taslaktan çıkar'),
                       onPressed: () => refresh(() => draft.remove(row)),
                       icon: const Icon(Icons.remove_circle_outline)),
                   ]),
@@ -6997,7 +6999,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
             Text('Stok işlemi bağlanan öğün: $linked • Bilinen toplam maliyet: ${_money(spent)}'),
             const Text('Her öğün için stok yalnızca bir kez düşülür. Önceden başka ekranda stok tükettiyseniz burada tekrar işlem yapmayın.'),
-            TextField(decoration: const InputDecoration(labelText: 'Yemek ara', prefixIcon: Icon(Icons.search)),
+            TextField(decoration: InputDecoration(labelText: t('Yemek ara'), prefixIcon: Icon(Icons.search)),
               onChanged: (v) => refresh(() => query = v)),
             SwitchListTile(title: const Text('Yalnızca stok işlemi bekleyenler'), value: onlyPending,
               onChanged: (v) => refresh(() => onlyPending = v)),
@@ -7241,8 +7243,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               IconButton(onPressed: () => refresh(() {selectedWeek = selectedWeek.add(const Duration(days: 7)); page = 0;}),
                 icon: const Icon(Icons.chevron_right)),
             ]),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-              labelText: 'Yemek veya tarih ara'),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+              labelText: t('Yemek veya tarih ara')),
               onChanged: (v) => refresh(() {query = v.trim(); page = 0;})),
             Wrap(spacing: 8, children: ['Tümü', 'Planlanan', 'Hazırlanan'].map((v) =>
               ChoiceChip(label: Text(v), selected: status == v,
@@ -7388,7 +7390,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             const ListTile(title: Text('Kayıtlı menü taslağı bulunmuyor.')),
           if (source == 'Taslak' && _savedMenuDrafts.isNotEmpty)
             DropdownButtonFormField<int>(initialValue: draftIndex.clamp(0, _savedMenuDrafts.length - 1),
-              decoration: const InputDecoration(labelText: 'Menü taslağı'),
+              decoration: InputDecoration(labelText: t('Menü taslağı')),
               items: List.generate(_savedMenuDrafts.length, (i) => DropdownMenuItem(
                 value: i, child: Text(_savedMenuDrafts[i]['title']?.toString() ?? 'Taslak ${i + 1}',
                   overflow: TextOverflow.ellipsis))),
@@ -7429,10 +7431,10 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             trailing: _customRecipes.any((r) => r['name'] == m['name'])
               ? const Icon(Icons.check_circle_outline, color: Colors.green)
               : const Icon(Icons.warning_amber, color: Colors.deepOrange))),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-            labelText: 'Malzeme ara'), onChanged: (v) => refresh(() => query = v)),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+            labelText: t('Malzeme ara')), onChanged: (v) => refresh(() => query = v)),
           DropdownButtonFormField<String>(initialValue: filter,
-            decoration: const InputDecoration(labelText: 'Stok durumu'),
+            decoration: InputDecoration(labelText: t('Stok durumu')),
             items: ['Tümü', 'Eksik', 'Yeterli', 'Belirsiz'].map((v) => DropdownMenuItem(
               value: v, child: Text(v))).toList(),
             onChanged: (v) { if (v != null) refresh(() => filter = v); }),
@@ -7605,7 +7607,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               fontWeight: FontWeight.bold, color: _purple)),
             const Text('Kayıtlı fiyatlara dayalı simülasyondur. Canlı fiyat, stok veya teslimat uygunluğu garantisi vermez.'),
             DropdownButtonFormField<int>(initialValue: selectedList,
-              decoration: const InputDecoration(labelText: 'Alışveriş ihtiyacı kaynağı'),
+              decoration: InputDecoration(labelText: t('Alışveriş ihtiyacı kaynağı')),
               isExpanded: true,
               items: [const DropdownMenuItem(value: -1, child: Text('Aktif alışveriş listesi (tamamlanmayanlar)')),
                 ...List.generate(_namedLists.length, (i) => DropdownMenuItem(
@@ -7637,7 +7639,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               trailing: Text('${_money((storeTotals[store] ?? 0) + visitCost)}*'))),
             const Text('* Kısmi market sepeti fiyatıdır; eksik ürünlerin maliyeti dahil değildir.',
               style: TextStyle(fontSize: 12)),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Ürün ara'),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Ürün ara')),
               onChanged: (v) => refresh(() => query = v)),
             SwitchListTile(title: const Text('Yalnızca fiyatı bulunamayanlar'), value: onlyMissing,
               onChanged: (v) => refresh(() => onlyMissing = v)),
@@ -7786,7 +7788,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
             const Text('Kayıtlı fiyatlarla hesaplanır; gerçek rota mesafesi, canlı fiyat ve market stokları bilinmez.'),
             DropdownButtonFormField<int>(initialValue: selectedList, isExpanded: true,
-              decoration: const InputDecoration(labelText: 'Alışveriş listesi'),
+              decoration: InputDecoration(labelText: t('Alışveriş listesi')),
               items: [const DropdownMenuItem(value: -1, child: Text('Aktif alışveriş listesi')),
                 ...List.generate(_namedLists.length, (i) => DropdownMenuItem(value: i,
                   child: Text((_namedLists[i]['title'] ?? 'Adsız liste').toString(), overflow: TextOverflow.ellipsis)))],
@@ -7813,7 +7815,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               if (rankedStores.length > 12) const Text('Hesaplama en fazla 12 market üzerinden yapılır; diğer marketler değerlendirme dışındadır.'),
               const Text('Öncelik: Önce en fazla ürün kapsamı, ardından en düşük maliyet.'),
             ]))),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Ürün veya market ara'),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Ürün veya market ara')),
               onChanged: (v) => refresh(() => query = v)),
             SwitchListTile(title: const Text('Yalnızca karşılanamayan ürünler'), value: showOnlyMissing,
               onChanged: (v) => refresh(() => showOnlyMissing = v)),
@@ -7890,7 +7892,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
             const Text('Satın alınan miktar, gerçek tutar ve market bilgisi kaydedilir. Stoklar otomatik değiştirilmez.'),
             DropdownButtonFormField<int>(initialValue: listIndex, isExpanded: true,
-              decoration: const InputDecoration(labelText: 'Kayıtlı alışveriş listesi'),
+              decoration: InputDecoration(labelText: t('Kayıtlı alışveriş listesi')),
               items: List.generate(_namedLists.length, (i) => DropdownMenuItem(
                 value: i, child: Text((_namedLists[i]['title'] ?? 'Adsız liste').toString(),
                   overflow: TextOverflow.ellipsis))),
@@ -7909,8 +7911,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               ...byStore.entries.map((e) => ListTile(dense: true,
                 title: Text(e.key), trailing: Text(_money(e.value)))),
             ],
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-              labelText: 'Ürün ara'), onChanged: (v) => refresh(() => query = v)),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+              labelText: t('Ürün ara')), onChanged: (v) => refresh(() => query = v)),
             SwitchListTile(title: const Text('Yalnızca alınmayanlar'), value: onlyPending,
               onChanged: (v) => refresh(() => onlyPending = v)),
             FilledButton.tonalIcon(onPressed: () async {
@@ -7955,11 +7957,11 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                     title: Text('$name • Satın alma'),
                     content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
                       TextField(controller: amountController, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                        decoration: InputDecoration(labelText: 'Alınan miktar (${q['unit']})')),
+                        decoration: InputDecoration(labelText: '${t('Alınan miktar')} (${q['unit']})')),
                       TextField(controller: storeController, maxLength: 80,
-                        decoration: const InputDecoration(labelText: 'Market')),
+                        decoration: InputDecoration(labelText: t('Market'))),
                       TextField(controller: costController, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                        decoration: const InputDecoration(labelText: 'Gerçek toplam tutar (TL)')),
+                        decoration: InputDecoration(labelText: t('Gerçek toplam tutar (TL)'))),
                     ])),
                     actions: [
                       TextButton(onPressed: () => Navigator.pop(dialog), child: const Text('Vazgeç')),
@@ -8054,12 +8056,12 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             fontWeight: FontWeight.bold, color: _purple)),
           const Text('Satın alınan gerçek miktar kullanılır. Aktarılan kayıt tekrar aktarılamaz.'),
           DropdownButtonFormField<int>(initialValue: sourceIndex, isExpanded: true,
-            decoration: const InputDecoration(labelText: 'Satın alma listesi'),
+            decoration: InputDecoration(labelText: t('Satın alma listesi')),
             items: List.generate(_namedLists.length, (i) => DropdownMenuItem(value: i,
               child: Text((_namedLists[i]['title'] ?? 'Adsız liste').toString(), overflow: TextOverflow.ellipsis))),
             onChanged: (v) { if (v != null) refresh(() { sourceIndex = v; selected.clear(); }); }),
           DropdownButtonFormField<int>(initialValue: targetIndex, isExpanded: true,
-            decoration: const InputDecoration(labelText: 'Hedef stok listesi'),
+            decoration: InputDecoration(labelText: t('Hedef stok listesi')),
             items: List.generate(_namedLists.length, (i) => DropdownMenuItem(value: i,
               child: Text((_namedLists[i]['title'] ?? 'Adsız liste').toString(), overflow: TextOverflow.ellipsis))),
             onChanged: (v) { if (v != null) refresh(() { targetIndex = v; selected.clear(); }); }),
@@ -8069,8 +8071,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               Text('Gerçek harcama: ${_money(totalPaid)} • Stoğa aktarılan alımlar: ${_money(transferredPaid)}'),
               Text('Seçili aktarılabilir ürün: ${selectedReady.length}'),
             ]))),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-            labelText: 'Ürün ara'), onChanged: (v) => refresh(() => query = v)),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+            labelText: t('Ürün ara')), onChanged: (v) => refresh(() => query = v)),
           SwitchListTile(title: const Text('Yalnızca aktarılabilir ürünler'), value: onlyReady,
             onChanged: (v) => refresh(() => onlyReady = v)),
           Wrap(spacing: 8, children: [
@@ -8244,7 +8246,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               fontWeight: FontWeight.bold, color: _purple)),
             const Text('Kayıtlı fiyatlardan senaryo üretir; stokları, fiyatları ve alışveriş kayıtlarını değiştirmez.'),
             DropdownButtonFormField<int>(initialValue: selectedList, isExpanded: true,
-              decoration: const InputDecoration(labelText: 'Planlanacak alışveriş listesi'),
+              decoration: InputDecoration(labelText: t('Planlanacak alışveriş listesi')),
               items: [const DropdownMenuItem(value: -1, child: Text('Aktif alışveriş listesi')),
                 ...List.generate(_namedLists.length, (i) => DropdownMenuItem(value: i,
                   child: Text((_namedLists[i]['title'] ?? 'Adsız liste').toString(), overflow: TextOverflow.ellipsis)))],
@@ -8282,10 +8284,10 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 if (unpriced > 0) const Text('Uyarı: fiyatı bilinmeyen ürünler toplama dahil değildir.'),
                 const Text('Market ulaşımı, paket boyutu ve canlı fiyatlar hesaplamaya dahil değildir.'),
               ]))),
-            TextField(decoration: const InputDecoration(labelText: 'Ürün ara', prefixIcon: Icon(Icons.search)),
+            TextField(decoration: InputDecoration(labelText: t('Ürün ara'), prefixIcon: Icon(Icons.search)),
               onChanged: (v) => refresh(() => search = v)),
             DropdownButtonFormField<String>(initialValue: sort,
-              decoration: const InputDecoration(labelText: 'Sıralama'),
+              decoration: InputDecoration(labelText: t('Sıralama')),
               items: ['Öncelik','Fiyat','Tasarruf'].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
               onChanged: (v) { if (v != null) refresh(() => sort = v); }),
             SwitchListTile(title: const Text('Yalnızca tasarruf fırsatları'), value: onlySavings,
@@ -8419,7 +8421,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
             const Text('Kayıtlı market fiyatlarına dayalı planlama. Kaynak alışveriş ve stok kayıtları değiştirilmez.'),
             DropdownButtonFormField<int>(initialValue: selected, isExpanded: true,
-              decoration: const InputDecoration(labelText: 'Alışveriş listesi'),
+              decoration: InputDecoration(labelText: t('Alışveriş listesi')),
               items: [const DropdownMenuItem(value: -1, child: Text('Aktif liste')),
                 ...List.generate(_namedLists.length, (i) => DropdownMenuItem(value: i,
                   child: Text((_namedLists[i]['title'] ?? 'Adsız liste').toString(), overflow: TextOverflow.ellipsis)))],
@@ -8504,7 +8506,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 });
                 _notice('Senaryo ayarları yüklendi. Fiyatlar güncel kayıtlarla yeniden hesaplandı.');
               },
-              trailing: IconButton(tooltip: 'Senaryoyu sil', icon: const Icon(Icons.delete_outline),
+              trailing: IconButton(tooltip: t('Senaryoyu sil'), icon: const Icon(Icons.delete_outline),
                 onPressed: () async {
                   final yes = await showDialog<bool>(context: ctx, builder: (dialogCtx) => AlertDialog(
                     title: const Text('Senaryo silinsin mi?'),
@@ -8515,10 +8517,10 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                   if (yes == true) { refresh(() => saved.remove(record)); await persist(); }
                 }),
             ))),
-            TextField(decoration: const InputDecoration(labelText: 'Ürün ara', prefixIcon: Icon(Icons.search)),
+            TextField(decoration: InputDecoration(labelText: t('Ürün ara'), prefixIcon: Icon(Icons.search)),
               onChanged: (v) => refresh(() => search = v)),
             DropdownButtonFormField<String>(initialValue: view,
-              decoration: const InputDecoration(labelText: 'Görünüm'),
+              decoration: InputDecoration(labelText: t('Görünüm')),
               items: ['Tümü', 'Bütçede', 'Bütçe dışında', 'Fiyatı bilinmeyen', 'Ertelenen']
                 .map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
               onChanged: (v) { if (v != null) refresh(() => view = v); }),
@@ -8526,7 +8528,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               ListTile(title: Text(r['name'] as String),
                 subtitle: Text('${r['qty']} ${r['unit']} • ${_money(r['cost'] as double)} • ${r['store']}\n'
                   '${r['excluded'] == true ? 'Ertelendi' : fitted.contains(r['id']) ? 'Bütçede' : 'Bütçe dışında'}'),
-                trailing: IconButton(tooltip: 'Ertele / geri al',
+                trailing: IconButton(tooltip: t('Ertele / geri al'),
                   icon: Icon(r['excluded'] == true ? Icons.undo : Icons.schedule),
                   onPressed: () => refresh(() {
                     final id = r['id'] as String;
@@ -8534,7 +8536,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                   }))),
               Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: DropdownButtonFormField<String>(
                 initialValue: r['priority'] as String,
-                decoration: const InputDecoration(labelText: 'Alışveriş önceliği'),
+                decoration: InputDecoration(labelText: t('Alışveriş önceliği')),
                 items: ['Zorunlu','Normal','Ertelenebilir']
                   .map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
                 onChanged: (v) { if (v != null) refresh(() => priorities[r['id'] as String] = v); },
@@ -8612,13 +8614,13 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       final saved = await showDialog<bool>(context: context, builder: (dialog) => StatefulBuilder(builder: (ctx, update) => AlertDialog(
         title: const Text('Alışveriş takvimi oluştur'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          TextField(controller: titleCtrl, maxLength: 60, decoration: const InputDecoration(labelText: 'Takvim adı')),
+          TextField(controller: titleCtrl, maxLength: 60, decoration: InputDecoration(labelText: t('Takvim adı'))),
           DropdownButtonFormField<int>(initialValue: chosen, isExpanded: true,
-            decoration: const InputDecoration(labelText: 'Kaynak plan / liste'),
+            decoration: InputDecoration(labelText: t('Kaynak plan / liste')),
             items: [for (var i = 0; i < sources.length; i++) DropdownMenuItem(value: i,
               child: Text('${sources[i]['type'] == 'scenario' ? 'Plan' : 'Liste'}: ${sources[i]['title']}', overflow: TextOverflow.ellipsis))],
             onChanged: (v) { if (v != null) update(() => chosen = v); }),
-          DropdownButtonFormField<String>(initialValue: period, decoration: const InputDecoration(labelText: 'Tekrar'),
+          DropdownButtonFormField<String>(initialValue: period, decoration: InputDecoration(labelText: t('Tekrar')),
             items: ['Haftalık', 'İki haftada bir', 'Aylık'].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
             onChanged: (v) { if (v != null) update(() => period = v); }),
           ListTile(title: const Text('İlk alışveriş günü'), subtitle: Text(fmt(date)),
@@ -8628,7 +8630,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               if (picked != null) update(() => date = picked);
             }),
           TextFormField(initialValue: '0', keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: const InputDecoration(labelText: 'Her alışveriş için bütçe (TL, 0 = sınır yok)'),
+            decoration: InputDecoration(labelText: t('Her alışveriş için bütçe (TL, 0 = sınır yok)')),
             onChanged: (v) => amount = double.tryParse(v.replaceAll(',', '.')) ?? -1),
         ])),
         actions: [TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Vazgeç')),
@@ -8760,12 +8762,12 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 }, icon: const Icon(Icons.copy), label: const Text('CSV kopyala')),
               ]),
               DropdownButtonFormField<int>(initialValue: horizon,
-                decoration: const InputDecoration(labelText: 'Yaklaşan alışveriş aralığı'),
+                decoration: InputDecoration(labelText: t('Yaklaşan alışveriş aralığı')),
                 items: [7, 14, 30, 60, 90].map((v) => DropdownMenuItem(value: v, child: Text('$v gün'))).toList(),
                 onChanged: (v) { if (v != null) refresh(() => horizon = v); }),
-              TextField(decoration: const InputDecoration(labelText: 'Takvim veya kaynak ara', prefixIcon: Icon(Icons.search)),
+              TextField(decoration: InputDecoration(labelText: t('Takvim veya kaynak ara'), prefixIcon: Icon(Icons.search)),
                 onChanged: (v) => refresh(() => query = v)),
-              DropdownButtonFormField<String>(initialValue: filter, decoration: const InputDecoration(labelText: 'Durum'),
+              DropdownButtonFormField<String>(initialValue: filter, decoration: InputDecoration(labelText: t('Durum')),
                 items: ['Tümü','Aktif','Duraklatılmış','Yaklaşan'].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
                 onChanged: (v) { if (v != null) refresh(() => filter = v); }),
               ...visible.map((r) {
@@ -8778,7 +8780,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                     ListTile(title: Text((r['title'] ?? '').toString()),
                       subtitle: Text('${r['sourceTitle']} • ${r['period']}\nSonraki: ${fmt(next)} • ${_money(_planNum(r['budget']))}\n'
                         '${r['paused'] == true ? 'Duraklatıldı' : 'Aktif'} • ${generated.length} liste oluşturuldu'),
-                      trailing: IconButton(tooltip: 'Takvimi sil', icon: const Icon(Icons.delete_outline),
+                      trailing: IconButton(tooltip: t('Takvimi sil'), icon: const Icon(Icons.delete_outline),
                         onPressed: () async {
                           final yes = await showDialog<bool>(context: ctx, builder: (dialog) => AlertDialog(
                             title: const Text('Takvim silinsin mi?'),
@@ -8962,7 +8964,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               const Text('Takvim / Stok İhtiyacı / Bütçe', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
               const SizedBox(height: 12),
               DropdownButtonFormField<int>(initialValue: chosen, isExpanded: true,
-                decoration: const InputDecoration(labelText: 'Alışveriş takvimi'),
+                decoration: InputDecoration(labelText: t('Alışveriş takvimi')),
                 items: [for (var i = 0; i < visibleSchedules.length; i++) DropdownMenuItem(value: i,
                   child: Text((visibleSchedules[i]['title'] ?? 'Takvim').toString(), overflow: TextOverflow.ellipsis))],
                 onChanged: (v) => refresh(() => chosen = v ?? 0)),
@@ -8983,11 +8985,11 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               if (source == null) const Text('Kaynak senaryo veya liste bulunamadı. Kaynak silinmiş olabilir.'),
               const SizedBox(height: 10),
               TextFormField(initialValue: '0', keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                decoration: const InputDecoration(labelText: 'Ürün başına güvenlik stoğu (aynı birim)'),
+                decoration: InputDecoration(labelText: t('Ürün başına güvenlik stoğu (aynı birim)')),
                 onChanged: (v) => refresh(() { final n = double.tryParse(v.replaceAll(',', '.')); if (n != null && n.isFinite && n >= 0) safety = n; })),
               SwitchListTile(title: const Text('Yalnızca eksik ürünleri göster'), value: onlyShortage,
                 onChanged: (v) => refresh(() => onlyShortage = v)),
-              TextField(decoration: const InputDecoration(labelText: 'Ürün ara', prefixIcon: Icon(Icons.search)),
+              TextField(decoration: InputDecoration(labelText: t('Ürün ara'), prefixIcon: Icon(Icons.search)),
                 onChanged: (v) => refresh(() => search = v)),
               OutlinedButton.icon(onPressed: () async {
                 await Clipboard.setData(ClipboardData(text: '﻿${lines.join('\r\n')}'));
@@ -9191,7 +9193,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
               const SizedBox(height: 10),
               DropdownButtonFormField<int>(initialValue: selected, isExpanded: true,
-                decoration: const InputDecoration(labelText: 'Alışveriş takvimi'),
+                decoration: InputDecoration(labelText: t('Alışveriş takvimi')),
                 items: [for (var i = 0; i < schedules.length; i++) DropdownMenuItem(value: i,
                   child: Text((schedules[i]['title'] ?? 'Takvim').toString(), overflow: TextOverflow.ellipsis))],
                 onChanged: (v) => refresh(() { selected = v ?? 0; priority.clear(); omitted.clear(); budgetOverride = -1; })),
@@ -9203,12 +9205,12 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               if (rows.any((r) => (r['unitCost'] as double) <= 0))
                 const Text('Fiyatı bilinmeyen ürünler için tahmini toplam eksik olabilir.'),
               TextFormField(initialValue: '0', keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                decoration: const InputDecoration(labelText: 'Ürün başına güvenlik stoğu'),
+                decoration: InputDecoration(labelText: t('Ürün başına güvenlik stoğu')),
                 onChanged: (v) { final n = double.tryParse(v.replaceAll(',', '.')); if (n != null && n.isFinite && n >= 0) refresh(() => safety = n); }),
               TextFormField(key: ValueKey('budget_$selected'),
                 initialValue: budgetOverride < 0 ? _planNum(schedule['budget']).toString() : budgetOverride.toString(),
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                decoration: const InputDecoration(labelText: 'Bu plan için bütçe (0 = sınırsız)'),
+                decoration: InputDecoration(labelText: t('Bu plan için bütçe (0 = sınırsız)')),
                 onChanged: (v) { final n = double.tryParse(v.replaceAll(',', '.')); if (n != null && n.isFinite && n >= 0) refresh(() => budgetOverride = n); }),
               SwitchListTile(title: const Text('Fiyatı bilinmeyen ürünleri de dahil et'),
                 value: includeUnknown, onChanged: (v) => refresh(() => includeUnknown = v)),
@@ -9216,10 +9218,10 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 for (final v in ['Tümü','Seçilenler','Ertelenenler','Zorunlu','Fiyat bilinmiyor'])
                   ChoiceChip(label: Text(v), selected: filter == v, onSelected: (_) => refresh(() => filter = v)),
               ]),
-              DropdownButtonFormField<String>(initialValue: order, decoration: const InputDecoration(labelText: 'Sıralama'),
+              DropdownButtonFormField<String>(initialValue: order, decoration: InputDecoration(labelText: t('Sıralama')),
                 items: ['Öncelik','Maliyet','Ürün adı'].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
                 onChanged: (v) => refresh(() => order = v ?? 'Öncelik')),
-              TextField(decoration: const InputDecoration(labelText: 'Ürün ara', prefixIcon: Icon(Icons.search)),
+              TextField(decoration: InputDecoration(labelText: t('Ürün ara'), prefixIcon: Icon(Icons.search)),
                 onChanged: (v) => refresh(() => search = v)),
               FilledButton.icon(onPressed: available.isEmpty ? null : createList,
                 icon: const Icon(Icons.playlist_add), label: const Text('Seçilenlerden alışveriş listesi oluştur')),
@@ -9339,7 +9341,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
             const Text('Kayıtlı gerçek alımları kullanır. Aynı ürün ve birim için ilk/son fiyat karşılaştırılır.'),
             DropdownButtonFormField<String>(initialValue: month, isExpanded: true,
-              decoration: const InputDecoration(labelText: 'Bütçe ayı'),
+              decoration: InputDecoration(labelText: t('Bütçe ayı')),
               items: monthOptions.map((m) => DropdownMenuItem(value: m, child: Text(m))).toList(),
               onChanged: (v) { if (v != null) refresh(() => month = v); }),
             Card(color: _pink, child: Padding(padding: const EdgeInsets.all(12),
@@ -9364,7 +9366,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                     final value = await showDialog<String>(context: ctx, builder: (d) => AlertDialog(
                       title: Text('$month bütçe hedefi (TL)'),
                       content: TextField(controller: input, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                        decoration: const InputDecoration(hintText: 'Örn. 5000; sıfır = hedef yok')),
+                        decoration: InputDecoration(hintText: t('Örn. 5000; sıfır = hedef yok'))),
                       actions: [TextButton(onPressed: () => Navigator.pop(d), child: const Text('Vazgeç')),
                         FilledButton(onPressed: () => Navigator.pop(d, input.text), child: const Text('Kaydet'))]));
                     disposeAfterDialog(input);
@@ -9387,11 +9389,11 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               style: TextStyle(fontWeight: FontWeight.bold)),
             const Text('Fiyatlar aynı ürün ve ölçü birimindeki ilk ve son satın alma kaydından hesaplanır.'),
             DropdownButtonFormField<String>(initialValue: store, isExpanded: true,
-              decoration: const InputDecoration(labelText: 'Son alım marketi'),
+              decoration: InputDecoration(labelText: t('Son alım marketi')),
               items: ['Tümü', ...storeOptions].map((v) => DropdownMenuItem(value: v,
                 child: Text(v, overflow: TextOverflow.ellipsis))).toList(),
               onChanged: (v) { if (v != null) refresh(() => store = v); }),
-            TextField(decoration: const InputDecoration(labelText: 'Ürün ara', prefixIcon: Icon(Icons.search)),
+            TextField(decoration: InputDecoration(labelText: t('Ürün ara'), prefixIcon: Icon(Icons.search)),
               onChanged: (v) => refresh(() => search = v)),
             SwitchListTile(title: const Text('Yalnızca %10 ve üzeri artışlar'), value: alertOnly,
               onChanged: (v) => refresh(() => alertOnly = v)),
@@ -9512,17 +9514,17 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
             const Text('Kayıtlı gerçek satın almalardan hesaplanır; stok ve alışveriş verileri değişmez.'),
             DropdownButtonFormField<int>(initialValue: period,
-              decoration: const InputDecoration(labelText: 'Analiz dönemi'),
+              decoration: InputDecoration(labelText: t('Analiz dönemi')),
               items: const [7, 30, 90, 180, 365, 730].map((n) => DropdownMenuItem(
                 value: n, child: Text('Son $n gün'))).toList(),
               onChanged: (v) { if (v != null) refresh(() => period = v); }),
             DropdownButtonFormField<String>(initialValue: storeFilter, isExpanded: true,
-              decoration: const InputDecoration(labelText: 'Market'),
+              decoration: InputDecoration(labelText: t('Market')),
               items: ['Tümü', ...stores].map((v) => DropdownMenuItem(value: v,
                 child: Text(v, overflow: TextOverflow.ellipsis))).toList(),
               onChanged: (v) { if (v != null) refresh(() => storeFilter = v); }),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-              labelText: 'Ürün, liste veya market ara'),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+              labelText: t('Ürün, liste veya market ara')),
               onChanged: (v) => refresh(() => query = v)),
             SwitchListTile(title: const Text('Yalnızca stoğa aktarılan alımlar'),
               value: onlyTransferred, onChanged: (v) => refresh(() => onlyTransferred = v)),
@@ -9638,7 +9640,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             const Text('Fiyatlar kayıtlı listelerden alınır. Ürün ve ölçü birimi eşleşmeden karşılaştırma yapılmaz. Fiyatlar güncel market fiyatı değildir.'),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Ürün veya market ara'),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Ürün veya market ara')),
               onChanged: (v) => refresh(() => query = v)),
             SwitchListTile(title: const Text('Yalnızca birden fazla fiyat kaydı olanlar'),
               value: onlyAlternatives, onChanged: (v) => refresh(() => onlyAlternatives = v)),
@@ -9784,7 +9786,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               const SizedBox(height: 6),
               const Text('Gerçek stok tüketim hareketleri üzerinden tahmini ihtiyaç. Kayıtlar değiştirilmez.', style: TextStyle(fontSize: 12)),
               DropdownButtonFormField<int>(initialValue: selectedList,
-                decoration: const InputDecoration(labelText: 'Stok listesi'),
+                decoration: InputDecoration(labelText: t('Stok listesi')),
                 items: [const DropdownMenuItem(value: 0, child: Text('Tüm listeler')),
                   for (var i = 0; i < _namedLists.length; i++) DropdownMenuItem(value: i+1,
                     child: Text((_namedLists[i]['title'] ?? 'Adsız').toString(), overflow: TextOverflow.ellipsis))],
@@ -9807,7 +9809,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                   final v = await showDialog<double>(context: ctx, builder: (dialog) => AlertDialog(
                     title: const Text('Yenileme bütçesi'), content: TextField(controller: c,
                       keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                      decoration: const InputDecoration(labelText: 'TL')),
+                      decoration: InputDecoration(labelText: t('TL'))),
                     actions: [TextButton(onPressed: () => Navigator.pop(dialog), child: const Text('Vazgeç')),
                       TextButton(onPressed: () => Navigator.pop(dialog, double.tryParse(c.text.replaceAll(',', '.'))), child: const Text('Uygula'))]));
                   disposeAfterDialog(c);
@@ -9823,7 +9825,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                   Text('Süresi geçmiş stok: $expiredCount'),
                   if (unknownPrices > 0) const Text('Fiyatı bilinmeyen ürünler toplam maliyete dahil değildir.', style: TextStyle(fontSize: 12)),
                 ]))),
-              TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Ürün veya liste ara'),
+              TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('Ürün veya liste ara')),
                 onChanged: (v) => refresh(() => search = v)),
               Wrap(spacing: 8, children: [
                 DropdownButton<String>(value: filter, items: ['Tümü','Eksikler','Acil','Geçmiş yok','Fiyat yok','Son kullanma']
@@ -9975,7 +9977,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           final titleInput=TextEditingController(text:'Stok yenileme ${fmt(now)}');
           final title=await showDialog<String>(context:ctx,builder:(d)=>AlertDialog(
             title:const Text('Yenileme alışveriş listesi'),
-            content:TextField(controller:titleInput,decoration:const InputDecoration(labelText:'Liste adı')),
+            content:TextField(controller:titleInput,decoration:InputDecoration(labelText:t('Liste adı'))),
             actions:[TextButton(onPressed:()=>Navigator.pop(d),child:const Text('Vazgeç')),
               FilledButton(onPressed:()=>Navigator.pop(d,titleInput.text.trim()),child:const Text('Oluştur'))]));
           disposeAfterDialog(titleInput);
@@ -10022,7 +10024,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           child:SizedBox(height:MediaQuery.of(ctx).size.height*.94,child:ListView(padding:const EdgeInsets.all(16),children:[
             const Text('Stok yenilemeden alışveriş listesi',style:TextStyle(fontSize:19,fontWeight:FontWeight.bold,color:_purple)),
             const Text('Tüketim hareketlerine göre hesaplanan eksikleri bütçe ve önceliklerle listeye dönüştür. Stoklar değişmez.'),
-            DropdownButtonFormField<int>(initialValue:listIndex,isExpanded:true,decoration:const InputDecoration(labelText:'Stok kaynağı'),
+            DropdownButtonFormField<int>(initialValue:listIndex,isExpanded:true,decoration:InputDecoration(labelText:t('Stok kaynağı')),
               items:[const DropdownMenuItem(value:0,child:Text('Tüm stok listeleri')),
                 for(var i=0;i<_namedLists.length;i++) DropdownMenuItem(value:i+1,child:Text((_namedLists[i]['title']??'Adsız').toString(),overflow:TextOverflow.ellipsis))],
               onChanged:(v)=>refresh((){listIndex=v??0;initialized=false;selected.clear();excluded.clear();priorities.clear();})),
@@ -10037,7 +10039,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               IconButton(onPressed:leadDays==0?null:()=>refresh(()=>leadDays--),icon:const Icon(Icons.remove_circle_outline)),
               Text('$leadDays'),IconButton(onPressed:()=>refresh(()=>leadDays=(leadDays+1).clamp(0,30)),icon:const Icon(Icons.add_circle_outline))]),
             TextFormField(initialValue:budget.toStringAsFixed(0),keyboardType:const TextInputType.numberWithOptions(decimal:true),
-              decoration:const InputDecoration(labelText:'Bütçe (TL, 0 = sınırsız)'),
+              decoration:InputDecoration(labelText:t('Bütçe (TL, 0 = sınırsız)')),
               onChanged:(v){final n=double.tryParse(v.replaceAll(',','.'));if(n!=null&&n.isFinite&&n>=0)refresh(()=>budget=n);}),
             SwitchListTile(title:const Text('Fiyatı bilinmeyen ürünleri dahil et'),value:includeUnknown,
               onChanged:(v)=>refresh(()=>includeUnknown=v)),
@@ -10049,7 +10051,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 if(unknown>0) Text('$unknown ürünün fiyatı bilinmiyor; gerçek toplam daha yüksek olabilir.'),
                 Text('Acil ihtiyaç: ${rows.where((r)=>r['urgent']==true).length} • Tüketim kaydı olmayan: ${rows.where((r)=>r['movements']==0).length}'),
               ]))),
-            TextField(decoration:const InputDecoration(labelText:'Ürün veya liste ara',prefixIcon:Icon(Icons.search)),
+            TextField(decoration:InputDecoration(labelText:t('Ürün veya liste ara'),prefixIcon:Icon(Icons.search)),
               onChanged:(v)=>refresh(()=>search=v)),
             Wrap(spacing:8,children:[
               DropdownButton<String>(value:filter,items:['Tümü','Seçilenler','Ertelenenler','Acil','Fiyat yok'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),
@@ -10253,7 +10255,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               DropdownButton<double>(value:increaseThreshold,items:[5.0,10.0,15.0,20.0,30.0].map((v)=>DropdownMenuItem(value:v,child:Text('Fiyat sapması ≥ %${v.toInt()}'))).toList(),onChanged:(v)=>refresh(()=>increaseThreshold=v??15)),
               FilterChip(label:const Text('Yalnız kritik'),selected:onlyCritical,onSelected:(v)=>refresh(()=>onlyCritical=v)),
             ]),
-            TextFormField(initialValue:budget==0?'':budget.toStringAsFixed(0),keyboardType:const TextInputType.numberWithOptions(decimal:true),decoration:const InputDecoration(labelText:'Açık ihtiyaçlar için bütçe (TL, isteğe bağlı)'),onChanged:(v)=>refresh(()=>budget=_planNum(v))),
+            TextFormField(initialValue:budget==0?'':budget.toStringAsFixed(0),keyboardType:const TextInputType.numberWithOptions(decimal:true),decoration:InputDecoration(labelText:t('Açık ihtiyaçlar için bütçe (TL, isteğe bağlı)')),onChanged:(v)=>refresh(()=>budget=_planNum(v))),
             Card(color:_pink,child:Padding(padding:const EdgeInsets.all(12),child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
               Text('İncelenen $analyzed kalem • Alım yapılan $purchased',style:const TextStyle(fontWeight:FontWeight.bold)),
               Text('İyileştirme bulgusu: ${issues.length} • Kritik: ${issues.where((r)=>r['level']=='Kritik').length}'),
@@ -10266,7 +10268,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               DropdownButton<String>(value:category,items:['Tümü',...types].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>category=v??'Tümü')),
               DropdownButton<String>(value:severity,items:['Tümü','Kritik','Yüksek','Orta'].map((v)=>DropdownMenuItem(value:v,child:Text('Önem: $v'))).toList(),onChanged:(v)=>refresh(()=>severity=v??'Tümü')),
             ]),
-            TextField(decoration:const InputDecoration(labelText:'Ürün, liste veya öneri ara',prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
+            TextField(decoration:InputDecoration(labelText:t('Ürün, liste veya öneri ara'),prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
             Text('Gösterilen ${visible.length} / ${issues.length} bulgu',style:const TextStyle(fontWeight:FontWeight.bold)),
             if(visible.isEmpty) const Padding(padding:EdgeInsets.all(12),child:Text('Seçilen filtrelerde bulgu bulunamadı.')),
             for(final r in visible) Card(child:ListTile(
@@ -10353,17 +10355,17 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           final accepted=await showDialog<bool>(context:ctx,builder:(dialogCtx)=>StatefulBuilder(builder:(dialogCtx,update)=>AlertDialog(
             title:Text(existing==null?'Yeni iyileştirme aksiyonu':'Aksiyonu düzenle'),
             content:SizedBox(width:440,child:SingleChildScrollView(child:Column(mainAxisSize:MainAxisSize.min,children:[
-              TextField(controller:title,maxLength:120,decoration:const InputDecoration(labelText:'Aksiyon başlığı *')),
-              TextField(controller:product,decoration:const InputDecoration(labelText:'Ürün / konu')),
-              TextField(controller:source,decoration:const InputDecoration(labelText:'Kaynak liste / bulgu')),
-              TextField(controller:owner,decoration:const InputDecoration(labelText:'Sorumlu (isteğe bağlı)')),
-              DropdownButtonFormField<String>(initialValue:level,decoration:const InputDecoration(labelText:'Önem'),items:['Kritik','Yüksek','Orta'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>update(()=>level=v??level)),
-              DropdownButtonFormField<String>(initialValue:status,decoration:const InputDecoration(labelText:'Durum'),items:['Açık','Devam ediyor','Beklemede','Tamamlandı'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>update(()=>status=v??status)),
+              TextField(controller:title,maxLength:120,decoration:InputDecoration(labelText:t('Aksiyon başlığı *'))),
+              TextField(controller:product,decoration:InputDecoration(labelText:t('Ürün / konu'))),
+              TextField(controller:source,decoration:InputDecoration(labelText:t('Kaynak liste / bulgu'))),
+              TextField(controller:owner,decoration:InputDecoration(labelText:t('Sorumlu (isteğe bağlı)'))),
+              DropdownButtonFormField<String>(initialValue:level,decoration:InputDecoration(labelText:t('Önem')),items:['Kritik','Yüksek','Orta'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>update(()=>level=v??level)),
+              DropdownButtonFormField<String>(initialValue:status,decoration:InputDecoration(labelText:t('Durum')),items:['Açık','Devam ediyor','Beklemede','Tamamlandı'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>update(()=>status=v??status)),
               ListTile(contentPadding:EdgeInsets.zero,title:Text('Hedef tarih: ${day(due)}'),trailing:const Icon(Icons.event),onTap:()async {
                 final picked=await showDatePicker(context:dialogCtx,initialDate:due,firstDate:DateTime(2020),lastDate:DateTime(2100));
                 if(picked!=null) update(()=>due=picked);
               }),
-              TextField(controller:note,maxLines:3,decoration:const InputDecoration(labelText:'Aksiyon notu / karar')),
+              TextField(controller:note,maxLines:3,decoration:InputDecoration(labelText:t('Aksiyon notu / karar'))),
             ]))),actions:[TextButton(onPressed:()=>Navigator.pop(dialogCtx,false),child:const Text('Vazgeç')),
               FilledButton(onPressed:()=>Navigator.pop(dialogCtx,title.text.trim().isNotEmpty),child:const Text('Kaydet'))])));
           if(accepted==true && ctx.mounted) {
@@ -10391,7 +10393,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             Text('Tamamlanma: ${plans.isEmpty?0:(100*done/plans.length).round()}%'),
           ]))),
           FilledButton.icon(onPressed:()=>edit(),icon:const Icon(Icons.add_task),label:const Text('Yeni aksiyon oluştur')),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Aksiyon, ürün, sorumlu veya kaynak ara'),onChanged:(v)=>refresh(()=>query=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Aksiyon, ürün, sorumlu veya kaynak ara')),onChanged:(v)=>refresh(()=>query=v)),
           Wrap(spacing:8,runSpacing:8,children:[
             DropdownButton<String>(value:statusFilter,items:['Tümü','Açık','Devam ediyor','Beklemede','Tamamlandı'].map((v)=>DropdownMenuItem(value:v,child:Text('Durum: $v'))).toList(),onChanged:(v)=>refresh(()=>statusFilter=v??'Tümü')),
             DropdownButton<String>(value:levelFilter,items:['Tümü','Kritik','Yüksek','Orta'].map((v)=>DropdownMenuItem(value:v,child:Text('Önem: $v'))).toList(),onChanged:(v)=>refresh(()=>levelFilter=v??'Tümü')),
@@ -10539,7 +10541,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               FilterChip(label:const Text('Tarihsiz listeler'),selected:includeUndated,onSelected:(v)=>refresh(()=>includeUndated=v)),
               FilterChip(label:const Text('Yalnız satın alınanlar'),selected:onlyWithPurchases,onSelected:(v)=>refresh(()=>onlyWithPurchases=v)),
             ]),
-            DropdownButtonFormField<String>(initialValue:sourceFilter,isExpanded:true,decoration:const InputDecoration(labelText:'Alışveriş listesi'),items:[const DropdownMenuItem(value:'Tümü',child:Text('Tüm listeler')),...(sources.toList()..sort()).map((v)=>DropdownMenuItem(value:v,child:Text(v,overflow:TextOverflow.ellipsis)))],onChanged:(v)=>refresh(()=>sourceFilter=v??'Tümü')),
+            DropdownButtonFormField<String>(initialValue:sourceFilter,isExpanded:true,decoration:InputDecoration(labelText:t('Alışveriş listesi')),items:[const DropdownMenuItem(value:'Tümü',child:Text('Tüm listeler')),...(sources.toList()..sort()).map((v)=>DropdownMenuItem(value:v,child:Text(v,overflow:TextOverflow.ellipsis)))],onChanged:(v)=>refresh(()=>sourceFilter=v??'Tümü')),
             Wrap(spacing:8,runSpacing:8,children:[
               DropdownButton<String>(value:priorityFilter,items:['Tümü','Zorunlu','Normal','Ertelenebilir'].map((v)=>DropdownMenuItem(value:v,child:Text('Öncelik: $v'))).toList(),onChanged:(v)=>refresh(()=>priorityFilter=v??'Tümü')),
               DropdownButton<String>(value:statusFilter,items:['Tümü','Tamamlandı','Kısmi','Gecikti','Bekliyor','Miktar eksik','Gecikenler','Kritik eksik'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>statusFilter=v??'Tümü')),
@@ -10562,7 +10564,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             if(storeRank.isEmpty) const Text('Henüz kayıtlı satın alma yok.'),
             for (final entry in storeRank.take(15)) ListTile(dense:true,title:Text(entry.key),subtitle:Text('${entry.value['lines']!.toInt()} satın alma kalemi • ${entry.value['completed']!.toInt()} tamamlandı'),trailing:Text(_money(entry.value['paid']!))),
             const Divider(),
-            TextField(decoration:const InputDecoration(labelText:'Ürün, liste, market veya not ara',prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
+            TextField(decoration:InputDecoration(labelText:t('Ürün, liste, market veya not ara'),prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
             Wrap(spacing:8,children:[
               DropdownButton<String>(value:sort,items:['Gecikme','Tamamlanma','Harcama','Ürün','Hedef tarih'].map((v)=>DropdownMenuItem(value:v,child:Text('Sırala: $v'))).toList(),onChanged:(v)=>refresh(()=>sort=v??'Gecikme')),
               DropdownButton<String>(value:group,items:['Liste','Market','Öncelik'].map((v)=>DropdownMenuItem(value:v,child:Text('Grupla: $v'))).toList(),onChanged:(v)=>refresh(()=>group=v??'Liste')),
@@ -10791,7 +10793,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               FilterChip(label:const Text('Yalnız aktarılmayan'),selected:onlyNew,onSelected:(v)=>refresh(()=>onlyNew=v)),
               FilterChip(label:const Text('Tamamlananları göster'),selected:includeClosed,onSelected:(v)=>refresh(()=>includeClosed=v)),
             ]),
-            TextField(decoration:const InputDecoration(labelText:'Ürün, liste veya bulgu ara',prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
+            TextField(decoration:InputDecoration(labelText:t('Ürün, liste veya bulgu ara'),prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
             Row(children:[Text('Gösterilen: ${visible.length}',style:const TextStyle(fontWeight:FontWeight.bold)),const Spacer(),
               TextButton(onPressed:()=>refresh((){selected={...selected,...visible.where((r)=>!matched.containsKey(r['id'])).map((r)=>r['id'].toString())};}),child:const Text('Yeni olanları seç')),
               TextButton(onPressed:()=>refresh(()=>selected.clear()),child:const Text('Temizle'))]),
@@ -11062,8 +11064,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           if(openRisks.isNotEmpty) LinearProgressIndicator(
             value:critical/openRisks.length,color:_purple),
           const SizedBox(height:8),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),
-            labelText:'Ürün, aksiyon, liste veya öneri ara'),onChanged:(v)=>refresh(()=>search=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),
+            labelText:t('Ürün, aksiyon, liste veya öneri ara')),onChanged:(v)=>refresh(()=>search=v)),
           Wrap(spacing:8,runSpacing:4,children:[
             DropdownButton<String>(value:category,items:['Tümü',...types].map((v)=>
               DropdownMenuItem(value:v,child:Text(v))).toList(),
@@ -11299,7 +11301,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           if(loadError.isNotEmpty)Text(loadError,style:const TextStyle(color:Colors.red)),
           const SizedBox(height:8),
           Wrap(spacing:8,runSpacing:5,children:['Genel özet','Aksiyonlar','Risk hedefleri','Dikkat gerektirenler'].map((v)=>ChoiceChip(label:Text(v),selected:view==v,onSelected:(_)=>update((){view=v;status='Tümü';}))).toList()),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Hedef, ürün, sorumlu veya aksiyon ara'),onChanged:(v)=>update(()=>search=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Hedef, ürün, sorumlu veya aksiyon ara')),onChanged:(v)=>update(()=>search=v)),
           Wrap(spacing:8,runSpacing:4,children:[
             DropdownButton<String>(value:safeType,items:types.map((v)=>DropdownMenuItem(value:v,child:Text(v.length>24?'${v.substring(0,24)}…':v))).toList(),onChanged:(v){if(v!=null)update(()=>category=v);}),
             DropdownButton<String>(value:safeStatus,items:statusOptions.map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v){if(v!=null)update(()=>status=v);}),
@@ -11436,14 +11438,14 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         final ok=await showDialog<bool>(context:ctx,builder:(dctx)=>StatefulBuilder(builder:(dctx,update)=>AlertDialog(
           title:const Text('Düzeltici aksiyon oluştur'),
           content:SingleChildScrollView(child:Column(mainAxisSize:MainAxisSize.min,children:[
-            TextField(controller:title,maxLength:120,decoration:const InputDecoration(labelText:'Aksiyon başlığı')),
-            TextField(controller:owner,decoration:const InputDecoration(labelText:'Sorumlu (isteğe bağlı)')),
-            DropdownButtonFormField<String>(initialValue:level,decoration:const InputDecoration(labelText:'Öncelik'),items:['Kritik','Yüksek','Orta'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v){if(v!=null)update(()=>level=v);}),
+            TextField(controller:title,maxLength:120,decoration:InputDecoration(labelText:t('Aksiyon başlığı'))),
+            TextField(controller:owner,decoration:InputDecoration(labelText:t('Sorumlu (isteğe bağlı)'))),
+            DropdownButtonFormField<String>(initialValue:level,decoration:InputDecoration(labelText:t('Öncelik')),items:['Kritik','Yüksek','Orta'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v){if(v!=null)update(()=>level=v);}),
             ListTile(title:Text('Hedef tarih: ${day(due)}'),trailing:const Icon(Icons.event),onTap:()async{
               final d=await showDatePicker(context:dctx,initialDate:due,firstDate:DateTime(2020),lastDate:DateTime(2100));
               if(d!=null)update(()=>due=d);
             }),
-            TextField(controller:note,maxLines:4,decoration:const InputDecoration(labelText:'Düzeltici işlem / not')),
+            TextField(controller:note,maxLines:4,decoration:InputDecoration(labelText:t('Düzeltici işlem / not'))),
           ])),actions:[TextButton(onPressed:()=>Navigator.pop(dctx,false),child:const Text('Vazgeç')),
             FilledButton(onPressed:()=>Navigator.pop(dctx,title.text.trim().isNotEmpty),child:const Text('Aksiyon oluştur'))])));
         if(ok==true&&ctx.mounted){
@@ -11477,7 +11479,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         const Text('Hedefleri aksiyona bağla, sorumlu ve tarih ata; açık aksiyonların takvimini izle. Risk sonuçları bu ekranda otomatik doğrulanmaz.',style:TextStyle(fontSize:12)),
         if(error.isNotEmpty)Text(error,style:const TextStyle(color:Colors.red)),
         Card(color:_pink,child:Padding(padding:const EdgeInsets.all(12),child:Text('Hedef: ${goals.length} • Aksiyona bağlı: ${goalRows.where((r)=>r['linked']==true).length} • Açık aksiyon: ${openActions.length} • Geciken: ${overdue.length} • Yaklaşan ($horizon gün): ${upcoming.length}',style:const TextStyle(fontWeight:FontWeight.bold)))),
-        TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Hedef adı, kategori veya açıklama ara'),onChanged:(v)=>refresh(()=>search=v)),
+        TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Hedef adı, kategori veya açıklama ara')),onChanged:(v)=>refresh(()=>search=v)),
         Wrap(spacing:8,runSpacing:4,children:[
           DropdownButton<String>(value:filter,items:['Tümü','Aksiyon yok','Dönemi biten','Dönemi süren'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v){if(v!=null)refresh(()=>filter=v);}),
           DropdownButton<int>(value:horizon,items:[7,14,30,60,90].map((v)=>DropdownMenuItem(value:v,child:Text('$v günlük takvim'))).toList(),onChanged:(v){if(v!=null)refresh(()=>horizon=v);}),
@@ -11489,7 +11491,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           title:Text(((r['goal'] as Map)['title']??'Risk hedefi').toString()),
           subtitle:Text('${(r['goal'] as Map)['type']} • ${r['ended']==true?'Ölçüm dönemi bitti':'Ölçüm sürüyor'} • ${day(r['due'] as DateTime)}\nBaşlangıç: ${r['baseline']} • Hedef: ${r['target']} • ${r['linked']==true?'Aksiyon bağlı':'Aksiyon yok'}'),
           isThreeLine:true,
-          trailing:r['linked']==true?const Icon(Icons.check_circle_outline,color:_purple):IconButton(icon:const Icon(Icons.add_task),tooltip:'Düzeltici aksiyon oluştur',onPressed:error.isNotEmpty?null:()=>create(r['goal'] as Map<String,dynamic>)),
+          trailing:r['linked']==true?const Icon(Icons.check_circle_outline,color:_purple):IconButton(icon:const Icon(Icons.add_task),tooltip:t('Düzeltici aksiyon oluştur'),onPressed:error.isNotEmpty?null:()=>create(r['goal'] as Map<String,dynamic>)),
         )),
         const SizedBox(height:8),
         Text('Geciken aksiyonlar (${overdue.length})',style:const TextStyle(fontSize:16,fontWeight:FontWeight.bold)),
@@ -11614,7 +11616,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 if(ctx.mounted) ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content:Text('Yönetim özeti CSV panoya kopyalandı.')));
               }),
             ]),
-            TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),hintText:'Hedef, risk veya açıklama ara'),onChanged:(v)=>refresh(()=>search=v)),
+            TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),hintText:t('Hedef, risk veya açıklama ara')),onChanged:(v)=>refresh(()=>search=v)),
             const SizedBox(height:8),
             Expanded(child:visible.isEmpty?const Center(child:Text('Seçilen filtrelerde hedef bulunamadı.')):ListView.builder(itemCount:visible.length,itemBuilder:(context,i) {
               final r=visible[i];final g=r['goal'] as Map<String,dynamic>;
@@ -11713,10 +11715,10 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 var type='Tüm riskler';var title='';var note='';var reduction=25;
                 final result=await showDialog<Map<String,dynamic>>(context:ctx,builder:(dialogCtx)=>StatefulBuilder(builder:(dctx,setDialog)=>AlertDialog(
                   title:const Text('Risk azaltma hedefi oluştur'),content:SingleChildScrollView(child:Column(mainAxisSize:MainAxisSize.min,children:[
-                    TextField(decoration:const InputDecoration(labelText:'Hedef adı'),onChanged:(v)=>title=v),
+                    TextField(decoration:InputDecoration(labelText:t('Hedef adı')),onChanged:(v)=>title=v),
                     DropdownButtonFormField<String>(initialValue:type,isExpanded:true,items:kinds.map((v)=>DropdownMenuItem(value:v,child:Text(v,overflow:TextOverflow.ellipsis))).toList(),onChanged:(v){if(v!=null)setDialog(()=>type=v);}),
-                    DropdownButtonFormField<int>(initialValue:reduction,decoration:const InputDecoration(labelText:'Azalma hedefi (%)'),items:[10,20,25,30,40,50,60,75,90,100].map((v)=>DropdownMenuItem(value:v,child:Text('%$v'))).toList(),onChanged:(v){if(v!=null)setDialog(()=>reduction=v);}),
-                    TextField(decoration:const InputDecoration(labelText:'Açıklama (isteğe bağlı)'),onChanged:(v)=>note=v),
+                    DropdownButtonFormField<int>(initialValue:reduction,decoration:InputDecoration(labelText:t('Azalma hedefi (%)')),items:[10,20,25,30,40,50,60,75,90,100].map((v)=>DropdownMenuItem(value:v,child:Text('%$v'))).toList(),onChanged:(v){if(v!=null)setDialog(()=>reduction=v);}),
+                    TextField(decoration:InputDecoration(labelText:t('Açıklama (isteğe bağlı)')),onChanged:(v)=>note=v),
                     const SizedBox(height:8),Text('Hedef dönemi: $days gün. Başlangıç karşılaştırması, önceki $days günlük kayıtlardır.'),
                   ])),actions:[TextButton(onPressed:()=>Navigator.pop(dctx),child:const Text('Vazgeç')),
                     FilledButton(onPressed:()=>Navigator.pop(dctx,{'type':type,'title':title.trim().isEmpty?'$type azaltma hedefi':title.trim(),'note':note,'reduction':reduction}),child:const Text('Oluştur'))])));
@@ -11735,7 +11737,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 if(ctx.mounted)ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content:Text('CSV panoya kopyalandı.')));
               }),
             ]),
-            TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),hintText:'Hedef, risk türü veya not ara'),onChanged:(v)=>refresh(()=>search=v)),
+            TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),hintText:t('Hedef, risk türü veya not ara')),onChanged:(v)=>refresh(()=>search=v)),
             const SizedBox(height:8),
             Expanded(child:shown.isEmpty?const Center(child:Text('Bu filtrede kayıtlı hedef yok.')):ListView.builder(itemCount:shown.length,itemBuilder:(context,i){
               final g=shown[i];final start=parse(g['createdAt'])??now;final duration=g['days'] as int? ?? 30;
@@ -11868,7 +11870,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             DropdownButton<String>(value:order,items:['Son işlem','Tekrar','Çözüm','Yaş'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>order=v??'Son işlem')),
             FilterChip(label:const Text('Tekrarlayanlar'),selected:onlyRepeated,onSelected:(v)=>refresh(()=>onlyRepeated=v)),
           ]),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Uyarı, kategori veya kaynak ara'),onChanged:(v)=>refresh(()=>query=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Uyarı, kategori veya kaynak ara')),onChanged:(v)=>refresh(()=>query=v)),
           Wrap(spacing:6,runSpacing:6,children:[metric('Kayıtlı risk','${rows.length}'),metric('İşlem','$eventCount'),metric('Çözüm','$solvedCount'),metric('Yeniden açma','$reopenCount'),metric('Erteleme','$snoozeCount'),metric('Aksiyona bağlı','$linkedCount')]),
           Card(child:Padding(padding:const EdgeInsets.all(12),child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
             Text('Ölçülebilen çözüm döngüsü: ${allHours.length}',style:const TextStyle(fontWeight:FontWeight.bold)),
@@ -12048,12 +12050,12 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             DropdownButton<int>(value: weeks, items: [4, 8, 12, 26, 52].map((n) => DropdownMenuItem(value: n, child: Text('$n hafta'))).toList(), onChanged: (n) => refresh(() => weeks = n ?? 8)),
             DropdownButton<String>(value: selected, items: owners.map((n) => DropdownMenuItem(value: n, child: Text(n))).toList(), onChanged: (n) => refresh(() => ownerFilter = n ?? 'Tümü')),
             DropdownButton<String>(value: order, items: ['En yeni', 'En fazla iyileşme', 'En fazla kötüleşme', 'En çok değişiklik'].map((n) => DropdownMenuItem(value: n, child: Text(n))).toList(), onChanged: (n) => refresh(() => order = n ?? 'En yeni')),
-            IconButton(tooltip: 'Önceki dönem', onPressed: () => refresh(() => anchor = anchor.subtract(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_left)),
+            IconButton(tooltip: t('Önceki dönem'), onPressed: () => refresh(() => anchor = anchor.subtract(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_left)),
             Text('${iso(start)} – ${iso(end.subtract(const Duration(days: 1)))}'),
-            IconButton(tooltip: 'Sonraki dönem', onPressed: () => refresh(() => anchor = anchor.add(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_right)),
+            IconButton(tooltip: t('Sonraki dönem'), onPressed: () => refresh(() => anchor = anchor.add(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_right)),
             TextButton(onPressed: () => refresh(() => anchor = DateTime.now()), child: const Text('Bugün')),
           ]),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Sürüm / açıklama / sorumlu ara'), onChanged: (v) => refresh(() => query = v)),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Sürüm / açıklama / sorumlu ara')), onChanged: (v) => refresh(() => query = v)),
           SwitchListTile(title: const Text('Yalnızca kapasite aşımı artan sürümler'), value: onlyRisk, onChanged: (v) => refresh(() => onlyRisk = v)),
           SwitchListTile(title: const Text('Yalnızca görev değişikliği olan sürümler'), value: onlyChanges, onChanged: (v) => refresh(() => onlyChanges = v)),
           Card(child: Padding(padding: const EdgeInsets.all(12), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -12192,7 +12194,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               DropdownButton<int>(value:weeks,items:[4,8,12,26,52].map((n)=>DropdownMenuItem(value:n,child:Text('$n hafta'))).toList(),onChanged:(n){if(n!=null)refresh(()=>weeks=n);}),
               DropdownButton<String>(value:order,items:['En yeni','En eski','En fazla iyileşme','En fazla değişiklik'].map((x)=>DropdownMenuItem(value:x,child:Text(x))).toList(),onChanged:(x){if(x!=null)refresh(()=>order=x);}),
             ]),
-            TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Sürüm adı / tür / not ara'),onChanged:(x)=>refresh(()=>query=x)),
+            TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Sürüm adı / tür / not ara')),onChanged:(x)=>refresh(()=>query=x)),
             SwitchListTile(title:const Text('Yalnızca seçimli optimizasyon sürümleri'),value:onlySelective,onChanged:(x)=>refresh(()=>onlySelective=x)),
             SwitchListTile(title:const Text('Yalnızca kapasite iyileşmesi olanlar'),value:onlyImproved,onChanged:(x)=>refresh(()=>onlyImproved=x)),
             Card(child:Padding(padding:const EdgeInsets.all(12),child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
@@ -12402,9 +12404,9 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               onChanged: (v) => refresh(() { horizon = v ?? 14; selected.clear(); })),
             DropdownButton<int>(value: maxMoves, items: [5, 10, 15, 25, 40].map((n) => DropdownMenuItem(value: n, child: Text('En çok $n öneri'))).toList(),
               onChanged: (v) => refresh(() { maxMoves = v ?? 15; selected.clear(); })),
-            IconButton(tooltip: 'Önceki dönem', onPressed: () => refresh(() { anchor = anchor.subtract(Duration(days: horizon)); selected.clear(); }), icon: const Icon(Icons.chevron_left)),
+            IconButton(tooltip: t('Önceki dönem'), onPressed: () => refresh(() { anchor = anchor.subtract(Duration(days: horizon)); selected.clear(); }), icon: const Icon(Icons.chevron_left)),
             Text('${iso(start)} – ${iso(end.subtract(const Duration(days: 1)))}'),
-            IconButton(tooltip: 'Sonraki dönem', onPressed: () => refresh(() { anchor = anchor.add(Duration(days: horizon)); selected.clear(); }), icon: const Icon(Icons.chevron_right)),
+            IconButton(tooltip: t('Sonraki dönem'), onPressed: () => refresh(() { anchor = anchor.add(Duration(days: horizon)); selected.clear(); }), icon: const Icon(Icons.chevron_right)),
             TextButton(onPressed: () => refresh(() { anchor = DateTime.now(); selected.clear(); }), child: const Text('Bugün')),
           ]),
           SwitchListTile(dense: true, title: const Text('Kritik / yüksek öncelikli görevleri koru'), value: protectHigh,
@@ -12428,7 +12430,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             TextButton.icon(onPressed: () => refresh(() => selected.addAll(proposals.map((m) => m['index'] as int))), icon: const Icon(Icons.select_all), label: const Text('Tümünü seç')),
             TextButton.icon(onPressed: () => refresh(selected.clear), icon: const Icon(Icons.clear_all), label: const Text('Seçimi temizle')),
           ]),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Görev / sorumlu ara'), onChanged: (v) => refresh(() => query = v)),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Görev / sorumlu ara')), onChanged: (v) => refresh(() => query = v)),
           CheckboxListTile(dense: true, title: const Text('Yalnızca seçilenleri göster'), value: onlySelected, onChanged: (v) => refresh(() => onlySelected = v ?? false)),
           if (shown.isEmpty) const Padding(padding: EdgeInsets.all(12), child: Text('Bu koşullarda gösterilecek öneri bulunamadı.')),
           for (final m in shown) CheckboxListTile(
@@ -12582,9 +12584,9 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             DropdownButton<int>(value: horizon, items: [7,14,21,28].map((n) => DropdownMenuItem(value:n, child:Text('$n gün'))).toList(), onChanged:(v)=>update(()=>horizon=v??14)),
             DropdownButton<int>(value: maxMoves, items: [5,10,15,25,40].map((n)=>DropdownMenuItem(value:n,child:Text('En çok $n taşıma'))).toList(),onChanged:(v)=>update(()=>maxMoves=v??15)),
             DropdownButton<String>(value:selectedOwner, items:['Tümü',...owners].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>update(()=>ownerFilter=v??'Tümü')),
-            IconButton(tooltip:'Önceki dönem',onPressed:()=>update(()=>anchor=anchor.subtract(Duration(days:horizon))),icon:const Icon(Icons.chevron_left)),
+            IconButton(tooltip:t('Önceki dönem'),onPressed:()=>update(()=>anchor=anchor.subtract(Duration(days:horizon))),icon:const Icon(Icons.chevron_left)),
             Text('${iso(start)} – ${iso(end.subtract(const Duration(days:1)))}'),
-            IconButton(tooltip:'Sonraki dönem',onPressed:()=>update(()=>anchor=anchor.add(Duration(days:horizon))),icon:const Icon(Icons.chevron_right)),
+            IconButton(tooltip:t('Sonraki dönem'),onPressed:()=>update(()=>anchor=anchor.add(Duration(days:horizon))),icon:const Icon(Icons.chevron_right)),
             TextButton(onPressed:()=>update(()=>anchor=DateTime.now()),child:const Text('Bugün')),
           ]),
           SwitchListTile(dense:true,title:const Text('Hafta sonuna görev öner'),value:weekends,onChanged:(v)=>update(()=>weekends=v)),
@@ -12599,7 +12601,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           const SizedBox(height:8),
           Text('Seçilen senaryo: ${current['name']}',style:const TextStyle(fontWeight:FontWeight.bold)),
           Text('Kapasite aşımı: $baseOver → ${current['over']} dk. Bu sonuç gerçek müsaitlik veya görev yetkinliğini doğrulamaz.'),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Önerilerde ara'),onChanged:(v)=>update(()=>query=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Önerilerde ara')),onChanged:(v)=>update(()=>query=v)),
           CheckboxListTile(title:const Text('Yalnızca değişiklikleri göster'),value:onlyChanges,onChanged:(v)=>update(()=>onlyChanges=v??false)),
           if (visible.isEmpty) const Padding(padding:EdgeInsets.all(16),child:Text('Bu koşullarda uygun görev taşıma önerisi bulunamadı.')),
           for (final m in visible) Card(child:ListTile(
@@ -12749,7 +12751,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             FilterChip(label: const Text('Yalnızca riskliler'), selected: riskOnly, onSelected: (v) => update(() => riskOnly = v)),
             FilterChip(label: const Text('Hafta sonlarını göster'), selected: includeWeekends, onSelected: (v) => update(() => includeWeekends = v)),
           ]),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Görev, tarih veya sorumlu ara'), onChanged: (v) => update(() => search = v)),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('Görev, tarih veya sorumlu ara')), onChanged: (v) => update(() => search = v)),
           Text('${visible.length} sorumlu-gün görüntüleniyor', style: const TextStyle(fontWeight: FontWeight.bold)),
           if (visible.isEmpty) const ListTile(title: Text('Seçili filtrelerde kayıt bulunamadı.')),
           ...visible.take(80).map((r) => Card(child: ExpansionTile(
@@ -12875,7 +12877,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           const Text('Puanlar kural tabanlıdır; farklı kapasite varsayımları içeren senaryolar doğrudan eşdeğer değildir. Gerçek müsaitlik ve yetkinlik doğrulanmaz.'),
           const Divider(),
           Wrap(spacing: 8, children: [DropdownButton<String>(value: selected, items: ['Tümü', ...people].map((p) => DropdownMenuItem(value: p, child: Text(p))).toList(), onChanged: (v) => update(() => owner = v ?? 'Tümü')), FilterChip(label: const Text('Yalnızca değişenler'), selected: onlyChanges, onSelected: (v) => update(() => onlyChanges = v))]),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Görev veya sorumlu ara'), onChanged: (v) => update(() => query = v)),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('Görev veya sorumlu ara')), onChanged: (v) => update(() => query = v)),
           Text('Seçili senaryo: ${visible.length} görünür öneri', style: const TextStyle(fontWeight: FontWeight.bold)),
           if (visible.isEmpty) const ListTile(title: Text('Bu filtrelerde öneri bulunamadı.')),
           ...visible.take(60).map((m) => Card(child: ListTile(leading: const Icon(Icons.swap_horiz, color: _purple), title: Text('${m['title']}'), subtitle: Text('${m['from']} → ${m['to']}\n${m['minutes']} dk • ${m['delay']} gün kayma • Sorumlu değişimi: ${m['reassigned'] == true ? 'Evet' : 'Hayır'}')))),
@@ -13018,7 +13020,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             DropdownButton<String>(value: ownerFilter, items: ownerNames.map((v) => DropdownMenuItem(value:v,child:Text(v))).toList(), onChanged: (v) { if(v!=null) refresh(() => ownerFilter=v); }),
           ]),
           Row(children: [IconButton(onPressed: () => refresh(() => offset -= weeks), icon: const Icon(Icons.chevron_left)), Expanded(child: Text('${label(start)} – ${label(end.subtract(const Duration(days: 1)))}', textAlign: TextAlign.center)), IconButton(onPressed: () => refresh(() => offset += weeks), icon: const Icon(Icons.chevron_right)), TextButton(onPressed: () => refresh(() => offset=0), child: const Text('Bugün'))]),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),hintText: 'Görev, tarih veya sorumlu ara'), onChanged: (v) => refresh(() => query=v)),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),hintText: t('Görev, tarih veya sorumlu ara')), onChanged: (v) => refresh(() => query=v)),
           Wrap(spacing: 6, children: [FilterChip(label: const Text('Hafta sonu'), selected: weekend, onSelected: (v) => refresh(() => weekend=v)),FilterChip(label: const Text('Yalnız riskli'), selected: onlyRisk, onSelected: (v) => refresh(() => onlyRisk=v)),FilterChip(label: const Text('Atanmamış'), selected: onlyUnassigned, onSelected: (v) => refresh(() => onlyUnassigned=v)),FilterChip(label: const Text('Tarihsiz görevler'), selected: includeUndated, onSelected: (v) => refresh(() => includeUndated=v))]),
           Wrap(spacing: 5, children: [metric('Sorumlu-gün', '${visible.length}'),metric('Riskli gün', '$risk'),metric('Aşım', '$overflowTotal dk'),metric('Hedef sapması', '$deviationTotal dk')]),
           Card(color: const Color(0xFFFFF1F7),child: Padding(padding: const EdgeInsets.all(12), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [const Text('Veri kalitesi / önleyici kontrol', style: TextStyle(fontWeight: FontWeight.bold)),Text('Sorumlusuz: $missingOwner • Süresi eksik: $missingDuration • Tarihi geçmiş: $stale • Öncelikli: $urgentCount • Tarihsiz: ${unknown.length}'),if (includeUndated) ...unknown.take(20).map((t) => Text('• ${str(t['title']).isEmpty ? 'Adsız görev' : str(t['title'])} (${who(t)})',style: const TextStyle(fontSize: 12)))]))),
@@ -13163,7 +13165,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             FilterChip(label: const Text('Sonrasında risk kalan'), selected: onlyRisk, onSelected: (v) => refresh(() => onlyRisk = v)),
           ]),
           Row(children: [IconButton(onPressed: () => refresh(() => anchor = anchor.subtract(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_left)), Expanded(child: Text('${dayLabel(start)} – ${dayLabel(end.subtract(const Duration(days: 1)))}', textAlign: TextAlign.center)), IconButton(onPressed: () => refresh(() => anchor = anchor.add(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_right)), TextButton(onPressed: () => refresh(() => anchor = DateTime.now()), child: const Text('Bugün'))]),
-          TextField(decoration: const InputDecoration(labelText: 'Sürüm adı veya tarihte ara', prefixIcon: Icon(Icons.search)), onChanged: (v) => refresh(() => query = v.trim())),
+          TextField(decoration: InputDecoration(labelText: t('Sürüm adı veya tarihte ara'), prefixIcon: Icon(Icons.search)), onChanged: (v) => refresh(() => query = v.trim())),
           Card(child: Padding(padding: const EdgeInsets.all(12), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text('${selected.length} işlem • $positive iyileşen • $negative kötüleşen • $neutral değişmeyen', style: const TextStyle(fontWeight: FontWeight.bold)),
             Text('İşlem bazlı net hedef sapması farkı: $gains dk • Görev hareketi: $moved'),
@@ -13283,7 +13285,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             FilterChip(label: const Text('Yalnızca iyileşen'), selected: onlyImproved, onSelected: (v) => refresh(() => onlyImproved = v)),
           ]),
           Row(children: [IconButton(onPressed: () => refresh(() => anchor = anchor.subtract(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_left)), Expanded(child: Text('${fmt(start)} – ${fmt(end.subtract(const Duration(days: 1)))}', textAlign: TextAlign.center)), IconButton(onPressed: () => refresh(() => anchor = anchor.add(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_right)), TextButton(onPressed: () => refresh(() => anchor = DateTime.now()), child: const Text('Bugün'))]),
-          TextField(decoration: const InputDecoration(labelText: 'Plan sürümünde ara', prefixIcon: Icon(Icons.search)), onChanged: (v) => refresh(() => search = v)),
+          TextField(decoration: InputDecoration(labelText: t('Plan sürümünde ara'), prefixIcon: Icon(Icons.search)), onChanged: (v) => refresh(() => search = v)),
           Card(child: Padding(padding: const EdgeInsets.all(12), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text('${filtered.length} tam plan kaydı • $improved iyileşen • net $gain dk sapma azalması', style: const TextStyle(fontWeight: FontWeight.bold)),
             Text('Eski/kısmi geçmiş: $legacy • Geçersiz tam görüntü: $invalid'),
@@ -13411,7 +13413,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             FilterChip(label: const Text('Yalnızca iyileşen kısmi kayıtlar'), selected: onlyImproved, onSelected: (v) => refresh(() => onlyImproved = v)),
           ]),
           Row(children: [IconButton(onPressed: () => refresh(() => anchor = anchor.subtract(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_left)), Expanded(child: Text('${fmt(start)} – ${fmt(end.subtract(const Duration(days: 1)))}', textAlign: TextAlign.center)), IconButton(onPressed: () => refresh(() => anchor = anchor.add(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_right)), TextButton(onPressed: () => refresh(() => anchor = DateTime.now()), child: const Text('Bugün'))]),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Sürüm adına göre ara'), onChanged: (v) => refresh(() => search = v)),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Sürüm adına göre ara')), onChanged: (v) => refresh(() => search = v)),
           Card(child: Padding(padding: const EdgeInsets.all(12), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text('${filtered.length} kayıt • $movedTotal görev hareketi', style: const TextStyle(fontWeight: FontWeight.bold)),
             Text('Kısmi hesapta azalan: $improved • artan: $worsened • değişmeyen: $unchanged'),
@@ -13618,7 +13620,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             Text('Hedefi aşan sorumlu-gün: ${risky(loads)} → ${risky(selectedLoads)}'),
             Text('Tüm öneriler uygulanırsa tahmini sapma: ${deviation(simulated)} dk'),
           ]))),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Görev veya sorumlu ara'), onChanged: (v) => refresh(() => search = v)),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Görev veya sorumlu ara')), onChanged: (v) => refresh(() => search = v)),
           Wrap(spacing: 8, children: [TextButton(onPressed: () => refresh(() => chosen.addAll(proposals.map((e) => e['index'] as int))), child: const Text('Tümünü seç')), TextButton(onPressed: () => refresh(chosen.clear), child: const Text('Seçimi temizle'))]),
           if (visible.isEmpty) const ListTile(title: Text('Bu dönemde hedef sapmasını azaltan uygun öneri bulunamadı.')),
           ...visible.map((m) => CheckboxListTile(value: chosen.contains(m['index']), onChanged: saving ? null : (v) => refresh(() { if (v == true) { chosen.add(m['index'] as int); } else { chosen.remove(m['index']); } }),
@@ -13716,7 +13718,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           final value = await showDialog<int>(context: ctx, builder: (dialog) => AlertDialog(
             title: Text('$who • kabul edilen günlük aşım'),
             content: TextField(controller: controller, keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Dakika', helperText: '0–1440 dakika; 0 = aşım kabul edilmez')),
+              decoration: InputDecoration(labelText: t('Dakika'), helperText: t('0–1440 dakika; 0 = aşım kabul edilmez'))),
             actions: [TextButton(onPressed: () => Navigator.pop(dialog), child: const Text('Vazgeç')),
               FilledButton(onPressed: () => Navigator.pop(dialog, int.tryParse(controller.text.trim())), child: const Text('Kaydet'))]));
           disposeAfterDialog(controller);
@@ -13746,7 +13748,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               FilterChip(label: const Text('Yalnızca riskli'), selected: riskOnly, onSelected: (v) => refresh(() => riskOnly = v)),
               FilterChip(label: const Text('Hafta sonu dahil'), selected: includeWeekends, onSelected: (v) => refresh(() => includeWeekends = v)),
             ]),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Sorumlu, görev veya tarih ara'), onChanged: (v) => refresh(() => query = v)),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('Sorumlu, görev veya tarih ara')), onChanged: (v) => refresh(() => query = v)),
             Row(children: [IconButton(onPressed: () => refresh(() => anchor = anchor.subtract(Duration(days: days))), icon: const Icon(Icons.chevron_left)), Expanded(child: Text('${iso(start)} – ${iso(end.subtract(const Duration(days: 1)))}', textAlign: TextAlign.center)), IconButton(onPressed: () => refresh(() => anchor = anchor.add(Duration(days: days))), icon: const Icon(Icons.chevron_right)), TextButton(onPressed: () => refresh(() => anchor = DateTime.now()), child: const Text('Bugün'))]),
             Card(color: const Color(0xFFF3E8FF), child: Padding(padding: const EdgeInsets.all(12), child: Text('Görüntülenen aşım: $totalExcess dk • Hedef üstü: $totalGap dk • Hedefi aşan sorumlu-gün: $atRisk\nÖzetler arama ve filtrelerden etkilenir.'))),
             const Text('Sorumlu bazında hedefler', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -13803,7 +13805,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       final total=rows.fold<int>(0,(v,r)=>v+(r['load'] as int));
       final excess=rows.fold<int>(0,(v,r)=>v+(r['excess'] as int));
       final overloaded=rows.where((r)=>(r['excess'] as int)>0).length;
-      Future<void> edit(String who)async{final input=TextEditingController(text:'${capacities[who]??120}');final n=await showDialog<int>(context:ctx,builder:(dialog)=>AlertDialog(title:Text('$who günlük kapasite (dakika)'),content:TextField(controller:input,keyboardType:TextInputType.number,decoration:const InputDecoration(helperText:'15–1440 dakika')),actions:[TextButton(onPressed:()=>Navigator.pop(dialog),child:const Text('Vazgeç')),FilledButton(onPressed:()=>Navigator.pop(dialog,int.tryParse(input.text)),child:const Text('Kaydet'))]));disposeAfterDialog(input);if(n==null)return;if(n<15||n>1440){if(mounted)_notice('Kapasite 15–1440 dakika arasında olmalı.');return;}final old=capacities[who];capacities[who]=n;try{final prefs=await SharedPreferences.getInstance();final ok=await prefs.setString(capacityKey,jsonEncode(capacities));if(!ok)throw StateError('Kayıt başarısız');if(ctx.mounted)refresh((){});}catch(_){if(old==null){capacities.remove(who);}else{capacities[who]=old;}if(mounted)_notice('Kapasite kaydedilemedi.');}}
+      Future<void> edit(String who)async{final input=TextEditingController(text:'${capacities[who]??120}');final n=await showDialog<int>(context:ctx,builder:(dialog)=>AlertDialog(title:Text('$who günlük kapasite (dakika)'),content:TextField(controller:input,keyboardType:TextInputType.number,decoration:InputDecoration(helperText:t('15–1440 dakika'))),actions:[TextButton(onPressed:()=>Navigator.pop(dialog),child:const Text('Vazgeç')),FilledButton(onPressed:()=>Navigator.pop(dialog,int.tryParse(input.text)),child:const Text('Kaydet'))]));disposeAfterDialog(input);if(n==null)return;if(n<15||n>1440){if(mounted)_notice('Kapasite 15–1440 dakika arasında olmalı.');return;}final old=capacities[who];capacities[who]=n;try{final prefs=await SharedPreferences.getInstance();final ok=await prefs.setString(capacityKey,jsonEncode(capacities));if(!ok)throw StateError('Kayıt başarısız');if(ctx.mounted)refresh((){});}catch(_){if(old==null){capacities.remove(who);}else{capacities[who]=old;}if(mounted)_notice('Kapasite kaydedilemedi.');}}
       final proposals=<Map<String,dynamic>>[];
       final simulated=Map<String,int>.from(planned);
       for(final entry in grouped.entries.toList()..sort((a,b)=>(planned[b.key]??0).compareTo(planned[a.key]??0))){
@@ -13830,7 +13832,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         Row(children:[const Expanded(child:Text('Kapasite hedefleri / haftalık iş yükü dengeleme',style:TextStyle(fontSize:19,fontWeight:FontWeight.bold))),IconButton(onPressed:()=>Navigator.pop(ctx),icon:const Icon(Icons.close))]),
         if(loading)const LinearProgressIndicator()else ...[
           Wrap(spacing:8,runSpacing:8,children:[DropdownButton<int>(value:days,items:[7,14,21,28].map((n)=>DropdownMenuItem(value:n,child:Text('$n gün'))).toList(),onChanged:(n)=>refresh(()=>days=n??7)),DropdownButton<String>(value:selected,items:['Tümü',...owners].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>owner=v??'Tümü')),DropdownButton<int>(value:threshold,items:[70,80,90,100].map((n)=>DropdownMenuItem(value:n,child:Text('Risk %$n'))).toList(),onChanged:(v)=>refresh(()=>threshold=v??90)),FilterChip(label:const Text('Yalnızca riskli'),selected:onlyRisk,onSelected:(v)=>refresh(()=>onlyRisk=v)),FilterChip(label:const Text('Hafta sonu öner'),selected:weekends,onSelected:(v)=>refresh(()=>weekends=v))]),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),hintText:'Görev, sorumlu veya tarih ara'),onChanged:(v)=>refresh(()=>query=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),hintText:t('Görev, sorumlu veya tarih ara')),onChanged:(v)=>refresh(()=>query=v)),
           Row(children:[IconButton(onPressed:()=>refresh(()=>anchor=anchor.subtract(Duration(days:days))),icon:const Icon(Icons.chevron_left)),Expanded(child:Text('${iso(start)} – ${iso(end.subtract(const Duration(days:1)))}',textAlign:TextAlign.center)),IconButton(onPressed:()=>refresh(()=>anchor=anchor.add(Duration(days:days))),icon:const Icon(Icons.chevron_right)),TextButton(onPressed:()=>refresh(()=>anchor=DateTime.now()),child:const Text('Bugün'))]),
           Card(child:Padding(padding:const EdgeInsets.all(12),child:Text('Görüntülenen plan: $total dk • Aşım: $excess dk • Aşırı yüklü sorumlu-gün: $overloaded\nKapasite hesabı yalnızca açık ve plan tarihli görevleri kapsar. Filtreler görünür özetleri etkiler.'))),
           const Text('Sorumlu bazında günlük hedefler',style:TextStyle(fontWeight:FontWeight.bold)),
@@ -14027,12 +14029,12 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               Wrap(spacing: 8, runSpacing: 4, crossAxisAlignment: WrapCrossAlignment.center, children: [
                 DropdownButton<int>(value: weeks, items: [4, 8, 12, 26].map((n) => DropdownMenuItem(value: n, child: Text('$n hafta'))).toList(),
                   onChanged: (v) { if (v != null) refresh(() => weeks = v); }),
-                IconButton(tooltip: 'Önceki dönem', onPressed: () => refresh(() => anchor = anchor.subtract(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_left)),
+                IconButton(tooltip: t('Önceki dönem'), onPressed: () => refresh(() => anchor = anchor.subtract(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_left)),
                 Text('${fmt(start)} – ${fmt(end.subtract(const Duration(days: 1)))}'),
-                IconButton(tooltip: 'Sonraki dönem', onPressed: () => refresh(() => anchor = anchor.add(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_right)),
+                IconButton(tooltip: t('Sonraki dönem'), onPressed: () => refresh(() => anchor = anchor.add(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_right)),
                 TextButton(onPressed: () => refresh(() => anchor = DateTime.now()), child: const Text('Bugün')),
               ]),
-              TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Sürüm ara'),
+              TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Sürüm ara')),
                 onChanged: (v) => refresh(() => query = v)),
               DropdownButton<String>(isExpanded: true, value: ownerFilter,
                 items: options.map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
@@ -14234,7 +14236,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               OutlinedButton(onPressed:()=>refresh(()=>anchor=anchor.add(Duration(days:weeks*7))),child:const Text('Sonraki ▶')),
             ]),
             Text('${label(start)} – ${label(end.subtract(const Duration(days:1)))}'),
-            TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Sürüm, açıklama veya tür ara'),onChanged:(v)=>refresh(()=>search=v)),
+            TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Sürüm, açıklama veya tür ara')),onChanged:(v)=>refresh(()=>search=v)),
             Wrap(spacing:8,children:[
               FilterChip(label:const Text('Yalnız önleyici'),selected:onlyPreventive,onSelected:(v)=>refresh(()=>onlyPreventive=v)),
               FilterChip(label:const Text('Değişiklik içeren'),selected:onlyChanged,onSelected:(v)=>refresh(()=>onlyChanged=v)),
@@ -14418,7 +14420,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           Wrap(spacing:10,runSpacing:8,children:[DropdownButton<int>(value:horizon,items:[7,14,21,28].map((v)=>DropdownMenuItem(value:v,child:Text('$v gün'))).toList(),onChanged:(v)=>refresh(()=>horizon=v??14)),DropdownButton<int>(value:threshold,items:[70,80,90,100].map((v)=>DropdownMenuItem(value:v,child:Text('Risk eşiği %$v'))).toList(),onChanged:(v)=>refresh(()=>threshold=v??80)),DropdownButton<int>(value:maxMoves,items:[5,10,15,25,40].map((v)=>DropdownMenuItem(value:v,child:Text('En fazla $v görev'))).toList(),onChanged:(v)=>refresh(()=>maxMoves=v??15)),DropdownButton<String>(value:owners.contains(ownerFilter)?ownerFilter:'Tümü',items:owners.map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>ownerFilter=v??'Tümü'))]),
           Wrap(spacing:8,children:[OutlinedButton(onPressed:()=>refresh(()=>anchor=anchor.subtract(Duration(days:horizon))),child:const Text('← Önceki')),OutlinedButton(onPressed:()=>refresh(()=>anchor=DateTime.now()),child:const Text('Bugün')),OutlinedButton(onPressed:()=>refresh(()=>anchor=anchor.add(Duration(days:horizon))),child:const Text('Sonraki →'))]),
           Text('${iso(start)} – ${iso(end.subtract(const Duration(days:1)))}'),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Görev / sorumlu / not ara'),onChanged:(v)=>refresh(()=>query=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Görev / sorumlu / not ara')),onChanged:(v)=>refresh(()=>query=v)),
           SwitchListTile(title:const Text('Yalnızca riskli günlerin görevleri'),value:onlyRisk,onChanged:(v)=>refresh(()=>onlyRisk=v)),
           SwitchListTile(title:const Text('Hafta sonlarına öneri oluştur'),value:weekends,onChanged:(v)=>refresh(()=>weekends=v)),
           Text('Üç senaryo karşılaştırması',style:Theme.of(ctx).textTheme.titleMedium),
@@ -14904,18 +14906,18 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             ]),
             DropdownButtonFormField<String>(
               initialValue: ownerFilter,
-              decoration: const InputDecoration(labelText: 'Sorumlu'),
+              decoration: InputDecoration(labelText: t('Sorumlu')),
               items: ['Tümü', ...owners].map((v) =>
                   DropdownMenuItem(value: v, child: Text(v))).toList(),
               onChanged: (v) => refresh(() => ownerFilter = v ?? 'Tümü')),
             DropdownButtonFormField<String>(
               initialValue: riskFilter,
-              decoration: const InputDecoration(labelText: 'Risk filtresi'),
+              decoration: InputDecoration(labelText: t('Risk filtresi')),
               items: ['Tümü', 'Kalıcı', 'Riskli', 'Risksiz'].map((v) =>
                   DropdownMenuItem(value: v, child: Text(v))).toList(),
               onChanged: (v) => refresh(() => riskFilter = v ?? 'Tümü')),
-            TextField(decoration: const InputDecoration(
-                labelText: 'Görev, sorumlu veya öncelik ara',
+            TextField(decoration: InputDecoration(
+                labelText: t('Görev, sorumlu veya öncelik ara'),
                 prefixIcon: Icon(Icons.search)),
               onChanged: (v) => refresh(() => search = v.trim())),
             metric('İncelenen açık görev', '${selected.length}',
@@ -15194,14 +15196,14 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             DropdownButtonFormField<String>(
               key: ValueKey('riskOwner:$ownerFilter'),
               initialValue: ownerFilter,
-              decoration: const InputDecoration(labelText: 'Sorumlu'),
+              decoration: InputDecoration(labelText: t('Sorumlu')),
               items: ['Tümü', ...owners].map((o) =>
                 DropdownMenuItem(value: o, child: Text(o))).toList(),
               onChanged: (v) => refresh(() { ownerFilter = v ?? 'Tümü'; selected.clear(); })),
             DropdownButtonFormField<String>(
               key: ValueKey('riskStrategy:$strategy'),
               initialValue: strategy,
-              decoration: const InputDecoration(labelText: 'Optimizasyon stratejisi'),
+              decoration: InputDecoration(labelText: t('Optimizasyon stratejisi')),
               items: ['Karma', 'Yalnız tarih', 'Yalnız sorumlu'].map((v) =>
                 DropdownMenuItem(value: v, child: Text(v))).toList(),
               onChanged: (v) => refresh(() { strategy = v ?? 'Karma'; selected.clear(); })),
@@ -15568,7 +15570,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             DropdownButtonFormField<String>(
               key: ValueKey(ownerFilter),
               initialValue: ownerFilter,
-              decoration: const InputDecoration(labelText: 'Sorumlu filtresi'),
+              decoration: InputDecoration(labelText: t('Sorumlu filtresi')),
               items: owners.map((o) => DropdownMenuItem(
                 value: o, child: Text(o))).toList(),
               onChanged: (v) => update(() => ownerFilter = v ?? 'Tümü')),
@@ -15851,9 +15853,9 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               ]),
               Text('${date(start)} – ${date(end.subtract(const Duration(days: 1)))}'),
               TextField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search),
-                    labelText: 'Sorumlu, hafta veya strateji ara'),
+                    labelText: t('Sorumlu, hafta veya strateji ara')),
                 onChanged: (v) => update(() => query = v)),
               SwitchListTile(
                 title: const Text('Yalnızca risk devam eden işlemler'),
@@ -16066,7 +16068,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 OutlinedButton(onPressed:()=>update(()=>anchor=anchor.add(Duration(days:weeks*7))),child:const Text('Sonraki')),
               ]),
               Text('${day(start)} – ${day(end.subtract(const Duration(days:1)))}'),
-              TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Sorumlu, strateji veya hafta ara'),onChanged:(v)=>update(()=>query=v)),
+              TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Sorumlu, strateji veya hafta ara')),onChanged:(v)=>update(()=>query=v)),
               SwitchListTile(title:const Text('Yalnızca iyileşen işlemler'),value:onlyImproved,onChanged:(v)=>update(()=>onlyImproved=v)),
               SwitchListTile(title:const Text('Yalnızca sonrasında risk kalan işlemler'),value:onlyRisk,onChanged:(v)=>update(()=>onlyRisk=v)),
               const SizedBox(height:8),
@@ -16480,12 +16482,12 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             DropdownButton<String>(value: owners.contains(ownerFilter) ? ownerFilter : 'Tümü', items: ['Tümü', ...owners].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(), onChanged: (v) { if (v != null) update(() => ownerFilter = v); }),
           ]),
           Wrap(spacing: 8, children: [
-            IconButton(tooltip: 'Önceki dönem', onPressed: () => update(() => anchor = anchor.subtract(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_left)),
+            IconButton(tooltip: t('Önceki dönem'), onPressed: () => update(() => anchor = anchor.subtract(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_left)),
             TextButton(onPressed: () => update(() => anchor = DateTime.now()), child: const Text('Bugün')),
-            IconButton(tooltip: 'Sonraki dönem', onPressed: () => update(() => anchor = anchor.add(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_right)),
+            IconButton(tooltip: t('Sonraki dönem'), onPressed: () => update(() => anchor = anchor.add(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_right)),
             Text('${iso(start)} – ${iso(end.subtract(const Duration(days: 1)))}'),
           ]),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Sorumlu / hafta ara'), onChanged: (v) => update(() => search = v)),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Sorumlu / hafta ara')), onChanged: (v) => update(() => search = v)),
           SwitchListTile(contentPadding: EdgeInsets.zero, title: const Text('Yalnızca riskli veya tekrarlayan kayıtlar'), value: risksOnly, onChanged: (v) => update(() => risksOnly = v)),
           Card(child: Padding(padding: const EdgeInsets.all(12), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text('İncelenen sorumlu-hafta: ${filtered.length}'),
@@ -16653,7 +16655,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 OutlinedButton(onPressed: () => update(() => anchor = anchor.add(Duration(days: weeks * 7))), child: const Text('Sonraki')),
               ]),
               Text('${day(start)} – ${day(end.subtract(const Duration(days: 1)))}'),
-              TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Sorumlu, strateji veya hafta ara'), onChanged: (v) => update(() => query = v)),
+              TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Sorumlu, strateji veya hafta ara')), onChanged: (v) => update(() => query = v)),
               SwitchListTile(title: const Text('Yalnızca tekrarlayan riskli sorumlular'), value: onlyRecurring, onChanged: (v) => update(() => onlyRecurring = v)),
               SwitchListTile(title: const Text('Yalnızca kötüleşen sonuçlar'), value: onlyWorse, onChanged: (v) => update(() => onlyWorse = v)),
               Card(child: Padding(padding: const EdgeInsets.all(12), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -16852,7 +16854,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 OutlinedButton(onPressed: () => update(() => anchor = anchor.add(Duration(days: weeks * 7))), child: const Text('Sonraki')),
               ]),
               Text('${day(start)} – ${day(end.subtract(const Duration(days: 1)))}'),
-              TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Tarih, strateji veya sorumlu ara'), onChanged: (v) => update(() => search = v)),
+              TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Tarih, strateji veya sorumlu ara')), onChanged: (v) => update(() => search = v)),
               SwitchListTile(title: const Text('Yalnızca iyileşen optimizasyonlar'), value: improvementsOnly, onChanged: (v) => update(() => improvementsOnly = v)),
               SwitchListTile(title: const Text('Sonrasında kapasite aşımı kalanlar'), value: riskOnly, onChanged: (v) => update(() => riskOnly = v)),
               Card(child: Padding(padding: const EdgeInsets.all(12), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -16992,7 +16994,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           final value = await showDialog<int>(context: sheet, builder: (d) => AlertDialog(
             title: const Text('Tahmini aksiyon süresi (dakika)'),
             content: TextField(controller: ctrl, keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: '5–480 dakika')),
+              decoration: InputDecoration(labelText: t('5–480 dakika'))),
             actions: [TextButton(onPressed: () => Navigator.pop(d),child: const Text('Vazgeç')),
               FilledButton(onPressed: () => Navigator.pop(d,int.tryParse(ctrl.text)),child: const Text('Kaydet'))]));
           disposeAfterDialog(ctrl);
@@ -17036,7 +17038,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                     ...items.map((a)=>ListTile(
                       title:Text(str(a['title']).isEmpty?'Başlıksız aksiyon':str(a['title'])),
                       subtitle:Text('${a['priority']} • ${iso(parse(a['due']) ?? DateTime.now())} • ${minutes(a)} dk'),
-                      trailing:IconButton(icon:const Icon(Icons.edit_outlined),tooltip:'Süreyi düzenle',onPressed:()=>editEstimate(a)))),
+                      trailing:IconButton(icon:const Icon(Icons.edit_outlined),tooltip:t('Süreyi düzenle'),onPressed:()=>editEstimate(a)))),
                     if (excess > 0) Padding(padding:const EdgeInsets.all(12),child:Text('Öneri: $excess dakikalık aksiyonu başka bir haftaya veya uygun bir sorumluya kaydırmayı değerlendirin.')),
                   ]));
               }),
@@ -17220,8 +17222,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                   style: const TextStyle(fontWeight: FontWeight.bold)))),
               if (badDates > 0) Text('$badDates aksiyonun risk haftası veya hedef tarihi geçersiz.',
                 style: const TextStyle(color: Colors.deepOrange)),
-              TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-                labelText: 'Aksiyon / sorumlu / not ara'), onChanged: (v) => update(() => search = v)),
+              TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+                labelText: t('Aksiyon / sorumlu / not ara')), onChanged: (v) => update(() => search = v)),
               SwitchListTile(title: const Text('Yalnızca açık aksiyonlar'), value: onlyOpen,
                 onChanged: (v) => update(() => onlyOpen = v)),
               SwitchListTile(title: const Text('Yalnızca geciken veya hedef üstü riskli'), value: onlyRisk,
@@ -17399,7 +17401,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             if (rows.isEmpty) const ListTile(title:Text('Bu dönemde kayıtlı aksiyon bulunamadı.')),
             SwitchListTile(title:const Text('Yalnızca açık aksiyonlar'),value:onlyOpen,onChanged:(v)=>update(()=>onlyOpen=v)),
             SwitchListTile(title:const Text('Yalnızca geciken aksiyonlar'),value:onlyOverdue,onChanged:(v)=>update(()=>onlyOverdue=v)),
-            TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Aksiyon, sorumlu, hafta veya not ara'),onChanged:(v)=>update(()=>query=v)),
+            TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Aksiyon, sorumlu, hafta veya not ara')),onChanged:(v)=>update(()=>query=v)),
             const SizedBox(height:8),Text('Aksiyon detayları (${filtered.length})',style:Theme.of(ctx).textTheme.titleMedium),
             ...filtered.take(150).map((r) {
               final p = r['plan'] as Map<String,dynamic>;
@@ -17505,15 +17507,15 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             builder: (dialogContext) => StatefulBuilder(builder: (dialogContext, refresh) => AlertDialog(
               title: Text(original == null ? 'Önleyici aksiyon oluştur' : 'Aksiyonu düzenle'),
               content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
-                TextField(controller: title, decoration: const InputDecoration(labelText: 'Aksiyon / yapılacak iş *')),
-                TextField(controller: person, decoration: const InputDecoration(labelText: 'Sorumlu *')),
-                TextField(controller: week, decoration: const InputDecoration(labelText: 'Risk haftası (YYYY-AA-GG) *')),
-                TextField(controller: due, decoration: const InputDecoration(labelText: 'Hedef tarih (YYYY-AA-GG) *')),
-                TextField(controller: note, maxLines: 2, decoration: const InputDecoration(labelText: 'Not / alınacak önlem')),
-                DropdownButtonFormField<String>(initialValue: priority, decoration: const InputDecoration(labelText: 'Öncelik'),
+                TextField(controller: title, decoration: InputDecoration(labelText: t('Aksiyon / yapılacak iş *'))),
+                TextField(controller: person, decoration: InputDecoration(labelText: t('Sorumlu *'))),
+                TextField(controller: week, decoration: InputDecoration(labelText: t('Risk haftası (YYYY-AA-GG) *'))),
+                TextField(controller: due, decoration: InputDecoration(labelText: t('Hedef tarih (YYYY-AA-GG) *'))),
+                TextField(controller: note, maxLines: 2, decoration: InputDecoration(labelText: t('Not / alınacak önlem'))),
+                DropdownButtonFormField<String>(initialValue: priority, decoration: InputDecoration(labelText: t('Öncelik')),
                   items: ['Düşük', 'Orta', 'Yüksek', 'Kritik'].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
                   onChanged: (v) { if (v != null) refresh(() => priority = v); }),
-                DropdownButtonFormField<String>(initialValue: status, decoration: const InputDecoration(labelText: 'Durum'),
+                DropdownButtonFormField<String>(initialValue: status, decoration: InputDecoration(labelText: t('Durum')),
                   items: ['Planlandı', 'Devam Ediyor', 'Tamamlandı', 'İptal'].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
                   onChanged: (v) { if (v != null) refresh(() => status = v); }),
               ])),
@@ -17569,8 +17571,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               Chip(label: Text('Tamamlanan: $done')),
             ]),
             FilledButton.icon(onPressed: busy ? null : () => edit(), icon: const Icon(Icons.add_task), label: const Text('Yeni önleyici aksiyon oluştur')),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Aksiyon / sorumlu ara'), onChanged: (v) => update(() => search = v)),
-            DropdownButtonFormField<String>(initialValue: ownerFilter, decoration: const InputDecoration(labelText: 'Sorumlu filtresi'),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Aksiyon / sorumlu ara')), onChanged: (v) => update(() => search = v)),
+            DropdownButtonFormField<String>(initialValue: ownerFilter, decoration: InputDecoration(labelText: t('Sorumlu filtresi')),
               items: ['Tümü', ...owners].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
               onChanged: (v) { if (v != null) update(() => ownerFilter = v); }),
             SwitchListTile(title: const Text('Tamamlanan ve iptal edilenleri göster'), value: showClosed, onChanged: (v) => update(() => showClosed = v)),
@@ -17759,7 +17761,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             Text('${iso(start)} – ${iso(end.subtract(const Duration(days:1)))}'),
             SwitchListTile(title:const Text('Hafta sonlarını kapasiteye dahil et'),value:weekends,onChanged:(v)=>update(()=>weekends=v)),
             SwitchListTile(title:const Text('Yalnızca riskli haftalar'),value:risksOnly,onChanged:(v)=>update(()=>risksOnly=v)),
-            TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Sorumlu veya hafta ara'),onChanged:(v)=>update(()=>query=v)),
+            TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Sorumlu veya hafta ara')),onChanged:(v)=>update(()=>query=v)),
             Card(color:const Color(0xFFFFF3FA),child:Padding(padding:const EdgeInsets.all(12),child:Text('Analiz: ${rows.length} sorumlu-hafta • Riskli: $riskCount • Hedef üstü: $totalGap dk • Geçmiş işlem: ${history.length}',style:const TextStyle(fontWeight:FontWeight.bold)))),
             if (missing.values.any((v)=>v>0)) Text('Veri kalitesi: ${missing['tarih']} tarihsiz, ${missing['sorumlu']} sorumlusuz, ${missing['süre']} varsayılan 30 dk ile hesaplanan görev.',style:const TextStyle(fontSize:12)),
             const SizedBox(height:8),
@@ -17896,7 +17898,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             Text('İyileşen işlem oranı: ${filtered.isEmpty ? '—' : '${(improved * 100 / filtered.length).toStringAsFixed(1)}%'}'),
             Text('Eksik eski kayıt: $legacy • Geçersiz tam plan: $invalid'),
           ]))),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'İşlem / strateji / tarih ara'), onChanged: (v) => update(() => query = v)),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('İşlem / strateji / tarih ara')), onChanged: (v) => update(() => query = v)),
           SwitchListTile(title: const Text('Yalnızca kötüleşen işlemler'), value: onlyWorse, onChanged: (v) => update(() => onlyWorse = v)),
           const Text('Tekrarlayan sorumlu riskleri', style: TextStyle(fontWeight: FontWeight.bold)),
           if (repeated.isEmpty) const ListTile(title: Text('Seçilen tekrar eşiğini aşan sorumlu yok.')),
@@ -18051,7 +18053,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             Text('Tam planı eksik eski kayıt: $legacy • Geçersiz kayıt: $invalid'),
             Text('İyileşen işlem oranı: ${filtered.isEmpty ? '—' : '${(100 * improvements / filtered.length).toStringAsFixed(1)}%'}'),
           ]))),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'İşlem adı / strateji / tarih ara'), onChanged: (v) => refresh(() => search = v)),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('İşlem adı / strateji / tarih ara')), onChanged: (v) => refresh(() => search = v)),
           SwitchListTile(title: const Text('Yalnızca iyileşen işlemler'), value: onlyImproved, onChanged: (v) => refresh(() => onlyImproved = v)),
           SwitchListTile(title: const Text('Sonrasında riskli gün kalanlar'), value: onlyRisk, onChanged: (v) => refresh(() => onlyRisk = v)),
           if (filtered.isEmpty) const ListTile(title: Text('Seçilen koşullarda tam plan optimizasyon kaydı bulunamadı.')),
@@ -18280,7 +18282,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           Text('Seçili ${selected.length}/${moves.length} • adalet ${fairnessExcess(base)} → ${fairnessExcess(preview)} dk • günlük aşım ${dailyExcess(base)} → ${dailyExcess(preview)} dk • riskli gün ${riskDays(base)} → ${riskDays(preview)}', style: Theme.of(ctx).textTheme.titleMedium),
           Wrap(spacing: 8, children: [TextButton(onPressed: () => refresh(() { selected..clear()..addAll(List.generate(moves.length, (i) => i)); }), child: const Text('Tümünü seç')), TextButton(onPressed: () => refresh(selected.clear), child: const Text('Seçimi temizle'))]),
           SwitchListTile(title: const Text('Yalnızca seçilenleri göster'), value: selectedOnly, onChanged: (v) => refresh(() => selectedOnly = v)),
-          TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Görev / sorumlu ara'), onChanged: (v) => refresh(() => search = v)),
+          TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Görev / sorumlu ara')), onChanged: (v) => refresh(() => search = v)),
           if (visible.isEmpty) const ListTile(title: Text('Bu koşullarda öneri bulunamadı.')),
           ...visible.map((i) { final e = moves[i]; return CheckboxListTile(value: selected.contains(i), controlAffinity: ListTileControlAffinity.leading, onChanged: (v) => refresh(() { if (v == true) { selected.add(i); } else { selected.remove(i); } }), title: Text(str(e['title'])), subtitle: Text('${e['owner']} / ${iso(e['date'] as DateTime)} → ${e['toOwner']} / ${iso(e['toDate'] as DateTime)}\n${e['minutes']} dk • Puan ${e['score']}')); }),
           FilledButton.tonalIcon(onPressed: () async { final lines = <String>['Görev;Önceki sorumlu;Önceki tarih;Yeni sorumlu;Yeni tarih;Süre;Puan;Seçili']; for (var i = 0; i < moves.length; i++) { final e = moves[i]; lines.add([e['title'], e['owner'], iso(e['date'] as DateTime), e['toOwner'], iso(e['toDate'] as DateTime), e['minutes'], e['score'], selected.contains(i)].map(csv).join(';')); } await Clipboard.setData(ClipboardData(text: '﻿${lines.join('\r\n')}')); if (ctx.mounted) _notice('CSV panoya kopyalandı.'); }, icon: const Icon(Icons.copy_outlined), label: const Text('CSV raporunu kopyala')),
@@ -18446,7 +18448,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           Text('Seçim önizlemesi • adalet: $beforeFair → ${fairnessExcess(preview)} dk • günlük aşım: $beforeDaily → ${dailyExcess(preview)} dk • riskli gün: ${riskDays(base)} → ${riskDays(preview)}'),
           Wrap(spacing:8,children:[TextButton(onPressed:()=>refresh((){selected..clear()..addAll(List.generate(moves.length,(i)=>i));}),child:const Text('Tümünü seç')),TextButton(onPressed:()=>refresh(selected.clear),child:const Text('Seçimi temizle'))]),
           SwitchListTile(title:const Text('Yalnızca seçilenleri göster'),value:onlySelected,onChanged:(v)=>refresh(()=>onlySelected=v)),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Görev veya sorumlu ara'),onChanged:(v)=>refresh(()=>query=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Görev veya sorumlu ara')),onChanged:(v)=>refresh(()=>query=v)),
           if(visible.isEmpty)const ListTile(title:Text('Bu koşullarda görüntülenecek öneri bulunamadı.')),
           ...visible.take(60).map((i){final e=moves[i];return CheckboxListTile(value:selected.contains(i),onChanged:(v)=>refresh((){if(v==true){selected.add(i);}else{selected.remove(i);}}),title:Text(str(e['title'])),subtitle:Text('${e['person']} / ${iso(e['date'] as DateTime)} → ${e['toPerson']} / ${iso(e['toDate'] as DateTime)}\n${e['minutes']} dk • Puan: ${e['score']}'),controlAffinity:ListTileControlAffinity.leading);}),
           FilledButton.tonalIcon(onPressed:()async{
@@ -18564,7 +18566,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             DropdownButton<int>(value:extraMinutes,items:[0,15,30,45,60].map((v)=>DropdownMenuItem(value:v,child:Text('Ek kapasite +$v dk'))).toList(),onChanged:(v)=>refresh(()=>extraMinutes=v??0)),
           ]),
           Row(children:[IconButton(onPressed:()=>refresh(()=>offsetWeeks-=weeks),icon:const Icon(Icons.chevron_left)),Expanded(child:Text('${iso(start)} – ${iso(end.subtract(const Duration(days:1)))}',textAlign:TextAlign.center)),IconButton(onPressed:()=>refresh(()=>offsetWeeks+=weeks),icon:const Icon(Icons.chevron_right)),TextButton(onPressed:()=>refresh(()=>offsetWeeks=0),child:const Text('Bu hafta'))]),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Sorumlu ara'),onChanged:(v)=>refresh(()=>search=v.trim())),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Sorumlu ara')),onChanged:(v)=>refresh(()=>search=v.trim())),
           SwitchListTile(title:const Text('Hafta sonlarını kapasiteye dahil et'),value:weekends,onChanged:(v)=>refresh(()=>weekends=v)),
           SwitchListTile(title:const Text('Yalnızca riskli sorumlu-haftalar'),value:onlyRisk,onChanged:(v)=>refresh(()=>onlyRisk=v)),
           Wrap(spacing:6,runSpacing:4,children:[stat('Hedef üstü', '$totalGap dk'),stat('Günlük aşım','$totalOver dk'),stat('Riskli sorumlu-hafta','$riskWeeks'),stat('Sorumlu','${people.length}')]),
@@ -18712,7 +18714,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             FilterChip(label:const Text('Yalnızca iyileşen sürümler'),selected:onlyImproved,onSelected:(v)=>refresh(()=>onlyImproved=v)),
           ]),
           Row(children:[IconButton(onPressed:()=>refresh(()=>anchor=anchor.subtract(Duration(days:weeks*7))),icon:const Icon(Icons.chevron_left)),Expanded(child:Text('${iso(start)} – ${iso(end.subtract(const Duration(days:1)))}',textAlign:TextAlign.center)),IconButton(onPressed:()=>refresh(()=>anchor=anchor.add(Duration(days:weeks*7))),icon:const Icon(Icons.chevron_right)),TextButton(onPressed:()=>refresh(()=>anchor=DateTime.now()),child:const Text('Bugün'))]),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Sorumlu ara'),onChanged:(v)=>refresh(()=>search=v.trim())),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Sorumlu ara')),onChanged:(v)=>refresh(()=>search=v.trim())),
           Card(child:ListTile(title:Text('${current['gap']} dk hedef üstü iş yükü · ${current['over']} dk günlük kapasite aşımı'),subtitle:Text('${current['risk']} riskli sorumlu-gün · ${versionResults.length} karşılaştırılabilir sürüm · $improving iyileşen / $worsening kötüleşen · işlem bazında net $sumGain dk'))),
           Text('Sorumlu bazında hedef durumu',style:Theme.of(ctx).textTheme.titleMedium),
           if(rank.isEmpty)const ListTile(title:Text('Bu dönemde sorumlu kaydı bulunamadı.')),
@@ -18917,7 +18919,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           ]))),
           const Divider(),
           const Text('Kişisel hedefler (kalıcı kayıt)', style: TextStyle(fontWeight: FontWeight.bold)),
-          TextField(decoration: const InputDecoration(labelText: 'Sorumlu ara', prefixIcon: Icon(Icons.search)),
+          TextField(decoration: InputDecoration(labelText: t('Sorumlu ara'), prefixIcon: Icon(Icons.search)),
             onChanged: (v) => update(() => search = v)),
           SwitchListTile(title: const Text('Yalnızca hedefi aşanlar'), value: onlyGaps, onChanged: (v) => update(() => onlyGaps = v)),
           if (people.isEmpty) const ListTile(title: Text('Atanmış sorumlu bulunamadı.')),
@@ -19169,7 +19171,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             Text('En yüksek ve en düşük doluluk farkı: '
               '${((before['spread'] as double) * 100).toStringAsFixed(1)} → ${((after['spread'] as double) * 100).toStringAsFixed(1)} yüzde puan'),
             const SizedBox(height: 8),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Sorumlu ara'),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Sorumlu ara')),
               onChanged: (v) => update(() => search = v)),
             SwitchListTile(title: const Text('Yalnızca kapasitesi aşılan sorumlular'), value: onlyRisk,
               onChanged: (v) => update(() => onlyRisk = v)),
@@ -19364,7 +19366,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           Text('Seçilen strateji: ${['Tarih odaklı','Sorumlu odaklı','Karma'][selectedStrategy]}',style:const TextStyle(fontSize:17,fontWeight:FontWeight.bold)),
           Text('Hedef üstü yük $beforeTotal → ${selected['after']} dk • Riskli gün ${risk(base)} → ${selected['risk']}'),
           const Text('İş yükü dengesi toplam görev dakikalarına göre hesaplanır; kişilerin farklı kapasite ve uygunluklarını tek başına temsil etmez.'),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),hintText:'Görev veya sorumlu ara'),onChanged:(v)=>refresh(()=>query=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),hintText:t('Görev veya sorumlu ara')),onChanged:(v)=>refresh(()=>query=v)),
           SwitchListTile(title:const Text('Yalnızca hedefi aşan sorumlular'),value:onlyRisk,onChanged:(v)=>refresh(()=>onlyRisk=v)),
           const Text('Sorumlu bazlı etki',style:TextStyle(fontSize:16,fontWeight:FontWeight.bold)),
           if(filteredOwners.isEmpty) const Text('Filtreye uygun sorumlu bulunamadı.'),
@@ -19519,7 +19521,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           const Text('Karar kuralı: Önce en fazla hedef sapması azalması; eşitlikte en az toplam erteleme. Öneri puanı = hedef sapması kazancı − (erteleme günü × ceza) − (sorumlu değişikliği cezası). Pozitif puanlı hareketler önerilir.'),
           const SizedBox(height:8),
           Text('Öne çıkan strateji: ${winner['name']}',style:Theme.of(ctx).textTheme.titleMedium),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),hintText:'Önerilerde görev veya sorumlu ara'),onChanged:(v)=>refresh(()=>search=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),hintText:t('Önerilerde görev veya sorumlu ara')),onChanged:(v)=>refresh(()=>search=v)),
           if(displayed.isEmpty) const ListTile(title:Text('Bu koşullarda öneri bulunamadı.')),
           ...displayed.take(60).map((r)=>Card(child:ListTile(title:Text(str(r['title'])),subtitle:Text('${r['from']} / ${iso(r['date'] as DateTime)} → ${r['to']} / ${iso(r['next'] as DateTime)}\n${r['minutes']} dk • Hedef sapması kazancı ${r['gain']} dk • Erteleme ${r['delay']} gün • Puan ${r['score']}')))),
           Text('Sorumlu bazında önerilen dönem yükü',style:Theme.of(ctx).textTheme.titleMedium),
@@ -19668,7 +19670,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           Text('${iso(start)} – ${iso(end.subtract(const Duration(days:1)))}'),
           SwitchListTile(title:const Text('Hafta sonuna görev öner'),value:weekends,onChanged:(v)=>refresh(()=>weekends=v)),
           SwitchListTile(title:const Text('Yalnızca iyileştiren öneriler'),value:onlyImproving,onChanged:(v)=>refresh(()=>onlyImproving=v)),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),hintText:'Görev, sorumlu veya tarih ara'),onChanged:(v)=>refresh(()=>search=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),hintText:t('Görev, sorumlu veya tarih ara')),onChanged:(v)=>refresh(()=>search=v)),
           Card(color:_pink,child:Padding(padding:const EdgeInsets.all(12),child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
             Text('Açık görev: ${entries.length} • Korunan öncelikli görev: $protectedCount • Öneri: ${proposals.length}',style:const TextStyle(fontWeight:FontWeight.bold)),
             Text('Hedef üstü yük: $before → $after dk • Azalma: ${before-after} dk'),
@@ -19839,7 +19841,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 OutlinedButton.icon(onPressed:()=>update(()=>anchor=anchor.add(Duration(days:horizon))),icon:const Icon(Icons.chevron_right),label:const Text('Sonraki')),
               ]),
               Text('${iso(start)} – ${iso(end.subtract(const Duration(days:1)))}'),
-              TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),hintText:'Görev, sorumlu, tarih veya risk ara'),onChanged:(v)=>update(()=>query=v)),
+              TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),hintText:t('Görev, sorumlu, tarih veya risk ara')),onChanged:(v)=>update(()=>query=v)),
               SwitchListTile(title:const Text('Yalnızca riskli sorumlu-günleri göster'),value:onlyRisk,onChanged:(v)=>update(()=>onlyRisk=v)),
               SwitchListTile(title:const Text('Alternatif önerilerde hafta sonunu kullan'),value:includeWeekends,onChanged:(v)=>update(()=>includeWeekends=v)),
               Wrap(spacing:6,runSpacing:6,children:[metric('Riskli sorumlu-gün','$riskCount'),metric('Mevcut aşım','$before dk'),metric('Öneri sonrası','$after dk'),metric('Öneri','${proposals.length}')]),
@@ -20028,12 +20030,12 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             const Card(child: Padding(padding: EdgeInsets.all(12), child: Text('Trendler kayıtlı plan sürümlerinin önce/sonra kapasite tahminlerini gösterir; gerçekleşmiş görev performansı değildir. Aynı görev farklı sürümlerde tekrar bulunabilir. Haftalık toplamlar tekil tasarruf olarak yorumlanmamalıdır. Hedef uyumu mevcut hedef ayarlarına göre yeniden hesaplanır.'))),
             Wrap(spacing: 8, crossAxisAlignment: WrapCrossAlignment.center, children: [
               DropdownButton<int>(value: weeks, items: [4, 8, 12, 26].map((n) => DropdownMenuItem(value: n, child: Text('$n hafta'))).toList(), onChanged: (v) { if (v != null) refresh(() => weeks = v); }),
-              IconButton(tooltip: 'Önceki dönem', onPressed: () => refresh(() => anchor = anchor.subtract(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_left)),
+              IconButton(tooltip: t('Önceki dönem'), onPressed: () => refresh(() => anchor = anchor.subtract(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_left)),
               OutlinedButton(onPressed: () => refresh(() => anchor = DateTime.now()), child: const Text('Bugün')),
-              IconButton(tooltip: 'Sonraki dönem', onPressed: () => refresh(() => anchor = anchor.add(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_right)),
+              IconButton(tooltip: t('Sonraki dönem'), onPressed: () => refresh(() => anchor = anchor.add(Duration(days: weeks * 7))), icon: const Icon(Icons.chevron_right)),
               Text('${dateLabel(firstWeek)} – ${dateLabel(end.subtract(const Duration(days: 1)))}'),
             ]),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Sürüm adı, türü veya notunda ara'), onChanged: (v) => refresh(() => search = v)),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Sürüm adı, türü veya notunda ara')), onChanged: (v) => refresh(() => search = v)),
             Wrap(spacing: 10, children: [
               FilterChip(label: const Text('Manuel sürümleri hariç tut'), selected: onlyAutomated, onSelected: (v) => refresh(() => onlyAutomated = v)),
               FilterChip(label: const Text('Yalnızca kötüleşme olan haftalar'), selected: onlyRegressions, onSelected: (v) => refresh(() => onlyRegressions = v)),
@@ -20218,9 +20220,9 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             const Card(child: Padding(padding: EdgeInsets.all(12), child: Text('Geçmiş analiz, kayıtlı plan sürümlerinin önce/sonra görüntülerine dayanır. Bu görüntüler anlık plan durumudur; gerçek görev tamamlama başarısı veya tarihsel kapasite kullanımı değildir. Manuel sürümler değişiklik içermeyebilir.'))),
             Wrap(spacing: 8, runSpacing: 8, crossAxisAlignment: WrapCrossAlignment.center, children: [
               DropdownButton<int>(value: period, items: [7, 14, 28, 60, 90].map((n) => DropdownMenuItem(value: n, child: Text('$n gün'))).toList(), onChanged: (v) { if (v != null) refresh(() => period = v); }),
-              IconButton(tooltip: 'Önceki dönem', onPressed: () => refresh(() => anchor = anchor.subtract(Duration(days: period))), icon: const Icon(Icons.chevron_left)),
+              IconButton(tooltip: t('Önceki dönem'), onPressed: () => refresh(() => anchor = anchor.subtract(Duration(days: period))), icon: const Icon(Icons.chevron_left)),
               OutlinedButton(onPressed: () => refresh(() => anchor = DateTime.now()), child: const Text('Bugün')),
-              IconButton(tooltip: 'Sonraki dönem', onPressed: () => refresh(() => anchor = anchor.add(Duration(days: period))), icon: const Icon(Icons.chevron_right)),
+              IconButton(tooltip: t('Sonraki dönem'), onPressed: () => refresh(() => anchor = anchor.add(Duration(days: period))), icon: const Icon(Icons.chevron_right)),
               Text('${start.day}.${start.month}.${start.year} – ${anchor.day}.${anchor.month}.${anchor.year}'),
             ]),
             Wrap(spacing: 6, runSpacing: 6, children: [
@@ -20237,7 +20239,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               const SizedBox(height: 6), Text('Hedefe uygun sürüm oranı: %${(goalRate * 100).toStringAsFixed(1)}'),
               TextButton.icon(onPressed: () { Navigator.pop(ctx); _showKitchenOptimizationGoalCenter(); }, icon: const Icon(Icons.tune), label: const Text('Hedefleri düzenle / senaryo karar merkezi')),
             ]))),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Sürüm adı, notu veya türünde ara'), onChanged: (v) => refresh(() => search = v)),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Sürüm adı, notu veya türünde ara')), onChanged: (v) => refresh(() => search = v)),
             Wrap(spacing: 12, crossAxisAlignment: WrapCrossAlignment.center, children: [
               FilterChip(label: const Text('Yalnızca değişen'), selected: onlyChanged, onSelected: (v) => refresh(() => onlyChanged = v)),
               FilterChip(label: const Text('Hedefe uygun'), selected: onlySuccess, onSelected: (v) => refresh(() => onlySuccess = v)),
@@ -20468,7 +20470,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 DropdownButton<int>(value: maxMoves, items: [5,10,15,25,50].map((v) => DropdownMenuItem(value: v, child: Text('En çok $v öneri'))).toList(), onChanged: (v) => refresh(() => maxMoves = v ?? 15)),
                 DropdownButton<String>(value: ownerFilter, items: ['Tümü', ...owners].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(), onChanged: (v) => refresh(() => ownerFilter = v ?? 'Tümü')),
               ]),
-              TextField(decoration: const InputDecoration(labelText: 'Görev / sorumlu ara', prefixIcon: Icon(Icons.search)), onChanged: (v) => refresh(() => query = v)),
+              TextField(decoration: InputDecoration(labelText: t('Görev / sorumlu ara'), prefixIcon: Icon(Icons.search)), onChanged: (v) => refresh(() => query = v)),
               SwitchListTile(title: const Text('Hafta sonu alternatiflerine izin ver'), value: weekends, onChanged: (v) => refresh(() => weekends = v)),
               const Divider(),
               Text('Hedef kapasite aşımı: en fazla $overflowGoal dakika'),
@@ -20733,11 +20735,11 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                   onSelected: (v) => refresh(() => allowWeekends = v)),
               ]),
               DropdownButtonFormField<String>(initialValue: ownerFilter,
-                decoration: const InputDecoration(labelText: 'Sorumlu'),
+                decoration: InputDecoration(labelText: t('Sorumlu')),
                 items: [for (final o in ['Tümü', ...owners]) DropdownMenuItem(value: o, child: Text(o))],
                 onChanged: (v) => refresh(() => ownerFilter = v ?? 'Tümü')),
-              TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-                labelText: 'Görev veya sorumlu ara'), onChanged: (v) => refresh(() => search = v)),
+              TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+                labelText: t('Görev veya sorumlu ara')), onChanged: (v) => refresh(() => search = v)),
               Wrap(spacing: 8, children: [for (final n in [5, 10, 15, 25, 50])
                 ChoiceChip(label: Text('En fazla $n'), selected: maxMoves == n,
                   onSelected: (_) => refresh(() => maxMoves = n))]),
@@ -20948,8 +20950,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             Wrap(spacing:8,runSpacing:6,children:[for(final n in [7,14,21,28])ChoiceChip(label:Text('$n gün'),selected:days==n,onSelected:(_)=>setSheet(()=>days=n)),
               FilterChip(label:const Text('Hafta sonuna izin ver'),selected:weekends,onSelected:(v)=>setSheet(()=>weekends=v)),
               FilterChip(label:const Text('Yalnız aşırı yüklü'),selected:onlyOverloaded,onSelected:(v)=>setSheet(()=>onlyOverloaded=v))]),
-            DropdownButtonFormField<String>(initialValue:ownerFilter,decoration:const InputDecoration(labelText:'Sorumlu'),items:[for(final o in ['Tümü',...owners])DropdownMenuItem(value:o,child:Text(o))],onChanged:(v)=>setSheet(()=>ownerFilter=v??'Tümü')),
-            TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Görev veya sorumlu ara'),onChanged:(v)=>setSheet(()=>query=v)),
+            DropdownButtonFormField<String>(initialValue:ownerFilter,decoration:InputDecoration(labelText:t('Sorumlu')),items:[for(final o in ['Tümü',...owners])DropdownMenuItem(value:o,child:Text(o))],onChanged:(v)=>setSheet(()=>ownerFilter=v??'Tümü')),
+            TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Görev veya sorumlu ara')),onChanged:(v)=>setSheet(()=>query=v)),
             Wrap(spacing:8,children:[for(final n in [5,10,15,25,50])ChoiceChip(label:Text('En fazla $n'),selected:maxChanges==n,onSelected:(_)=>setSheet(()=>maxChanges=n))]),
             Card(child:ListTile(title:Text('Mevcut kapasite aşımı: $baselineExcess dk'),subtitle:Text('Aşırı yüklü sorumlu-gün: ${overloadCount(initial)} • Planlanan aktif görev: ${tasks.length}\nVarsayılan kapasite: 120 dk / sorumlu / gün'))),
             for(var i=0;i<3;i++)Card(child:RadioGroup<int>(groupValue:strategy,onChanged:(v)=>setSheet(()=>strategy=v??0),child:RadioListTile<int>(value:i,
@@ -21075,10 +21077,10 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         Row(children:[Expanded(child:Text('Akıllı geri alma • Simülasyon ve çakışma çözümü',style:Theme.of(ctx).textTheme.titleLarge)),IconButton(onPressed:()=>Navigator.pop(ctx),icon:const Icon(Icons.close))]),
         const Text('Görevleri tek tek seç, mevcut kapasite etkisini gör, onayla ve yeni sürüm oluştur. Tahminler yalnızca planlanan dakikaları kullanır.'),
         if(loading)const LinearProgressIndicator()else if(ordered.isEmpty)const Card(child:ListTile(title:Text('Kayıtlı plan sürümü yok'),subtitle:Text('Önce Plan Sürümleri ekranından bir sürüm oluştur.')))else ...[
-          DropdownButtonFormField<int>(initialValue:chosen<ordered.length?chosen:0,decoration:const InputDecoration(labelText:'Kaynak plan sürümü'),items:[for(var i=0;i<ordered.length;i++)DropdownMenuItem(value:i,child:Text('${ordered[i]['name']??'Plan'} • ${txt(ordered[i]['at']).split('T').first}',overflow:TextOverflow.ellipsis))],onChanged:(v)=>refresh((){chosen=v??0;selected.clear();})),
+          DropdownButtonFormField<int>(initialValue:chosen<ordered.length?chosen:0,decoration:InputDecoration(labelText:t('Kaynak plan sürümü')),items:[for(var i=0;i<ordered.length;i++)DropdownMenuItem(value:i,child:Text('${ordered[i]['name']??'Plan'} • ${txt(ordered[i]['at']).split('T').first}',overflow:TextOverflow.ellipsis))],onChanged:(v)=>refresh((){chosen=v??0;selected.clear();})),
           Wrap(spacing:8,children:[ChoiceChip(label:const Text('Önceki plan'),selected:target=='before',onSelected:(_)=>refresh((){target='before';selected.clear();})),ChoiceChip(label:const Text('Sonraki plan'),selected:target=='after',onSelected:(_)=>refresh((){target='after';selected.clear();})),for(final n in [7,14,28,60])ChoiceChip(label:Text('$n gün'),selected:window==n,onSelected:(_)=>refresh(()=>window=n))]),
           Card(child:Padding(padding:const EdgeInsets.all(12),child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('Toplam ${rows.length} görev • ${validIds.length} değişiklik • $risk çakışma • ${selected.length} seçili'),Text('Kapasite aşımı: ${excess(before)} → ${excess(after)} dk (${excess(after)-excess(before)>=0?'+':''}${excess(after)-excess(before)} dk)'),Text('Aşırı yüklü sorumlu-gün: ${overDays(before)} → ${overDays(after)}'),Text('Karşılaştırma: bugünden itibaren $window gün • Varsayılan kapasite: 120 dk/gün')]))),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Görev veya çakışma ara'),onChanged:(v)=>refresh(()=>search=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Görev veya çakışma ara')),onChanged:(v)=>refresh(()=>search=v)),
           Wrap(spacing:8,children:[FilterChip(label:const Text('Yalnız değişenler'),selected:onlyChanged,onSelected:(v)=>refresh(()=>onlyChanged=v)),FilterChip(label:const Text('Yalnız çakışmalar'),selected:onlyRisk,onSelected:(v)=>refresh(()=>onlyRisk=v)),ActionChip(label:const Text('Uygunların tümünü seç'),onPressed:()=>refresh(()=>selected.addAll(validIds))),ActionChip(label:const Text('Seçimi temizle'),onPressed:()=>refresh(()=>selected.clear()))]),
           for(final r in shown.take(150))Builder(builder:(ctx){final a=r['current'] as Map<String,dynamic>?,b=r['saved'] as Map<String,dynamic>;final id=txt(r['id']),safe=r['safe']==true&&r['changed']==true;
             return Card(child:CheckboxListTile(value:selected.contains(id),onChanged:safe?(v)=>refresh((){if(v==true){selected.add(id);}else{selected.remove(id);}}):null,title:Text(txt(r['title'])),subtitle:Text('${r['reason']}\n${a==null?'—':owner(a)} • ${txt(a?['targetDate'])}  →  ${owner(b)} • ${txt(b['targetDate'])}'),isThreeLine:true));
@@ -21158,14 +21160,14 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         Row(children:[Expanded(child:Text('Plan sürümleri • Ayrıntılı karşılaştırma ve geri alma önizlemesi',style:Theme.of(ctx).textTheme.titleLarge)),IconButton(onPressed:()=>Navigator.pop(ctx),icon:const Icon(Icons.close))]),
         const Text('İki kayıtlı planı veya bir planı mevcut görevlerle karşılaştır. Önizleme kayıtları değiştirmez. Geri alma işlemleri mevcut Plan Sürümleri ekranından onaylanır.'),
         if(loading)const LinearProgressIndicator()else if(ordered.isEmpty)const Card(child:ListTile(title:Text('Henüz kayıtlı plan sürümü yok.'),subtitle:Text('Önce Plan Sürümleri ekranından anlık görüntü oluştur.')))else ...[
-          DropdownButtonFormField<int>(initialValue:left,decoration:const InputDecoration(labelText:'Başlangıç sürümü'),isExpanded:true,items:[for(var i=0;i<ordered.length;i++)DropdownMenuItem(value:i,child:Text('${ordered[i]['name']} • ${day(ordered[i]['at'])}',overflow:TextOverflow.ellipsis))],onChanged:(v)=>refresh(()=>left=v??0)),
+          DropdownButtonFormField<int>(initialValue:left,decoration:InputDecoration(labelText:t('Başlangıç sürümü')),isExpanded:true,items:[for(var i=0;i<ordered.length;i++)DropdownMenuItem(value:i,child:Text('${ordered[i]['name']} • ${day(ordered[i]['at'])}',overflow:TextOverflow.ellipsis))],onChanged:(v)=>refresh(()=>left=v??0)),
           const SizedBox(height:8),
-          DropdownButtonFormField<int>(initialValue:right,decoration:const InputDecoration(labelText:'Karşılaştırılacak plan'),isExpanded:true,items:[const DropdownMenuItem(value:-1,child:Text('Mevcut görev planı')),for(var i=0;i<ordered.length;i++)DropdownMenuItem(value:i,child:Text('${ordered[i]['name']} • ${day(ordered[i]['at'])}',overflow:TextOverflow.ellipsis))],onChanged:(v)=>refresh(()=>right=v??-1)),
+          DropdownButtonFormField<int>(initialValue:right,decoration:InputDecoration(labelText:t('Karşılaştırılacak plan')),isExpanded:true,items:[const DropdownMenuItem(value:-1,child:Text('Mevcut görev planı')),for(var i=0;i<ordered.length;i++)DropdownMenuItem(value:i,child:Text('${ordered[i]['name']} • ${day(ordered[i]['at'])}',overflow:TextOverflow.ellipsis))],onChanged:(v)=>refresh(()=>right=v??-1)),
           Wrap(spacing:8,children:[ChoiceChip(label:const Text('120 dk varsayılan'),selected:defaultCapacity==120,onSelected:(_)=>refresh(()=>defaultCapacity=120)),ChoiceChip(label:const Text('180 dk varsayılan'),selected:defaultCapacity==180,onSelected:(_)=>refresh(()=>defaultCapacity=180)),ChoiceChip(label:const Text('240 dk varsayılan'),selected:defaultCapacity==240,onSelected:(_)=>refresh(()=>defaultCapacity=240))]),
           metric('Karşılaştırılan görev','${allIds.length}'),metric('Değişen görev','${changes.where((r)=>r['changed']==true).length}'),metric('Eşleşme / kapalı görev çakışması','${changes.where((r)=>r['conflict']==true).length}'),
           metric('Planlanan toplam süre','$totalBefore → $totalAfter dk'),metric('Aşırı yüklü sorumlu-gün','${overDays(beforeLoads)} → ${overDays(afterLoads)}'),metric('Kapasite aşımı','${excess(beforeLoads)} → ${excess(afterLoads)} dk'),
           const Text('Kapasite hesabı, sürümlerdeki açık görevler ile kaydedilmiş günlük dakika limitlerine dayanır. Eski sürümlerde durum/süre bilgisi eksikse sonuçlar yaklaşık olabilir.'),
-          TextField(decoration:const InputDecoration(labelText:'Görev veya çakışma ara',prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
+          TextField(decoration:InputDecoration(labelText:t('Görev veya çakışma ara'),prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
           Wrap(spacing:10,children:[DropdownButton<String>(value:sort,items:['Değişenler önce','Çakışmalar önce','Görev adı'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>sort=v??'Değişenler önce'))]),
           SwitchListTile(title:const Text('Yalnızca değişen görevler'),value:onlyChanged,onChanged:(v)=>refresh(()=>onlyChanged=v)),
           SwitchListTile(title:const Text('Yalnızca çakışmalar'),value:onlyConflicts,onChanged:(v)=>refresh(()=>onlyConflicts=v)),
@@ -21208,7 +21210,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       Future<void> capture()async{
         final title=TextEditingController(text:'Manuel plan • ${DateTime.now().day}.${DateTime.now().month}');
         final note=TextEditingController();
-        final ok=await showDialog<bool>(context:ctx,builder:(d)=>AlertDialog(title:const Text('Plan sürümünü kaydet'),content:SingleChildScrollView(child:Column(mainAxisSize:MainAxisSize.min,children:[TextField(controller:title,maxLength:80,decoration:const InputDecoration(labelText:'Sürüm adı')),TextField(controller:note,maxLines:2,maxLength:250,decoration:const InputDecoration(labelText:'Not (isteğe bağlı)')),Text('${actions.length} görev için planın anlık görüntüsü saklanacak.')])),actions:[TextButton(onPressed:()=>Navigator.pop(d,false),child:const Text('Vazgeç')),FilledButton(onPressed:()=>Navigator.pop(d,true),child:const Text('Kaydet'))]));
+        final ok=await showDialog<bool>(context:ctx,builder:(d)=>AlertDialog(title:const Text('Plan sürümünü kaydet'),content:SingleChildScrollView(child:Column(mainAxisSize:MainAxisSize.min,children:[TextField(controller:title,maxLength:80,decoration:InputDecoration(labelText:t('Sürüm adı'))),TextField(controller:note,maxLines:2,maxLength:250,decoration:InputDecoration(labelText:t('Not (isteğe bağlı)'))),Text('${actions.length} görev için planın anlık görüntüsü saklanacak.')])),actions:[TextButton(onPressed:()=>Navigator.pop(d,false),child:const Text('Vazgeç')),FilledButton(onPressed:()=>Navigator.pop(d,true),child:const Text('Kaydet'))]));
         final name=title.text.trim(),memo=note.text.trim();disposeAfterDialog(title);disposeAfterDialog(note);
         if(ok!=true||name.isEmpty)return;
         final state=actions.map((a)=>{'id':identity(a),'owner':txt(a['owner']),'targetDate':txt(a['targetDate']),'estimatedMinutes':a['estimatedMinutes'],'status':txt(a['status']),'title':txt(a['title'])}).toList();
@@ -21242,7 +21244,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         if(loading)const LinearProgressIndicator()else ...[
           Card(color:const Color(0xFFFFF1FA),child:ListTile(title:Text('${versions.length} kayıtlı sürüm'),subtitle:Text('${actions.length} mevcut görev • En fazla 100 sürüm saklanır.'))),
           FilledButton.icon(onPressed:capture,icon:const Icon(Icons.save_outlined),label:const Text('Mevcut planın sürümünü kaydet')),
-          TextField(decoration:const InputDecoration(labelText:'Sürüm adı veya notunda ara',prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
+          TextField(decoration:InputDecoration(labelText:t('Sürüm adı veya notunda ara'),prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
           Wrap(spacing:8,children:[DropdownButton<String>(value:sort,items:['En yeni','En eski'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>sort=v??'En yeni')),DropdownButton<int>(value:limit,items:[20,50,100].map((v)=>DropdownMenuItem(value:v,child:Text('İlk $v'))).toList(),onChanged:(v)=>refresh(()=>limit=v??50))]),
           SwitchListTile(title:const Text('Yalnızca değişiklik içeren sürümler'),value:onlyChanged,onChanged:(v)=>refresh(()=>onlyChanged=v)),
           for(final v in filtered.take(limit))Card(child:ExpansionTile(title:Text(txt(v['name'])),subtitle:Text('${dateText(v['at'])} • ${changed(v)} farklı kayıt • ${v['type']=='manual'?'Manuel':'Optimizasyon / geri yükleme'}'),children:[
@@ -21344,7 +21346,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           stat('Planlanan süre • önce / sonra','${baseline.values.fold<int>(0,(a,b)=>a+b)} / ${current.values.fold<int>(0,(a,b)=>a+b)} dk'),
           stat('İzlenen sorumlu','${perOwner.length}'),
           const SizedBox(height:10),
-          TextField(decoration:const InputDecoration(labelText:'Görev, sorumlu veya öncelik ara',prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
+          TextField(decoration:InputDecoration(labelText:t('Görev, sorumlu veya öncelik ara'),prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
           Wrap(spacing:10,children:[DropdownButton<String>(value:owners.contains(ownerFilter)?ownerFilter:'Tümü',items:owners.map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>ownerFilter=v??'Tümü')),DropdownButton<String>(value:sort,items:['En yeni','Görev','Süre','Sorumlu'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>sort=v??'En yeni'))]),
           SwitchListTile(title:const Text('Yalnızca gerçekten taşınan görevler'),value:onlyMoved,onChanged:(v)=>refresh(()=>onlyMoved=v)),
           SwitchListTile(title:const Text('Yalnızca toplam kapasite aşımı azalan dönem'),value:onlyImproved,onChanged:(v)=>refresh(()=>onlyImproved=v)),
@@ -21446,7 +21448,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         if(loading)const LinearProgressIndicator() else ...[
           Wrap(spacing:10,runSpacing:8,children:[DropdownButton<int>(value:days,items:[7,14,21,28].map((v)=>DropdownMenuItem(value:v,child:Text('$v gün'))).toList(),onChanged:(v)=>refresh(()=>days=v??7)),DropdownButton<int>(value:minSamples,items:[1,2,3,5].map((v)=>DropdownMenuItem(value:v,child:Text('Öğrenme: $v ölçüm'))).toList(),onChanged:(v)=>refresh(()=>minSamples=v??2)),DropdownButton<int>(value:maxMoves,items:[5,10,15,25,50].map((v)=>DropdownMenuItem(value:v,child:Text('En fazla $v öneri'))).toList(),onChanged:(v)=>refresh(()=>maxMoves=v??15)),DropdownButton<String>(value:owners.contains(ownerFilter)?ownerFilter:'Tümü',items:owners.map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>ownerFilter=v??'Tümü')),DropdownButton<String>(value:order,items:['Öncelik','Tarih','Süre','Sorumlu'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>order=v??'Öncelik'))]),
           Row(children:[IconButton(onPressed:()=>refresh(()=>anchor=anchor.subtract(Duration(days:days))),icon:const Icon(Icons.chevron_left)),Expanded(child:Text('${iso(start)} – ${iso(end.subtract(const Duration(days:1)))}',textAlign:TextAlign.center)),IconButton(onPressed:()=>refresh(()=>anchor=anchor.add(Duration(days:days))),icon:const Icon(Icons.chevron_right)),TextButton(onPressed:()=>refresh(()=>anchor=DateTime.now()),child:const Text('Bugün'))]),
-          TextField(decoration:const InputDecoration(labelText:'Görev, ürün, sorumlu veya açıklama ara',prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>query=v)),
+          TextField(decoration:InputDecoration(labelText:t('Görev, ürün, sorumlu veya açıklama ara'),prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>query=v)),
           SwitchListTile(title:const Text('Yalnızca kapasitesi aşılmış günlerin görevleri'),value:onlyOverloaded,onChanged:(v)=>refresh(()=>onlyOverloaded=v)),
           SwitchListTile(title:const Text('Atanmamış görevleri dahil et'),value:includeUnassigned,onChanged:(v)=>refresh(()=>includeUnassigned=v)),
           SwitchListTile(title:const Text('Görev sorumlusunu değiştirme'),value:keepOwner,onChanged:(v)=>refresh(()=>keepOwner=v)),
@@ -21542,7 +21544,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           DropdownButton<String>(value:order,items:['Hedef tarihi','Öncelik','En büyük sapma','Sorumlu','Tahmini süre'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>order=v??'Hedef tarihi')),
         ]),
         Text('${iso(start)} – ${iso(end.subtract(const Duration(days:1)))} • Yalnızca hedef tarihi olan görevler'),
-        TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),hintText:'Görev, sorumlu, kaynak veya not ara'),onChanged:(v)=>refresh(()=>query=v)),
+        TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),hintText:t('Görev, sorumlu, kaynak veya not ara')),onChanged:(v)=>refresh(()=>query=v)),
         SwitchListTile(dense:true,title:const Text('Yalnızca kapasitesi aşılan günler'),value:onlyOver,onChanged:(v)=>refresh(()=>onlyOver=v)),
         SwitchListTile(dense:true,title:const Text('Gerçekleşen süresi eksik görevler'),value:onlyMissing,onChanged:(v)=>refresh(()=>onlyMissing=v)),
         SwitchListTile(dense:true,title:const Text('Geciken açık görevler'),value:onlyLate,onChanged:(v)=>refresh(()=>onlyLate=v)),
@@ -21620,7 +21622,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         if(loading)const LinearProgressIndicator() else ...[
           Wrap(spacing:8,runSpacing:8,children:[DropdownButton<int>(value:window,items:[7,14,21,28].map((v)=>DropdownMenuItem(value:v,child:Text('$v gün'))).toList(),onChanged:(v)=>refresh(()=>window=v??7)),DropdownButton<int>(value:minimumSamples,items:[1,2,3,5].map((v)=>DropdownMenuItem(value:v,child:Text('En az $v ölçüm'))).toList(),onChanged:(v)=>refresh(()=>minimumSamples=v??2)),DropdownButton<String>(value:owners.contains(owner)?owner:'Tümü',items:owners.map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>owner=v??'Tümü')),DropdownButton<String>(value:sort,items:['Öncelik','Tarih','Süre','Sorumlu'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>sort=v??'Öncelik'))]),
           Row(children:[IconButton(onPressed:()=>refresh(()=>anchor=anchor.subtract(Duration(days:window))),icon:const Icon(Icons.chevron_left)),Expanded(child:Text('${iso(start)} – ${iso(end.subtract(const Duration(days:1)))}',textAlign:TextAlign.center)),IconButton(onPressed:()=>refresh(()=>anchor=anchor.add(Duration(days:window))),icon:const Icon(Icons.chevron_right)),TextButton(onPressed:()=>refresh(()=>anchor=DateTime.now()),child:const Text('Bugün'))]),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Görev / sorumlu ara'),onChanged:(v)=>refresh(()=>query=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Görev / sorumlu ara')),onChanged:(v)=>refresh(()=>query=v)),
           SwitchListTile(title:const Text('Yalnızca kapasitesi aşan günlerdeki görevler'),value:onlyOver,onChanged:(v)=>refresh(()=>onlyOver=v)),
           SwitchListTile(title:const Text('Yalnızca atanmamış görevler'),value:onlyUnassigned,onChanged:(v)=>refresh(()=>onlyUnassigned=v)),
           SwitchListTile(title:const Text('Yeterli geçmiş ölçümü olmayan görevler'),value:onlyUnmeasured,onChanged:(v)=>refresh(()=>onlyUnmeasured=v)),
@@ -21664,7 +21666,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       final accuracy=measured.isEmpty?0.0:measured.map((a)=>((1-(difference(a).abs()/estimate(a))).clamp(0.0,1.0))).reduce((a,b)=>a+b)/measured.length*100;
       Future<void> edit(Map<String,dynamic> a)async{
         final c=TextEditingController(text:'${a['actualMinutes']??''}');
-        final ok=await showDialog<bool>(context:ctx,builder:(d)=>AlertDialog(title:Text('${a['title']??'Görev'} • gerçekleşen süre'),content:Column(mainAxisSize:MainAxisSize.min,crossAxisAlignment:CrossAxisAlignment.start,children:[Text('Tahmin: ${estimate(a)} dakika'),const SizedBox(height:10),TextField(controller:c,keyboardType:TextInputType.number,decoration:const InputDecoration(labelText:'Gerçekleşen dakika (1–1440)',helperText:'Boş bırakırsan önceki ölçüm silinir.'))]),actions:[TextButton(onPressed:()=>Navigator.pop(d,false),child:const Text('Vazgeç')),FilledButton(onPressed:()=>Navigator.pop(d,true),child:const Text('Kaydet'))]));
+        final ok=await showDialog<bool>(context:ctx,builder:(d)=>AlertDialog(title:Text('${a['title']??'Görev'} • gerçekleşen süre'),content:Column(mainAxisSize:MainAxisSize.min,crossAxisAlignment:CrossAxisAlignment.start,children:[Text('Tahmin: ${estimate(a)} dakika'),const SizedBox(height:10),TextField(controller:c,keyboardType:TextInputType.number,decoration:InputDecoration(labelText:t('Gerçekleşen dakika (1–1440)'),helperText:t('Boş bırakırsan önceki ölçüm silinir.')))]),actions:[TextButton(onPressed:()=>Navigator.pop(d,false),child:const Text('Vazgeç')),FilledButton(onPressed:()=>Navigator.pop(d,true),child:const Text('Kaydet'))]));
         final input=c.text.trim();disposeAfterDialog(c);if(ok!=true)return;final n=input.isEmpty?null:int.tryParse(input);if(input.isNotEmpty&&(n==null||n<1||n>1440)){if(mounted)_notice('1–1440 dakika arasında değer gir.');return;}
         final old=Map<String,dynamic>.from(a);refresh((){if(n==null){a.remove('actualMinutes');}else{a['actualMinutes']=n;}a['updated']=DateTime.now().toIso8601String();final h=a['history'] is List?List<dynamic>.from(a['history'] as List):<dynamic>[];h.add({'at':DateTime.now().toIso8601String(),'event':n==null?'Gerçekleşen süre silindi':'Gerçekleşen süre: $n dakika'});a['history']=h;});
         try{await persist();if(mounted)_notice('Gerçekleşen süre kaydedildi.');}catch(_){if(ctx.mounted)refresh((){a..clear()..addAll(old);});if(mounted)_notice('Kayıt başarısız; değişiklik geri alındı.');}
@@ -21678,7 +21680,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         const Text('Ölçümler kullanıcı girişidir; otomatik zaman tutma yapılmaz. Tahminsiz görevlerde 30 dk varsayılır.'),
         if(busy)const LinearProgressIndicator() else ...[
           Wrap(spacing:8,runSpacing:8,children:[DropdownButton<int>(value:period,items:[30,60,90,180,365].map((n)=>DropdownMenuItem(value:n,child:Text('$n gün'))).toList(),onChanged:(n)=>refresh(()=>period=n??90)),DropdownButton<String>(value:owners.contains(owner)?owner:'Tümü',items:owners.map((n)=>DropdownMenuItem(value:n,child:Text(n))).toList(),onChanged:(n)=>refresh(()=>owner=n??'Tümü')),DropdownButton<String>(value:status,items:['Tümü','Tamamlanan','Açık olanlar'].map((n)=>DropdownMenuItem(value:n,child:Text(n))).toList(),onChanged:(n)=>refresh(()=>status=n??'Tümü')),DropdownButton<String>(value:order,items:['En büyük sapma','En yeni','Sorumlu','Görev adı'].map((n)=>DropdownMenuItem(value:n,child:Text(n))).toList(),onChanged:(n)=>refresh(()=>order=n??'En büyük sapma'))]),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Görev / sorumlu ara'),onChanged:(v)=>refresh(()=>query=v)),SwitchListTile(title:const Text('Yalnızca gerçekleşen süresi girilenler'),value:onlyMeasured,onChanged:(v)=>refresh(()=>onlyMeasured=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Görev / sorumlu ara')),onChanged:(v)=>refresh(()=>query=v)),SwitchListTile(title:const Text('Yalnızca gerçekleşen süresi girilenler'),value:onlyMeasured,onChanged:(v)=>refresh(()=>onlyMeasured=v)),
           Card(child:Padding(padding:const EdgeInsets.all(12),child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('Görev: ${filtered.length} • Ölçülen: ${measured.length} • Ölçülmeyen: ${filtered.length-measured.length}'),Text('Tahmin toplamı: $estimatedTotal dk • Gerçekleşen: $actualTotal dk'),Text('Toplam fark: ${actualTotal-estimatedTotal} dk • Doğruluk göstergesi: %${accuracy.toStringAsFixed(1)}'),Text('Tahmini aşan: $over • Tahminden kısa: $under • Tam eşleşen: $exact'),if(measured.isNotEmpty)LinearProgressIndicator(value:(accuracy/100).clamp(0.0,1.0))]))),
           if(groups.isNotEmpty)Card(child:ExpansionTile(title:const Text('Sorumlu bazlı süre performansı'),children:groups.entries.map((e){final est=e.value.fold<int>(0,(v,a)=>v+estimate(a)),act=e.value.fold<int>(0,(v,a)=>v+actual(a)!);return ListTile(title:Text('${e.key} • ${e.value.length} ölçüm'),subtitle:Text('Tahmin: $est dk • Gerçekleşen: $act dk • Fark: ${act-est} dk'));}).toList())),
           ...filtered.map((a){final e=estimate(a),v=actual(a),d=v==null?null:v-e;final comparable=measured.where((b)=>'${b['title']??''}'.trim().toLowerCase()=='${a['title']??''}'.trim().toLowerCase()).toList();final suggested=comparable.isEmpty?null:(comparable.fold<int>(0,(sum,b)=>sum+actual(b)!)/comparable.length).round().clamp(5,1440);return Card(child:ExpansionTile(title:Text('${a['title']??'Görev'}'),subtitle:Text('${a['owner']??'Atanmamış'} • ${a['status']??'Açık'} • Tahmin $e dk • ${v==null?'Ölçüm yok':'Gerçek $v dk (${d!>=0?'+':''}$d dk)'}'),children:[if(v!=null)ListTile(title:Text('Sapma: %${(d!/e*100).toStringAsFixed(1)}'),subtitle:Text(d>0?'Tahminin üzerinde tamamlandı':d<0?'Tahminden kısa sürdü':'Tahminle eşleşti')),if(suggested!=null)ListTile(title:Text('Benzer başlıklı ${comparable.length} ölçümün ortalaması: $suggested dk'),subtitle:const Text('Öneri yalnızca aynı başlıklı kayıtların kullanıcı girişlerine dayanır.'),trailing:TextButton(onPressed:()=>applyEstimate(a,suggested),child:const Text('Tahmini güncelle'))),TextButton.icon(onPressed:()=>edit(a),icon:const Icon(Icons.edit_outlined),label:Text(v==null?'Gerçekleşen süre gir':'Gerçekleşen süreyi düzenle'))]));}),
@@ -21730,12 +21732,12 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       final missing=visible.where((a)=>a['estimatedMinutes']==null).length;
       final overDays=summary.fold<int>(0,(v,g)=>v+(g['over'] as int));
       Future<void> editCapacity(String who)async{final c=TextEditingController(text:'${available[who]??120}');
-        final ok=await showDialog<bool>(context:ctx,builder:(d)=>AlertDialog(title:Text('$who • günlük kullanılabilir süre'),content:TextField(controller:c,keyboardType:TextInputType.number,decoration:const InputDecoration(labelText:'Dakika (15–1440)',helperText:'Örnek: 120 dakika = 2 saat')),actions:[TextButton(onPressed:()=>Navigator.pop(d,false),child:const Text('Vazgeç')),FilledButton(onPressed:()=>Navigator.pop(d,true),child:const Text('Kaydet'))]));
+        final ok=await showDialog<bool>(context:ctx,builder:(d)=>AlertDialog(title:Text('$who • günlük kullanılabilir süre'),content:TextField(controller:c,keyboardType:TextInputType.number,decoration:InputDecoration(labelText:t('Dakika (15–1440)'),helperText:t('Örnek: 120 dakika = 2 saat'))),actions:[TextButton(onPressed:()=>Navigator.pop(d,false),child:const Text('Vazgeç')),FilledButton(onPressed:()=>Navigator.pop(d,true),child:const Text('Kaydet'))]));
         final n=int.tryParse(c.text.trim());disposeAfterDialog(c);if(ok!=true)return;if(n==null||n<15||n>1440){if(mounted)_notice('15–1440 dakika arasında değer gir.');return;}
         final previous=available[who];refresh(()=>available[who]=n);try{await saveHours();if(mounted)_notice('Günlük süre kaydedildi.');}catch(_){if(ctx.mounted)refresh((){if(previous==null){available.remove(who);}else{available[who]=previous;}});if(mounted)_notice('Kapasite kaydedilemedi.');}
       }
       Future<void> editDuration(Map<String,dynamic> a)async{final c=TextEditingController(text:'${a['estimatedMinutes']??30}');
-        final ok=await showDialog<bool>(context:ctx,builder:(d)=>AlertDialog(title:Text('${a['title']??'Görev'} • tahmini süre'),content:TextField(controller:c,keyboardType:TextInputType.number,decoration:const InputDecoration(labelText:'Dakika (5–1440)',helperText:'Tahmini süredir; gerçek süreyi ölçmez.')),actions:[TextButton(onPressed:()=>Navigator.pop(d,false),child:const Text('Vazgeç')),FilledButton(onPressed:()=>Navigator.pop(d,true),child:const Text('Kaydet'))]));
+        final ok=await showDialog<bool>(context:ctx,builder:(d)=>AlertDialog(title:Text('${a['title']??'Görev'} • tahmini süre'),content:TextField(controller:c,keyboardType:TextInputType.number,decoration:InputDecoration(labelText:t('Dakika (5–1440)'),helperText:t('Tahmini süredir; gerçek süreyi ölçmez.'))),actions:[TextButton(onPressed:()=>Navigator.pop(d,false),child:const Text('Vazgeç')),FilledButton(onPressed:()=>Navigator.pop(d,true),child:const Text('Kaydet'))]));
         final n=int.tryParse(c.text.trim());disposeAfterDialog(c);if(ok!=true)return;if(n==null||n<5||n>1440){if(mounted)_notice('5–1440 dakika arasında değer gir.');return;}
         final old=Map<String,dynamic>.from(a);refresh((){a['estimatedMinutes']=n;a['updated']=DateTime.now().toIso8601String();final h=a['history'] is List?List<dynamic>.from(a['history'] as List):<dynamic>[];h.add({'at':DateTime.now().toIso8601String(),'event':'Tahmini süre: $n dakika'});a['history']=h;});
         try{await saveActions();if(mounted)_notice('Tahmini görev süresi kaydedildi.');}catch(_){if(ctx.mounted)refresh((){a..clear()..addAll(old);});if(mounted)_notice('Kayıt başarısız; işlem geri alındı.');}
@@ -21760,14 +21762,14 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         Text('Görev süresi / gerçek zaman kapasitesi',style:Theme.of(ctx).textTheme.titleLarge),
         const Text('Görevlerin tahmini dakika bilgisi ve kişi başına günlük kullanılabilir süre ile planlama. Eksik süre için 30 dk, eksik kapasite için 120 dk varsayılır.'),
         if(loading)const LinearProgressIndicator(),
-        TextField(decoration:const InputDecoration(labelText:'Görev, ürün, sorumlu ara',prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>query=v)),
+        TextField(decoration:InputDecoration(labelText:t('Görev, ürün, sorumlu ara'),prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>query=v)),
         Wrap(spacing:8,runSpacing:6,children:[DropdownButton<int>(value:window,items:[7,14,21,28].map((v)=>DropdownMenuItem(value:v,child:Text('$v gün'))).toList(),onChanged:(v)=>refresh(()=>window=v??7)),DropdownButton<String>(value:selectedOwner,items:['Tümü',...owners].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>ownerFilter=v??'Tümü')),OutlinedButton(onPressed:()=>refresh(()=>anchor=day(anchor).subtract(Duration(days:window))),child:const Text('◀ Önceki')),OutlinedButton(onPressed:()=>refresh(()=>anchor=day(DateTime.now())),child:const Text('Bugün')),OutlinedButton(onPressed:()=>refresh(()=>anchor=day(anchor).add(Duration(days:window))),child:const Text('Sonraki ▶'))]),
         Text('Dönem: ${iso(start)} – ${iso(end.subtract(const Duration(days:1)))}'),
         Wrap(spacing:8,children:[FilterChip(label:const Text('Yalnız kapasite aşımı'),selected:onlyOver,onSelected:(v)=>refresh(()=>onlyOver=v)),FilterChip(label:const Text('Süresi girilmemiş görevler'),selected:onlyMissing,onSelected:(v)=>refresh(()=>onlyMissing=v))]),
         Card(color:_pink,child:Padding(padding:const EdgeInsets.all(12),child:Text('Görev: ${visible.length} • Planlanan süre: $totalMinutes dk (${(totalMinutes/60).toStringAsFixed(1)} saat)\nSüresi eksik: $missing • Kapasite aşımı kişi-gün: $overDays • Sorumlu: ${summary.length}'))),
         OutlinedButton.icon(onPressed:()=>Clipboard.setData(ClipboardData(text:'\uFEFF${report.join('\r\n')}')).then((_){if(mounted)_notice('Süre bazlı kapasite CSV kopyalandı.');}),icon:const Icon(Icons.copy),label:const Text('Kapasite CSV kopyala')),
         if(shown.isEmpty)const Padding(padding:EdgeInsets.all(16),child:Text('Bu dönemde uygun görev bulunamadı.')),
-        ...shown.map((g){final who=g['owner'] as String,daily=g['daily'] as Map<String,int>,rows=g['tasks'] as List<Map<String,dynamic>>,cap=g['cap'] as int;return Card(child:ExpansionTile(title:Text('$who • ${rows.length} görev • ${g['total']} dk'),subtitle:Text('Günlük kapasite: $cap dk • Aşım: ${g['over']} gün'),children:[TextButton.icon(onPressed:()=>editCapacity(who),icon:const Icon(Icons.schedule),label:const Text('Günlük kullanılabilir süreyi düzenle')),...(daily.entries.toList()..sort((a,b)=>a.key.compareTo(b.key))).map((e)=>ListTile(dense:true,title:Text(e.key),subtitle:LinearProgressIndicator(value:(e.value/cap).clamp(0.0,1.0),color:e.value>cap?Colors.red:_purple),trailing:Text('${e.value}/$cap dk${e.value>cap?' ⚠':''}'))),...rows.map((a)=>ListTile(title:Text('${a['title']??'Görev'}'),subtitle:Text('${a['due']??''} • ${a['level']??'Orta'} • ${minutes(a)} dk${a['estimatedMinutes']==null?' (varsayılan)':''}'),trailing:Wrap(children:[IconButton(tooltip:'Tahmini süreyi düzenle',icon:const Icon(Icons.timer_outlined),onPressed:()=>editDuration(a)),IconButton(tooltip:'Süreye göre plan öner',icon:const Icon(Icons.auto_fix_high),onPressed:()=>suggest(a))])))]));}),
+        ...shown.map((g){final who=g['owner'] as String,daily=g['daily'] as Map<String,int>,rows=g['tasks'] as List<Map<String,dynamic>>,cap=g['cap'] as int;return Card(child:ExpansionTile(title:Text('$who • ${rows.length} görev • ${g['total']} dk'),subtitle:Text('Günlük kapasite: $cap dk • Aşım: ${g['over']} gün'),children:[TextButton.icon(onPressed:()=>editCapacity(who),icon:const Icon(Icons.schedule),label:const Text('Günlük kullanılabilir süreyi düzenle')),...(daily.entries.toList()..sort((a,b)=>a.key.compareTo(b.key))).map((e)=>ListTile(dense:true,title:Text(e.key),subtitle:LinearProgressIndicator(value:(e.value/cap).clamp(0.0,1.0),color:e.value>cap?Colors.red:_purple),trailing:Text('${e.value}/$cap dk${e.value>cap?' ⚠':''}'))),...rows.map((a)=>ListTile(title:Text('${a['title']??'Görev'}'),subtitle:Text('${a['due']??''} • ${a['level']??'Orta'} • ${minutes(a)} dk${a['estimatedMinutes']==null?' (varsayılan)':''}'),trailing:Wrap(children:[IconButton(tooltip:t('Tahmini süreyi düzenle'),icon:const Icon(Icons.timer_outlined),onPressed:()=>editDuration(a)),IconButton(tooltip:t('Süreye göre plan öner'),icon:const Icon(Icons.auto_fix_high),onPressed:()=>suggest(a))])))]));}),
         const SizedBox(height:12),OutlinedButton.icon(onPressed:(){Navigator.pop(ctx);_showKitchenWeeklyCapacityPlanner();},icon:const Icon(Icons.calendar_month_outlined),label:const Text('Görev sayısına göre kapasite ekranı')),
       ]))));
     }));
@@ -21809,7 +21811,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
       final overloaded=summary.fold<int>(0,(v,g)=>v+(g['overload'] as int));
       Future<void> changeLimit(String owner)async{
         final controller=TextEditingController(text:'${limits[owner]??3}');
-        final accepted=await showDialog<bool>(context:ctx,builder:(d)=>AlertDialog(title:Text('$owner • günlük görev sınırı'),content:TextField(controller:controller,keyboardType:TextInputType.number,decoration:const InputDecoration(labelText:'1–100 görev / gün')),actions:[TextButton(onPressed:()=>Navigator.pop(d,false),child:const Text('Vazgeç')),FilledButton(onPressed:()=>Navigator.pop(d,true),child:const Text('Kaydet'))]));
+        final accepted=await showDialog<bool>(context:ctx,builder:(d)=>AlertDialog(title:Text('$owner • günlük görev sınırı'),content:TextField(controller:controller,keyboardType:TextInputType.number,decoration:InputDecoration(labelText:t('1–100 görev / gün'))),actions:[TextButton(onPressed:()=>Navigator.pop(d,false),child:const Text('Vazgeç')),FilledButton(onPressed:()=>Navigator.pop(d,true),child:const Text('Kaydet'))]));
         final value=int.tryParse(controller.text.trim());disposeAfterDialog(controller);if(accepted!=true||value==null||value<1||value>100){if(accepted==true&&mounted)_notice('1 ile 100 arasında sınır gir.');return;}
         final old=limits[owner];refresh(()=>limits[owner]=value);
         try{await saveLimits();if(mounted)_notice('Günlük kapasite kaydedildi.');}catch(_){if(ctx.mounted)refresh((){if(old==null){limits.remove(owner);}else{limits[owner]=old;}});if(mounted)_notice('Kapasite kaydedilemedi.');}
@@ -21837,14 +21839,14 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         Text('Haftalık kapasite / akıllı görev önerileri',style:Theme.of(ctx).textTheme.titleLarge),
         const Text('Günlük görev sayısına göre kapasite kontrolü. Varsayılan sınır: 3 görev/gün; gerçek çalışma saati veya kişi uygunluğu değildir.'),
         if(loading)const LinearProgressIndicator(),
-        TextField(decoration:const InputDecoration(labelText:'Görev, ürün veya sorumlu ara',prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
+        TextField(decoration:InputDecoration(labelText:t('Görev, ürün veya sorumlu ara'),prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
         Wrap(spacing:8,runSpacing:6,children:[DropdownButton<int>(value:horizon,items:[7,14,21,28].map((n)=>DropdownMenuItem(value:n,child:Text('$n gün'))).toList(),onChanged:(v)=>refresh(()=>horizon=v??7)),DropdownButton<String>(value:filter=='Tümü'||owners.contains(filter)?filter:'Tümü',items:['Tümü',...owners].map((o)=>DropdownMenuItem(value:o,child:Text(o))).toList(),onChanged:(v)=>refresh(()=>filter=v??'Tümü')),OutlinedButton(onPressed:()=>refresh(()=>anchor=day(anchor).subtract(Duration(days:horizon))),child:const Text('◀ Önceki')),OutlinedButton(onPressed:()=>refresh(()=>anchor=day(DateTime.now())),child:const Text('Bugün')),OutlinedButton(onPressed:()=>refresh(()=>anchor=day(anchor).add(Duration(days:horizon))),child:const Text('Sonraki ▶'))]),
         Text('Dönem: ${iso(start)} – ${iso(end.subtract(const Duration(days:1)))}'),
         Wrap(spacing:8,children:[FilterChip(label:const Text('Yalnız aşırı yük'),selected:onlyOverloaded,onSelected:(v)=>refresh(()=>onlyOverloaded=v)),FilterChip(label:const Text('Yalnız geciken'),selected:onlyLate,onSelected:(v)=>refresh(()=>onlyLate=v))]),
         Card(color:_pink,child:Padding(padding:const EdgeInsets.all(12),child:Text('Aktif planlı görev: ${visible.length} • Sorumlu grubu: ${summary.length}\nKapasite aşımı olan kişi-gün: $overloaded • Kritik görev: ${visible.where((a)=>a['level']=='Kritik').length}'))),
         OutlinedButton.icon(onPressed:()=>Clipboard.setData(ClipboardData(text:'\uFEFF${report.join('\r\n')}')).then((_){if(mounted)_notice('Kapasite raporu kopyalandı.');}),icon:const Icon(Icons.copy),label:const Text('CSV kopyala')),
         if(shown.isEmpty)const Padding(padding:EdgeInsets.all(16),child:Text('Seçilen dönemde görev veya aşırı yük bulunamadı.')),
-        ...shown.map((g){final owner=g['owner'] as String,rows=g['rows'] as List<Map<String,dynamic>>,daily=g['days'] as Map<String,int>;return Card(child:ExpansionTile(title:Text('$owner • ${rows.length} görev'),subtitle:Text('Günlük sınır: ${g['limit']} • Aşırı yüklü gün: ${g['overload']} • En yoğun gün: ${g['peak']}'),children:[TextButton.icon(onPressed:()=>changeLimit(owner),icon:const Icon(Icons.tune),label:const Text('Günlük sınırı düzenle')),...(daily.entries.toList()..sort((a,b)=>a.key.compareTo(b.key))).map((e)=>ListTile(dense:true,title:Text(e.key),subtitle:LinearProgressIndicator(value:(e.value/(g['limit'] as int)).clamp(0.0,1.0),color:e.value>(g['limit'] as int)?Colors.red:_purple),trailing:Text('${e.value}/${g['limit']}${e.value>(g['limit'] as int)?' ⚠':''}'))),...rows.map((a)=>ListTile(title:Text((a['title']??'Görev').toString()),subtitle:Text('${a['level']??'Orta'} • ${a['due']??''}'),trailing:IconButton(icon:const Icon(Icons.auto_fix_high),tooltip:'Uygun sorumlu ve tarih öner',onPressed:()=>suggest(a))))]));}),
+        ...shown.map((g){final owner=g['owner'] as String,rows=g['rows'] as List<Map<String,dynamic>>,daily=g['days'] as Map<String,int>;return Card(child:ExpansionTile(title:Text('$owner • ${rows.length} görev'),subtitle:Text('Günlük sınır: ${g['limit']} • Aşırı yüklü gün: ${g['overload']} • En yoğun gün: ${g['peak']}'),children:[TextButton.icon(onPressed:()=>changeLimit(owner),icon:const Icon(Icons.tune),label:const Text('Günlük sınırı düzenle')),...(daily.entries.toList()..sort((a,b)=>a.key.compareTo(b.key))).map((e)=>ListTile(dense:true,title:Text(e.key),subtitle:LinearProgressIndicator(value:(e.value/(g['limit'] as int)).clamp(0.0,1.0),color:e.value>(g['limit'] as int)?Colors.red:_purple),trailing:Text('${e.value}/${g['limit']}${e.value>(g['limit'] as int)?' ⚠':''}'))),...rows.map((a)=>ListTile(title:Text((a['title']??'Görev').toString()),subtitle:Text('${a['level']??'Orta'} • ${a['due']??''}'),trailing:IconButton(icon:const Icon(Icons.auto_fix_high),tooltip:t('Uygun sorumlu ve tarih öner'),onPressed:()=>suggest(a))))]));}),
         const SizedBox(height:12),OutlinedButton.icon(onPressed:(){Navigator.pop(ctx);_showKitchenWorkloadBalancer();},icon:const Icon(Icons.balance_outlined),label:const Text('Görev dağılımı ekranını aç')),
       ]))));
     }));
@@ -21903,7 +21905,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         DateTime target=now.add(const Duration(days:3));
         final accepted=await showDialog<bool>(context:ctx,builder:(dialog)=>StatefulBuilder(builder:(d,update)=>AlertDialog(
           title:Text(reassign?'Toplu sorumlu değiştir':'Toplu yeniden planla'),
-          content:Column(mainAxisSize:MainAxisSize.min,children:[Text('${chosen.length} görev güncellenecek.'),if(reassign)TextField(controller:input,maxLength:80,decoration:const InputDecoration(labelText:'Yeni sorumlu')),if(!reassign)ListTile(title:Text('${target.day}.${target.month}.${target.year}'),trailing:const Icon(Icons.calendar_month),onTap:()async{final p=await showDatePicker(context:d,initialDate:target,firstDate:DateTime(2020),lastDate:DateTime(2100));if(p!=null)update(()=>target=p);})]),
+          content:Column(mainAxisSize:MainAxisSize.min,children:[Text('${chosen.length} görev güncellenecek.'),if(reassign)TextField(controller:input,maxLength:80,decoration:InputDecoration(labelText:t('Yeni sorumlu'))),if(!reassign)ListTile(title:Text('${target.day}.${target.month}.${target.year}'),trailing:const Icon(Icons.calendar_month),onTap:()async{final p=await showDatePicker(context:d,initialDate:target,firstDate:DateTime(2020),lastDate:DateTime(2100));if(p!=null)update(()=>target=p);})]),
           actions:[TextButton(onPressed:()=>Navigator.pop(d,false),child:const Text('Vazgeç')),FilledButton(onPressed:()=>Navigator.pop(d,true),child:const Text('Onayla'))],
         )));
         if(accepted!=true||!ctx.mounted){disposeAfterDialog(input);return;}
@@ -21919,7 +21921,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         Text('Akıllı görev dağılımı / iş yükü dengeleme',style:Theme.of(ctx).textTheme.titleLarge),
         const Text('Aksiyon kayıtlarına dayalı iş yükü; ağırlıklar Kritik=5, Yüksek=3, Orta=1. Tahmini çalışma saati değildir.'),
         if(loading)const LinearProgressIndicator(),
-        TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Görev, ürün, kaynak veya sorumlu ara'),onChanged:(v)=>refresh(()=>query=v)),
+        TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Görev, ürün, kaynak veya sorumlu ara')),onChanged:(v)=>refresh(()=>query=v)),
         Wrap(spacing:8,children:[SizedBox(width:135,child:dropdown(status,['Aktif','Tümü','Tamamlandı','İptal'],(v)=>refresh(()=>status=v??'Aktif'))),SizedBox(width:130,child:dropdown(priority,['Tümü','Kritik','Yüksek','Orta'],(v)=>refresh(()=>priority=v??'Tümü'))),SizedBox(width:155,child:dropdown(owner,names,(v)=>refresh(()=>owner=v??'Tümü'))),SizedBox(width:135,child:dropdown(sort,['Yük (azalan)','Geciken','Görev sayısı','İsim'],(v)=>refresh(()=>sort=v??'Yük (azalan'))),SizedBox(width:110,child:dropdown('$window',['3','7','14','30','60'],(v)=>refresh(()=>window=int.tryParse(v??'7')??7)))]),
         Wrap(spacing:6,children:[FilterChip(label:const Text('Gecikenler'),selected:onlyLate,onSelected:(v)=>refresh(()=>onlyLate=v)),FilterChip(label:const Text('Atanmamış'),selected:onlyUnassigned,onSelected:(v)=>refresh(()=>onlyUnassigned=v)),FilterChip(label:const Text('Kritik'),selected:onlyCritical,onSelected:(v)=>refresh(()=>onlyCritical=v))]),
         Card(color:_pink,child:Padding(padding:const EdgeInsets.all(12),child:Text('Görev: ${indexed.length}  •  Sorumlu grubu: ${stats.length}  •  Ağırlıklı yük: $totalPoints\nGrup başına ortalama: ${average.toStringAsFixed(1)} puan  •  Seçilen: ${selected.length}'))),
@@ -22061,7 +22063,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             DropdownButton<String>(value:chosenOwner,items:owners.map((v)=>DropdownMenuItem(value:v,child:Text('Sorumlu: $v'))).toList(),onChanged:(v)=>refresh(()=>ownerFilter=v??'Tümü')),
             DropdownButton<String>(value:ordering,items:['Hedef tarihi','Öncelik','Sorumlu','Durum'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>ordering=v??'Hedef tarihi')),
           ]),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Görev, ürün, kaynak veya sorumlu ara'),onChanged:(v)=>refresh(()=>search=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Görev, ürün, kaynak veya sorumlu ara')),onChanged:(v)=>refresh(()=>search=v)),
           Wrap(spacing:5,children:[
             FilterChip(label:const Text('Gecikenler'),selected:onlyLate,onSelected:(v)=>refresh(()=>onlyLate=v)),
             FilterChip(label:const Text('Atananlar'),selected:onlyAssigned,onSelected:(v)=>refresh(()=>onlyAssigned=v)),
@@ -22235,8 +22237,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             FilterChip(label:const Text('Yalnız seçilenler'),selected:selectedOnly,onSelected:(v)=>refresh(()=>selectedOnly=v)),
             FilterChip(label:const Text('Bağlı aksiyonlar'),selected:showLinked,onSelected:(v)=>refresh(()=>showLinked=v)),
           ]),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),hintText:'Ürün, liste, risk veya karar ara'),onChanged:(v)=>refresh(()=>query=v)),
-          TextField(controller:owner,decoration:const InputDecoration(labelText:'Yeni aksiyonların sorumlusu (isteğe bağlı)',isDense:true)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),hintText:t('Ürün, liste, risk veya karar ara')),onChanged:(v)=>refresh(()=>query=v)),
+          TextField(controller:owner,decoration:InputDecoration(labelText:t('Yeni aksiyonların sorumlusu (isteğe bağlı)'),isDense:true)),
           Wrap(spacing:8,runSpacing:4,children:[
             OutlinedButton.icon(onPressed:()=>refresh((){selected.addAll(pending.map((r)=>r['id'] as String));}),icon:const Icon(Icons.select_all),label:const Text('Görünen yeni kararları seç')),
             OutlinedButton.icon(onPressed:()=>refresh(selected.clear),icon:const Icon(Icons.deselect),label:const Text('Seçimi temizle')),
@@ -22472,7 +22474,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           metric('Kayıtlı gerçekleşen alım',_money(paidTotal)),
           metric('Aylık bütçe / harcama','${_money(budget.toDouble())} / ${_money(spent.toDouble())}',warning:budget>0&&spent>budget),
           metric('Üretilen öncelik kaydı','${rows.length}'),
-          TextField(decoration:const InputDecoration(labelText:'Ürün, liste, risk veya öneri ara',prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
+          TextField(decoration:InputDecoration(labelText:t('Ürün, liste, risk veya öneri ara'),prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>search=v)),
           Wrap(spacing:8,children:[
             DropdownButton<String>(value:safeCategory,items:types.map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>category=v??'Tümü')),
             DropdownButton<String>(value:level,items:['Tümü','Kritik','Yüksek','Orta'].map((v)=>DropdownMenuItem(value:v,child:Text(v))).toList(),onChanged:(v)=>refresh(()=>level=v??'Tümü')),
@@ -22595,7 +22597,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             LinearProgressIndicator(value:completed/rows.length,color:_purple),
           ],
           const SizedBox(height:12),
-          TextField(decoration:const InputDecoration(labelText:'Ürün, liste, market veya durum ara',prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>query=v)),
+          TextField(decoration:InputDecoration(labelText:t('Ürün, liste, market veya durum ara'),prefixIcon:Icon(Icons.search)),onChanged:(v)=>refresh(()=>query=v)),
           SwitchListTile(title:const Text('Yalnızca riskli kayıtlar'),value:onlyRisks,onChanged:(v)=>refresh(()=>onlyRisks=v)),
           Wrap(spacing:8,children:[for(final g in ['Durum','Liste','Market']) ChoiceChip(label:Text(g),selected:group==g,onSelected:(_)=>refresh(()=>group=g))]),
           for(final entry in grouped.entries) Card(child:ExpansionTile(title:Text('${entry.key} (${entry.value.length})'),subtitle:Text('Ödenen: ${_money(entry.value.fold<double>(0,(v,r)=>v+(r['paid'] as double)))}'),children:[
@@ -22727,7 +22729,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             FilterChip(label:const Text('Yalnız ilgili ürün'),selected:productOnly,onSelected:(v)=>refresh(()=>productOnly=v)),
             FilterChip(label:const Text('Yalnız karşılaştırılabilir'),selected:completedOnly,onSelected:(v)=>refresh(()=>completedOnly=v)),
           ]),
-          TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),labelText:'Aksiyon, ürün, kaynak veya sorumlu ara'),onChanged:(v)=>refresh(()=>search=v)),
+          TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),labelText:t('Aksiyon, ürün, kaynak veya sorumlu ara')),onChanged:(v)=>refresh(()=>search=v)),
           Card(color:_pink,child:Padding(padding:const EdgeInsets.all(12),child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
             Text('Tamamlanan aksiyon: ${completed.length} • İncelenen: ${visible.length}',style:const TextStyle(fontWeight:FontWeight.bold)),
             Text('İki dönemde de kayıt bulunan: ${measurable.length} • Tamamlama oranı artan: $improving • Azalan: $declining'),
@@ -22850,7 +22852,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             content:SingleChildScrollView(child:Column(mainAxisSize:MainAxisSize.min,children:[
               Text('Kalan: ${_planNumberText(_planNum(r['left']))} ${r['unit']} • ${r['status']}'),
               DropdownButtonFormField<String>(initialValue:['Zorunlu','Normal','Ertelenebilir'].contains(priority)?priority:'Normal',
-                decoration:const InputDecoration(labelText:'Öncelik'),
+                decoration:InputDecoration(labelText:t('Öncelik')),
                 items:[for(final v in ['Zorunlu','Normal','Ertelenebilir']) DropdownMenuItem(value:v,child:Text(v))],
                 onChanged:(v)=>update(()=>priority=v??'Normal')),
               ListTile(title:const Text('Yeni hedef alışveriş tarihi'),subtitle:Text(fmt(date)),
@@ -22859,7 +22861,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                     firstDate:DateTime(2020),lastDate:DateTime(2100));
                   if(picked!=null) update(()=>date=picked);
                 }),
-              TextField(controller:note,maxLength:200,maxLines:2,decoration:const InputDecoration(labelText:'Aksiyon notu')),
+              TextField(controller:note,maxLength:200,maxLines:2,decoration:InputDecoration(labelText:t('Aksiyon notu'))),
             ])),actions:[TextButton(onPressed:()=>Navigator.pop(dialog,false),child:const Text('Vazgeç')),
               FilledButton(onPressed:()=>Navigator.pop(dialog,true),child:const Text('Kaydet'))])));
           if(ok!=true) return;
@@ -22911,7 +22913,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           child:ListView(padding:const EdgeInsets.all(16),children:[
             const Text('Geciken sipariş / kısmi alım aksiyonları',style:TextStyle(fontSize:19,fontWeight:FontWeight.bold,color:_purple)),
             const Text('Kalan miktar, yeni hedef tarih ve öncelik üzerinden takip. Satın alma ve stok hareketleri değiştirilmez.',style:TextStyle(fontSize:12)),
-            DropdownButtonFormField<int>(initialValue:selected,isExpanded:true,decoration:const InputDecoration(labelText:'Tarihli stok yenileme listesi'),
+            DropdownButtonFormField<int>(initialValue:selected,isExpanded:true,decoration:InputDecoration(labelText:t('Tarihli stok yenileme listesi')),
               items:[for(var i=0;i<eligible.length;i++) DropdownMenuItem(value:i,child:Text((eligible[i]['title']??'Adsız').toString(),overflow:TextOverflow.ellipsis))],
               onChanged:(v)=>refresh(() {selected=v??0;initialized=false;chosen.clear();postponed.clear();priorityOverrides.clear();})),
             Card(color:_pink,child:Padding(padding:const EdgeInsets.all(12),child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
@@ -22921,11 +22923,11 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               if(unknown>0) Text('$unknown ürünün fiyatı bilinmiyor; tahmin eksik olabilir.',style:const TextStyle(fontSize:12)),
               if(rows.isNotEmpty) LinearProgressIndicator(value:(rows.length-remaining.length)/rows.length),
             ]))),
-            TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),hintText:'Ürün, market veya not ara'),onChanged:(v)=>refresh(()=>query=v)),
+            TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),hintText:t('Ürün, market veya not ara')),onChanged:(v)=>refresh(()=>query=v)),
             Wrap(spacing:6,runSpacing:6,children:[for(final f in ['Eksik','Tümü','Geciken','Kısmi','Tamamlanan'])
               ChoiceChip(label:Text(f),selected:filter==f,onSelected:(_)=>refresh(()=>filter=f))]),
             SwitchListTile(title:const Text('Yalnızca zorunlu ürünler'),value:onlyCritical,onChanged:(v)=>refresh(()=>onlyCritical=v)),
-            DropdownButtonFormField<String>(initialValue:sort,decoration:const InputDecoration(labelText:'Sırala'),
+            DropdownButtonFormField<String>(initialValue:sort,decoration:InputDecoration(labelText:t('Sırala')),
               items:[for(final v in ['Gecikme','Tarih','Ürün','Tutar','Miktar']) DropdownMenuItem(value:v,child:Text(v))],
               onChanged:(v)=>refresh(()=>sort=v??'Gecikme')),
             for(final r in visible) Card(child:Column(children:[
@@ -23059,14 +23061,14 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               Text('Alınan ürünlerin plan farkı: ${_money(paidCost-boughtBudget)} • Bekleyen tahmini: ${_money(pendingCost)}'),
               if(unknownCost>0) Text('Fiyatı bilinmeyen: $unknownCost ürün; toplam tahmin eksik olabilir.',style:const TextStyle(fontSize:12)),
             ]))),
-            DropdownButtonFormField<String>(initialValue:selectedSource,isExpanded:true,decoration:const InputDecoration(labelText:'Alışveriş listesi'),
+            DropdownButtonFormField<String>(initialValue:selectedSource,isExpanded:true,decoration:InputDecoration(labelText:t('Alışveriş listesi')),
               items:[const DropdownMenuItem(value:'Tümü',child:Text('Tüm listeler')),
                 for(final n in (sourceNames.toList()..sort())) DropdownMenuItem(value:n,child:Text(n,overflow:TextOverflow.ellipsis))],
               onChanged:(v)=>refresh(()=>selectedSource=v??'Tümü')),
-            TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),hintText:'Ürün, liste, market veya öncelik ara'),onChanged:(v)=>refresh(()=>query=v)),
+            TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),hintText:t('Ürün, liste, market veya öncelik ara')),onChanged:(v)=>refresh(()=>query=v)),
             Wrap(spacing:6,runSpacing:6,children:[for(final f in ['Tümü','Gecikti','Bugün','Bekliyor','Satın alındı','Stoğa aktarılan','Kritik bekleyen','Tarih yok'])
               ChoiceChip(label:Text(f),selected:filter==f,onSelected:(_)=>refresh(()=>filter=f))]),
-            DropdownButtonFormField<String>(initialValue:sort,decoration:const InputDecoration(labelText:'Sıralama'),
+            DropdownButtonFormField<String>(initialValue:sort,decoration:InputDecoration(labelText:t('Sıralama')),
               items:[for(final f in ['Tarih','Gecikme','Durum','Tutar','Ürün']) DropdownMenuItem(value:f,child:Text(f))],
               onChanged:(v)=>refresh(()=>sort=v??'Tarih')),
             const SizedBox(height:12),
@@ -23229,7 +23231,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           final titleController=TextEditingController(text:'Stok siparişi $dateKey');
           final title=await showDialog<String>(context:ctx,builder:(d)=>AlertDialog(
             title:const Text('Tarihe göre alışveriş listesi'),
-            content:TextField(controller:titleController,decoration:const InputDecoration(labelText:'Liste adı')),
+            content:TextField(controller:titleController,decoration:InputDecoration(labelText:t('Liste adı'))),
             actions:[TextButton(onPressed:()=>Navigator.pop(d),child:const Text('Vazgeç')),
               FilledButton(onPressed:()=>Navigator.pop(d,titleController.text.trim()),child:const Text('Liste oluştur'))]));
           disposeAfterDialog(titleController);
@@ -23275,7 +23277,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
           child:SizedBox(height:MediaQuery.of(ctx).size.height*.94,child:ListView(padding:const EdgeInsets.all(16),children:[
             const Text('Stok yenileme takvimi / kritik satın alma',style:TextStyle(fontSize:19,fontWeight:FontWeight.bold,color:_purple)),
             const Text('Tüketim ve stok hareketlerine göre sipariş tarihleri. Stok kayıtları değiştirilmez.'),
-            DropdownButtonFormField<int>(initialValue:selectedList,isExpanded:true,decoration:const InputDecoration(labelText:'Stok kaynağı'),
+            DropdownButtonFormField<int>(initialValue:selectedList,isExpanded:true,decoration:InputDecoration(labelText:t('Stok kaynağı')),
               items:[const DropdownMenuItem(value:0,child:Text('Tüm stok listeleri')),
                 for(var i=0;i<_namedLists.length;i++) DropdownMenuItem(value:i+1,
                   child:Text((_namedLists[i]['title']??'Adsız').toString(),overflow:TextOverflow.ellipsis))],
@@ -23291,7 +23293,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               IconButton(onPressed:leadDays==0?null:()=>refresh(()=>leadDays--),icon:const Icon(Icons.remove_circle_outline)),
               Text('$leadDays'),IconButton(onPressed:()=>refresh(()=>leadDays=(leadDays+1).clamp(0,30)),icon:const Icon(Icons.add_circle_outline))]),
             TextFormField(initialValue:budget.toStringAsFixed(0),keyboardType:const TextInputType.numberWithOptions(decimal:true),
-              decoration:const InputDecoration(labelText:'Toplam bütçe (TL, 0 = sınırsız)'),
+              decoration:InputDecoration(labelText:t('Toplam bütçe (TL, 0 = sınırsız)')),
               onChanged:(v){final n=double.tryParse(v.replaceAll(',','.'));if(n!=null&&n.isFinite&&n>=0)refresh(()=>budget=n);}),
             SwitchListTile(title:const Text('Fiyatı bilinmeyenleri dahil et'),value:includeUnknown,onChanged:(v)=>refresh(()=>includeUnknown=v)),
             Card(color:const Color(0xFFF3E8FF),child:Padding(padding:const EdgeInsets.all(12),child:Column(
@@ -23305,10 +23307,10 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               if(noPrice>0) const Text('Fiyatı bilinmeyen ürünler toplam maliyete dahil değildir.',style:TextStyle(fontSize:12)),
               if(noHistory>0) const Text('Tüketim geçmişi olmayan ürünlerde sipariş tarihi bugüne alınabilir; tahmin sınırlıdır.',style:TextStyle(fontSize:12)),
             ]))),
-            TextField(decoration:const InputDecoration(prefixIcon:Icon(Icons.search),hintText:'Ürün veya stok listesi ara'),onChanged:(v)=>refresh(()=>query=v)),
+            TextField(decoration:InputDecoration(prefixIcon:Icon(Icons.search),hintText:t('Ürün veya stok listesi ara')),onChanged:(v)=>refresh(()=>query=v)),
             Wrap(spacing:6,children:[for(final f in ['Tümü','Acil','7 gün','Seçilen','Ertelenen','Fiyat yok','Geçmiş yok'])
               ChoiceChip(label:Text(f),selected:status==f,onSelected:(_)=>refresh(()=>status=f))]),
-            DropdownButtonFormField<String>(initialValue:sort,decoration:const InputDecoration(labelText:'Sıralama'),
+            DropdownButtonFormField<String>(initialValue:sort,decoration:InputDecoration(labelText:t('Sıralama')),
               items:[for(final f in ['Sipariş tarihi','Öncelik','Maliyet','Ürün']) DropdownMenuItem(value:f,child:Text(f))],
               onChanged:(v)=>refresh(()=>sort=v??'Sipariş tarihi')),
             const SizedBox(height:8),
@@ -23465,11 +23467,11 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             ]),
             TextFormField(initialValue: budget.toStringAsFixed(0),
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
-              decoration: const InputDecoration(labelText: 'Simülasyon bütçesi (TL)',
+              decoration: InputDecoration(labelText: t('Simülasyon bütçesi (TL)'),
                 prefixIcon: Icon(Icons.account_balance_wallet_outlined)),
               onChanged: (v) { final parsed = double.tryParse(v.replaceAll(',', '.'));
                 if (parsed != null && parsed.isFinite && parsed >= 0) refresh(() => budget = parsed); }),
-            TextField(decoration: const InputDecoration(labelText: 'Ürün veya liste ara',
+            TextField(decoration: InputDecoration(labelText: t('Ürün veya liste ara'),
               prefixIcon: Icon(Icons.search)), onChanged: (v) => refresh(() => search = v)),
             Wrap(spacing: 10, children: [
               FilterChip(label: const Text('Yalnızca ihtiyaçlar'), selected: onlyNeeded,
@@ -23609,8 +23611,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                   overflow: TextOverflow.ellipsis))).toList(),
                 onChanged: (n) { if(n != null) refresh(() => listFilter = n); }),
             ]),
-            TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-              labelText: 'Ürün, liste veya işlem nedeni ara'),
+            TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+              labelText: t('Ürün, liste veya işlem nedeni ara')),
               onChanged: (v) => refresh(() => query = v)),
             SwitchListTile(title: const Text('Yalnızca tüketim hareketleri'),
               value: onlyConsumption, onChanged: (v) => refresh(() => onlyConsumption = v)),
@@ -24007,7 +24009,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
         const Text('Önceden kaydettiğiniz JSON yedeğini yapıştırın. Önce biçim ve alanlar doğrulanacak; onay olmadan hiçbir kayıt değişmeyecek.'),
         const SizedBox(height: 10),
         TextField(controller: controller, minLines: 4, maxLines: 8,
-          decoration: const InputDecoration(border: OutlineInputBorder(), hintText: '{"format": ...}')),
+          decoration: InputDecoration(border: OutlineInputBorder(), hintText: t('{"format": ...}'))),
       ])),
       actions: [
         TextButton.icon(onPressed: () async {
@@ -24631,8 +24633,8 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               }),
             ]),
             const Divider(),
-            TextField(decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.search), labelText: 'Kontrollerde ara'),
+            TextField(decoration: InputDecoration(
+              prefixIcon: Icon(Icons.search), labelText: t('Kontrollerde ara')),
               onChanged: (v) => refresh(() => search = v)),
             Wrap(spacing: 6, children: [
               for (final f in const ['Tümü', 'Kritik', 'Uyarı', 'Bilgi'])
@@ -24820,7 +24822,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
     return Scaffold(
       backgroundColor: _pink,
       appBar: AppBar(title: const Text('Akıllı alışveriş listem'),
-        actions: [IconButton(tooltip: 'Yenile', icon: const Icon(Icons.refresh), onPressed: _load)]),
+        actions: [IconButton(tooltip: t('Yenile'), icon: const Icon(Icons.refresh), onPressed: _load)]),
       floatingActionButton: FloatingActionButton.extended(onPressed: () => _edit(),
         icon: const Icon(Icons.add), label: const Text('Ürün ekle')),
       body: _loading ? const Center(child: CircularProgressIndicator()) :
@@ -24894,10 +24896,10 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
             ]))),
           const SizedBox(height: 12),
           TextField(onChanged: (s) => setState(() { _query = s; _shoppingPage = 0; }),
-            decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Ürün ara')),
+            decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('Ürün ara'))),
           const SizedBox(height: 10),
           DropdownButtonFormField<String>(initialValue: _category,
-            decoration: const InputDecoration(labelText: 'Kategori'),
+            decoration: InputDecoration(labelText: t('Kategori')),
             items: _categories.map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(),
             onChanged: (v) { if (v != null) setState(() { _category = v; _shoppingPage = 0; }); }),
           SwitchListTile(title: const Text('Tamamlananları gizle'), value: _hideDone,
@@ -24912,13 +24914,13 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
                 style: const TextStyle(fontSize: 12, color: _purple),
               )),
               IconButton(
-                tooltip: 'Önceki sayfa',
+                tooltip: t('Önceki sayfa'),
                 onPressed: currentPage == 0 ? null : () => setState(() => _shoppingPage = currentPage - 1),
                 icon: const Icon(Icons.chevron_left),
               ),
               Text('${currentPage + 1}/$pageCount', style: const TextStyle(color: _purple)),
               IconButton(
-                tooltip: 'Sonraki sayfa',
+                tooltip: t('Sonraki sayfa'),
                 onPressed: currentPage + 1 >= pageCount ? null : () => setState(() => _shoppingPage = currentPage + 1),
                 icon: const Icon(Icons.chevron_right),
               ),
@@ -24938,7 +24940,7 @@ class _SmartShoppingPageState extends State<SmartShoppingPage> {
               }),
             ]),
             subtitle: Text('${_details[name]?['category'] ?? _guess(name)}${(_details[name]?['note'] ?? '').isEmpty ? '' : '  •  ${_details[name]!['note']}'}\nTahmini: ${_prices.containsKey(name) ? _money(_prices[name]!) : 'Girilmedi'}  •  Gerçek: ${_actualPrices.containsKey(name) ? _money(_actualPrices[name]!) : 'Girilmedi'}'),
-            secondary: PopupMenuButton<String>(tooltip: 'Ürün işlemleri',
+            secondary: PopupMenuButton<String>(tooltip: t('Ürün işlemleri'),
               onSelected: (action) async {
                 if (action == 'edit') { await _edit(original: name); }
                 if (action == 'price') { await _setPrice(name); }
@@ -25032,7 +25034,7 @@ class _KitchenToolsPageState extends State<_KitchenToolsPage> {
         TextField(
           key: const ValueKey('kitchen_tools_search'),
           onChanged: (v) => setState(() => _query = v),
-          decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Araç ara (ör. bütçe, stok, menü)')),
+          decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('Araç ara (ör. bütçe, stok, menü)'))),
         const SizedBox(height: 8),
         if (groups.isEmpty) const Padding(padding: EdgeInsets.all(24),
           child: Text('Aramanla eşleşen araç yok.', textAlign: TextAlign.center)),

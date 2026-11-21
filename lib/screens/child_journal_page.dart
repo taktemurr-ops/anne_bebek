@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../services/child_journals.dart';
 import '../services/child_profiles.dart';
 import '../services/secure_health_store.dart';
@@ -76,13 +78,13 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
             DropdownButtonFormField<String>(initialValue: category,
               items: categories.map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),
               onChanged: (s) { if (s != null) update(() => category = s); },
-              decoration: const InputDecoration(labelText: 'Kategori')),
+              decoration: InputDecoration(labelText: t('Kategori'))),
             TextField(controller: note, maxLines: 2, maxLength: 300,
-              decoration: const InputDecoration(labelText: 'Açıklama / not')),
+              decoration: InputDecoration(labelText: t('Açıklama / not'))),
             if (category == 'Kilo (kg)' || category == 'Boy (cm)' || category == 'Baş çevresi (cm)')
               TextField(controller: number, maxLength: 64,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                decoration: const InputDecoration(labelText: 'Ölçüm değeri')),
+                decoration: InputDecoration(labelText: t('Ölçüm değeri'))),
             OutlinedButton(onPressed: () async {
               if (DateUtils.dateOnly(widget.child.birthDate)
                   .isAfter(DateUtils.dateOnly(DateTime.now()))) {
@@ -138,10 +140,10 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
           Text(original.category),
           TextField(controller: note, maxLines: 2, maxLength: 300,
-            decoration: const InputDecoration(labelText: 'Açıklama / not')),
+            decoration: InputDecoration(labelText: t('Açıklama / not'))),
           if (isMeasure) TextField(controller: number, maxLength: 64,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: const InputDecoration(labelText: 'Ölçüm değeri')),
+            decoration: InputDecoration(labelText: t('Ölçüm değeri'))),
           OutlinedButton(onPressed: () async {
             if (DateUtils.dateOnly(widget.child.birthDate)
                   .isAfter(DateUtils.dateOnly(DateTime.now()))) {
@@ -222,9 +224,9 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
             title: Text(e.category + (e.value == null ? '' : ': ${e.value}')),
             subtitle: Text('${e.at.day}.${e.at.month}.${e.at.year}  ${e.note}'),
             trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-              IconButton(tooltip: 'Kaydı düzenle', icon: const Icon(Icons.edit_outlined),
+              IconButton(tooltip: t('Kaydı düzenle'), icon: const Icon(Icons.edit_outlined),
                 onPressed: _saving ? null : () => _edit(e)),
-              IconButton(tooltip: 'Kaydı sil', icon: const Icon(Icons.delete_outline),
+              IconButton(tooltip: t('Kaydı sil'), icon: const Icon(Icons.delete_outline),
               onPressed: _saving ? null : () async {
                 final ok = await showDialog<bool>(context: context, builder: (ctx) => AlertDialog(
                   title: const Text('Kayıt silinsin mi?'),

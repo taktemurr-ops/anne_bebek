@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 
 /// Arama hem Türkçe büyük/küçük harf hem de boşluk farklılıklarını tolere eder.
 String normalizeQuickSearch(String value) => value
@@ -73,8 +75,8 @@ class _QuickAccessSheetState extends State<QuickAccessSheet> {
         const Text('Hızlı erişim', style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold)),
         const SizedBox(height: 12),
         TextField(autofocus: true, textInputAction: TextInputAction.search, onChanged: (value) => setState(() => query = value),
-          decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-            hintText: 'Bölüm veya işlem ara', border: OutlineInputBorder())),
+          decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+            hintText: t('Bölüm veya işlem ara'), border: OutlineInputBorder())),
         const SizedBox(height: 10),
         Flexible(child: results.isEmpty
           ? const Padding(padding: EdgeInsets.all(24), child: Text('Aramanızla eşleşen bölüm bulunamadı.'))

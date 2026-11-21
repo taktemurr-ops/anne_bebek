@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 
 /// Offline, deterministic content discovery. No AI API or personal data upload.
 class SmartDiscoveryPage extends StatefulWidget {
@@ -34,7 +36,7 @@ class _SmartDiscoveryPageState extends State<SmartDiscoveryPage> {
           child: Text('Aradığınız konuyla ilgili içerikleri cihazınızda bulabilirsiniz. Bu sürüm yapay zekâ sohbeti değil, çevrimdışı anahtar kelime aramasıdır.'))),
         const SizedBox(height: 12),
         TextField(controller: _query, onChanged: (_) => setState(() {}),
-          decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Konu ara', hintText: 'Örn. uyku, regl, tarif')),
+          decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Konu ara'), hintText: t('Örn. uyku, regl, tarif'))),
         const SizedBox(height: 12),
         Wrap(spacing: 8, children: ['Tümü', 'Bebek', 'Kadınlar', 'Genel'].map((c) => ChoiceChip(
           label: Text(c), selected: _filter == c, onSelected: (_) => setState(() => _filter = c))).toList()),

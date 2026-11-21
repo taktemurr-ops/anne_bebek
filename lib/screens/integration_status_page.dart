@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/text.dart';
 
 /// Paket 32: Kurulum ve doğrulama gereksinimlerini açıkça gösterir.
 /// Bu ekran sunucuya bağlanıp canlı durum ölçmez.

@@ -1,6 +1,8 @@
 import '../utils/dialog_helpers.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Offline forum prototype. A production multi-user forum requires an API,
@@ -45,7 +47,7 @@ class _CommunityForumPageState extends State<CommunityForumPage> {
     final result = await showDialogAndDispose<String>(disposables: [controller], context: context, builder: (ctx) => AlertDialog(
       title: Text(title), content: TextField(controller: controller, autofocus: true,
         maxLines: maxLines, maxLength: maxLines == 1 ? 100 : 2000,
-        decoration: const InputDecoration(hintText: 'Buraya yazın')),
+        decoration: InputDecoration(hintText: t('Buraya yazın'))),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () => Navigator.pop(ctx, controller.text.trim()), child: const Text('Devam'))],
     ));
@@ -120,8 +122,8 @@ class _CommunityForumPageState extends State<CommunityForumPage> {
               SizedBox(height: 6), Text('Kişisel sağlık bilgilerinizi ve çocukların özel bilgilerini paylaşmayın.', style: TextStyle(fontSize: 12)),
             ]))),
           const SizedBox(height: 10),
-          TextField(controller: _search, decoration: const InputDecoration(
-            prefixIcon: Icon(Icons.search), hintText: 'Konularda ara...')),
+          TextField(controller: _search, decoration: InputDecoration(
+            prefixIcon: Icon(Icons.search), hintText: t('Konularda ara...'))),
           const SizedBox(height: 10), SizedBox(height: 42, child: ListView(scrollDirection: Axis.horizontal,
             children: _categories.map((c) => Padding(padding: const EdgeInsets.only(right: 6),
               child: ChoiceChip(label: Text(c), selected: _category == c,
@@ -134,7 +136,7 @@ class _CommunityForumPageState extends State<CommunityForumPage> {
             subtitle: Text('${post['category']} • ${(post['replies'] as List).length} yanıt'),
             leading: const Icon(Icons.forum_outlined, color: Color(0xFFB83D85)),
             onTap: () => _open(post),
-            trailing: IconButton(tooltip: 'Konuyu sil', icon: const Icon(Icons.delete_outline),
+            trailing: IconButton(tooltip: t('Konuyu sil'), icon: const Icon(Icons.delete_outline),
               onPressed: () => _delete(post)),
           )), const SizedBox(height: 90),
         ]));

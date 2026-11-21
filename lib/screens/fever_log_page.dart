@@ -1,6 +1,8 @@
 import 'dart:async';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 
 import '../services/fever_log.dart';
 import '../services/secure_health_store.dart';
@@ -75,16 +77,16 @@ class _FeverLogPageState extends State<FeverLogPage> {
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
           TextField(key: const Key('ates_derece'), controller: temp,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: const InputDecoration(labelText: 'Ateş (°C)', hintText: 'ör. 38,4')),
+            decoration: InputDecoration(labelText: t('Ateş (°C)'), hintText: t('ör. 38,4'))),
           DropdownButtonFormField<String>(initialValue: method,
-            decoration: const InputDecoration(labelText: 'Ölçüm yeri'),
+            decoration: InputDecoration(labelText: t('Ölçüm yeri')),
             items: feverMethods.map((m) => DropdownMenuItem(value: m, child: Text(m))).toList(),
             onChanged: (v) { if (v != null) update(() => method = v); }),
           TextField(key: const Key('ates_ilac'), controller: medicine, maxLength: 80,
-            decoration: const InputDecoration(labelText: 'Verilen ilaç ve miktar (isteğe bağlı)',
-                helperText: 'Dozu doktorun/eczacının önerisine göre ver.', helperMaxLines: 2)),
+            decoration: InputDecoration(labelText: t('Verilen ilaç ve miktar (isteğe bağlı)'),
+                helperText: t('Dozu doktorun/eczacının önerisine göre ver.'), helperMaxLines: 2)),
           TextField(controller: note, maxLength: 300,
-            decoration: const InputDecoration(labelText: 'Not (belirtiler, sıvı alımı…)')),
+            decoration: InputDecoration(labelText: t('Not (belirtiler, sıvı alımı…)'))),
         ])),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
@@ -186,7 +188,7 @@ class _FeverLogPageState extends State<FeverLogPage> {
           if (e.medicine.isNotEmpty) '💊 ${e.medicine}',
         ].join('  •  ')),
         subtitle: Text([_when(e.time), if (e.temperature != null) e.method, if (e.note.isNotEmpty) e.note].join(' • ')),
-        trailing: IconButton(tooltip: 'Sil', icon: const Icon(Icons.delete_outline), onPressed: () => _delete(e)),
+        trailing: IconButton(tooltip: t('Sil'), icon: const Icon(Icons.delete_outline), onPressed: () => _delete(e)),
       )),
       const Padding(padding: EdgeInsets.all(12), child: Text(
         'Bu sayfa tanı koymaz ve ilaç dozu önermez. Eşikler genel bilgilendirme amaçlıdır; doktorunun söyledikleri önceliklidir.',

@@ -1,7 +1,9 @@
 import 'dart:math' as math;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 
 import 'visuals.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 
 import '../services/cycle_estimate.dart';
 import 'pastel_design.dart';
@@ -419,7 +421,7 @@ class TrackingRow extends StatelessWidget {
             ]),
           ),
           IconButton(
-            tooltip: '$title kaydı ekle',
+            tooltip: t('$title kaydı ekle'),
             onPressed: onAdd,
             icon: const CircleAvatar(
               radius: 16,
@@ -467,7 +469,7 @@ class DateNavigator extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
       child: Row(children: [
         IconButton(
-          tooltip: 'Önceki gün',
+          tooltip: t('Önceki gün'),
           onPressed: () => onChanged(DateTime(date.year, date.month, date.day - 1)),
           icon: const Icon(Icons.chevron_left_rounded),
         ),
@@ -500,7 +502,7 @@ class DateNavigator extends StatelessWidget {
           ),
         ),
         IconButton(
-          tooltip: 'Sonraki gün',
+          tooltip: t('Sonraki gün'),
           onPressed: isToday ? null : () => onChanged(DateTime(date.year, date.month, date.day + 1)),
           icon: const Icon(Icons.chevron_right_rounded),
         ),
@@ -586,7 +588,7 @@ class CycleMonthCalendar extends StatelessWidget {
       child: Column(children: [
         Row(children: [
           IconButton(
-            tooltip: 'Önceki ay',
+            tooltip: t('Önceki ay'),
             onPressed: () => onMonthChanged(DateTime(month.year, month.month - 1, 1)),
             icon: const Icon(Icons.chevron_left_rounded),
           ),
@@ -597,7 +599,7 @@ class CycleMonthCalendar extends StatelessWidget {
                     fontWeight: FontWeight.w900, fontSize: 16, color: PastelPalette.text)),
           ),
           IconButton(
-            tooltip: 'Sonraki ay',
+            tooltip: t('Sonraki ay'),
             onPressed: () => onMonthChanged(DateTime(month.year, month.month + 1, 1)),
             icon: const Icon(Icons.chevron_right_rounded),
           ),

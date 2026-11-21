@@ -1,6 +1,8 @@
 import 'dart:async';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 
 import '../services/local_reminder_notifications.dart';
 import '../services/my_health.dart';
@@ -153,7 +155,7 @@ class _MyHealthPageState extends State<MyHealthPage> {
         if (e.note.isNotEmpty) e.note,
         if (w != null) '⚠️ $w',
       ].join(' • ')),
-      trailing: IconButton(tooltip: 'Sil', icon: const Icon(Icons.delete_outline),
+      trailing: IconButton(tooltip: t('Sil'), icon: const Icon(Icons.delete_outline),
           onPressed: () => _save(_data.copyWith(entries: _data.entries.where((x) => !identical(x, e)).toList()))),
     ));
   }
@@ -173,8 +175,8 @@ class _MyHealthPageState extends State<MyHealthPage> {
             decoration: InputDecoration(labelText: k.twoValues ? 'Büyük tansiyon (mmHg)' : '${k.title} (${k.unit})')),
           if (k.twoValues) TextField(key: const Key('olcum_deger2'), controller: v2,
             keyboardType: TextInputType.number,
-            decoration: const InputDecoration(labelText: 'Küçük tansiyon (mmHg)')),
-          TextField(controller: note, maxLength: 200, decoration: const InputDecoration(labelText: 'Not (isteğe bağlı)')),
+            decoration: InputDecoration(labelText: t('Küçük tansiyon (mmHg)'))),
+          TextField(controller: note, maxLength: 200, decoration: InputDecoration(labelText: t('Not (isteğe bağlı)'))),
         ])),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
@@ -203,7 +205,7 @@ class _MyHealthPageState extends State<MyHealthPage> {
     final v = await showDialogAndDispose<double>(context: context, disposables: [c], builder: (ctx) => AlertDialog(
       title: const Text('Boy (cm)'),
       content: TextField(key: const Key('boy_deger'), controller: c, keyboardType: TextInputType.number,
-          decoration: const InputDecoration(hintText: 'ör. 165')),
+          decoration: InputDecoration(hintText: t('ör. 165'))),
       actions: [
         TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () {
@@ -277,11 +279,11 @@ class _MyHealthPageState extends State<MyHealthPage> {
         title: Text(existing == null ? 'İlaç / vitamin ekle' : 'Düzenle'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
           TextField(key: const Key('ilac_ad'), controller: name, maxLength: 60,
-              decoration: const InputDecoration(labelText: 'Adı (ör. Folik asit)')),
+              decoration: InputDecoration(labelText: t('Adı (ör. Folik asit)'))),
           TextField(controller: dose, maxLength: 60,
-              decoration: const InputDecoration(labelText: 'Miktar (ör. 1 tablet)')),
+              decoration: InputDecoration(labelText: t('Miktar (ör. 1 tablet)'))),
           TextField(key: const Key('ilac_saat'), controller: times,
-              decoration: const InputDecoration(labelText: 'Saat(ler)', helperText: 'Virgülle ayır: 08:00, 20:00')),
+              decoration: InputDecoration(labelText: t('Saat(ler)'), helperText: t('Virgülle ayır: 08:00, 20:00'))),
           SwitchListTile(contentPadding: EdgeInsets.zero, value: notify, title: const Text('Her gün hatırlat'),
               onChanged: (v) => update(() => notify = v)),
           if (existing != null) SwitchListTile(contentPadding: EdgeInsets.zero, value: active,
@@ -361,7 +363,7 @@ class _MyHealthPageState extends State<MyHealthPage> {
         title: Text(c.title),
         subtitle: Text('${c.detail}\n${_checkText(c, _data.checks[c.id])}'),
         isThreeLine: true,
-        trailing: IconButton(key: Key('kontrol_yap_${c.id}'), tooltip: 'Yaptırdım', icon: const Icon(Icons.event_available_rounded),
+        trailing: IconButton(key: Key('kontrol_yap_${c.id}'), tooltip: t('Yaptırdım'), icon: const Icon(Icons.event_available_rounded),
             onPressed: () => _markCheck(c)),
       )),
       const Padding(padding: EdgeInsets.all(10), child: Text(
@@ -379,7 +381,7 @@ class _MyHealthPageState extends State<MyHealthPage> {
 
   Future<void> _markCheck(Checkup c) async {
     final d = await showDatePicker(context: context, initialDate: _now(), firstDate: DateTime(2000), lastDate: _now(),
-        helpText: '${c.title} tarihi');
+        helpText: t('${c.title} tarihi'));
     if (d == null) return;
     await _save(_data.copyWith(checks: {..._data.checks, c.id: d}));
   }

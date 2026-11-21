@@ -1,5 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/general_recipe_catalog.dart';
 import '../widgets/recipe_info_sections.dart';
@@ -129,7 +131,7 @@ class _RecipeExplorerPageState extends State<RecipeExplorerPage> {
         Padding(padding: const EdgeInsets.fromLTRB(14, 12, 14, 6), child: TextField(
           controller: _search, onChanged: (_) => setState(() {}),
           decoration: InputDecoration(prefixIcon: const Icon(Icons.search),
-            hintText: 'Tarif, kategori veya malzeme ara',
+            hintText: t('Tarif, kategori veya malzeme ara'),
             suffixIcon: IconButton(icon: const Icon(Icons.clear), onPressed: () { _search.clear(); setState(() {}); }),
             border: const OutlineInputBorder()))),
         SizedBox(height: 46, child: ListView(scrollDirection: Axis.horizontal, padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -166,7 +168,7 @@ class _RecipeExplorerPageState extends State<RecipeExplorerPage> {
               child: ListTile(
                 title: Text(r.title, style: const TextStyle(fontWeight: FontWeight.w600)),
                 subtitle: Text('${r.category} • ${r.minutes} dk • ${r.ingredients.length} malzeme'),
-                trailing: IconButton(tooltip: 'Favorilere ekle / çıkar',
+                trailing: IconButton(tooltip: t('Favorilere ekle / çıkar'),
                   icon: Icon(_favorites.contains(r.title) ? Icons.favorite : Icons.favorite_border,
                     color: const Color(0xFFE94291)),
                   onPressed: () => _toggleFavorite(r)),
@@ -264,7 +266,7 @@ class _InteractiveRecipeDetailsState extends State<_InteractiveRecipeDetails> {
             },
           ),
           DropdownButtonFormField<String>(
-            initialValue: meal, decoration: const InputDecoration(labelText: 'Öğün'),
+            initialValue: meal, decoration: InputDecoration(labelText: t('Öğün')),
             items: _meals.map((m) => DropdownMenuItem(value: m, child: Text(m))).toList(),
             onChanged: (v) { if (v != null) update(() => meal = v); },
           ),
@@ -438,7 +440,7 @@ class _InteractiveRecipeDetailsState extends State<_InteractiveRecipeDetails> {
         const Text('Kişisel tarif notum', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
         const SizedBox(height: 8),
         TextField(controller: _notes, maxLines: 4,
-          decoration: const InputDecoration(hintText: 'Tarifle ilgili notlarını yaz...', border: OutlineInputBorder())),
+          decoration: InputDecoration(hintText: t('Tarifle ilgili notlarını yaz...'), border: OutlineInputBorder())),
         const SizedBox(height: 10),
         FilledButton.icon(onPressed: _saving ? null : _saveNotes,
           icon: const Icon(Icons.save_outlined), label: const Text('Notumu kaydet')),

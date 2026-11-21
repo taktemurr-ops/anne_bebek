@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../models/app_data.dart';
 import '../services/app_store.dart';
 import '../widgets/ui.dart';
@@ -15,7 +17,7 @@ class BabyScreen extends StatelessWidget {
     if (!context.mounted || name == null || name.isEmpty) return;
     final date = await showDatePicker(
       context: context, firstDate: DateTime(2010), lastDate: DateTime.now(),
-      initialDate: store.baby?.birthDate ?? DateTime.now(), helpText: 'Doğum tarihi',
+      initialDate: store.baby?.birthDate ?? DateTime.now(), helpText: t('Doğum tarihi'),
     );
     if (date == null || !context.mounted) return;
     await store.saveBaby(BabyProfile(name: name, birthDate: date));

@@ -1,8 +1,10 @@
 import 'utils/dialog_helpers.dart';
+import 'i18n/i18n.dart' show t;
+import 'i18n/text.dart';
 import 'dart:convert';
 import 'dart:math' as math;
 import 'tracking_journal.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'services/secure_health_store.dart';
 import 'services/growth_analysis.dart';
 import 'services/monthly_growth.dart';
@@ -93,7 +95,7 @@ class _PregnancyPageState extends State<PregnancyPage> {
         title: const Text('Kontrol / randevu ekle'),
         content: Column(mainAxisSize: MainAxisSize.min, children: [
           TextField(controller: controller, maxLength: 100,
-            decoration: const InputDecoration(labelText: 'Kontrol adı')),
+            decoration: InputDecoration(labelText: t('Kontrol adı'))),
           OutlinedButton.icon(icon: const Icon(Icons.event), label: Text(_date(selected)),
             onPressed: () async {
               final date = await showDatePicker(context: ctx, initialDate: selected,
@@ -214,7 +216,7 @@ class _PregnancyPageState extends State<PregnancyPage> {
       Row(key: _checklistKey, children: [
         const Expanded(child: Text('Kontrol ve randevularım',
           style: TextStyle(fontSize: 17, color: _mor, fontWeight: FontWeight.bold))),
-        IconButton(tooltip: 'Kontrol ekle', onPressed: _addAppointment,
+        IconButton(tooltip: t('Kontrol ekle'), onPressed: _addAppointment,
           icon: const Icon(Icons.add_circle_outline, color: _mor)),
       ]),
       if (appointments.isEmpty) const Padding(
@@ -224,7 +226,7 @@ class _PregnancyPageState extends State<PregnancyPage> {
         child: ListTile(leading: const Icon(Icons.medical_services_outlined, color: _mor),
           title: Text(a['title']!),
           subtitle: Text(_date(DateTime.parse(a['date']!))),
-          trailing: IconButton(tooltip: 'Kontrolü sil', icon: const Icon(Icons.delete_outline),
+          trailing: IconButton(tooltip: t('Kontrolü sil'), icon: const Icon(Icons.delete_outline),
             onPressed: () => _removeAppointment(a))))),
       const Padding(padding: EdgeInsets.symmetric(vertical: 10), child: Text('Doğuma hazırlık listesi',
         style: TextStyle(fontSize: 17, color: _mor, fontWeight: FontWeight.bold))),
@@ -268,7 +270,7 @@ class _PregnancyWeekGuidePageState extends State<PregnancyWeekGuidePage> {
         const SizedBox(height: 16),
         DropdownButtonFormField<int>(
           initialValue: week,
-          decoration: const InputDecoration(labelText: 'Hafta seç', border: OutlineInputBorder()),
+          decoration: InputDecoration(labelText: t('Hafta seç'), border: OutlineInputBorder()),
           items: [for (var i = 1; i <= 40; i++) DropdownMenuItem(value: i, child: Text('$i. hafta'))],
           onChanged: (value) { if (value != null) setState(() => week = value); },
         ),
@@ -344,7 +346,7 @@ class _FamilyCalendarPageState extends State<FamilyCalendarPage> {
       builder: (ctx) => StatefulBuilder(builder: (ctx, refresh) => AlertDialog(
         title: const Text('Etkinlik ekle'),
         content: Column(mainAxisSize: MainAxisSize.min, children: [
-          TextField(controller: input, decoration: const InputDecoration(labelText: 'Etkinlik adı')),
+          TextField(controller: input, decoration: InputDecoration(labelText: t('Etkinlik adı'))),
           OutlinedButton.icon(icon: const Icon(Icons.event), label: Text(_date(selected)), onPressed: () async {
             final d = await showDatePicker(context: ctx, initialDate: selected,
               firstDate: DateTime(2020), lastDate: DateTime(2100));

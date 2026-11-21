@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/text.dart';
 import '../data/general_recipe_catalog.dart';
 import '../data/recipe_meta.dart';
 import 'pastel_design.dart';

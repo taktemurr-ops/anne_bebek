@@ -1,5 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Device-only operational preview, not a protected server admin console.
@@ -34,7 +36,7 @@ class _LocalAdminPreviewPageState extends State<LocalAdminPreviewPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: const Text('Yönetim özeti • Ön izleme'), actions: [IconButton(
-      tooltip: 'Yenile', onPressed: _load, icon: const Icon(Icons.refresh))]),
+      tooltip: t('Yenile'), onPressed: _load, icon: const Icon(Icons.refresh))]),
     body: ListView(padding: const EdgeInsets.all(16), children: [
       const Card(color: Color(0xFFFFE6F3), child: Padding(padding: EdgeInsets.all(16), child: Text(
         'Bu ekran yalnızca bu cihazda tutulan bazı kayıtların sayısını gösterir. Gerçek yönetici yetkilendirmesi, merkezi kullanıcılar, moderasyon, gelir ve analitik verileri henüz mevcut değildir.'))),

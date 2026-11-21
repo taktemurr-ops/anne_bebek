@@ -1,6 +1,8 @@
 import '../utils/dialog_helpers.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/general_recipe_catalog.dart';
 
@@ -203,9 +205,9 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
     final result = await showDialogAndDispose<bool>(disposables: [name, amount, minimum], context: context, builder: (ctx) => AlertDialog(
       title: const Text('Hızlı ürün ekle'),
       content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
-        TextField(controller: name, decoration: const InputDecoration(labelText: 'Ürün adı')),
-        TextField(controller: amount, decoration: const InputDecoration(labelText: 'Miktar (örn. 1 kg)')),
-        TextField(controller: minimum, decoration: const InputDecoration(labelText: 'Minimum stok (örn. 500 g)')),
+        TextField(controller: name, decoration: InputDecoration(labelText: t('Ürün adı'))),
+        TextField(controller: amount, decoration: InputDecoration(labelText: t('Miktar (örn. 1 kg)'))),
+        TextField(controller: minimum, decoration: InputDecoration(labelText: t('Minimum stok (örn. 500 g)'))),
       ])),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('İptal')),
         FilledButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Ekle'))],
@@ -315,7 +317,7 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         Text('Mevcut: $current'),
         TextField(controller: controller, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: InputDecoration(labelText: 'Tüketilen miktar${unit.isEmpty ? '' : ' ($unit)'}')),
+          decoration: InputDecoration(labelText: unit.isEmpty ? t('Tüketilen miktar') : '${t('Tüketilen miktar')} ($unit)')),
       ]),
       actions: [
         TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('İptal')),
@@ -352,10 +354,10 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
           title: Text('$item • Stok bilgisi'),
           content: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
             TextField(controller: quantity,
-              decoration: const InputDecoration(labelText: 'Miktar (örn. 500 g, 2 adet)', border: OutlineInputBorder())),
+              decoration: InputDecoration(labelText: t('Miktar (örn. 500 g, 2 adet)'), border: OutlineInputBorder())),
             const SizedBox(height: 12),
             TextField(controller: minimum,
-              decoration: const InputDecoration(labelText: 'Minimum stok (örn. 200 g, 2 adet)', border: OutlineInputBorder())),
+              decoration: InputDecoration(labelText: t('Minimum stok (örn. 200 g, 2 adet)'), border: OutlineInputBorder())),
             const SizedBox(height: 12),
             Text(selectedDate == null ? 'Son kullanma tarihi: Belirtilmedi' :
               'Son kullanma: ${selectedDate!.day.toString().padLeft(2, '0')}.${selectedDate!.month.toString().padLeft(2, '0')}.${selectedDate!.year}'),
@@ -506,11 +508,11 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
           Row(children: [
             Expanded(child: TextField(controller: _input,
               onSubmitted: (_) => _add(),
-              decoration: const InputDecoration(labelText: 'Örn. domates, yumurta, süt',
+              decoration: InputDecoration(labelText: t('Örn. domates, yumurta, süt'),
                 border: OutlineInputBorder()))),
             const SizedBox(width: 8),
-            IconButton.filled(onPressed: _add, tooltip: 'Malzeme ekle', icon: const Icon(Icons.add)),
-            IconButton(onPressed: _quickAdd, tooltip: 'Miktarıyla hızlı ekle', icon: const Icon(Icons.playlist_add)),
+            IconButton.filled(onPressed: _add, tooltip: t('Malzeme ekle'), icon: const Icon(Icons.add)),
+            IconButton(onPressed: _quickAdd, tooltip: t('Miktarıyla hızlı ekle'), icon: const Icon(Icons.playlist_add)),
           ]),
           const SizedBox(height: 10),
           if (_pantry.isEmpty) const Text('Henüz malzeme eklenmedi.'),
@@ -546,8 +548,8 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
           ]),
           const SizedBox(height: 10),
           TextField(onChanged: (value) => setState(() => _pantryQuery = value),
-            decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-              labelText: 'Envanterde ürün ara', border: OutlineInputBorder())),
+            decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+              labelText: t('Envanterde ürün ara'), border: OutlineInputBorder())),
           const SizedBox(height: 8),
           Wrap(spacing: 6, runSpacing: 4, children: [
             for (final category in ['Tümü', 'Sebze ve meyve', 'Et ve balık', 'Süt ürünleri', 'Tahıl ve bakliyat', 'Diğer'])
@@ -583,9 +585,9 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
                 if (_daysLeft(item) != null && _daysLeft(item)! >= 0 && _daysLeft(item)! <= 3) 'Son kullanma tarihi yaklaşıyor',
               ].join(' • ')),
               trailing: Wrap(children: [
-                IconButton(tooltip: 'Tüketim kaydet', icon: const Icon(Icons.remove_circle_outline),
+                IconButton(tooltip: t('Tüketim kaydet'), icon: const Icon(Icons.remove_circle_outline),
                   onPressed: () => _consume(item)),
-                IconButton(tooltip: 'Ürünü sil', icon: const Icon(Icons.delete_outline),
+                IconButton(tooltip: t('Ürünü sil'), icon: const Icon(Icons.delete_outline),
                   onPressed: () { setState(() { _pantry.remove(item); _details.remove(item); }); _save(); }),
               ]),
               onTap: () => _editItem(item),
@@ -609,8 +611,8 @@ class _PantryRecipePageState extends State<PantryRecipePage> {
           const Text('Tarif önerileri', style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold, color: _purple)),
           const SizedBox(height: 8),
           TextField(controller: _search, onChanged: (_) => setState(() {}),
-            decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-              hintText: 'Tarif veya malzeme ara', border: OutlineInputBorder())),
+            decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+              hintText: t('Tarif veya malzeme ara'), border: OutlineInputBorder())),
           const SizedBox(height: 10),
           SizedBox(height: 44, child: ListView(scrollDirection: Axis.horizontal, children: [
             for (final c in categories) Padding(padding: const EdgeInsets.only(right: 7),

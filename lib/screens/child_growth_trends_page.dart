@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'package:flutter/services.dart';
 import '../services/child_growth_export.dart';
 import '../services/cdc_who_reference_csv.dart';
@@ -59,8 +61,8 @@ class _ChildGrowthTrendsPageState extends State<ChildGrowthTrendsPage> {
 
   @override Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: Text('${widget.child.name} · Büyüme geçmişi'), actions: [
-      IconButton(tooltip: 'WHO CSV referansı yükle', icon: const Icon(Icons.upload_file_outlined), onPressed: _importWhoCsv),
-      IconButton(tooltip: 'Ölçümleri CSV olarak kopyala', icon: const Icon(Icons.copy_all_outlined), onPressed: loading || error != null ? null : () async {
+      IconButton(tooltip: t('WHO CSV referansı yükle'), icon: const Icon(Icons.upload_file_outlined), onPressed: _importWhoCsv),
+      IconButton(tooltip: t('Ölçümleri CSV olarak kopyala'), icon: const Icon(Icons.copy_all_outlined), onPressed: loading || error != null ? null : () async {
         final csv = exportChildMeasurementsCsv(widget.child, entries);
         await Clipboard.setData(ClipboardData(text: csv));
         if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Ölçüm CSV verisi panoya kopyalandı.')));

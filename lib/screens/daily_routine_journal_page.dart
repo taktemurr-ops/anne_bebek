@@ -1,6 +1,8 @@
 import '../utils/dialog_helpers.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 
 import '../services/daily_routines.dart';
 import '../services/daily_routine_repository.dart';
@@ -92,22 +94,22 @@ class _DailyRoutineJournalPageState extends State<DailyRoutineJournalPage> {
                     keyboardType: const TextInputType.numberWithOptions(
                       decimal: true,
                     ),
-                    decoration: const InputDecoration(labelText: 'Miktar (ml)'),
+                    decoration: InputDecoration(labelText: t('Miktar (ml)')),
                   ),
                 if (kind == 'sleep')
                   TextField(
                     controller: duration,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Uyku süresi (dakika)',
+                    decoration: InputDecoration(
+                      labelText: t('Uyku süresi (dakika)'),
                     ),
                   ),
                 TextField(
                   controller: note,
                   maxLength: 300,
                   maxLines: 2,
-                  decoration: const InputDecoration(
-                    labelText: 'Not (isteğe bağlı)',
+                  decoration: InputDecoration(
+                    labelText: t('Not (isteğe bağlı)'),
                   ),
                 ),
               ],
@@ -226,7 +228,7 @@ class _DailyRoutineJournalPageState extends State<DailyRoutineJournalPage> {
                           ].join(' · '),
                         ),
                         trailing: IconButton(
-                          tooltip: 'Kaydı sil',
+                          tooltip: t('Kaydı sil'),
                           icon: const Icon(Icons.delete_outline),
                           onPressed: _error != null
                               ? null

@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../services/admin_dashboard_service.dart';
 import '../services/forum_safety_service.dart';
 
@@ -55,7 +57,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: const Text('Merkezi Yönetim'), actions: [
-      IconButton(onPressed: _loading ? null : _reload, icon: const Icon(Icons.refresh), tooltip: 'Yenile')]),
+      IconButton(onPressed: _loading ? null : _reload, icon: const Icon(Icons.refresh), tooltip: t('Yenile'))]),
     body: ListView(padding: const EdgeInsets.all(16), children: [
       const Card(color: Color(0xFFFFE6F3), child: Padding(padding: EdgeInsets.all(14), child: Text(
         'Bu ekran yalnızca sunucu tarafından doğrulanmış yöneticilere veri gösterir. Kullanıcıların sağlık kayıtları burada görüntülenmez.'))),

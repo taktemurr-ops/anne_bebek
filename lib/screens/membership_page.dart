@@ -1,5 +1,6 @@
 import '../widgets/coming_soon.dart';
-import 'package:flutter/material.dart';
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../services/subscription_service.dart';
 
 /// Informational plans and read-only server-verified membership status.

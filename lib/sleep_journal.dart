@@ -1,5 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'i18n/i18n.dart' show t;
+import 'i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'services/secure_health_store.dart';
 import 'services/daily_analytics.dart';
 import 'services/period_comparison.dart';
@@ -185,8 +187,8 @@ class _SleepJournalPageState extends State<SleepJournalPage> {
         return Card(child: ListTile(title: Text('${minutes ~/ 60} saat ${minutes % 60} dakika'),
           subtitle: Text('${_display(s)} → ${_display(e)}'),
           trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-          IconButton(tooltip: 'Kaydı düzenle', icon: const Icon(Icons.edit_outlined), onPressed: () => _add(editing: entry)),
-          IconButton(tooltip: 'Kaydı sil', icon: const Icon(Icons.delete_outline),
+          IconButton(tooltip: t('Kaydı düzenle'), icon: const Icon(Icons.edit_outlined), onPressed: () => _add(editing: entry)),
+          IconButton(tooltip: t('Kaydı sil'), icon: const Icon(Icons.delete_outline),
             onPressed: () async {
               final ok = await showDialog<bool>(context: context, builder: (ctx) => AlertDialog(
                 title: const Text('Uyku kaydı silinsin mi?'),

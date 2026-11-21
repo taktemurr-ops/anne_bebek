@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/text.dart';
 import '../services/family_recipe_repository.dart';
 import '../services/family_recipes.dart';
 import '../services/recipe_notebook_bridge.dart';

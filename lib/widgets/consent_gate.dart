@@ -1,4 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/language_picker.dart';
+import '../i18n/text.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,6 +69,7 @@ class _ConsentGateState extends State<ConsentGate> {
           child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const Align(alignment: AlignmentDirectional.centerEnd, child: LanguageButton()),
             const Icon(Icons.favorite_rounded, size: 48, color: Color(0xFFF0449B)),
             const SizedBox(height: 12),
             Text('Anne & Bebek\'e hoş geldin',
@@ -110,7 +114,7 @@ class PrivacyPolicyLink extends StatelessWidget {
     title: const Text('Gizlilik politikasının tamamı'),
     subtitle: const SelectableText(privacyPolicyUrl),
     trailing: IconButton(
-      tooltip: 'Adresi kopyala',
+      tooltip: t('Adresi kopyala'),
       icon: const Icon(Icons.copy_rounded),
       onPressed: () async {
         await Clipboard.setData(const ClipboardData(text: privacyPolicyUrl));

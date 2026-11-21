@@ -1,8 +1,10 @@
 import '../widgets/coming_soon.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../services/cloud_auth_service.dart';
 import '../utils/dialog_helpers.dart';
 import 'forum_safety_page.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../services/baby_forum_service.dart';
 
 class BabyOnlineForumPage extends StatefulWidget {
@@ -40,7 +42,7 @@ class _BabyOnlineForumPageState extends State<BabyOnlineForumPage> {
     final controller = TextEditingController();
     final value = await showDialogAndDispose<String>(disposables: [controller], context: context, builder: (ctx) => AlertDialog(
       title: Text(title), content: TextField(controller: controller, maxLines: lines,
-        maxLength: lines == 1 ? 100 : 2000, decoration: const InputDecoration(hintText: 'Yazınız...')),
+        maxLength: lines == 1 ? 100 : 2000, decoration: InputDecoration(hintText: t('Yazınız...'))),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () => Navigator.pop(ctx, controller.text.trim()), child: const Text('Kaydet'))],
     ));
@@ -86,9 +88,9 @@ class _BabyOnlineForumPageState extends State<BabyOnlineForumPage> {
     final visible = posts.where((p) => (category == 'Tümü' || p['category'] == category) &&
       ('${p['title']} ${p['body']}').toLowerCase().contains(query)).toList();
     return Scaffold(appBar: AppBar(title: const Text('Bebeğim • Çevrim içi forum'), actions: [
-      IconButton(onPressed: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const ForumNotificationsPage())), icon: const Icon(Icons.notifications_outlined), tooltip: 'Bildirimler'),
+      IconButton(onPressed: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const ForumNotificationsPage())), icon: const Icon(Icons.notifications_outlined), tooltip: t('Bildirimler')),
       PopupMenuButton<String>(onSelected: (value) { if (value == 'moderation') Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const ForumModerationPage())); }, itemBuilder: (_) => [const PopupMenuItem(value: 'moderation', child: Text('Moderatör paneli'))]),
-      IconButton(onPressed: _load, icon: const Icon(Icons.refresh), tooltip: 'Yenile')]),
+      IconButton(onPressed: _load, icon: const Icon(Icons.refresh), tooltip: t('Yenile'))]),
       floatingActionButton: FloatingActionButton.extended(onPressed: _create,
         icon: const Icon(Icons.edit_outlined), label: const Text('Konu aç')),
       body: loading ? const Center(child: CircularProgressIndicator()) : error != null
@@ -100,8 +102,8 @@ class _BabyOnlineForumPageState extends State<BabyOnlineForumPage> {
           const Card(child: Padding(padding: EdgeInsets.all(14), child: Text(
             'Paylaşımlar diğer kullanıcılara açıktır. Çocukların kimlik, adres ve özel sağlık bilgilerini paylaşmayın. '
             'Bu forum tıbbi danışmanlık yerine geçmez.'))),
-          TextField(controller: search, decoration: const InputDecoration(
-            prefixIcon: Icon(Icons.search), hintText: 'Konularda ara')),
+          TextField(controller: search, decoration: InputDecoration(
+            prefixIcon: Icon(Icons.search), hintText: t('Konularda ara'))),
           const SizedBox(height: 8), SizedBox(height: 44, child: ListView(scrollDirection: Axis.horizontal,
             children: categories.map((c) => Padding(padding: const EdgeInsets.only(right: 6),
               child: ChoiceChip(label: Text(c), selected: category == c,
@@ -116,7 +118,7 @@ class _BabyOnlineForumPageState extends State<BabyOnlineForumPage> {
             trailing: Row(mainAxisSize: MainAxisSize.min, children: [
               ForumReportButton(forum: 'baby', kind: 'post', contentId: post['id'].toString()),
               if (post['author_id']?.toString() == userId) IconButton(
-                tooltip: 'Sil', icon: const Icon(Icons.delete_outline),
+                tooltip: t('Sil'), icon: const Icon(Icons.delete_outline),
                 onPressed: () => _delete(post['id'].toString())),
             ]),
           )), const SizedBox(height: 90),

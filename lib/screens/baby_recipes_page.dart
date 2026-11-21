@@ -1,8 +1,10 @@
 import '../utils/privacy_log_sanitizer.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../services/recipe_notebook_bridge.dart';
 import '../widgets/add_to_notebook_tile.dart';
 import '../widgets/visuals.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/baby_recipe_catalog.dart';
 
@@ -140,9 +142,9 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
                     onChanged: (value) => setState(() => _query = value),
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.search),
-                      hintText: 'Tarif veya malzeme ara',
+                      hintText: t('Tarif veya malzeme ara'),
                       suffixIcon: _query.isEmpty ? null : IconButton(
-                        tooltip: 'Aramayı temizle',
+                        tooltip: t('Aramayı temizle'),
                         onPressed: () {
                           _searchController.clear();
                           setState(() => _query = '');
@@ -158,7 +160,7 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
                         key: ValueKey('age_$_age'),
                         initialValue: _age,
                         isExpanded: true,
-                        decoration: const InputDecoration(labelText: 'Yaş'),
+                        decoration: InputDecoration(labelText: t('Yaş')),
                         items: ages.map((value) => DropdownMenuItem(
                           value: value,
                           child: Text(value == 'Tümü' ? 'Tüm yaşlar' : value,
@@ -173,7 +175,7 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
                         key: ValueKey('category_$_category'),
                         initialValue: _category,
                         isExpanded: true,
-                        decoration: const InputDecoration(labelText: 'Kategori'),
+                        decoration: InputDecoration(labelText: t('Kategori')),
                         items: categories.map((value) => DropdownMenuItem(
                           value: value,
                           child: Text(value, overflow: TextOverflow.ellipsis),

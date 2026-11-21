@@ -1,6 +1,8 @@
 import '../utils/dialog_helpers.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../services/activity_plan.dart';
 import 'baby_activity_catalog_page.dart';
 import '../services/secure_health_store.dart';
@@ -51,8 +53,8 @@ class _ActivityPlannerPageState extends State<ActivityPlannerPage> {
     final result = await showDialogAndDispose<(String, String)>(disposables: [controller], context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, refresh) => AlertDialog(
       title: const Text('Yeni etkinlik'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
-        TextField(controller: controller, maxLength: 120, autofocus: true, decoration: const InputDecoration(labelText: 'Etkinlik adı')),
-        DropdownButtonFormField<String>(initialValue: category, decoration: const InputDecoration(labelText: 'Kategori'), items: ['Oyun', 'Kitap', 'Hareket', 'Aile', 'Diğer'].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(), onChanged: (v) => refresh(() => category = v ?? 'Oyun')),
+        TextField(controller: controller, maxLength: 120, autofocus: true, decoration: InputDecoration(labelText: t('Etkinlik adı'))),
+        DropdownButtonFormField<String>(initialValue: category, decoration: InputDecoration(labelText: t('Kategori')), items: ['Oyun', 'Kitap', 'Hareket', 'Aile', 'Diğer'].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(), onChanged: (v) => refresh(() => category = v ?? 'Oyun')),
       ]),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')), FilledButton(onPressed: () { final value = controller.text.trim(); if (value.isNotEmpty) Navigator.pop(ctx, (value, category)); }, child: const Text('Ekle'))],
     )));
@@ -81,7 +83,7 @@ class _ActivityPlannerPageState extends State<ActivityPlannerPage> {
           value: item.done,
           onChanged: _saving || _error != null ? null : (v) => _change(() { final index = _items.indexWhere((e) => e.id == item.id); if (index >= 0) _items[index] = item.copyWith(done: v ?? false); }),
           title: Text(item.title), subtitle: Text(item.category),
-          secondary: IconButton(tooltip: 'Sil', icon: const Icon(Icons.delete_outline), onPressed: _saving || _error != null ? null : () => _change(() => _items.removeWhere((e) => e.id == item.id))),
+          secondary: IconButton(tooltip: t('Sil'), icon: const Icon(Icons.delete_outline), onPressed: _saving || _error != null ? null : () => _change(() => _items.removeWhere((e) => e.id == item.id))),
         )),
         const SizedBox(height: 72),
       ]),

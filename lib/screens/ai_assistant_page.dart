@@ -1,7 +1,9 @@
 import '../services/offline_assistant.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../services/secure_health_store.dart';
 import '../utils/ai_request_guard.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../services/ai_assistant_service.dart';
 
 class AiAssistantPage extends StatefulWidget {
@@ -54,7 +56,7 @@ class _AiAssistantPageState extends State<AiAssistantPage> {
       const Text('Bebek bakımı, gebelik, yemek planlama veya uygulamanın kullanımı hakkında genel bir soru sorabilirsiniz.'),
       const SizedBox(height: 12),
       TextField(controller: _question, minLines: 3, maxLines: 6, maxLength: 1200,
-        decoration: const InputDecoration(labelText: 'Sorunuz', hintText: 'Örn. 8 aylık bebek için güvenli oyun önerileri nelerdir?')),
+        decoration: InputDecoration(labelText: t('Sorunuz'), hintText: t('Örn. 8 aylık bebek için güvenli oyun önerileri nelerdir?'))),
       CheckboxListTile(value: _consent, onChanged: _busy ? null : (v) => setState(() => _consent = v ?? false),
         title: const Text('Sorumu AI hizmetine göndermeyi kabul ediyorum.'),
         subtitle: const Text('Yazdığınız soru gönderilir. E-posta ve telefon numaraları otomatik maskelenir; bu tam anonimleştirme değildir. Ad, adres, tahlil veya başka hassas kişisel bilgi yazmayın.'),
@@ -199,7 +201,7 @@ class _OfflineAssistantViewState extends State<OfflineAssistantView> {
             controller: _input, maxLength: 300, minLines: 1, maxLines: 3,
             textInputAction: TextInputAction.send,
             onSubmitted: (_) => _ask(),
-            decoration: const InputDecoration(hintText: 'Sorunu yaz…', counterText: ''))),
+            decoration: InputDecoration(hintText: t('Sorunu yaz…'), counterText: ''))),
           const SizedBox(width: 8),
           IconButton.filled(key: const ValueKey('assistant_send'), onPressed: _ask,
             icon: const Icon(Icons.send_rounded)),

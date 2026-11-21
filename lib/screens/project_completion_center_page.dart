@@ -1,5 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -154,7 +156,7 @@ class _ProjectCompletionCenterPageState extends State<ProjectCompletionCenterPag
         const SizedBox(height: 12),
         DropdownButtonFormField<String>(
           initialValue: _filter,
-          decoration: const InputDecoration(labelText: 'Modül filtresi',
+          decoration: InputDecoration(labelText: t('Modül filtresi'),
             border: OutlineInputBorder()),
           items: ['Tümü', ..._groups.keys].map(
             (name) => DropdownMenuItem(value: name, child: Text(name))).toList(),

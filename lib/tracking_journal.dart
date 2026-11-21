@@ -1,6 +1,8 @@
 import 'utils/dialog_helpers.dart';
+import 'i18n/i18n.dart' show t;
+import 'i18n/text.dart';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'services/secure_health_store.dart';
 import 'services/daily_analytics.dart';
 import 'services/period_comparison.dart';
@@ -54,11 +56,11 @@ class _TrackingJournalPageState extends State<TrackingJournalPage> {
         title: Text(widget.pregnancy ? 'Gebelik kaydı ekle' : 'Beslenme kaydı ekle'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
           DropdownButtonFormField<String>(initialValue: type, isExpanded: true,
-            decoration: const InputDecoration(labelText: 'Kayıt türü'),
+            decoration: InputDecoration(labelText: t('Kayıt türü')),
             items: _types.map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
             onChanged: (v) { if (v != null) update(() => type = v); }),
           if (type == 'Emzirme') DropdownButtonFormField<String>(initialValue: side,
-            decoration: const InputDecoration(labelText: 'Taraf'),
+            decoration: InputDecoration(labelText: t('Taraf')),
             items: ['Belirtilmedi', 'Sol', 'Sağ', 'Her ikisi']
               .map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),
             onChanged: (v) { if (v != null) update(() => side = v); }),
@@ -67,7 +69,7 @@ class _TrackingJournalPageState extends State<TrackingJournalPage> {
             decoration: InputDecoration(labelText: _unitLabel(type))),
           if (type == 'Tansiyon') TextField(key: const Key('journal_amount2'), controller: quantity2,
             keyboardType: TextInputType.number,
-            decoration: const InputDecoration(labelText: 'Küçük tansiyon (mmHg)')),
+            decoration: InputDecoration(labelText: t('Küçük tansiyon (mmHg)'))),
           TextField(controller: note, maxLength: 500,
             decoration: InputDecoration(labelText: type == 'Ek gıda' ? 'Besin / porsiyon / gözlem' : 'Açıklama (isteğe bağlı)')),
           OutlinedButton.icon(icon: const Icon(Icons.calendar_today),
@@ -229,7 +231,7 @@ class _TrackingJournalPageState extends State<TrackingJournalPage> {
         if (warning != null) detail.add('⚠️ $warning');
         return Card(color: warning != null ? const Color(0xFFFFF0F0) : null,
           child: ListTile(title: Text(type), subtitle: Text(detail.join(' • ')),
-          trailing: IconButton(tooltip: 'Kaydı sil', icon: const Icon(Icons.delete_outline),
+          trailing: IconButton(tooltip: t('Kaydı sil'), icon: const Icon(Icons.delete_outline),
             onPressed: () => _delete(entry))));
       }),
       const Padding(padding: EdgeInsets.all(12), child: Text(

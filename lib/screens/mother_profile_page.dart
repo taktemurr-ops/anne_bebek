@@ -1,7 +1,9 @@
 import 'dart:async';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:flutter/services.dart';
 
 import '../services/secure_health_store.dart';
@@ -172,7 +174,7 @@ class _MotherProfilePageState extends State<MotherProfilePage> {
             child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               SizedBox(width: 130, child: Text(label, style: const TextStyle(fontSize: 12.5, color: Colors.black54))),
               Expanded(child: SelectableText(value, style: const TextStyle(fontWeight: FontWeight.w600))),
-              if (label.contains('elefon')) IconButton(visualDensity: VisualDensity.compact, tooltip: 'Kopyala',
+              if (label.contains('elefon')) IconButton(visualDensity: VisualDensity.compact, tooltip: t('Kopyala'),
                   icon: const Icon(Icons.copy_rounded, size: 18),
                   onPressed: () => Clipboard.setData(ClipboardData(text: value))),
             ])),

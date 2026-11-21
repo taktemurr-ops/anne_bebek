@@ -1,5 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/general_recipe_catalog.dart';
 import 'pantry_recipe_page.dart';
@@ -199,8 +201,8 @@ class _WeeklyShoppingAssistantPageState extends State<WeeklyShoppingAssistantPag
             ]),
             const SizedBox(height: 8),
             TextField(onChanged: (v) => setState(() => _query = v),
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.search), labelText: 'Malzeme ara',
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search), labelText: t('Malzeme ara'),
                 isDense: true, border: OutlineInputBorder())),
             Wrap(spacing: 8, children: [
               TextButton.icon(onPressed: () => setState(() => _selected.addAll(names)),

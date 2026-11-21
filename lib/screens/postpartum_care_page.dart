@@ -1,6 +1,8 @@
 import '../utils/dialog_helpers.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../services/secure_health_store.dart';
 
 /// Educational postpartum companion. Does not diagnose or replace follow-up care.
@@ -94,7 +96,7 @@ class _PostpartumCarePageState extends State<PostpartumCarePage> {
     final value = await showDialogAndDispose<String>(disposables: [controller], context: context, builder: (ctx) => AlertDialog(
       title: const Text('Yeni kişisel not'),
       content: TextField(controller: controller, maxLength: 500, maxLines: 4,
-        decoration: const InputDecoration(hintText: 'Belirti, kontrol sorusu veya günlük gözlem')),
+        decoration: InputDecoration(hintText: t('Belirti, kontrol sorusu veya günlük gözlem'))),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('İptal')),
         FilledButton(onPressed: () => Navigator.pop(ctx, controller.text.trim()), child: const Text('Kaydet'))],
     ));
@@ -149,7 +151,7 @@ class _PostpartumCarePageState extends State<PostpartumCarePage> {
           for (final note in notes) Card(child: ListTile(
             title: Text(note['text'] ?? ''),
             subtitle: Text((note['date'] ?? '').split('T').first),
-            trailing: IconButton(tooltip: 'Notu sil', icon: const Icon(Icons.delete_outline), onPressed: () async {
+            trailing: IconButton(tooltip: t('Notu sil'), icon: const Icon(Icons.delete_outline), onPressed: () async {
               final confirmed = await showDialog<bool>(context: context, builder: (ctx) => AlertDialog(
                 title: const Text('Not silinsin mi?'), actions: [
                   TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Vazgeç')),

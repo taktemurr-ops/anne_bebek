@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../services/child_data_audit.dart';
 import '../services/child_journals.dart';
 import '../services/child_profiles.dart';
@@ -35,7 +37,7 @@ class _ChildDataAuditPageState extends State<ChildDataAuditPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: const Text('Çocuk verisi kontrolü'), actions: [
-      IconButton(onPressed: loading ? null : _check, icon: const Icon(Icons.refresh), tooltip: 'Yeniden kontrol et'),
+      IconButton(onPressed: loading ? null : _check, icon: const Icon(Icons.refresh), tooltip: t('Yeniden kontrol et')),
     ]),
     body: loading ? const Center(child: CircularProgressIndicator()) :
       ListView(padding: const EdgeInsets.all(16), children: [

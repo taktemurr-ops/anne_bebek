@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../data/encyclopedia/encyclopedia.dart';
 
 const _pink = Color(0xFFE94791);
@@ -63,9 +65,9 @@ class _EncyclopediaPageState extends State<EncyclopediaPage> {
           onChanged: (_) => setState(() {}),
           decoration: InputDecoration(
             prefixIcon: const Icon(Icons.search_rounded),
-            hintText: 'Konu ara (ör. ateş, emzirme, adet sancısı)',
+            hintText: t('Konu ara (ör. ateş, emzirme, adet sancısı)'),
             suffixIcon: _search.text.isEmpty ? null : IconButton(
-              tooltip: 'Temizle', icon: const Icon(Icons.close_rounded),
+              tooltip: t('Temizle'), icon: const Icon(Icons.close_rounded),
               onPressed: () => setState(_search.clear)),
           )),
         const SizedBox(height: 10),

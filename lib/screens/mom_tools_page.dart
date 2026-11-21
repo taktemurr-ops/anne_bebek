@@ -1,7 +1,9 @@
 import 'dart:async';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/baby_names.dart';
@@ -332,7 +334,7 @@ class _MomToolsPageState extends State<MomToolsPage> {
     return Column(children: [
       Padding(padding: const EdgeInsets.fromLTRB(16, 12, 16, 4), child: TextField(
         key: const Key('isim_ara'), controller: _nameSearch,
-        decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'İsim ya da anlam ara',
+        decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('İsim ya da anlam ara'),
             border: OutlineInputBorder()),
         onChanged: (_) => setState(() {}))),
       SingleChildScrollView(scrollDirection: Axis.horizontal, padding: const EdgeInsets.symmetric(horizontal: 12),

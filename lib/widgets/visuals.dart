@@ -1,5 +1,6 @@
 import 'dart:math' as math;
-import 'package:flutter/material.dart';
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 
 /// Paket 39 referans tasarımı: renkli ikon ve özgün çizimler.
 ///

@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 
 /// Tüm modüllerde ortak kullanılan, sade pastel tasarım renkleri.
 abstract final class PastelPalette {
@@ -31,7 +33,7 @@ class PastelModuleScaffold extends StatelessWidget {
         appBar: AppBar(
           leading: Navigator.of(context).canPop()
               ? IconButton(
-                  tooltip: 'Geri dön',
+                  tooltip: t('Geri dön'),
                   icon: const Icon(Icons.arrow_back_rounded),
                   onPressed: () => Navigator.of(context).pop(),
                 )

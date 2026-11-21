@@ -1,6 +1,8 @@
 import '../utils/dialog_helpers.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../services/secure_health_store.dart';
 
 /// Symptom diary only: not a diagnosis, screening or fertility prediction.
@@ -79,11 +81,11 @@ class _WomensHealthJournalPageState extends State<WomensHealthJournalPage> {
       builder: (dialogContext) => StatefulBuilder(builder: (dialogContext, refresh) => AlertDialog(
         title: Text('Yeni kayıt • $selectedCategory'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          TextField(controller: title, maxLength: 100, decoration: const InputDecoration(labelText: 'Belirti / kontrol / konu')),
-          TextField(controller: note, maxLength: 1000, maxLines: 3, decoration: const InputDecoration(labelText: 'Notlar (isteğe bağlı)')),
+          TextField(controller: title, maxLength: 100, decoration: InputDecoration(labelText: t('Belirti / kontrol / konu'))),
+          TextField(controller: note, maxLength: 1000, maxLines: 3, decoration: InputDecoration(labelText: t('Notlar (isteğe bağlı)'))),
           OutlinedButton.icon(icon: const Icon(Icons.calendar_today), label: Text('${date.day}.${date.month}.${date.year}'),
             onPressed: () async { final chosen = await showDatePicker(context: dialogContext, initialDate: date, firstDate: DateTime(1950), lastDate: DateTime(2100)); if (chosen != null) refresh(() => date = chosen); }),
-          DropdownButtonFormField<int>(initialValue: severity, decoration: const InputDecoration(labelText: 'Şiddet / etki'),
+          DropdownButtonFormField<int>(initialValue: severity, decoration: InputDecoration(labelText: t('Şiddet / etki')),
             items: const [DropdownMenuItem(value: 0, child: Text('Belirtilmedi')), DropdownMenuItem(value: 1, child: Text('Hafif')), DropdownMenuItem(value: 2, child: Text('Orta')), DropdownMenuItem(value: 3, child: Text('Şiddetli'))],
             onChanged: (v) => refresh(() => severity = v ?? 0)),
         ])),
@@ -106,8 +108,8 @@ class _WomensHealthJournalPageState extends State<WomensHealthJournalPage> {
       builder: (ctx) => AlertDialog(
         title: const Text('Kaydı düzenle'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          TextField(controller: title, maxLength: 100, decoration: const InputDecoration(labelText: 'Başlık')),
-          TextField(controller: note, maxLength: 1000, maxLines: 4, decoration: const InputDecoration(labelText: 'Not')),
+          TextField(controller: title, maxLength: 100, decoration: InputDecoration(labelText: t('Başlık'))),
+          TextField(controller: note, maxLength: 1000, maxLines: 4, decoration: InputDecoration(labelText: t('Not'))),
         ])),
         actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
           FilledButton(onPressed: () {
@@ -151,7 +153,7 @@ class _WomensHealthJournalPageState extends State<WomensHealthJournalPage> {
             icon: const Icon(Icons.sort), label: Text(newestFirst ? 'Yeniden eskiye' : 'Eskiden yeniye')),
         ])),
         Padding(padding: const EdgeInsets.symmetric(horizontal: 14), child: TextField(
-          decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Bu kategoride ara'),
+          decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Bu kategoride ara')),
           onChanged: (value) => setState(() => search = value))),
         SizedBox(height: 54, child: ListView.builder(scrollDirection: Axis.horizontal, itemCount: categories.length,
           itemBuilder: (ctx, i) => Padding(padding: const EdgeInsets.symmetric(horizontal: 4), child: ChoiceChip(label: Text(categories[i]), selected: category == i, onSelected: (_) => setState(() => category = i))))),
@@ -165,8 +167,8 @@ class _WomensHealthJournalPageState extends State<WomensHealthJournalPage> {
               isThreeLine: (entry['note'] ?? '').isNotEmpty,
               onTap: () => _edit(entry),
               trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-                IconButton(tooltip: 'Düzenle', icon: const Icon(Icons.edit_outlined), onPressed: () => _edit(entry)),
-                IconButton(tooltip: 'Sil', icon: const Icon(Icons.delete_outline), onPressed: () => _delete(entry)),
+                IconButton(tooltip: t('Düzenle'), icon: const Icon(Icons.edit_outlined), onPressed: () => _edit(entry)),
+                IconButton(tooltip: t('Sil'), icon: const Icon(Icons.delete_outline), onPressed: () => _delete(entry)),
               ])));
           })),
       ]));
