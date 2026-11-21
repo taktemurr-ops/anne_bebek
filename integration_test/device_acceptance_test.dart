@@ -26,6 +26,15 @@ Future<void> startApp(WidgetTester tester) async {
   await pumpUntil(tester, () => find.byType(PastelModuleTile).evaluate().isNotEmpty);
 }
 
+/// Tembel oluşturulan listelerde öğeyi bulana kadar ana listeyi kaydırır.
+Future<void> scrollTo(WidgetTester tester, Finder target) async {
+  if (target.evaluate().isEmpty) {
+    await tester.scrollUntilVisible(target, 250, scrollable: find.byType(Scrollable).first);
+  }
+  await tester.ensureVisible(target.first);
+  await tester.pumpAndSettle();
+}
+
 Future<void> openTile(WidgetTester tester, String title) async {
   final tile = find.descendant(of: find.byType(PastelModuleTile), matching: find.text(title));
   tester.widget<PastelModuleTile>(find.ancestor(of: tile, matching: find.byType(PastelModuleTile))).onTap();
@@ -89,7 +98,9 @@ void main() {
     await tester.pumpWidget(const SizedBox.shrink());
     await startApp(tester);
     await openTile(tester, 'Kadınlar');
-    expect(find.textContaining('Sonraki adet (tahmini)'), findsOneWidget);
+    final next = find.textContaining('Sonraki adet (tahmini)');
+    await scrollTo(tester, next);
+    expect(next, findsOneWidget);
   });
 
   testWidgets('4) + menüsünden uyku kaydı eklenir', (tester) async {
@@ -109,12 +120,10 @@ void main() {
 
   testWidgets('5) Tarif detayından aile tarif defterine ekleme', (tester) async {
     await startApp(tester);
-    await tester.tap(find.text('Tarifler').last);
-    await tester.pumpAndSettle();
-    final recipe = find.textContaining('çorbası').first;
-    await tester.ensureVisible(recipe);
-    await tester.pumpAndSettle();
-    await tester.tap(recipe);
+    await openTile(tester, 'Yemek Tarifleri');
+    final recipe = find.textContaining('çorbası');
+    await scrollTo(tester, recipe);
+    await tester.tap(recipe.first);
     await tester.pumpAndSettle();
     final add = find.byKey(const ValueKey('add_to_notebook'));
     await tester.ensureVisible(add);
@@ -126,7 +135,7 @@ void main() {
   testWidgets('6) A\'dan Z\'ye Rehber araması ve konu ayrıntısı', (tester) async {
     await startApp(tester);
     final search = find.text('A’dan Z’ye Rehber’de ara...');
-    await tester.ensureVisible(search);
+    await scrollTo(tester, search);
     await tester.tap(search);
     await tester.pumpAndSettle();
     await tester.enterText(find.byKey(const ValueKey('ansiklopedi_ara')), 'ateş');
