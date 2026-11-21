@@ -76,3 +76,10 @@ void _disposeAll(List<ChangeNotifier> disposables) {
     item.dispose();
   }
 }
+
+/// Diyalogdan döndükten hemen sonra çağrılan `dispose` yerine kullanılır.
+/// Diyalog kapanma animasyonu (≈300 ms) bitene kadar beklenir; böylece
+/// kapanan diyaloğun `TextField`'ları silinmiş controller'a dokunmaz.
+void disposeAfterDialog(ChangeNotifier item) {
+  Future<void>.delayed(const Duration(milliseconds: 800), item.dispose);
+}
