@@ -27,13 +27,17 @@ jobs:
           channel: stable
           cache: true
       - run: flutter pub get
+      - name: Emoji yazı tipini indir
+        run: |
+          curl -fsSL -o /tmp/emoji.ttf https://github.com/googlefonts/noto-emoji/raw/main/fonts/Noto-COLRv1.ttf || true
+          ls -la /tmp/emoji.ttf || true
       - name: Görüntüleri üret
         run: |
           # integration_test altındaki dosyalar cihaz ister; testi normal
           # widget testi olarak çalıştırmak için test/ altına kopyala.
           mkdir -p test/_screens
           cp integration_test/screenshots/screens_test.dart test/_screens/
-          flutter test test/_screens --update-goldens || true
+          EMOJI_FONT=/tmp/emoji.ttf flutter test test/_screens --update-goldens || true
       - name: Görüntüleri dala yaz
         env:
           TOKEN: ${{ github.token }}

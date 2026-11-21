@@ -1,6 +1,7 @@
 import '../utils/privacy_log_sanitizer.dart';
 import '../services/recipe_notebook_bridge.dart';
 import '../widgets/add_to_notebook_tile.dart';
+import '../widgets/visuals.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/baby_recipe_catalog.dart';
@@ -233,11 +234,8 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
                           child: ListTile(
                             contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 14, vertical: 7),
-                            leading: const CircleAvatar(
-                              backgroundColor: Color(0xFFFFD9ED),
-                              child: Icon(Icons.restaurant_menu,
-                                  color: Color(0xFF48235F)),
-                            ),
+                            leading: EmojiBadge(recipeEmoji(recipe.title, recipe.category),
+                                size: 44, background: const Color(0xFFFFE9F3)),
                             title: Text(recipe.title,
                                 style: const TextStyle(fontWeight: FontWeight.w700)),
                             subtitle: Text(recipe.variants.isEmpty

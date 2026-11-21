@@ -1,3 +1,4 @@
+import 'visuals.dart';
 import 'package:flutter/material.dart';
 import 'pastel_design.dart';
 
@@ -110,14 +111,14 @@ class PastelTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(mainAxisSize: MainAxisSize.min, children: [
-        Icon(icon, color: PastelPalette.primary, size: 28),
-        const SizedBox(width: 10),
+        Icon(icon, color: PastelPalette.primary, size: 24),
+        const SizedBox(width: 8),
         Flexible(
           child: Text(title,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                  fontSize: 22, fontWeight: FontWeight.w900, color: PastelPalette.primary)),
+                  fontSize: 20, fontWeight: FontWeight.w900, color: PastelPalette.primary)),
         ),
       ]);
 }
@@ -149,27 +150,28 @@ class PastelModuleTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.fromLTRB(10, 11, 8, 11),
             child: Row(children: [
               Container(
-                width: 44,
-                height: 44,
+                width: 40,
+                height: 40,
                 decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(14)),
-                child: Icon(icon, color: PastelPalette.primary, size: 26),
+                alignment: Alignment.center,
+                child: IconGlyph(icon, size: 26),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 8),
               Expanded(
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                          fontWeight: FontWeight.w800, color: PastelPalette.text, fontSize: 14)),
+                          fontWeight: FontWeight.w800, color: PastelPalette.text, fontSize: 13.5)),
                   const SizedBox(height: 2),
                   Text(subtitle,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: 11.5, color: Colors.black54)),
+                      style: const TextStyle(fontSize: 11, color: Colors.black54)),
                 ]),
               ),
             ]),
@@ -201,19 +203,14 @@ class PastelGreetingCard extends StatelessWidget {
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(greeting,
                   style: const TextStyle(
-                      fontSize: 22, fontWeight: FontWeight.w900, color: Color(0xFFB0306E))),
+                      fontSize: 21, fontWeight: FontWeight.w900, color: Color(0xFFB0306E))),
               const SizedBox(height: 6),
               Text(subtitle,
                   style: const TextStyle(
                       fontSize: 15, fontWeight: FontWeight.w700, color: PastelPalette.text)),
             ]),
           ),
-          Container(
-            width: 84,
-            height: 84,
-            decoration: const BoxDecoration(color: Color(0xFFFFD0E6), shape: BoxShape.circle),
-            child: const Icon(Icons.family_restroom_rounded, size: 50, color: PastelPalette.primary),
-          ),
+          const MotherBabyArt(width: 120, height: 104),
         ]),
       );
 }

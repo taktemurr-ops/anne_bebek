@@ -28,6 +28,13 @@ Future<void> _loadFonts() async {
   }
   await load('Roboto', (n) => n.startsWith('Roboto') && n.endsWith('.ttf'));
   await load('MaterialIcons', (n) => n.startsWith('MaterialIcons'));
+  // CI emoji yazı tipini indirir (EMOJI_FONT); yoksa emojiler kutu görünür.
+  final emoji = Platform.environment['EMOJI_FONT'];
+  if (emoji != null && File(emoji).existsSync()) {
+    final loader = FontLoader('Noto Color Emoji');
+    loader.addFont(Future.value(ByteData.view(Uint8List.fromList(File(emoji).readAsBytesSync()).buffer)));
+    await loader.load();
+  }
 }
 
 Map<String, Object> _sampleData() {
@@ -62,14 +69,38 @@ void main() {
   setUpAll(_loadFonts);
   setUp(installSecureStorageMock);
 
-  Future<void> shot(WidgetTester tester, String name) async {
+  Iterable<ScrollableState> vertical() => find.byType(Scrollable).evaluate()
+      .map((e) => (e as StatefulElement).state as ScrollableState)
+      .where((s) => s.position.axis == Axis.vertical);
+
+  Future<void> toTop(WidgetTester tester) async {
+    for (final st in vertical()) {
+      if (st.position.pixels != 0) st.position.jumpTo(0);
+    }
     await tester.pumpAndSettle();
+  }
+
+  Future<void> capture(WidgetTester tester, String name) async {
     try {
       await expectLater(find.byType(MaterialApp), matchesGoldenFile('goldens/$name.png'));
     } catch (e) {
       // Bir ekranın çekilememesi diğerlerini engellemesin.
       // ignore: avoid_print
       print('Ekran çekilemedi: $name: $e');
+    }
+  }
+
+  Future<void> shot(WidgetTester tester, String name) async {
+    await tester.pumpAndSettle();
+    await toTop(tester);
+    await capture(tester, name);
+    final main = vertical().where((s) => s.position.maxScrollExtent > 0).toList();
+    if (main.isNotEmpty) {
+      final st = main.first;
+      st.position.jumpTo((st.position.pixels + 650).clamp(0, st.position.maxScrollExtent).toDouble());
+      await tester.pumpAndSettle();
+      await capture(tester, '${name}_b');
+      await toTop(tester);
     }
   }
 
@@ -98,11 +129,11 @@ void main() {
     await shot(tester, '01_ana_sayfa');
 
     Future<void> home() async {
-      await tapText(tester, 'Ana Sayfa', last: true);
-      // Açık alt sayfaları kapat.
       final nav = tester.state<NavigatorState>(find.byType(Navigator).first);
       nav.popUntil((r) => r.isFirst);
       await tester.pumpAndSettle();
+      await tapText(tester, 'Ana Sayfa', last: true);
+      await toTop(tester);
     }
 
     final targets = <(String, String, bool)>[

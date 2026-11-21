@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'visuals.dart';
 import 'package:flutter/material.dart';
 
 import '../services/cycle_estimate.dart';
@@ -115,7 +116,7 @@ class PastelSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(children: [
-        Icon(icon, color: PastelPalette.primary, size: 22),
+        IconGlyph(icon, size: 22),
         const SizedBox(width: 8),
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -145,8 +146,11 @@ class ChildHeaderCard extends StatelessWidget {
     required this.age,
     required this.onTap,
     this.trailingIcon = Icons.keyboard_arrow_down_rounded,
+    this.girl,
   });
 
+  /// Avatar: kız için fiyonklu, erkek için mavi tulumlu bebek yüzü.
+  final bool? girl;
   final String name;
   final String age;
   final VoidCallback onTap;
@@ -157,11 +161,7 @@ class ChildHeaderCard extends StatelessWidget {
         onTap: onTap,
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         child: Row(children: [
-          const CircleAvatar(
-            radius: 28,
-            backgroundColor: PastelPalette.softPink,
-            child: Icon(Icons.child_care_rounded, color: PastelPalette.primary, size: 32),
-          ),
+          BabyFaceAvatar(size: 56, girl: girl),
           const SizedBox(width: 14),
           Expanded(
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -169,7 +169,7 @@ class ChildHeaderCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w900, color: PastelPalette.text)),
+                      fontSize: 17, fontWeight: FontWeight.w900, color: PastelPalette.text)),
               const SizedBox(height: 2),
               Text(age, style: const TextStyle(color: Colors.black54)),
             ]),
@@ -251,7 +251,7 @@ class _MetricTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
         ),
         child: Row(children: [
-          Icon(icon, color: PastelPalette.primary, size: 22),
+          IconGlyph(icon, size: 22),
           const SizedBox(width: 6),
           Expanded(
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -362,7 +362,7 @@ class CareShortcut extends StatelessWidget {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(12)),
-                child: Icon(icon, color: PastelPalette.primary, size: 22),
+                child: IconGlyph(icon, size: 22),
               ),
               const SizedBox(height: 6),
               Text(label,
@@ -403,7 +403,7 @@ class TrackingRow extends StatelessWidget {
             width: 44,
             height: 44,
             decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(14)),
-            child: Icon(icon, color: PastelPalette.primary, size: 26),
+            child: IconGlyph(icon, size: 26),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -739,13 +739,7 @@ class PregnancyWeekCard extends StatelessWidget {
                 ),
               ]),
             ),
-            Container(
-              width: 92,
-              height: 92,
-              decoration: const BoxDecoration(color: Color(0xFFFFD0E6), shape: BoxShape.circle),
-              child: const Icon(Icons.pregnant_woman_rounded,
-                  size: 58, color: PastelPalette.primary),
-            ),
+            const PregnantArt(width: 96, height: 116),
           ]),
         ),
         if (week != null) ...[
@@ -777,23 +771,29 @@ class PastelLinkCard extends StatelessWidget {
     required this.subtitle,
     required this.onTap,
     this.iconColor = PastelPalette.softPink,
+    this.leading,
+    this.background,
   });
 
   final IconData icon;
   final String title, subtitle;
   final VoidCallback onTap;
   final Color iconColor;
+  /// Simge yerine çizim (ör. Kadınlar → Bugünkü Notun).
+  final Widget? leading;
+  final Color? background;
 
   @override
   Widget build(BuildContext context) => PastelCard(
         onTap: onTap,
         padding: const EdgeInsets.fromLTRB(12, 12, 8, 12),
+        color: background ?? PastelPalette.surface,
         child: Row(children: [
-          Container(
+          leading ?? Container(
             width: 46,
             height: 46,
             decoration: BoxDecoration(color: iconColor, borderRadius: BorderRadius.circular(14)),
-            child: Icon(icon, color: PastelPalette.primary, size: 26),
+            child: IconGlyph(icon, size: 26),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -890,7 +890,7 @@ class CategoryIconTile extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
-              Icon(icon, color: PastelPalette.primary, size: 28),
+              IconGlyph(icon, size: 28),
               const SizedBox(height: 6),
               Text(label,
                   maxLines: 1,

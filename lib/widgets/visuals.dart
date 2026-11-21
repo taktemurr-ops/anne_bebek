@@ -124,9 +124,10 @@ void _closedEye(Canvas c, Offset o, double w, Paint p) {
 
 /// Bebek yüzü avatarı (çocuk kartları ve profil listesi).
 class BabyFaceAvatar extends StatelessWidget {
-  const BabyFaceAvatar({super.key, this.size = 48, this.girl = true, this.background = const Color(0xFFFFE3EF)});
+  const BabyFaceAvatar({super.key, this.size = 48, this.girl, this.background = const Color(0xFFFFE3EF)});
   final double size;
-  final bool girl;
+  /// true: fiyonklu/pembe, false: mavi, null: nötr (cinsiyet bilinmiyor).
+  final bool? girl;
   final Color background;
   @override
   Widget build(BuildContext context) => SizedBox.square(
@@ -135,7 +136,7 @@ class BabyFaceAvatar extends StatelessWidget {
 
 class _BabyFacePainter extends CustomPainter {
   _BabyFacePainter({required this.girl, required this.background});
-  final bool girl;
+  final bool? girl;
   final Color background;
 
   @override
@@ -153,7 +154,7 @@ class _BabyFacePainter extends CustomPainter {
     canvas.drawCircle(face.translate(r * 0.98, r * 0.05), r * 0.2, Paint()..color = _skinShade);
     // Gövde (tulum)
     canvas.drawOval(Rect.fromCenter(center: Offset(s * 0.5, s * 1.02), width: s * 0.78, height: s * 0.5),
-        Paint()..color = girl ? const Color(0xFFF7A8C9) : const Color(0xFFA9C8F5));
+        Paint()..color = girl == null ? const Color(0xFFB9E4C9) : girl! ? const Color(0xFFF7A8C9) : const Color(0xFFA9C8F5));
     canvas.drawCircle(face, r, skin);
     // Saç perçemi
     final hair = Paint()..color = _hair;
@@ -174,7 +175,7 @@ class _BabyFacePainter extends CustomPainter {
     canvas.drawArc(Rect.fromCenter(center: face.translate(0, r * 0.25), width: r * 0.5, height: r * 0.36),
         math.pi * 0.15, math.pi * 0.7, false,
         Paint()..color = _ink..style = PaintingStyle.stroke..strokeWidth = r * 0.08..strokeCap = StrokeCap.round);
-    if (girl) {
+    if (girl == true) {
       final bow = Paint()..color = const Color(0xFFF0449B);
       final b = face.translate(r * 0.62, -r * 0.78);
       canvas.drawPath(Path()
@@ -375,4 +376,52 @@ class _WomanPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+/// Materyal ikonunun referanstaki renkli karşılığı; yoksa null.
+String? emojiForIcon(IconData icon) => _iconEmoji[icon.codePoint];
+
+final Map<int, String> _iconEmoji = {
+  for (final e in <(IconData, String)>[
+    (Icons.event_note_rounded, '📅'), (Icons.calendar_month_outlined, '🗓️'),
+    (Icons.calendar_view_week_rounded, '🗓️'), (Icons.child_care_rounded, '👶'),
+    (Icons.child_care, '👶'), (Icons.child_friendly_outlined, '🚼'),
+    (Icons.stroller_outlined, '🚼'), (Icons.restaurant_menu_rounded, '🍴'),
+    (Icons.restaurant_outlined, '🍽️'), (Icons.pregnant_woman_rounded, '🤰'),
+    (Icons.local_florist_rounded, '🌸'), (Icons.shopping_cart_outlined, '🛒'),
+    (Icons.shopping_bag_outlined, '🛍️'), (Icons.shopping_basket_outlined, '🧺'),
+    (Icons.local_drink_outlined, '🍼'), (Icons.bedtime_outlined, '🌙'),
+    (Icons.baby_changing_station_outlined, '🧷'), (Icons.medication_outlined, '💊'),
+    (Icons.vaccines_outlined, '💉'), (Icons.medical_services_outlined, '🩺'),
+    (Icons.local_hospital_outlined, '🏥'), (Icons.health_and_safety_outlined, '🛡️'),
+    (Icons.shield_outlined, '🛡️'), (Icons.toys_outlined, '🧸'),
+    (Icons.spa_outlined, '🧴'), (Icons.bathtub_outlined, '🛁'),
+    (Icons.checkroom_outlined, '👕'), (Icons.cleaning_services_outlined, '🧽'),
+    (Icons.kitchen_outlined, '🥫'), (Icons.favorite_border_rounded, '💗'),
+    (Icons.forum_outlined, '💬'), (Icons.menu_book_rounded, '📖'),
+    (Icons.menu_book_outlined, '📖'), (Icons.auto_stories_outlined, '📚'),
+    (Icons.checklist_rounded, '✅'), (Icons.edit_note_rounded, '📝'),
+    (Icons.edit_outlined, '✏️'), (Icons.history_rounded, '🕘'),
+    (Icons.insights_rounded, '📈'), (Icons.auto_graph_rounded, '📈'),
+    (Icons.notifications_active_outlined, '🔔'), (Icons.volunteer_activism_outlined, '🤲'),
+    (Icons.group_add_rounded, '👨‍👩‍👧'), (Icons.auto_awesome, '✨'),
+    (Icons.monitor_weight_outlined, '⚖️'), (Icons.straighten_rounded, '📏'),
+    (Icons.face_retouching_natural, '👶'),
+  ]) e.$1.codePoint: e.$2,
+};
+
+/// Eşlemesi olan ikonları renkli simge, diğerlerini pembe ikon olarak çizer.
+class IconGlyph extends StatelessWidget {
+  const IconGlyph(this.icon, {super.key, this.size = 24, this.color = const Color(0xFFE94791)});
+  final IconData icon;
+  final double size;
+  final Color color;
+  @override
+  Widget build(BuildContext context) {
+    final emoji = emojiForIcon(icon);
+    if (emoji == null) return Icon(icon, color: color, size: size);
+    // Sabit boyutlu kutularda ortalanması için Center.
+    return Center(child: Text(emoji, textScaler: TextScaler.noScaling,
+        style: TextStyle(fontSize: size * 0.9, height: 1.1)));
+  }
 }

@@ -42,6 +42,7 @@ import 'tracking_journal.dart';
 import 'screens/backup_page.dart';
 import 'services/privacy_service.dart';
 import 'widgets/consent_gate.dart';
+import 'widgets/visuals.dart';
 import 'widgets/add_to_notebook_tile.dart';
 import 'services/recipe_notebook_bridge.dart';
 import 'services/local_reminder_notifications.dart';
@@ -83,6 +84,8 @@ class AnneBebekApp extends StatelessWidget {
     ],
     theme: ThemeData(
       useMaterial3: true,
+      // Renkli simgeler: sistemin emoji yazı tipi (cihazda zaten mevcut).
+      fontFamilyFallback: const ['Noto Color Emoji', 'Apple Color Emoji'],
       scaffoldBackgroundColor: arka,
       colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF0449B), brightness: Brightness.light),
       dividerColor: const Color(0xFFF2E5F0),
@@ -94,7 +97,8 @@ class AnneBebekApp extends StatelessWidget {
       cardTheme: CardThemeData(color: const Color(0xFFFFFCFF), elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26))),
       appBarTheme: const AppBarTheme(backgroundColor: arka, foregroundColor: mor,
-        elevation: 0, centerTitle: false),
+        elevation: 0, scrolledUnderElevation: 0, surfaceTintColor: Colors.transparent,
+        centerTitle: false),
       filledButtonTheme: FilledButtonThemeData(style: FilledButton.styleFrom(
         backgroundColor: const Color(0xFFF0449B), foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)))),
@@ -418,7 +422,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       ),
     );
 
-  Widget _hero(String title, String subtitle, IconData icon, {VoidCallback? onTap, String button = 'Keşfet'}) =>
+  Widget _hero(String title, String subtitle, IconData icon, {VoidCallback? onTap, String button = 'Keşfet', String? emoji}) =>
     Container(
       constraints: const BoxConstraints(minHeight: 184),
       padding: const EdgeInsets.all(20),
@@ -440,7 +444,10 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         const SizedBox(width: 8),
         Container(width: 96, height: 112, decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: .33), borderRadius: BorderRadius.circular(25)),
-          child: Icon(icon, size: 68, color: const Color(0xFFD44A9A))),
+          alignment: Alignment.center,
+          child: emoji != null
+            ? Text(emoji, textScaler: TextScaler.noScaling, style: const TextStyle(fontSize: 60))
+            : IconGlyph(icon, size: 66, color: const Color(0xFFD44A9A))),
       ]),
     );
 
@@ -460,8 +467,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     _panel(
       color: const Color(0xFFFFFCFF),
       child: ListTile(
-        leading: const CircleAvatar(radius: 24, backgroundColor: Color(0xFFFFE3F0),
-          child: Icon(Icons.child_care_rounded, color: Color(0xFFE94791))),
+        leading: const BabyFaceAvatar(size: 48),
         title: Text(bebekAdi.isEmpty ? 'Bebek profilini tamamla' : '$bebekAdi 💗',
           style: const TextStyle(fontWeight: FontWeight.w800, color: mor)),
         subtitle: Text(yas),
@@ -887,7 +893,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       child: InkWell(
         onTap: () => _sayfa(t.title, ListView(padding: const EdgeInsets.all(18), children: [
-          _hero(t.title, '${t.category} • ${t.minutes} dk', simge),
+          _hero(t.title, '${t.category} • ${t.minutes} dk', simge, emoji: recipeEmoji(t.title, t.category)),
           RecipeSummaryChips(recipe: t),
           const SizedBox(height: 8),
           AddToNotebookTile(build: () => RecipeNotebookBridge.fromGeneral(t)),
@@ -926,7 +932,11 @@ class _AnaUygulamaState extends State<AnaUygulama> {
             decoration: BoxDecoration(gradient: LinearGradient(colors: renkler,
               begin: Alignment.topLeft, end: Alignment.bottomRight)),
             child: Stack(children: [
-            Center(child: Icon(simge, size: 58, color: Colors.white.withValues(alpha: .95))),
+            Center(child: Container(
+              width: 84, height: 84, alignment: Alignment.center,
+              decoration: BoxDecoration(color: Colors.white.withValues(alpha: .55), shape: BoxShape.circle),
+              child: Text(recipeEmoji(t.title, t.category), textScaler: TextScaler.noScaling,
+                style: const TextStyle(fontSize: 46)))),
             Positioned(right: 4, top: 4, child: IconButton(
               tooltip: isFavorite ? 'Favorilerden çıkar' : 'Favorilere ekle',
               style: IconButton.styleFrom(backgroundColor: Colors.white.withValues(alpha: .9)),
@@ -1382,6 +1392,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
             : 'Döngü süresi: ${tahmin.cycleLength} gün (varsayılan; daha fazla kayıt girince ölçülür)'),
         ])),
       PastelLinkCard(icon: Icons.edit_note_rounded, title: 'Bugünkü Notun',
+        leading: const WomanPortraitArt(size: 56), background: const Color(0xFFFFEEF6),
         subtitle: 'Enerji seviyen nasıl? Belirti ve ruh halini kaydet',
         onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomensHealthJournalPage()))),
       PastelLinkCard(icon: Icons.history_rounded, title: 'Adet döngüsü geçmişim',
@@ -1568,8 +1579,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         trailing: TextButton.icon(onPressed: _profillerAc, icon: const Icon(Icons.add_rounded),
           label: const Text('Profil Ekle'))),
       ListTile(
-        leading: const CircleAvatar(backgroundColor: Color(0xFFFFE3F0),
-          child: Icon(Icons.child_care_rounded, color: Color(0xFFE94791))),
+        leading: const BabyFaceAvatar(size: 44),
         title: Text(bebekAdi.isEmpty ? 'Bebek profili oluştur' : bebekAdi,
           style: const TextStyle(fontWeight: FontWeight.w700)),
         subtitle: Text(yas),
