@@ -1,3 +1,4 @@
+import '../utils/privacy_log_sanitizer.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/baby_recipe_catalog.dart';
@@ -42,7 +43,7 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
           ..addAll((prefs.getStringList(_favoritesKey) ?? const <String>[]).map(babyRecipeIdFor));
       });
     } catch (error) {
-      debugPrint('Bebek tarifi favorileri yüklenemedi: $error');
+      logSafeError('Bebek tarifi favorileri yüklenemedi', error);
     }
   }
 
@@ -66,7 +67,7 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Favori kaydedilemedi. Tekrar deneyin.')),
       );
-      debugPrint('Bebek tarifi favori kayıt hatası: $error');
+      logSafeError('Bebek tarifi favori kayıt hatası', error);
     }
   }
 

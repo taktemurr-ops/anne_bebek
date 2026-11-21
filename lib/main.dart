@@ -1,3 +1,4 @@
+import 'utils/privacy_log_sanitizer.dart';
 import 'utils/dialog_helpers.dart';
 import 'screens/notification_preferences_page.dart';
 import 'screens/family_recipe_notebook_page.dart';
@@ -191,9 +192,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         p.setString('alisveris_adet', jsonEncode(alisverisAdet)),
       ]);
       return true;
-    } catch (error, stackTrace) {
-      debugPrint('Kayıt başarısız: $error');
-      debugPrintStack(stackTrace: stackTrace);
+    } catch (error) {
+      logSafeError('Kayıt başarısız', error);
       return false;
     }
   }
@@ -1101,7 +1101,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         alisveris..clear()..addAll(items);
         tamamlanan..clear()..addAll(done);
       });
-    } catch (e) { debugPrint('Alışveriş yenileme hatası: $e'); }
+    } catch (e) { logSafeError('Alışveriş yenileme hatası', e); }
   }
 
   int _adet(String urun) => alisverisAdet[urun] ?? 1;

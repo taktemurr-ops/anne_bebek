@@ -12,3 +12,13 @@ class PrivacyLogSanitizer {
     return cleaned.runes.take(maxLength).map(String.fromCharCode).join();
   }
 }
+
+/// GP-11: Hata günlüğü. `debugPrint` yayın sürümünde de sistem günlüğüne
+/// (logcat) yazar ve hata mesajları (ör. bozuk JSON) kayıt içeriğini
+/// taşıyabilir. Yayın sürümünde hiçbir şey yazılmaz; geliştirmede mesaj
+/// kısaltılır ve iletişim bilgileri maskelenir.
+void logSafeError(String where, Object error, {bool releaseMode = const bool.fromEnvironment('dart.vm.product')}) {
+  if (releaseMode) return;
+  // ignore: avoid_print
+  print('$where: ${error.runtimeType} ${PrivacyLogSanitizer.sanitize('$error', maxLength: 120)}');
+}
