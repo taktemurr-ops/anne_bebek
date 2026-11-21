@@ -185,17 +185,19 @@ void main() {
     await tester.pumpAndSettle();
     await scrollTo(tester, find.byKey(const Key('uyku_rain')));
     tester.widget<ListTile>(find.byKey(const Key('uyku_rain'))).onTap!();
-    for (var i = 0; i < 360 && find.textContaining('sonra kapanacak').evaluate().isEmpty
+    // Başlık tembel listede ekran dışında kalabilir; çalma durumunu kutucuktaki simgeden izle.
+    final playingIcon = find.descendant(of: find.byKey(const Key('uyku_rain')),
+        matching: find.byIcon(Icons.pause_circle_filled_rounded));
+    for (var i = 0; i < 240 && playingIcon.evaluate().isEmpty
         && find.textContaining('Ses çalınamadı').evaluate().isEmpty; i++) {
       await tester.pump(const Duration(milliseconds: 250));
     }
-    final header = tester.widget<Text>(find.byKey(const Key('uyku_kalan'))).data;
-    debugPrint('UYKU_DURUM: $header');
     expect(find.textContaining('Ses çalınamadı'), findsNothing);
-    expect(find.byType(CircularProgressIndicator), findsNothing, reason: 'ses hazırlığı bitmeliydi');
-    expect(find.textContaining('sonra kapanacak'), findsOneWidget);
+    expect(playingIcon, findsOneWidget, reason: 'yağmur sesi çalıyor olmalı');
     await tester.pump(const Duration(seconds: 2));
-    await tester.ensureVisible(find.byKey(const Key('uyku_durdur')));
+    await tester.drag(find.byType(Scrollable).first, const Offset(0, 3000));
+    await tester.pump(const Duration(milliseconds: 500));
+    expect(find.textContaining('sonra kapanacak'), findsOneWidget);
     await tester.tap(find.byKey(const Key('uyku_durdur')));
     await tester.pumpAndSettle();
     expect(find.text('Uyku sesleri 🌙'), findsOneWidget);
