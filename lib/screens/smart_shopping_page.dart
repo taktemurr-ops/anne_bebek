@@ -25014,6 +25014,8 @@ class _KitchenToolsPageState extends State<_KitchenToolsPage> {
           child: Text('Aramanla eşleşen araç yok.', textAlign: TextAlign.center)),
         for (final entry in groups.entries)
           Card(child: ExpansionTile(
+            // Arama başlayınca/bitince kategoriler yeniden kurulur ve açılır/kapanır.
+            key: ValueKey('${entry.key}_${q.isNotEmpty}'),
             initiallyExpanded: q.isNotEmpty,
             title: Text(entry.key, style: const TextStyle(fontWeight: FontWeight.bold)),
             subtitle: Text('${entry.value.length} araç'),
