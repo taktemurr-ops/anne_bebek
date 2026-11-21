@@ -15,7 +15,10 @@ void main() {
     expect(tester.takeException(), isNull);
     expect(find.text('Mutfak araçları'), findsOneWidget);
 
-    await tester.tap(find.textContaining('Tümü ('));
+    final openAll = find.textContaining('Tümü (');
+    await tester.ensureVisible(openAll);
+    await tester.pumpAndSettle();
+    await tester.tap(openAll);
     await tester.pumpAndSettle();
     expect(find.text('Liste ve geçmiş'), findsOneWidget);
     expect(find.text('Bütçe ve fiyat'), findsOneWidget);
