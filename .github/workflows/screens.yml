@@ -28,14 +28,19 @@ jobs:
           cache: true
       - run: flutter pub get
       - name: Görüntüleri üret
-        run: flutter test integration_test/screenshots --update-goldens || true
+        run: |
+          # integration_test altındaki dosyalar cihaz ister; testi normal
+          # widget testi olarak çalıştırmak için test/ altına kopyala.
+          mkdir -p test/_screens
+          cp integration_test/screenshots/screens_test.dart test/_screens/
+          flutter test test/_screens --update-goldens || true
       - name: Görüntüleri dala yaz
         env:
           TOKEN: ${{ github.token }}
         run: |
           set -e
           mkdir -p /tmp/shots
-          cp integration_test/screenshots/goldens/*.png /tmp/shots/ 2>/dev/null || true
+          cp test/_screens/goldens/*.png /tmp/shots/ 2>/dev/null || true
           ls -la /tmp/shots
           cd /tmp/shots
           echo "Kaynak: ${GITHUB_SHA}" > KAYNAK.txt
