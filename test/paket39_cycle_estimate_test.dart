@@ -42,4 +42,22 @@ void main() {
     final e = CycleEstimate.from([DateTime(2025, 1, 1, 9), DateTime(2025, 1, 1, 20)]);
     expect(e.starts.length, 1);
   });
+
+  test('GP-05 sınırları: artık yıl ve ay/yıl geçişleri', () {
+    // 2024 artık yıl: 1 Şubat + 28 gün = 29 Şubat
+    final leap = CycleEstimate.from([DateTime(2024, 2, 1)]);
+    expect(leap.nextPeriod, DateTime(2024, 2, 29));
+    expect(leap.kindOf(DateTime(2024, 2, 29)), CycleDayKind.period);
+    // Yıl geçişi: 20 Aralık + 28 = 17 Ocak; yumurtlama 3 Ocak
+    final year = CycleEstimate.from([DateTime(2024, 12, 20)]);
+    expect(year.nextPeriod, DateTime(2025, 1, 17));
+    expect(year.kindOf(DateTime(2025, 1, 3)), CycleDayKind.ovulation);
+  });
+
+  test('GP-05 sınırları: saat ve yaz saati farkı gün hesabını bozmaz', () {
+    final e = CycleEstimate.from([DateTime(2025, 3, 20, 23, 59)]);
+    // 30 Mart (Avrupa yaz saati geçişi) sonrası günler doğru sayılır.
+    expect(e.nextPeriod, DateTime(2025, 4, 17));
+    expect(e.kindOf(DateTime(2025, 4, 3, 0, 1)), CycleDayKind.ovulation);
+  });
 }

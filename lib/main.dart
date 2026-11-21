@@ -30,6 +30,7 @@ import 'screens/release_check_page.dart';
 import 'widgets/quick_access.dart';
 import 'widgets/daily_quick_actions.dart';
 import 'utils/baby_age.dart';
+import 'utils/child_profile_validator.dart';
 import 'sleep_journal.dart';
 import 'dart:convert';
 import 'extra_features.dart';
@@ -229,6 +230,21 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           if (kaydediliyor) return;
           kaydediliyor = true;
           try {
+          // GP-02: ad ve doğum tarihi kaydetmeden önce doğrulanır.
+          final adHatasi = ChildProfileValidator.validateName(ad.text);
+          if (adHatasi != null) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(adHatasi)));
+            return;
+          }
+          final kayitTarihleri = [
+            for (final o in [...olaylar, ...olcumler])
+              ?DateTime.tryParse(o['zaman'] ?? o['tarih'] ?? ''),
+          ];
+          if (secilen != null && ChildProfileValidator.hasRecordsBeforeBirth(secilen!, kayitTarihleri)) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text(
+              'Bu doğum tarihinden önceye ait kayıtlar var. Tarihi kontrol edin veya önce o kayıtları düzenleyin.')));
+            return;
+          }
           final oncekiAd = bebekAdi;
           final oncekiDogum = dogum;
           setState(() { bebekAdi = ad.text.trim(); dogum = secilen; });

@@ -51,11 +51,11 @@ class CycleEstimate {
 
   /// Son kayıttan sonraki tahmini adet başlangıcı.
   DateTime? get nextPeriod =>
-      starts.isEmpty ? null : starts.last.add(Duration(days: cycleLength));
+      starts.isEmpty ? null : _addDays(starts.last, cycleLength);
 
   /// Son kayda göre tahmini yumurtlama günü.
   DateTime? get nextOvulation =>
-      nextPeriod?.subtract(const Duration(days: 14));
+      nextPeriod == null ? null : _addDays(nextPeriod!, -14);
 
   /// Gösterim için döngü başlangıçları: kayıtlılar + son kayıttan sonra
   /// [aheadCycles] adet tahmini başlangıç.
@@ -64,7 +64,7 @@ class CycleEstimate {
     return [
       ...starts,
       for (var k = 1; k <= aheadCycles; k++)
-        starts.last.add(Duration(days: cycleLength * k)),
+        _addDays(starts.last, cycleLength * k),
     ];
   }
 
@@ -79,8 +79,8 @@ class CycleEstimate {
     for (var i = 0; i < all.length; i++) {
       // Bir döngünün yumurtlaması, bir sonraki başlangıçtan 14 gün öncedir.
       // Kayıtlı ardışık başlangıçlar varsa gerçek aralık kullanılır.
-      final next = i + 1 < all.length ? all[i + 1] : all[i].add(Duration(days: cycleLength));
-      final ovulation = next.subtract(const Duration(days: 14));
+      final next = i + 1 < all.length ? all[i + 1] : _addDays(all[i], cycleLength);
+      final ovulation = _addDays(next, -14);
       if (!ovulation.isAfter(all[i])) continue;
       final offset = _daysBetween(ovulation, d);
       if (offset == 0) return CycleDayKind.ovulation;
@@ -88,6 +88,9 @@ class CycleEstimate {
     }
     return CycleDayKind.none;
   }
+
+  /// Takvim günü ekler; yaz/kış saati geçişinde saat kayması olmaz.
+  static DateTime _addDays(DateTime d, int days) => DateTime(d.year, d.month, d.day + days);
 
   static int _daysBetween(DateTime a, DateTime b) =>
       DateTime.utc(b.year, b.month, b.day).difference(DateTime.utc(a.year, a.month, a.day)).inDays;

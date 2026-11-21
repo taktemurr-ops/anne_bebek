@@ -468,7 +468,7 @@ class DateNavigator extends StatelessWidget {
       child: Row(children: [
         IconButton(
           tooltip: 'Önceki gün',
-          onPressed: () => onChanged(date.subtract(const Duration(days: 1))),
+          onPressed: () => onChanged(DateTime(date.year, date.month, date.day - 1)),
           icon: const Icon(Icons.chevron_left_rounded),
         ),
         Expanded(
@@ -501,7 +501,7 @@ class DateNavigator extends StatelessWidget {
         ),
         IconButton(
           tooltip: 'Sonraki gün',
-          onPressed: isToday ? null : () => onChanged(date.add(const Duration(days: 1))),
+          onPressed: isToday ? null : () => onChanged(DateTime(date.year, date.month, date.day + 1)),
           icon: const Icon(Icons.chevron_right_rounded),
         ),
       ]),

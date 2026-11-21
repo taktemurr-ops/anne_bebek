@@ -15,7 +15,7 @@ class BackupService {
     'bebekAdi', 'dogum', 'sonAdet', 'olaylar', 'olcumler',
     'child_profiles_directory_v58', 'child_journal_entries_v59',
     'child_care_plan_v96',
-    'alisveris', 'favoriler', 'sepet', 'tamamlanan',
+    'alisveris', 'favoriler', 'sepet', 'tamamlanan', 'alisveris_adet',
     'baby_recipe_favorites_v1',
     'anne_bebek_lifehub_v1', 'pregnancy_last_period_v3',
     'pregnancy_checklist_v3', 'family_calendar_v3',
@@ -119,6 +119,22 @@ class BackupService {
           decodeChildCareItems(value);
         } catch (_) {
           throw const FormatException('Çocuk sağlık planı geçersiz.');
+        }
+      }
+      // Alışveriş listesi adetleri: ürün adı -> 1..99 arası tam sayı.
+      if (entry.key == 'alisveris_adet') {
+        if (value is! String) {
+          throw const FormatException('Alışveriş adetleri geçersiz.');
+        }
+        try {
+          final parsed = jsonDecode(value);
+          if (parsed is! Map || !parsed.entries.every((e) =>
+              e.key is String && e.value is int &&
+              (e.value as int) >= 1 && (e.value as int) <= 99)) {
+            throw const FormatException('Alışveriş adetleri geçersiz.');
+          }
+        } on FormatException {
+          throw const FormatException('Alışveriş adetleri geçersiz.');
         }
       }
       if (entry.key == 'baby_v2') {
