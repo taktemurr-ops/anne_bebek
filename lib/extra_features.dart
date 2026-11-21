@@ -264,9 +264,26 @@ class _PregnancyWeekGuidePageState extends State<PregnancyWeekGuidePage> {
           onChanged: (value) { if (value != null) setState(() => week = value); },
         ),
         const SizedBox(height: 12),
+        Card(color: const Color(0xFFFFEEF6), elevation: 0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
+          child: Padding(padding: const EdgeInsets.all(16), child: Row(children: [
+            Text(guide.sizeEmoji, style: const TextStyle(fontSize: 52)),
+            const SizedBox(width: 14),
+            Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text('$week. hafta · ${guide.trimester}. trimester',
+                style: const TextStyle(fontWeight: FontWeight.w800, color: _mor)),
+              if (guide.sizeLabel.isNotEmpty) ...[
+                const SizedBox(height: 4),
+                Text('Bebeğin bir ${guide.sizeLabel} büyüklüğünde',
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: Color(0xFFE94791))),
+              ],
+              if (guide.measure.isNotEmpty) Text(guide.measure[0].toUpperCase() + guide.measure.substring(1),
+                style: const TextStyle(color: Colors.black54)),
+            ])),
+          ]))),
         _guideCard('Bebeğin gelişimi', guide.development, Icons.child_care),
         _guideCard('Anne adayındaki değişimler', guide.maternalChanges, Icons.favorite_outline),
-        _guideCard('Bu dönemde planlanabilecekler', guide.preparation, Icons.checklist),
+        _guideCard('Bu hafta yapılacaklar', guide.preparation, Icons.checklist),
         _guideCard('Ne zaman yardım alınmalı?', guide.safety, Icons.health_and_safety_outlined),
         Row(children: [
           Expanded(child: OutlinedButton.icon(
