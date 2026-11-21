@@ -215,7 +215,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     // Hata türü (içerik değil) gösterilir; cihazdaki sorunları bildirmek için.
     final e = hata ?? _sonKayitHatasi;
     final kod = e == null ? '' : ' (Hata kodu: ${e is PlatformException ? 'PE-${e.code}' : e.runtimeType})';
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    // Önceki bildirim beklemeden yenisi gösterilir (art arda işlemler).
+    ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(SnackBar(
       content: Text(basarili ? basariMesaji : 'Kayıt kaydedilemedi. Lütfen tekrar deneyin.$kod'),
     ));
   }
@@ -1307,7 +1308,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       return;
     }
     if (donguTarihleri.any((d) => d.year == secilen.year && d.month == secilen.month && d.day == secilen.day)) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${_tarih(secilen)} zaten kayıtlı. Silmek için "Adet döngüsü geçmişim"i aç.')));
+      ScaffoldMessenger.of(context)..hideCurrentSnackBar()..showSnackBar(SnackBar(content: Text('${_tarih(secilen)} zaten kayıtlı. Silmek için "Adet döngüsü geçmişim"i aç.')));
       return;
     }
     final onay = !onayIste ? true : await showDialog<bool>(context: context, builder: (ctx) => AlertDialog(
