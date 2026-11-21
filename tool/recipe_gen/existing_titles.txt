@@ -297,6 +297,46 @@ n04_112	ekmek kadayıfı (pratik)
 n04_113	çikolatalı mousse (avokadolu)
 n04_114	fırında elmalı tarçınlı yulaf tatlısı (kase)
 n04_115	lokma (evde)
+n05_001	hamsi tava
+n05_002	buğulama levrek
+n05_003	kremalı karides sote
+n05_004	fırında palamut
+n05_005	midye tava (evde)
+n05_006	somon ızgara (limon tereyağlı)
+n05_007	fırında sardalya
+n05_008	kalamar tava (fırında)
+n05_009	balık çorbası
+n05_010	uskumru dolması (fırında)
+n05_011	levrek kağıtta (papillote)
+n05_012	karidesli sebzeli pilav
+n05_013	somonlu ıspanaklı makarna
+n05_014	alabalık ızgara (bademli)
+n05_015	çipura ızgara
+n05_101	pancarlı humus
+n05_102	deniz börülcesi salatası
+n05_103	muhammara
+n05_104	kabak çiçeği dolması
+n05_105	atom (yoğurtlu kuru biber)
+n05_106	zeytinyağlı yaprak sarma
+n05_107	zeytinyağlı biber dolması
+n05_108	babagannuş (közlü patlıcan)
+n05_109	cevizli kereviz salatası (yoğurtlu)
+n05_110	fasulye pilaki (zeytinyağlı)
+n05_111	girit ezmesi
+n05_112	közlenmiş biber salatası
+n05_113	topik
+n05_114	patlıcan söğürme
+n05_115	cacık
+n05_201	fırın makarna (beşamelli)
+n05_202	mantı (pratik, hazır yaprakla)
+n05_203	kıymalı domatesli spagetti
+n05_204	pesto soslu makarna
+n05_205	arabiata (acılı domates soslu penne)
+n05_206	tavuklu kremalı penne
+n05_207	ev yapımı erişte (kuru)
+n05_208	cevizli erişte
+n05_209	mercimekli makarna (anadolu usulü)
+n05_210	sebzeli makarna salatası
 p39a10_001	fırında sebzeli tavuk güveç
 p39a10_002	cevizli yoğurtlu semizotu kasesi
 p39a10_005	kırmızı mercimekli kabak çorbası
