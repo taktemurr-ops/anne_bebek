@@ -17,7 +17,8 @@ void main() {
     await tester.pumpWidget(const AnneBebekApp());
     await tester.pumpAndSettle();
     final tile = find.descendant(of: find.byType(PastelModuleTile), matching: find.text('Kadınlar'));
-    await tester.ensureVisible(tile);
+    // Alt menü çubuğunun altında kalmaması için kartı ekranın ortasına getir.
+    await Scrollable.ensureVisible(tester.element(tile), alignment: 0.5);
     await tester.pumpAndSettle();
     await tester.tap(tile);
     await tester.pumpAndSettle();
