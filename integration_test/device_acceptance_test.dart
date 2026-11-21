@@ -183,9 +183,16 @@ void main() {
 
     await tester.pumpWidget(const MaterialApp(home: Scaffold(body: SleepSoundsPage())));
     await tester.pumpAndSettle();
+    await scrollTo(tester, find.byKey(const Key('uyku_rain')));
     await tester.tap(find.byKey(const Key('uyku_rain')));
-    await pumpUntil(tester, () => find.textContaining('sonra kapanacak').evaluate().isNotEmpty);
+    for (var i = 0; i < 120 && find.textContaining('sonra kapanacak').evaluate().isEmpty
+        && find.textContaining('Ses çalınamadı').evaluate().isEmpty; i++) {
+      await tester.pump(const Duration(milliseconds: 250));
+    }
     expect(find.textContaining('Ses çalınamadı'), findsNothing);
+    expect(find.textContaining('sonra kapanacak'), findsOneWidget);
+    await tester.pump(const Duration(seconds: 2));
+    await tester.ensureVisible(find.byKey(const Key('uyku_durdur')));
     await tester.tap(find.byKey(const Key('uyku_durdur')));
     await tester.pumpAndSettle();
     expect(find.text('Uyku sesleri 🌙'), findsOneWidget);

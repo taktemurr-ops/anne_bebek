@@ -15,7 +15,7 @@ abstract class LoopPlayer {
 }
 
 class AudioLoopPlayer implements LoopPlayer {
-  final AudioPlayer _player = AudioPlayer(playerId: 'uyku_sesleri');
+  final AudioPlayer _player = AudioPlayer();
 
   @override
   Future<void> playLoop(String id, Uint8List wav, double volume) async {
