@@ -417,6 +417,46 @@ n07_307	fırında sebzeli yumurta (tek tava)
 n07_308	yoğurtlu meyveli dondurma kasesi
 n07_309	pratik tavuk çorbası (hazır suyla)
 n07_310	fırında peynirli patlıcan dilimleri
+n08_001	fırında bütün tavuk (limon ve kekikli)
+n08_002	tavuk dolma (biberli)
+n08_003	tavuk ciğer sote
+n08_004	ballı hardallı tavuk but
+n08_005	tavuklu bezelyeli pilav (tek tencere)
+n08_006	hindi göğsü rosto
+n08_007	tavuk köri (yoğurtlu)
+n08_008	tavuk kavurma (karadeniz usulü)
+n08_009	tavuklu mantarlı kaşarlı güveç
+n08_010	tavuk ızgara (yoğurt marine)
+n08_011	tavuk börek (milföyden)
+n08_012	tavuk çöp şiş (fırında)
+n08_013	tavuklu sebzeli krep
+n08_014	tavuk haşlama (limonlu sebzeli)
+n08_015	susamlı tavuk (fırında)
+n08_101	burrito kasesi
+n08_102	ton balıklı pirinç topları (onigiri)
+n08_103	minestrone çorbası
+n08_104	tavuk shawarma (fırında)
+n08_105	hollanda usulü fırın patates (hasselback)
+n08_106	tabule
+n08_107	tavuklu noodle çorbası
+n08_108	caprese salatası
+n08_109	cornbread (tatlımsı mısır ekmeği)
+n08_110	fransız tost (tarçınlı)
+n08_201	yulaflı sebze çorbası
+n08_202	yeşil shakshuka
+n08_203	mercimekli sebze kasesi
+n08_204	tavuklu kabak kayığı
+n08_205	somon ve kinoa kasesi
+n08_206	sebzeli omlet muffin (yağsız)
+n08_207	fırında baharatlı karnabahar steak
+n08_208	yoğurtlu semizotu salatası (cevizli)
+n08_209	elmalı tarçınlı chia kasesi
+n08_210	brokoli ve tavuklu fırın kasesi
+n08_301	soğuk yeşil çay (ballı limonlu)
+n08_302	karpuz naneli içecek
+n08_303	kakaolu muzlu süt
+n08_304	çilekli limonata
+n08_305	tarçınlı elma çayı (meyveli)
 p39a10_001	fırında sebzeli tavuk güveç
 p39a10_002	cevizli yoğurtlu semizotu kasesi
 p39a10_005	kırmızı mercimekli kabak çorbası
