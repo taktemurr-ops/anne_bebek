@@ -1,0 +1,47 @@
+name: Ekran görüntüleri
+
+# Tasarım incelemesi: ana ekranların PNG görüntülerini üretir ve
+# 'ekran-goruntuleri' dalına yazar (yalnızca görüntüler; kaynak kod değil).
+on:
+  push:
+    branches: [claude/tum-duzeltmeler]
+    paths: ['lib/**', 'screenshot_test/**', '.github/workflows/screens.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: screens
+  cancel-in-progress: true
+
+jobs:
+  screens:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.9'
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - name: Görüntüleri üret
+        run: flutter test screenshot_test --update-goldens || true
+      - name: Görüntüleri dala yaz
+        run: |
+          set -e
+          mkdir -p /tmp/shots
+          cp screenshot_test/goldens/*.png /tmp/shots/ 2>/dev/null || true
+          ls -la /tmp/shots
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git switch --orphan ekran-goruntuleri
+          git rm -rf --quiet . || true
+          rm -rf ./* .github 2>/dev/null || true
+          cp /tmp/shots/*.png . 2>/dev/null || true
+          echo "Kaynak: ${GITHUB_SHA}" > KAYNAK.txt
+          git add -A
+          git commit -m "Ekran görüntüleri ${GITHUB_SHA::7}"
+          git push -f origin ekran-goruntuleri
