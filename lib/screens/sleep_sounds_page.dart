@@ -14,28 +14,28 @@ Uint8List _synth(String id) => synthesizeWav(id);
 Uint8List _synthList(List<String> ids) => synthesizeMelodyPlaylist(ids);
 
 /// Ninnilerin tekrar biçimi.
-enum RepeatMode { one, all, shuffle }
+enum LullabyRepeat { one, all, shuffle }
 
-extension RepeatModeText on RepeatMode {
+extension LullabyRepeatText on LullabyRepeat {
   String get label => switch (this) {
-        RepeatMode.one => 'Aynısını tekrarla',
-        RepeatMode.all => 'Hepsini sırayla',
-        RepeatMode.shuffle => 'Karışık',
+        LullabyRepeat.one => 'Aynısını tekrarla',
+        LullabyRepeat.all => 'Hepsini sırayla',
+        LullabyRepeat.shuffle => 'Karışık',
       };
   IconData get icon => switch (this) {
-        RepeatMode.one => Icons.repeat_one_rounded,
-        RepeatMode.all => Icons.repeat_rounded,
-        RepeatMode.shuffle => Icons.shuffle_rounded,
+        LullabyRepeat.one => Icons.repeat_one_rounded,
+        LullabyRepeat.all => Icons.repeat_rounded,
+        LullabyRepeat.shuffle => Icons.shuffle_rounded,
       };
 }
 
 /// [first] ile başlayan çalma sırası. Karışıkta ilk ninni korunur, kalanı karıştırılır.
-List<String> melodyOrder(String first, RepeatMode mode, {math.Random? random}) {
+List<String> melodyOrder(String first, LullabyRepeat mode, {math.Random? random}) {
   final ids = melodyIds;
-  if (mode == RepeatMode.one) return [first];
+  if (mode == LullabyRepeat.one) return [first];
   final start = ids.indexOf(first);
   final rest = [...ids.skip(start + 1), ...ids.take(start)];
-  if (mode == RepeatMode.shuffle) rest.shuffle(random ?? math.Random());
+  if (mode == LullabyRepeat.shuffle) rest.shuffle(random ?? math.Random());
   return [first, ...rest];
 }
 
@@ -65,7 +65,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage> {
   late final _Layer _noise = _Layer((widget.playerFactory ?? AudioLoopPlayer.new)(), 0.5);
   late final _Layer _music = _Layer((widget.playerFactory ?? AudioLoopPlayer.new)(), 0.6);
   final Map<String, Uint8List> _cache = {};
-  RepeatMode _mode = RepeatMode.all;
+  LullabyRepeat _mode = LullabyRepeat.all;
   int _timerMinutes = 30; // 0 = sınırsız
   DateTime? _endsAt;
   Timer? _ticker;
@@ -88,7 +88,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage> {
       return x != null && x >= 0.05 && x <= 1 ? x : null;
     }
     final m = parts.length > 2 ? int.tryParse(parts[2]) : null;
-    final mode = parts.length > 3 ? RepeatMode.values.where((e) => e.name == parts[3]).firstOrNull : null;
+    final mode = parts.length > 3 ? LullabyRepeat.values.where((e) => e.name == parts[3]).firstOrNull : null;
     setState(() {
       _noise.volume = v(0) ?? _noise.volume;
       _music.volume = v(1) ?? _music.volume;
@@ -127,7 +127,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage> {
           : await compute(_synthList, ids);
     }
     // Karışık sıralar her seferinde farklıdır; önbelleği şişirmesin.
-    if (_mode != RepeatMode.shuffle || ids.length == 1) _cache[key] = wav;
+    if (_mode != LullabyRepeat.shuffle || ids.length == 1) _cache[key] = wav;
     return wav;
   }
 
@@ -202,7 +202,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage> {
   }
 
   /// Tekrar biçimi değişince çalan ninniyi yeni sırayla baştan başlat.
-  Future<void> _setMode(RepeatMode m) async {
+  Future<void> _setMode(LullabyRepeat m) async {
     setState(() => _mode = m);
     unawaited(_savePrefs());
     final current = _music.id;
@@ -293,7 +293,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage> {
       const Text('Ninniler (müzik kutusu)', style: TextStyle(fontWeight: FontWeight.w800, color: _mor, fontSize: 15.5)),
       const SizedBox(height: 6),
       Wrap(spacing: 6, runSpacing: 6, children: [
-        for (final m in RepeatMode.values)
+        for (final m in LullabyRepeat.values)
           ChoiceChip(key: Key('uyku_tekrar_${m.name}'), avatar: Icon(m.icon, size: 18),
               label: Text(m.label), selected: _mode == m, onSelected: (_) => _setMode(m)),
       ]),

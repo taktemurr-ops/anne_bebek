@@ -66,9 +66,9 @@ void main() {
   });
 
   test('çalma sırası: tekrar, sırayla, karışık', () {
-    expect(melodyOrder('twinkle', RepeatMode.one), ['twinkle']);
-    expect(melodyOrder('twinkle', RepeatMode.all), ['twinkle', 'ninni', 'brahms']);
-    final shuffled = melodyOrder('ninni', RepeatMode.shuffle, random: Random(1));
+    expect(melodyOrder('twinkle', LullabyRepeat.one), ['twinkle']);
+    expect(melodyOrder('twinkle', LullabyRepeat.all), ['twinkle', 'ninni', 'brahms']);
+    final shuffled = melodyOrder('ninni', LullabyRepeat.shuffle, random: Random(1));
     expect(shuffled.first, 'ninni');
     expect(shuffled.toSet(), {'brahms', 'twinkle', 'ninni'});
   });
