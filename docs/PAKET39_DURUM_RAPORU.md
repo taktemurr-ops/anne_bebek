@@ -36,6 +36,10 @@ Gerçek cihaz testi yapılmamıştır.
 | Hafta hafta gebelik | 40 haftanın her biri için boyut benzetmesi, yaklaşık boy-kilo, gelişim, annedeki değişiklikler ve o haftanın yapılacakları | `lib/services/pregnancy_week_guide.dart` |
 | Ay ay bebek rehberi | 0–24 ayın her biri ve 2–6 yaş her yıl için ayrı gelişim ve oyun; aya göre beslenme, uyku, aşı/kontrol, güvenlik | `lib/data/monthly_baby_guide.dart` |
 | Ortak alışveriş adedi | Alışveriş sekmesi ve Akıllı Alışveriş aynı adet kaydını kullanıyor | `lib/screens/smart_shopping_page.dart` |
+| Otomatik cihaz testleri | Android 14 (Pixel 6) ve Android 10 (Nexus 5X) emülatörlerinde 8 kabul testi: gerçek şifreli depo, açık rıza, adet girişi, hızlı kayıt, tarif defteri, ansiklopedi, asistan, yedek döngüsü. + menüsünün küçük ekranda taşması bu testle bulunup düzeltildi | `integration_test/device_acceptance_test.dart`, `.github/workflows/cihaz_testleri.yml` |
+| Gizlilik politikası sayfası | `gh-pages` dalında yayına hazır; uygulamada bağlantı. GitHub Pages ayardan etkinleştirilmeli | `https://taktemurr-ops.github.io/anne_bebek/` |
+| Mağaza ekran görüntüleri | 8 adet 1080×1920, CI her değişiklikte yeniden üretir (`ekran-goruntuleri` dalı, `magaza/`) | `.github/workflows/screens.yml` |
+| Uzman inceleme paketi | Tüm sağlık içeriği tek Word dosyasında + inceleme takip belgesi | Claude Docs |
 | Cihaz test listesi | Gerçek cihazda yapılacak 30+ kontrol | `docs/CIHAZ_TEST_LISTESI.md` |
 | Profil doğrulama (GP-02) | Ana ekran bebek profili formu doğrulayıcıdan geçiyor | `lib/main.dart` |
 | Performans | Tarifler sekmesi 40'arlık sayfalama | `lib/main.dart` |
