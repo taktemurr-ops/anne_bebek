@@ -14,6 +14,8 @@ class SecureHealthStore {
     // Kasılma/tekme sayacı ve emzirme zamanlayıcısı.
     'mom_tools_v1',
     'baby_fever_log_v1',
+    // Bebek/anne/aile araçları (2026-11).
+    'baby_milestones_v1', 'baby_teeth_v1', 'baby_food_intro_v1', 'baby_memories_v1', 'mood_screening_v1', 'ttc_journal_v1', 'mother_exercise_v1', 'milk_stash_v1', 'birth_plan_v1', 'newborn_checklist_v1', 'potty_training_v1', 'caregiver_card_v1',
     'my_health_v1',
     'mother_profile_v1',
     'doctor_questions_v1',

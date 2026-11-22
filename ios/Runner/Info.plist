@@ -70,5 +70,9 @@
 	<array>
 		<string>audio</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Anı defterine fotoğraf eklemek için kamera kullanılır.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Anı defterine galeriden fotoğraf eklemek için kullanılır.</string>
 </dict>
 </plist>

@@ -35,6 +35,17 @@ import 'package:anne_bebek/screens/smart_shopping_page.dart';
 import 'package:anne_bebek/screens/weekly_meal_planner_page.dart';
 import 'package:anne_bebek/screens/women_lifestyle_page.dart';
 import 'package:anne_bebek/screens/womens_health_journal_page.dart';
+import 'package:anne_bebek/screens/birth_plan_page.dart';
+import 'package:anne_bebek/screens/family_tools_pages.dart';
+import 'package:anne_bebek/screens/first_aid_page.dart';
+import 'package:anne_bebek/screens/food_intro_page.dart';
+import 'package:anne_bebek/screens/memories_page.dart';
+import 'package:anne_bebek/screens/milestones_page.dart';
+import 'package:anne_bebek/screens/milk_stash_page.dart';
+import 'package:anne_bebek/screens/mood_check_page.dart';
+import 'package:anne_bebek/screens/mother_exercise_page.dart';
+import 'package:anne_bebek/screens/teeth_page.dart';
+import 'package:anne_bebek/screens/ttc_page.dart';
 import 'package:anne_bebek/sleep_journal.dart';
 import 'package:anne_bebek/tracking_journal.dart';
 import 'package:flutter/material.dart';
@@ -85,6 +96,19 @@ void main() {
     ('BabyNutritionPage', () => const BabyNutritionPage(initialMonth: 6)),
     ('MonthlyBabyGuidePage', () => const MonthlyBabyGuidePage(initialMonth: 3)),
     ('AgeGuidesPage', () => const AgeGuidesPage()),
+    ('MilestonesPage', () => MilestonesPage(birth: DateTime.now().subtract(const Duration(days: 300)))),
+    ('TeethPage', () => TeethPage(birth: DateTime.now().subtract(const Duration(days: 300)))),
+    ('FoodIntroPage', () => FoodIntroPage(birth: DateTime.now().subtract(const Duration(days: 200)))),
+    ('MemoriesPage', () => const MemoriesPage()),
+    ('MoodCheckPage', () => const MoodCheckPage()),
+    ('TtcPage', () => TtcPage(periodStarts: [DateTime.now().subtract(const Duration(days: 10))])),
+    ('MotherExercisePage', () => const MotherExercisePage()),
+    ('MilkStashPage', () => const MilkStashPage()),
+    ('BirthPlanPage', () => const BirthPlanPage()),
+    ('FirstAidPage', () => const FirstAidPage()),
+    ('NewbornChecklistPage', () => const NewbornChecklistPage()),
+    ('PottyTrainingPage', () => const PottyTrainingPage()),
+    ('CaregiverCardPage', () => const CaregiverCardPage(childName: 'Ada')),
   ];
   for (final (name, build) in pages) {
     testWidgets('$name boş değil ve etkileşimli', (tester) async {
