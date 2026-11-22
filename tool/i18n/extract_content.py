@@ -25,6 +25,11 @@ LIT = re.compile(r"'((?:[^'\\\n]|\\.)*)'|\"((?:[^\"\\\n]|\\.)*)\"")
 
 def strings(path):
     s = open(os.path.join(ROOT, path), encoding='utf-8').read()
+    if path.endswith('baby_names.dart'):   # isimler çevrilmez; yalnız anlam ve köken
+        out = []
+        for m in re.finditer(r"BabyName\('[^']*', '\w', '([^']*)', '([^']*)'\)", s):
+            out += [m.group(1), m.group(2)]
+        return out
     s = re.sub(r'^\s*(import|export|part)\b.*$', '', s, flags=re.M)
     s = re.sub(r'^\s*//.*$', '', s, flags=re.M)
     s = re.sub(r"'[ \t]*\n[ \t]*'", '', s)   # bitişik dize birleştirme

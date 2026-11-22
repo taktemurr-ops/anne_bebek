@@ -1,6 +1,7 @@
 import 'dart:async';
 import '../i18n/i18n.dart' show t;
 import '../i18n/text.dart';
+import 'package:flutter/material.dart' as m show Text;
 import 'dart:convert';
 
 import 'package:flutter/material.dart' hide Text;
@@ -366,8 +367,8 @@ class _MomToolsPageState extends State<MomToolsPage> {
               return Card(margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4), child: ListTile(
                 leading: CircleAvatar(backgroundColor: n.gender == 'K' ? _pembe : n.gender == 'E' ? const Color(0xFFDDEBFF) : _lila,
                     child: Text(n.name.characters.first, style: const TextStyle(color: _mor, fontWeight: FontWeight.w700))),
-                title: Text(n.name),
-                subtitle: Text('${n.meaning} • ${n.origin}'),
+                title: m.Text(n.name), // özel isim: çevrilmez
+                subtitle: Text('${t(n.meaning)} • ${t(n.origin)}'),
                 trailing: IconButton(key: Key('isim_fav_${n.name}'),
                   tooltip: fav ? 'Favorilerden çıkar' : 'Favorilere ekle',
                   icon: Icon(fav ? Icons.favorite : Icons.favorite_border, color: Colors.pink),
