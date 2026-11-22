@@ -5394,6 +5394,7 @@ const Map<String, String> stringsFa = {
   'Kaygana (otlu)': 'کایگانا (املت‌کرپ سبزی)',
   'Kaygı günlük işlerini yapmanı engelliyorsa.': 'اگر اضطراب مانع انجام کارهای روزمره می‌شود.',
   'Kaygı ve stres': 'اضطراب و استرس',
+  'Kaymak ve fıstıkla servis edin.': 'با سرشیر و پسته سرو کنید.',
   'Kaymayan büyük minderler': 'بالش‌های بزرگ ضدلغزش',
   'Kaymaz renkli yer işaretleri': 'نشانگرهای رنگی ضدلغزش کف',
   'Kaymaz taban': 'کف ضدلغزش',

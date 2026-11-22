@@ -5394,6 +5394,7 @@ const Map<String, String> stringsAr = {
   'Kaygana (otlu)': 'كايغانا (عجة بالأعشاب)',
   'Kaygı günlük işlerini yapmanı engelliyorsa.': 'إذا منعك القلق من أداء المهام اليومية.',
   'Kaygı ve stres': 'القلق والتوتر',
+  'Kaymak ve fıstıkla servis edin.': 'قدّميها مع القيمق والفستق.',
   'Kaymayan büyük minderler': 'وسائد كبيرة غير منزلقة',
   'Kaymaz renkli yer işaretleri': 'علامات أرضية ملونة غير منزلقة',
   'Kaymaz taban': 'قاعدة غير منزلقة',

@@ -5394,6 +5394,7 @@ const Map<String, String> stringsId = {
   'Kaygana (otlu)': 'Kaygana (dadar telur dengan daun herba)',
   'Kaygı günlük işlerini yapmanı engelliyorsa.': 'Jika kecemasan menghalangi tugas sehari-hari.',
   'Kaygı ve stres': 'Kecemasan dan stres',
+  'Kaymak ve fıstıkla servis edin.': 'Sajikan dengan kaymak dan pistachio.',
   'Kaymayan büyük minderler': 'Bantal besar antiselip',
   'Kaymaz renkli yer işaretleri': 'Penanda lantai berwarna yang antiselip',
   'Kaymaz taban': 'Alas antiselip',

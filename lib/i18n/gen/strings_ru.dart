@@ -5394,6 +5394,7 @@ const Map<String, String> stringsRu = {
   'Kaygana (otlu)': 'Кайгана (омлет-блин с зеленью)',
   'Kaygı günlük işlerini yapmanı engelliyorsa.': 'Если тревога мешает выполнять повседневные дела.',
   'Kaygı ve stres': 'Тревога и стресс',
+  'Kaymak ve fıstıkla servis edin.': 'Подавайте с каймаком и фисташками.',
   'Kaymayan büyük minderler': 'Большие нескользящие подушки',
   'Kaymaz renkli yer işaretleri': 'Нескользящие цветные метки на полу',
   'Kaymaz taban': 'Нескользящее дно',

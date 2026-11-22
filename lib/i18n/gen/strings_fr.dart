@@ -5394,6 +5394,7 @@ const Map<String, String> stringsFr = {
   'Kaygana (otlu)': 'Kaygana (crêpe-omelette aux herbes)',
   'Kaygı günlük işlerini yapmanı engelliyorsa.': 'Si l\'anxiété vous empêche d\'accomplir les tâches quotidiennes.',
   'Kaygı ve stres': 'Anxiété et stress',
+  'Kaymak ve fıstıkla servis edin.': 'Servez avec du kaymak et des pistaches.',
   'Kaymayan büyük minderler': 'Grands coussins antidérapants',
   'Kaymaz renkli yer işaretleri': 'Repères colorés antidérapants au sol',
   'Kaymaz taban': 'Base antidérapante',
