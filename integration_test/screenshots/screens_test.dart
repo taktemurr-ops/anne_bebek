@@ -151,7 +151,7 @@ void main() {
     final targets = <(String, String, bool)>[
       ('Bebeğim', '02_bebegim', true),
       ('Günlük Takip', '03_gunluk_takip', false),
-      ('Tarifler', '04_tarifler', true),
+      ('Yemek Tarifleri', '04_tarifler', false),
       ('Kadınlar', '05_kadinlar', false),
       ('Gebelik', '06_gebelik', false),
       ('Alışveriş', '07_alisveris', false),
