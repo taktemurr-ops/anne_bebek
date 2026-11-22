@@ -204,31 +204,55 @@ class _CryingBabyPageState extends State<CryingBabyPage> {
 }
 
 /// Yaşa göre uyku rehberi.
-class SleepGuidePage extends StatelessWidget {
+class SleepGuidePage extends StatefulWidget {
   final DateTime? birth;
   const SleepGuidePage({super.key, this.birth});
   @override
+  State<SleepGuidePage> createState() => _SleepGuidePageState();
+}
+
+class _SleepGuidePageState extends State<SleepGuidePage> {
+  SleepNeed? _cur;
+  late SleepNeed _sel;
+
+  @override
+  void initState() {
+    super.initState();
+    final m = ageInMonths(widget.birth, DateTime.now());
+    _cur = m == null ? null : sleepNeedFor(m);
+    _sel = _cur ?? sleepNeeds.first;
+  }
+
+  Widget _row(SleepNeed s) => PastelCard(
+    color: identical(s, _cur) ? const Color(0xFFF6E3F2) : const Color(0xFFFFFFFF),
+    padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(s.label, style: const TextStyle(fontWeight: FontWeight.w900, color: kitMor)),
+      Text('${t('Toplam uyku (24 saat)')}: ${t(s.total)}', style: const TextStyle(fontSize: 13)),
+      Text('${t('Gündüz uykusu')}: ${t(s.naps)}', style: const TextStyle(fontSize: 13)),
+      Text('${t('Uyanık kalma süresi')}: ${t(s.awake)}', style: const TextStyle(fontSize: 13)),
+    ]));
+
+  @override
   Widget build(BuildContext context) {
-    final m = ageInMonths(birth, DateTime.now());
-    final cur = m == null ? null : sleepNeedFor(m);
-    Widget row(SleepNeed s) => PastelCard(
-      color: identical(s, cur) ? const Color(0xFFF6E3F2) : const Color(0xFFFFFFFF),
-      padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(s.label, style: const TextStyle(fontWeight: FontWeight.w900, color: kitMor)),
-        Text('${t('Toplam uyku (24 saat)')}: ${t(s.total)}', style: const TextStyle(fontSize: 13)),
-        Text('${t('Gündüz uykusu')}: ${t(s.naps)}', style: const TextStyle(fontSize: 13)),
-        Text('${t('Uyanık kalma süresi')}: ${t(s.awake)}', style: const TextStyle(fontSize: 13)),
-      ]));
     return ListView(padding: const EdgeInsets.fromLTRB(16, 8, 16, 24), children: [
-      if (cur != null) ...[
+      if (_cur != null) ...[
         Text('Bebeğinin yaşına göre', style: TextStyle(fontWeight: FontWeight.w800)),
         const SizedBox(height: 6),
-        row(cur),
+        _row(_cur!),
       ],
       const KitNote('Süreler ortalamadır; bebeğin ruh hâli ve büyümesi iyiyse kendi ritmi en doğrusudur. Uyanık kalma süresi, iki uyku arasında yorulmadan geçirebileceği yaklaşık süredir.'),
       const KitHeader('Tüm yaşlar', Icons.bedtime_outlined),
-      for (final s in sleepNeeds) row(s),
+      Wrap(spacing: 6, runSpacing: 6, children: [
+        for (final s in sleepNeeds)
+          ChoiceChip(
+            label: Text(s.label),
+            selected: identical(s, _sel),
+            onSelected: (_) => setState(() => _sel = s),
+          ),
+      ]),
+      const SizedBox(height: 8),
+      _row(_sel),
       const KitHeader('Güvenli uyku', Icons.verified_user_outlined),
       const KitBullets(safeSleepRules),
       const KitFootnote('Kaynak: Amerikan Uyku Tıbbı Akademisi (AASM 2016), ABD Ulusal Uyku Vakfı, AAP güvenli uyku önerileri.'),
