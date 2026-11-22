@@ -1,124 +1,207 @@
-import '../widgets/coming_soon.dart';
-import '../i18n/text.dart';
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Text;
+
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import '../services/link_launcher.dart';
+import '../services/store_billing.dart';
 import '../services/subscription_service.dart';
 
-/// Informational plans and read-only server-verified membership status.
-/// Checkout is intentionally disabled until store products and secure receipt
-/// verification are deployed. Displayed amounts are NOT store prices.
+/// Ücretsiz ve Premium seçenekleri; mağaza üzerinden satın alma ve geri yükleme.
+/// Ücretli haklar yalnızca sunucuda doğrulanan abonelikle açılır.
+/// Sağlık ve güvenlik içerikleri hiçbir zaman ücretli değildir.
 class MembershipPage extends StatefulWidget {
   const MembershipPage({super.key});
   @override
   State<MembershipPage> createState() => _MembershipPageState();
 }
 
+const _pink = Color(0xFFF0449B);
+
+const freeFeatures = <String>[
+  'Tüm sağlık, güvenlik ve ilk yardım rehberleri',
+  'Bebek, anne ve kadın takipleri; hatırlatıcılar',
+  'Gebelik hafta hafta, aşı takvimi, gelişim basamakları',
+  'Toplu takip raporu (metin olarak paylaşma)',
+  'Şifreli yedekleme ve geri yükleme',
+];
+
+const premiumFeatures = <String>[
+  'Toplu takip raporunu PDF olarak indirme ve yazdırma',
+  'Doktor görüşmeleri için tüm süreçlerin tek belgede özeti',
+  'Yeni premium araçlara ek ücret ödemeden erişim',
+  'Uygulamanın reklamsız ve bağımsız kalmasına destek',
+];
+
 class _MembershipPageState extends State<MembershipPage> {
-  Future<SubscriptionStatus>? _status;
+  SubscriptionStatus? _status;
+  String? _statusError;
+  List<StorePlan> _products = const [];
+  bool _loading = true;
+  bool _busy = false;
+
   @override
   void initState() {
     super.initState();
-    _refresh();
+    StoreBilling.message.addListener(_onMessage);
+    StoreBilling.status.addListener(_onStatus);
+    unawaited(_load());
   }
 
-  void _refresh() => setState(() { _status = SubscriptionService.fetchStatus(); });
+  @override
+  void dispose() {
+    StoreBilling.message.removeListener(_onMessage);
+    StoreBilling.status.removeListener(_onStatus);
+    super.dispose();
+  }
+
+  void _onMessage() {
+    final m = StoreBilling.message.value;
+    if (m == null || !mounted) return;
+    setState(() => _busy = false);
+    ScaffoldMessenger.maybeOf(context)?.showSnackBar(SnackBar(content: Text(m)));
+    StoreBilling.message.value = null;
+  }
+
+  void _onStatus() {
+    if (mounted) setState(() => _status = StoreBilling.status.value);
+  }
+
+  Future<void> _load() async {
+    SubscriptionStatus? status;
+    String? error;
+    var products = const <StorePlan>[];
+    if (SubscriptionService.configured) {
+      try { status = await SubscriptionService.fetchStatus(); } catch (_) { error = 'Üyelik doğrulanamadı; bağlantını kontrol edip yenile.'; }
+    }
+    if (StoreBilling.configured) {
+      try { products = await StoreBilling.loadProducts(); } catch (_) {}
+    }
+    if (mounted) setState(() { _status = status; _statusError = error; _products = products; _loading = false; });
+  }
+
+  Future<void> _buy(StorePlan p) async {
+    setState(() => _busy = true);
+    try {
+      final started = await StoreBilling.buy(p);
+      if (!started && mounted) setState(() => _busy = false);
+    } catch (_) {
+      if (mounted) {
+        setState(() => _busy = false);
+        ScaffoldMessenger.maybeOf(context)?.showSnackBar(SnackBar(content: Text('Satın alma başlatılamadı.')));
+      }
+    }
+  }
+
+  Future<void> _restore() async {
+    setState(() => _busy = true);
+    try { await StoreBilling.restore(); } catch (_) {}
+    if (mounted) setState(() => _busy = false);
+    await _load();
+  }
+
+  Future<void> _manage() async {
+    final url = defaultTargetPlatform == TargetPlatform.iOS
+        ? 'https://apps.apple.com/account/subscriptions'
+        : 'https://play.google.com/store/account/subscriptions';
+    var ok = false;
+    try { ok = await LinkLauncher.open(url); } catch (_) {}
+    if (!ok && mounted) {
+      ScaffoldMessenger.maybeOf(context)?.showSnackBar(SnackBar(content: Text('Mağaza açılamadı. Aboneliğini mağaza uygulamasındaki “Abonelikler” bölümünden yönetebilirsin.')));
+    }
+  }
+
+  String _current(SubscriptionStatus s) {
+    final label = t('Mevcut üyelik');
+    return '$label: ${t(s.label)}';
+  }
+
+  String _renewal(DateTime d) {
+    final label = t('Yenileme / bitiş');
+    return '$label: ${d.day}.${d.month}.${d.year}';
+  }
+
+  Widget _list(String title, IconData icon, List<String> items, {bool featured = false}) => Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22),
+            side: BorderSide(color: featured ? _pink : const Color(0xFFF1E5EF), width: featured ? 1.6 : 1)),
+        child: Padding(padding: const EdgeInsets.all(16), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(children: [
+            Icon(icon, color: _pink), const SizedBox(width: 10),
+            Expanded(child: Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800))),
+          ]),
+          const SizedBox(height: 8),
+          for (final b in items) Padding(padding: const EdgeInsets.symmetric(vertical: 4), child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const Icon(Icons.check_circle_outline, color: _pink, size: 19),
+            const SizedBox(width: 9), Expanded(child: Text(b)),
+          ])),
+        ])),
+      );
 
   @override
   Widget build(BuildContext context) {
-    if (!SubscriptionService.configured) {
-      return const ComingSoonView(title: 'Premium Üyelik', icon: Icons.workspace_premium_outlined,
-        description: 'Reklamsız kullanım, aile paylaşımı ve ek içerikler sunan premium üyelik.');
-    }
+    final status = _status;
     return Scaffold(
-    appBar: AppBar(title: const Text('Üyelik ve Premium')),
-    body: ListView(padding: const EdgeInsets.all(18), children: [
-      Container(
-        padding: const EdgeInsets.all(22),
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(colors: [Color(0xFFFFD9ED), Color(0xFFEDE1FF)]),
-          borderRadius: BorderRadius.circular(24),
+      appBar: AppBar(title: Text('Üyelik ve Premium'), actions: [
+        IconButton(tooltip: t('Yenile'), onPressed: _loading ? null : () { setState(() => _loading = true); _load(); }, icon: const Icon(Icons.refresh)),
+      ]),
+      body: ListView(padding: const EdgeInsets.all(18), children: [
+        Container(
+          padding: const EdgeInsets.all(22),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(colors: [Color(0xFFFFD9ED), Color(0xFFEDE1FF)]),
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const Icon(Icons.workspace_premium, color: _pink, size: 34),
+            const SizedBox(height: 8),
+            Text('Her aile için bir seçenek', style: const TextStyle(fontSize: 23, fontWeight: FontWeight.w800)),
+            const SizedBox(height: 8),
+            Text('Sağlık ve güvenlik bilgileri herkes için her zaman ücretsizdir.'),
+          ]),
         ),
-        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Icon(Icons.workspace_premium, color: Color(0xFFF0449B), size: 34),
-          SizedBox(height: 8),
-          Text('Her aile için bir seçenek', style: TextStyle(fontSize: 23, fontWeight: FontWeight.w800)),
-          SizedBox(height: 8),
-          Text('Temel sağlık bilgileri ve temel takipler ücretsiz kalır.'),
+        const SizedBox(height: 12),
+        if (_loading) const LinearProgressIndicator(),
+        if (status != null)
+          Card(child: ListTile(
+            leading: Icon(status.isPremium ? Icons.verified : Icons.verified_user_outlined, color: _pink),
+            title: Text(_current(status)),
+            subtitle: status.expiresAt == null ? null
+                : Text(_renewal(status.expiresAt!)),
+          )),
+        if (_statusError != null) Card(child: ListTile(leading: const Icon(Icons.warning_amber_rounded), title: Text(_statusError!))),
+        _list('Ücretsiz', Icons.spa_outlined, freeFeatures),
+        _list('Premium', Icons.auto_awesome_outlined, premiumFeatures, featured: true),
+        const SizedBox(height: 6),
+        if (_products.isNotEmpty) ...[
+          Text('Planı seç', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
+          const SizedBox(height: 6),
+          for (final p in _products)
+            Card(child: ListTile(
+              key: Key('plan_${p.id}'),
+              title: Text(p.title, style: const TextStyle(fontWeight: FontWeight.w800)),
+              subtitle: p.description.isEmpty ? null : Text(p.description),
+              trailing: FilledButton(
+                onPressed: _busy || (status?.isPremium ?? false) ? null : () => _buy(p),
+                child: Text(p.price)),
+            )),
+        ] else if (!_loading)
+          Card(color: const Color(0xFFFFF4FA), child: Padding(padding: const EdgeInsets.all(16), child: Text(
+            StoreBilling.configured
+                ? 'Mağaza planları şu an yüklenemedi. İnternet bağlantını kontrol edip yenile.'
+                : 'Premium satın alma, uygulama mağaza sürümünde etkinleşir. Tüm ücretsiz özellikler şimdiden kullanılabilir.'))),
+        if (StoreBilling.configured) Wrap(spacing: 8, runSpacing: 8, children: [
+          OutlinedButton.icon(onPressed: _busy ? null : _restore, icon: const Icon(Icons.restore), label: Text('Satın alımları geri yükle')),
+          OutlinedButton.icon(onPressed: _manage, icon: const Icon(Icons.manage_accounts_outlined), label: Text('Aboneliği yönet / iptal et')),
         ]),
-      ),
-      const SizedBox(height: 14),
-      FutureBuilder<SubscriptionStatus>(
-        future: _status,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return const Card(child: ListTile(title: Text('Üyelik durumu kontrol ediliyor…'), trailing: CircularProgressIndicator()));
-          }
-          if (snapshot.hasError) {
-            return Card(child: ListTile(
-              leading: const Icon(Icons.warning_amber_rounded),
-              title: const Text('Üyelik doğrulanamadı'),
-              subtitle: const Text('Bağlantıyı kontrol ederek tekrar deneyin. Premium hakları doğrulanmadan açılmaz.'),
-              trailing: IconButton(icon: const Icon(Icons.refresh), onPressed: _refresh),
-            ));
-          }
-          final status = snapshot.data!;
-          return Card(child: ListTile(
-            leading: const Icon(Icons.verified_user_outlined),
-            title: Text('Mevcut üyelik: ${status.label}'),
-            subtitle: Text(!status.configured
-              ? 'Abonelik sunucusu henüz yapılandırılmadı.'
-              : status.expiresAt == null ? 'Durum sunucudan doğrulandı.'
-                : 'Bitiş: ${status.expiresAt!.day}.${status.expiresAt!.month}.${status.expiresAt!.year}'),
-            trailing: IconButton(icon: const Icon(Icons.refresh), onPressed: _refresh),
-          ));
-        },
-      ),
-      const SizedBox(height: 10),
-      _plan('Ücretsiz', 'Ücretsiz', Icons.spa_outlined, const [
-        'Temel bebek ve kadın sağlığı rehberleri',
-        'Temel takip ve günlükler',
-        'Tarifler ve forumlar (sunucu kurulumu gerektirir)',
+        const SizedBox(height: 10),
+        Text(
+          'Abonelik, seçtiğin dönem sonunda otomatik yenilenir ve ücret mağaza hesabından alınır. '
+          'Yenilemeyi istemiyorsan dönem bitmeden en az 24 saat önce mağazanın “Abonelikler” bölümünden iptal et. '
+          'İptal ettiğinde Premium, ödenmiş dönemin sonuna kadar açık kalır. Satın almak için hesabına giriş yapman gerekir.',
+          style: const TextStyle(fontSize: 12, color: Colors.black54)),
       ]),
-      _plan('Premium', 'Fiyat mağazada belirlenecek', Icons.auto_awesome_outlined, const [
-        'Gelişmiş raporlar (planlanan özellik)',
-        'Kişiselleştirilmiş planlama (planlanan özellik)',
-        'Reklamsız kullanım (planlanan özellik)',
-      ], featured: true),
-      _plan('Premium Aile', 'Fiyat mağazada belirlenecek', Icons.family_restroom_outlined, const [
-        'Premium özellikleri (planlanan)',
-        'Aile paylaşımı (planlanan)',
-        'Çocuklar için ortak yönetim (planlanan)',
-      ]),
-      const Card(child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text('Satın alma henüz aktif değil', style: TextStyle(fontWeight: FontWeight.bold)),
-          SizedBox(height: 7),
-          Text('Bu ekrandan ödeme alınmaz. Mağaza ürünleri, satın alma/geri yükleme, sunucu tarafında makbuz doğrulama ve abonelik haklarının denetlenmesi tamamlanmadan satış açılmayacak.'),
-          SizedBox(height: 8),
-          Text('Abonelik yönetimi ve iptal, satın alma etkinleştirildiğinde ilgili uygulama mağazasından yapılacaktır.'),
-        ]),
-      )),
-    ]),
-  );
-  }
-
-  Widget _plan(String title, String price, IconData icon, List<String> benefits, {bool featured = false}) =>
-    Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22),
-        side: BorderSide(color: featured ? const Color(0xFFF0449B) : const Color(0xFFF1E5EF), width: featured ? 1.6 : 1)),
-      child: Padding(padding: const EdgeInsets.all(17), child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(children: [Icon(icon, color: const Color(0xFFF0449B)), const SizedBox(width: 10),
-            Expanded(child: Text(title, style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w800))),
-            if (featured) const Chip(label: Text('Planlanan'))]),
-          Text(price, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
-          const SizedBox(height: 10),
-          for (final benefit in benefits) Padding(padding: const EdgeInsets.symmetric(vertical: 5),
-            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Icon(Icons.check_circle_outline, color: Color(0xFFF0449B), size: 19),
-              const SizedBox(width: 9), Expanded(child: Text(benefit)),
-            ])),
-        ],
-      )),
     );
+  }
 }

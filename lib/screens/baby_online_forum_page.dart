@@ -1,4 +1,4 @@
-import '../widgets/coming_soon.dart';
+import 'offline_community_view.dart';
 import '../i18n/i18n.dart' show t;
 import '../i18n/text.dart';
 import '../services/cloud_auth_service.dart';
@@ -81,8 +81,8 @@ class _BabyOnlineForumPageState extends State<BabyOnlineForumPage> {
   @override
   Widget build(BuildContext context) {
     if (!CloudAuthService.configured) {
-      return const ComingSoonView(title: 'Bebeğim Forumu', icon: Icons.forum_outlined,
-        description: 'Ebeveynlerle soru sor, deneyim paylaş; moderasyonlu ve güvenli topluluk.');
+      return const OfflineCommunityView(title: 'Bebeğim Forumu', icon: Icons.forum_outlined,
+        description: 'Ebeveynlerle soru sor, deneyim paylaş; moderasyonlu ve güvenli topluluk.', categories: ['Bebek (0–12 ay)', 'Çocuk (1–6 yaş)']);
     }
     final query = search.text.toLowerCase().trim();
     final visible = posts.where((p) => (category == 'Tümü' || p['category'] == category) &&

@@ -22,9 +22,9 @@ class PastelBottomBar extends StatelessWidget {
 
   static const items = <(IconData, IconData, String)>[
     (Icons.home_outlined, Icons.home_rounded, 'Ana Sayfa'),
-    (Icons.child_care_outlined, Icons.child_care_rounded, 'Bebeğim'),
-    (Icons.restaurant_menu_outlined, Icons.restaurant_menu_rounded, 'Tarifler'),
-    (Icons.person_outline_rounded, Icons.person_rounded, 'Profil'),
+    (Icons.child_care_outlined, Icons.child_care_rounded, 'Bebek'),
+    (Icons.pregnant_woman_outlined, Icons.pregnant_woman_rounded, 'Anne'),
+    (Icons.local_florist_outlined, Icons.local_florist_rounded, 'Kadınlar'),
   ];
 
   @override

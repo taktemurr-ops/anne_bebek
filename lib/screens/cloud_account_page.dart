@@ -1,4 +1,4 @@
-import '../widgets/coming_soon.dart';
+import 'offline_community_view.dart';
 import '../i18n/i18n.dart' show t;
 import '../i18n/text.dart';
 import 'package:flutter/material.dart' hide Text;
@@ -68,8 +68,8 @@ class _CloudAccountPageState extends State<CloudAccountPage> {
   @override
   Widget build(BuildContext context) {
     if (!CloudAuthService.configured) {
-      return const ComingSoonView(title: 'Bulut hesabım', icon: Icons.cloud_outlined,
-        description: 'Hesap oluşturup kayıtlarını cihazlar arasında güvenle eşitleme.');
+      return const OfflineCommunityView(title: 'Bulut hesabım', icon: Icons.cloud_outlined,
+        description: 'Hesap oluşturup kayıtlarını cihazlar arasında güvenle eşitleme.', categories: [], showBackup: true);
     }
     return Scaffold(
     appBar: AppBar(title: const Text('Bulut hesabım')),

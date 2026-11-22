@@ -10,6 +10,37 @@ class SubscriptionService {
   static const iosMonthly = String.fromEnvironment('IOS_PREMIUM_MONTHLY_ID');
   static const androidFamily = String.fromEnvironment('ANDROID_FAMILY_MONTHLY_ID');
   static const iosFamily = String.fromEnvironment('IOS_FAMILY_MONTHLY_ID');
+  static const androidYearly = String.fromEnvironment('ANDROID_PREMIUM_YEARLY_ID');
+  static const iosYearly = String.fromEnvironment('IOS_PREMIUM_YEARLY_ID');
+
+  static Future<String> _token() async {
+    var session = await CloudAuthService.currentSession();
+    if (session == null) throw StateError('Önce hesabınıza giriş yapın.');
+    final expiry = session['expires_at'];
+    if (expiry is int && expiry <= DateTime.now().millisecondsSinceEpoch ~/ 1000 + 60) {
+      session = await CloudAuthService.refreshSession();
+    }
+    final token = session?['access_token'];
+    if (token is! String || token.isEmpty) throw StateError('Oturum geçersiz.');
+    return token;
+  }
+
+  /// Mağaza satın alımını sunucuya gönderir; hak yalnızca sunucu yanıtıyla açılır.
+  static Future<SubscriptionStatus> verifyPurchase({required String platform,
+      required String productId, required String verificationData}) async {
+    if (!configured) throw StateError('Abonelik sunucusu yapılandırılmadı.');
+    final token = await _token();
+    final response = await http.post(Uri.parse('$verificationUrl/verify'),
+      headers: {'Authorization': 'Bearer $token', 'Content-Type': 'application/json'},
+      body: jsonEncode({'platform': platform, 'product_id': productId, 'verification_data': verificationData}),
+    ).timeout(const Duration(seconds: 30));
+    if (response.statusCode != 200) {
+      throw StateError('Satın alma doğrulanamadı (${response.statusCode}).');
+    }
+    final body = jsonDecode(response.body);
+    if (body is! Map<String, dynamic>) throw const FormatException('Geçersiz abonelik yanıtı');
+    return SubscriptionStatus.fromServerPayload(body, DateTime.now());
+  }
 
   static bool get configured => verificationUrl.startsWith('https://') &&
       CloudAuthService.configured;

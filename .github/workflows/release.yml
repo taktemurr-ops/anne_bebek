@@ -52,6 +52,26 @@ jobs:
           echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/upload-keystore.jks"
           echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/upload-keystore.jks" >> "$GITHUB_ENV"
 
+      - name: Uygulama ayarlarını hazırla (gizli olmayan değerler)
+        shell: bash
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+          SUBSCRIPTION_API_URL: ${{ vars.SUBSCRIPTION_API_URL }}
+          ANDROID_PREMIUM_MONTHLY_ID: ${{ vars.ANDROID_PREMIUM_MONTHLY_ID }}
+          ANDROID_PREMIUM_YEARLY_ID: ${{ vars.ANDROID_PREMIUM_YEARLY_ID }}
+          ANDROID_FAMILY_MONTHLY_ID: ${{ vars.ANDROID_FAMILY_MONTHLY_ID }}
+          AFFILIATE_SEARCH_URL: ${{ vars.AFFILIATE_SEARCH_URL }}
+          AFFILIATE_PARTNER: ${{ vars.AFFILIATE_PARTNER }}
+        run: |
+          python3 - <<'PY' > "$RUNNER_TEMP/app_config.json"
+          import json, os
+          keys = ['SUPABASE_URL','SUPABASE_ANON_KEY','SUBSCRIPTION_API_URL','ANDROID_PREMIUM_MONTHLY_ID',
+                  'ANDROID_PREMIUM_YEARLY_ID','ANDROID_FAMILY_MONTHLY_ID','AFFILIATE_SEARCH_URL','AFFILIATE_PARTNER']
+          print(json.dumps({k: os.environ.get(k, '') for k in keys}))
+          PY
+          echo "APP_CONFIG=$RUNNER_TEMP/app_config.json" >> "$GITHUB_ENV"
+
       - name: Release APK ve AAB derle
         shell: bash
         env:
@@ -62,8 +82,8 @@ jobs:
           if [ "$HAS_SIGNING" != "true" ]; then
             echo "::warning::Release imza sırları tanımlı değil; APK yalnızca test amaçlı debug anahtarıyla imzalanır."
           fi
-          flutter build apk --release
-          flutter build appbundle --release
+          flutter build apk --release --dart-define-from-file="$APP_CONFIG"
+          flutter build appbundle --release --dart-define-from-file="$APP_CONFIG"
 
       - name: İmzayı doğrula
         shell: bash
