@@ -80,6 +80,7 @@ import 'services/store_billing.dart';
 import 'screens/tracking_report_page.dart';
 import 'screens/life_guides_pages.dart';
 import 'screens/family_more_pages.dart';
+import 'screens/growing_up_pages.dart';
 import 'services/life_guides.dart';
 import 'screens/extra_guides_pages.dart';
 import 'services/photo_store.dart';
@@ -833,6 +834,12 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       PastelLinkCard(key: const Key('dil_gelisimi'), icon: Icons.record_voice_over_outlined, title: 'Konuşma ve dil gelişimi',
         subtitle: 'Yaşa göre beklenenler, destekleme ve ne zaman uzmana', iconColor: const Color(0xFFEDE4FF),
         onTap: () => _sayfa('Konuşma ve dil gelişimi', SpeechDevelopmentPage(birth: dogum))),
+      PastelLinkCard(key: const Key('uyku_egitimi'), icon: Icons.nights_stay_outlined, title: 'Uyku eğitimi',
+        subtitle: 'Nazik yöntemler, yatma rutini ve gece uyanma kaydı', iconColor: const Color(0xFFEDE4FF),
+        onTap: () => _sayfa('Uyku eğitimi', SleepTrainingPage(birth: dogum))),
+      PastelLinkCard(key: const Key('kres_okul'), icon: Icons.school_outlined, title: 'Kreş ve okula hazırlık',
+        subtitle: 'Kreş seçimi, uyum haftası ve okul öncesi beceriler', iconColor: const Color(0xFFE0EEFF),
+        onTap: () => _sayfa('Kreş ve okula hazırlık', const SchoolPrepPage())),
       PastelLinkCard(key: const Key('ofke_nobeti'), icon: Icons.sentiment_very_dissatisfied_outlined, title: 'Öfke nöbeti yardımcısı',
         subtitle: 'Şu an ne yapmalı, kayıt ve tetikleyici örüntüsü', iconColor: const Color(0xFFFFE3F0),
         onTap: () => _sayfa('Öfke nöbeti', const TantrumHelperPage())),
@@ -1655,6 +1662,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     PastelLinkCard(key: const Key('acil_belirtiler'), icon: Icons.warning_amber_rounded, title: 'Gebelikte acil belirtiler',
       subtitle: 'Hangi belirtide hemen hastaneye gidilir', iconColor: const Color(0xFFFFE3F0),
       onTap: () => _sayfa('Acil belirtiler', const PregnancyWarningSignsPage())),
+    PastelLinkCard(key: const Key('gebelik_egzersiz'), icon: Icons.fitness_center_outlined, title: 'Gebelikte egzersiz programı',
+      subtitle: 'Trimestere göre program, haftalık 150 dakika hedefi', iconColor: const Color(0xFFE3F3E5),
+      onTap: () => _sayfa('Egzersiz programı', const PregnancyExercisePage())),
     PastelLinkCard(icon: Icons.self_improvement, title: 'Gebelikte hareket ve pelvik taban',
       subtitle: 'Kegel programı ve güvenli egzersiz', iconColor: const Color(0xFFE3F3E5),
       onTap: () => _sayfa('Anne egzersizleri', const MotherExercisePage())),
@@ -1704,6 +1714,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     PastelLinkCard(key: const Key('pelvik_taban'), icon: Icons.self_improvement, title: 'Pelvik taban ve egzersiz',
       subtitle: 'Kegel programı, nefes egzersizi, doğum sonrası hareket rehberi', iconColor: const Color(0xFFE3F3E5),
       onTap: () => _sayfa('Anne egzersizleri', const MotherExercisePage())),
+    PastelLinkCard(key: const Key('emzirirken_egzersiz'), icon: Icons.fitness_center_outlined, title: 'Doğum sonrası ve emzirirken egzersiz',
+      subtitle: 'Güvenli dönüş, haftalık hedef ve emzirme ipuçları', iconColor: const Color(0xFFE3F3E5),
+      onTap: () => _sayfa('Egzersiz programı', const PregnancyExercisePage())),
     PastelLinkCard(key: const Key('dogum_sonrasi_korunma'), icon: Icons.family_restroom, title: 'Doğum sonrası korunma',
       subtitle: 'Emzirirken ve emzirmezken hangi yöntem ne zaman', iconColor: const Color(0xFFE0EEFF),
       onTap: () => _sayfa('Doğum sonrası korunma', const PostpartumContraceptionPage())),
@@ -1888,6 +1901,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         QuickAccessItem(title: 'Bebek bakımı', description: 'Banyo, göbek, tırnak, kundak…', icon: Icons.bathtub_outlined, onOpen: () => _sayfa('Bebek bakımı', const BabyCareHowToPage())),
         QuickAccessItem(title: 'Konuşma ve dil gelişimi', description: 'Yaşa göre beklenenler', icon: Icons.record_voice_over_outlined, onOpen: () => _sayfa('Konuşma ve dil gelişimi', SpeechDevelopmentPage(birth: dogum))),
         QuickAccessItem(title: 'Annelik ve çalışma hakları', description: 'Doğum izni, süt izni, yarım çalışma', icon: Icons.gavel_outlined, onOpen: () => _sayfa('Annelik ve çalışma hakları', const MotherRightsPage())),
+        QuickAccessItem(title: 'Uyku eğitimi', description: 'Yöntemler ve gece uyanma kaydı', icon: Icons.nights_stay_outlined, onOpen: () => _sayfa('Uyku eğitimi', SleepTrainingPage(birth: dogum))),
+        QuickAccessItem(title: 'Kreş ve okula hazırlık', description: 'Seçim, uyum ve beceriler', icon: Icons.school_outlined, onOpen: () => _sayfa('Kreş ve okula hazırlık', const SchoolPrepPage())),
+        QuickAccessItem(title: 'Egzersiz programı', description: 'Gebelikte ve emzirirken', icon: Icons.fitness_center_outlined, onOpen: () => _sayfa('Egzersiz programı', const PregnancyExercisePage())),
         QuickAccessItem(title: 'Öfke nöbeti yardımcısı', description: 'Şu an ne yapmalı ve kayıt', icon: Icons.sentiment_very_dissatisfied_outlined, onOpen: () => _sayfa('Öfke nöbeti', const TantrumHelperPage())),
         QuickAccessItem(title: 'Ekran süresi', description: 'Yaşa göre öneri ve kayıt', icon: Icons.tv_outlined, onOpen: () => _sayfa('Ekran süresi', ScreenTimePage(birth: dogum))),
         QuickAccessItem(title: 'Kardeşe hazırlık', description: 'Büyük kardeş için liste', icon: Icons.family_restroom, onOpen: () => _sayfa('Kardeşe hazırlık', const SiblingPrepPage())),

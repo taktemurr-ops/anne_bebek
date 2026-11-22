@@ -41,6 +41,7 @@ import 'package:anne_bebek/screens/more_guides_pages.dart';
 import 'package:anne_bebek/screens/tracking_report_page.dart';
 import 'package:anne_bebek/screens/life_guides_pages.dart';
 import 'package:anne_bebek/screens/family_more_pages.dart';
+import 'package:anne_bebek/screens/growing_up_pages.dart';
 import 'package:anne_bebek/screens/extra_guides_pages.dart';
 import 'package:anne_bebek/screens/family_tools_pages.dart';
 import 'package:anne_bebek/screens/first_aid_page.dart';
@@ -136,6 +137,9 @@ void main() {
     ('PartnerGuidePage', () => const PartnerGuidePage()),
     ('SiblingPrepPage', () => const SiblingPrepPage()),
     ('MenopauseTrackerPage', () => const MenopauseTrackerPage()),
+    ('SleepTrainingPage', () => SleepTrainingPage(birth: DateTime.now().subtract(const Duration(days: 300)))),
+    ('SchoolPrepPage', () => const SchoolPrepPage()),
+    ('PregnancyExercisePage', () => const PregnancyExercisePage()),
     ('HomeSafetyPage', () => HomeSafetyPage(birth: DateTime.now().subtract(const Duration(days: 200)))),
   ];
   for (final (name, build) in pages) {
