@@ -57,6 +57,7 @@ import 'data/general_recipe_catalog.dart';
 import 'data/shopping_needs.dart';
 import 'widgets/recipe_info_sections.dart';
 import 'widgets/pastel_shell.dart';
+import 'widgets/adaptive.dart';
 import 'widgets/reference_widgets.dart';
 import 'services/cycle_estimate.dart';
 import 'screens/monthly_baby_guide_page.dart';
@@ -156,6 +157,8 @@ class AnneBebekApp extends StatelessWidget {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(22), borderSide: BorderSide.none),
         enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(22), borderSide: BorderSide.none)),
     )),
+    // Telefon ve tablet: geniş ekranda ortalanmış içerik, sınırlı yazı ölçeği.
+    builder: (context, child) => ResponsiveFrame(background: arka, child: child ?? const SizedBox()),
     home: const ConsentGate(child: AnaUygulama()),
   ));
 }
@@ -558,11 +561,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           title: 'Premium', subtitle: 'Üyelik • Avantajlar',
           onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const MembershipPage()))),
       ];
-      return GridView.count(
-        crossAxisCount: columns, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
-        mainAxisSpacing: 10, crossAxisSpacing: 10,
-        childAspectRatio: columns == 1 ? c.maxWidth / 72 : ((c.maxWidth - 10) / 2) / 72,
-        children: tiles);
+      return AdaptiveGrid(minTileWidth: columns == 1 ? 260 : 150, tileHeight: 72,
+        maxColumns: 4, children: tiles);
     }),
     const SizedBox(height: 6),
     _panel(padding: EdgeInsets.zero, color: const Color(0xFFF7EAF5), child: ListTile(
@@ -623,11 +623,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       ]),
     ),
     _baslik('Kategorileri keşfet 🌸'),
-    LayoutBuilder(builder: (context, constraints) => GridView.count(
-      crossAxisCount: constraints.maxWidth < 350 ? 2 : 4,
-      shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
-      mainAxisSpacing: 10, crossAxisSpacing: 10,
-      childAspectRatio: constraints.maxWidth < 350 ? 1.8 : .78, children: [
+    LayoutBuilder(builder: (context, constraints) => AdaptiveGrid(
+      minTileWidth: 72, tileHeight: constraints.maxWidth < 350 ? 76 : 96,
+      minColumns: 2, maxColumns: 8, children: [
         _mini('Alışveriş', Icons.shopping_cart, const Color(0xFFECDFFF), () => setState(() => sekme = 3)),
         _mini('Yemek', Icons.restaurant, const Color(0xFFFFE5CF), () => setState(() => sekme = 2)),
         _mini('Bebek', Icons.child_care, const Color(0xFFDDF5F4), () => setState(() => sekme = 1)),
@@ -1393,9 +1391,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         subtitle: 'Taslak sepet; sipariş veya ödeme yapılmaz', iconColor: const Color(0xFFFFEBD9),
         onTap: () => _sayfa('Sepetim', _sepet())),
       _baslik('Ürün kataloğu'),
-      GridView.count(crossAxisCount: 4, shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 8,
-        crossAxisSpacing: 8, childAspectRatio: .76, children: [
+      AdaptiveGrid(minTileWidth: 72, tileHeight: 98, spacing: 8,
+        minColumns: 3, maxColumns: 8, children: [
           _mini('Bebek Ürünleri', Icons.child_care, const Color(0xFFDDF4EF),
             () => _sayfa('Bebek Ürünleri', _urunKategori('Bebek Ürünleri'))),
           _mini('Anne Ürünleri', Icons.pregnant_woman, const Color(0xFFFFD9EE),
@@ -1725,8 +1722,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   ];
 
   List<Widget> _kadinIyiHisset() => [
-    GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
-      mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 1.15, children: [
+    AdaptiveGrid(minTileWidth: 150, tileHeight: 138, minColumns: 2, maxColumns: 4, children: [
         _kart('Güzellik & Bakım', 'Öneriler', Icons.spa, const Color(0xFFFFE0E8), () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomenLifestylePage(initialCategory: 'Güzellik & Bakım')))),
         _kart('Sağlık & Wellness', 'Kişisel sağlık', Icons.health_and_safety, const Color(0xFFECDFFF), () => _sayfa('Sağlık', _saglik())),
         _kart('Moda & Stil', 'İlham', Icons.checkroom, const Color(0xFFE5E3FF), () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const WomenLifestylePage(initialCategory: 'Moda & Stil')))),

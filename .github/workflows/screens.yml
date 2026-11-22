@@ -41,6 +41,8 @@ jobs:
           cp integration_test/screenshots/screens_test.dart test/_screens/
           EMOJI_FONT=/tmp/emoji.ttf flutter test test/_screens --update-goldens || true
           EMOJI_FONT=/tmp/emoji.ttf STORE_SHOTS=1 flutter test test/_screens --update-goldens || true
+          EMOJI_FONT=/tmp/emoji.ttf TABLET_SHOTS=dikey flutter test test/_screens --update-goldens || true
+          EMOJI_FONT=/tmp/emoji.ttf TABLET_SHOTS=yatay flutter test test/_screens --update-goldens || true
       - name: Görüntüleri dala yaz
         env:
           TOKEN: ${{ github.token }}
@@ -50,6 +52,10 @@ jobs:
           cp test/_screens/goldens/*.png /tmp/shots/ 2>/dev/null || true
           mkdir -p /tmp/shots/magaza
           cp test/_screens/goldens/magaza/*.png /tmp/shots/magaza/ 2>/dev/null || true
+          for t in dikey yatay; do
+            mkdir -p /tmp/shots/tablet_$t
+            cp test/_screens/goldens/tablet_$t/*.png /tmp/shots/tablet_$t/ 2>/dev/null || true
+          done
           ls -la /tmp/shots
           cd /tmp/shots
           echo "Kaynak: ${GITHUB_SHA}" > KAYNAK.txt

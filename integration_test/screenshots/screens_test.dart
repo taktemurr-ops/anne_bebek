@@ -81,11 +81,14 @@ void main() {
 
   // STORE_SHOTS=1: mağaza için 1080x1920 (9:16), yalnızca üst görünüm.
   final store = Platform.environment['STORE_SHOTS'] == '1';
+  // TABLET_SHOTS=dikey|yatay: 10 inç tablet görünümü (800x1280 / 1280x800 dp).
+  final tablet = Platform.environment['TABLET_SHOTS'];
+  final folder = store ? 'goldens/magaza' : tablet != null ? 'goldens/tablet_$tablet' : 'goldens';
 
   Future<void> capture(WidgetTester tester, String name) async {
     try {
       await expectLater(find.byType(MaterialApp),
-          matchesGoldenFile(store ? 'goldens/magaza/$name.png' : 'goldens/$name.png'));
+          matchesGoldenFile('$folder/$name.png'));
     } catch (e) {
       // Bir ekranın çekilememesi diğerlerini engellemesin.
       // ignore: avoid_print
@@ -123,8 +126,14 @@ void main() {
   }
 
   testWidgets('ekran görüntüleri', (tester) async {
-    tester.view.physicalSize = store ? const Size(1080, 1920) : const Size(1080, 2340);
-    tester.view.devicePixelRatio = 3;
+    tester.view.physicalSize = store
+        ? const Size(1080, 1920)
+        : tablet == 'dikey'
+            ? const Size(1600, 2560)
+            : tablet == 'yatay'
+                ? const Size(2560, 1600)
+                : const Size(1080, 2340);
+    tester.view.devicePixelRatio = tablet != null ? 2 : 3;
     addTearDown(tester.view.reset);
     SharedPreferences.setMockInitialValues(_sampleData());
 

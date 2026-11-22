@@ -9,6 +9,7 @@ import '../services/my_health.dart';
 import '../services/secure_health_store.dart';
 import '../utils/dialog_helpers.dart';
 import 'mother_profile_page.dart';
+import '../widgets/adaptive.dart';
 
 const _mor = Color(0xFF764A72);
 const _pembe = Color(0xFFFFE3F0);
@@ -86,8 +87,7 @@ class _MyHealthPageState extends State<MyHealthPage> {
     return ListView(padding: const EdgeInsets.all(14), children: [
       const Text('Bugün', style: TextStyle(fontWeight: FontWeight.w800, color: _mor, fontSize: 16)),
       const SizedBox(height: 8),
-      GridView.count(crossAxisCount: 4, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
-        mainAxisSpacing: 8, crossAxisSpacing: 8, childAspectRatio: 0.82, children: [
+      AdaptiveGrid(minTileWidth: 72, tileHeight: 92, spacing: 8, minColumns: 3, maxColumns: 8, children: [
           for (final k in healthKinds) _kindTile(k, todayValue(_data.entries, k.id, now)),
         ]),
       const SizedBox(height: 6),

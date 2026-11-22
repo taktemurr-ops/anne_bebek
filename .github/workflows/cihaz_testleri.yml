@@ -28,6 +28,9 @@ jobs:
             profile: pixel_6
           - api: 29
             profile: Nexus 5X
+          # Tablet: 10 inç, 2560x1600 (yatay tablet ekranı).
+          - api: 33
+            profile: Nexus 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4

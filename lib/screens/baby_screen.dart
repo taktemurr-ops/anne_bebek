@@ -7,6 +7,7 @@ import '../widgets/ui.dart';
 import 'baby_health_page.dart';
 import 'child_profiles_page.dart';
 import 'module_hub_page.dart';
+import '../widgets/adaptive.dart';
 
 class BabyScreen extends StatelessWidget {
   final AppStore store;
@@ -64,9 +65,7 @@ class BabyScreen extends StatelessWidget {
         trailing: const Icon(Icons.edit), onTap: () => editBaby(context),
       )),
       sectionTitle('Günlük takip'),
-      GridView.count(
-        crossAxisCount: 2, crossAxisSpacing: 12, mainAxisSpacing: 12, childAspectRatio: 1.5,
-        shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
+      AdaptiveGrid(minTileWidth: 150, tileHeight: 106, spacing: 12, minColumns: 2, maxColumns: 4,
         children: [for (final item in categories) categoryCard(item.$1, item.$2, const Color(0xFFFFE1ED), () => addRecord(context, item.$1))],
       ),
       sectionTitle('Son kayıtlar'),
