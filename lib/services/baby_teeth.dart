@@ -24,6 +24,9 @@ const toothTypes = <ToothType>[
 
 const toothSides = ['sağ', 'sol'];
 
+/// Ekranda gösterilecek taraf adı.
+String toothSideLabel(String side) => side == 'sağ' ? 'Sağ' : 'Sol';
+
 /// Diş kimliği: tür + taraf (ör. 'lc_sağ').
 List<String> allToothIds() => [for (final t in toothTypes) for (final s in toothSides) '${t.id}_$s'];
 

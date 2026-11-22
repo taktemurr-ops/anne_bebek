@@ -120,9 +120,8 @@ class _MoodCheckPageState extends State<MoodCheckPage> {
             Expanded(child: Text(item.options[i].text, key: Key('epds_${_q}_$i'))),
           ])),
       const SizedBox(height: 8),
-      Row(children: [
+      OverflowBar(alignment: MainAxisAlignment.end, spacing: 8, overflowAlignment: OverflowBarAlignment.end, children: [
         if (_q > 0) TextButton(onPressed: () => setState(() => _q--), child: Text('Geri')),
-        const Spacer(),
         TextButton(onPressed: () => setState(() => _answers = null), child: Text('Vazgeç')),
         FilledButton(key: const Key('epds_ileri'), onPressed: answers[_q] == null ? null : () {
           if (_q < epdsItems.length - 1) { setState(() => _q++); } else { _finish(); }

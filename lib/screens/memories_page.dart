@@ -8,6 +8,7 @@ import '../i18n/text.dart';
 import '../services/json_store.dart';
 import '../services/memories.dart';
 import '../services/photo_store.dart';
+import '../utils/dialog_helpers.dart';
 import '../widgets/module_kit.dart';
 import '../widgets/reference_widgets.dart';
 
@@ -40,9 +41,11 @@ class _MemoriesPageState extends State<MemoriesPage> {
     Map<String, dynamic> all = {};
     String? dir;
     try { all = await JsonStore.readMap(MemoriesPage.storageKey); } catch (_) {}
-    try { dir = await PhotoStore.dirPath(); } catch (_) {}
     if (!mounted) return;
-    setState(() { _all = all; _items = decodeMemories(all[widget.childKey]); _dir = dir; _loading = false; });
+    setState(() { _all = all; _items = decodeMemories(all[widget.childKey]); _loading = false; });
+    // Fotoğraf klasörü ayrı yüklenir; eklentisi olmayan ortamlarda liste beklemez.
+    try { dir = await PhotoStore.dirPath().timeout(const Duration(seconds: 5)); } catch (_) {}
+    if (mounted && dir != null) setState(() => _dir = dir);
   }
 
   Future<bool> _save(List<Memory> next) async {
@@ -67,7 +70,7 @@ class _MemoriesPageState extends State<MemoriesPage> {
     var tag = editing?.tag ?? 'Diğer';
     var photo = editing?.photo;
     final added = <String>[];
-    final saved = await showDialog<bool>(context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, set) {
+    final saved = await showDialogAndDispose<bool>(disposables: [title, note], context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, set) {
       Future<void> pick(bool camera) async {
         try {
           final name = await PhotoStore.pick(camera: camera);
@@ -114,8 +117,6 @@ class _MemoriesPageState extends State<MemoriesPage> {
     }));
     final titleText = title.text.trim();
     final noteText = note.text.trim();
-    title.dispose();
-    note.dispose();
     // Kaydedilmeyen ya da değiştirilen fotoğraflar diskte kalmasın.
     Future<void> cleanup(Iterable<String> names) async {
       for (final n in names) {

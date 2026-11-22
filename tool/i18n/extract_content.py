@@ -16,6 +16,7 @@ FILES = [
     'lib/services/my_health.dart', 'lib/services/fever_log.dart', 'lib/services/mom_tools.dart',
     'lib/services/sound_synth.dart', 'lib/data/shopping_needs.dart', 'lib/data/product_catalog.dart',
     'lib/services/product_catalog.dart', 'lib/data/recipe_meta.dart',
+    'lib/data/first_aid.dart', 'lib/data/newborn_checklist.dart',
 ]
 GROUPS = {
     'recipes': ['lib/data/general_recipe_catalog.dart', 'lib/data/baby_recipe_catalog.dart'],

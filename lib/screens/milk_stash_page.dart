@@ -6,6 +6,7 @@ import '../i18n/i18n.dart' show t;
 import '../i18n/text.dart';
 import '../services/json_store.dart';
 import '../services/milk_stash.dart';
+import '../utils/dialog_helpers.dart';
 import '../widgets/module_kit.dart';
 import '../widgets/reference_widgets.dart';
 
@@ -57,7 +58,7 @@ class _MilkStashPageState extends State<MilkStashPage> {
     var when = _now();
     var place = 'Buzdolabı';
     String? error;
-    final ok = await showDialog<bool>(context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, set) => AlertDialog(
+    final ok = await showDialogAndDispose<bool>(disposables: [ml], context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, set) => AlertDialog(
       title: Text('Süt ekle'),
       content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
         TextField(key: const Key('sut_ml'), controller: ml, keyboardType: TextInputType.number,
@@ -85,7 +86,6 @@ class _MilkStashPageState extends State<MilkStashPage> {
         }, child: Text('Kaydet')),
       ])));
     final v = int.tryParse(ml.text.trim());
-    ml.dispose();
     if (ok != true || v == null) return;
     await _save([..._bags, MilkBag(id: 's${DateTime.now().microsecondsSinceEpoch}', pumped: when, ml: v, place: place)]);
   }

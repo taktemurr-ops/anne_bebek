@@ -64,7 +64,7 @@ class _TeethPageState extends State<TeethPage> {
     final has = _teeth[id];
     if (has != null) {
       final remove = await showDialog<bool>(context: context, builder: (ctx) => AlertDialog(
-        title: Text('${t(type.name)} (${t(side)})'),
+        title: Text('${t(type.name)} (${t(toothSideLabel(side))})'),
         content: Text('Çıkış tarihi: ${dmy(DateTime.parse(has))}'),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx, true), child: Text('Kaydı kaldır')),
@@ -75,7 +75,7 @@ class _TeethPageState extends State<TeethPage> {
     }
     final d = await showDatePicker(context: context, initialDate: _now(),
         firstDate: widget.birth ?? DateTime(2000), lastDate: _now(),
-        helpText: '${t(type.name)} (${t(side)})');
+        helpText: '${t(type.name)} (${t(toothSideLabel(side))})');
     if (d == null) return;
     await _save({..._teeth, id: d.toIso8601String()});
   }
@@ -86,7 +86,7 @@ class _TeethPageState extends State<TeethPage> {
     final molar = type.id.endsWith('1') || type.id.endsWith('2');
     return Semantics(
       button: true,
-      label: '${t(type.name)} ${t(id.split('_').last)}',
+      label: '${t(type.name)} ${t(toothSideLabel(id.split('_').last))}',
       child: InkWell(
         key: Key('dis_$id'),
         onTap: () => _tap(id),
@@ -141,7 +141,7 @@ class _TeethPageState extends State<TeethPage> {
         const KitHeader('Çıkış sırası', Icons.history),
         for (final e in list)
           ListTile(dense: true, leading: const Icon(Icons.circle, size: 10, color: _mor),
-            title: Text('${t(toothTypeOf(e.key)!.name)} (${t(e.key.split('_').last)})'),
+            title: Text('${t(toothTypeOf(e.key)!.name)} (${t(toothSideLabel(e.key.split('_').last))})'),
             trailing: Text(dmy(DateTime.parse(e.value)))),
       ],
       const KitHeader('Diş bakımı', Icons.clean_hands_outlined),

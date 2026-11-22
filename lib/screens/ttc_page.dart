@@ -6,6 +6,7 @@ import '../i18n/i18n.dart' show t;
 import '../i18n/text.dart';
 import '../services/json_store.dart';
 import '../services/ttc.dart';
+import '../utils/dialog_helpers.dart';
 import '../widgets/module_kit.dart';
 import '../widgets/reference_widgets.dart';
 
@@ -59,7 +60,7 @@ class _TtcPageState extends State<TtcPage> {
     int? opk = cur.opk, test = cur.pregnancyTest;
     var intimacy = cur.intimacy;
     String? error;
-    final ok = await showDialog<bool>(context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, set) => AlertDialog(
+    final ok = await showDialogAndDispose<bool>(disposables: [bbt, note], context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, set) => AlertDialog(
       title: Text('Günlük kayıt'),
       content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
         ListTile(contentPadding: EdgeInsets.zero, leading: const Icon(Icons.event), title: Text(dmy(d)), onTap: () async {
@@ -101,8 +102,6 @@ class _TtcPageState extends State<TtcPage> {
       ])));
     final entry = TtcDay(d, bbt: bbt.text.trim().isEmpty ? null : parseBbt(bbt.text), opk: opk,
         pregnancyTest: test, intimacy: intimacy, note: note.text.trim());
-    bbt.dispose();
-    note.dispose();
     if (ok != true) return;
     final next = [..._days.where((e) => e.day != d), if (!entry.isEmpty) entry]..sort((a, b) => a.day.compareTo(b.day));
     await _save(next);

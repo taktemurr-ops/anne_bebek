@@ -6,6 +6,7 @@ import '../i18n/i18n.dart' show t;
 import '../i18n/text.dart';
 import '../services/food_intro.dart';
 import '../services/json_store.dart';
+import '../utils/dialog_helpers.dart';
 import '../widgets/module_kit.dart';
 import '../widgets/reference_widgets.dart';
 
@@ -56,7 +57,7 @@ class _FoodIntroPageState extends State<FoodIntroPage> {
     var date = _now();
     var reaction = 0;
     final note = TextEditingController();
-    final ok = await showDialog<bool>(context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, set) => AlertDialog(
+    final ok = await showDialogAndDispose<bool>(disposables: [note], context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, set) => AlertDialog(
       title: Text(food.name),
       content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
         ListTile(contentPadding: EdgeInsets.zero, leading: const Icon(Icons.event), title: Text(dmy(date)),
@@ -81,7 +82,6 @@ class _FoodIntroPageState extends State<FoodIntroPage> {
         FilledButton(key: const Key('besin_kaydet'), onPressed: () => Navigator.pop(ctx, true), child: Text('Kaydet')),
       ])));
     final text = note.text.trim();
-    note.dispose();
     if (ok != true) return;
     final list = [...?_tries[food.id], FoodTry(date, reaction: reaction, note: text)]..sort((a, b) => a.date.compareTo(b.date));
     await _save({..._tries, food.id: list});
