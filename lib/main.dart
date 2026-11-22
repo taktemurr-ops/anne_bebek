@@ -73,6 +73,7 @@ import 'screens/milk_stash_page.dart';
 import 'screens/birth_plan_page.dart';
 import 'screens/first_aid_page.dart';
 import 'screens/family_tools_pages.dart';
+import 'screens/extra_guides_pages.dart';
 import 'services/photo_store.dart';
 import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter/material.dart' hide Text;
@@ -779,6 +780,15 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       PastelLinkCard(key: const Key('dis_takibi'), icon: Icons.mood_outlined, title: 'Diş takibi',
         subtitle: '20 süt dişi, çıkış tarihleri ve diş bakımı', iconColor: const Color(0xFFE0EEFF),
         onTap: () => _sayfa('Diş takibi', TeethPage(birth: dogum))),
+      PastelLinkCard(key: const Key('aglayan_bebek'), icon: Icons.sentiment_dissatisfied_outlined, title: 'Ağlayan bebek rehberi',
+        subtitle: 'Adım adım kontrol, kolik ve ne zaman doktora gidilir', iconColor: const Color(0xFFFFE3F0),
+        onTap: () => _sayfa('Ağlayan bebek', CryingBabyPage(onOpenSounds: () => _sayfa('Uyku sesleri ve ninniler', const SleepSoundsPage())))),
+      PastelLinkCard(key: const Key('uyku_rehberi'), icon: Icons.bedtime_outlined, title: 'Yaşa göre uyku rehberi',
+        subtitle: 'Toplam uyku, gündüz uykusu ve uyanık kalma süresi', iconColor: const Color(0xFFEDE4FF),
+        onTap: () => _sayfa('Uyku rehberi', SleepGuidePage(birth: dogum))),
+      PastelLinkCard(key: const Key('ev_guvenligi'), icon: Icons.shield_outlined, title: 'Ev güvenliği kontrol listesi',
+        subtitle: 'Priz, merdiven, pencere, ilaç dolabı… yaşa göre', iconColor: const Color(0xFFE0EEFF),
+        onTap: () => _sayfa('Ev güvenliği', HomeSafetyPage(birth: dogum))),
       PastelLinkCard(key: const Key('tuvalet_egitimi'), icon: Icons.wc_outlined, title: 'Tuvalet eğitimi',
         subtitle: 'Hazır olma belirtileri ve günlük başarı kaydı', iconColor: const Color(0xFFFFEBD9),
         onTap: () => _sayfa('Tuvalet eğitimi', PottyTrainingPage(birth: dogum))),
@@ -935,6 +945,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       PastelLinkCard(icon: Icons.bedtime_outlined, title: 'Uyku günlüğüm',
         subtitle: 'Başlangıç–bitiş saatleri ve toplam uyku', iconColor: const Color(0xFFEDE4FF),
         onTap: () => _sayfa('Uyku günlüğüm', const SleepJournalPage())),
+      PastelLinkCard(icon: Icons.schedule_outlined, title: 'Yaşa göre uyku rehberi',
+        subtitle: 'Kaç saat uyumalı, kaç kez gündüz uykusu', iconColor: const Color(0xFFEDE4FF),
+        onTap: () => _sayfa('Uyku rehberi', SleepGuidePage(birth: dogum))),
     ]);
   }
 
@@ -1526,6 +1539,12 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     PastelLinkCard(key: const Key('sut_stogu'), icon: Icons.inventory_2_outlined, title: 'Anne sütü stoğum',
       subtitle: 'Sağılan süt, buzdolabı/dondurucu ve son kullanma tarihi', iconColor: const Color(0xFFFFEBD9),
       onTap: () => _sayfa('Anne sütü stoğu', const MilkStashPage())),
+    PastelLinkCard(key: const Key('yiyebilir_miyim'), icon: Icons.no_food_outlined, title: 'Yiyebilir miyim?',
+      subtitle: 'Gebelikte ve emzirirken besin güvenliği', iconColor: const Color(0xFFE3F3E5),
+      onTap: () => _sayfa('Yiyebilir miyim?', const FoodSafetyPage())),
+    PastelLinkCard(key: const Key('gebelik_kilo'), icon: Icons.monitor_weight_outlined, title: 'Gebelikte kilo alımı',
+      subtitle: 'Boyuna ve kilona göre önerilen aralık', iconColor: const Color(0xFFFFEBD9),
+      onTap: () => _sayfa('Gebelikte kilo', const PregnancyWeightPage())),
     PastelLinkCard(key: const Key('dogum_plani'), icon: Icons.assignment_outlined, title: 'Doğum planım',
       subtitle: 'Tercihlerini seç, doktorun ve ebenle paylaş',
       onTap: () => _sayfa('Doğum planım', const BirthPlanPage())),
@@ -1701,6 +1720,11 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         QuickAccessItem(title: 'Nefes egzersizi', description: 'Rahatlama ve uykuya hazırlık', icon: Icons.air, onOpen: () => _sayfa('Anne egzersizleri', const MotherExercisePage(initialTab: 1))),
         QuickAccessItem(title: 'Anne sütü stoğu', description: 'Sağılan süt ve son kullanma', icon: Icons.inventory_2_outlined, onOpen: () => _sayfa('Anne sütü stoğu', const MilkStashPage())),
         QuickAccessItem(title: 'Doğum planı', description: 'Tercihlerini hazırla ve paylaş', icon: Icons.assignment_outlined, onOpen: () => _sayfa('Doğum planım', const BirthPlanPage())),
+        QuickAccessItem(title: 'Yiyebilir miyim?', description: 'Gebelik ve emzirmede besin güvenliği', icon: Icons.no_food_outlined, onOpen: () => _sayfa('Yiyebilir miyim?', const FoodSafetyPage())),
+        QuickAccessItem(title: 'Gebelikte kilo alımı', description: 'Önerilen kilo aralığı', icon: Icons.monitor_weight_outlined, onOpen: () => _sayfa('Gebelikte kilo', const PregnancyWeightPage())),
+        QuickAccessItem(title: 'Ağlayan bebek', description: 'Neden ağlıyor, ne yapmalı', icon: Icons.sentiment_dissatisfied_outlined, onOpen: () => _sayfa('Ağlayan bebek', CryingBabyPage(onOpenSounds: () => _sayfa('Uyku sesleri ve ninniler', const SleepSoundsPage())))),
+        QuickAccessItem(title: 'Uyku rehberi', description: 'Yaşa göre uyku ihtiyacı', icon: Icons.bedtime_outlined, onOpen: () => _sayfa('Uyku rehberi', SleepGuidePage(birth: dogum))),
+        QuickAccessItem(title: 'Ev güvenliği', description: 'Yaşa göre güvenlik listesi', icon: Icons.shield_outlined, onOpen: () => _sayfa('Ev güvenliği', HomeSafetyPage(birth: dogum))),
         QuickAccessItem(title: 'Beslenme kaydı', description: 'Yeni beslenme kaydı oluştur', icon: Icons.local_drink_outlined, onOpen: () => _olayEkle('Beslenme')),
         QuickAccessItem(title: 'Uyku kaydı', description: 'Yeni uyku kaydı oluştur', icon: Icons.bedtime_outlined, onOpen: () => _olayEkle('Uyku')),
         QuickAccessItem(title: 'Büyüme ölçümü', description: 'Boy, kilo ve baş çevresi', icon: Icons.monitor_weight_outlined, onOpen: _olcumEkle),

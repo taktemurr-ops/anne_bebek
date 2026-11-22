@@ -36,6 +36,7 @@ import 'package:anne_bebek/screens/weekly_meal_planner_page.dart';
 import 'package:anne_bebek/screens/women_lifestyle_page.dart';
 import 'package:anne_bebek/screens/womens_health_journal_page.dart';
 import 'package:anne_bebek/screens/birth_plan_page.dart';
+import 'package:anne_bebek/screens/extra_guides_pages.dart';
 import 'package:anne_bebek/screens/family_tools_pages.dart';
 import 'package:anne_bebek/screens/first_aid_page.dart';
 import 'package:anne_bebek/screens/food_intro_page.dart';
@@ -109,6 +110,11 @@ void main() {
     ('NewbornChecklistPage', () => const NewbornChecklistPage()),
     ('PottyTrainingPage', () => const PottyTrainingPage()),
     ('CaregiverCardPage', () => const CaregiverCardPage(childName: 'Ada')),
+    ('FoodSafetyPage', () => const FoodSafetyPage()),
+    ('PregnancyWeightPage', () => const PregnancyWeightPage()),
+    ('CryingBabyPage', () => const CryingBabyPage()),
+    ('SleepGuidePage', () => SleepGuidePage(birth: DateTime.now().subtract(const Duration(days: 200)))),
+    ('HomeSafetyPage', () => HomeSafetyPage(birth: DateTime.now().subtract(const Duration(days: 200)))),
   ];
   for (final (name, build) in pages) {
     testWidgets('$name boş değil ve etkileşimli', (tester) async {
