@@ -73,6 +73,7 @@ import 'screens/milk_stash_page.dart';
 import 'screens/birth_plan_page.dart';
 import 'screens/first_aid_page.dart';
 import 'screens/family_tools_pages.dart';
+import 'screens/care_guides_pages.dart';
 import 'screens/extra_guides_pages.dart';
 import 'services/photo_store.dart';
 import 'package:flutter/foundation.dart' show kReleaseMode;
@@ -789,6 +790,15 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       PastelLinkCard(key: const Key('ev_guvenligi'), icon: Icons.shield_outlined, title: 'Ev güvenliği kontrol listesi',
         subtitle: 'Priz, merdiven, pencere, ilaç dolabı… yaşa göre', iconColor: const Color(0xFFE0EEFF),
         onTap: () => _sayfa('Ev güvenliği', HomeSafetyPage(birth: dogum))),
+      PastelLinkCard(key: const Key('hasta_bebek'), icon: Icons.thermostat_outlined, title: 'Hasta bebek: ne zaman doktora?',
+        subtitle: 'Ateş, ishal, kusma, öksürük, döküntü, sarılık…', iconColor: const Color(0xFFFFE3F0),
+        onTap: () => _sayfa('Hasta bebek', const SickBabyGuidePage())),
+      PastelLinkCard(key: const Key('bez_rehberi'), icon: Icons.child_care_outlined, title: 'Bez ve kaka rengi rehberi',
+        subtitle: 'Hangi renk normal, günde kaç bez olmalı', iconColor: const Color(0xFFFFEBD9),
+        onTap: () => _sayfa('Bez ve kaka rengi', const StoolGuidePage())),
+      PastelLinkCard(key: const Key('mama_hazirlama'), icon: Icons.local_drink_outlined, title: 'Güvenli mama hazırlama',
+        subtitle: 'Adım adım hazırlama, saklama ve biberonla besleme', iconColor: const Color(0xFFE0EEFF),
+        onTap: () => _sayfa('Mama hazırlama', const FormulaPrepPage())),
       PastelLinkCard(key: const Key('tuvalet_egitimi'), icon: Icons.wc_outlined, title: 'Tuvalet eğitimi',
         subtitle: 'Hazır olma belirtileri ve günlük başarı kaydı', iconColor: const Color(0xFFFFEBD9),
         onTap: () => _sayfa('Tuvalet eğitimi', PottyTrainingPage(birth: dogum))),
@@ -1545,6 +1555,12 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     PastelLinkCard(key: const Key('gebelik_kilo'), icon: Icons.monitor_weight_outlined, title: 'Gebelikte kilo alımı',
       subtitle: 'Boyuna ve kilona göre önerilen aralık', iconColor: const Color(0xFFFFEBD9),
       onTap: () => _sayfa('Gebelikte kilo', const PregnancyWeightPage())),
+    PastelLinkCard(key: const Key('acil_belirtiler'), icon: Icons.warning_amber_rounded, title: 'Gebelik ve doğum sonrası acil belirtiler',
+      subtitle: 'Hangi belirtide hemen hastaneye gidilir', iconColor: const Color(0xFFFFE3F0),
+      onTap: () => _sayfa('Acil belirtiler', const PregnancyWarningSignsPage())),
+    PastelLinkCard(key: const Key('emzirme_sorunlari'), icon: Icons.healing_outlined, title: 'Emzirme sorunları',
+      subtitle: 'Ağrı, çatlak, dolgunluk, tıkanma, mastit, süt yetersizliği', iconColor: const Color(0xFFE3F3E5),
+      onTap: () => _sayfa('Emzirme sorunları', const BreastfeedingHelpPage())),
     PastelLinkCard(key: const Key('dogum_plani'), icon: Icons.assignment_outlined, title: 'Doğum planım',
       subtitle: 'Tercihlerini seç, doktorun ve ebenle paylaş',
       onTap: () => _sayfa('Doğum planım', const BirthPlanPage())),
@@ -1725,6 +1741,11 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         QuickAccessItem(title: 'Ağlayan bebek', description: 'Neden ağlıyor, ne yapmalı', icon: Icons.sentiment_dissatisfied_outlined, onOpen: () => _sayfa('Ağlayan bebek', CryingBabyPage(onOpenSounds: () => _sayfa('Uyku sesleri ve ninniler', const SleepSoundsPage())))),
         QuickAccessItem(title: 'Uyku rehberi', description: 'Yaşa göre uyku ihtiyacı', icon: Icons.bedtime_outlined, onOpen: () => _sayfa('Uyku rehberi', SleepGuidePage(birth: dogum))),
         QuickAccessItem(title: 'Ev güvenliği', description: 'Yaşa göre güvenlik listesi', icon: Icons.shield_outlined, onOpen: () => _sayfa('Ev güvenliği', HomeSafetyPage(birth: dogum))),
+        QuickAccessItem(title: 'Hasta bebek', description: 'Ne zaman doktora, ne zaman acile', icon: Icons.thermostat_outlined, onOpen: () => _sayfa('Hasta bebek', const SickBabyGuidePage())),
+        QuickAccessItem(title: 'Bez ve kaka rengi', description: 'Hangi renk normal, günde kaç bez', icon: Icons.child_care_outlined, onOpen: () => _sayfa('Bez ve kaka rengi', const StoolGuidePage())),
+        QuickAccessItem(title: 'Mama hazırlama', description: 'Güvenli hazırlama ve saklama', icon: Icons.local_drink_outlined, onOpen: () => _sayfa('Mama hazırlama', const FormulaPrepPage())),
+        QuickAccessItem(title: 'Acil belirtiler', description: 'Gebelik ve doğum sonrası tehlike işaretleri', icon: Icons.warning_amber_rounded, onOpen: () => _sayfa('Acil belirtiler', const PregnancyWarningSignsPage())),
+        QuickAccessItem(title: 'Emzirme sorunları', description: 'Ağrı, tıkanma, mastit ve çözümler', icon: Icons.healing_outlined, onOpen: () => _sayfa('Emzirme sorunları', const BreastfeedingHelpPage())),
         QuickAccessItem(title: 'Beslenme kaydı', description: 'Yeni beslenme kaydı oluştur', icon: Icons.local_drink_outlined, onOpen: () => _olayEkle('Beslenme')),
         QuickAccessItem(title: 'Uyku kaydı', description: 'Yeni uyku kaydı oluştur', icon: Icons.bedtime_outlined, onOpen: () => _olayEkle('Uyku')),
         QuickAccessItem(title: 'Büyüme ölçümü', description: 'Boy, kilo ve baş çevresi', icon: Icons.monitor_weight_outlined, onOpen: _olcumEkle),

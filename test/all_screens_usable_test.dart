@@ -36,6 +36,7 @@ import 'package:anne_bebek/screens/weekly_meal_planner_page.dart';
 import 'package:anne_bebek/screens/women_lifestyle_page.dart';
 import 'package:anne_bebek/screens/womens_health_journal_page.dart';
 import 'package:anne_bebek/screens/birth_plan_page.dart';
+import 'package:anne_bebek/screens/care_guides_pages.dart';
 import 'package:anne_bebek/screens/extra_guides_pages.dart';
 import 'package:anne_bebek/screens/family_tools_pages.dart';
 import 'package:anne_bebek/screens/first_aid_page.dart';
@@ -114,6 +115,11 @@ void main() {
     ('PregnancyWeightPage', () => const PregnancyWeightPage()),
     ('CryingBabyPage', () => const CryingBabyPage()),
     ('SleepGuidePage', () => SleepGuidePage(birth: DateTime.now().subtract(const Duration(days: 200)))),
+    ('SickBabyGuidePage', () => const SickBabyGuidePage()),
+    ('BreastfeedingHelpPage', () => const BreastfeedingHelpPage()),
+    ('StoolGuidePage', () => const StoolGuidePage()),
+    ('PregnancyWarningSignsPage', () => const PregnancyWarningSignsPage()),
+    ('FormulaPrepPage', () => const FormulaPrepPage()),
     ('HomeSafetyPage', () => HomeSafetyPage(birth: DateTime.now().subtract(const Duration(days: 200)))),
   ];
   for (final (name, build) in pages) {
