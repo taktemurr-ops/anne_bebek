@@ -37,6 +37,7 @@ import 'package:anne_bebek/screens/women_lifestyle_page.dart';
 import 'package:anne_bebek/screens/womens_health_journal_page.dart';
 import 'package:anne_bebek/screens/birth_plan_page.dart';
 import 'package:anne_bebek/screens/care_guides_pages.dart';
+import 'package:anne_bebek/screens/more_guides_pages.dart';
 import 'package:anne_bebek/screens/extra_guides_pages.dart';
 import 'package:anne_bebek/screens/family_tools_pages.dart';
 import 'package:anne_bebek/screens/first_aid_page.dart';
@@ -120,6 +121,9 @@ void main() {
     ('StoolGuidePage', () => const StoolGuidePage()),
     ('PregnancyWarningSignsPage', () => const PregnancyWarningSignsPage()),
     ('FormulaPrepPage', () => const FormulaPrepPage()),
+    ('BabyCareHowToPage', () => const BabyCareHowToPage()),
+    ('SpeechDevelopmentPage', () => SpeechDevelopmentPage(birth: DateTime.now().subtract(const Duration(days: 400)))),
+    ('PostpartumContraceptionPage', () => const PostpartumContraceptionPage()),
     ('HomeSafetyPage', () => HomeSafetyPage(birth: DateTime.now().subtract(const Duration(days: 200)))),
   ];
   for (final (name, build) in pages) {

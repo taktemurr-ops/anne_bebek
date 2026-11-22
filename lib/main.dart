@@ -74,6 +74,7 @@ import 'screens/birth_plan_page.dart';
 import 'screens/first_aid_page.dart';
 import 'screens/family_tools_pages.dart';
 import 'screens/care_guides_pages.dart';
+import 'screens/more_guides_pages.dart';
 import 'screens/extra_guides_pages.dart';
 import 'services/photo_store.dart';
 import 'package:flutter/foundation.dart' show kReleaseMode;
@@ -799,6 +800,12 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       PastelLinkCard(key: const Key('mama_hazirlama'), icon: Icons.local_drink_outlined, title: 'Güvenli mama hazırlama',
         subtitle: 'Adım adım hazırlama, saklama ve biberonla besleme', iconColor: const Color(0xFFE0EEFF),
         onTap: () => _sayfa('Mama hazırlama', const FormulaPrepPage())),
+      PastelLinkCard(key: const Key('bebek_bakimi'), icon: Icons.bathtub_outlined, title: 'Bebek bakımı nasıl yapılır?',
+        subtitle: 'Banyo, göbek, tırnak, bez, gaz çıkarma, kundak, burun ve diş bakımı', iconColor: const Color(0xFFE3F3E5),
+        onTap: () => _sayfa('Bebek bakımı', const BabyCareHowToPage())),
+      PastelLinkCard(key: const Key('dil_gelisimi'), icon: Icons.record_voice_over_outlined, title: 'Konuşma ve dil gelişimi',
+        subtitle: 'Yaşa göre beklenenler, destekleme ve ne zaman uzmana', iconColor: const Color(0xFFEDE4FF),
+        onTap: () => _sayfa('Konuşma ve dil gelişimi', SpeechDevelopmentPage(birth: dogum))),
       PastelLinkCard(key: const Key('tuvalet_egitimi'), icon: Icons.wc_outlined, title: 'Tuvalet eğitimi',
         subtitle: 'Hazır olma belirtileri ve günlük başarı kaydı', iconColor: const Color(0xFFFFEBD9),
         onTap: () => _sayfa('Tuvalet eğitimi', PottyTrainingPage(birth: dogum))),
@@ -1561,6 +1568,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     PastelLinkCard(key: const Key('emzirme_sorunlari'), icon: Icons.healing_outlined, title: 'Emzirme sorunları',
       subtitle: 'Ağrı, çatlak, dolgunluk, tıkanma, mastit, süt yetersizliği', iconColor: const Color(0xFFE3F3E5),
       onTap: () => _sayfa('Emzirme sorunları', const BreastfeedingHelpPage())),
+    PastelLinkCard(key: const Key('dogum_sonrasi_korunma'), icon: Icons.family_restroom, title: 'Doğum sonrası korunma',
+      subtitle: 'Emzirirken ve emzirmezken hangi yöntem ne zaman', iconColor: const Color(0xFFE0EEFF),
+      onTap: () => _sayfa('Doğum sonrası korunma', const PostpartumContraceptionPage())),
     PastelLinkCard(key: const Key('dogum_plani'), icon: Icons.assignment_outlined, title: 'Doğum planım',
       subtitle: 'Tercihlerini seç, doktorun ve ebenle paylaş',
       onTap: () => _sayfa('Doğum planım', const BirthPlanPage())),
@@ -1746,6 +1756,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         QuickAccessItem(title: 'Mama hazırlama', description: 'Güvenli hazırlama ve saklama', icon: Icons.local_drink_outlined, onOpen: () => _sayfa('Mama hazırlama', const FormulaPrepPage())),
         QuickAccessItem(title: 'Acil belirtiler', description: 'Gebelik ve doğum sonrası tehlike işaretleri', icon: Icons.warning_amber_rounded, onOpen: () => _sayfa('Acil belirtiler', const PregnancyWarningSignsPage())),
         QuickAccessItem(title: 'Emzirme sorunları', description: 'Ağrı, tıkanma, mastit ve çözümler', icon: Icons.healing_outlined, onOpen: () => _sayfa('Emzirme sorunları', const BreastfeedingHelpPage())),
+        QuickAccessItem(title: 'Bebek bakımı', description: 'Banyo, göbek, tırnak, kundak…', icon: Icons.bathtub_outlined, onOpen: () => _sayfa('Bebek bakımı', const BabyCareHowToPage())),
+        QuickAccessItem(title: 'Konuşma ve dil gelişimi', description: 'Yaşa göre beklenenler', icon: Icons.record_voice_over_outlined, onOpen: () => _sayfa('Konuşma ve dil gelişimi', SpeechDevelopmentPage(birth: dogum))),
+        QuickAccessItem(title: 'Doğum sonrası korunma', description: 'Yöntemler ve başlama zamanı', icon: Icons.family_restroom, onOpen: () => _sayfa('Doğum sonrası korunma', const PostpartumContraceptionPage())),
         QuickAccessItem(title: 'Beslenme kaydı', description: 'Yeni beslenme kaydı oluştur', icon: Icons.local_drink_outlined, onOpen: () => _olayEkle('Beslenme')),
         QuickAccessItem(title: 'Uyku kaydı', description: 'Yeni uyku kaydı oluştur', icon: Icons.bedtime_outlined, onOpen: () => _olayEkle('Uyku')),
         QuickAccessItem(title: 'Büyüme ölçümü', description: 'Boy, kilo ve baş çevresi', icon: Icons.monitor_weight_outlined, onOpen: _olcumEkle),
