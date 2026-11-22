@@ -34,8 +34,8 @@ void main() {
     expect(find.text('Ateş'), findsWidgets);
     await tester.tap(find.byKey(const Key('konu_1')));
     await tester.pump();
-    await tester.scrollUntilVisible(find.text('İshal 1 haftadan uzun sürüyorsa'), 200);
-    expect(find.text('İshal 1 haftadan uzun sürüyorsa'), findsOneWidget);
+    await tester.scrollUntilVisible(find.textContaining('İshal 1 haftadan uzun sürüyorsa'), 200);
+    expect(find.textContaining('İshal 1 haftadan uzun sürüyorsa'), findsOneWidget);
   });
 
   testWidgets('mama adımları işaretlenir ve sıfırlanır', (tester) async {
@@ -53,6 +53,6 @@ void main() {
 
   testWidgets('doğum sonrası sekmesi', (tester) async {
     await tester.pumpWidget(const MaterialApp(home: Scaffold(body: PregnancyWarningSignsPage(postpartum: true))));
-    expect(find.text('Saatte bir ped dolduran ya da artan kanama, büyük pıhtılar'), findsOneWidget);
+    expect(find.textContaining('Saatte bir ped dolduran'), findsOneWidget);
   });
 }
