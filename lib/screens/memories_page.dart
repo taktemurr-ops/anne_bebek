@@ -39,13 +39,15 @@ class _MemoriesPageState extends State<MemoriesPage> {
 
   Future<void> _load() async {
     Map<String, dynamic> all = {};
-    String? dir;
     try { all = await JsonStore.readMap(MemoriesPage.storageKey); } catch (_) {}
     if (!mounted) return;
     setState(() { _all = all; _items = decodeMemories(all[widget.childKey]); _loading = false; });
     // Fotoğraf klasörü ayrı yüklenir; eklentisi olmayan ortamlarda liste beklemez.
-    try { dir = await PhotoStore.dirPath().timeout(const Duration(seconds: 5)); } catch (_) {}
-    if (mounted && dir != null) setState(() => _dir = dir);
+    try {
+      unawaited(PhotoStore.dirPath().then((d) {
+        if (mounted) setState(() => _dir = d);
+      }, onError: (Object _) {}));
+    } catch (_) {}
   }
 
   Future<bool> _save(List<Memory> next) async {
