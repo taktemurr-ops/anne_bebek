@@ -1,3 +1,4 @@
+import '../i18n/i18n.dart';
 import 'child_journals.dart';
 import 'child_profiles.dart';
 
@@ -33,7 +34,7 @@ class ChildReport {
   }
 
   static String csvReport(ChildProfile child, List<ChildJournalEntry> entries) {
-    final b = StringBuffer('\uFEFFTarih,Çocuk,Kategori,Ölçüm,Not\r\n');
+    final b = StringBuffer('\uFEFF${t('Tarih,Çocuk,Kategori,Ölçüm,Not')}\r\n');
     for (final e in select(entries, child.id)) {
       b.writeln([date(e.at), child.name, e.category, e.value, e.note]
           .map(_csvCell).join(','));

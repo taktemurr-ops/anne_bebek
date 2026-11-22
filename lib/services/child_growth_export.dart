@@ -1,3 +1,4 @@
+import '../i18n/i18n.dart';
 import 'child_journals.dart';
 import 'child_profiles.dart';
 import 'child_growth_summary.dart';
@@ -20,7 +21,7 @@ String exportChildMeasurementsCsv(ChildProfile child, List<ChildJournalEntry> en
     final safe = value.trimLeft().startsWith(RegExp(r'[=+@\-]')) ? "'$value" : value;
     return '"${safe.replaceAll('"', '""')}"';
   }
-  final rows = <String>['Çocuk;Tarih;Yaş (gün);Ölçüm;Değer;Not'];
+  final rows = <String>[t('Çocuk;Tarih;Yaş (gün);Ölçüm;Değer;Not')];
   for (final e in records) {
     final day = DateTime(e.at.year, e.at.month, e.at.day);
     final date = '${day.year.toString().padLeft(4, '0')}-${day.month.toString().padLeft(2, '0')}-${day.day.toString().padLeft(2, '0')}';
