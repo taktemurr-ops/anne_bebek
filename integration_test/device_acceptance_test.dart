@@ -130,6 +130,10 @@ void main() {
     await tester.tap(recipe.first);
     await tester.pumpAndSettle();
     final add = find.byKey(const ValueKey('add_to_notebook'));
+    // Tablette içerik daha geniş; düğme ilk görünümün altında kalabilir.
+    if (add.evaluate().isEmpty) {
+      await tester.scrollUntilVisible(add, 300, scrollable: find.byType(Scrollable).last);
+    }
     await tester.ensureVisible(add);
     await tester.tap(add);
     await pumpUntil(tester, () => find.textContaining('tarif defterine eklendi').evaluate().isNotEmpty);

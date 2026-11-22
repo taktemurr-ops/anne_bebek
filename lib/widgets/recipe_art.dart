@@ -237,6 +237,33 @@ class RecipeArt extends StatelessWidget {
   }
 }
 
+/// Tarif detayının üstündeki geniş görsel. Yüksekliği ekran genişliğiyle
+/// orantılıdır ama tablette sayfayı kaplamaması için sınırlıdır.
+class RecipeHeroArt extends StatelessWidget {
+  const RecipeHeroArt({
+    super.key,
+    required this.title,
+    required this.category,
+    this.ingredients = const [],
+  });
+
+  final String title, category;
+  final List<String> ingredients;
+
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(builder: (context, c) {
+        final h = (c.maxWidth * 9 / 16).clamp(140.0, 240.0);
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(22),
+          child: SizedBox(
+            height: h,
+            width: double.infinity,
+            child: RecipeArt(title: title, category: category, ingredients: ingredients, borderRadius: 0),
+          ),
+        );
+      });
+}
+
 class DishPainter extends CustomPainter {
   DishPainter(this.look, {this.showBackground = true});
 

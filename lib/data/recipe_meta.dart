@@ -71,6 +71,34 @@ class RecipeMeta {
     return null;
   }
 
+  static const _equipmentRules = <(List<String>, String)>[
+    (['doğra', 'kes', 'kıy', 'dilimle'], 'Kesme tahtası ve bıçak'),
+    (['rende'], 'Rende'),
+    (['tencere', 'haşla', 'kaynat', 'demle'], 'Tencere'),
+    (['tava', 'sac', 'sotele', 'kavur'], 'Tava'),
+    (['ızgara'], 'Izgara tavası'),
+    (['fırın'], 'Fırın ve fırın tepsisi ya da kabı'),
+    (['kalıb', 'kalıp', 'kapsül'], 'Kek ya da muffin kalıbı'),
+    (['blender'], 'Blender'),
+    (['mutfak robot'], 'Mutfak robotu'),
+    (['mikser'], 'Mikser'),
+    (['çırp'], 'Çırpma teli ya da çatal'),
+    (['süz'], 'Süzgeç'),
+    (['tost makine'], 'Tost makinesi'),
+    (['buhar'], 'Buharda pişirme sepeti'),
+    (['pişirme kâğıd'], 'Pişirme kâğıdı'),
+    (['spatula'], 'Spatula'),
+  ];
+
+  /// Hazırlanış adımlarından çıkarılan mutfak araçları listesi.
+  static List<String> equipment(GeneralRecipe recipe) {
+    final text = recipe.steps.join(' ').toLowerCase();
+    return [
+      for (final (words, tool) in _equipmentRules)
+        if (words.any(text.contains)) tool,
+    ];
+  }
+
   static String serving(GeneralRecipe recipe) =>
       recipe.serving ?? _servingByCategory[recipe.category] ??
       'Pişirdikten sonra sıcak veya ılık servis edin.';

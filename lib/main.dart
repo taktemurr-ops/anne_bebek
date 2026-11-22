@@ -1052,8 +1052,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       child: InkWell(
         onTap: () => _sayfa(t.title, ListView(padding: const EdgeInsets.all(18), children: [
-          ClipRRect(borderRadius: BorderRadius.circular(26), child: AspectRatio(aspectRatio: 16 / 9,
-            child: RecipeArt(title: t.title, category: t.category, ingredients: t.ingredients, borderRadius: 0))),
+          RecipeHeroArt(title: t.title, category: t.category, ingredients: t.ingredients),
           const SizedBox(height: 12),
           _hero(t.title, '${t.category} • ${t.minutes} dk', simge),
           RecipeSummaryChips(recipe: t),

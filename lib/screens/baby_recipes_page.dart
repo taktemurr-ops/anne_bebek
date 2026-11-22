@@ -286,14 +286,8 @@ class _BabyRecipeDetailPage extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(18),
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(22),
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: RecipeArt(title: recipe.title, category: recipe.category,
-                    ingredients: recipe.ingredients, borderRadius: 0),
-              ),
-            ),
+            RecipeHeroArt(title: recipe.title, category: recipe.category,
+                ingredients: recipe.ingredients),
             const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(18),

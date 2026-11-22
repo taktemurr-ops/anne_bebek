@@ -64,7 +64,19 @@ class RecipeExtraSections extends StatelessWidget {
   Widget build(BuildContext context) {
     final tips = RecipeMeta.tips(recipe);
     final allergens = RecipeMeta.allergens(recipe);
+    final tools = RecipeMeta.equipment(recipe);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      if (tools.isNotEmpty) ...[
+        const _SectionTitle('Gerekli mutfak araçları', Icons.soup_kitchen_outlined),
+        Wrap(spacing: 6, runSpacing: 6, children: [
+          for (final tool in tools)
+            Chip(
+              label: Text(tool),
+              backgroundColor: PastelPalette.softPink,
+              side: BorderSide.none,
+            ),
+        ]),
+      ],
       if (tips.isNotEmpty) ...[
         const _SectionTitle('Püf noktaları', Icons.lightbulb_outline),
         for (final tip in tips)
