@@ -154,7 +154,7 @@ class _ProjectCompletionCenterPageState extends State<ProjectCompletionCenterPag
               style: TextStyle(fontSize: 12)),
           ]))),
         const SizedBox(height: 12),
-        DropdownButtonFormField<String>(
+        DropdownButtonFormField<String>(isExpanded: true, 
           initialValue: _filter,
           decoration: InputDecoration(labelText: t('Modül filtresi'),
             border: OutlineInputBorder()),

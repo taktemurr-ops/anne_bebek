@@ -3,10 +3,10 @@ import '../i18n/i18n.dart' show t;
 import '../i18n/text.dart';
 import '../services/recipe_notebook_bridge.dart';
 import '../widgets/add_to_notebook_tile.dart';
-import '../widgets/visuals.dart';
 import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/baby_recipe_catalog.dart';
+import '../widgets/recipe_art.dart';
 
 /// Mevcut baby_recipe_catalog.dart veri modelini değiştirmeden kullanır.
 class BabyRecipesPage extends StatefulWidget {
@@ -106,9 +106,10 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Bebek tarifleri')),
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
+        // Filtreler listeyle birlikte kayar; kısa ve yatay ekranlarda taşmaz.
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(child: Padding(
               padding: const EdgeInsets.fromLTRB(14, 12, 14, 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,10 +201,10 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
                   ),
                 ],
               ),
-            ),
-            Expanded(
-              child: visible.isEmpty
-                  ? Center(child: Padding(
+            )),
+            if (visible.isEmpty)
+              SliverFillRemaining(hasScrollBody: false,
+                  child: Center(child: Padding(
                       padding: const EdgeInsets.all(24),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -226,9 +227,11 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
                           ),
                         ],
                       ),
-                    ))
-                  : ListView.builder(
-                      padding: const EdgeInsets.fromLTRB(12, 0, 12, 20),
+                    )))
+            else
+              SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 20),
+                  sliver: SliverList.builder(
                       itemCount: visible.length,
                       itemBuilder: (context, index) {
                         final recipe = visible[index];
@@ -236,8 +239,8 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
                           child: ListTile(
                             contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 14, vertical: 7),
-                            leading: EmojiBadge(recipeEmoji(recipe.title, recipe.category),
-                                size: 44, background: const Color(0xFFFFE9F3)),
+                            leading: RecipeArt(title: recipe.title, category: recipe.category,
+                                ingredients: recipe.ingredients, size: 52, borderRadius: 14),
                             title: Text(recipe.title,
                                 style: const TextStyle(fontWeight: FontWeight.w700)),
                             subtitle: Text(recipe.variants.isEmpty
@@ -259,8 +262,7 @@ class _BabyRecipesPageState extends State<BabyRecipesPage> {
                           ),
                         );
                       },
-                    ),
-            ),
+                    )),
           ],
         ),
       ),
@@ -284,6 +286,15 @@ class _BabyRecipeDetailPage extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(18),
           children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(22),
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: RecipeArt(title: recipe.title, category: recipe.category,
+                    ingredients: recipe.ingredients, borderRadius: 0),
+              ),
+            ),
+            const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(

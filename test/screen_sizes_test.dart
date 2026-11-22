@@ -31,12 +31,12 @@ String _describe(Object e) {
     final first = e.exceptionAsString().split('\n').first;
     final lib = e.library ?? '';
     final ctx = e.context?.toDescription() ?? '';
-    final where = e.informationCollector?.call()
-            .map((d) => d.toString())
-            .where((l) => l.contains('lib/') || l.contains('file://'))
-            .take(2)
-            .join(' | ') ??
-        '';
+    final where = RegExp(r'lib/[A-Za-z0-9_/]+\.dart:\d+:\d+')
+        .allMatches(e.toString(minLevel: DiagnosticLevel.debug))
+        .map((m) => m.group(0))
+        .toSet()
+        .take(3)
+        .join(' | ');
     return '$first ($lib $ctx) $where'.trim();
   }
   return e.toString().split('\n').first;

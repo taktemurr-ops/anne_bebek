@@ -82,7 +82,7 @@ class _ReproductiveCalendarPageState extends State<ReproductiveCalendarPage> {
           child: Text(_periodStart == null ? 'Son adet tarihini seç' :
             'Son adet: ${_periodStart!.day}.${_periodStart!.month}.${_periodStart!.year}')),
         const SizedBox(height: 12),
-        DropdownButtonFormField<int>(initialValue: _cycleDays,
+        DropdownButtonFormField<int>(isExpanded: true, initialValue: _cycleDays,
           decoration: InputDecoration(labelText: t('Döngü uzunluğu (gün)')),
           items: [for (var days = 21; days <= 35; days++)
             DropdownMenuItem(value: days, child: Text('$days gün'))],

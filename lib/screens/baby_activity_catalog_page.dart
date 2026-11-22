@@ -23,22 +23,23 @@ class _BabyActivityCatalogPageState extends State<BabyActivityCatalogPage> {
       ('${a.title} ${a.materials} ${a.area}'.toLowerCase().contains(_query.toLowerCase()))).toList();
     return Scaffold(
       appBar: AppBar(title: const Text('Bebek oyun ve aktiviteleri')),
-      body: Column(children: [
-        Padding(padding: const EdgeInsets.all(16), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      // Filtreler listeyle birlikte kayar; kısa ve yatay ekranlarda taşmaz.
+      body: CustomScrollView(slivers: [
+        SliverToBoxAdapter(child: Padding(padding: const EdgeInsets.all(16), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Text('52 temel etkinlik, 11 yaş dönemi için uyarlanmıştır (572 yaşa göre varyasyon). Her etkinlik her yaşta uygun olmayabilir; açıklamaları okuyun.'),
           const SizedBox(height: 12),
-          DropdownButtonFormField<int>(initialValue: _band, decoration: InputDecoration(labelText: t('Yaş aralığı (ay)'), border: OutlineInputBorder()),
+          DropdownButtonFormField<int>(isExpanded: true, initialValue: _band, decoration: InputDecoration(labelText: t('Yaş aralığı (ay)'), border: OutlineInputBorder()),
             items: [for (var i = 0; i < ages.length; i++) DropdownMenuItem(value: i, child: Text('${ages[i].$1}–${ages[i].$2} ay'))],
             onChanged: (value) => setState(() => _band = value ?? 0)),
           const SizedBox(height: 8),
           TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('Etkinlik veya malzeme ara'), border: OutlineInputBorder()), onChanged: (value) => setState(() => _query = value.trim())),
           const SizedBox(height: 8),
-          DropdownButtonFormField<String>(initialValue: _area, decoration: InputDecoration(labelText: t('Gelişim alanı'), border: OutlineInputBorder()),
+          DropdownButtonFormField<String>(isExpanded: true, initialValue: _area, decoration: InputDecoration(labelText: t('Gelişim alanı'), border: OutlineInputBorder()),
             items: areas.map((area) => DropdownMenuItem(value: area, child: Text(area))).toList(), onChanged: (value) => setState(() => _area = value ?? 'Tümü')),
           const SizedBox(height: 8),
           Text('${filtered.length} etkinlik gösteriliyor', style: Theme.of(context).textTheme.labelLarge),
-        ])),
-        Expanded(child: ListView.builder(itemCount: filtered.length, itemBuilder: (context, index) {
+        ]))),
+        SliverList.builder(itemCount: filtered.length, itemBuilder: (context, index) {
           final activity = filtered[index];
           return Card(margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4), child: ListTile(
             title: Text(activity.title), subtitle: Text('${activity.area} • ${activity.minutes} dk • ${activity.materials}'),
@@ -52,7 +53,8 @@ class _BabyActivityCatalogPageState extends State<BabyActivityCatalogPage> {
               ]),
             )))),
           );
-        })),
+        }),
+        const SliverToBoxAdapter(child: SizedBox(height: 16)),
       ]),
     );
   }

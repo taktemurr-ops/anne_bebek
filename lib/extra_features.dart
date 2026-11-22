@@ -268,7 +268,7 @@ class _PregnancyWeekGuidePageState extends State<PregnancyWeekGuidePage> {
       body: ListView(padding: const EdgeInsets.all(16), children: [
         _header('$week. hafta', 'Genel bilgilendirme • Doktorunun belirlediği gebelik haftası esas alınır.'),
         const SizedBox(height: 16),
-        DropdownButtonFormField<int>(
+        DropdownButtonFormField<int>(isExpanded: true, 
           initialValue: week,
           decoration: InputDecoration(labelText: t('Hafta seç'), border: OutlineInputBorder()),
           items: [for (var i = 1; i <= 40; i++) DropdownMenuItem(value: i, child: Text('$i. hafta'))],

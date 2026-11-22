@@ -59,7 +59,7 @@ class _TrackingJournalPageState extends State<TrackingJournalPage> {
             decoration: InputDecoration(labelText: t('Kayıt türü')),
             items: _types.map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
             onChanged: (v) { if (v != null) update(() => type = v); }),
-          if (type == 'Emzirme') DropdownButtonFormField<String>(initialValue: side,
+          if (type == 'Emzirme') DropdownButtonFormField<String>(isExpanded: true, initialValue: side,
             decoration: InputDecoration(labelText: t('Taraf')),
             items: ['Belirtilmedi', 'Sol', 'Sağ', 'Her ikisi']
               .map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),

@@ -75,7 +75,7 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
         title: Text('${widget.child.name} · Yeni kayıt'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min,
           children: [
-            DropdownButtonFormField<String>(initialValue: category,
+            DropdownButtonFormField<String>(isExpanded: true, initialValue: category,
               items: categories.map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),
               onChanged: (s) { if (s != null) update(() => category = s); },
               decoration: InputDecoration(labelText: t('Kategori'))),

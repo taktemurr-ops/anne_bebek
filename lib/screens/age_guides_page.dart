@@ -81,7 +81,7 @@ class _AgeGuidesPageState extends State<AgeGuidesPage> {
           const SizedBox(height: 12),
           TextField(controller: _search, decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Rehberde ara'), border: OutlineInputBorder()), onChanged: (_) => setState(() {})),
           const SizedBox(height: 8),
-          DropdownButtonFormField<String>(initialValue: _category, decoration: InputDecoration(labelText: t('Kategori')),
+          DropdownButtonFormField<String>(isExpanded: true, initialValue: _category, decoration: InputDecoration(labelText: t('Kategori')),
             items: ['Tümü', 'Gelişim', 'Beslenme', 'Uyku', 'Oyun', 'Bakım', 'Güvenlik', 'Sağlık', 'Aile'].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
             onChanged: (v) => setState(() => _category = v ?? 'Tümü')),
           const SizedBox(height: 12),

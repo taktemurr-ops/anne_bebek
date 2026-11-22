@@ -128,11 +128,10 @@ class _PregnancyWeightPageState extends State<PregnancyWeightPage> {
       field(_pre, 'Gebelik öncesi kilo (kg)', const Key('kilo_once')),
       field(_height, 'Boy (cm)', const Key('kilo_boy')),
       field(_now, 'Şimdiki kilo (kg, isteğe bağlı)', const Key('kilo_simdi')),
-      Row(children: [
-        Text('${t('Gebelik haftası')}: $_week', style: const TextStyle(fontWeight: FontWeight.w700)),
-        Expanded(child: Slider(value: _week.toDouble(), min: 1, max: 42, divisions: 41, activeColor: kitMor,
-            onChanged: (v) => setState(() => _week = v.round()), onChangeEnd: (_) => unawaited(_save()))),
-      ]),
+      Padding(padding: const EdgeInsets.only(top: 6), child: Text('${t('Gebelik haftası')}: $_week',
+          style: const TextStyle(fontWeight: FontWeight.w700))),
+      Slider(value: _week.toDouble(), min: 1, max: 42, divisions: 41, activeColor: kitMor,
+          onChanged: (v) => setState(() => _week = v.round()), onChangeEnd: (_) => unawaited(_save())),
       if (plan == null)
         const KitNote('Önerilen kilo aralığını görmek için gebelik öncesi kilonu ve boyunu gir.')
       else ...[

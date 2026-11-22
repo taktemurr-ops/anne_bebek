@@ -70,7 +70,7 @@ class _ChildProfilesPageState extends State<ChildProfilesPage> {
       title: const Text('Çocuk profili ekle'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: name, maxLength: 60, decoration: InputDecoration(labelText: t('Adı'))),
-        DropdownButtonFormField<String>(initialValue: sex, decoration: InputDecoration(labelText: t('Büyüme referansı için cinsiyet')), items: const [
+        DropdownButtonFormField<String>(isExpanded: true, initialValue: sex, decoration: InputDecoration(labelText: t('Büyüme referansı için cinsiyet')), items: const [
           DropdownMenuItem(value: 'unknown', child: Text('Belirtilmedi')),
           DropdownMenuItem(value: 'female', child: Text('Kız')),
           DropdownMenuItem(value: 'male', child: Text('Erkek')),

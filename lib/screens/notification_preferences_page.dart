@@ -94,7 +94,7 @@ class _NotificationPreferencesPageState extends State<NotificationPreferencesPag
           onChanged: _error != null ? null : (v) => _save(_copy(marketing: v))),
         const SizedBox(height: 16),
         const Text('Sessiz saatler', style: TextStyle(fontWeight: FontWeight.bold)),
-        DropdownButtonFormField<int>(
+        DropdownButtonFormField<int>(isExpanded: true, 
           initialValue: _prefs.quietStartHour,
           decoration: InputDecoration(labelText: t('Başlangıç')),
           items: [for (var h = 0; h < 24; h++)
@@ -103,7 +103,7 @@ class _NotificationPreferencesPageState extends State<NotificationPreferencesPag
             if (v != null) _save(_copy(start: v));
           }),
         const SizedBox(height: 12),
-        DropdownButtonFormField<int>(
+        DropdownButtonFormField<int>(isExpanded: true, 
           initialValue: _prefs.quietEndHour,
           decoration: InputDecoration(labelText: t('Bitiş')),
           items: [for (var h = 0; h < 24; h++)

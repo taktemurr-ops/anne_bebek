@@ -3,7 +3,8 @@ Enterpolasyonlar {0}, {1} yer tutucularına dönüştürülür."""
 import re, glob, os, json
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SKIP_FILES = ('smart_shopping_page.dart', 'pregnancy_week_guide.dart', 'offline_assistant.dart',
-              'guide_content.dart', 'monthly_baby_guide.dart', 'age_guides.dart', 'baby_activity_catalog.dart')
+              'guide_content.dart', 'monthly_baby_guide.dart', 'age_guides.dart', 'baby_activity_catalog.dart',
+              'recipe_art.dart')
 LIT = re.compile(r"""(?<![A-Za-z0-9_$])'((?:[^'\\\n]|\\.|\$\{(?:[^{}]|\{[^{}]*\})*\})*)'""")
 
 SEQ = re.compile(LIT.pattern + r'(?:\s*' + LIT.pattern + r')*')

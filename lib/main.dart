@@ -58,6 +58,7 @@ import 'data/shopping_needs.dart';
 import 'widgets/recipe_info_sections.dart';
 import 'widgets/pastel_shell.dart';
 import 'widgets/adaptive.dart';
+import 'widgets/recipe_art.dart';
 import 'widgets/reference_widgets.dart';
 import 'services/cycle_estimate.dart';
 import 'screens/monthly_baby_guide_page.dart';
@@ -624,7 +625,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     ),
     _baslik('Kategorileri keşfet 🌸'),
     LayoutBuilder(builder: (context, constraints) => AdaptiveGrid(
-      minTileWidth: 72, tileHeight: constraints.maxWidth < 350 ? 76 : 96,
+      minTileWidth: 72, tileHeight: 104,
       minColumns: 2, maxColumns: 8, children: [
         _mini('Alışveriş', Icons.shopping_cart, const Color(0xFFECDFFF), () => setState(() => sekme = 3)),
         _mini('Yemek', Icons.restaurant, const Color(0xFFFFE5CF), () => setState(() => sekme = 2)),
@@ -726,8 +727,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         Container(padding: const EdgeInsets.all(9), decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: .62), borderRadius: BorderRadius.circular(16)),
           child: Icon(icon, color: mor, size: 25)),
-        const SizedBox(height: 7), Text(label, textAlign: TextAlign.center, maxLines: 2,
-          style: const TextStyle(fontSize: 10.5, color: mor, fontWeight: FontWeight.w700))])));
+        const SizedBox(height: 7), Flexible(child: Text(label, textAlign: TextAlign.center, maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(fontSize: 10.5, color: mor, fontWeight: FontWeight.w700)))])));
 
   Widget _oner(String title, String desc, IconData icon, VoidCallback tap) => ExpandedSuggestionCard(
     title: title, description: desc, icon: icon, onTap: tap);
@@ -1050,7 +1052,10 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       child: InkWell(
         onTap: () => _sayfa(t.title, ListView(padding: const EdgeInsets.all(18), children: [
-          _hero(t.title, '${t.category} • ${t.minutes} dk', simge, emoji: recipeEmoji(t.title, t.category)),
+          ClipRRect(borderRadius: BorderRadius.circular(26), child: AspectRatio(aspectRatio: 16 / 9,
+            child: RecipeArt(title: t.title, category: t.category, ingredients: t.ingredients, borderRadius: 0))),
+          const SizedBox(height: 12),
+          _hero(t.title, '${t.category} • ${t.minutes} dk', simge),
           RecipeSummaryChips(recipe: t),
           const SizedBox(height: 8),
           AddToNotebookTile(build: () => RecipeNotebookBridge.fromGeneral(t)),
@@ -1089,11 +1094,8 @@ class _AnaUygulamaState extends State<AnaUygulama> {
             decoration: BoxDecoration(gradient: LinearGradient(colors: renkler,
               begin: Alignment.topLeft, end: Alignment.bottomRight)),
             child: Stack(children: [
-            Center(child: Container(
-              width: 84, height: 84, alignment: Alignment.center,
-              decoration: BoxDecoration(color: Colors.white.withValues(alpha: .55), shape: BoxShape.circle),
-              child: Text(recipeEmoji(t.title, t.category), textScaler: TextScaler.noScaling,
-                style: const TextStyle(fontSize: 46)))),
+            Positioned.fill(child: RecipeArt(title: t.title, category: t.category,
+              ingredients: t.ingredients, borderRadius: 0)),
             Positioned(right: 4, top: 4, child: IconButton(
               tooltip: isFavorite ? 'Favorilerden çıkar' : 'Favorilere ekle',
               style: IconButton.styleFrom(backgroundColor: Colors.white.withValues(alpha: .9)),
@@ -1391,7 +1393,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         subtitle: 'Taslak sepet; sipariş veya ödeme yapılmaz', iconColor: const Color(0xFFFFEBD9),
         onTap: () => _sayfa('Sepetim', _sepet())),
       _baslik('Ürün kataloğu'),
-      AdaptiveGrid(minTileWidth: 72, tileHeight: 98, spacing: 8,
+      AdaptiveGrid(minTileWidth: 72, tileHeight: 106, spacing: 8,
         minColumns: 3, maxColumns: 8, children: [
           _mini('Bebek Ürünleri', Icons.child_care, const Color(0xFFDDF4EF),
             () => _sayfa('Bebek Ürünleri', _urunKategori('Bebek Ürünleri'))),

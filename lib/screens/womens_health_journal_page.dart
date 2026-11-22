@@ -85,7 +85,7 @@ class _WomensHealthJournalPageState extends State<WomensHealthJournalPage> {
           TextField(controller: note, maxLength: 1000, maxLines: 3, decoration: InputDecoration(labelText: t('Notlar (isteğe bağlı)'))),
           OutlinedButton.icon(icon: const Icon(Icons.calendar_today), label: Text('${date.day}.${date.month}.${date.year}'),
             onPressed: () async { final chosen = await showDatePicker(context: dialogContext, initialDate: date, firstDate: DateTime(1950), lastDate: DateTime(2100)); if (chosen != null) refresh(() => date = chosen); }),
-          DropdownButtonFormField<int>(initialValue: severity, decoration: InputDecoration(labelText: t('Şiddet / etki')),
+          DropdownButtonFormField<int>(isExpanded: true, initialValue: severity, decoration: InputDecoration(labelText: t('Şiddet / etki')),
             items: const [DropdownMenuItem(value: 0, child: Text('Belirtilmedi')), DropdownMenuItem(value: 1, child: Text('Hafif')), DropdownMenuItem(value: 2, child: Text('Orta')), DropdownMenuItem(value: 3, child: Text('Şiddetli'))],
             onChanged: (v) => refresh(() => severity = v ?? 0)),
         ])),
@@ -144,7 +144,9 @@ class _WomensHealthJournalPageState extends State<WomensHealthJournalPage> {
     }).length;
     return Scaffold(appBar: AppBar(title: const Text('Kadın Sağlığı Günlüğü')),
       floatingActionButton: loading || error != null ? null : FloatingActionButton.extended(onPressed: _add, icon: const Icon(Icons.add), label: const Text('Kayıt ekle')),
-      body: loading ? const Center(child: CircularProgressIndicator()) : error != null ? Center(child: Text(error!)) : Column(children: [
+      // Başlık alanı listeyle birlikte kayar; kısa ve yatay ekranlarda taşmaz.
+      body: loading ? const Center(child: CircularProgressIndicator()) : error != null ? Center(child: Text(error!)) : CustomScrollView(slivers: [
+        SliverToBoxAdapter(child: Column(children: [
         const Padding(padding: EdgeInsets.all(14), child: Text('Bu günlük belirtileri ve kontrolleri not etmek içindir; tanı, tedavi veya doğurganlık tahmini sunmaz. Şiddetli veya ani belirtilerde sağlık kuruluşuna başvurun.')),
         Padding(padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6), child: Text(prompts[categories[category]] ?? '', style: Theme.of(context).textTheme.bodySmall)),
         Padding(padding: const EdgeInsets.symmetric(horizontal: 14), child: Row(children: [
@@ -157,8 +159,11 @@ class _WomensHealthJournalPageState extends State<WomensHealthJournalPage> {
           onChanged: (value) => setState(() => search = value))),
         SizedBox(height: 54, child: ListView.builder(scrollDirection: Axis.horizontal, itemCount: categories.length,
           itemBuilder: (ctx, i) => Padding(padding: const EdgeInsets.symmetric(horizontal: 4), child: ChoiceChip(label: Text(categories[i]), selected: category == i, onSelected: (_) => setState(() => category = i))))),
-        Expanded(child: shown.isEmpty ? const Center(child: Text('Bu kategoride henüz kayıt yok.')) : ListView.builder(
-          padding: const EdgeInsets.only(bottom: 90), itemCount: shown.length, itemBuilder: (ctx, i) {
+        ])),
+        if (shown.isEmpty) const SliverFillRemaining(hasScrollBody: false, child: Center(child: Padding(
+          padding: EdgeInsets.all(24), child: Text('Bu kategoride henüz kayıt yok.'))))
+        else SliverPadding(padding: const EdgeInsets.only(bottom: 90), sliver: SliverList.builder(
+          itemCount: shown.length, itemBuilder: (ctx, i) {
             final entry = shown[i]; final d = DateTime.tryParse(entry['date'] ?? '');
             const levels = ['Belirtilmedi', 'Hafif', 'Orta', 'Şiddetli'];
             final level = int.tryParse(entry['severity'] ?? '') ?? 0;

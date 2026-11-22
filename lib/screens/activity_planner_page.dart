@@ -54,7 +54,7 @@ class _ActivityPlannerPageState extends State<ActivityPlannerPage> {
       title: const Text('Yeni etkinlik'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: controller, maxLength: 120, autofocus: true, decoration: InputDecoration(labelText: t('Etkinlik adı'))),
-        DropdownButtonFormField<String>(initialValue: category, decoration: InputDecoration(labelText: t('Kategori')), items: ['Oyun', 'Kitap', 'Hareket', 'Aile', 'Diğer'].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(), onChanged: (v) => refresh(() => category = v ?? 'Oyun')),
+        DropdownButtonFormField<String>(isExpanded: true, initialValue: category, decoration: InputDecoration(labelText: t('Kategori')), items: ['Oyun', 'Kitap', 'Hareket', 'Aile', 'Diğer'].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(), onChanged: (v) => refresh(() => category = v ?? 'Oyun')),
       ]),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')), FilledButton(onPressed: () { final value = controller.text.trim(); if (value.isNotEmpty) Navigator.pop(ctx, (value, category)); }, child: const Text('Ekle'))],
     )));

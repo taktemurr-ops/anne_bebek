@@ -236,7 +236,7 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
         content: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Text('Kahvaltı, öğle ve akşam için tarif önerileri oluşturulur. Beslenme veya sağlık önerisi değildir.'),
           const SizedBox(height: 12),
-          DropdownButtonFormField<String>(initialValue: style,
+          DropdownButtonFormField<String>(isExpanded: true, initialValue: style,
             decoration: InputDecoration(labelText: t('Menü türü')),
             items: ['Dengeli', 'Pratik', 'Sebze ağırlıklı']
               .map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),

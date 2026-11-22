@@ -125,7 +125,7 @@ class _ProductCatalogPageState extends State<ProductCatalogPage> {
         if (error != null) Text(error!, style: const TextStyle(color: Colors.red)),
         TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Ürün veya özellik ara'), border: OutlineInputBorder()), onChanged: (v) => setState(() => search = v)),
         const SizedBox(height: 10),
-        DropdownButtonFormField<String>(initialValue: category, decoration: InputDecoration(labelText: t('Kategori')), items: ['Tümü', ...ProductCatalog.categories].map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(), onChanged: (v) => setState(() => category = v ?? 'Tümü')),
+        DropdownButtonFormField<String>(initialValue: category, isExpanded: true, decoration: InputDecoration(labelText: t('Kategori')), items: ['Tümü', ...ProductCatalog.categories].map((c) => DropdownMenuItem(value: c, child: Text(c, maxLines: 1, overflow: TextOverflow.ellipsis))).toList(), onChanged: (v) => setState(() => category = v ?? 'Tümü')),
         SwitchListTile(title: const Text('Yalnızca favoriler'), value: onlyFavorites, onChanged: (v) => setState(() => onlyFavorites = v)),
         FilledButton.icon(onPressed: _compare, icon: const Icon(Icons.compare_arrows), label: Text('Karşılaştır (${compared.length}/3)')),
         const SizedBox(height: 8),

@@ -63,7 +63,7 @@ class _ChildCarePlanPageState extends State<ChildCarePlanPage> {
       StatefulBuilder(builder: (ctx, refresh) => AlertDialog(
         title: Text(original == null ? 'Takip kaydı ekle' : 'Takip kaydını düzenle'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          DropdownButtonFormField<String>(initialValue: category, decoration: InputDecoration(labelText: t('Kategori')),
+          DropdownButtonFormField<String>(isExpanded: true, initialValue: category, decoration: InputDecoration(labelText: t('Kategori')),
             items: ['Aşı', 'Doktor kontrolü', 'Gelişim gözlemi'].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
             onChanged: (v) { if (v != null) refresh(() => category = v); }),
           TextField(controller: title, maxLength: 90, decoration: InputDecoration(labelText: t('Başlık / aşı adı'))),

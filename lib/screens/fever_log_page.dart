@@ -78,7 +78,7 @@ class _FeverLogPageState extends State<FeverLogPage> {
           TextField(key: const Key('ates_derece'), controller: temp,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             decoration: InputDecoration(labelText: t('Ateş (°C)'), hintText: t('ör. 38,4'))),
-          DropdownButtonFormField<String>(initialValue: method,
+          DropdownButtonFormField<String>(isExpanded: true, initialValue: method,
             decoration: InputDecoration(labelText: t('Ölçüm yeri')),
             items: feverMethods.map((m) => DropdownMenuItem(value: m, child: Text(m))).toList(),
             onChanged: (v) { if (v != null) update(() => method = v); }),

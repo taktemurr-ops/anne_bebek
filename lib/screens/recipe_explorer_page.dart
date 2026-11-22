@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../data/general_recipe_catalog.dart';
 import '../widgets/recipe_info_sections.dart';
 import 'weekly_meal_planner_page.dart';
+import '../widgets/recipe_art.dart';
 
 /// Paket 39 / Asama 38-42: Mevcut tarif ve favori kayitlariyla uyumlu kesif ekrani.
 class RecipeExplorerPage extends StatefulWidget {
@@ -127,7 +128,9 @@ class _RecipeExplorerPageState extends State<RecipeExplorerPage> {
     }
     return Scaffold(
       appBar: AppBar(title: const Text('Tarif keşfi'), backgroundColor: _pink),
-      body: Column(children: [
+      // Arama ve filtreler listeyle birlikte kayar; kısa ve yatay ekranlarda taşmaz.
+      body: CustomScrollView(slivers: [
+        SliverToBoxAdapter(child: Column(children: [
         Padding(padding: const EdgeInsets.fromLTRB(14, 12, 14, 6), child: TextField(
           controller: _search, onChanged: (_) => setState(() {}),
           decoration: InputDecoration(prefixIcon: const Icon(Icons.search),
@@ -139,15 +142,15 @@ class _RecipeExplorerPageState extends State<RecipeExplorerPage> {
             child: ChoiceChip(label: Text(c), selected: _category == c,
               onSelected: (_) => setState(() => _category = c)))])),
         Padding(padding: const EdgeInsets.symmetric(horizontal: 12), child: Wrap(spacing: 8, crossAxisAlignment: WrapCrossAlignment.center, children: [
-          DropdownButton<int>(value: _maxMinutes, items: const [
+          SizedBox(width: 140, child: DropdownButton<int>(isExpanded: true, value: _maxMinutes, items: const [
             DropdownMenuItem(value: 0, child: Text('Tüm süreler')),
             DropdownMenuItem(value: 15, child: Text('≤ 15 dk')),
             DropdownMenuItem(value: 30, child: Text('≤ 30 dk')),
             DropdownMenuItem(value: 60, child: Text('≤ 60 dk')),
-          ], onChanged: (v) => setState(() => _maxMinutes = v ?? 0)),
-          DropdownButton<String>(value: _sort, items: ['Önerilen','Süre: kısa → uzun','Süre: uzun → kısa','İsim: A → Z']
-            .map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),
-            onChanged: (v) => setState(() => _sort = v ?? 'Önerilen')),
+          ], onChanged: (v) => setState(() => _maxMinutes = v ?? 0))),
+          SizedBox(width: 170, child: DropdownButton<String>(isExpanded: true, value: _sort, items: ['Önerilen','Süre: kısa → uzun','Süre: uzun → kısa','İsim: A → Z']
+            .map((s) => DropdownMenuItem(value: s, child: Text(s, maxLines: 1, overflow: TextOverflow.ellipsis))).toList(),
+            onChanged: (v) => setState(() => _sort = v ?? 'Önerilen'))),
           FilterChip(label: const Text('Favorilerim'), selected: _onlyFavorites,
             onSelected: (v) => setState(() => _onlyFavorites = v)),
           FilterChip(label: const Text('Son görüntülenenler'), selected: _onlyRecent,
@@ -160,12 +163,16 @@ class _RecipeExplorerPageState extends State<RecipeExplorerPage> {
             _search.clear(); _category = 'Tümü'; _sort = 'Önerilen'; _maxMinutes = 0; _onlyFavorites = false; _onlyRecent = false;
           }), child: const Text('Filtreleri sıfırla')),
         ])),
-        Expanded(child: filtered.isEmpty ? const Center(child: Text('Bu filtrelere uygun tarif bulunamadı.')) :
-          ListView.builder(itemCount: filtered.length, itemBuilder: (ctx, i) {
+        ])),
+        if (filtered.isEmpty) const SliverFillRemaining(hasScrollBody: false,
+          child: Center(child: Text('Bu filtrelere uygun tarif bulunamadı.')))
+        else SliverList.builder(itemCount: filtered.length, itemBuilder: (ctx, i) {
             final r = filtered[i];
             return Card(margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               color: i.isEven ? _pink : const Color(0xFFF4EFFF),
               child: ListTile(
+                leading: RecipeArt(title: r.title, category: r.category, ingredients: r.ingredients,
+                  size: 52, borderRadius: 14),
                 title: Text(r.title, style: const TextStyle(fontWeight: FontWeight.w600)),
                 subtitle: Text('${r.category} • ${r.minutes} dk • ${r.ingredients.length} malzeme'),
                 trailing: IconButton(tooltip: t('Favorilere ekle / çıkar'),
@@ -173,7 +180,8 @@ class _RecipeExplorerPageState extends State<RecipeExplorerPage> {
                     color: const Color(0xFFE94291)),
                   onPressed: () => _toggleFavorite(r)),
                 onTap: () => _details(r)));
-          })),
+          }),
+        const SliverToBoxAdapter(child: SizedBox(height: 16)),
       ]),
     );
   }
@@ -265,7 +273,7 @@ class _InteractiveRecipeDetailsState extends State<_InteractiveRecipeDetails> {
               if (chosen != null) update(() => selected = chosen);
             },
           ),
-          DropdownButtonFormField<String>(
+          DropdownButtonFormField<String>(isExpanded: true, 
             initialValue: meal, decoration: InputDecoration(labelText: t('Öğün')),
             items: _meals.map((m) => DropdownMenuItem(value: m, child: Text(m))).toList(),
             onChanged: (v) { if (v != null) update(() => meal = v); },
@@ -371,6 +379,9 @@ class _InteractiveRecipeDetailsState extends State<_InteractiveRecipeDetails> {
     return Scaffold(
       appBar: AppBar(title: Text(r.title), backgroundColor: _pink),
       body: ListView(padding: const EdgeInsets.all(16), children: [
+        ClipRRect(borderRadius: BorderRadius.circular(22), child: AspectRatio(aspectRatio: 16 / 9,
+          child: RecipeArt(title: r.title, category: r.category, ingredients: r.ingredients, borderRadius: 0))),
+        const SizedBox(height: 12),
         Text('${r.category} • ${r.minutes} dakika', style: const TextStyle(color: _purple)),
         const SizedBox(height: 8),
         RecipeSummaryChips(recipe: r),
