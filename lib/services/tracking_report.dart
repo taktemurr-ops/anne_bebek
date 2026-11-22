@@ -45,6 +45,10 @@ const trackerDefs = <TrackerDef>[
   TrackerDef('shopping_checklist_v1', 'Alışveriş listesi', 'Aile'),
   TrackerDef('family_activity_planner_v57', 'Etkinlik planı', 'Aile'),
   TrackerDef('travel_checklist_v1', 'Bebekle seyahat listesi', 'Aile'),
+  TrackerDef('tantrum_log_v1', 'Öfke nöbeti kayıtları', 'Bebek'),
+  TrackerDef('screen_time_v1', 'Ekran süresi', 'Bebek'),
+  TrackerDef('sibling_prep_v1', 'Kardeşe hazırlık', 'Aile'),
+  TrackerDef('menopause_log_v1', 'Menopoz belirtileri', 'Kadın'),
 ];
 
 class TrackerSummary {

@@ -40,6 +40,7 @@ import 'package:anne_bebek/screens/care_guides_pages.dart';
 import 'package:anne_bebek/screens/more_guides_pages.dart';
 import 'package:anne_bebek/screens/tracking_report_page.dart';
 import 'package:anne_bebek/screens/life_guides_pages.dart';
+import 'package:anne_bebek/screens/family_more_pages.dart';
 import 'package:anne_bebek/screens/extra_guides_pages.dart';
 import 'package:anne_bebek/screens/family_tools_pages.dart';
 import 'package:anne_bebek/screens/first_aid_page.dart';
@@ -130,6 +131,11 @@ void main() {
     ('MotherRightsPage', () => const MotherRightsPage()),
     ('TravelWithBabyPage', () => const TravelWithBabyPage()),
     ('BreastSelfExamPage', () => const BreastSelfExamPage()),
+    ('TantrumHelperPage', () => const TantrumHelperPage()),
+    ('ScreenTimePage', () => ScreenTimePage(birth: DateTime.now().subtract(const Duration(days: 1000)))),
+    ('PartnerGuidePage', () => const PartnerGuidePage()),
+    ('SiblingPrepPage', () => const SiblingPrepPage()),
+    ('MenopauseTrackerPage', () => const MenopauseTrackerPage()),
     ('HomeSafetyPage', () => HomeSafetyPage(birth: DateTime.now().subtract(const Duration(days: 200)))),
   ];
   for (final (name, build) in pages) {

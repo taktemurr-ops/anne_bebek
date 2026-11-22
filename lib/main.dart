@@ -79,6 +79,7 @@ import 'screens/membership_page.dart';
 import 'services/store_billing.dart';
 import 'screens/tracking_report_page.dart';
 import 'screens/life_guides_pages.dart';
+import 'screens/family_more_pages.dart';
 import 'services/life_guides.dart';
 import 'screens/extra_guides_pages.dart';
 import 'services/photo_store.dart';
@@ -832,6 +833,15 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       PastelLinkCard(key: const Key('dil_gelisimi'), icon: Icons.record_voice_over_outlined, title: 'Konuşma ve dil gelişimi',
         subtitle: 'Yaşa göre beklenenler, destekleme ve ne zaman uzmana', iconColor: const Color(0xFFEDE4FF),
         onTap: () => _sayfa('Konuşma ve dil gelişimi', SpeechDevelopmentPage(birth: dogum))),
+      PastelLinkCard(key: const Key('ofke_nobeti'), icon: Icons.sentiment_very_dissatisfied_outlined, title: 'Öfke nöbeti yardımcısı',
+        subtitle: 'Şu an ne yapmalı, kayıt ve tetikleyici örüntüsü', iconColor: const Color(0xFFFFE3F0),
+        onTap: () => _sayfa('Öfke nöbeti', const TantrumHelperPage())),
+      PastelLinkCard(key: const Key('ekran_suresi'), icon: Icons.tv_outlined, title: 'Ekran süresi',
+        subtitle: 'Yaşa göre öneri ve günlük süre kaydı', iconColor: const Color(0xFFE0EEFF),
+        onTap: () => _sayfa('Ekran süresi', ScreenTimePage(birth: dogum))),
+      PastelLinkCard(key: const Key('kardese_hazirlik'), icon: Icons.family_restroom, title: 'Kardeşe hazırlık',
+        subtitle: 'Büyük kardeşi yeni bebeğe hazırlama listesi', iconColor: const Color(0xFFE3F3E5),
+        onTap: () => _sayfa('Kardeşe hazırlık', const SiblingPrepPage())),
       PastelLinkCard(key: const Key('bebekle_seyahat'), icon: Icons.luggage_outlined, title: 'Bebekle seyahat',
         subtitle: 'Araçla ve uçakla yolculuk kontrol listesi', iconColor: const Color(0xFFFFEBD9),
         onTap: () => _sayfa('Bebekle seyahat', const TravelWithBabyPage())),
@@ -1579,6 +1589,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     PastelLinkCard(key: const Key('meme_muayenesi'), icon: Icons.self_improvement_outlined, title: 'Meme kendi muayenesi',
       subtitle: 'Adım adım muayene, ne zaman doktora, ücretsiz taramalar', iconColor: const Color(0xFFFFE3F0),
       onTap: () => _sayfa('Meme kendi muayenesi', BreastSelfExamPage(onOpenCheckups: () => _sayfa('Sağlığım', const MyHealthPage(initialTab: 2))))),
+    PastelLinkCard(key: const Key('menopoz_takibi'), icon: Icons.thermostat_auto_outlined, title: 'Menopoz belirti takibi',
+      subtitle: 'Sıcak basması, uyku, ruh hâli; 30 günlük özet', iconColor: const Color(0xFFFFEBD9),
+      onTap: () => _sayfa('Menopoz takibi', const MenopauseTrackerPage())),
     PastelLinkCard(key: const Key('kadin_bebek_planliyorum'), icon: Icons.child_friendly_outlined, title: 'Bebek planlıyorum',
       subtitle: 'Doğurgan günler, bazal ateş, ovulasyon ve gebelik testi kaydı', iconColor: const Color(0xFFFFE3F0),
       onTap: _ttcAc),
@@ -1615,6 +1628,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     PastelLinkCard(key: const Key('anne_haklar'), icon: Icons.gavel_outlined, title: 'Annelik ve çalışma haklarım',
       subtitle: 'Doğum izni, süt izni, yarım çalışma ve başvurular', iconColor: const Color(0xFFE0EEFF),
       onTap: () => _sayfa('Annelik ve çalışma hakları', MotherRightsPage(onOpenReminders: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const RemindersPage()))))),
+    PastelLinkCard(key: const Key('destekci_rehberi'), icon: Icons.volunteer_activism_outlined, title: 'Babalar ve destekçiler için',
+      subtitle: 'Gebelikten ilk haftalara kim neye yardım edebilir; paylaş', iconColor: const Color(0xFFE3F3E5),
+      onTap: () => _sayfa('Babalar ve destekçiler', const PartnerGuidePage())),
     PastelLinkCard(key: const Key('anne_ruh_halim'), icon: Icons.psychology_outlined, title: 'Ruh halim',
       subtitle: 'Edinburgh ölçeği, sonuç ve destek hatları', iconColor: const Color(0xFFEDE4FF),
       onTap: () => _sayfa('Ruh halim', const MoodCheckPage())),
@@ -1872,6 +1888,11 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         QuickAccessItem(title: 'Bebek bakımı', description: 'Banyo, göbek, tırnak, kundak…', icon: Icons.bathtub_outlined, onOpen: () => _sayfa('Bebek bakımı', const BabyCareHowToPage())),
         QuickAccessItem(title: 'Konuşma ve dil gelişimi', description: 'Yaşa göre beklenenler', icon: Icons.record_voice_over_outlined, onOpen: () => _sayfa('Konuşma ve dil gelişimi', SpeechDevelopmentPage(birth: dogum))),
         QuickAccessItem(title: 'Annelik ve çalışma hakları', description: 'Doğum izni, süt izni, yarım çalışma', icon: Icons.gavel_outlined, onOpen: () => _sayfa('Annelik ve çalışma hakları', const MotherRightsPage())),
+        QuickAccessItem(title: 'Öfke nöbeti yardımcısı', description: 'Şu an ne yapmalı ve kayıt', icon: Icons.sentiment_very_dissatisfied_outlined, onOpen: () => _sayfa('Öfke nöbeti', const TantrumHelperPage())),
+        QuickAccessItem(title: 'Ekran süresi', description: 'Yaşa göre öneri ve kayıt', icon: Icons.tv_outlined, onOpen: () => _sayfa('Ekran süresi', ScreenTimePage(birth: dogum))),
+        QuickAccessItem(title: 'Kardeşe hazırlık', description: 'Büyük kardeş için liste', icon: Icons.family_restroom, onOpen: () => _sayfa('Kardeşe hazırlık', const SiblingPrepPage())),
+        QuickAccessItem(title: 'Babalar ve destekçiler', description: 'Kim neye yardım edebilir', icon: Icons.volunteer_activism_outlined, onOpen: () => _sayfa('Babalar ve destekçiler', const PartnerGuidePage())),
+        QuickAccessItem(title: 'Menopoz belirti takibi', description: 'Günlük belirti ve 30 günlük özet', icon: Icons.thermostat_auto_outlined, onOpen: () => _sayfa('Menopoz takibi', const MenopauseTrackerPage())),
         QuickAccessItem(title: 'Bebekle seyahat', description: 'Yolculuk kontrol listesi', icon: Icons.luggage_outlined, onOpen: () => _sayfa('Bebekle seyahat', const TravelWithBabyPage())),
         QuickAccessItem(title: 'Meme kendi muayenesi', description: 'Adım adım ve tarama takvimi', icon: Icons.self_improvement_outlined, onOpen: () => _sayfa('Meme kendi muayenesi', const BreastSelfExamPage())),
         QuickAccessItem(title: 'Doğum sonrası korunma', description: 'Yöntemler ve başlama zamanı', icon: Icons.family_restroom, onOpen: () => _sayfa('Doğum sonrası korunma', const PostpartumContraceptionPage())),
