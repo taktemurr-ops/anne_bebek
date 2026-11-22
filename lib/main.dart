@@ -78,6 +78,8 @@ import 'screens/more_guides_pages.dart';
 import 'screens/membership_page.dart';
 import 'services/store_billing.dart';
 import 'screens/tracking_report_page.dart';
+import 'screens/life_guides_pages.dart';
+import 'services/life_guides.dart';
 import 'screens/extra_guides_pages.dart';
 import 'services/photo_store.dart';
 import 'package:flutter/foundation.dart' show kReleaseMode;
@@ -635,6 +637,15 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       ])),
     _panel(color: const Color(0xFFFFE6F3), child: ListTile(leading: const Icon(Icons.auto_awesome_outlined, color: mor), title: const Text('Bilgi Asistanı'), subtitle: const Text('Bebek, gebelik, aşı ve tarif soruların · çevrimdışı'), trailing: const Icon(Icons.chevron_right), onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const AiAssistantPage())))),
     _panel(color: const Color(0xFFF3E6FF), child: ListTile(leading: const Icon(Icons.manage_search_outlined, color: mor), title: const Text('Akıllı içerik keşfi'), subtitle: const Text('Bebek, kadın ve yaşam konularında çevrimdışı arama'), trailing: const Icon(Icons.chevron_right), onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const SmartDiscoveryPage())))),
+    Builder(builder: (_) {
+      final tip = dailyTopic(DateTime.now(), hasBaby: dogum != null);
+      return _panel(color: const Color(0xFFFFF8E6), child: ListTile(key: const Key('ana_gunun_bilgisi'),
+        leading: const Icon(Icons.lightbulb_outline_rounded, color: mor),
+        title: Text(tip.title, style: const TextStyle(fontWeight: FontWeight.w800)),
+        subtitle: Text(tip.summary, maxLines: 2, overflow: TextOverflow.ellipsis),
+        trailing: const Text('Günün bilgisi', style: TextStyle(fontSize: 11, color: Colors.black54)),
+        onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => EncyclopediaPage(initialQuery: tip.title)))));
+    }),
     _panel(color: const Color(0xFFFFE4E4), child: ListTile(key: const Key('ana_ilk_yardim'), leading: const Icon(Icons.emergency_outlined, color: Color(0xFFD32F2F)), title: const Text('İlk yardım ve acil arama'), subtitle: const Text('Boğulma, havale, zehirlenme · 112 ve 114'), trailing: const Icon(Icons.chevron_right), onTap: () => _sayfa('İlk yardım', const FirstAidPage()))),
     _baslik('Bugünün önerileri ✨', action: 'Tümünü gör', onTap: () => setState(() => sekme = 2)),
     Row(children: [Expanded(child: _oner('Bebeğiniz için sağlıklı tarifler', 'Yaşa uygun bebek yemekleri', Icons.ramen_dining_rounded, () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const BabyRecipesPage())))),
@@ -821,6 +832,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       PastelLinkCard(key: const Key('dil_gelisimi'), icon: Icons.record_voice_over_outlined, title: 'Konuşma ve dil gelişimi',
         subtitle: 'Yaşa göre beklenenler, destekleme ve ne zaman uzmana', iconColor: const Color(0xFFEDE4FF),
         onTap: () => _sayfa('Konuşma ve dil gelişimi', SpeechDevelopmentPage(birth: dogum))),
+      PastelLinkCard(key: const Key('bebekle_seyahat'), icon: Icons.luggage_outlined, title: 'Bebekle seyahat',
+        subtitle: 'Araçla ve uçakla yolculuk kontrol listesi', iconColor: const Color(0xFFFFEBD9),
+        onTap: () => _sayfa('Bebekle seyahat', const TravelWithBabyPage())),
       PastelLinkCard(key: const Key('tuvalet_egitimi'), icon: Icons.wc_outlined, title: 'Tuvalet eğitimi',
         subtitle: 'Hazır olma belirtileri ve günlük başarı kaydı', iconColor: const Color(0xFFFFEBD9),
         onTap: () => _sayfa('Tuvalet eğitimi', PottyTrainingPage(birth: dogum))),
@@ -1562,6 +1576,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     PastelLinkCard(key: const Key('kadin_taramalar'), icon: Icons.fact_check_outlined, title: 'Kadın sağlığı taramalarım',
       subtitle: 'Smear/HPV, meme muayenesi, mamografi ve diğer kontroller', iconColor: const Color(0xFFE0EEFF),
       onTap: () => _sayfa('Sağlığım', const MyHealthPage(initialTab: 2))),
+    PastelLinkCard(key: const Key('meme_muayenesi'), icon: Icons.self_improvement_outlined, title: 'Meme kendi muayenesi',
+      subtitle: 'Adım adım muayene, ne zaman doktora, ücretsiz taramalar', iconColor: const Color(0xFFFFE3F0),
+      onTap: () => _sayfa('Meme kendi muayenesi', BreastSelfExamPage(onOpenCheckups: () => _sayfa('Sağlığım', const MyHealthPage(initialTab: 2))))),
     PastelLinkCard(key: const Key('kadin_bebek_planliyorum'), icon: Icons.child_friendly_outlined, title: 'Bebek planlıyorum',
       subtitle: 'Doğurgan günler, bazal ateş, ovulasyon ve gebelik testi kaydı', iconColor: const Color(0xFFFFE3F0),
       onTap: _ttcAc),
@@ -1595,6 +1612,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     PastelLinkCard(key: const Key('anne_sorular'), icon: Icons.question_answer_outlined, title: 'Soru defterim',
       subtitle: 'Doktoruna ve ebene soracaklarını yaz',
       onTap: () => _sayfa('Sorular', const QuestionsPage(categories: ['Gebelik', 'Doğum', 'Lohusalık ve Emzirme', 'Ruh Sağlığı']))),
+    PastelLinkCard(key: const Key('anne_haklar'), icon: Icons.gavel_outlined, title: 'Annelik ve çalışma haklarım',
+      subtitle: 'Doğum izni, süt izni, yarım çalışma ve başvurular', iconColor: const Color(0xFFE0EEFF),
+      onTap: () => _sayfa('Annelik ve çalışma hakları', MotherRightsPage(onOpenReminders: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const RemindersPage()))))),
     PastelLinkCard(key: const Key('anne_ruh_halim'), icon: Icons.psychology_outlined, title: 'Ruh halim',
       subtitle: 'Edinburgh ölçeği, sonuç ve destek hatları', iconColor: const Color(0xFFEDE4FF),
       onTap: () => _sayfa('Ruh halim', const MoodCheckPage())),
@@ -1851,6 +1871,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         QuickAccessItem(title: 'Emzirme sorunları', description: 'Ağrı, tıkanma, mastit ve çözümler', icon: Icons.healing_outlined, onOpen: () => _sayfa('Emzirme sorunları', const BreastfeedingHelpPage())),
         QuickAccessItem(title: 'Bebek bakımı', description: 'Banyo, göbek, tırnak, kundak…', icon: Icons.bathtub_outlined, onOpen: () => _sayfa('Bebek bakımı', const BabyCareHowToPage())),
         QuickAccessItem(title: 'Konuşma ve dil gelişimi', description: 'Yaşa göre beklenenler', icon: Icons.record_voice_over_outlined, onOpen: () => _sayfa('Konuşma ve dil gelişimi', SpeechDevelopmentPage(birth: dogum))),
+        QuickAccessItem(title: 'Annelik ve çalışma hakları', description: 'Doğum izni, süt izni, yarım çalışma', icon: Icons.gavel_outlined, onOpen: () => _sayfa('Annelik ve çalışma hakları', const MotherRightsPage())),
+        QuickAccessItem(title: 'Bebekle seyahat', description: 'Yolculuk kontrol listesi', icon: Icons.luggage_outlined, onOpen: () => _sayfa('Bebekle seyahat', const TravelWithBabyPage())),
+        QuickAccessItem(title: 'Meme kendi muayenesi', description: 'Adım adım ve tarama takvimi', icon: Icons.self_improvement_outlined, onOpen: () => _sayfa('Meme kendi muayenesi', const BreastSelfExamPage())),
         QuickAccessItem(title: 'Doğum sonrası korunma', description: 'Yöntemler ve başlama zamanı', icon: Icons.family_restroom, onOpen: () => _sayfa('Doğum sonrası korunma', const PostpartumContraceptionPage())),
         QuickAccessItem(title: 'Beslenme kaydı', description: 'Yeni beslenme kaydı oluştur', icon: Icons.local_drink_outlined, onOpen: () => _olayEkle('Beslenme')),
         QuickAccessItem(title: 'Uyku kaydı', description: 'Yeni uyku kaydı oluştur', icon: Icons.bedtime_outlined, onOpen: () => _olayEkle('Uyku')),

@@ -44,6 +44,7 @@ const trackerDefs = <TrackerDef>[
   TrackerDef('family_reminders_v40', 'Aile hatırlatıcıları', 'Aile'),
   TrackerDef('shopping_checklist_v1', 'Alışveriş listesi', 'Aile'),
   TrackerDef('family_activity_planner_v57', 'Etkinlik planı', 'Aile'),
+  TrackerDef('travel_checklist_v1', 'Bebekle seyahat listesi', 'Aile'),
 ];
 
 class TrackerSummary {

@@ -49,7 +49,7 @@ class BackupService {
     'paket39_weekly_meal_plan_v1', 'paket39_recipe_recent_v1',
     'paket39_kitchen_manual_qa_v1', 'paket44_weekly_action_estimates_v1',
     'mom_tools_v1', 'baby_name_favorites_v1', 'baby_fever_log_v1', 'my_health_v1', 'mother_profile_v1', 'doctor_questions_v1',
-    'baby_milestones_v1', 'baby_teeth_v1', 'baby_food_intro_v1', 'baby_memories_v1', 'mood_screening_v1', 'ttc_journal_v1', 'mother_exercise_v1', 'milk_stash_v1', 'birth_plan_v1', 'newborn_checklist_v1', 'potty_training_v1', 'caregiver_card_v1', 'pregnancy_weight_v1', 'home_safety_v1',
+    'baby_milestones_v1', 'baby_teeth_v1', 'baby_food_intro_v1', 'baby_memories_v1', 'mood_screening_v1', 'ttc_journal_v1', 'mother_exercise_v1', 'milk_stash_v1', 'birth_plan_v1', 'newborn_checklist_v1', 'potty_training_v1', 'caregiver_card_v1', 'pregnancy_weight_v1', 'home_safety_v1', 'travel_checklist_v1',
   };
 
   /// Sabit anahtarlar ve çocuk başına uyku günlükleri yedeklenebilir.

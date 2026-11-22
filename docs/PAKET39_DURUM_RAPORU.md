@@ -47,6 +47,12 @@ Gerçek cihaz testi yapılmamıştır.
 | Profil doğrulama (GP-02) | Ana ekran bebek profili formu doğrulayıcıdan geçiyor | `lib/main.dart` |
 | Performans | Tarifler sekmesi 40'arlık sayfalama | `lib/main.dart` |
 
+| Menü yapısı | Alt menü: Ana Sayfa · Bebek · (+) · Anne · Kadınlar. Anne: Gebelik / Doğum / Doğum sonrası; Kadınlar: Döngü / Sağlık / İyi Hisset. Tarifler ve Profil ⋮ menüde ve ana sayfada | `lib/main.dart`, `lib/widgets/pastel_shell.dart` |
+| Takip ve raporlar | 31 takip sürecinin kayıt sayısı, son kayıt, son 7 gün; toplu metin raporu (ücretsiz), PDF rapor (Premium) | `lib/screens/tracking_report_page.dart` |
+| Para kazanma | Premium abonelik (mağaza + sunucu doğrulama), iş birliği bağlantıları (reklam etiketli), yönetici gelir paneli. Kurulum: `docs/PARA_KAZANMA_KURULUM.md` | `lib/services/store_billing.dart`, `supabase/functions/subscription/`, `MONETIZATION_SUPABASE_SETUP.sql` |
+| Boş ekranlar | Sunucu kapalıyken forumlar ve bulut hesabı "Yakında" yerine çevrimdışı içerik ve araç gösteriyor; içerik doluluk testi | `lib/screens/offline_community_view.dart`, `test/content_completeness_test.dart` |
+| Ek rehberler | Hasta bebek, emzirme sorunları, bez/kaka rengi, acil belirtiler, mama hazırlama, bebek bakımı, konuşma gelişimi, doğum sonrası korunma, annelik ve çalışma hakları (7578 s. Kanun), bebekle seyahat, meme kendi muayenesi, günün bilgisi | `lib/screens/*guides_pages.dart` |
+
 ## Açık kalanlar (dürüst durum)
 
 - **Genel tarifler:** 1003 tarif, hepsi ayrıntılı (test ile korunuyor). Uzman/editör okuması önerilir.
@@ -54,7 +60,7 @@ Gerçek cihaz testi yapılmamıştır.
 - **Tarif ve bebek görselleri:** Lisanslı fotoğraf dosyaları gerekiyor; şu an simge kullanılıyor.
 - **Görseller:** Referanstaki fotoğraf/illüstrasyonlar (bebek, anne, yemek fotoğrafları) lisanslı görsel gerektirir; şu an simge ve renk geçişi kullanılıyor.
 - **Alışveriş (§7):** ürün detay, karşılaştırma ve kategori yapısı; gerçek fiyat/mağaza verisi için veri kaynağı gerekiyor.
-- **Excel'deki backend/mağaza maddeleri:** AI backend, push, topluluk moderasyonu, Google Play / App Store satın alma ve sunucu makbuz doğrulaması, iOS imzalama, KVKK metinlerinin hukukçu onayı ve yayımlanması: hesap/anahtar ve yönetim kararı gerektirir; kodla tek başına kapatılamaz.
+- **Excel'deki backend/mağaza maddeleri:** Satın alma ve sunucu doğrulama kodu hazır; mağaza ürünleri, Supabase kurulumu ve gizli anahtarlar sahibinin girişini bekliyor. AI backend, push, topluluk moderasyonu, iOS imzalama, KVKK metinlerinin hukukçu onayı ve yayımlanması: hesap/anahtar ve yönetim kararı gerektirir; kodla tek başına kapatılamaz.
 - **Gerçek cihaz testi:** Yapılmadı; kontrol listesi `docs/CIHAZ_TEST_LISTESI.md`.
 - **Yeni sağlık içerikleri:** EPDS, ilk yardım kartları, gelişim basamakları ve ek gıda önerileri yayından önce doktor/hemşire incelemesinden geçmeli.
 - **Anı fotoğrafları:** Uygulama klasöründe tutulur, yedek dosyasına girmez (boyut sınırı); bulut yedeği sunucu gerektirir.
