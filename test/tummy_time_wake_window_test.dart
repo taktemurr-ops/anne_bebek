@@ -120,4 +120,24 @@ void main() {
     expect(find.byKey(const Key('uyaniklik_penceresi')), findsOneWidget);
     expect(find.textContaining('Sıradaki uyku için önerilen aralık'), findsOneWidget);
   });
+
+  testWidgets('uyku günlüğünde Uyudu/Uyandı canlı zamanlayıcı kayıt oluşturur', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    installSecureStorageMock();
+    var now = DateTime(2026, 11, 20, 13);
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: SleepJournalPage(clock: () => now))));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('uyku_canli_dugme')));
+    await tester.pump();
+    expect(decodeSleepRunning(await SecureHealthStore.read(sleepRunningKey)), contains(sleepJournalKey));
+    now = now.add(const Duration(minutes: 45));
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('Uyuyor'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('uyku_canli_dugme')));
+    await tester.pumpAndSettle();
+    final saved = parseSleepJournal(await SecureHealthStore.read(sleepJournalKey));
+    expect(saved.single['end'], DateTime(2026, 11, 20, 13, 45).toIso8601String());
+    expect(decodeSleepRunning(await SecureHealthStore.read(sleepRunningKey)), isEmpty);
+    expect(SecureHealthStore.isAllowed(sleepRunningKey), isTrue);
+  });
 }
