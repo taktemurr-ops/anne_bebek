@@ -44,6 +44,9 @@ import 'screens/mom_tools_page.dart';
 import 'screens/fever_log_page.dart';
 import 'screens/tummy_time_page.dart';
 import 'services/last_event.dart';
+import 'services/turkey_vaccine_schedule.dart';
+import 'services/child_profiles.dart' show ChildProfile;
+import 'screens/official_vaccine_guide_page.dart';
 import 'screens/sleep_sounds_page.dart';
 import 'screens/my_health_page.dart';
 import 'screens/mother_profile_page.dart';
@@ -583,6 +586,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       title: const Text('A’dan Z’ye Rehber’de ara...', style: TextStyle(fontSize: 13)),
       trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 15, color: mor),
       onTap: () => _ansiklopediAc())),
+    ?_yaklasanAsiKarti(),
     _baslik('Bugünkü takip özeti'),
     _panel(
       child: Row(
@@ -892,7 +896,25 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     ];
   }
 
+  /// Yaklaşan aşı günü kartı (60 gün içinde planlı aşı varsa).
+  Widget? _yaklasanAsiKarti() {
+    final d = dogum;
+    if (d == null) return null;
+    final next = nextVaccineVisit(d, DateTime.now());
+    if (next == null) return null;
+    final bugun = DateUtils.dateOnly(DateTime.now());
+    final kalan = next.date.difference(bugun).inDays;
+    final tarih = '${next.date.day.toString().padLeft(2, '0')}.${next.date.month.toString().padLeft(2, '0')}.${next.date.year}';
+    final ne = next.vaccines.map((v) => t(v.title)).join(', ');
+    return PastelLinkCard(key: const Key('yaklasan_asi'), icon: Icons.vaccines_outlined,
+      title: kalan == 0 ? 'Bugün aşı günü' : 'Yaklaşan aşı: $kalan gün sonra',
+      subtitle: '$tarih • $ne', iconColor: const Color(0xFFE0EEFF),
+      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => OfficialVaccineGuidePage(
+          child: ChildProfile(id: 'ana', name: bebekAdi.isEmpty ? t('Bebeğim') : bebekAdi, birthDate: d)))));
+  }
+
   List<Widget> _bebekSaglik(int ay) => [
+    ?_yaklasanAsiKarti(),
     PastelLinkCard(icon: Icons.health_and_safety_outlined, title: 'Bebek sağlık günlüğü',
       subtitle: 'Kontrol, belirti, alerji ve gelişim kayıtları',
       onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const BabyHealthPage()))),

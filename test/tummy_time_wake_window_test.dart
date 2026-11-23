@@ -4,6 +4,7 @@ import 'package:anne_bebek/services/last_event.dart';
 import 'package:anne_bebek/services/secure_health_store.dart';
 import 'package:anne_bebek/services/tracking_report.dart';
 import 'package:anne_bebek/services/tummy_time.dart';
+import 'package:anne_bebek/services/turkey_vaccine_schedule.dart';
 import 'package:anne_bebek/services/wake_window.dart';
 import 'package:anne_bebek/sleep_journal.dart';
 import 'package:flutter/material.dart';
@@ -206,5 +207,16 @@ void main() {
     expect(s.count, 3);
     expect(s.averageGap, const Duration(hours: 2, minutes: 45));
     expect(last24hStats(events, 'Uyku', now).averageGap, isNull);
+  });
+
+  test('yaklaşan aşı günü aynı gündeki aşıları gruplar', () {
+    final birth = DateTime(2026, 10, 1);
+    final next = nextVaccineVisit(birth, DateTime(2026, 11, 23))!;
+    expect(next.date, DateTime(2026, 12, 1));
+    expect(next.vaccines.map((v) => v.code), containsAll(['bcg_2', 'hex_2', 'pcv_2']));
+    expect(nextVaccineVisit(birth, DateTime(2026, 12, 1))!.date, DateTime(2026, 12, 1));
+    // 4. ay aşıları 60 günden uzakta: kart gösterilmez.
+    expect(nextVaccineVisit(birth, DateTime(2026, 12, 2)), isNull);
+    expect(nextVaccineVisit(birth, DateTime(2026, 12, 2), withinDays: 90)!.date, DateTime(2027, 2, 1));
   });
 }
