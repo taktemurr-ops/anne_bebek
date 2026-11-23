@@ -33,7 +33,9 @@ class I18n {
   static final ValueNotifier<String> language = ValueNotifier('tr');
 
   static Map<String, String> _exact = const {};
-  static List<(RegExp, String)> _templates = const [];
+  /// (desen, hedef metin, kaynak metindeki yer tutucu sırası). Sıra, kaynakta
+  /// {1} … {0} gibi karışık sırada yazılmış şablonların doğru eşlenmesi içindir.
+  static List<(RegExp, String, List<int>)> _templates = const [];
 
   /// Kayıtlı dili yükler; yoksa cihaz dilini (destekleniyorsa) kullanır.
   static Future<void> load() async {
@@ -67,7 +69,10 @@ class I18n {
     _apply(code);
     if (exact != null) {
       _exact = exact;
-      _templates = const [];
+      _templates = [
+        for (final e in exact.entries)
+          if (e.key.contains('{0}')) (_templateRegExp(e.key), e.value, templateOrder(e.key)),
+      ];
     }
   }
 
@@ -76,10 +81,15 @@ class I18n {
     _exact = table ?? const {};
     _templates = [
       for (final e in _exact.entries)
-        if (e.key.contains('{0}')) (_templateRegExp(e.key), e.value),
+        if (e.key.contains('{0}')) (_templateRegExp(e.key), e.value, templateOrder(e.key)),
     ];
     language.value = code;
   }
+
+  /// Kaynak şablondaki yer tutucuların görünme sırasıyla numaraları.
+  @visibleForTesting
+  static List<int> templateOrder(String tpl) =>
+      [for (final m in RegExp(r'\{(\d+)\}').allMatches(tpl)) int.parse(m.group(1)!)];
 
   static RegExp _templateRegExp(String tpl) {
     final parts = tpl.split(RegExp(r'\{\d+\}'));
@@ -102,13 +112,14 @@ class I18n {
     if (language.value == 'tr' || text.isEmpty) return text;
     final exact = _exact[text];
     if (exact != null) return exact;
-    for (final (re, target) in _templates) {
+    for (final (re, target, order) in _templates) {
       final m = re.firstMatch(text);
       if (m == null) continue;
       var out = target;
       for (var i = 1; i <= m.groupCount; i++) {
         final g = m.group(i)!;
-        out = out.replaceAll('{${i - 1}}', _exact[g] ?? g);
+        final index = i - 1 < order.length ? order[i - 1] : i - 1;
+        out = out.replaceAll('{$index}', _exact[g] ?? g);
       }
       return out;
     }

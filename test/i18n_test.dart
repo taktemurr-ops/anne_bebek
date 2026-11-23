@@ -13,8 +13,19 @@ void main() {
     expect(t('Kaydet'), 'Save');
     expect(t('Bilinmeyen metin'), 'Bilinmeyen metin');
     I18n.setForTest('en', exact: const {'Kaydet': 'Save', 'Bugün {0} bardak su': 'Today {0} glasses of water', 'Kilo': 'Weight'});
-    // setForTest şablonları derlemez; gerçek tablo yolu _apply ile test edilir.
     expect(t('Kaydet'), 'Save');
+    expect(t('Bugün 5 bardak su'), 'Today 5 glasses of water');
+  });
+
+  test('karışık sıralı yer tutucular doğru değere eşlenir', () {
+    expect(I18n.templateOrder('Uyanık: {1} (son uyanış {0})'), [1, 0]);
+    I18n.setForTest('en', exact: const {
+      'Uyanık: {1} (son uyanış {0})': 'Awake: {1} (last woke at {0})',
+      '{0} kayıt • İlk: {1} {3} • Son: {2} {4}': '{0} records • First: {1} {3} • Last: {2} {4}',
+    });
+    // Kaynakta {1} önce geldiği için ilk yakalanan değer {1} yerine geçmeli.
+    expect(t('Uyanık: 2 sa 10 dk (son uyanış 11:30)'), 'Awake: 2 sa 10 dk (last woke at 11:30)');
+    expect(t('3 kayıt • İlk: 5 kg • Son: 7 kg'), isNot(contains('{')));
   });
 
   test('desteklenen diller ve yön', () {
