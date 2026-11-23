@@ -1000,6 +1000,10 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         (Icons.local_drink_outlined, '${say('Beslenme')} beslenme'),
         (Icons.baby_changing_station_outlined, '${say('Bez değişimi')} bez'),
       ]),
+      if (bugunMu ? last24hStats(olaylar, 'Beslenme', DateTime.now()) : null case (count: final int n, averageGap: final Duration ara))
+        Padding(key: const Key('beslenme_araligi'), padding: const EdgeInsets.fromLTRB(8, 0, 8, 4),
+          child: Text(t('Son 24 saatte $n beslenme • ortalama aralık ${t(shortAgo(ara))}'),
+            style: const TextStyle(fontSize: 12.5, color: mor))),
       if (_bezOzeti(gun) case final ozet?) Padding(key: const Key('bez_ozeti'),
         padding: const EdgeInsets.fromLTRB(8, 0, 8, 6),
         child: Text(ozet, style: const TextStyle(fontSize: 12.5, color: mor))),

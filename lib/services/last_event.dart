@@ -47,3 +47,16 @@ int? expectedWetDiapers(DateTime? birth, DateTime now) {
   if (days < 1 || days > 60) return null;
   return days < 5 ? days : 6;
 }
+
+/// Son 24 saatteki kayıt sayısı ve ardışık kayıtlar arasındaki ortalama süre.
+({int count, Duration? averageGap}) last24hStats(List<Map<String, String>> events, String type, DateTime now) {
+  final from = now.subtract(const Duration(hours: 24));
+  final times = <DateTime>[
+    for (final e in events)
+      if (e['tur'] == type)
+        if (DateTime.tryParse(e['zaman'] ?? '') case final t? when !t.isAfter(now) && t.isAfter(from)) t,
+  ]..sort();
+  if (times.length < 2) return (count: times.length, averageGap: null);
+  final total = times.last.difference(times.first);
+  return (count: times.length, averageGap: Duration(minutes: total.inMinutes ~/ (times.length - 1)));
+}

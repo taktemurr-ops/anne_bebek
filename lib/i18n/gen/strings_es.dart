@@ -13291,6 +13291,7 @@ const Map<String, String> stringsEs = {
   'Somonu yerleştirin.': 'Coloque el salmón.',
   'Son 1 saat': 'Última hora',
   'Son 20 ölçüm gösteriliyor (toplam {0}).': 'Se muestran las últimas 20 mediciones (total {0}).',
+  'Son 24 saatte {1} beslenme • ortalama aralık {0}': '{1} tomas en las últimas 24 horas • intervalo medio {0}',
   'Son 30 gün': 'Últimos 30 días',
   'Son 30 günde iş birliği tıklaması': 'Clics de afiliado en 30 días',
   'Son 30 günde yeni abonelik': 'Suscripciones nuevas en 30 días',

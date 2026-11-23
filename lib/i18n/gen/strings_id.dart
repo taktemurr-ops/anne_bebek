@@ -13291,6 +13291,7 @@ const Map<String, String> stringsId = {
   'Somonu yerleştirin.': 'Letakkan salmon.',
   'Son 1 saat': 'Satu jam terakhir',
   'Son 20 ölçüm gösteriliyor (toplam {0}).': 'Menampilkan 20 pengukuran terakhir (total {0}).',
+  'Son 24 saatte {1} beslenme • ortalama aralık {0}': '{1} kali menyusu dalam 24 jam terakhir • jarak rata-rata {0}',
   'Son 30 gün': '30 hari terakhir',
   'Son 30 günde iş birliği tıklaması': 'Klik afiliasi 30 hari terakhir',
   'Son 30 günde yeni abonelik': 'Langganan baru 30 hari terakhir',

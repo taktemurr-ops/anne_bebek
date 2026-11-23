@@ -13291,6 +13291,7 @@ const Map<String, String> stringsAr = {
   'Somonu yerleştirin.': 'ضعي السلمون.',
   'Son 1 saat': 'الساعة الأخيرة',
   'Son 20 ölçüm gösteriliyor (toplam {0}).': 'يُعرض آخر 20 قياسًا (الإجمالي {0}).',
+  'Son 24 saatte {1} beslenme • ortalama aralık {0}': '{1} رضعات في آخر 24 ساعة • متوسط الفاصل {0}',
   'Son 30 gün': 'آخر 30 يومًا',
   'Son 30 günde iş birliği tıklaması': 'نقرات الشراكة في آخر 30 يومًا',
   'Son 30 günde yeni abonelik': 'اشتراكات جديدة في آخر 30 يومًا',

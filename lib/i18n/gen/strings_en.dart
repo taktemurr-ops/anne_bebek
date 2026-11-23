@@ -13291,6 +13291,7 @@ const Map<String, String> stringsEn = {
   'Somonu yerleştirin.': 'Lay the salmon on top.',
   'Son 1 saat': 'Last hour',
   'Son 20 ölçüm gösteriliyor (toplam {0}).': 'Showing the last 20 measurements (total {0}).',
+  'Son 24 saatte {1} beslenme • ortalama aralık {0}': '{1} feeds in the last 24 hours • average interval {0}',
   'Son 30 gün': 'Last 30 days',
   'Son 30 günde iş birliği tıklaması': 'Affiliate clicks in the last 30 days',
   'Son 30 günde yeni abonelik': 'New subscriptions in the last 30 days',

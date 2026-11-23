@@ -191,4 +191,20 @@ void main() {
     expect(r.dayMinutes, 110);
     expect(r.naps, 1);
   });
+
+  test('son 24 saatte beslenme sayısı ve ortalama aralık', () {
+    final now = DateTime(2026, 11, 23, 12);
+    String at(DateTime d) => d.toIso8601String();
+    final events = [
+      {'tur': 'Beslenme', 'zaman': at(DateTime(2026, 11, 23, 6))},
+      {'tur': 'Beslenme', 'zaman': at(DateTime(2026, 11, 23, 9))},
+      {'tur': 'Beslenme', 'zaman': at(DateTime(2026, 11, 23, 11, 30))},
+      {'tur': 'Beslenme', 'zaman': at(DateTime(2026, 11, 22, 8))}, // 24 saatten eski
+      {'tur': 'Uyku', 'zaman': at(DateTime(2026, 11, 23, 10))},
+    ];
+    final s = last24hStats(events, 'Beslenme', now);
+    expect(s.count, 3);
+    expect(s.averageGap, const Duration(hours: 2, minutes: 45));
+    expect(last24hStats(events, 'Uyku', now).averageGap, isNull);
+  });
 }

@@ -13291,6 +13291,7 @@ const Map<String, String> stringsFa = {
   'Somonu yerleştirin.': 'سالمون را بگذارید.',
   'Son 1 saat': 'ساعت گذشته',
   'Son 20 ölçüm gösteriliyor (toplam {0}).': 'نمایش ۲۰ اندازه آخر (مجموع {0}).',
+  'Son 24 saatte {1} beslenme • ortalama aralık {0}': '{1} بار شیر در ۲۴ ساعت گذشته • فاصله‌ی میانگین {0}',
   'Son 30 gün': '۳۰ روز اخیر',
   'Son 30 günde iş birliği tıklaması': 'کلیک‌های همکاری در ۳۰ روز اخیر',
   'Son 30 günde yeni abonelik': 'اشتراک‌های جدید در ۳۰ روز اخیر',
