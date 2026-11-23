@@ -156,4 +156,24 @@ void main() {
     expect(shortAgo(const Duration(hours: 2, minutes: 10)), '2 sa 10 dk');
     expect(shortAgo(const Duration(days: 3)), '3 gün');
   });
+
+  test('ıslak/kakalı bez sayımı ve yenidoğan beklentisi', () {
+    final day = DateTime(2026, 11, 23, 18);
+    String at(int h) => DateTime(2026, 11, 23, h).toIso8601String();
+    final events = [
+      {'tur': 'Bez değişimi', 'zaman': at(8), 'bez': 'Islak'},
+      {'tur': 'Bez değişimi', 'zaman': at(10), 'bez': 'İkisi'},
+      {'tur': 'Bez değişimi', 'zaman': at(12), 'bez': 'Kakalı'},
+      {'tur': 'Bez değişimi', 'zaman': at(14)}, // eski kayıt: tür yok
+      {'tur': 'Bez değişimi', 'zaman': DateTime(2026, 11, 22, 9).toIso8601String(), 'bez': 'Islak'},
+      {'tur': 'Beslenme', 'zaman': at(9), 'bez': 'Islak'},
+    ];
+    final c = diaperCounts(events, day);
+    expect(c.wet, 2);
+    expect(c.dirty, 2);
+    expect(expectedWetDiapers(DateTime(2026, 11, 21), day), 3);
+    expect(expectedWetDiapers(DateTime(2026, 11, 10), day), 6);
+    expect(expectedWetDiapers(DateTime(2026, 6, 1), day), isNull);
+    expect(expectedWetDiapers(null, day), isNull);
+  });
 }

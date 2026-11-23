@@ -340,17 +340,26 @@ class _AnaUygulamaState extends State<AnaUygulama> {
     final not = TextEditingController();
     ModalRoute<dynamic>? recordRoute;
     var kaydediliyor = false; // Çift dokunuşta ikinci kayıt/pop engellenir.
+    final bezKaydi = tur == 'Bez değişimi';
+    var bez = 'Islak';
     await showDialog<void>(context: context, builder: (ctx) {
       recordRoute = ModalRoute.of(ctx);
-      return AlertDialog(
+      return StatefulBuilder(builder: (ctx, guncelle) => AlertDialog(
       title: Text('$tur kaydı'),
-      content: TextField(controller: not, autofocus: true, decoration: InputDecoration(labelText: t('Açıklama / miktar (isteğe bağlı)')), maxLines: 2),
+      content: Column(mainAxisSize: MainAxisSize.min, children: [
+        if (bezKaydi) Wrap(spacing: 6, children: [
+          for (final b in diaperKinds) ChoiceChip(key: Key('bez_$b'), label: Text(b), selected: bez == b,
+              onSelected: (_) => guncelle(() => bez = b)),
+        ]),
+        TextField(controller: not, autofocus: !bezKaydi, decoration: InputDecoration(labelText: t('Açıklama / miktar (isteğe bağlı)')), maxLines: 2),
+      ]),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
         FilledButton(onPressed: () async {
           if (kaydediliyor) return;
           kaydediliyor = true;
           try {
-          final yeniKayit = {'tur': tur, 'not': not.text.trim(), 'zaman': (zaman ?? DateTime.now()).toIso8601String()};
+          final yeniKayit = {'tur': tur, 'not': not.text.trim(), 'zaman': (zaman ?? DateTime.now()).toIso8601String(),
+            if (bezKaydi) 'bez': bez};
           setState(() => olaylar.insert(0, yeniKayit));
           final basarili = await _kaydet();
           if (!basarili && mounted) setState(() => olaylar.remove(yeniKayit));
@@ -361,7 +370,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
             kaydediliyor = false;
           }
         }, child: const Text('Kaydet'))],
-    ); });
+    )); });
     await recordRoute?.completed;
     not.dispose();
   }
@@ -991,13 +1000,16 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         (Icons.local_drink_outlined, '${say('Beslenme')} beslenme'),
         (Icons.baby_changing_station_outlined, '${say('Bez değişimi')} bez'),
       ]),
+      if (_bezOzeti(gun) case final ozet?) Padding(key: const Key('bez_ozeti'),
+        padding: const EdgeInsets.fromLTRB(8, 0, 8, 6),
+        child: Text(ozet, style: const TextStyle(fontSize: 12.5, color: mor))),
       _baslik('Günün kayıtları'),
       if (gunKayitlari.isEmpty) _panel(child: const Text('Bu güne ait kayıt yok. Satırlardaki + butonuyla ekleyebilirsin.')),
       ...gunKayitlari.map((o) {
         final z = DateTime.parse(o['zaman']!);
         return _panel(child: ListTile(
           leading: const Icon(Icons.check_circle_outline, color: mor),
-          title: Text(o['tur'] ?? ''),
+          title: Text(o['bez'] == null ? (o['tur'] ?? '') : '${t(o['tur'] ?? '')} · ${t(o['bez']!)}'),
           subtitle: Text('${z.hour.toString().padLeft(2, '0')}:${z.minute.toString().padLeft(2, '0')}  ${o['not'] ?? ''}'),
           trailing: IconButton(tooltip: t('Kaydı sil'), icon: const Icon(Icons.delete_outline), onPressed: () => _kayitSil(olaylar, o))));
       }),
@@ -1026,6 +1038,17 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   // Türkçe ondalık ayırıcı (7,4 kg).
   String _olcumMetni(String? deger, String birim) => (deger == null || deger.isEmpty) ? '—' : '${deger.replaceAll('.', ',')} $birim';
   String _guvenliTarih(String? s) {final d = DateTime.tryParse(s ?? ''); return d == null ? '' : _tarih(d);}
+  /// Günün ıslak/kakalı bez sayısı ve ilk iki ayda ıslak bez beklentisi.
+  String? _bezOzeti(DateTime gun) {
+    final c = diaperCounts(olaylar, gun);
+    if (c.wet == 0 && c.dirty == 0) return null;
+    final beklenen = expectedWetDiapers(dogum, gun);
+    final ozet = t('Islak bez: ${c.wet} • Kakalı bez: ${c.dirty}');
+    if (beklenen == null) return ozet;
+    final not = t('Bu yaşta günde en az $beklenen ıslak bez beklenir (genel bilgi). Azsa ve bebek halsizse doktoruna danış.');
+    return '$ozet\n$not';
+  }
+
   /// "Son beslenme 2 sa 10 dk önce • Son bez 40 dk önce" gibi kısa özet.
   String? _sonKayitOzeti() {
     final now = DateTime.now();

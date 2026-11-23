@@ -18,3 +18,32 @@ String shortAgo(Duration d) {
   if (d.inHours >= 1) return '${d.inHours} sa ${d.inMinutes % 60} dk';
   return '${d.inMinutes} dk';
 }
+
+/// Bez kaydı türleri; "İkisi" hem ıslak hem kakalı sayılır.
+const diaperKinds = ['Islak', 'Kakalı', 'İkisi'];
+
+/// Verilen gündeki ıslak ve kakalı bez sayısı (türü seçilmemiş eski kayıtlar
+/// sayılmaz).
+({int wet, int dirty}) diaperCounts(List<Map<String, String>> events, DateTime day) {
+  var wet = 0, dirty = 0;
+  for (final e in events) {
+    if (e['tur'] != 'Bez değişimi') continue;
+    final t = DateTime.tryParse(e['zaman'] ?? '');
+    if (t == null || t.year != day.year || t.month != day.month || t.day != day.day) continue;
+    switch (e['bez']) {
+      case 'Islak': wet++;
+      case 'Kakalı': dirty++;
+      case 'İkisi': wet++; dirty++;
+    }
+  }
+  return (wet: wet, dirty: dirty);
+}
+
+/// İlk iki ayda ıslak bez için genel beklenti (emzirme rehberleriyle uyumlu):
+/// 1–4. günlerde gün sayısı kadar, 5. günden sonra en az 6. Bilgi amaçlıdır.
+int? expectedWetDiapers(DateTime? birth, DateTime now) {
+  if (birth == null) return null;
+  final days = DateTime(now.year, now.month, now.day).difference(DateTime(birth.year, birth.month, birth.day)).inDays + 1;
+  if (days < 1 || days > 60) return null;
+  return days < 5 ? days : 6;
+}
