@@ -7,6 +7,7 @@ import '../data/general_recipe_catalog.dart';
 import '../widgets/recipe_info_sections.dart';
 import 'weekly_meal_planner_page.dart';
 import '../widgets/recipe_art.dart';
+import 'cook_mode_page.dart';
 
 /// Paket 39 / Asama 38-42: Mevcut tarif ve favori kayitlariyla uyumlu kesif ekrani.
 class RecipeExplorerPage extends StatefulWidget {
@@ -384,6 +385,7 @@ class _InteractiveRecipeDetailsState extends State<_InteractiveRecipeDetails> {
         Text('${r.category} • ${r.minutes} dakika', style: const TextStyle(color: _purple)),
         const SizedBox(height: 8),
         RecipeSummaryChips(recipe: r),
+        CookModeButton(title: r.title, ingredients: r.ingredients, steps: r.steps),
         const SizedBox(height: 12),
         Card(color: _pink, child: Padding(padding: const EdgeInsets.all(12), child: Column(
           crossAxisAlignment: CrossAxisAlignment.start, children: [

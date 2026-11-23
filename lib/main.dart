@@ -59,6 +59,7 @@ import 'widgets/recipe_info_sections.dart';
 import 'widgets/pastel_shell.dart';
 import 'widgets/adaptive.dart';
 import 'widgets/recipe_art.dart';
+import 'screens/cook_mode_page.dart';
 import 'widgets/reference_widgets.dart';
 import 'services/cycle_estimate.dart';
 import 'screens/monthly_baby_guide_page.dart';
@@ -1057,6 +1058,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           _hero(t.title, '${t.category} • ${t.minutes} dk', simge),
           RecipeSummaryChips(recipe: t),
           const SizedBox(height: 8),
+          CookModeButton(title: t.title, ingredients: t.ingredients, steps: t.steps),
           AddToNotebookTile(build: () => RecipeNotebookBridge.fromGeneral(t)),
           _panel(color: const Color(0xFFFFEAF5), child: ListTile(
             leading: const Icon(Icons.add_shopping_cart, color: mor),

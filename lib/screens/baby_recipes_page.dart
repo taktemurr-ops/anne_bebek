@@ -7,6 +7,7 @@ import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/baby_recipe_catalog.dart';
 import '../widgets/recipe_art.dart';
+import 'cook_mode_page.dart';
 
 /// Mevcut baby_recipe_catalog.dart veri modelini değiştirmeden kullanır.
 class BabyRecipesPage extends StatefulWidget {
@@ -306,6 +307,7 @@ class _BabyRecipeDetailPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
+            CookModeButton(title: recipe.title, ingredients: ingredients, steps: steps),
             AddToNotebookTile(build: () => RecipeNotebookBridge.fromBaby(recipe)),
             const SizedBox(height: 12),
             Text('Malzemeler', style: Theme.of(context).textTheme.titleLarge),
