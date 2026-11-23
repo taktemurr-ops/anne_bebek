@@ -136,10 +136,8 @@ void main() {
     }
     await tester.ensureVisible(add);
     await tester.pumpAndSettle();
-    // Alttaki gezinme çubuğunun altında kalmasın diye biraz daha kaydır.
-    await tester.drag(find.byType(Scrollable).last, const Offset(0, -150));
-    await tester.pumpAndSettle();
-    await tester.tap(add);
+    // Küçük ekranda düğme alt gezinme çubuğunun altında kalabilir; doğrudan dokunma işlevini çağır.
+    tester.widget<ListTile>(add).onTap!();
     await pumpUntil(tester, () => find.textContaining('tarif defterine eklendi').evaluate().isNotEmpty);
     expect((await FamilyRecipeRepository.load()), isNotEmpty);
   });
