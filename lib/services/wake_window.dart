@@ -67,3 +67,27 @@ const sleepyCues = [
   'Huysuzlanma, mızmızlanma',
   'Kollarını ve bacaklarını sarsak hareket ettirme',
 ];
+
+/// Gece (önceki gün 19:00 → bu gün 07:00) ve gündüz (07:00 → 19:00) uyku
+/// dakikaları ile gündüz şekerleme sayısı. Kayıtlar {'start','end'} ISO metinleri.
+({int nightMinutes, int dayMinutes, int naps}) dayNightSleep(List<Map<String, dynamic>> records, DateTime day) {
+  final dayStart = DateTime(day.year, day.month, day.day, 7);
+  final dayEnd = DateTime(day.year, day.month, day.day, 19);
+  final nightStart = DateTime(day.year, day.month, day.day - 1, 19);
+  int overlap(DateTime s, DateTime e, DateTime a, DateTime b) {
+    final from = s.isAfter(a) ? s : a;
+    final to = e.isBefore(b) ? e : b;
+    return to.isAfter(from) ? to.difference(from).inMinutes : 0;
+  }
+  var night = 0, dayMin = 0, naps = 0;
+  for (final r in records) {
+    final s = DateTime.tryParse('${r['start']}');
+    final e = DateTime.tryParse('${r['end']}');
+    if (s == null || e == null || !e.isAfter(s)) continue;
+    night += overlap(s, e, nightStart, dayStart);
+    final d = overlap(s, e, dayStart, dayEnd);
+    dayMin += d;
+    if (d >= 10 && !s.isBefore(dayStart)) naps++;
+  }
+  return (nightMinutes: night, dayMinutes: dayMin, naps: naps);
+}

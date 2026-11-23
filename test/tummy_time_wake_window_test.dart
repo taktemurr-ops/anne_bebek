@@ -176,4 +176,19 @@ void main() {
     expect(expectedWetDiapers(DateTime(2026, 6, 1), day), isNull);
     expect(expectedWetDiapers(null, day), isNull);
   });
+
+  test('gece/gündüz uyku ayrımı ve şekerleme sayısı', () {
+    String iso(int d, int h, [int m = 0]) => DateTime(2026, 11, d, h, m).toIso8601String();
+    final records = [
+      {'start': iso(22, 20), 'end': iso(23, 6, 30)}, // gece 10 sa 30 dk
+      {'start': iso(23, 6, 30), 'end': iso(23, 7, 30)}, // 30 dk gece + 30 dk gündüz
+      {'start': iso(23, 13), 'end': iso(23, 14, 15)}, // şekerleme 75 dk
+      {'start': iso(23, 16), 'end': iso(23, 16, 5)}, // 5 dk: şekerleme sayılmaz
+      {'start': iso(20, 13), 'end': iso(20, 14)}, // başka gün
+    ];
+    final r = dayNightSleep(records, DateTime(2026, 11, 23, 20));
+    expect(r.nightMinutes, 660);
+    expect(r.dayMinutes, 110);
+    expect(r.naps, 1);
+  });
 }

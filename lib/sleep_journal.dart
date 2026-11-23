@@ -274,6 +274,17 @@ class _SleepJournalPageState extends State<SleepJournalPage> {
             label: Text(runningSince == null ? 'Uyudu' : 'Uyandı')),
         ]))),
       if (runningSince == null) ..._wakeWindowCard(),
+      if (!loading && records.isNotEmpty) Builder(builder: (_) {
+        final dn = dayNightSleep(records, _now());
+        String hm(int m) => t('${m ~/ 60} sa ${m % 60} dk');
+        return Card(key: const Key('gece_gunduz'), child: ListTile(
+          leading: const Icon(Icons.nights_stay_outlined),
+          title: Text('Geçen gece: ${hm(dn.nightMinutes)}'),
+          subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text('Bugün gündüz: ${hm(dn.dayMinutes)} • ${dn.naps} şekerleme'),
+            const Text('Gece 19:00–07:00, gündüz 07:00–19:00 arası sayılır.', style: TextStyle(fontSize: 11, color: Colors.black54)),
+          ])));
+      }),
       Card(child: ListTile(title: const Text('Son 7 gündeki uyku süresi'),
         subtitle: Text('${weeklyMinutes ~/ 60} saat ${weeklyMinutes % 60} dakika • ${records.where((r) => !DateTime.parse(r['start'] as String).isBefore(start)).length} kayıt'))),
       const Text('Bu süreler kayıt bazlıdır; uyku ihtiyacı için tıbbi değerlendirme yerine geçmez.'),
