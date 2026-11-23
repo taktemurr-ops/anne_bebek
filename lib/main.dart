@@ -1058,7 +1058,6 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           _hero(t.title, '${t.category} • ${t.minutes} dk', simge),
           RecipeSummaryChips(recipe: t),
           const SizedBox(height: 8),
-          CookModeButton(title: t.title, ingredients: t.ingredients, steps: t.steps),
           AddToNotebookTile(build: () => RecipeNotebookBridge.fromGeneral(t)),
           _panel(color: const Color(0xFFFFEAF5), child: ListTile(
             leading: const Icon(Icons.add_shopping_cart, color: mor),
@@ -1084,6 +1083,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
           ...t.ingredients.map((m) => ListTile(dense: true,
             leading: const Icon(Icons.check_circle_outline, color: mor), title: Text(m))),
           _baslik('Hazırlanışı'),
+          CookModeButton(title: t.title, ingredients: t.ingredients, steps: t.steps),
           ...t.steps.asMap().entries.map((e) => Padding(
             padding: const EdgeInsets.symmetric(vertical: 7),
             child: Text('${e.key + 1}. ${e.value}', style: const TextStyle(fontSize: 15)))),

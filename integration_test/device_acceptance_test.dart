@@ -135,6 +135,10 @@ void main() {
       await tester.scrollUntilVisible(add, 300, scrollable: find.byType(Scrollable).last);
     }
     await tester.ensureVisible(add);
+    await tester.pumpAndSettle();
+    // Alttaki gezinme çubuğunun altında kalmasın diye biraz daha kaydır.
+    await tester.drag(find.byType(Scrollable).last, const Offset(0, -150));
+    await tester.pumpAndSettle();
     await tester.tap(add);
     await pumpUntil(tester, () => find.textContaining('tarif defterine eklendi').evaluate().isNotEmpty);
     expect((await FamilyRecipeRepository.load()), isNotEmpty);
