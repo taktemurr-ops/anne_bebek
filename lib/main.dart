@@ -42,6 +42,7 @@ import 'widgets/consent_gate.dart';
 import 'screens/encyclopedia_page.dart';
 import 'screens/mom_tools_page.dart';
 import 'screens/fever_log_page.dart';
+import 'screens/tummy_time_page.dart';
 import 'screens/sleep_sounds_page.dart';
 import 'screens/my_health_page.dart';
 import 'screens/mother_profile_page.dart';
@@ -1008,7 +1009,10 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         onTap: () => _sayfa('Uyku sesleri ve ninniler', const SleepSoundsPage())),
       PastelLinkCard(icon: Icons.bedtime_outlined, title: 'Uyku günlüğüm',
         subtitle: 'Başlangıç–bitiş saatleri ve toplam uyku', iconColor: const Color(0xFFEDE4FF),
-        onTap: () => _sayfa('Uyku günlüğüm', const SleepJournalPage())),
+        onTap: () => _sayfa('Uyku günlüğüm', SleepJournalPage(birth: dogum))),
+      PastelLinkCard(key: const Key('karin_ustu'), icon: Icons.child_care_rounded, title: 'Karın üstü zamanı',
+        subtitle: 'Zamanlayıcı, günlük hedef ve son 7 gün', iconColor: const Color(0xFFE3F6E8),
+        onTap: () => _sayfa('Karın üstü zamanı', TummyTimePage(birth: dogum))),
       PastelLinkCard(icon: Icons.schedule_outlined, title: 'Yaşa göre uyku rehberi',
         subtitle: 'Kaç saat uyumalı, kaç kez gündüz uykusu', iconColor: const Color(0xFFEDE4FF),
         onTap: () => _sayfa('Uyku rehberi', SleepGuidePage(birth: dogum))),
@@ -1869,6 +1873,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         QuickAccessItem(title: 'Soru defteri', description: 'Doktoruma soracaklarım', icon: Icons.question_answer_outlined, onOpen: () => _sayfa('Sorular', const QuestionsPage())),
         QuickAccessItem(title: 'Uyku sesleri', description: 'Beyaz gürültü ve ninniler', icon: Icons.music_note_outlined, onOpen: () => _sayfa('Uyku sesleri ve ninniler', const SleepSoundsPage())),
         QuickAccessItem(title: 'Ateş takibi', description: 'Ateş ölçümü ve ilaç saati kaydı', icon: Icons.thermostat_outlined, onOpen: () => _sayfa('Ateş ve ilaç takibi', FeverLogPage(birth: dogum))),
+        QuickAccessItem(title: 'Karın üstü zamanı', description: 'Zamanlayıcı ve yaşa göre günlük hedef', icon: Icons.child_care_rounded, onOpen: () => _sayfa('Karın üstü zamanı', TummyTimePage(birth: dogum))),
         QuickAccessItem(title: 'Kasılma sayacı', description: 'Doğum kasılmalarının süresi ve aralığı', icon: Icons.timer_outlined, onOpen: () => _sayfa('Kasılma sayacı', const MomToolsPage())),
         QuickAccessItem(title: 'Tekme sayacı', description: 'Bebek hareketlerini say (10 hareket)', icon: Icons.touch_app_outlined, onOpen: () => _sayfa('Tekme sayacı', const MomToolsPage(initialTab: 1))),
         QuickAccessItem(title: 'Emzirme zamanlayıcısı', description: 'Sol / sağ süre takibi', icon: Icons.timer, onOpen: () => _sayfa('Emzirme zamanlayıcısı', const MomToolsPage(initialTab: 2))),

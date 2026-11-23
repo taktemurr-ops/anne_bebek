@@ -19,6 +19,7 @@ const trackerDefs = <TrackerDef>[
   TrackerDef('baby_sleep_journal_v1', 'Uyku günlüğü', 'Bebek'),
   TrackerDef('baby_feeding_journal_v5', 'Beslenme günlüğü', 'Bebek'),
   TrackerDef('baby_fever_log_v1', 'Ateş ve ilaç takibi', 'Bebek'),
+  TrackerDef('tummy_time_v1', 'Karın üstü zamanı', 'Bebek'),
   TrackerDef('baby_health_journal_v41', 'Bebek sağlık günlüğü (aşı, hastalık, alerji)', 'Bebek'),
   TrackerDef('baby_milestones_v1', 'Gelişim basamakları', 'Bebek'),
   TrackerDef('baby_teeth_v1', 'Diş takibi', 'Bebek'),

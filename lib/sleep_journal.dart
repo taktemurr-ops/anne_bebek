@@ -6,6 +6,7 @@ import 'services/secure_health_store.dart';
 import 'services/daily_analytics.dart';
 import 'services/period_comparison.dart';
 import 'services/child_profiles.dart';
+import 'services/wake_window.dart';
 
 const sleepJournalKey = 'baby_sleep_journal_v1';
 
@@ -47,7 +48,10 @@ List<Map<String, dynamic>> parseSleepJournal(String? raw) {
 
 class SleepJournalPage extends StatefulWidget {
   final ChildProfile? child;
-  const SleepJournalPage({super.key, this.child});
+  /// Profil seçilmeden açıldığında uyanıklık penceresi için doğum tarihi.
+  final DateTime? birth;
+  final DateTime Function()? clock;
+  const SleepJournalPage({super.key, this.child, this.birth, this.clock});
   @override
   State<SleepJournalPage> createState() => _SleepJournalPageState();
 }
@@ -121,6 +125,39 @@ class _SleepJournalPageState extends State<SleepJournalPage> {
     }
   }
 
+  String _hm(DateTime d) => '${d.hour.toString().padLeft(2, '0')}:${d.minute.toString().padLeft(2, '0')}';
+
+  /// Son uyanıştan bu yana geçen süre ve sıradaki uyku için önerilen aralık.
+  List<Widget> _wakeWindowCard() {
+    final birth = widget.child?.birthDate ?? widget.birth;
+    if (birth == null || loading) return const [];
+    final now = (widget.clock ?? DateTime.now)();
+    final s = nextNapSuggestion(records, birth, now);
+    if (s == null) {
+      return [Card(key: const Key('uyaniklik_penceresi'), color: const Color(0xFFF3EEFF), child: const ListTile(
+        leading: Icon(Icons.wb_twilight_rounded, color: Color(0xFF764A72)),
+        title: Text('Uyanıklık penceresi'),
+        subtitle: Text('Son uykunun bitiş saatini kaydedince sıradaki uyku için önerilen saat aralığı burada görünür.')))];
+    }
+    final awake = '${s.awake.inHours} sa ${s.awake.inMinutes % 60} dk';
+    final range = '${_hm(s.from)}–${_hm(s.to)}';
+    final (color, text) = switch (s.status) {
+      WakeStatus.early => (const Color(0xFFE3F6E8), 'Sıradaki uyku için önerilen aralık: $range'),
+      WakeStatus.inWindow => (const Color(0xFFFFF4D6), 'Uyku zamanı yaklaştı ($range). Yorgunluk belirtilerini izle.'),
+      WakeStatus.late => (const Color(0xFFFFE6CC), 'Önerilen aralık geçti ($range). Aşırı yorgunluk uykuya dalmayı zorlaştırabilir; sakin bir ortam hazırla.'),
+    };
+    return [Card(key: const Key('uyaniklik_penceresi'), color: color, child: Padding(padding: const EdgeInsets.all(12), child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text('Uyanık: $awake (son uyanış ${_hm(s.lastWake)})', style: const TextStyle(fontWeight: FontWeight.w800)),
+        const SizedBox(height: 4),
+        Text(text),
+        const SizedBox(height: 6),
+        Text('Yorgunluk belirtileri: ${sleepyCues.map(t).join(', ')}', style: const TextStyle(fontSize: 12)),
+        const Text('Aralıklar yaşa göre genel değerlerdir; bebeğinin belirtileri her zaman önceliklidir.',
+            style: TextStyle(fontSize: 11, color: Colors.black54)),
+      ])))];
+  }
+
   String _display(DateTime date) => '${date.day}.${date.month}.${date.year} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
 
   @override
@@ -134,6 +171,7 @@ class _SleepJournalPageState extends State<SleepJournalPage> {
     return ListView(padding: const EdgeInsets.all(16), children: [
       Text(widget.child == null ? 'Uyku günlüğü 🌙' : '${widget.child!.name} · Uyku günlüğü 🌙', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
       const SizedBox(height: 8),
+      ..._wakeWindowCard(),
       Card(child: ListTile(title: const Text('Son 7 gündeki uyku süresi'),
         subtitle: Text('${weeklyMinutes ~/ 60} saat ${weeklyMinutes % 60} dakika • ${records.where((r) => !DateTime.parse(r['start'] as String).isBefore(start)).length} kayıt'))),
       const Text('Bu süreler kayıt bazlıdır; uyku ihtiyacı için tıbbi değerlendirme yerine geçmez.'),
