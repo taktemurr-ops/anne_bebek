@@ -1,5 +1,6 @@
 import 'package:anne_bebek/screens/tummy_time_page.dart';
 import 'package:anne_bebek/services/backup_service.dart';
+import 'package:anne_bebek/services/last_event.dart';
 import 'package:anne_bebek/services/secure_health_store.dart';
 import 'package:anne_bebek/services/tracking_report.dart';
 import 'package:anne_bebek/services/tummy_time.dart';
@@ -139,5 +140,20 @@ void main() {
     expect(saved.single['end'], DateTime(2026, 11, 20, 13, 45).toIso8601String());
     expect(decodeSleepRunning(await SecureHealthStore.read(sleepRunningKey)), isEmpty);
     expect(SecureHealthStore.isAllowed(sleepRunningKey), isTrue);
+  });
+
+  test('son kayıttan bu yana geçen süre', () {
+    final now = DateTime(2026, 11, 23, 12);
+    final events = [
+      {'tur': 'Beslenme', 'zaman': DateTime(2026, 11, 23, 9, 50).toIso8601String()},
+      {'tur': 'Beslenme', 'zaman': DateTime(2026, 11, 23, 11, 15).toIso8601String()},
+      {'tur': 'Bez değişimi', 'zaman': 'bozuk'},
+      {'tur': 'Uyku', 'zaman': DateTime(2026, 11, 23, 13).toIso8601String()},
+    ];
+    expect(shortAgo(sinceLastEvent(events, 'Beslenme', now)!), '45 dk');
+    expect(sinceLastEvent(events, 'Bez değişimi', now), isNull);
+    expect(sinceLastEvent(events, 'Uyku', now), isNull);
+    expect(shortAgo(const Duration(hours: 2, minutes: 10)), '2 sa 10 dk');
+    expect(shortAgo(const Duration(days: 3)), '3 gün');
   });
 }

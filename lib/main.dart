@@ -43,6 +43,7 @@ import 'screens/encyclopedia_page.dart';
 import 'screens/mom_tools_page.dart';
 import 'screens/fever_log_page.dart';
 import 'screens/tummy_time_page.dart';
+import 'services/last_event.dart';
 import 'screens/sleep_sounds_page.dart';
 import 'screens/my_health_page.dart';
 import 'screens/mother_profile_page.dart';
@@ -584,6 +585,9 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         ],
       ),
     ),
+    if (_sonKayitOzeti() case final ozet?) Padding(key: const Key('son_kayit_ozeti'),
+      padding: const EdgeInsets.fromLTRB(8, 2, 8, 4),
+      child: Text(ozet, textAlign: TextAlign.center, style: const TextStyle(fontSize: 12.5, color: mor))),
     _baslik('Hızlı günlük kayıt ✨'),
     DailyQuickActions(
       // Hızlı işlemler, ana ekrandaki günlük sayacıyla aynı kaydı kullanır.
@@ -1022,6 +1026,23 @@ class _AnaUygulamaState extends State<AnaUygulama> {
   // Türkçe ondalık ayırıcı (7,4 kg).
   String _olcumMetni(String? deger, String birim) => (deger == null || deger.isEmpty) ? '—' : '${deger.replaceAll('.', ',')} $birim';
   String _guvenliTarih(String? s) {final d = DateTime.tryParse(s ?? ''); return d == null ? '' : _tarih(d);}
+  /// "Son beslenme 2 sa 10 dk önce • Son bez 40 dk önce" gibi kısa özet.
+  String? _sonKayitOzeti() {
+    final now = DateTime.now();
+    String? parca(String tur) {
+      final d = sinceLastEvent(olaylar, tur, now);
+      if (d == null) return null;
+      final sure = t(shortAgo(d));
+      return switch (tur) {
+        'Beslenme' => t('Son beslenme $sure önce'),
+        'Uyku' => t('Son uyku $sure önce'),
+        _ => t('Son bez $sure önce'),
+      };
+    }
+    final parts = [parca('Beslenme'), parca('Uyku'), parca('Bez değişimi')].whereType<String>().toList();
+    return parts.isEmpty ? null : parts.join(' • ');
+  }
+
   Widget _sayac(String label, String type) => Column(children: [Text('${olaylar.where((e) => e['tur'] == type && _guvenliTarih(e['zaman']) == _tarih(DateTime.now())).length}',
     style: const TextStyle(fontSize: 23, color: mor, fontWeight: FontWeight.bold)), Text(label)]);
 
