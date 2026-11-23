@@ -82,8 +82,17 @@ jobs:
           if [ "$HAS_SIGNING" != "true" ]; then
             echo "::warning::Release imza sırları tanımlı değil; APK yalnızca test amaçlı debug anahtarıyla imzalanır."
           fi
-          flutter build apk --release --dart-define-from-file="$APP_CONFIG"
-          flutter build appbundle --release --dart-define-from-file="$APP_CONFIG"
+          # Gradle bağımlılık indirmesi ağ kaynaklı ara sıra düşebiliyor; 3 denemeye kadar tekrar et.
+          retry() {
+            for i in 1 2 3; do
+              "$@" && return 0
+              echo "::warning::Deneme $i başarısız: $*; 30 sn sonra tekrar denenecek."
+              sleep 30
+            done
+            return 1
+          }
+          retry flutter build apk --release --dart-define-from-file="$APP_CONFIG"
+          retry flutter build appbundle --release --dart-define-from-file="$APP_CONFIG"
 
       - name: İmzayı doğrula
         shell: bash
