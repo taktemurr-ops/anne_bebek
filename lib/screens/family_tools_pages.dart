@@ -7,6 +7,7 @@ import '../data/newborn_checklist.dart';
 import '../i18n/i18n.dart' show t;
 import '../i18n/text.dart';
 import '../services/json_store.dart';
+import '../services/last_event.dart';
 import '../services/potty_training.dart';
 import '../services/text_share.dart';
 import '../widgets/module_kit.dart';
@@ -194,7 +195,11 @@ class CaregiverCardPage extends StatefulWidget {
   static const storageKey = 'caregiver_card_v1';
   final String childName;
   final DateTime? birth;
-  const CaregiverCardPage({super.key, this.childName = '', this.birth});
+  /// Ana ekrandaki hızlı kayıtlar; varsa son beslenme/uyku/bez saatleri
+  /// karta eklenebilir.
+  final List<Map<String, String>> events;
+  final DateTime Function()? clock;
+  const CaregiverCardPage({super.key, this.childName = '', this.birth, this.events = const [], this.clock});
 
   @override
   State<CaregiverCardPage> createState() => _CaregiverCardPageState();
@@ -217,7 +222,15 @@ const caregiverFields = <(String, String, String)>[
 class _CaregiverCardPageState extends State<CaregiverCardPage> {
   final _c = <String, TextEditingController>{};
   bool _loading = true;
+  bool _includeRecent = true;
   Timer? _debounce;
+
+  List<String> get _recent => [
+        for (final r in caregiverRecent(widget.events, widget.clock?.call() ?? DateTime.now()))
+          _recentLine(t(r.type), r.time, t(r.ago)),
+      ];
+
+  static String _recentLine(String label, String time, String ago) => t('$label: $time ($ago önce)');
 
   @override
   void initState() {
@@ -269,6 +282,13 @@ class _CaregiverCardPageState extends State<CaregiverCardPage> {
     for (final (id, label, _) in caregiverFields) {
       if (v[id] != null) b.writeln('${t(label)}: ${v[id]}');
     }
+    final recent = _includeRecent ? _recent : const <String>[];
+    if (recent.isNotEmpty) {
+      b..writeln()..writeln(t('SON KAYITLAR'));
+      for (final line in recent) {
+        b.writeln(line);
+      }
+    }
     b..writeln()..writeln(t('Acil durumda 112’yi ara. Zehirlenme şüphesinde 114 Ulusal Zehir Danışma Merkezi.'))
       ..writeln(t('Bebeği her zaman sırtüstü, boş ve düz bir yatakta uyut. Bebeği asla sarsma.'));
     return b.toString();
@@ -294,6 +314,11 @@ class _CaregiverCardPageState extends State<CaregiverCardPage> {
           key: Key('bakici_$id'), controller: _c[id], minLines: 1, maxLines: id == 'notes' || id == 'feeding' || id == 'sleep' ? 4 : 2,
           keyboardType: id.startsWith('contact') ? TextInputType.phone : TextInputType.multiline,
           decoration: InputDecoration(border: const OutlineInputBorder(), labelText: t(label), hintText: hint.isEmpty ? null : t(hint)))),
+      if (_recent.isNotEmpty) SwitchListTile(key: const Key('bakici_son_kayitlar'),
+        contentPadding: EdgeInsets.zero,
+        title: const Text('Son beslenme, uyku ve bez saatlerini ekle'),
+        subtitle: Text(_recent.join(' • ')),
+        value: _includeRecent, onChanged: (v) => setState(() => _includeRecent = v)),
       FilledButton.icon(key: const Key('bakici_paylas'), onPressed: _share, icon: const Icon(Icons.share_outlined), label: Text('Kartı paylaş')),
       const KitFootnote('Kart yalnızca bu telefonda şifreli saklanır; sen paylaşmadıkça kimseye gönderilmez.'),
     ]);

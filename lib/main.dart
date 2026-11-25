@@ -974,7 +974,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
       onTap: () => _sayfa('Yapılacaklar', const NewbornChecklistPage())),
     PastelLinkCard(key: const Key('bakici_karti'), icon: Icons.badge_outlined, title: 'Bakıcı kartı',
       subtitle: 'Bebeği başkasına bırakırken alerji, rutin ve acil bilgileri paylaş',
-      onTap: () => _sayfa('Bakıcı kartı', CaregiverCardPage(childName: bebekAdi, birth: dogum))),
+      onTap: () => _sayfa('Bakıcı kartı', CaregiverCardPage(childName: bebekAdi, birth: dogum, events: olaylar))),
     _baslik('Son kayıtlar'),
     if (olaylar.isEmpty) _panel(child: const Text('Henüz kayıt bulunmuyor. Ortadaki + butonundan kayıt ekleyebilirsin.')),
     ...olaylar.take(30).map((o) => _panel(child: ListTile(
@@ -1957,7 +1957,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         QuickAccessItem(title: 'Ek gıda ve alerjen', description: 'Denenen besinler ve tepkiler', icon: Icons.egg_alt_outlined, onOpen: () => _sayfa('Ek gıda ve alerjenler', FoodIntroPage(birth: dogum))),
         QuickAccessItem(title: 'Tuvalet eğitimi', description: 'Hazır olma belirtileri ve kayıt', icon: Icons.wc_outlined, onOpen: () => _sayfa('Tuvalet eğitimi', PottyTrainingPage(birth: dogum))),
         QuickAccessItem(title: 'Yeni doğan yapılacaklar', description: 'Taramalar, kayıtlar, takviyeler', icon: Icons.checklist_rounded, onOpen: () => _sayfa('Yapılacaklar', const NewbornChecklistPage())),
-        QuickAccessItem(title: 'Bakıcı kartı', description: 'Bebeği bırakırken paylaşılacak bilgiler', icon: Icons.badge_outlined, onOpen: () => _sayfa('Bakıcı kartı', CaregiverCardPage(childName: bebekAdi, birth: dogum))),
+        QuickAccessItem(title: 'Bakıcı kartı', description: 'Bebeği bırakırken paylaşılacak bilgiler', icon: Icons.badge_outlined, onOpen: () => _sayfa('Bakıcı kartı', CaregiverCardPage(childName: bebekAdi, birth: dogum, events: olaylar))),
         QuickAccessItem(title: 'Ruh halim', description: 'Doğum sonrası depresyon tarama testi', icon: Icons.psychology_outlined, onOpen: () => _sayfa('Ruh halim', const MoodCheckPage())),
         QuickAccessItem(title: 'Bebek planlıyorum', description: 'Doğurgan günler ve testler', icon: Icons.child_friendly_outlined, onOpen: _ttcAc),
         QuickAccessItem(title: 'Pelvik taban egzersizi', description: 'Kegel programı ve doğum sonrası hareket', icon: Icons.self_improvement, onOpen: () => _sayfa('Anne egzersizleri', const MotherExercisePage())),

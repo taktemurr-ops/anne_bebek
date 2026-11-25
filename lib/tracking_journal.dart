@@ -7,6 +7,7 @@ import 'services/secure_health_store.dart';
 import 'services/daily_analytics.dart';
 import 'services/period_comparison.dart';
 import 'services/fever_log.dart' show pregnancyReadingWarning;
+import 'screens/mom_tools_page.dart';
 
 /// Local journal using platform-protected secure storage; no cloud sync.
 class TrackingJournalPage extends StatefulWidget {
@@ -109,6 +110,17 @@ class _TrackingJournalPageState extends State<TrackingJournalPage> {
     setState(() { _entries.insert(0, result); _entries.sort((a, b) =>
       (b['date'] as String).compareTo(a['date'] as String)); });
     await _save();
+  }
+
+  /// Zamanlayıcı kaydı aynı günlüğe yazar; dönüşte liste yeniden okunur.
+  Future<void> _openNursingTimer() async {
+    await Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => Scaffold(
+      appBar: AppBar(title: const Text('Emzirme zamanlayıcısı')),
+      body: const MomToolsPage(initialTab: 2))));
+    if (!mounted) return;
+    final parsed = decodeJournal(await SecureHealthStore.read(_key));
+    if (!mounted) return;
+    setState(() { _entries..clear()..addAll(parsed); });
   }
 
   Future<void> _delete(Map<String, dynamic> entry) async {
@@ -214,6 +226,10 @@ class _TrackingJournalPageState extends State<TrackingJournalPage> {
       ),
       const SizedBox(height: 10),
       FilledButton.icon(onPressed: _add, icon: const Icon(Icons.add), label: const Text('Yeni kayıt ekle')),
+      if (!widget.pregnancy) Padding(padding: const EdgeInsets.only(top: 8), child: OutlinedButton.icon(
+        key: const Key('journal_open_nursing_timer'),
+        icon: const Icon(Icons.timer), label: const Text('Emzirme zamanlayıcısı (sol / sağ)'),
+        onPressed: _openNursingTimer)),
       if (_loading) const Center(child: CircularProgressIndicator()),
       if (!_loading && _entries.isEmpty) const Padding(padding: EdgeInsets.all(20),
         child: Text('Henüz kayıt bulunmuyor. Yeni kayıt ekleyerek başlayabilirsin.')),

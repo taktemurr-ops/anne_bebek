@@ -60,3 +60,24 @@ int? expectedWetDiapers(DateTime? birth, DateTime now) {
   final total = times.last.difference(times.first);
   return (count: times.length, averageGap: Duration(minutes: total.inMinutes ~/ (times.length - 1)));
 }
+
+/// Bakıcı kartına eklenen "son kayıtlar" bölümü: beslenme, uyku ve bez
+/// değişiminin son 24 saatteki en son saati ve üzerinden geçen süre.
+List<({String type, String time, String ago})> caregiverRecent(
+    List<Map<String, String>> events, DateTime now) {
+  const types = ['Beslenme', 'Uyku', 'Bez değişimi'];
+  final out = <({String type, String time, String ago})>[];
+  for (final type in types) {
+    DateTime? last;
+    for (final e in events) {
+      if (e['tur'] != type) continue;
+      final at = DateTime.tryParse(e['zaman'] ?? '');
+      if (at == null || at.isAfter(now)) continue;
+      if (last == null || at.isAfter(last)) last = at;
+    }
+    if (last == null || now.difference(last) > const Duration(hours: 24)) continue;
+    final hm = '${last.hour.toString().padLeft(2, '0')}:${last.minute.toString().padLeft(2, '0')}';
+    out.add((type: type, time: hm, ago: shortAgo(now.difference(last))));
+  }
+  return out;
+}
