@@ -26,7 +26,7 @@ class _BabyActivityCatalogPageState extends State<BabyActivityCatalogPage> {
       // Filtreler listeyle birlikte kayar; kısa ve yatay ekranlarda taşmaz.
       body: CustomScrollView(slivers: [
         SliverToBoxAdapter(child: Padding(padding: const EdgeInsets.all(16), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Text('52 temel etkinlik, 11 yaş dönemi için uyarlanmıştır (572 yaşa göre varyasyon). Her etkinlik her yaşta uygun olmayabilir; açıklamaları okuyun.'),
+          Text(t('${BabyActivityCatalog.baseCount} temel etkinlik ${ages.length} yaş dönemine uyarlanmıştır; ayrıca ${BabyActivityCatalog.targetedCount} etkinlik yalnızca belirli yaşlar için yazılmıştır. Her etkinlik her yaşta uygun olmayabilir; açıklamaları okuyun.')),
           const SizedBox(height: 12),
           DropdownButtonFormField<int>(isExpanded: true, initialValue: _band, decoration: InputDecoration(labelText: t('Yaş aralığı (ay)'), border: OutlineInputBorder()),
             items: [for (var i = 0; i < ages.length; i++) DropdownMenuItem(value: i, child: Text('${ages[i].$1}–${ages[i].$2} ay'))],

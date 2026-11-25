@@ -72,7 +72,7 @@ class _ActivityPlannerPageState extends State<ActivityPlannerPage> {
       body: _loading ? const Center(child: CircularProgressIndicator()) : ListView(padding: const EdgeInsets.all(16), children: [
         const Text('Oyun, kitap ve aile etkinliklerini planlayın. Bu ekran tıbbi gelişim değerlendirmesi yapmaz.'),
         const SizedBox(height: 12),
-        FilledButton.tonalIcon(onPressed: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const BabyActivityCatalogPage())), icon: const Icon(Icons.toys_outlined), label: const Text('572 yaşa uyarlanmış oyun ve aktiviteyi keşfet')),
+        FilledButton.tonalIcon(onPressed: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const BabyActivityCatalogPage())), icon: const Icon(Icons.toys_outlined), label: const Text('Yaşa göre oyun ve aktiviteleri keşfet')),
         const SizedBox(height: 12),
         OutlinedButton.icon(icon: const Icon(Icons.calendar_today), label: Text('${_day.day}.${_day.month}.${_day.year} • Tarih seç'), onPressed: () async { final date = await showDatePicker(context: context, initialDate: _day, firstDate: DateTime(2020), lastDate: DateTime(2100)); if (date != null && mounted) setState(() => _day = date); }),
         if (_error != null) Card(child: Padding(padding: const EdgeInsets.all(12), child: Column(children: [Text(_error!, style: TextStyle(color: Theme.of(context).colorScheme.error)), TextButton(onPressed: () { setState(() { _error = null; _items.clear(); _loading = true; }); _load(); }, child: const Text('Yeniden yükle'))]))),

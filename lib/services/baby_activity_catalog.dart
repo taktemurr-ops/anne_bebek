@@ -61,6 +61,55 @@ class BabyActivityCatalog {
     ('Gün sonu sohbeti', 'Sosyal', 'Gereç gerekmez', 'Günün sevilen anlarını kısa cümlelerle paylaşın.'),
   ];
 
+  /// Yalnızca belirli yaş dönemine uygun, dönemin gelişim becerilerine göre
+  /// yazılmış etkinlikler (yaş dönemi dizini, ad, alan, malzeme, uygulama).
+  static const _targeted = <(int, String, String, String, String)>[
+    (0, 'Karın üstü sohbet', 'Motor', 'Yumuşak battaniye, sizin yüzünüz', 'Bebek uyanık ve tokken onu göğsünüzün üzerine yüzüstü yatırın. Yüzünüzü onun hizasına getirip konuşun; başını kaldırmaya çalıştıkça gülümseyin. 1–2 dakika ile başlayın.'),
+    (0, 'Siyah-beyaz kart izleme', 'Duyu', 'Siyah-beyaz desenli kartlar', 'Kartı bebeğin yüzünden 20–30 cm uzakta tutun. Bakışını sabitlediğinde kartı yavaşça sağa sola kaydırın. Başını çevirince durun.'),
+    (0, 'Ses ve gülümseme sırası', 'İletişim', 'Gereç gerekmez', 'Bebek bir ses çıkardığında aynı sesi yumuşakça tekrarlayın ve bekleyin. Karşılıklı “konuşma” sırası kurmaya çalışın.'),
+    (0, 'Bebek masajı', 'Duyu', 'Kokusuz bebek yağı (isteğe bağlı)', 'Sıcak bir odada, beslenmeden en az 30 dakika sonra bacaklardan başlayarak hafif ve yavaş hareketlerle masaj yapın. Ağlarsa bırakın.'),
+    (1, 'Oyuncağa uzanma', 'Motor', 'Hafif çıngırak', 'Bebek sırtüstü yatarken çıngırağı göğsünün üstünde, eliyle ulaşabileceği yerde tutun. Uzanıp dokununca adını söyleyerek kutlayın.'),
+    (1, 'Yan dönme desteği', 'Motor', 'Yumuşak minder', 'Bebeği yerde sırtüstü yatırın, sevdiği oyuncağı bir yanına koyun. Dönmeye çalışırken kalçasına hafif destek verin; döndürmeye zorlamayın.'),
+    (1, 'Ayna karşısında karın üstü', 'Sosyal', 'Kırılmaz bebek aynası', 'Karın üstü zamanında aynayı önüne yerleştirin. Kendi yansımasıyla ilgilenmesini izleyin, onunla birlikte konuşun.'),
+    (1, 'Agucuk taklidi', 'Dil', 'Gereç gerekmez', 'Bebeğin “agu, ba” gibi seslerini taklit edin, sonra yeni bir hece ekleyin. Cevap vermesi için birkaç saniye bekleyin.'),
+    (2, 'Ce-e oyunu', 'Sosyal', 'Hafif örtü', 'Yüzünüzü örtüyle kapatın ve “Ce-e!” diyerek açın. Sonra örtüyü bebeğin eline verin, kendisi çekmesine fırsat verin.'),
+    (2, 'Elden ele geçirme', 'Motor', 'İki küçük ama yutulamayacak büyüklükte oyuncak', 'Oyuncağı bir eline verin, sonra diğer eline uzatın. İki elini birlikte kullanmasını teşvik edin.'),
+    (2, 'Destekli oturma oyunu', 'Motor', 'Emzirme yastığı ya da minder', 'Bebeği yastık desteğiyle oturtun, oyuncakları biraz yanlara koyun. Uzanırken dengesini korumasını izleyin; yanından ayrılmayın.'),
+    (2, 'Kap içine bırakma', 'Bilişsel', 'Büyük plastik kase, büyük bloklar', 'Bir bloğu kaseye bırakıp sesini dinletin. Sonra bloğu ona verin ve bırakmasını bekleyin.'),
+    (3, 'Bay bay ve alkış', 'Sosyal', 'Gereç gerekmez', 'Biri odadan çıkarken “bay bay” deyip el sallayın; şarkı sonunda alkışlayın. Taklit etmesi için bekleyin.'),
+    (3, 'Mobilyaya tutunarak yürüme', 'Motor', 'Sağlam kanepe, oyuncak', 'Oyuncağı kanepenin diğer ucuna koyun. Tutunarak yan yan ilerlemesini teşvik edin; sivri köşeleri koruyun.'),
+    (3, 'Tencere davulu', 'Müzik', 'Tencere, tahta kaşık', 'Tencereyi ters çevirip tahta kaşıkla vurmayı gösterin. Hızlı-yavaş, sesli-sessiz vuruşları birlikte deneyin.'),
+    (3, 'Kutudan çıkarma', 'Bilişsel', 'Ayakkabı kutusu, büyük yumuşak oyuncaklar', 'Oyuncakları kutuya koyun, birlikte tek tek çıkarın. Sonra geri koyma oyununa dönüştürün.'),
+    (4, 'İtme arabası yürüyüşü', 'Motor', 'Sağlam itme arabası ya da boş karton kutu', 'Çocuğun arabayı iterek yürümesine eşlik edin. Kaymayan zeminde ve merdivenden uzakta oynayın.'),
+    (4, 'İşaret et ve söyle', 'Dil', 'Resimli kitap', 'Bir resmi işaret edip “Kedi nerede?” diye sorun. Gösterdiğinde sözcüğü tekrar edin.'),
+    (4, 'Basit şekil kutusu', 'Bilişsel', 'Yuvarlak ve kare delikli şekil kutusu', 'Önce yuvarlak parçayla başlayın. Doğru deliği bulana kadar elini yönlendirin, sonra kendi denemesine izin verin.'),
+    (4, 'Kalın boya ile karalama', 'Sanat', 'Kalın mum boya, büyük kâğıt', 'Kâğıdı masaya bantlayın. Boyayı tutmayı gösterip birlikte karalayın; boyayı ağzına götürmemesi için yanında olun.'),
+    (5, 'Top tekmeleme', 'Motor', 'Büyük hafif top', 'Topu çocuğun ayağının önüne koyun, tekmelemeyi gösterin. Düşmemesi için gerekirse elinden tutun.'),
+    (5, 'İki kelimelik cümleler', 'Dil', 'Gereç gerekmez', 'Çocuğun tek kelimesini iki kelimeyle genişletin: “Su” dediğinde “Su iç” deyin. Düzeltmeden, örnek olun.'),
+    (5, 'Bebeğini doyur', 'Hayal gücü', 'Oyuncak bebek, plastik kaşık ve kase', 'Oyuncak bebeği doyurup uyutmayı canlandırın. Sırayı çocuğa verin ve ne yaptığını anlatın.'),
+    (5, 'Bez çorap eşleştirme', 'Bilişsel', '3–4 çift renkli çorap', 'Çorapları karıştırın, birlikte eşlerini bulun. Her eşi bulunca rengini söyleyin.'),
+    (6, 'Zıplama oyunu', 'Motor', 'Yumuşak minder', 'İki ayak birlikte zıplamayı gösterin. Minderin üstünde, elini tutarak birkaç kez deneyin.'),
+    (6, 'Renk sepeti', 'Bilişsel', 'İki renkli kova, renkli toplar', 'Kırmızı topları kırmızı kovaya, mavileri mavi kovaya koyun. Karışık olanları birlikte düzeltin.'),
+    (6, 'Oyun hamuru', 'Sanat', 'Ev yapımı ya da güvenli oyun hamuru', 'Hamuru yuvarlayıp yılan ve top yapın. Kalıplarla basmayı gösterin; ağzına koymamasını hatırlatın.'),
+    (6, 'Ne yapıyoruz?', 'Dil', 'Gereç gerekmez', 'Gün içinde yaptığınız işleri anlatın: “Çorap giyiyoruz.” Sonra çocuğa “Ne yapıyoruz?” diye sorun.'),
+    (7, 'Kısa engel parkuru', 'Motor', 'Minder, karton tünel, yastık', 'Altından geç, üstünden atla, etrafından dolaş gibi üç adımlı bir parkur kurun. Sırayı birlikte söyleyin.'),
+    (7, 'Büyük-küçük sıralama', 'Bilişsel', 'Farklı boyutta 3–4 kap', 'Kapları büyükten küçüğe dizin. Karıştırıp çocuğun sıralamasına fırsat verin.'),
+    (7, 'Parmak boyası', 'Sanat', 'Yıkanabilir parmak boyası, önlük', 'Kâğıt ve önlük hazırlayın. Elleriyle iz bırakmasına, renkleri karıştırmasına izin verin; sonra birlikte temizleyin.'),
+    (7, 'Duygu kuklası', 'Sosyal', 'Çorap kukla', 'Kuklanın üzgün, kızgın, mutlu olduğu küçük sahneler canlandırın. Çocuğa “Kukla ne hissediyor?” diye sorun.'),
+    (8, 'Makasla kesme denemesi', 'Motor', 'Çocuk makası, kalın kâğıt şeritleri', 'Ucu yuvarlak çocuk makasıyla kâğıt şeritlerini kesmeyi gösterin. Makası taşırken ucu aşağıda tutmayı öğretin.'),
+    (8, 'Hikâye zarı', 'Dil', 'Resimli zar ya da resim kartları', 'Zarı atın, çıkan resimle hikâyeye bir cümle ekleyin. Sırayla devam edin.'),
+    (8, 'Desen tamamlama', 'Bilişsel', 'Renkli bloklar', 'Kırmızı-mavi-kırmızı-mavi gibi bir desen kurun. Sıradaki rengi çocuğun bulmasını isteyin.'),
+    (8, 'Evde market oyunu', 'Hayal gücü', 'Boş ambalajlar, oyuncak para', 'Kasiyer ve müşteri rolleri alın. Saymayı ve teşekkür etmeyi oyunun içinde tekrar edin.'),
+    (9, 'Tek ayak üstünde durma', 'Motor', 'Gereç gerekmez', 'Tek ayak üstünde birlikte 5’e kadar sayın. Ayak değiştirin; düşerse gülerek yeniden deneyin.'),
+    (9, 'Harf avı', 'Dil', 'Kitap ya da ambalajlar', 'Çocuğun adının ilk harfini evdeki yazılarda arayın. Bulunca sesini birlikte söyleyin.'),
+    (9, 'Batan-yüzen deneyi', 'Bilim', 'Su dolu kap, farklı nesneler', 'Önce tahmin edin, sonra nesneyi suya koyup bakın. Sonuçları iki gruba ayırın. Suyun başından ayrılmayın.'),
+    (9, 'Kurallı masa oyunu', 'Sosyal', 'Basit kutu oyunu', 'Sıra bekleme ve kaybetmeyi kabul etmeyi öğreten kısa bir oyun oynayın. Kuralları oyundan önce birlikte tekrarlayın.'),
+    (10, 'Bisiklet ya da denge bisikleti', 'Motor', 'Kask, denge bisikleti', 'Kask takarak trafikten uzak, düz bir alanda pratik yapın. Kısa mesafelerle başlayın.'),
+    (10, 'Mini tarif', 'Yaşam becerisi', 'Yoğurt, meyve, kase', 'Çocuğun meyveyi tereyağı bıçağıyla kesip yoğurda karıştırmasına izin verin. Elleri yıkamayla başlayın.'),
+    (10, 'Haftalık hava durumu çizelgesi', 'Bilim', 'Kâğıt, kalem', 'Her gün havayı gözleyip çizelgeye güneş, bulut ya da yağmur çizin. Hafta sonunda sayın.'),
+    (10, 'Mektup yazma oyunu', 'Dil', 'Kâğıt, zarf, boya', 'Büyükanne ya da arkadaşa resimli bir “mektup” hazırlayın. Çocuk anlatsın, siz yazın; adını kendisi yazmayı denesin.'),
+  ];
+
   static final List<BabyActivity> all = List.unmodifiable([
     for (var band = 0; band < ageBands.length; band++)
       for (var i = 0; i < _ideas.length; i++)
@@ -74,7 +123,22 @@ class BabyActivityCatalog {
               ? 'Yetişkin sürekli gözetiminde uygulayın. Küçük parçalar, kopabilen nesneler, ipler ve boğulma riski oluşturan malzemeler kullanmayın. Bebek istemezse durun.'
               : 'Yetişkin gözetiminde, yaşa uygun güvenli malzemelerle uygulayın. Çocuk istemezse ara verin.',
         ),
+    for (var i = 0; i < _targeted.length; i++)
+      BabyActivity(
+        id: 'activity_age_$i', title: _targeted[i].$2,
+        area: _targeted[i].$3, materials: _targeted[i].$4,
+        minMonth: ageBands[_targeted[i].$1].$1, maxMonth: ageBands[_targeted[i].$1].$2,
+        minutes: ageBands[_targeted[i].$1].$1 < 6 ? 3 : ageBands[_targeted[i].$1].$1 < 24 ? 8 : 15,
+        steps: _targeted[i].$5,
+        safety: ageBands[_targeted[i].$1].$1 < 36
+            ? 'Yetişkin sürekli gözetiminde uygulayın. Küçük parçalar, kopabilen nesneler, ipler ve boğulma riski oluşturan malzemeler kullanmayın. Bebek istemezse durun.'
+            : 'Yetişkin gözetiminde, yaşa uygun güvenli malzemelerle uygulayın. Çocuk istemezse ara verin.',
+      ),
   ]);
+
+  /// Her yaşa uyarlanan temel etkinlik sayısı ve yaşa özel etkinlik sayısı.
+  static int get baseCount => _ideas.length;
+  static int get targetedCount => _targeted.length;
 
   static String _adaptation(int band) {
     if (band == 0) return 'Yalnızca izleme, dinleme ve nazik karşılıklı etkileşim kullanın; bebeği zorlamayın. Hareket ve nesne gerektiren adımları uygulamayın.';
