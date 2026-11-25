@@ -2694,7 +2694,7 @@ const Map<String, String> stringsFa = {
   'Altındaki patates ve domateslerle birlikte, yanında yeşil salata ile servis edin.': 'همراه سیب‌زمینی و گوجه‌ی زیرش و یک سالاد سبز کنارش سرو کنید.',
   'Altından geç, üstünden atla, etrafından dolaş gibi üç adımlı bir parkur kurun. Sırayı birlikte söyleyin.': 'مسیری سه‌مرحله‌ای بسازید مثل از زیرش رد شو، از رویش بپر، دورش بچرخ. ترتیب را با هم بگویید.',
   'Altından, altın sarısı': 'زرین، زرد طلایی',
-  'Altını ıslatma (gece)': 'شب‌ادراری',
+  'Altını ıslatma (enürezis)': 'شب‌ادراری (انورزیس)',
   'Alın': 'پیشانی',
   'Alın yazısı': 'سرنوشت',
   'Alınacaklar': 'برای خرید',

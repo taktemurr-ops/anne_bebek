@@ -2694,7 +2694,7 @@ const Map<String, String> stringsPt = {
   'Altındaki patates ve domateslerle birlikte, yanında yeşil salata ile servis edin.': 'Sirva com as batatas e tomates por baixo e salada verde ao lado.',
   'Altından geç, üstünden atla, etrafından dolaş gibi üç adımlı bir parkur kurun. Sırayı birlikte söyleyin.': 'Monte um percurso de três etapas: passar por baixo, pular por cima, contornar. Digam a ordem juntos.',
   'Altından, altın sarısı': 'Dourada, amarelo-ouro',
-  'Altını ıslatma (gece)': 'Fazer xixi na cama (à noite)',
+  'Altını ıslatma (enürezis)': 'Fazer xixi na cama (enurese)',
   'Alın': 'Testa',
   'Alın yazısı': 'Destino',
   'Alınacaklar': 'Para comprar',

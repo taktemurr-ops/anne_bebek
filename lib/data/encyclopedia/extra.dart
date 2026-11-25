@@ -125,7 +125,7 @@ const extraTopics = <EncyclopediaTopic>[
      'Bebeklikten beri süren kabızlık.'],
     ['kaka', 'tuvalet', 'sert dışkı', 'lif']),
 
-  EncyclopediaTopic('c_altini_islatma', 'Altını ıslatma (gece)', _c,
+  EncyclopediaTopic('c_altini_islatma', 'Altını ıslatma (enürezis)', _c,
     'Gece kuruluğu gündüz kuruluğundan daha geç gelişir; 5 yaşa kadar gece ıslatma sık görülür.',
     ['Mesane kapasitesi ve gece idrar üretimini azaltan hormonun olgunlaşması zaman alır.',
      'Ailede benzer öykü sıktır.',
@@ -136,7 +136,7 @@ const extraTopics = <EncyclopediaTopic>[
     ['7 yaşından sonra da sürüyorsa.',
      'Uzun süre kuru kaldıktan sonra yeniden başladıysa.',
      'Gündüz kaçırma, idrarda yanma, çok su içme ya da çok idrara çıkma eşlik ediyorsa.'],
-    ['enürezis', 'gece', 'idrar', 'yatak ıslatma']),
+    ['enürezis', 'idrar', 'yatak ıslatma', 'çiş kaçırma']),
 
   EncyclopediaTopic('c_bit', 'Bit', _c,
     'Baş biti kreş ve okul çağında sık görülür; temizlikle ilgili değildir ve tedavi edilebilir.',
@@ -177,7 +177,7 @@ const extraTopics = <EncyclopediaTopic>[
     ['Ağrı ritmik geliyorsa, kanama ya da sıvı gelmesi eşlik ediyorsa: hemen doktora.',
      'Ateş, idrarda yanma ya da yan ağrısı varsa.',
      'Bacaklarda uyuşma ya da güçsüzlük varsa.'],
-    ['bel', 'sırt', 'kasık ağrısı', 'duruş']),
+    ['bel', 'sırt', 'leğen', 'duruş']),
 
   EncyclopediaTopic('g_mide_yanmasi', 'Gebelikte mide yanması ve kabızlık', _g,
     'Hormonlar ve büyüyen rahim sindirimi yavaşlatır; mide yanması ve kabızlık çok sık görülür.',
@@ -244,7 +244,7 @@ const extraTopics = <EncyclopediaTopic>[
     ['İlk kez nöbet geçiriyorsa: doktora başvurun.',
      'Nöbet 5 dakikadan uzun sürüyorsa, nefes alma güçlüğü ya da morarma varsa: 112.',
      'Ense sertliği, kusma, basmakla solmayan döküntü ya da çocuk uyanmakta zorlanıyorsa: 112.'],
-    ['havale', 'nöbet', 'kasılma', 'ateş']),
+    ['havale', 'nöbet', 'kasılma', 'febril']),
 
   EncyclopediaTopic('s_burun_kanamasi', 'Burun kanaması', _s,
     'Çocuklarda burun kanaması sıktır ve çoğu doğru baskıyla 10–15 dakikada durur.',

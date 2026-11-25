@@ -2694,7 +2694,7 @@ const Map<String, String> stringsId = {
   'Altındaki patates ve domateslerle birlikte, yanında yeşil salata ile servis edin.': 'Sajikan bersama kentang dan tomat di bawahnya serta salad hijau.',
   'Altından geç, üstünden atla, etrafından dolaş gibi üç adımlı bir parkur kurun. Sırayı birlikte söyleyin.': 'Buat rintangan tiga langkah seperti merangkak di bawah, lompat di atas, memutari. Sebutkan urutannya bersama.',
   'Altından, altın sarısı': 'Keemasan, kuning emas',
-  'Altını ıslatma (gece)': 'Mengompol (malam hari)',
+  'Altını ıslatma (enürezis)': 'Mengompol (enuresis)',
   'Alın': 'Dahi',
   'Alın yazısı': 'Takdir',
   'Alınacaklar': 'Akan dibeli',
