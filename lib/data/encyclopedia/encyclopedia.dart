@@ -48,6 +48,7 @@ List<EncyclopediaTopic> searchEncyclopedia(String query, {String? category}) {
   final scored = <(int, EncyclopediaTopic)>[];
   for (final t in pool) {
     final title = _norm(t.title);
+    final titleWords = title.split(RegExp(r'[^a-zçğıöşü0-9]+')).toSet();
     final tags = _norm(t.tags.join(' '));
     final body = _norm('${t.summary} ${t.know.join(' ')} ${t.todo.join(' ')} ${t.doctor.join(' ')}');
     var score = 0;
@@ -55,6 +56,8 @@ List<EncyclopediaTopic> searchEncyclopedia(String query, {String? category}) {
     for (final w in words) {
       final stem = w.length > 5 ? w.substring(0, 5) : w;
       if (title.contains(stem)) score += 6;
+      // Başlıkta kelimenin tam hâli geçiyorsa ("ateş" ↔ "ateşli" değil) öne al.
+      if (titleWords.contains(w)) score += 3;
       if (tags.contains(stem)) score += 4;
       if (body.contains(stem)) score += 1;
     }

@@ -72,7 +72,7 @@ const extraTopics = <EncyclopediaTopic>[
      'Kekemelik 5 yaşından sonra da sürüyorsa: dil ve konuşma terapistine başvurun.'],
     ['konuşma', 'takılma', 'tekrar', 'akıcılık']),
 
-  EncyclopediaTopic('c_gece_korkusu', 'Gece korkuları ve kâbuslar', _c,
+  EncyclopediaTopic('c_gece_korkusu', 'Uyku korkuları ve kâbuslar', _c,
     'Gece korkusunda çocuk uyanık gibi görünse de uyumaktadır; kâbusta ise uyanır ve rüyayı hatırlar.',
     ['Gece korkusu genellikle uykunun ilk saatlerinde olur; çocuk bağırır, terler ama sabah hatırlamaz.',
      'Kâbuslar uykunun ikinci yarısında olur; çocuk uyanır, korkar ve teselli ister.',
@@ -83,7 +83,7 @@ const extraTopics = <EncyclopediaTopic>[
     ['Olaylar çok sık oluyorsa ya da gündüz yorgunluğa yol açıyorsa.',
      'Nöbet şüphesi (kasılma, idrar kaçırma, sabah karışıklık) varsa.',
      'Uykuda horlama ve nefes durması gözlüyorsanız.'],
-    ['uyku', 'korku', 'kabus', 'gece uyanma']),
+    ['gece korkusu', 'korku', 'kabus', 'pavor']),
 
   EncyclopediaTopic('c_parmak_emme', 'Parmak ve emzik emme alışkanlığı', _c,
     'Parmak emme bebeklikte doğaldır; çoğu çocuk 2–4 yaşta kendiliğinden bırakır.',
