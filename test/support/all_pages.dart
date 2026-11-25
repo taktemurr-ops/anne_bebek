@@ -22,7 +22,6 @@ import 'package:anne_bebek/screens/family_recipe_notebook_page.dart';
 import 'package:anne_bebek/screens/family_tools_pages.dart';
 import 'package:anne_bebek/screens/fever_log_page.dart';
 import 'package:anne_bebek/screens/tummy_time_page.dart';
-import 'package:anne_bebek/screens/night_light_page.dart';
 import 'package:anne_bebek/screens/first_aid_page.dart';
 import 'package:anne_bebek/screens/food_intro_page.dart';
 import 'package:anne_bebek/screens/growing_up_pages.dart';
@@ -78,7 +77,6 @@ List<(String, Widget Function())> allUserPages() {
     ('FamilyRecipeNotebookPage', () => const FamilyRecipeNotebookPage()),
     ('FeverLogPage', () => const FeverLogPage()),
     ('TummyTimePage', () => const TummyTimePage()),
-    ('NightLightPage', () => const NightLightPage()),
     ('LifeHubPage', () => const LifeHubPage()),
     ('ModuleHubPage', () => const ModuleHubPage()),
     ('MomToolsPage', () => const MomToolsPage()),
