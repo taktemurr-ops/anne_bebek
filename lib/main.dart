@@ -43,6 +43,7 @@ import 'screens/encyclopedia_page.dart';
 import 'screens/mom_tools_page.dart';
 import 'screens/fever_log_page.dart';
 import 'screens/tummy_time_page.dart';
+import 'screens/night_light_page.dart';
 import 'services/last_event.dart';
 import 'services/turkey_vaccine_schedule.dart';
 import 'services/child_profiles.dart' show ChildProfile;
@@ -1942,6 +1943,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         QuickAccessItem(title: 'Anne profilim', description: 'Acil durum kartı', icon: Icons.person_outline_rounded, onOpen: () => _sayfa('Anne profilim', const MotherProfilePage())),
         QuickAccessItem(title: 'Soru defteri', description: 'Doktoruma soracaklarım', icon: Icons.question_answer_outlined, onOpen: () => _sayfa('Sorular', const QuestionsPage())),
         QuickAccessItem(title: 'Uyku sesleri', description: 'Beyaz gürültü ve ninniler', icon: Icons.music_note_outlined, onOpen: () => _sayfa('Uyku sesleri ve ninniler', const SleepSoundsPage())),
+        QuickAccessItem(title: 'Gece ışığı', description: 'Gece emzirmesi için loş, sıcak ışık', icon: Icons.nightlight_round, onOpen: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const NightLightPage()))),
         QuickAccessItem(title: 'Ateş takibi', description: 'Ateş ölçümü ve ilaç saati kaydı', icon: Icons.thermostat_outlined, onOpen: () => _sayfa('Ateş ve ilaç takibi', FeverLogPage(birth: dogum))),
         QuickAccessItem(title: 'Karın üstü zamanı', description: 'Zamanlayıcı ve yaşa göre günlük hedef', icon: Icons.child_care_rounded, onOpen: () => _sayfa('Karın üstü zamanı', TummyTimePage(birth: dogum))),
         QuickAccessItem(title: 'Kasılma sayacı', description: 'Doğum kasılmalarının süresi ve aralığı', icon: Icons.timer_outlined, onOpen: () => _sayfa('Kasılma sayacı', const MomToolsPage())),

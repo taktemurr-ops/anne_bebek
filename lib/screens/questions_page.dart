@@ -4,6 +4,7 @@ import '../i18n/text.dart';
 import 'dart:convert';
 
 import 'package:flutter/material.dart' hide Text;
+import 'package:flutter/services.dart';
 
 import '../data/encyclopedia/encyclopedia.dart';
 import '../services/secure_health_store.dart';
@@ -11,6 +12,15 @@ import '../utils/dialog_helpers.dart';
 import 'encyclopedia_page.dart';
 
 const _mor = Color(0xFF764A72);
+
+/// Muayeneye götürmek için açık soruların numaralı düz metin listesi.
+String openQuestionsText(List<DoctorQuestion> items, String Function(String) tr) {
+  final open = items.where((q) => !q.asked).toList();
+  return [
+    tr('Doktoruma soracaklarım'),
+    for (var i = 0; i < open.length; i++) '${i + 1}. ${open[i].text}${open[i].about == 'Ben' ? ' (${tr('Ben')})' : ''}',
+  ].join('\n');
+}
 
 class DoctorQuestion {
   final String id;
@@ -161,7 +171,17 @@ class _QuestionsPageState extends State<QuestionsPage> {
       if (_items.isEmpty) const Padding(padding: EdgeInsets.all(12), child: Text(
           'Örnek: “Demir ilacını ne zamana kadar kullanmalıyım?”, “Bebeğimin kakası yeşil, normal mi?”',
           textAlign: TextAlign.center, style: TextStyle(color: Colors.black54))),
-      if (open.isNotEmpty) const Text('Sorulacaklar', style: TextStyle(fontWeight: FontWeight.w800, color: _mor)),
+      if (open.isNotEmpty) Row(children: [
+        const Text('Sorulacaklar', style: TextStyle(fontWeight: FontWeight.w800, color: _mor)),
+        const Spacer(),
+        TextButton.icon(key: const Key('soru_kopyala'), icon: const Icon(Icons.copy, size: 18), label: const Text('Listeyi kopyala'),
+          onPressed: () async {
+            await Clipboard.setData(ClipboardData(text: openQuestionsText(_items, t)));
+            if (!mounted) return;
+            ScaffoldMessenger.maybeOf(context)?.showSnackBar(const SnackBar(
+                content: Text('Sorular panoya kopyalandı; not uygulamasına ya da mesaja yapıştırabilirsin.')));
+          }),
+      ]),
       for (final q in open) _tile(q),
       if (done.isNotEmpty) const Text('Sorduklarım', style: TextStyle(fontWeight: FontWeight.w800, color: _mor)),
       for (final q in done) _tile(q),
