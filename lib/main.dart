@@ -665,7 +665,7 @@ class _AnaUygulamaState extends State<AnaUygulama> {
         title: Text(tip.title, style: const TextStyle(fontWeight: FontWeight.w800)),
         subtitle: Text(tip.summary, maxLines: 2, overflow: TextOverflow.ellipsis),
         trailing: const Text('Günün bilgisi', style: TextStyle(fontSize: 11, color: Colors.black54)),
-        onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => EncyclopediaPage(initialQuery: tip.title)))));
+        onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => EncyclopediaTopicPage(topic: tip)))));
     }),
     _panel(color: const Color(0xFFFFE4E4), child: ListTile(key: const Key('ana_ilk_yardim'), leading: const Icon(Icons.emergency_outlined, color: Color(0xFFD32F2F)), title: const Text('İlk yardım ve acil arama'), subtitle: const Text('Boğulma, havale, zehirlenme · 112 ve 114'), trailing: const Icon(Icons.chevron_right), onTap: () => _sayfa('İlk yardım', const FirstAidPage()))),
     _baslik('Bugünün önerileri ✨', action: 'Tümünü gör', onTap: () => setState(() => sekme = 2)),
