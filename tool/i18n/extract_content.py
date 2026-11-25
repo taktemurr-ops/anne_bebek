@@ -7,7 +7,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 FILES = [
     'lib/data/encyclopedia/model.dart', 'lib/data/encyclopedia/baby.dart', 'lib/data/encyclopedia/child.dart',
     'lib/data/encyclopedia/pregnancy.dart', 'lib/data/encyclopedia/mother.dart', 'lib/data/encyclopedia/life.dart',
-    'lib/data/encyclopedia/more.dart',
+    'lib/data/encyclopedia/more.dart', 'lib/data/encyclopedia/extra.dart',
     'lib/services/pregnancy_week_guide.dart', 'lib/data/monthly_baby_guide.dart', 'lib/data/monthly_age_content.dart',
     'lib/data/baby_care_guidance.dart', 'lib/data/age_guides.dart', 'lib/data/baby_nutrition.dart',
     'lib/data/women_lifestyle_content.dart', 'lib/services/offline_assistant.dart',
