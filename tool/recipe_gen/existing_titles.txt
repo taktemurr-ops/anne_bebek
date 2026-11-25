@@ -1,0 +1,1003 @@
+At-0	humus
+At-1	yoğurtlu naneli dip sos
+At-2	fırında baharatlı nohut
+At-3	sebze çubukları ve tahinli dip
+At-4	ev yapımı peynirli kraker
+At-5	hurmalı yulaf bar
+At-6	meyveli kefir kasesi
+At-7	avokado ezmesi (guacamole)
+At-8	fırında baharatlı patates dilimleri
+At-9	lorlu sebzeli sandviç
+Ba-0	kuru fasulye
+Ba-0-unique-1	fırında somon
+Ba-1	nohut yemeği
+Ba-1-unique-2	ızgara levrek
+Ba-2	yeşil mercimek yemeği
+Ba-2-unique-3	fırında çipura
+Ba-3	barbunya pilaki
+Ba-3-unique-4	sebzeli alabalık
+Ba-4	kırmızı mercimek köftesi
+Ba-4-unique-5	limonlu mezgit
+Ba-5	börülce salatası
+Ba-5-unique-6	balık köftesi
+Ba-6	nohutlu ıspanak
+Ba-6-unique-7	fırında uskumru
+Ba-7	fasulye piyazı
+Ba-7-unique-8	somonlu makarna
+Ba-8	mercimekli bulgur pilavı
+Ba-8-unique-9	balıklı sebze güveç
+Ba-9	nohutlu kabak yemeği
+Ba-9-unique-10	ton balıklı makarna
+Et-0	ızgara köfte
+Et-1	fırında köfte
+Et-2	etli türlü
+Et-3	et sote
+Et-4	etli nohut
+Et-5	kıymalı kabak
+Et-6	kıymalı ıspanak
+Et-7	kıymalı patates
+Et-8	etli bezelye
+Et-9	etli bulgur
+Fı-0	patates graten
+Fı-1	sebzeli tepsi böreği
+Fı-2	ıspanaklı kol böreği
+Fı-3	peynirli yumuşak poğaça
+Fı-4	tam buğday ev pizzası
+Fı-5	sebzeli kiş
+Fı-6	fırın mücver
+Fı-7	fırında kaşarlı mantar
+Fı-8	kabak graten
+Fı-9	fırın karnabahar
+Ka-0	biberli menemen
+Ka-1	ıspanaklı omlet
+Ka-2	peynirli omlet
+Ka-3	muzlu pankek
+Ka-4	elmalı yulaf lapası
+Ka-5	avokadolu tost
+Ka-6	lor peynirli tost
+Ka-7	sebzeli krep
+Ka-8	yoğurtlu granola
+Ka-9	fırında yumurta
+Ma-0	domatesli makarna
+Ma-1	fesleğenli makarna
+Ma-2	mantarlı makarna
+Ma-3	sebzeli erişte
+Ma-4	bulgur pilavı
+Ma-5	pirinç pilavı
+Ma-6	kinoalı sebze pilavı
+Ma-7	karabuğday pilavı
+Ma-8	fırın makarna
+Ma-9	nohutlu kuskus
+Sa-0	çoban salata
+Sa-1	narlı roka salatası
+Sa-2	maydanozlu nohut salatası
+Sa-3	limonlu yeşil mercimek salatası
+Sa-4	salatalıklı kinoa salatası
+Sa-5	mısırlı ton balıklı salata
+Sa-6	naneli bulgur salatası
+Sa-7	pancar, yoğurt
+Sa-8	havuç, lahana
+Sa-9	semizotu, yoğurt
+Se-0	zeytinyağlı taze fasulye
+Se-1	kabak yemeği
+Se-2	patlıcan musakka
+Se-3	karnabahar fırın
+Se-4	ıspanak yemeği
+Se-5	bamya yemeği
+Se-6	pırasa yemeği
+Se-7	zeytinyağlı enginar ve bezelye
+Se-8	zeytinyağlı bezelye ve havuç
+Se-9	fırında kök sebzeler
+Ta-0	fırında tavuk, patates
+Ta-0-unique-11	sütlaç
+Ta-1	sebzeli tavuk sote
+Ta-1-unique-12	muhallebi
+Ta-2	limonlu tavuk
+Ta-2-unique-13	muzlu yulaf kurabiyesi
+Ta-3	tavuklu pilav
+Ta-3-unique-14	elmalı crumble
+Ta-4	tavuklu makarna
+Ta-4-unique-15	fırında cevizli armut
+Ta-5	tavuk şiş
+Ta-5-unique-16	ballı cevizli yoğurt kasesi
+Ta-6	yoğurtlu tavuk
+Ta-6-unique-17	irmik helvası
+Ta-7	tavuklu sebze güveç
+Ta-7-unique-18	fırın sütlaç
+Ta-8	tavuk köftesi
+Ta-8-unique-19	havuçlu cevizli kek
+Ta-9	tavuklu dürüm
+Ta-9-unique-20	kakaolu puding
+master33-0	mercimek çorbası
+master33-1	domates çorbası
+master33-10	yoğurtlu semizotu
+master33-11	kabak mücveri
+master33-12	fırında karnabahar
+master33-13	kıymalı kabak dolması
+master33-15	elmalı tarçınlı yulaf
+master33-17	sebzeli makarna
+master33-18	mercimek köftesi
+master33-2	sebzeli bulgur pilavı
+master33-5	fırında tavuk ve patates
+master33-8	muzlu yulaf pankeki
+master34-0	fırında sebzeli omlet
+master34-1	kırmızı pancarlı yoğurt salatası
+master34-10	fırında elmalı crumble
+master34-11	yoğurtlu köz patlıcan
+master34-12	sebzeli mercimek güveci
+master34-13	fırında kıymalı patates
+master34-14	tarçınlı armut kompostosu
+master34-2	zeytinyağlı pırasa
+master34-4	limonlu fırın levrek
+master34-5	tavuklu sebze sote
+master34-6	mantarlı arpa şehriye pilavı
+master34-7	yeşil mercimekli bulgur salatası
+master34-8	fırında kabak graten
+master34-9	kuru fasulye piyazı
+n01_001	menemen
+n01_002	sucuklu yumurta
+n01_003	kaşarlı tost
+n01_004	yumurtalı ekmek
+n01_005	peynirli gözleme (tavada)
+n01_006	ton balıklı sandviç
+n01_007	patatesli yumurta
+n01_008	pratik mercimek çorbası (20 dakika)
+n01_009	fırında patates kumpir (mikrodalgasız)
+n01_010	domates çorbası (pratik)
+n01_011	tavada pizza ekmeği
+n01_012	yoğurtlu makarna
+n01_013	kıymalı pide tost
+n01_014	peynirli bazlama tostu
+n01_015	hızlı nohut salatası
+n01_016	tavuklu dürüm (pratik)
+n01_017	mısır gevrekli yoğurt kasesi
+n01_018	fırında sosisli patates
+n01_019	pratik sebzeli erişte
+n01_020	avokadolu yumurtalı tost
+n01_101	ev yapımı limonata
+n01_102	ayran
+n01_103	naneli limonlu soda
+n01_104	ev yapımı vişne şerbeti
+n01_105	soğuk ıhlamur çayı (ballı)
+n01_106	ev yapımı buzlu çay (şeftalili)
+n01_107	sıcak salep (evde)
+n01_108	sıcak çikolata
+n01_109	zencefilli limonlu bitki çayı
+n01_110	ev yapımı kefir smoothie (orman meyveli)
+n01_111	yeşil smoothie (ıspanaklı)
+n01_112	hurmalı süt
+n01_113	ev yapımı limonlu nane şurubu
+n01_114	elmalı tarçınlı kompost
+n01_115	ev yapımı ayva kompostosu
+n01_201	kakaolu mozaik pasta
+n01_202	ıslak kek (brownie usulü)
+n01_203	limonlu kek
+n01_204	mermer kek
+n01_205	tarçınlı elmalı kurabiye
+n01_206	un kurabiyesi
+n01_207	tuzlu kurabiye (susamlı)
+n01_208	portakallı muffin
+n01_209	çikolatalı damla kurabiye
+n01_210	muzlu cevizli ekmek (banana bread)
+n01_211	yulaflı fıstık ezmeli kurabiye
+n01_212	revani
+n01_213	elmalı yulaflı muffin
+n02_001	spagetti bolonez
+n02_002	fettuccine alfredo (hafif)
+n02_003	sebzeli risotto
+n02_004	tavuk fajita
+n02_005	tavuklu sebzeli wok
+n02_006	meksika usulü fasulyeli pilav
+n02_007	falafel (fırında)
+n02_008	ratatouille
+n02_009	yoğurt soslu tavuklu sezar salata
+n02_010	lazanya (kıymalı)
+n02_011	mantarlı kremalı tavuk (stroganoff usulü)
+n02_012	shakshuka (biber soslu yumurta)
+n02_013	teriyaki somon
+n02_014	gnocchi (patatesli)
+n02_015	hint usulü nohut köri (chana masala)
+n02_016	quesadilla (peynirli tavuklu)
+n02_017	paella usulü tavuklu pilav
+n02_018	yunan salatası (horiatiki)
+n02_019	tom yum usulü tavuk çorbası
+n02_020	pad thai usulü tavuklu erişte
+n02_101	fırında sebzeli tavuk göğsü (yağsız)
+n02_102	mercimekli kinoa köftesi
+n02_103	chia puding (meyveli)
+n02_104	fırında falafel kasesi
+n02_105	kabak spagetti (zoodle) domates soslu
+n02_106	yulaflı protein pankek
+n02_107	ızgara sebze ve hellim salatası
+n02_108	fırında tatlı patates ve nohut
+n02_109	ton balıklı kinoa salatası
+n02_110	buharda levrek ve sebzeler
+n02_111	yeşil mercimek çorbası (yağsız)
+n02_112	avokadolu yumurta kasesi
+n02_113	karnabahar pilavı
+n02_114	yoğurtlu yulaf (overnight oats)
+n02_115	ızgara tavuklu buğday salatası
+n02_201	sigara böreği
+n02_202	su böreği (pratik, yufkadan)
+n02_203	kıymalı pide
+n02_204	lahmacun (evde)
+n02_205	patatesli gözleme (sac usulü)
+n02_206	simit
+n02_207	peynirli pişi
+n02_208	mayalı açma (zeytinli)
+n02_209	kol böreği (patatesli)
+n02_210	bazlama
+n03_001	hünkar beğendi
+n03_002	orman kebabı
+n03_003	kuzu tandır (fırında)
+n03_004	izmir köfte
+n03_005	tas kebabı
+n03_006	kıymalı patlıcan musakka
+n03_007	ıslama köfte
+n03_008	kadınbudu köfte
+n03_009	etli kuru fasulye
+n03_010	ali nazik kebabı
+n03_011	fırında kuzu pirzola
+n03_012	patatesli et yemeği
+n03_013	kıymalı lahana sarması
+n03_014	taze fasulyeli kuşbaşı
+n03_015	dana rosto
+n03_016	kıymalı börülce
+n03_017	etli enginar
+n03_018	kuzu incik (fırında)
+n03_019	sebzeli et haşlama
+n03_020	kıymalı ıspanaklı pide dürümü
+n03_101	tavuk şiş (yoğurtlu marine)
+n03_102	tavuk sote (domatesli biberli)
+n03_103	fırında patatesli tavuk but
+n03_104	tavuk haşlama ve sebze çorbası
+n03_105	tavuk tantuni
+n03_106	çerkez tavuğu
+n03_107	tavuklu güveç
+n03_108	tavuk pane (fırında)
+n03_109	limonlu kekikli tavuk kanat
+n03_110	bezelyeli tavuk yemeği
+n03_201	etli nohut (fırında güveçte)
+n03_202	zeytinyağlı barbunya (taze)
+n03_203	mercimekli kabak dolması
+n03_204	nohutlu pilav üstü yahni
+n03_205	mercimek kavurması (bulgurlu)
+n03_206	humuslu sebze tabağı
+n03_207	fava (bakla ezmesi)
+n03_208	siyah fasulyeli sebze yahnisi
+n03_209	bezelye ve nohutlu köri
+n03_210	mercimekli ekşili köfte
+n04_001	çılbır
+n04_002	pankek (klasik)
+n04_003	kaygana (otlu)
+n04_004	fırında yumurtalı avokado
+n04_005	peynirli ıspanaklı muffin (tuzlu)
+n04_006	sucuklu kaşarlı omlet
+n04_007	haşhaşlı çörek (kahvaltılık)
+n04_008	kahvaltılık patates salatası
+n04_009	fırında kaşarlı ekmek (bruschetta usulü)
+n04_010	tahin pekmez ezmesi
+n04_011	yumurtalı kabak (kahvaltılık)
+n04_012	mısır ekmeği (kahvaltılık)
+n04_013	kuymak (mıhlama)
+n04_014	fırında granola
+n04_015	peynirli patatesli rösti
+n04_101	kazandibi (tavada)
+n04_102	keşkül
+n04_103	supangle
+n04_104	aşure
+n04_105	profiterol
+n04_106	tiramisu (yumurtasız)
+n04_107	elmalı turta
+n04_108	cheesecake (fırında)
+n04_109	trileçe
+n04_110	güllaç
+n04_111	irmikli portakal tatlısı (şerbetli)
+n04_112	ekmek kadayıfı (pratik)
+n04_113	çikolatalı mousse (avokadolu)
+n04_114	fırında elmalı tarçınlı yulaf tatlısı (kase)
+n04_115	lokma (evde)
+n05_001	hamsi tava
+n05_002	buğulama levrek
+n05_003	kremalı karides sote
+n05_004	fırında palamut
+n05_005	midye tava (evde)
+n05_006	somon ızgara (limon tereyağlı)
+n05_007	fırında sardalya
+n05_008	kalamar tava (fırında)
+n05_009	balık çorbası
+n05_010	uskumru dolması (fırında)
+n05_011	levrek kağıtta (papillote)
+n05_012	karidesli sebzeli pilav
+n05_013	somonlu ıspanaklı makarna
+n05_014	alabalık ızgara (bademli)
+n05_015	çipura ızgara
+n05_101	pancarlı humus
+n05_102	deniz börülcesi salatası
+n05_103	muhammara
+n05_104	kabak çiçeği dolması
+n05_105	atom (yoğurtlu kuru biber)
+n05_106	zeytinyağlı yaprak sarma
+n05_107	zeytinyağlı biber dolması
+n05_108	babagannuş (közlü patlıcan)
+n05_109	cevizli kereviz salatası (yoğurtlu)
+n05_110	fasulye pilaki (zeytinyağlı)
+n05_111	girit ezmesi
+n05_112	közlenmiş biber salatası
+n05_113	topik
+n05_114	patlıcan söğürme
+n05_115	cacık
+n05_201	fırın makarna (beşamelli)
+n05_202	mantı (pratik, hazır yaprakla)
+n05_203	kıymalı domatesli spagetti
+n05_204	pesto soslu makarna
+n05_205	arabiata (acılı domates soslu penne)
+n05_206	tavuklu kremalı penne
+n05_207	ev yapımı erişte (kuru)
+n05_208	cevizli erişte
+n05_209	mercimekli makarna (anadolu usulü)
+n05_210	sebzeli makarna salatası
+n06_001	ezogelin çorbası
+n06_002	tarhana çorbası
+n06_003	düğün çorbası
+n06_004	kekikli mantar çorbası (sütlü)
+n06_005	brokoli çorbası
+n06_006	tavuk suyu şehriye çorbası
+n06_007	patates çorbası
+n06_008	soğan çorbası (fırında peynirli)
+n06_009	sütlü mısır çorbası
+n06_010	lahana çorbası (karadeniz usulü)
+n06_011	erişte çorbası
+n06_012	toyga çorbası
+n06_013	havuçlu zencefilli çorba
+n06_014	kremalı tavuk çorbası
+n06_015	kırmızı biberli domates çorbası (közlü)
+n06_101	iç pilav
+n06_102	perde pilavı
+n06_103	firik pilavı
+n06_104	meyhane pilavı
+n06_105	patlıcanlı pirinç pilavı
+n06_106	domatesli pirinç pilavı
+n06_107	sebzeli esmer pirinç pilavı
+n06_108	kestaneli pilav
+n06_109	bulgurlu mercimekli kuskus pilavı
+n06_110	kuruyemişli safranlı pilav
+n06_111	kabaklı bulgur pilavı (taneli)
+n06_112	sade tereyağlı pirinç pilavı
+n06_201	türlü
+n06_202	ıspanak yemeği (yumurtalı)
+n06_203	havuçlu zeytinyağlı kereviz
+n06_204	fırında karnabahar mücver
+n06_205	kabak sinkonta (bodrum usulü)
+n06_206	kıymasız patlıcan oturtma
+n06_207	biberli mantar sote
+n06_208	fırında sebze graten
+n06_209	zeytinyağlı limonlu bamya
+n06_210	zeytinyağlı pırasa (havuçlu pirinçli)
+n06_211	fırında kabak dolması (kıymasız)
+n06_212	közlenmiş patlıcanlı biber kavurma
+n06_213	kereviz sapı soteli havuç
+n07_001	bol limonlu çoban salatası
+n07_002	gavurdağı salatası
+n07_003	mevsim salatası (yeşil)
+n07_004	patates salatası (yoğurtlu)
+n07_005	rus salatası (yoğurtlu, hafif)
+n07_006	ton balıklı fasulye salatası
+n07_007	kısır (bol yeşillikli)
+n07_008	narlı peynirli roka salatası
+n07_009	fırınlanmış balkabağı salatası
+n07_010	tavuklu yeşil salata
+n07_011	piyaz (antalya usulü tahinli)
+n07_012	kırmızı lahana turşulu salata
+n07_101	ev yufkasından peynirli kol böreği
+n07_102	milföy peynirli börek
+n07_103	talaş böreği (kıymalı)
+n07_104	ıspanaklı gözleme
+n07_105	kıymalı gözleme
+n07_106	pizza poğaça
+n07_107	patatesli puf börek
+n07_108	ev yapımı tost ekmeği
+n07_109	su böreği (klasik, ev açması)
+n07_110	kaşarlı mısır poğaçası
+n07_201	elmalı kurabiye (pudra şekerli)
+n07_202	cevizli tereyağlı kurabiye
+n07_203	yoğurtlu kek (klasik)
+n07_204	brownie
+n07_205	kakaolu fındıklı kurabiye
+n07_206	havuçlu tarçınlı muffin (yoğurtlu)
+n07_207	limonlu kurabiye (pudralı)
+n07_208	portakallı ıslak kek
+n07_301	pratik peynirli pide (lavaştan)
+n07_302	fırında fincan kek
+n07_303	tavada yumurtalı patates köftesi
+n07_304	10 dakikada makarna (domatesli)
+n07_305	peynirli omlet sandviç
+n07_306	hazır yufkadan elmalı rulo tatlı
+n07_307	fırında sebzeli yumurta (tek tava)
+n07_308	yoğurtlu meyveli dondurma kasesi
+n07_309	pratik tavuk çorbası (hazır suyla)
+n07_310	fırında peynirli patlıcan dilimleri
+n08_001	fırında bütün tavuk (limon ve kekikli)
+n08_002	tavuk dolma (biberli)
+n08_003	tavuk ciğer sote
+n08_004	ballı hardallı tavuk but
+n08_005	tavuklu bezelyeli pilav (tek tencere)
+n08_006	hindi göğsü rosto
+n08_007	tavuk köri (yoğurtlu)
+n08_008	tavuk kavurma (karadeniz usulü)
+n08_009	tavuklu mantarlı kaşarlı güveç
+n08_010	tavuk ızgara (yoğurt marine)
+n08_011	tavuk börek (milföyden)
+n08_012	tavuk çöp şiş (fırında)
+n08_013	tavuklu sebzeli krep
+n08_014	tavuk haşlama (limonlu sebzeli)
+n08_015	susamlı tavuk (fırında)
+n08_101	burrito kasesi
+n08_102	ton balıklı pirinç topları (onigiri)
+n08_103	minestrone çorbası
+n08_104	tavuk shawarma (fırında)
+n08_105	hollanda usulü fırın patates (hasselback)
+n08_106	tabule
+n08_107	tavuklu noodle çorbası
+n08_108	caprese salatası
+n08_109	cornbread (tatlımsı mısır ekmeği)
+n08_110	fransız tost (tarçınlı)
+n08_201	yulaflı sebze çorbası
+n08_202	yeşil shakshuka
+n08_203	mercimekli sebze kasesi
+n08_204	tavuklu kabak kayığı
+n08_205	somon ve kinoa kasesi
+n08_206	sebzeli omlet muffin (yağsız)
+n08_207	fırında baharatlı karnabahar steak
+n08_208	yoğurtlu semizotu salatası (cevizli)
+n08_209	elmalı tarçınlı chia kasesi
+n08_210	brokoli ve tavuklu fırın kasesi
+n08_301	soğuk yeşil çay (ballı limonlu)
+n08_302	karpuz naneli içecek
+n08_303	kakaolu muzlu süt
+n08_304	çilekli limonata
+n08_305	tarçınlı elma çayı (meyveli)
+n09_001	kuzu kapama
+n09_002	kıymalı patates musakka
+n09_003	sebzeli kıymalı tava
+n09_004	fırında kuzu kol (sebzeli)
+n09_005	et döner (ev usulü, tavada)
+n09_006	kıymalı makarna güveç
+n09_007	kuşbaşılı patlıcan kebabı
+n09_008	köfteli patates yemeği
+n09_009	dana bonfile (tavada)
+n09_010	kıymalı karnabahar graten
+n09_101	levrek şiş (fırında)
+n09_102	somon köftesi
+n09_103	hamsili pilav
+n09_104	mezgit buğulama
+n09_105	karidesli makarna (sarımsaklı)
+n09_106	fırında hamsi (kiremitte)
+n09_107	füme somonlu krep
+n09_108	lüfer ızgara
+n09_109	ton balıklı patates salatası
+n09_110	çupra kâğıt kebabı
+n09_201	tavada nohut köftesi
+n09_202	etsiz pişmiş çiğ köfte
+n09_203	nohutlu tavuk yahni
+n09_204	yeşil mercimekli ıspanak
+n09_205	börülceli pazı kavurma
+n09_206	barbunyalı bulgur pilavı
+n09_207	mercimek çorbası (süzme, klasik)
+n09_208	fasulye pilaki (fırında)
+n09_209	nohut salatası (tahinli)
+n09_210	mercimekli patates yemeği
+n09_301	yulaflı muzlu kahvaltı kurabiyesi
+n09_302	avokadolu menemen
+n09_303	peynirli kabak çiçeği (kahvaltılık)
+n09_304	fırında yumurtalı ekmek kasesi
+n09_305	muzlu yulaf lapası (sütlü)
+n09_306	patatesli peynirli börek (tavada)
+n09_307	kahvaltılık ezme (domatesli biberli)
+n09_308	lorlu dereotlu börek (kahvaltılık rulo)
+n09_309	yumurtalı pide
+n09_310	mısır unlu krep (glutensiz)
+n09_401	tavuklu pilav (nohutlu, sokak usulü)
+n09_402	kuskus pilavı (sade)
+n09_403	mantarlı pirinç pilavı
+n09_404	havuçlu kuru üzümlü pilav
+n09_405	ıspanaklı pirinç pilavı
+n09_501	yayla çorbası (pirinçli, naneli)
+n09_502	sebzeli tavuk çorbası (şehriyesiz)
+n09_503	kabak çorbası (kremasız)
+n09_504	arpa şehriye çorbası
+n09_505	bezelye çorbası
+n10_001	kabak tatlısı (cevizli)
+n10_002	ayva tatlısı
+n10_003	sütlü irmik tatlısı (kalıp)
+n10_004	kemalpaşa tatlısı (hazır)
+n10_005	meyveli jöle kupu
+n10_006	fırında sütlü muzlu tatlı
+n10_007	tahin helvalı tatlı (kup)
+n10_008	fırında elmalı pankek (dutch baby)
+n10_009	höşmerim
+n10_010	pekmezli irmik helvası
+n10_011	çikolatalı muz dilimleri (dondurulmuş)
+n10_012	çilekli sütlü tatlı (pratik)
+n10_013	yoğurt tatlısı (şerbetli)
+n10_014	elmalı yulaflı fırın kurabiye kup
+n10_015	karpuz ve beyaz peynir tabağı (tatlı)
+n10_101	zeytinyağlı enginar kalbi mezesi
+n10_102	zeytinyağlı lahana sarma
+n10_103	fava ezmesi (dereotlu)
+n10_104	ezme biber salatası (antep usulü)
+n10_105	yoğurtlu havuç tarator
+n10_106	antakya usulü fıstıklı humus
+n10_107	patlıcan biber kızartması (yoğurtlu)
+n10_108	kereviz yaprağı salatası (yoğurtlu)
+n10_109	yoğurtlu ıspanak kökü
+n10_110	közlenmiş kırmızı biber ve beyaz peynir
+n10_201	ıspanaklı mantarlı lazanya (vejetaryen)
+n10_202	yeşil mercimekli makarna salatası
+n10_203	domates soslu köfteli spagetti
+n10_204	fesleğenli tavuklu penne
+n10_205	kabaklı kremalı fettuccine
+n10_206	brokolili fırın makarna
+n10_207	ton balıklı domatesli makarna
+n10_208	mantı soslu makarna (yoğurtlu kıymalı)
+n10_209	limonlu sarımsaklı spagetti
+n10_210	sebzeli soya soslu erişte (wok)
+n10_301	kaşarlı sosisli milföy
+n10_302	ıspanaklı peynirli kare börek (milföy)
+n10_303	zeytinli açma (mayasız, pratik)
+n10_304	tepsi pizza (ev yapımı hamur)
+n10_305	kıymalı çıtır börek (yufka, fırında)
+n10_401	tahinli kurabiye (çay saati)
+n10_402	kakaolu muffin
+n10_403	hindistan cevizli kurabiye
+n10_404	pekmezli tarçınlı kek
+n10_405	cevizli üzümlü kurabiye (yulaflı)
+p39a10_001	fırında sebzeli tavuk güveç
+p39a10_002	cevizli yoğurtlu semizotu kasesi
+p39a10_005	kırmızı mercimekli kabak çorbası
+p39a10_006	domatesli barbunya pilaki
+p39a10_007	fırında peynirli kabak ruloları
+p39a10_008	bulgurlu yeşil mercimek çorbası
+p39a10_009	tahinli havuç salatası
+p39a10_010	fırında domatesli köfte
+p39a10_011	portakallı kereviz salatası
+p39a10_013	kabaklı bulgur pilavı
+p39a10_014	elmalı tarçınlı fırın yulaf
+p39a10_015	fırında nohutlu patlıcan
+p39a10_016	limonlu ıspanak salatası
+p39a10_017	peynirli mısır unlu muffin
+p39a10_018	fırında armutlu crumble
+p39a10_019	sarımsaklı fırın brokoli
+p39a10_020	tavuklu sebzeli kuskus
+p39a11_001	zerdeçallı mercimek çorbası
+p39a11_002	fırında yoğurtlu karnabahar
+p39a11_003	tavuklu nohut yemeği
+p39a11_004	köz patlıcanlı bulgur pilavı
+p39a11_005	fırında hardallı somon
+p39a11_006	beşamel soslu ıspanaklı patates
+p39a11_007	kuru domatesli makarna
+p39a11_008	cevizli yoğurtlu semizotu salatası
+p39a11_009	soğanlı mantarlı arpa şehriye pilavı
+p39a11_010	portakallı zeytinyağlı pırasa
+p39a11_011	kıymalı karnabahar yemeği
+p39a11_012	fırında peynirli kabak dilimleri
+p39a11_013	tarçınlı kabak tatlısı
+p39a11_014	sebzeli fırın mücver topları
+p39a11_015	limonlu tavuklu pirinç pilavı
+p39a11_016	brokolili peynirli krep
+p39a11_017	fırında limonlu levrek
+p39a11_018	elmalı yoğurtlu kup
+p39a11_019	domatesli yeşil mercimek güveci
+p39a11_020	yoğurtlu dereotlu peynir poğaçası
+p39a12_001	fırında yoğurt soslu patates
+p39a12_002	tahinli limonlu nohut salatası
+p39a12_003	kıymalı yeşil mercimek yemeği
+p39a12_004	köz biberli lorlu omlet
+p39a12_005	fırında kekikli barbunya güveci
+p39a12_006	limonlu taze naneli pirinç pilavı
+p39a12_007	fırında kabaklı tavuk köftesi
+p39a12_008	ıspanaklı nohut sote
+p39a12_009	portakallı havuç çorbası
+p39a12_010	yoğurtlu fırın patlıcan
+p39a12_011	tavuklu bezelyeli bulgur
+p39a12_012	fırında tahinli karnabahar
+p39a12_013	peynirli ıspanaklı mini börek
+p39a12_014	narlı yoğurtlu havuç mezesi
+p39a12_015	fırında elmalı irmik kup
+p39a12_016	limonlu sarımsaklı fırın alabalık
+p39a12_017	mantarlı yeşil mercimek makarnası
+p39a12_018	domatesli peynirli fırın kabak
+p39a12_019	zencefilli balkabağı çorbası
+p39a12_020	cevizli muzlu yulaf kurabiyesi
+p39a13_001	fırında havuçlu kabaklı hindi köfte
+p39a13_002	közlenmiş domatesli bulgur çorbası
+p39a13_003	fırında sarımsaklı brokoli patates
+p39a13_004	tavuklu kabaklı pirinç pilavı
+p39a13_005	yoğurtlu kırmızı lahana mezesi
+p39a13_006	domatesli nohutlu pazı yemeği
+p39a13_007	fırında limonlu tavuk kanat
+p39a13_008	fırında mantarlı peynirli polenta
+p39a13_009	portakallı pancar salatası
+p39a13_010	ıspanaklı lorlu fırın makarna
+p39a13_011	kabaklı mercimek mücveri
+p39a13_012	fırında elmalı tarçınlı kek
+p39a13_013	naneli yoğurtlu buğday salatası
+p39a13_014	domatesli fırın barbunya köftesi
+p39a13_015	limonlu dereotlu karnabahar salatası
+p39a13_016	fırında mantarlı hindi sote
+p39a13_017	fırında muzlu yulaf bar
+p39a13_018	köz biberli bulgur kısırı
+p39a13_019	patatesli pırasalı omlet
+p39a13_020	tarçınlı armutlu sütlü irmik
+p39a14_001	fırında yoğurtlu kabak dilimleri
+p39a14_002	kırmızı mercimekli domates çorbası
+p39a14_003	kekikli fırın tavuk but
+p39a14_004	nohutlu pazı kavurması
+p39a14_005	limonlu havuçlu kuskus
+p39a14_006	fırında lorlu patlıcan ruloları
+p39a14_007	tahinli elmalı yulaf kasesi
+p39a14_008	köz patlıcanlı tahinli yoğurt mezesi
+p39a14_009	mantarlı ıspanaklı bulgur
+p39a14_010	portakallı fırın havuç
+p39a14_011	domatesli mercimekli erişte
+p39a14_012	fırında limonlu çipura ve rezene
+p39a14_013	cevizli pancarlı kinoa
+p39a14_014	peynirli kabaklı mini pankek
+p39a14_015	fırında tarçınlı elmalı irmik kup
+p39a14_016	yoğurtlu naneli buğday çorbası
+p39a14_017	kıymalı fırın karnabahar
+p39a14_018	biberli nohutlu makarna salatası
+p39a14_019	fırında tarçınlı muzlu ekmek
+p39a14_020	tavuklu sebzeli karabuğday
+p39a15_001	fırında sebzeli hindi rosto
+p39a15_002	kremasız pırasa patates çorbası
+p39a15_003	fırında domates soslu kabak kayıkları
+p39a15_004	nohutlu köz biberli kinoa pilavı
+p39a15_005	dereotlu fırın mezgit
+p39a15_006	fırında mantarlı ıspanaklı yumurta
+p39a15_007	köz havuçlu mercimek salatası
+p39a15_008	yoğurtlu dereotlu patates salatası
+p39a15_009	fırında kıymalı mantar dolması
+p39a15_010	portakallı zeytinyağlı pancar
+p39a15_011	tavuklu limonlu arpa şehriye
+p39a15_012	fırında peynirli karnabahar dilimleri
+p39a15_013	bulgurlu mantarlı sebze çorbası
+p39a15_014	elmalı cevizli yoğurt tatlısı
+p39a15_015	tahinli kakolu yulaf topları
+p39a15_016	fırında ıspanaklı nohut köftesi
+p39a15_017	domatesli fasulyeli kuskus salatası
+p39a15_018	fırında patatesli pırasa böreği
+p39a15_019	kabaklı dereotlu mercimek mücveri
+p39a15_020	fırında armutlu yulaf kup
+p39a16_001	kabaklı beyaz fasulye çorbası
+p39a16_002	kerevizli havuç çorbası
+p39a16_003	balkabaklı kırmızı mercimek çorbası
+p39a16_004	brokolili patates çorbası
+p39a16_005	karnabaharlı pırasa çorbası
+p39a16_006	naneli bezelye çorbası
+p39a16_007	ıspanaklı pirinç çorbası
+p39a16_008	mantarlı arpa şehriye çorbası
+p39a16_009	nohutlu domates çorbası
+p39a16_010	zencefilli havuç çorbası
+p39a16_011	tatlı patatesli mercimek çorbası
+p39a16_012	pazılı bulgur çorbası
+p39a16_014	zeytinyağlı havuçlu pırasa
+p39a16_015	yeşil mercimekli patlıcan yemeği
+p39a16_016	bezelyeli karnabahar yemeği
+p39a16_017	zeytinyağlı bamya
+p39a16_018	patatesli taze fasulye
+p39a16_020	barbunyalı pazı yemeği
+p39a16_021	portakallı zeytinyağlı kereviz
+p39a16_022	havuçlu brüksel lahanası
+p39a16_023	mantarlı kabak sote
+p39a16_024	zeytinyağlı bezelyeli enginar
+p39a16_025	roka ve armut salatası
+p39a16_026	pancar ve portakal salatası
+p39a16_027	bulgur ve nar salatası
+p39a16_028	kinoalı avokado salatası
+p39a16_029	nohut ve salatalık salatası
+p39a16_030	yeşil mercimekli köz biber salatası
+p39a16_031	semizotu ve çilek salatası
+p39a16_032	karabuğdaylı domates salatası
+p39a16_033	beyaz fasulye ve dereotu salatası
+p39a16_034	kuskuslu mısır salatası
+p39a16_035	mor lahana ve elma salatası
+p39a16_036	brokoli ve ceviz salatası
+p39a16_049	mantarlı karabuğday pilavı
+p39a16_050	nohutlu esmer pirinç pilavı
+p39a16_051	biberli bulgur pilavı
+p39a16_052	bezelyeli pirinç pilavı
+p39a16_053	domatesli kinoa pilavı
+p39a16_054	havuçlu arpa şehriye pilavı
+p39a16_055	ıspanaklı bulgur pilavı
+p39a16_056	mısırlı kuskus pilavı
+p39a16_057	patlıcanlı bulgur pilavı
+p39a16_058	mercimekli karabuğday pilavı
+p39a16_059	kabaklı pirinç pilavı
+p39a16_060	pırasalı bulgur pilavı
+p39a16_061	mantarlı tavuk sote
+p39a16_063	köri soslu tavuk sote
+p39a16_066	brokolili kremalı tavuk
+p39a16_067	limonlu pırasalı tavuk
+p39a16_069	domatesli fesleğenli tavuk
+p39a16_071	zencefilli havuçlu tavuk
+p39a16_073	limonlu dereotlu fırın levrek
+p39a16_077	portakallı rezeneli fırın somon
+p39a16_080	pırasalı fırın çipura
+p39a16_082	mantarlı kekikli fırın balık
+p39a16_086	armutlu cevizli fırın tatlısı
+p39a16_090	balkabaklı cevizli fırın tatlısı
+p39a16_091	erikli yulaflı fırın tatlısı
+p39a16_092	kayısılı bademli fırın tatlısı
+p39a16_094	vişneli yulaflı fırın tatlısı
+p39a16_096	hurmalı kakaolu fırın tatlısı
+p39a16_097	ıspanaklı lorlu makarna
+p39a16_098	mantarlı kekikli makarna
+p39a16_099	domatesli fesleğenli makarna
+p39a16_100	kabaklı limonlu makarna
+p39a16_101	brokolili sarımsaklı makarna
+p39a16_102	köz biberli cevizli makarna
+p39a16_103	bezelyeli naneli makarna
+p39a16_104	patlıcanlı domatesli makarna
+p39a16_105	pırasalı mantarlı makarna
+p39a16_106	karnabaharlı peynirli makarna
+p39a16_107	havuçlu zencefilli makarna
+p39a16_108	nohutlu ıspanaklı makarna
+p39a16_109	yoğurtlu pancar mezesi
+p39a16_110	dereotlu kabak mezesi
+p39a16_111	köz patlıcanlı tahinli meze (baba gannuş)
+p39a16_112	havuçlu cevizli meze
+p39a16_113	köz biberli lor mezesi
+p39a16_114	kimyonlu nohut mezesi
+p39a16_115	yoğurtlu semizotu mezesi
+p39a16_116	sarımsaklı brokoli mezesi
+p39a16_117	tahinli karnabahar mezesi
+p39a16_118	yoğurtlu pazı mezesi
+p39a16_119	patlıcanlı domatesli meze (közlü ezme)
+p39a16_120	kereviz ve elma mezesi
+p39a17_001	kremasız sebze çorbası
+p39a17_013	köz biber ve domates çorbası
+p39a17_014	nohut ve limon çorbası
+p39a17_016	sebzeli tencere yemeği
+p39a17_032	tahıllı yeşil salata
+p39a17_047	fırın tavasında sebzeli frittata
+p39a17_061	sebzeli tahıl pilavı
+p39a17_076	bol sebzeli tavuk sote
+p39a17_091	fırında limonlu otlu balık
+p39a17_106	sebzeli zeytinyağlı makarna
+p39a17_121	yoğurtlu meyve ve kuruyemiş kupu
+p39a17_136	yoğurtlu sebze ezmesi
+p39a18_001	fırında sarımsaklı kabak
+p39a18_002	fırında sarımsaklı patlıcan
+p39a18_003	fırında sarımsaklı karnabahar
+p39a18_004	fırında sarımsaklı brokoli
+p39a18_005	fırında sarımsaklı pırasa
+p39a18_006	fırında sarımsaklı ıspanak
+p39a18_007	fırında sarımsaklı pazı
+p39a18_008	fırında sarımsaklı kereviz
+p39a18_009	fırında sarımsaklı havuç
+p39a18_010	fırında sarımsaklı mantar
+p39a18_011	yoğurtlu sebze salatası (borani usulü)
+p39a18_031	sebzeli peynirli omlet
+p39a18_041	sebzeli nohutlu bulgur pilavı
+p39a18_051	sebze soslu tam buğday makarna
+p39a18_062	patlıcanlı tavuk tepsi
+p39a18_063	karnabaharlı baharatlı tavuk tepsi
+p39a18_073	sebze yatağında fırın somon
+p39a18_081	tahinli köz sebze mezesi
+p39a18_091	meyveli yulaflı fırın tatlısı
+p39a18_101	meyveli yoğurtlu soğuk kup
+p39a18_111	yeşil mercimekli sıcak sebze salatası
+p39a18_121	pirinçli zeytinyağlı sebze
+p39a18_141	kabaklı patatesli tepsi köftesi
+p39a18_142	patlıcanlı tepsi köftesi
+p39a19_002	köz kırmızı biberli mercimek çorbası
+p39a19_003	kabaklı dereotlu çorba
+p39a19_012	zeytinyağlı kabak ve havuç
+p39a19_013	zeytinyağlı pırasa ve kereviz
+p39a19_021	mantarlı kekikli tavuk sote
+p39a19_022	kabaklı limonlu tavuk sote
+p39a19_023	kapya biberli fesleğenli tavuk sote
+p39a19_024	ıspanaklı sarımsaklı tavuk sote
+p39a19_025	brokolili zencefilli tavuk sote
+p39a19_026	havuçlu susamlı tavuk sote
+p39a19_027	pırasalı hardallı tavuk sote
+p39a19_028	domatesli zeytinli tavuk sote
+p39a19_029	patlıcanlı kimyonlu tavuk sote
+p39a19_030	bezelyeli dereotlu tavuk sote
+p39a19_032	mantarlı kekikli bulgur pilavı
+p39a19_042	nohutlu avokado domates salatası
+p39a19_051	köz biberli ricottalı makarna
+p39a19_061	ıspanaklı lorlu rulo omlet
+p39a19_072	kekikli domatesli fırın çipura
+p39a19_073	zencefilli susamlı fırın somon
+p39a19_081	mantarlı arpacık soğanlı dana güveç
+p39a19_082	patlıcanlı dana güveç
+p39a19_083	bamyalı limonlu dana güveç
+p39a19_091	köz patlıcanlı yoğurtlu meze (alinazik usulü)
+p39a19_111	ıspanaklı lorlu börek
+p39a19_112	pırasalı beyaz peynirli börek
+p39a19_113	patatesli dereotlu börek
+p39a19_114	mantarlı kaşarlı börek
+p39a19_115	kabaklı naneli börek
+p39a19_116	patlıcanlı lorlu börek
+p39a19_117	brokolili peynirli börek
+p39a19_118	havuçlu çökelekli börek
+p39a19_119	köz biberli lorlu börek
+p39a19_120	pazılı beyaz peynirli börek
+p39a19_121	nohutlu ıspanak yemeği
+p39a19_122	yeşil mercimekli kabak yemeği
+p39a19_131	kabaklı patatesli fırın tepsi
+p39a19_132	patlıcanlı biberli fırın tepsi
+p39a19_133	karnabaharlı havuçlu fırın tepsi
+p39a19_141	muzlu çilekli smoothie
+p39a19_142	yaban mersinli yoğurtlu smoothie
+p39a19_143	şeftalili yulaflı smoothie
+p39a19_144	mangolu kefirli smoothie
+p39a19_145	armutlu tarçınlı smoothie
+p39a19_146	elmalı yulaflı smoothie
+p39a19_147	ananaslı naneli smoothie
+p39a19_148	böğürtlenli muzlu smoothie
+p39a19_149	kayısılı yoğurtlu smoothie
+p39a19_150	kivili muzlu smoothie
+p39a4_001	sebzeli arpa şehriye pilavı
+p39a4_003	yoğurtlu pancar salatası
+p39a4_004	limonlu tavuk baget
+p39a4_006	fırında kabak dilimleri
+p39a4_009	domatesli peynirli makarna
+p39a4_010	köz biberli yoğurt mezesi
+p39a4_011	patatesli pırasa
+p39a4_012	portakallı havuç salatası
+p39a4_013	fırında peynirli mantar
+p39a4_014	sebzeli kuskus
+p39a4_015	limonlu mercimek salatası
+p39a4_016	fırında armut tatlısı
+p39a4_017	sebzeli yumurta muffin
+p39a4_018	zeytinyağlı kereviz
+p39a5_001	fırında sebzeli köfte
+p39a5_003	fırında karnabahar graten
+p39a5_006	tavuklu sebzeli noodle
+p39a5_008	ıspanaklı peynirli börek
+p39a5_010	portakallı kereviz
+p39a5_011	fırında yoğurtlu tavuk
+p39a5_012	mantar sote
+p39a5_013	elmalı tarçınlı kek
+p39a5_014	nohutlu bulgur salatası
+p39a5_015	fesleğenli domatesli makarna
+p39a5_016	sebzeli fırın mücver
+p39a5_018	tahinli cevizli kurabiye
+p39a5_019	peynirli köz biber salatası
+p39a5_020	fırında sebzeli levrek
+p39a6_001	terbiyeli tavuk çorbası
+p39a6_002	köz patlıcan çorbası
+p39a6_003	kıymalı kabak yemeği
+p39a6_004	fırında kaşarlı tavuk
+p39a6_006	fırında somon ve kuşkonmaz
+p39a6_008	peynirli kabak mücveri
+p39a6_009	fırında brokoli köftesi
+p39a6_010	nohutlu pazı yemeği
+p39a6_012	sebzeli karabuğday pilavı
+p39a6_013	kremasız mantarlı makarna
+p39a6_014	ıspanaklı lazanya
+p39a6_015	tavuklu sezar salata
+p39a6_016	pancarlı cevizli salata
+p39a6_017	kuru domatesli roka salatası
+p39a6_018	fırında sütlaç
+p39a6_021	peynirli dereotlu poğaça
+p39a6_022	patatesli gözleme
+p39a6_024	haydari
+p39a6_025	acılı ezme
+p39a7_001	terbiyeli kereviz çorbası
+p39a7_002	köz biberli domates çorbası
+p39a7_003	arpa şehriyeli yoğurt çorbası
+p39a7_004	tavuklu nohutlu çorba
+p39a7_005	fırında patlıcan musakka
+p39a7_006	etli kuru bamya
+p39a7_008	fırında sebzeli hindi köfte
+p39a7_010	fırında karnabahar ve nohut
+p39a7_011	yoğurtlu semizotu yemeği
+p39a7_012	bulgurlu kabak dolması
+p39a7_013	limonlu fırın çipura
+p39a7_014	sebzeli karides güveç
+p39a7_016	dereotlu limonlu pirinç pilavı
+p39a7_018	fırında peynirli erişte
+p39a7_020	yeşil mercimekli pancar salatası
+p39a7_021	fırında ayva tatlısı
+p39a7_022	elmalı tarçınlı crumble
+p39a7_023	ıspanaklı lorlu krep
+p39a7_024	fırında yulaflı muzlu pankek
+p39a7_025	zeytinli kekikli mini ekmek
+p39a8_001	cevizli sarımsaklı semizotu cacığı
+p39a8_002	fırında kabak mücver
+p39a8_003	közlenmiş patlıcanlı bulgur salatası
+p39a8_004	terbiyeli sulu köfte
+p39a8_005	fırında mantarlı köfte
+p39a8_006	domates soslu nohutlu pazı
+p39a8_007	fırında limonlu hindi
+p39a8_008	kırmızı mercimekli sebze köftesi
+p39a8_009	fırında domatesli barbunya
+p39a8_010	peynirli brokoli çorbası
+p39a8_011	şehriyeli domatesli tavuk çorbası
+p39a8_012	kabaklı yoğurtlu erişte
+p39a8_013	fırında sebzeli kuskus
+p39a8_014	karamelize soğanlı mercimek pilavı
+p39a8_015	fırında elmalı yulaf
+p39a8_016	lor peynirli biber dolması
+p39a8_017	portakallı irmik tatlısı
+p39a8_018	kıyır tahinli ceviz kurabiyesi
+p39a8_019	fırında peynirli karnabahar topları
+p39a8_020	köz biberli humus
+p39a9_001	fırında sebzeli tavuk şiş
+p39a9_002	cevizli yoğurtlu pancar salatası
+p39a9_004	fırında ıspanaklı patates
+p39a9_005	nohutlu karnabahar yemeği
+p39a9_006	limonlu dereotlu somon
+p39a9_007	tavuklu arpa şehriye pilavı
+p39a9_008	fırında yoğurtlu kabak
+p39a9_009	peynirli pırasalı börek
+p39a9_010	bulgurlu yeşil mercimek salatası
+p39a9_011	fırında ballı tarçınlı armut
+p39a9_012	domatesli fesleğenli bulgur
+p39a9_013	fırında nohut köftesi
+p39a9_014	sütlü kabak çorbası
+p39a9_015	fırında patatesli alabalık
+p39a9_016	yoğurtlu havuçlu makarna
+p39a9_017	fırında peynirli domates
+p39a9_018	portakallı havuçlu kek
+p39a9_019	köz patlıcanlı yoğurt mezesi
+p39a9_020	sebzeli yumurtalı pirinç
+paket39-g-002	karnıyarık
+paket39-g-003	imam bayıldı
+paket39-g-005	nohutlu bulgur pilavı
+paket39-g-006	fırında sebzeli somon
+paket39-g-007	tavuklu mantar sote
+paket39-g-008	fırında patatesli köfte
+paket39-g-009	yoğurtlu semizotu salatası
+paket39-g-011	şakşuka
+paket39-g-012	peynirli gözleme
+paket39-g-013	domatesli şehriye çorbası
+paket39-g-017	kabak dolması
+paket39-g-018	fırında tavuk baget
+paket39-g-022	şehriyeli pirinç pilavı
+paket39-g-023	fırında mücver
+paket39-g-024	kıymalı patates oturtma
+paket39-g-025	etli sebze güveç
+paket39-g-027	fırında beşamel soslu karnabahar
+paket39-g-028	kırmızı mercimek çorbası
+paket39-g-029	yayla çorbası
+paket39-g-031	fırında levrek
+paket39-g-032	ton balıklı makarna salatası
+paket39-g-033	patates salatası
+paket39-g-034	kısır
+paket39-g-035	peynirli börek
+paket39-g-037	sebzeli omlet
+paket39-g-040	zeytinyağlı enginar
+paket39-g-041	kabak sandal
+paket39-g-042	köz patlıcan salatası
+paket39-g-043	yeşil mercimek salatası
+paket39-g-044	mayalı açma
+paket39-g-045	domatesli arpa şehriye pilavı
+paket39-g-046	mantarlı bulgur pilavı
+paket39-g-047	tavuklu erişte
+paket39-g-048	fesleğenli domates makarna
+paket39-g-049	karides güveç
+paket39-g-050	fırında köri soslu tavuk
+paket39-g-051	tavuklu sebze çorbası
+paket39-g-052	kremasız mantar çorbası
+paket39-g-053	balkabağı çorbası
+paket39-g-054	tahinli kabak tatlısı
+paket39-g-055	portakallı kek
+paket39-g-056	fırında sütlü irmik tatlısı
+paket39-g-057	kahvaltılık patatesli yumurta
+paket39-g-058	sebzeli kinoa kasesi
+paket39-g-059	fırında baharatlı patates
+Ço-0	mercimekli havuç çorbası
+Ço-1	bulgurlu ezogelin çorbası
+Ço-2	fesleğenli domates çorbası
+Ço-3	pirinçli yayla çorbası
+Ço-4	naneli tarhana çorbası
+Ço-5	kremalı mantar çorbası
+Ço-6	patatesli brokoli çorbası
+Ço-7	dereotlu kabak çorbası
+Ço-8	tavuklu şehriye çorbası
+Ço-9	sebzeli arpa şehriye çorbası

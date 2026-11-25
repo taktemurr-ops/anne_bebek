@@ -1,4 +1,7 @@
-import 'package:flutter/material.dart';
+import 'offline_community_view.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../services/cloud_auth_service.dart';
 
 class CloudAccountPage extends StatefulWidget {
@@ -63,7 +66,12 @@ class _CloudAccountPageState extends State<CloudAccountPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    if (!CloudAuthService.configured) {
+      return const OfflineCommunityView(title: 'Bulut hesabım', icon: Icons.cloud_outlined,
+        description: 'Hesap oluşturup kayıtlarını cihazlar arasında güvenle eşitleme.', categories: [], showBackup: true);
+    }
+    return Scaffold(
     appBar: AppBar(title: const Text('Bulut hesabım')),
     body: ListView(padding: const EdgeInsets.all(18), children: [
       const Card(child: Padding(padding: EdgeInsets.all(16), child: Text('Üyelik için Supabase projesi gerekir. Sağlık kayıtları ve bebek verileri bu aşamada buluta gönderilmez; yalnızca hesap oturumu yönetilir.'))),
@@ -73,9 +81,9 @@ class _CloudAccountPageState extends State<CloudAccountPage> {
         FilledButton.icon(onPressed: busy ? null : () => _run(() async { await CloudAuthService.logout(); setState(() { signedInEmail = null; feedback = 'Oturum kapatıldı.'; }); }), icon: const Icon(Icons.logout), label: const Text('Çıkış yap')),
         OutlinedButton(onPressed: busy || !CloudAuthService.configured ? null : () => _run(() async { await CloudAuthService.refreshSession(); setState(() => feedback = 'Oturum yenilendi.'); }), child: const Text('Oturumu yenile')),
       ] else ...[
-        TextField(controller: email, keyboardType: TextInputType.emailAddress, autofillHints: const [AutofillHints.email], decoration: const InputDecoration(labelText: 'E-posta adresi')),
+        TextField(controller: email, keyboardType: TextInputType.emailAddress, autofillHints: const [AutofillHints.email], decoration: InputDecoration(labelText: t('E-posta adresi'))),
         const SizedBox(height: 12),
-        TextField(controller: password, obscureText: hidePassword, autofillHints: const [AutofillHints.password], decoration: InputDecoration(labelText: 'Şifre', suffixIcon: IconButton(onPressed: () => setState(() => hidePassword = !hidePassword), icon: Icon(hidePassword ? Icons.visibility : Icons.visibility_off)))),
+        TextField(controller: password, obscureText: hidePassword, autofillHints: const [AutofillHints.password], decoration: InputDecoration(labelText: t('Şifre'), suffixIcon: IconButton(onPressed: () => setState(() => hidePassword = !hidePassword), icon: Icon(hidePassword ? Icons.visibility : Icons.visibility_off)))),
         const SizedBox(height: 16),
         FilledButton(onPressed: busy || !CloudAuthService.configured ? null : () { if (_validate()) _run(() async { final result = await CloudAuthService.login(email.text, password.text); setState(() => feedback = result['access_token'] != null ? 'Giriş başarılı.' : 'E-posta doğrulaması gerekebilir.'); }); }, child: const Text('Giriş yap')),
         OutlinedButton(onPressed: busy || !CloudAuthService.configured ? null : () { if (_validate()) _run(() async { final result = await CloudAuthService.register(email.text, password.text); setState(() => feedback = result['access_token'] != null ? 'Hesap oluşturuldu ve oturum açıldı.' : 'Kayıt talebi alındı. E-postanızı doğrulayın.'); }); }, child: const Text('Yeni hesap oluştur')),
@@ -85,4 +93,5 @@ class _CloudAccountPageState extends State<CloudAccountPage> {
       if (feedback != null) Padding(padding: const EdgeInsets.symmetric(vertical: 12), child: Text(feedback!, style: const TextStyle(color: Color(0xFF48235F)))),
     ]),
   );
+  }
 }

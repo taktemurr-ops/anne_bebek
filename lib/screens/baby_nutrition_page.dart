@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../data/baby_nutrition.dart';
 
 class BabyNutritionPage extends StatefulWidget {
@@ -42,14 +44,14 @@ class _BabyNutritionPageState extends State<BabyNutritionPage> {
             Text(nutritionNoteForMonth(month)),
             const SizedBox(height: 12),
             Row(children: [
-              IconButton(tooltip: 'Önceki ay', onPressed: month > 0 ? () => setState(() => month--) : null, icon: const Icon(Icons.chevron_left)),
+              IconButton(tooltip: t('Önceki ay'), onPressed: month > 0 ? () => setState(() => month--) : null, icon: const Icon(Icons.chevron_left)),
               Expanded(child: DropdownButtonFormField<int>(
                 key: ValueKey(month), initialValue: month, isExpanded: true,
-                decoration: const InputDecoration(labelText: 'Ay seç', filled: true, fillColor: Colors.white),
+                decoration: InputDecoration(labelText: t('Ay seç'), filled: true, fillColor: Colors.white),
                 items: List.generate(73, (index) => DropdownMenuItem(value: index, child: Text('$index. ay'))),
                 onChanged: (value) { if (value != null) setState(() => month = value); },
               )),
-              IconButton(tooltip: 'Sonraki ay', onPressed: month < 72 ? () => setState(() => month++): null, icon: const Icon(Icons.chevron_right)),
+              IconButton(tooltip: t('Sonraki ay'), onPressed: month < 72 ? () => setState(() => month++): null, icon: const Icon(Icons.chevron_right)),
             ]),
           ]),
         ),
@@ -57,7 +59,7 @@ class _BabyNutritionPageState extends State<BabyNutritionPage> {
         if (month < 6) const Card(child: Padding(padding: EdgeInsets.all(16), child: Text('Bu yaş için ek gıda tarifi listelenmiyor. Beslenme konusunda çocuk doktorunuzun önerilerini izleyin.'))),
         if (month >= 6) ...[
           TextField(onChanged: (value) => setState(() => query = value),
-            decoration: const InputDecoration(hintText: 'Tarif veya malzeme ara', prefixIcon: Icon(Icons.search))),
+            decoration: InputDecoration(hintText: t('Tarif veya malzeme ara'), prefixIcon: Icon(Icons.search))),
           const SizedBox(height: 10),
           SizedBox(height: 44, child: ListView(scrollDirection: Axis.horizontal, children: [
             for (final item in categories) Padding(padding: const EdgeInsets.only(right: 8), child: ChoiceChip(

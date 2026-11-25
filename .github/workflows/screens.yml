@@ -1,0 +1,67 @@
+name: Ekran görüntüleri
+
+# Tasarım incelemesi: ana ekranların PNG görüntülerini üretir ve
+# 'ekran-goruntuleri' dalına yazar (yalnızca görüntüler; kaynak kod değil).
+on:
+  push:
+    branches: [claude/tum-duzeltmeler]
+    paths: ['lib/**', 'integration_test/screenshots/**', '.github/workflows/screens.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: screens
+  cancel-in-progress: true
+
+jobs:
+  screens:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.9'
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - name: Emoji yazı tipini indir
+        run: |
+          curl -fsSL -o /tmp/emoji.ttf https://github.com/google/fonts/raw/main/ofl/notocoloremoji/NotoColorEmoji-Regular.ttf \
+            || curl -fsSL -o /tmp/emoji.ttf https://github.com/googlefonts/noto-emoji/raw/main/fonts/NotoColorEmoji.ttf \
+            || (sudo apt-get install -y -qq fonts-noto-color-emoji && cp /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf /tmp/emoji.ttf) || true
+          ls -la /tmp/emoji.ttf || true
+      - name: Görüntüleri üret
+        run: |
+          # integration_test altındaki dosyalar cihaz ister; testi normal
+          # widget testi olarak çalıştırmak için test/ altına kopyala.
+          mkdir -p test/_screens
+          cp integration_test/screenshots/screens_test.dart test/_screens/
+          EMOJI_FONT=/tmp/emoji.ttf flutter test test/_screens --update-goldens || true
+          EMOJI_FONT=/tmp/emoji.ttf STORE_SHOTS=1 flutter test test/_screens --update-goldens || true
+          EMOJI_FONT=/tmp/emoji.ttf TABLET_SHOTS=dikey flutter test test/_screens --update-goldens || true
+          EMOJI_FONT=/tmp/emoji.ttf TABLET_SHOTS=yatay flutter test test/_screens --update-goldens || true
+      - name: Görüntüleri dala yaz
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          mkdir -p /tmp/shots
+          cp test/_screens/goldens/*.png /tmp/shots/ 2>/dev/null || true
+          mkdir -p /tmp/shots/magaza
+          cp test/_screens/goldens/magaza/*.png /tmp/shots/magaza/ 2>/dev/null || true
+          for t in dikey yatay; do
+            mkdir -p /tmp/shots/tablet_$t
+            cp test/_screens/goldens/tablet_$t/*.png /tmp/shots/tablet_$t/ 2>/dev/null || true
+          done
+          ls -la /tmp/shots
+          cd /tmp/shots
+          echo "Kaynak: ${GITHUB_SHA}" > KAYNAK.txt
+          git init -q
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add -A
+          git commit -qm "Ekran görüntüleri ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:ekran-goruntuleri

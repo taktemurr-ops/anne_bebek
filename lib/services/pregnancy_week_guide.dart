@@ -1,69 +1,200 @@
-/// General educational pregnancy guide. Dating and care plans require clinical confirmation.
+/// Hafta hafta gebelik rehberi (1–40). Genel bilgilendirme amaçlıdır;
+/// gebelik haftası ve bakım planı doktor tarafından belirlenir.
+/// Boy ve kilo değerleri yaklaşık ortalamalardır; bebekler arasında farklılık
+/// olağandır (20. haftaya kadar baş-popo, sonrasında baş-topuk uzunluğu).
 class PregnancyWeekGuide {
   final int week;
   final String development;
   final String maternalChanges;
   final String preparation;
   final String safety;
-  const PregnancyWeekGuide(this.week, this.development, this.maternalChanges, this.preparation, this.safety);
+
+  /// Boyut benzetmesi simgesi ve metni (ör. 🍋, "misket limonu").
+  final String sizeEmoji;
+  final String sizeLabel;
+
+  /// "Yaklaşık 5,4 cm · 14 g" gibi; ilk haftalarda boş olabilir.
+  final String measure;
+
+  const PregnancyWeekGuide(this.week, this.development, this.maternalChanges,
+      this.preparation, this.safety,
+      {this.sizeEmoji = '', this.sizeLabel = '', this.measure = ''});
+
+  int get trimester => week <= 13 ? 1 : week <= 27 ? 2 : 3;
 }
 
-const _milestones = <String>[
-  'Gebelik haftaları son adet tarihinden itibaren sayılır; döllenme genellikle daha sonra gerçekleşir.',
-  'Erken dönemde hormon değişiklikleri başlar; gebelik henüz testle doğrulanmamış olabilir.',
-  'Döllenme ve erken hücresel gelişim bu döneme denk gelebilir.',
-  'Yerleşme ve erken gebelik hormonları hakkında sağlık uzmanından bilgi alabilirsin.',
-  'Gebelik kesesi ultrasonla değerlendirilmeye başlanabilir; zamanlama kişiye göre değişir.',
-  'Embriyonun erken organ gelişimi sürer; ultrason bulguları tarihlendirmeye bağlıdır.',
-  'Beyin ve omurilik gibi temel yapılar hızla gelişmektedir.',
-  'Kol ve bacak taslakları belirginleşir; gelişim bireysel farklılık gösterir.',
-  'Yüz yapıları ve hareket sisteminin temelleri gelişmeye devam eder.',
-  'Organların temel yapıları şekillenmektedir; takip planını doktorunla gözden geçir.',
-  'Embriyonik dönemden fetal döneme geçiş yaklaşır.',
-  'Fetüsün hareketleri başlayabilir ancak anne tarafından henüz hissedilmeyebilir.',
-  'İlk trimester sonuna yaklaşılır; tarama seçenekleri doktorla değerlendirilir.',
-  'İkinci trimester başlar; büyüme ve organların olgunlaşması sürer.',
-  'İskelet ve kas sistemi gelişmeye devam eder.',
-  'Fetüs hareketleri artar; hissedilme zamanı kişiden kişiye değişir.',
-  'Gelişen kaslar ve eklemler daha çeşitli hareketleri destekler.',
-  'Bazı gebeler ilk hareketleri bu haftalarda fark etmeye başlayabilir.',
-  'İşitmeyle ilişkili yapılar gelişmeyi sürdürür.',
-  'Ayrıntılı ultrason değerlendirmesi için sağlık ekibinin önerdiği zaman aralığına girilebilir.',
-  'Büyüme hızlanırken organların olgunlaşması devam eder.',
-  'Hareketler daha belirgin olabilir; hareket örüntüsü henüz düzenli olmayabilir.',
-  'Akciğer gelişimi sürer; doğum sonrası yaşama hazırlık devam eder.',
-  'Fetüsün uyku ve hareket dönemleri değişkenlik gösterebilir.',
-  'Akciğer ve sinir sistemi gelişmeye devam eder.',
-  'Büyüme ve kilo alımı hızlanabilir.',
-  'Göz ve duyusal sistemlerin olgunlaşması sürer.',
-  'Üçüncü trimester yaklaşırken büyüme ve beyin gelişimi devam eder.',
-  'Üçüncü trimester başlar; fetüsün hareket örüntüsünü tanımak önem kazanır.',
-  'Beyin ve akciğer gelişimi devam eder.',
-  'Fetüsün büyümesiyle rahimdeki alan giderek azalır.',
-  'Hareketlerin niteliği değişebilir; belirgin azalma değerlendirilmelidir.',
-  'Büyüme, yağ dokusu birikimi ve organ olgunlaşması sürer.',
-  'Doğum pozisyonu değişebilir; değerlendirmeyi sağlık ekibi yapar.',
-  'Akciğerler olgunlaşmaya devam eder.',
-  'Doğum hazırlığı ve doğum yeri planlaması önem kazanır.',
-  'Doğum belirtileri ve acil başvuru planını gözden geçir.',
-  'Gebelik artık doğuma yakın dönemdedir; doğum zamanı kişiye göre değişir.',
-  'Doğum bu haftalarda başlayabilir; sağlık ekibinin önerilerini izle.',
-  'Tahmini doğum haftasıdır; tarih kesin değildir.',
+// (simge, benzetme, ölçü, gelişim, anne, yapılacaklar)
+const _weeks = <(String, String, String, String, String, String)>[
+  ('🌸', '', '',
+    'Gebelik haftaları son adetin ilk gününden sayılır; bu hafta aslında adet dönemidir ve henüz gebelik yoktur.',
+    'Adet dönemindesin. Vücudun yeni bir yumurtlamaya hazırlanıyor.',
+    'Gebelik planlıyorsan folik asit desteğine başla; alkol ve sigarayı bırak.'),
+  ('🌸', '', '',
+    'Yumurtlama çoğunlukla bu haftanın sonuna doğru olur; döllenme yumurtlamadan sonraki yaklaşık bir gün içinde gerçekleşebilir.',
+    'Yumurtlama döneminde berrak, kaygan akıntı ve hafif kasık ağrısı olabilir.',
+    'Verimli günlerini uygulamadaki döngü takviminden izleyebilirsin.'),
+  ('🌱', 'mikroskobik', '',
+    'Döllenmiş yumurta (zigot) hızla bölünerek rahme doğru ilerler.',
+    'Çoğu kadın henüz bir şey hissetmez.',
+    'Kullandığın ilaçları gebelik olasılığına göre doktoruna sor.'),
+  ('🌱', 'haşhaş tanesi', 'yaklaşık 1 mm',
+    'Hücre topluluğu rahim duvarına yerleşir; gebelik hormonu (hCG) yükselmeye başlar.',
+    'Adet gecikmesi, hafif kramp veya az miktarda lekelenme olabilir. Ev gebelik testi pozitif çıkabilir.',
+    'Test pozitifse doktor randevusu al; folik asidi sürdür.'),
+  ('🌱', 'susam tanesi', 'yaklaşık 2 mm',
+    'Kalp ve sinir sisteminin temelleri oluşur; nöral tüp kapanmaya başlar.',
+    'Yorgunluk, meme hassasiyeti ve sık idrara çıkma başlayabilir.',
+    'İlk muayenende kronik hastalıklarını ve ilaçlarını gözden geçir.'),
+  ('🌱', 'mercimek tanesi', 'yaklaşık 6 mm',
+    'Kalp atımı ultrasonda görülebilir; kol ve bacak tomurcukları belirir.',
+    'Bulantı başlayabilir; kokulara hassasiyet artabilir.',
+    'Kafeini günde 200 mg ile sınırla; az ve sık ye.'),
+  ('🌱', 'nohut tanesi', 'yaklaşık 1 cm',
+    'Beyin hızla gelişir; yüz yapıları şekillenmeye başlar.',
+    'Bulantı, duygu dalgalanmaları ve yorgunluk sık görülür.',
+    'İlk ultrasonla gebelik haftası doğrulanır; tahmini doğum tarihini uygulamaya gir.'),
+  ('🍇', 'üzüm tanesi', 'yaklaşık 1,6 cm · 1 g',
+    'Parmaklar belirginleşmeye başlar; embriyo küçük hareketler yapar ama henüz hissedilmez.',
+    'Şişkinlik ve yorgunluk sürebilir.',
+    'Kan grubu, kan sayımı ve enfeksiyon taramaları gibi ilk tahliller yapılır.'),
+  ('🍒', 'kiraz', 'yaklaşık 2,3 cm · 2 g',
+    'Temel organların çoğu oluşmuştur; göz kapakları gelişir.',
+    'Bulantı bu haftalarda en yoğun olabilir.',
+    'Bulantı için aç kalmamaya çalış; hiçbir şey tutamıyorsan doktoruna başvur.'),
+  ('🍓', 'çilek', 'yaklaşık 3,1 cm · 4 g',
+    'Embriyo dönemi sona erer, "fetüs" dönemi başlar; hayati organlar yerini almıştır.',
+    'Kan hacmi artar; damarlar daha belirgin görünebilir.',
+    'Tarama seçeneklerini (ikili test, hücresiz DNA testi) doktorunla konuş.'),
+  ('🌰', 'kestane', 'yaklaşık 4,1 cm · 7 g',
+    'Baş vücudun yaklaşık yarısı kadardır; tırnak yatakları ve diş tomurcukları gelişir.',
+    'Bulantı azalmaya başlayabilir; ani kalkınca baş dönmesi olabilir.',
+    '11–14. haftalar arasındaki tarama testinin randevusunu planla.'),
+  ('🍋', 'misket limonu', 'yaklaşık 5,4 cm · 14 g',
+    'Refleksler gelişir; parmaklarını açıp kapayabilir. Böbrekler idrar üretmeye başlar.',
+    'Rahim leğen kemiğinin üzerine çıkar; sık idrara çıkma biraz azalabilir.',
+    'Ense kalınlığı ölçümü ve ikili test bu dönemde yapılabilir.'),
+  ('🥝', 'kivi', 'yaklaşık 7,4 cm · 23 g',
+    'Ses telleri gelişir; bağırsaklar karın içindeki yerine yerleşir.',
+    'Birçok gebede enerji artmaya başlar.',
+    'Diş hekimi kontrolü yaptır; gebelikte diş eti hassaslaşabilir.'),
+  ('🍑', 'şeftali', 'yaklaşık 8,7 cm · 43 g',
+    'Yüz ifadeleri başlayabilir; vücudu ince tüylerle (lanugo) kaplanmaya başlar.',
+    'İştah artar; karın belirginleşmeye başlar.',
+    'Düzenli yürüyüş gibi bir egzersiz rutini oluştur.'),
+  ('🍎', 'elma', 'yaklaşık 10 cm · 70 g',
+    'Kemikleşme sürer; göz kapakları kapalı olsa da ışığa duyarlılık gelişir.',
+    'Burun tıkanıklığı ve diş eti kanaması görülebilir.',
+    'Demir desteği gerekip gerekmediğini doktoruna sor.'),
+  ('🥑', 'avokado', 'yaklaşık 11,6 cm · 100 g',
+    'Kas ve iskelet güçlenir; baş daha dik durur.',
+    'Ciltte koyulaşma (gebelik maskesi) ve karın ortasında çizgi belirebilir.',
+    'Doktorun önerirse üçlü/dörtlü tarama testi 15–20. haftalarda yapılır.'),
+  ('🍐', 'armut', 'yaklaşık 13 cm · 140 g',
+    'Deri altında yağ dokusu birikmeye başlar; ter bezleri gelişir.',
+    'Ağırlık merkezi değişir; sırt ağrısı başlayabilir.',
+    'Rahat ayakkabı ve destekli sütyen kullan.'),
+  ('🌶️', 'dolmalık biber', 'yaklaşık 14 cm · 190 g',
+    'Kulaklar yerine yerleşir ve sesleri algılamaya başlayabilir.',
+    'İlk hareketleri "kelebek kanadı" gibi hissedebilirsin (özellikle önceki gebeliklerde).',
+    'Ayrıntılı ultrason randevunu planla.'),
+  ('🥭', 'mango', 'yaklaşık 15 cm · 240 g',
+    'Cildi koruyucu beyaz bir tabaka (verniks) kaplamaya başlar.',
+    'Karnın yanlarında kısa süreli, batma tarzı ağrılar (bağ ağrısı) olabilir.',
+    'Pelvik taban egzersizlerine başla.'),
+  ('🍌', 'muz', 'yaklaşık 25 cm (baş-topuk) · 300 g',
+    'Gebeliğin yarısındasın. Bebek yutma hareketleri yapar; hareketleri belirginleşir.',
+    'Karın belirginleşir; göbek deliği düzleşebilir.',
+    'Ayrıntılı (anomali) ultrasonu genellikle 18–22. haftalarda yapılır.'),
+  ('🥕', 'havuç', 'yaklaşık 27 cm · 360 g',
+    'Sindirim sistemi gelişir; yuttuğu amniyon sıvısını işlemeye başlar.',
+    'Bacak krampları ve varisler görülebilir.',
+    'Doğum hazırlık sınıflarını araştır.'),
+  ('🥥', 'hindistan cevizi', 'yaklaşık 28 cm · 430 g',
+    'Duyular gelişir; dokunmayı hissedebilir, kaşları belirir.',
+    'Karın, kalça ve göğüslerde çatlaklar oluşabilir.',
+    'Bebek bütçesini ve ihtiyaç listesini uygulamadaki alışveriş bölümünde hazırla.'),
+  ('🍆', 'patlıcan', 'yaklaşık 29 cm · 500 g',
+    'Akciğerlerde damarlanma gelişir; ritmik sarsıntılar (hıçkırık) hissedilebilir.',
+    'Ayak bileklerinde hafif şişlik olabilir.',
+    'Bebeğin hareket düzenini tanımaya başla.'),
+  ('🌽', 'mısır koçanı', 'yaklaşık 30 cm · 600 g',
+    'Akciğerler yüzey gerilimini azaltan madde (sürfaktan) üretmeye başlar.',
+    'Mide yanması sıklaşabilir.',
+    'Gebelik diyabeti taraması (şeker yükleme testi) 24–28. haftalarda yapılır.'),
+  ('🥦', 'karnabahar', 'yaklaşık 34 cm · 660 g',
+    'El kavrama refleksi gelişir; saçlar uzar.',
+    'Uyku güçlüğü başlayabilir.',
+    'Bebek odası ve güvenli uyku alanını planla.'),
+  ('🥬', 'marul', 'yaklaşık 35 cm · 760 g',
+    'Gözler açılmaya başlar; seslere tepki verebilir.',
+    'Hafif şişlik ve düzensiz, ağrısız sertleşmeler (yalancı kasılmalar) olabilir.',
+    'Sol yanına yatarak uyumaya alış.'),
+  ('🥬', 'lahana', 'yaklaşık 36 cm · 875 g',
+    'Uyku-uyanıklık döngüleri düzenlenir; beyin aktivitesi artar.',
+    'Nefes darlığı hissi olabilir.',
+    'Kan grubun Rh negatifse 28. hafta civarında yapılacakları doktorunla konuş.'),
+  ('🍆', 'büyük patlıcan', 'yaklaşık 38 cm · 1 kg',
+    'Gözler açılıp kapanabilir. Üçüncü trimester başlar.',
+    'Yorgunluk geri dönebilir; huzursuz bacak hissi olabilir.',
+    'Hareketleri her gün takip et; kan sayımı tekrarlanabilir.'),
+  ('🎃', 'küçük balkabağı', 'yaklaşık 39 cm · 1,2 kg',
+    'Kaslar ve akciğerler olgunlaşır; tekmeler güçlenir.',
+    'Kabızlık ve hemoroid görülebilir.',
+    'Emzirme hakkında bilgi edin; uygulamadaki rehberden başlayabilirsin.'),
+  ('🥬', 'büyük lahana', 'yaklaşık 40 cm · 1,3 kg',
+    'Beyin hızla büyür; kemik iliği kan hücresi üretir.',
+    'Uyku zorluğu ve duygu dalgalanmaları artabilir.',
+    'Doğum tercihlerini (doğum planı) yazmaya başla.'),
+  ('🥥', 'iri hindistan cevizi', 'yaklaşık 41 cm · 1,5 kg',
+    'Duyusal algı gelişir; hızla kilo alır.',
+    'Memelerden sarımsı bir sıvı (kolostrum) gelebilir.',
+    'Doğum yapacağın hastaneyi ve ulaşımı netleştir.'),
+  ('🍍', 'ananas', 'yaklaşık 42 cm · 1,7 kg',
+    'Tırnaklar uzar, ince tüyler dökülmeye başlar; çoğu bebek baş aşağı döner.',
+    'Yalancı kasılmalar sıklaşabilir.',
+    'Büyüme takibi için ultrason yapılabilir.'),
+  ('🍍', 'iri ananas', 'yaklaşık 44 cm · 1,9 kg',
+    'Kemikler sertleşir (kafatası esnek kalır); anneden antikor geçişi artar.',
+    'Sırt, kalça ve el bileklerinde ağrı olabilir.',
+    'Arkaya bakan oto koltuğunu al ve takmayı öğren.'),
+  ('🍈', 'kavun', 'yaklaşık 45 cm · 2,1 kg',
+    'Merkezi sinir sistemi ve akciğerler olgunlaşmayı sürdürür.',
+    'Yorgunluk ve sık idrara çıkma artar.',
+    'Hastane çantasını hazırla.'),
+  ('🍈', 'iri kavun', 'yaklaşık 46 cm · 2,4 kg',
+    'Böbrekler gelişimini tamamlar; karaciğer işlevini artırır.',
+    'Rahim kaburgalara kadar yükselir; nefes darlığı olabilir.',
+    'Doktorun önerdiği son ay tahlillerini yaptır.'),
+  ('🎃', 'bal kabağı', 'yaklaşık 47 cm · 2,6 kg',
+    'Yağ birikimi sürer; bebek leğen kemiğine inmeye başlayabilir.',
+    'Bebek inince nefes rahatlar ama idrar sıklığı artar.',
+    'Kontroller sıklaşır; çantan ve evrakların hazır olsun.'),
+  ('🍉', 'küçük karpuz', 'yaklaşık 49 cm · 2,9 kg',
+    'Organlar olgunlaşmaya devam eder (erken term).',
+    'Nişan (kanlı mukus) gelebilir; kasıkta baskı artar.',
+    'Doğum belirtilerini ve ne zaman hastaneye gideceğini gözden geçir.'),
+  ('🍉', 'karpuz', 'yaklaşık 50 cm · 3,1 kg',
+    'Kavrama güçlüdür; ses ve ışığa tepkileri belirgindir.',
+    'Şişlik ve sabırsızlık hissi olabilir.',
+    'Dinlenmeye öncelik ver; hareketleri takip etmeyi sürdür.'),
+  ('🍉', 'iri karpuz', 'yaklaşık 51 cm · 3,3 kg',
+    'Tam term. Beyin ve akciğer gelişimi sürüyor.',
+    'Düzensiz ve düzenli kasılmaları ayırt etmeye çalış.',
+    'Doktorun önerdiği izlem kontrollerine (ör. NST) git.'),
+  ('🍉', 'karpuz', 'yaklaşık 51 cm · 3,4 kg',
+    'Tahmini doğum haftası. Bebeklerin yalnızca küçük bir kısmı tam bu tarihte doğar.',
+    'Bekleyiş kaygı yaratabilir; dinlen ve destek iste.',
+    'Doğum başlamazsa doktorunun izlem planını öğren; genellikle 41. haftada değerlendirme yapılır.'),
 ];
 
 PregnancyWeekGuide pregnancyGuideForWeek(int week) {
   if (week < 1 || week > 40) throw RangeError.range(week, 1, 40, 'week');
-  final trimester = week <= 13 ? 1 : week <= 27 ? 2 : 3;
-  final maternal = trimester == 1
-      ? 'Bulantı, yorgunluk ve meme hassasiyeti görülebilir; her gebelik farklıdır. Şikâyetlerini not ederek kontrolünde paylaş.'
-      : trimester == 2
-          ? 'Enerji düzeyinde değişiklik, cilt değişimleri ve büyüyen karınla ilişkili yakınmalar olabilir. Rahatlık ve hareket konusunda doktorunun önerisini izle.'
-          : 'Uyku güçlüğü, sık idrara çıkma ve hareketle ilgili rahatsızlıklar görülebilir. Yeni veya şiddetli belirtileri sağlık ekibine bildir.';
-  final prep = week <= 13
-      ? 'Gebelik doğrulaması, ilaçların gözden geçirilmesi, folat desteği ve tarama seçeneklerini doktorunla konuş.'
+  final (emoji, size, measure, development, maternal, todo) = _weeks[week - 1];
+  final safety = week <= 13
+      ? 'Kanama, şiddetli veya tek taraflı karın ağrısı, hiçbir şey tutamayacak kadar kusma, ateş: gecikmeden başvur.'
       : week <= 27
-          ? 'Önerilen kontrolleri, ultrason değerlendirmelerini ve gebelik diyabeti taraması zamanlamasını sağlık ekibinle planla.'
-          : 'Doğum yeri, ulaşım, destek kişisi, hastane çantası ve doğum sonrası bakım planını netleştir.';
-  return PregnancyWeekGuide(week, _milestones[week - 1], maternal, prep,
-      'Şiddetli ağrı, yoğun kanama, su gelmesi, şiddetli baş ağrısı, görme değişikliği veya belirgin hareket azalmasında gecikmeden tıbbi değerlendirme al.');
+          ? 'Kanama, su gelmesi, düzenli ağrılı kasılmalar, şiddetli baş ağrısı, görme bozukluğu, yüz ve ellerde ani şişlik: gecikmeden başvur.'
+          : 'Bebek hareketlerinde belirgin azalma, kanama, su gelmesi, düzenli kasılmalar, şiddetli baş ağrısı veya görme bozukluğu: aynı gün başvur. Acil durumda 112.';
+  return PregnancyWeekGuide(week, development, maternal, todo, safety,
+      sizeEmoji: emoji, sizeLabel: size, measure: measure);
 }

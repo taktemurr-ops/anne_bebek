@@ -1,4 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kReleaseMode;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'smart_shopping_page.dart';
@@ -39,9 +42,10 @@ class _ModuleHubPageState extends State<ModuleHubPage> {
     ('Kadın', 'Doğum sonrası bakım', Icons.spa_outlined, const PostpartumCarePage()),
     ('Araçlar', 'Hatırlatıcılar', Icons.notifications_outlined, const RemindersPage()),
     ('Araçlar', 'Yedekleme', Icons.backup_outlined, const BackupPage()),
-    ('Araçlar', 'AI asistan', Icons.auto_awesome_outlined, const AiAssistantPage()),
-    ('Yayın', 'Yayın kontrolleri', Icons.fact_check_outlined, const ReleaseCheckPage()),
-    ('Yayın', 'Proje tamamlama', Icons.task_alt_outlined, const ProjectCompletionCenterPage()),
+    ('Araçlar', 'Bilgi asistanı', Icons.auto_awesome_outlined, const AiAssistantPage()),
+    // Geliştirici araçları yalnızca geliştirme sürümlerinde.
+    if (!kReleaseMode) ('Yayın', 'Yayın kontrolleri', Icons.fact_check_outlined, const ReleaseCheckPage()),
+    if (!kReleaseMode) ('Yayın', 'Proje tamamlama', Icons.task_alt_outlined, const ProjectCompletionCenterPage()),
   ];
   @override
   void initState() { super.initState(); _loadFavorites(); }
@@ -74,7 +78,7 @@ class _ModuleHubPageState extends State<ModuleHubPage> {
        m.$1.toLowerCase().contains(query.toLowerCase()))).toList();
     return Scaffold(
       appBar: AppBar(title: const Text('Tüm modüller'), actions: [
-        IconButton(tooltip: 'Modül listesini kopyala',
+        IconButton(tooltip: t('Modül listesini kopyala'),
           icon: const Icon(Icons.copy_all_outlined),
           onPressed: () async {
             final rows = <String>['Kategori,Modül',
@@ -91,8 +95,8 @@ class _ModuleHubPageState extends State<ModuleHubPage> {
           style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold,
             color: Color(0xFF48235F))),
         const SizedBox(height: 8),
-        TextField(decoration: const InputDecoration(
-          prefixIcon: Icon(Icons.search), labelText: 'Modül ara'),
+        TextField(decoration: InputDecoration(
+          prefixIcon: Icon(Icons.search), labelText: t('Modül ara')),
           onChanged: (v) => setState(() => query = v)),
         const SizedBox(height: 8),
         Wrap(spacing: 6, runSpacing: 4, children: [

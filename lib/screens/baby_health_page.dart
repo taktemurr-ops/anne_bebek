@@ -1,5 +1,8 @@
+import '../utils/dialog_helpers.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../services/secure_health_store.dart';
 import '../data/baby_care_guidance.dart';
 
@@ -42,11 +45,11 @@ class _BabyHealthPageState extends State<BabyHealthPage> {
     DateTime date = DateTime.tryParse(existing?['date'] ?? '') ?? DateTime.now();
     bool completed = existing?['completed'] == 'true';
     final sectionName = existing?['section'] ?? _sections[_section];
-    final item = await showDialog<Map<String, String>>(context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, update) => AlertDialog(
+    final item = await showDialogAndDispose<Map<String, String>>(disposables: [title, notes], context: context, builder: (ctx) => StatefulBuilder(builder: (ctx, update) => AlertDialog(
       title: Text(existing == null ? 'Yeni kayıt: $sectionName' : 'Kaydı düzenle: $sectionName'),
       content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
-        TextField(controller: title, maxLength: 100, decoration: const InputDecoration(labelText: 'Başlık / aşı / belirti / gözlem')),
-        TextField(controller: notes, maxLines: 3, maxLength: 1000, decoration: const InputDecoration(labelText: 'Açıklama (isteğe bağlı)')),
+        TextField(controller: title, maxLength: 100, decoration: InputDecoration(labelText: t('Başlık / aşı / belirti / gözlem'))),
+        TextField(controller: notes, maxLines: 3, maxLength: 1000, decoration: InputDecoration(labelText: t('Açıklama (isteğe bağlı)'))),
         OutlinedButton.icon(icon: const Icon(Icons.calendar_month), label: Text('${date.day}.${date.month}.${date.year}'), onPressed: () async {
           final picked = await showDatePicker(context: ctx, initialDate: date, firstDate: DateTime(2000), lastDate: DateTime(2100));
           if (picked != null) update(() => date = picked);
@@ -59,7 +62,6 @@ class _BabyHealthPageState extends State<BabyHealthPage> {
           Navigator.pop(ctx, {'section': sectionName, 'title': title.text.trim(), 'notes': notes.text.trim(), 'date': date.toIso8601String(), 'completed': completed.toString()});
         }, child: const Text('Kaydet'))],
     )));
-    title.dispose(); notes.dispose();
     if (item == null || !mounted) return;
     final previous = List<Map<String, String>>.from(_entries);
     setState(() {
@@ -116,13 +118,13 @@ class _BabyHealthPageState extends State<BabyHealthPage> {
       (_showCompleted || e['completed'] != 'true') &&
       (query.isEmpty || '${e['title'] ?? ''} ${e['notes'] ?? ''}'.toLowerCase().contains(query))).toList();
     final total = _entries.where((e) => e['section'] == selected).length;
-    return Scaffold(appBar: AppBar(title: const Text('Bebek Sağlığı ve Gelişimi'), actions: [IconButton(tooltip: 'Bakım rehberi', icon: const Icon(Icons.info_outline), onPressed: _showGuidance)]),
+    return Scaffold(appBar: AppBar(title: const Text('Bebek Sağlığı ve Gelişimi'), actions: [IconButton(tooltip: t('Bakım rehberi'), icon: const Icon(Icons.info_outline), onPressed: _showGuidance)]),
       floatingActionButton: _loading || _error != null ? null : FloatingActionButton.extended(onPressed: () => _add(), icon: const Icon(Icons.add), label: const Text('Kayıt ekle')),
       body: _loading ? const Center(child: CircularProgressIndicator()) : _error != null ? Center(child: Padding(padding: const EdgeInsets.all(20), child: Text(_error!))) :
       Column(children: [
         const Padding(padding: EdgeInsets.all(12), child: Text('Kişisel sağlık günlüğüdür; tanı, tedavi veya resmi aşı kartı değildir. İlaç ve aşı planlarını sağlık uzmanıyla doğrulayın. Acil belirtilerde sağlık kuruluşuna başvurun.')),
         Padding(padding: const EdgeInsets.symmetric(horizontal: 12), child: TextField(
-          decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Başlık veya notlarda ara', border: OutlineInputBorder()),
+          decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('Başlık veya notlarda ara'), border: OutlineInputBorder()),
           onChanged: (value) => setState(() => _query = value),
         )),
         Padding(padding: const EdgeInsets.symmetric(horizontal: 12), child: Row(children: [
@@ -139,8 +141,8 @@ class _BabyHealthPageState extends State<BabyHealthPage> {
             isThreeLine: (item['notes'] ?? '').isNotEmpty,
             leading: (_section == 0 || _section == 1 || selected == 'Doktor randevuları') ? Checkbox(value: item['completed'] == 'true', onChanged: (_) => _toggle(item)) : const Icon(Icons.notes),
             trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-              IconButton(tooltip: 'Düzenle', icon: const Icon(Icons.edit_outlined), onPressed: () => _add(existing: item)),
-              IconButton(tooltip: 'Sil', icon: const Icon(Icons.delete_outline), onPressed: () => _remove(item)),
+              IconButton(tooltip: t('Düzenle'), icon: const Icon(Icons.edit_outlined), onPressed: () => _add(existing: item)),
+              IconButton(tooltip: t('Sil'), icon: const Icon(Icons.delete_outline), onPressed: () => _remove(item)),
             ]),
           ));
         })),

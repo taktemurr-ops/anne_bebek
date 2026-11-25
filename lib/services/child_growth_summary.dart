@@ -40,3 +40,18 @@ class GrowthInterval {
   const GrowthInterval({required this.days, required this.change});
   double get changePer30Days => change * 30 / days;
 }
+
+/// Büyüme geçmişi dönem filtresi: son [months] takvim ayındaki kayıtlar.
+/// [months] null ise tüm kayıtlar döner. Ay sonu taşmaları (ör. 31 Mayıs →
+/// 3 ay önce) ayın son gününe sabitlenir; yaz saati kaymasından etkilenmez.
+List<ChildJournalEntry> growthEntriesInPeriod(
+    List<ChildJournalEntry> entries, int? months, DateTime now) {
+  if (months == null) return entries;
+  if (months <= 0) throw ArgumentError.value(months, 'months');
+  var year = now.year;
+  var month = now.month - months;
+  while (month < 1) { month += 12; year--; }
+  final lastDay = DateTime(year, month + 1, 0).day;
+  final start = DateTime(year, month, now.day > lastDay ? lastDay : now.day);
+  return entries.where((e) => !e.at.isBefore(start)).toList();
+}

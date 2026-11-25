@@ -1,0 +1,7 @@
+18e62003	Sleep shorter than 1 minute or longer than 24 hours is not saved.
+a56be01b	Tap now, tap again when they wake up; the duration is saved automatically.
+a957286e	Woke up
+457fa936	Fell asleep
+6a9537ea	Sleeping
+3179cba4	{0} • started {1}
+25c6cb2b	Did they just fall asleep?

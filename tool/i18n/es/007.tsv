@@ -1,0 +1,300 @@
+7dd4893d	Mi diario de sueño
+d2f221e1	Registro de sueño
+6fe54c31	¿Eliminar el registro de sueño?
+f35a8e57	Editar registro de sueño
+dbe666f3	Registros de sueño
+4c817317	No se pudieron leer los registros de sueño. Los registros existentes no se eliminaron.
+a10a9f28	Melodía del sueño
+6b49345f	Rutina de sueño
+7e3c9066	Sonidos para dormir
+ea0c18d5	Sonidos para dormir y nanas
+4a0c0713	Sonidos para dormir 🌙
+0ced78e5	Duración del sueño (minutos)
+ada26820	Añadir duración del sueño
+a9710c8f	Duración del sueño y notas
+379d41de	Seguimiento del sueño y gráfico semanal
+4f596027	Sueño y descanso
+e59fcdb3	Sueño y rutina diaria
+04af83ce	Sueño y vida diaria
+c429c486	Sueño • Alimentación • Pañales
+95605fed	Registros de sueño, alimentación, pañales y medicamentos por fecha
+ede951de	Lista de maleta y viaje
+cae2f2a4	Ventilador
+14d24820	Cancelar
+fd682e2f	Comprobación de integridad de datos
+fa443a7c	Medicamento dado y cantidad (opcional)
+1c2d5efd	No se pudieron verificar los datos. No se modificó ningún registro.
+0ad85845	Hacer copia o restaurar datos
+38849bc7	Mis datos
+8671b79e	Ventana fértil
+8e134e98	Separa con comas: 08:00, 20:00
+97125909	Índice de masa corporal: {0} ({1}). No es una medida válida durante el embarazo y la lactancia.
+31c8b4c6	La temperatura parece baja. Abriga a tu bebé y vuelve a medir; si sigue baja o el bebé está decaído, acude al médico de inmediato.
+51c7c481	La referencia OMS de 0–24 meses debe incluir los 25 meses
+dfd2d9ec	Cargar referencia CSV de la OMS
+1cc4765f	Se requiere el enlace a la fuente de la OMS
+fd375b32	Para los percentiles de la OMS se necesitan archivos CSV CDC/OMS de 0–24 meses verificados. Puedes importar el contenido CSV oficial desde el portapapeles con el icono de carga de arriba. Sin referencia no se calculan percentiles.
+c3e129b1	Próximos
+cc54c201	Configurar recordatorios para las próximas citas
+d7b2d14b	Unos {0} meses
+89b96cf8	Próximamente
+44bbbb95	Solo favoritos
+a7afde3d	Solo mis favoritos
+2d1caed9	Solo resume los intervalos pasados entre las fechas que ingresaste. No lo uses para predicciones ni como anticonceptivo.
+87aea77d	Solo se recalculan proporcionalmente las cantidades que empiezan por un número. Revisa las fracciones, las cantidades aproximadas y las del texto.
+de7872a4	Solo se muestran los registros del niño seleccionado. Los datos se quedan en tu dispositivo; al copiar van al portapapeles.
+1a58d99a	Solo seleccionados
+3837ff97	Mostrar solo los registros de los últimos 7 días
+c7e13701	Solo las cuentas definidas como moderadoras en el servidor pueden ver las denuncias.
+be4f070d	Solo recetas con todos los ingredientes disponibles
+abf54174	Información de salud engañosa
+dd7dfe98	Respuesta
+11421ad6	Esperando respuesta…
+95c6b0a1	Añadir respuesta
+8d51bcd8	Escribir una respuesta
+59dfc0be	Escribe tu respuesta
+8c62add1	Las respuestas también se eliminarán.
+c23d93bb	Ya me lo hice
+1d5b3520	Mi lista de pendientes
+d33f496c	Pendientes y completados
+61da8572	Vacunas puestas y sus fechas
+0e53067d	Registra las vacunas puestas con fecha y nota
+9d20e6ef	He identificado a quién pedir ayuda
+6111735e	El sonido de las olas que van y vienen lentamente.
+697dcaae	Publicación
+aa04ddbb	Comprobaciones de publicación
+76e84489	Publicación y calidad
+2dcf5a8e	Comprobación previa a la publicación
+cfbb1cec	Lista de comprobación previa a la publicación
+52d23e7a	Se enviará la pregunta que escribas. Los correos y teléfonos se ocultan automáticamente; esto no es un anonimato completo. No escribas nombres, direcciones, resultados de pruebas ni otra información personal sensible.
+0cdd3141	Tu mensaje...
+6a6c247a	Lluvia
+1375a9ca	Edad
+77cef0fd	Rango de edad (meses)
+30179530	Las etiquetas de edad son información general. Ten en cuenta los alérgenos, la textura y el desarrollo de tu bebé.
+f57b1aa7	Buscar por edad, categoría e ingrediente
+45918659	Explorar por edad, categoría e ingrediente
+0bb80b4e	Actividades adecuadas a la edad
+50fce414	Comidas de bebé adecuadas a la edad
+5c2f6e29	Alimentación adecuada a la edad
+f2cfca90	Guía de alimentación y recetas según la edad
+d6ed084c	Guía del desarrollo según la edad
+a2a4f451	Contenidos y guías según la edad
+59fbc056	Guía según la edad
+70423165	Crea una rutina de sueño constante y adecuada a la edad. Comprueba que el entorno de sueño sea seguro; acuesta a tu bebé boca arriba.
+9421742d	Guía de vida según la edad
+82974595	Vida
+0ed43857	Mi centro de vida
+6aaeb8f7	Herramientas de vida
+622e3358	El registro del centro de vida no es válido.
+705dbd24	Mi centro de vida ✨
+30bb8fd8	El número de campos de la copia no es válido.
+0ce3cbc0	Las copias dependen de ti; se recomienda cifrarlas con contraseña.
+e36c65f6	Se superó el límite de tamaño de la copia (3 MB).
+67814e28	La copia está vacía; no hay registros que restaurar. Se conservan los registros existentes.
+103d6777	El archivo de copia es demasiado grande.
+e32ead49	No se pudo verificar la copia: {0}
+86d36476	La copia pertenece a otro niño
+2264ce25	El contenido de la copia no es válido: {0}
+117e220e	El texto de la copia contiene información de salud personal del niño. Otras apps pueden leer el contenido copiado al portapapeles. ¿Continuar?
+22a4830d	Crear copia y restaurar con datos de prueba
+2839f77d	No se pudo crear la copia: {0}
+5226eeb0	Falta la fecha de creación de la copia o no es válida.
+3c881c49	La fecha de creación de la copia parece estar en el futuro.
+2d8e4624	Contraseña de la copia (mínimo 12 caracteres)
+4b8b8dd9	La contraseña de la copia debe tener al menos 12 caracteres.
+17846133	La contraseña de la copia puede tener como máximo 256 caracteres.
+cec9168c	Los campos de cifrado de la copia no son válidos.
+0cdfd711	Copia de seguridad
+e723e5d5	Copia y restauración
+5ca9cc0f	Las copias se cifran con AES-256-GCM mediante una contraseña. Si olvidas la contraseña, no podrás abrir la copia. Aun así, guarda en lugar seguro el texto de la copia copiado al portapapeles. IMPORTANTE: Esto no cifra los registros actuales del dispositivo; no es una copia en la nube.
+fe1295fb	La copia contiene registros de otro niño
+d28a2981	La copia contiene un tipo de registro no válido.
+19c81124	Registro no válido en la copia: {0}
+907a7099	La copia contiene un elemento de lista no válido.
+9b3640c7	La copia contiene una lista no válida.
+b2251093	La copia contiene un diario de niño sin perfil.
+a6a28d8c	La copia contiene un plan de salud de niño sin perfil.
+9f013a15	La copia contiene un campo de registro no reconocido.
+2ae5db22	La copia no incluye {0} áreas de datos. La restauración conserva los registros existentes en esas áreas.
+8b946ea0	La copia contiene {0} áreas de datos y unos {1} registros.
+3306c64f	Verificar y restaurar la copia
+13c341fa	Comida
+5c3b5359	Recetas
+b43d243d	Recetas de comidas y alimentación complementaria
+168078d4	Añadir un bebé nuevo
+1d3da1f4	Añadir un bebé nuevo, cambiar entre perfiles; diario y plan de cuidados
+d6c0cccf	Crear un perfil de bebé nuevo
+76280fb8	Nuevo diario de alimentos y comidas
+f5e5aa21	Crear un nuevo registro de alimentación
+3daa42cd	La nueva fecha de nacimiento no puede ser posterior a registros de diario o salud existentes. Revisa primero los registros.
+3ab9c140	Nuevo evento
+8cd124b2	Crear una cuenta nueva
+2c2c722a	Nuevo registro
+78864878	Añadir nuevo registro
+14139a8e	Nuevo registro • {0}
+34482149	Nuevo registro: {0}
+c543676f	Nueva nota personal
+bbf53b45	Nueva receta
+60a6e435	Crear un nuevo registro de sueño
+549bfe99	Las nuevas respuestas aparecen aquí. Las notificaciones instantáneas en el teléfono aún no están activas.
+330da458	Añadir artículo
+e7c85607	Nuevo: Vida familiar ✨
+7ba41f54	Reintentar
+b96d401c	Más recientes primero
+ca2f77a3	Comprobar de nuevo
+de5e0d3c	Recargar
+e15030ea	Recién nacido
+255b90ed	Actualizar
+051c4abc	Registros locales de bebé y mujer
+a5a4ba01	Error al leer los datos locales
+a78fb991	Resumen de gestión local (vista previa)
+56657a1d	No se pudo leer el resumen local.
+9fc52a0e	Moderación controlada por permisos
+87963f33	Se requieren permisos, flujos de denuncia, protección antispam y pruebas reales de notificaciones. No hay notificaciones push.
+ec1961a9	Registro de diario duplicado
+820f82f6	Registro de rutina diaria duplicado
+cd178a76	ID de registro duplicado
+af9b0db7	Perfil duplicado
+2737e506	ID de receta duplicado
+6def65cb	ID de artículo duplicado
+02d24668	Toca una de las casillas de arriba para añadir tu primera medición.
+7c760d68	Huevo
+d8f5e465	La ovulación y la ventana fértil se estiman a partir de la duración media de tu ciclo. No es un método fiable de anticoncepción ni de planificación del embarazo, y no sustituye una valoración médica.
+5bf24d05	No se pudo acceder a los datos de gestión. Revisa el permiso de administrador, la sesión y la configuración del servidor.
+851cf730	Resumen de gestión • Vista previa
+08ece895	Las referencias cargadas solo se conservan mientras esta pantalla está abierta. Los percentiles mensuales de la OMS de 0–24 meses son informativos; no son una valoración médica.
+3be181d6	Un chequeo general una vez al año; según recomiende tu médico.
+a0584744	Una vez al año; sin esperar si un lunar crece, cambia de color o sangra.
+14282d47	Temporizador apagado – se repite continuamente
+7a005fd4	Temporizador: izquierdo {0}, derecho {1}
+06ffcdc4	[correo oculto]
+4f546c2d	[teléfono oculto]
+f27daa76	toca para empezar
+84f4ef71	toca para detener
+f548092e	sobrepeso
+ba242156	Pruebas en dispositivo iOS
+e5f8828a	Compilación iOS y verificación TestFlight hechas (requiere Mac)
+76d713f4	Compilación iOS
+bc797ca2	Prueba en dispositivo iOS real/TestFlight
+77778cec	bajo peso
+8c8463b3	{0} ({1}+ meses)
+d46506f3	{0} / 40 semanas
+3ed1d8a2	{0} / {1} comprobaciones marcadas
+d7d21dc0	{0} / {1} comprobaciones completadas
+e8d1f06b	{0} / {1} módulos
+4c047fc9	{0} / {1} recetas
+1e9bc45f	Cantidad de {0} aumentada.
+6e31f528	¿Guardar {0} como día de inicio de la menstruación?
+9e3b35cb	{0} herramientas
+39dcb346	Desde {0} meses ({1}) • {2}
+76d132a2	{0} meses
+a9e63ce1	{0} temas mensuales • {1} leídos
+1d4ccb16	{0} minutos
+b956e17b	{0} min
+1ed27a97	{0} artículos editoriales iniciales • {1} leídos
+b01aab41	Se muestran {0} actividades
+33d59205	{0} ingredientes distintos • {1} en casa • faltan {2}
+77d1adfb	{0} recetas favoritas • {1} registros de cuidado • {2} mediciones de crecimiento
+a281475b	{0} atrasados • {1} hoy
+6923ddc3	{0} recetas • {1} resultados
+867b5915	{0} días
+ddc1685d	{0} días (aproximadamente)
+6148359a	{0} días
+620745ed	{0} herramientas de vida diaria • Tus registros se guardan en este dispositivo
+344c841b	{0} nombres
+25eed84e	{0} contenidos
+e89655ea	{1} registros para {0}
+d6b3d33a	Ingresa un valor entre {1} y {2} {3} para {0}.
+33edf2af	{0} guardado.
+66332aef	Registro de {0}
+32cd6bf1	Añadir registro de {0}
+ebffeb23	Registro de {0} añadido.
+409e949d	{0} registros
+8d1220da	{0} áreas de registros restauradas. Cierra la app por completo y vuelve a abrirla.
+f2d88b06	{0} registros copiados. Se conservaron los registros antiguos.
+0e5bf71a	{0} registros · {1} categorías
+7167c108	{0} registros • Primero: {1} {3} • Último: {2} {4}
+65f7f6f0	{0} kg
+b28623e0	Para {0} personas
+d773d924	{0} controles están pendientes o nunca se registraron
+2004d198	{0} temas
+8d7173f7	{0} añadido a la lista.
+a3972015	{0} ingredientes añadidos a tu lista de compras.
+2a0e9db5	{0} ingredientes añadidos a la lista de compras.
+327d8d8e	{0} ingredientes añadidos a la lista de compras para {1} raciones.
+c16337a7	{0} mg/dL
+86e23524	{0} ml
+c7fba814	{0} raciones
+be8c429b	Añadir los ingredientes para {0} raciones a la lista de compras
+7672293f	¿Quieres eliminar el perfil {0}? No se puede deshacer.
+b7d695c3	{0} h {1} min
+eba9aabb	{0} horas {1} minutos
+1728cbd2	{0} añadido a la cesta
+699debf7	{0} resultados
+5cbd73d1	{0} recetas
+7829d135	{0} recetas encontradas
+93479447	{0} recetas • 6–72 meses • Explora por edad e ingrediente
+5843347a	{0} recetas • La adecuación es una coincidencia aproximada de ingredientes
+9c4c13d3	Fecha de {0}
+c336a2fe	{0} años {1} meses
+4edb960f	Recomendaciones generales de detección para los {0} años.
+5fd8a997	{0} años
+57c717e5	{0} ingredientes nuevos añadidos a la lista de compras. Ve a la pestaña Compras para ver la lista.
+f2fb22d8	{0} artículos nuevos añadidos a la lista de compras existente.
+57563a37	{0} ya está guardado. Abre «Mi historial menstrual» para eliminarlo.
+5f0f5e61	{0} {1}  •  {2} movimientos
+6b41fb39	Se sobrescribirá la receta guardada para {0} {1}.
+a028deba	{0} añadido al plan de {1}.
+920918f4	{0} · Historial de crecimiento
+e318d639	{0} · Resumen para el médico
+41928c4c	{0} · Vista general
+66f73dce	{0} · Diario
+5fbc9967	{0} · Editar registro
+301cdf03	{0} · Diario de sueño 🌙
+e4f276cd	{0} · Nuevo registro
+5ef40115	{0} mediciones
+758375a3	{0} mediciones registradas • ver los gráficos
+b382e9ed	Dado hace {0}. Decide el intervalo hasta la siguiente dosis según el prospecto y la indicación de tu médico.
+9d0904fd	{0} consejos • {1} leídos
+8254be8c	Se añadirán {0} comidas a los huecos vacíos. Las elecciones existentes de esta semana no cambian.
+4110f091	Sugerencias preparadas para {0} comidas.
+a162d32a	{0} comidas traídas de la semana anterior.
+108a21c3	{0} artículos añadidos a la lista de compras.
+fb448456	Eliminar {0}
+05eed817	{0} • Calendario de vacunación
+2ad16cdb	{0} • Información
+1f0c7254	{0} • Plan de salud
+09672e22	{0} • Información de stock
+8de7664e	{0} • Comunidad
+1493394e	{0} • Registro de consumo
+6e0fa32d	{0} • Unos {1} min
+cadd7921	{0} • Nuevo registro
+cd3f9664	{0} • {1} minutos
+64d6642e	{0} • {1} min
+c50903f6	{0} • {1} min • {2}
+cad4b532	{0} • {1} min • {2} ingredientes
+1ded6f2a	{0} • {1} min • {2}+ meses
+51d7899c	{0} • {1} min • {2}/{3} ingredientes disponibles
+22f78654	{0} • hace {1} días
+53a1b1e9	{0} • {1} semanas {2} días (aproximadamente)
+b4492db8	{0} • Alternativas para {1}
+bd4b1b59	{0} • {1} registros
+b15ad4c5	{0} • {1} • {2} opciones de verduras
+7d785621	{0} • {1}–{2} meses\n{3}
+92c332c1	{0} • ~{1} min
+1dba9703	{0}+ meses • {1} minutos • {2}
+252e384b	Mes {0}
+c0b84528	Guía de alimentación del mes {0}
+5a325e25	Consejos de desarrollo, juego y cuidados para el mes {0}
+70773554	Semana {0}
+f6284071	¿Qué te espera en la semana {0}?
+24dc6176	Semana del {0}.{1}.{2}
+d5796a68	{0}.{1}.{2} • Elegir fecha
+4fc32893	Paso {0}/{1}
+5e8260f5	{0}/{1} actividades completadas
+a66bda08	{0}/{1} mmHg
+a9a90428	{0}/{1} completado
+46773c53	{0}: referencia de 25 meses cargada. Asegúrate de que la fuente CSV sea CDC/OMS.
+30d07e6c	{0}: toca para añadir a la lista
+1e5d372f	{0}: {1} registros

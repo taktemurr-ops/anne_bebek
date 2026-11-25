@@ -1,5 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../data/women_lifestyle_content.dart';
 import '../services/secure_health_store.dart';
 
@@ -99,7 +101,7 @@ class _WomenLifestylePageState extends State<WomenLifestylePage> {
         const SizedBox(height: 6),
         Text('${lifestyleArticles.length} editoryal başlangıç içeriği • ${completed.length} okundu'),
         const SizedBox(height: 12),
-        TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Konu veya kelime ara', border: OutlineInputBorder()),
+        TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('Konu veya kelime ara'), border: OutlineInputBorder()),
           onChanged: (value) => setState(() => query = value)),
         const SizedBox(height: 12),
         SingleChildScrollView(scrollDirection: Axis.horizontal, child: Row(children: [

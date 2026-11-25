@@ -1,0 +1,267 @@
+88ebc0b8	Health content is for information; it does not replace diagnosis or treatment.
+3d66247c	Medical warnings in health content
+cb3dc776	Health records and vaccine information
+ec8dcfc4	Health check-ups
+031d8d4b	Health centre
+3395086d	Health notes
+d07ca934	Health 💗
+ee7b5b44	Healthy living
+c7abc728	My Health
+7435be90	Vegetables
+374dc02d	Vegetable-based
+7f89b19a	Vegetable options
+e485a853	Fruit and vegetables
+86c65a9c	Vegetable dishes
+52f78a08	Add to basket
+dba796dc	My basket
+eb71c452	My basket ({0})
+bcd58eac	Your basket is empty.
+e41d099e	Serving suggestion
+27ed2fd5	Sound could not be played. Check that the phone is not on silent and try again.
+60a3a31b	Sounds are generated mathematically within the app. Brahms' Lullaby (1868) and the tune of "Twinkle, Twinkle, Little Star" are in the public domain; "Sleep melody" was composed for this app.
+3dc7f551	Quiet hours
+6b16c36a	Travel preparation
+22bf5868	The selected child's JSON backup was copied to the clipboard. Keep it in a safe place.
+c1238a35	Number of selected records
+f554b750	Add the {0} selected ingredients to shopping
+bad84e62	Deselect
+353ad5e3	Delete
+df5d4664	Left
+5dc321a4	Left / right duration tracking
+3f912f3b	Left / right duration, next side suggestion
+093f7e31	Left to right: {0} – {1}
+c566cd45	Last hour
+764edfd1	Showing the last 20 measurements (total {0}).
+3d70c703	Last 30 days
+dbd2222e	Summary of the last 30 days
+8fc3be8f	Last 7 days
+3452f0c9	Last 7 days (number of entries in the app):
+7016f824	Last 7 days – feeding
+e4c15744	Last 7 days – sleep
+e4ae1fee	Last 7 days: {0} ml\nPrevious 7 days: {1} ml\nDifference: {2}{3} ml
+ea0cbb3d	Last 7 days: {0} h {1} min\nPrevious 7 days: {2} h {3} min\nDifference: {4}{5} min
+f57ea550	Sleep time over the last 7 days
+13df50de	Summary of the last 7 days
+77a370b5	Last 90 days
+fabde53b	Last period start: {0}
+480aee46	Last period start date
+92c612d1	Enter your last period start date to begin weekly tracking.
+a90bf2ae	Choose your last period date
+111adc5c	Last period: {0}.{1}.{2}
+e945602e	For the last hour, contractions have come every 5 minutes and lasted at least 1 minute. Call your doctor or the hospital where you will give birth, and set off according to the plan you were given.
+d8013077	Last growth measurement
+dcb7ae7e	Recently viewed
+6d9cf120	You have felt bad on many days in the last two weeks. This isn't a burden you have to carry alone; talk to someone close to you or your doctor. If you have thoughts of harming yourself, call your local emergency number right away.
+d0b1d457	Last medicine: {0}
+e31c0d99	Recent entries
+0a3b8c6a	Expiring soonest first
+b95bd939	Expiry date approaching
+546fefab	Expiry date: Not specified
+cd632814	Items with 3 days or less until their expiry date; expired items are not included.
+4d691397	Last: {0}
+a4e48322	Last: {0} – {1}
+a4ae15bc	Last: {0} • Next: {1}
+b1ef8b35	Next period (estimated): {0}
+7684bcc1	Next month
+1ddc3970	Next day
+baef1a81	Next week
+4564a49f	Asked
+60ed5d70	I asked
+89967610	The question cannot be empty.
+a0888914	Question notebook
+49eb252e	My question notebook and FAQs
+bf5fa868	Add question
+6ad31bc4	The question is too long.
+9e7d0868	To ask
+9548416b	Questions
+c511d1e4	My question
+354a7d2d	I agree to send my question to the AI service.
+d49c9c10	Write your question (e.g. colic, groin pain)
+ce3e1205	Write your question…
+ebfd4312	Your question
+86f8b519	Your question must be between 3 and 1,200 characters.
+b88b01d9	Write your question or experience
+54c57f78	Edit question
+fc28ef50	Send question
+516467e3	Spam / advertising
+c1829eda	Low stock: {0}
+74013d7c	Stock movements and expiry actions
+fd65dc96	Stock and consumption report
+e80d0d1b	Stress management
+25bfc51c	Water
+23b755da	Water intake
+53e6f5f2	Server function, API key, quota, cost limit and health safety checks are required.
+6d525e68	Requires server authorisation; forum and aggregate statistics
+38a2993c	No valid response was received from the server.
+6d93a22e	Supabase project details, email verification, account deletion and session scenarios must be verified.
+acecf924	If your waters break, you are bleeding, have severe pain that won't go away, your baby is moving less, or you have regular contractions before week 37, call your local emergency number or go to hospital without waiting.
+b41c22b8	Chickenpox – dose 1
+6124b484	Chickenpox – dose 2
+9fe8aa6c	Duration (minutes)
+5e7dd2ec	The duration exceeds the allowed limit.
+a39b628c	The duration is an estimate; you can adjust it based on your own experience.
+97839816	Save duration and side
+603f093c	Duration {0}
+2b14b0c0	Time: short → long
+2c574a7a	Time: long → short
+a002e8db	Durations are the total of the recipes' estimated times; this is not a shopping and preparation plan.
+ae7e6abd	Pumping
+1d7d6c44	Dairy products
+207ac18b	Dairy
+c6eada29	Milk feeding
+824f0493	Track hot flushes, sleep and cycle changes.
+8fb7f0b2	Reset
+8915ba96	Common health topics
+b2e877b9	FAQs
+d0cd885a	Unlimited
+387e224e	Which vaccines are next?
+3d48c097	Suggested next side: {0}
+c2f0471b	Spending entry in TL
+21dda277	I reviewed the discharge and medicine instructions
+0ea175d5	Note the test date, unit, reference range and the doctor's assessment.
+eb1e2a6c	Tests and check-ups
+f90906cc	Estimated Due Date
+95a02fac	Estimated Ovulation
+08bdb4b4	Estimated due date: {0}.{1}.{2}
+dbf27746	Time left to estimated due date
+77922546	Estimated pregnancy week: {0} weeks {1} days
+2d3db9b7	Estimated next period: {0}
+8a9eb351	The estimated date was {0} days ago; talk to your doctor.
+04db341b	Estimated ovulation: {0}
+335cd9bf	Grain
+d146240b	Grains and legumes
+31318610	Add a tracking entry
+490409fb	Edit tracking entry
+25a7066e	Tracking records are for personal use; they do not replace a health assessment.
+b9cb4b16	Tracking list is corrupted
+7fc694e4	Calendar month comparison • feeding
+8b6d195a	Calendar month comparison • sleep
+56a38418	Calendar text copied to the clipboard. You can save it as an .ics file and import it into your calendar.
+3fd42b3f	Tap the day your period started in the calendar to add your first entry. After two or more entries, your cycle length is calculated from your records.
+2556f83b	Copy calendar to clipboard
+90c01c9d	Completed
+bec1b361	Completed
+0dbadb33	Done
+eae1d69b	Done / applied
+c6ea6fc2	Blood pressure
+6c432868	Low blood pressure. If you feel dizzy or faint, ask your doctor.
+5aee8459	Low blood pressure: If you feel dizzy or faint, lie down and ask your doctor.
+3ab21889	High blood pressure. Rest and measure again; if it stays high, see your doctor.
+719532f6	High blood pressure: Rest for 15 minutes, measure again and tell your doctor the same day. If you have a severe headache, vision problems, pain in the upper abdomen or sudden swelling, call your local emergency number.
+99c00910	Blood pressure check
+fe17b302	Promotional and campaign notifications
+45fe2c14	Side
+e7a36d19	Recipe name
+42c1ec29	The recipe steps are in the catalogue.
+c4a54f0b	Recipe added to your family recipe book. You can edit it there.
+2921fe89	Check the recipe fields.
+46d5f6c0	Search recipes (e.g. lentil soup)
+524525fb	Recipe search, favourites and shopping list were checked after a restart
+5b6721c9	Recipe search, favourites and adding to the list
+55498ffa	Recipe tools
+1ed05ca2	Recipe not found
+1ce6e834	Could not add to the recipe book. Existing recipes are kept.
+289321ea	Add recipe
+d86fbf64	The recipe could not be saved; old records were kept.
+ac4d1980	Recipe explorer
+35280335	Recipe list is corrupted
+2b30d42e	Your recipe note was saved.
+8f886eea	No recipe selected
+69d84cfa	Total recipe time: {0} min
+6aa4066e	Recipe and product content
+acaa4f03	Search recipes or ingredients
+6da4cd70	Recipe added to {0} / {1}.
+ff78d3ce	The recipe serves {0}. When you change the portion, amounts starting with a number are recalculated proportionally.
+8015df0b	Recipe ideas
+2cb9b81a	Search recipes, categories or ingredients
+88b830e8	See recipe
+3f6f94ea	View recipe
+9c74075a	Plan the recipe for a day and meal
+4b09247c	Delete recipe
+1cf19d52	Add recipe to meal plan
+8a9a8d53	Write your notes about the recipe...
+30dace0a	Recipes
+7eb0b747	Recipes could not be read; records were not changed.
+bdced70c	Recipes and forums (require server setup)
+a4ff0fa6	Choose recipes; your plan is stored on the device. Previous recipes and other app records don't change.
+41918e6f	Where the recipe says "your choice", you can use one of these:
+bb0c9230	Date range
+ce22824c	Date passed
+9de70512	This week's development is shown once a date is entered
+463af041	The date could not be saved. The previous date was kept.
+a3018298	Choose date
+99f620af	The date cannot be before the child's date of birth.
+5d0f4c05	Date: {0}.{1}.{2}
+523876d0	Change date
+9250691a	Expired
+4fe19d6f	Remove date
+371953e0	Dated check-ups and family notes
+6c41e8aa	Draft basket; no orders or payments
+f30c7312	Dessert
+cbc7067e	Desserts
+4c589e3f	Chicken dishes
+711f61f1	The transfer could not be saved
+6bd545db	Kicks
+c5d788b9	Kick (movement) counter
+e9e22001	Kick counter
+555367ed	Try again
+ebc4d6df	Duplicate .dart.dart files and import conflicts were checked
+16bf84ac	Duplicate reminder ID
+6bd88496	Send phone notification
+a21613db	Phone notifications are optional and need permission. Notifications may be delayed because of battery restrictions. They should not be relied on alone for medical emergencies or medicine tracking.
+321bd48d	Phone
+c37932ec	Core baby and women's health guides
+53fd43b9	Basic statistics and moderation are coded; content management, user management and the action log are missing.
+fa0ff072	Basic health information and basic tracking stay free.
+b69b8ec1	Basic tracking and journals
+31060809	Basic:
+021e6221	Clear
+6bdbcf14	Cleaning and tidying
+4d56b57b	July
+c5520d12	Preferences saved; phone notifications could not be updated.
+14a95d34	Preferences could not be saved. The previous preferences are kept.
+5ab453a9	Preferences and to-dos
+abd89fbf	Backup and restore were tried with test data
+597ea0e5	Total different ingredients: {0}
+cccacc43	Total records
+fdd44ade	Total records: {0}
+ddccaa27	Total registered accounts
+06081f3d	Total {0}
+9b5f6bd2	Total {0} entries • Last 30 days: {1}
+df47db8e	Total {0} entries • {1} pending
+03f8db2e	Aggregate platform statistics
+aa1dc7bb	Community area
+cf727b49	Community notifications
+e6dcb0ed	Community and AI
+d43c1eac	Amount (TL)
+dce7b2d4	Amount used
+565ddf4d	Consumption history could not be saved
+2c99d166	Record consumption
+14c2aab8	Consumption report
+abaf3e3f	Save consumption
+b14f9813	All Categories
+609ba94c	All notification categories are off by default. These preferences are only saved; the sending services must also apply these permissions.
+bffec887	All daily life tools
+1d8605b3	All my medicines
+3e6fe1a7	Delete all contraction records?
+5f5502b4	All records
+7fa7fbd4	Copy the full checklist as CSV
+d3dfe94c	All your check-ups are up to date 🎉
+6aad86b1	All modules
+6fce6e96	Completion centre for all modules
+6edd167f	All durations
+d0296764	All ages
+e29a796e	Delete all local records?
+8daf748e	All
+50b9542f	See all
+e3b96816	Alert centre
+5e2b30d9	If there are warnings, don't fix records automatically. First back up the existing data and review the relevant dates/profiles.
+8dc1c4cf	App
+3a16868d	About the App
+d88e9abc	Data preserved during app updates
+a4aa4146	In-app notifications
+20b7b415	Sleep
+56b0e369	Sleep Routine
+3cc4a433	Add sleep
+6cad5e41	Sleep journal
+d0a4bd21	Sleep journal 🌙

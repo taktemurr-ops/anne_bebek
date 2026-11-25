@@ -1,0 +1,458 @@
+[
+{
+"id": "Ba-0-unique-1",
+"title": "Fırında somon",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 18,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"4 dilim somon fileto (her biri yaklaşık 150 g)",
+"2 yemek kaşığı zeytinyağı",
+"1 limon (suyu ve rendelenmiş kabuğu)",
+"2 diş sarımsak (ince kıyılmış)",
+"1 çay kaşığı kuru kekik",
+"Yarım demet dereotu (ince kıyılmış)",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Fırını 200 °C'ye (fanlı 190 °C) ısıtın ve fırın tepsisine pişirme kâğıdı serin.",
+"Somonları soğuk suyla durulayıp kâğıt havluyla iyice kurulayın; derili tarafı alta gelecek şekilde tepsiye dizin.",
+"Küçük bir kasede zeytinyağı, limon suyu, limon kabuğu, sarımsak, kekik, tuz ve karabiberi karıştırın.",
+"Sosu fırça yardımıyla somonların üzerine eşit şekilde sürün ve 10 dakika dinlendirin.",
+"Somonları fırının orta rafında 15–18 dakika, eti çatalla kolayca ayrılana ve iç sıcaklığı 63 °C olana kadar pişirin.",
+"Fırından çıkarınca üzerine dereotu serpin ve 2 dakika dinlendirip servis edin."
+],
+"tips": [
+"Kalın filetolar için süreyi 3–4 dakika uzatın; ince filetolar 12 dakikada pişer.",
+"Somonu pişirmeden 15 dakika önce buzdolabından çıkarırsanız daha eşit pişer."
+],
+"serving": "Fırında sebze, bulgur pilavı veya roka salatası ile sıcak servis edin.",
+"storage": "Buzdolabında kapalı kapta en fazla 1 gün saklayın; soğuk olarak salataya da eklenebilir."
+},
+{
+"id": "Ba-1-unique-2",
+"title": "Izgara levrek",
+"category": "Balık ve deniz ürünleri",
+"servings": 2,
+"prepMinutes": 15,
+"cookMinutes": 12,
+"difficulty": "Orta",
+"ingredients": [
+"2 adet porsiyonluk levrek (temizlenmiş, her biri 350–400 g)",
+"3 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"3 dal taze kekik veya 1 çay kaşığı kuru kekik",
+"1 küçük kırmızı soğan (garnitür için)",
+"Yarım demet roka (garnitür için)"
+],
+"steps": [
+"Levrekleri iç ve dış yüzeyleriyle yıkayıp kâğıt havluyla kurulayın; derisine her iki yüzden 3'er çapraz çizik atın.",
+"Balığın içini ve dışını tuz, karabiber ve 2 yemek kaşığı zeytinyağı ile ovun; karnına 2 dilim limon ve kekik dallarını yerleştirin.",
+"Izgara tavasını veya mangal ızgarasını yüksek ateşte iyice kızdırın, ızgarayı kalan yağla yağlayın.",
+"Levrekleri ızgaraya koyup ilk 5–6 dakika hiç oynatmadan pişirin; derisi kolayca ayrılınca geniş spatulayla çevirin.",
+"Diğer yüzünü de 5–6 dakika pişirin; sırt kısmındaki et kılçıktan kolayca ayrılıyorsa balık pişmiştir.",
+"Halka doğranmış kırmızı soğan ve roka ile servis tabağına alın, üzerine limon sıkın."
+],
+"tips": [
+"Izgara yeterince kızgın değilse deri yapışır; balığı koymadan önce ızgaranın tütmeye başlamasını bekleyin.",
+"Balığı çevirirken iki spatula kullanmak dağılmasını önler."
+],
+"serving": "Roka-soğan salatası, közlenmiş biber ve limon dilimleriyle hemen servis edin.",
+"storage": "Izgara balık bekletilmez; artarsa kılçığını ayıklayıp buzdolabında 1 gün saklayın."
+},
+{
+"id": "Ba-2-unique-3",
+"title": "Fırında çipura",
+"category": "Balık ve deniz ürünleri",
+"servings": 2,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"2 adet porsiyonluk çipura (temizlenmiş)",
+"2 orta boy patates (ince halka)",
+"1 kırmızı soğan (ince halka)",
+"1 domates (halka)",
+"3 yemek kaşığı zeytinyağı",
+"1 limon",
+"2 diş sarımsak (dilimlenmiş)",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"Yarım demet maydanoz"
+],
+"steps": [
+"Fırını 200 °C'ye ısıtın.",
+"Patates ve soğan halkalarını fırın kabına yayın, 1 yemek kaşığı zeytinyağı ve bir tutam tuzla harmanlayıp fırında 10 dakika ön pişirin.",
+"Bu sırada çipuraları kurulayıp her iki yüzüne 2'şer çizik atın; içini ve dışını tuz, karabiber ve kalan zeytinyağıyla ovun.",
+"Balıkların karnına sarımsak dilimleri, maydanoz sapları ve 2 dilim limon yerleştirin.",
+"Ön pişmiş patateslerin üzerine domates halkalarını, onların üzerine çipuraları yerleştirin.",
+"Fırında 20–25 dakika, sırt kısmındaki et kemikten kolayca ayrılana kadar pişirin; üzerine kıyılmış maydanoz serpip servis edin."
+],
+"tips": [
+"Patatesleri önceden pişirmek, balık kurumadan patateslerin yumuşamasını sağlar.",
+"Balığın gözü beyazlaşıp dışarı çıkıyorsa pişmiştir."
+],
+"serving": "Altındaki patates ve domateslerle birlikte, yanında yeşil salata ile servis edin.",
+"storage": "Buzdolabında kapalı kapta en fazla 1 gün saklayın."
+},
+{
+"id": "Ba-3-unique-4",
+"title": "Sebzeli alabalık",
+"category": "Balık ve deniz ürünleri",
+"servings": 2,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ovenCelsius": 190,
+"ingredients": [
+"2 adet alabalık (temizlenmiş)",
+"1 havuç (jülyen doğranmış)",
+"1 kabak (jülyen doğranmış)",
+"1 kırmızı kapya biber (ince şerit)",
+"1 küçük soğan (ince piyaz)",
+"3 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"1 çay kaşığı kuru kekik"
+],
+"steps": [
+"Fırını 190 °C'ye ısıtın; iki ayrı büyük parça yağlı kâğıt hazırlayın.",
+"Havuç, kabak, biber ve soğanı 1 yemek kaşığı zeytinyağı, kekik ve yarım çay kaşığı tuzla harmanlayın.",
+"Sebzelerin yarısını her kâğıdın ortasına yayın; alabalıkları tuz ve karabiberle ovup sebzelerin üzerine koyun.",
+"Balıkların üzerine kalan zeytinyağını gezdirin, 2'şer dilim limon yerleştirin.",
+"Kâğıtların kenarlarını katlayarak kapalı paketler hâline getirin, tepsiye dizin.",
+"Fırında 22–25 dakika pişirin; paketi dikkatle açın, buhar çıkarken yüzünüzü yaklaştırmayın ve servis edin."
+],
+"tips": [
+"Kâğıt içinde pişirme balığın kendi buharında pişmesini sağlar, kurumasını önler.",
+"Sebzeleri ince doğrayın ki balıkla aynı sürede pişsin."
+],
+"serving": "Paketi tabakta açarak, yanında haşlanmış patates veya bulgur pilavı ile servis edin.",
+"storage": "Buzdolabında 1 gün saklayın; ısıtmak yerine soğuk tüketmek daha iyidir."
+},
+{
+"id": "Ba-4-unique-5",
+"title": "Limonlu mezgit",
+"category": "Balık ve deniz ürünleri",
+"servings": 3,
+"prepMinutes": 10,
+"cookMinutes": 12,
+"difficulty": "Kolay",
+"ingredients": [
+"500 g mezgit fileto",
+"4 yemek kaşığı un",
+"2 yemek kaşığı zeytinyağı",
+"1 yemek kaşığı tereyağı",
+"1 limon (suyu)",
+"1 diş sarımsak (ezilmiş)",
+"2 yemek kaşığı kıyılmış maydanoz",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Mezgit filetolarını kâğıt havluyla kurulayın, tuz ve karabiberle tatlandırın.",
+"Filetoları una bulayıp fazla ununu silkeleyin.",
+"Geniş bir tavada zeytinyağını orta-yüksek ateşte ısıtın; filetoları tek kat hâlinde dizip her yüzünü 2–3 dakika altın rengi olana kadar pişirin ve tabağa alın.",
+"Ateşi kısıp tavaya tereyağı ve sarımsağı ekleyin, 30 saniye kokusu çıkana kadar karıştırın.",
+"Limon suyunu ekleyip tavanın dibini sıyırarak 1 dakika kaynatın, maydanozu ilave edin.",
+"Limonlu sosu balıkların üzerine gezdirip hemen servis edin."
+],
+"tips": [
+"Mezgit çok yumuşak bir balıktır; tavada yalnızca bir kez çevirin.",
+"Tava kalabalık olursa balık kızarmaz, haşlanır; gerekirse iki partide pişirin."
+],
+"serving": "Patates püresi veya mevsim salatası ile sıcak servis edin.",
+"storage": "Aynı gün tüketilmesi önerilir; buzdolabında en fazla 1 gün saklayın."
+},
+{
+"id": "Ba-5-unique-6",
+"title": "Balık köftesi",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 25,
+"cookMinutes": 15,
+"difficulty": "Orta",
+"ingredients": [
+"400 g pişmiş ve kılçığı ayıklanmış beyaz balık (mezgit, levrek veya hamsi)",
+"1 orta boy haşlanmış patates",
+"1 yumurta",
+"1 küçük soğan (rendelenmiş, suyu sıkılmış)",
+"Yarım demet maydanoz (ince kıyılmış)",
+"Yarım demet dereotu (ince kıyılmış)",
+"4 yemek kaşığı galeta unu",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"Yarım çay kaşığı kimyon",
+"4 yemek kaşığı ayçiçek yağı (kızartmak için)"
+],
+"steps": [
+"Pişmiş balığı geniş bir kaba alıp parmaklarınızla ufalayın, kalan kılçık olmadığından emin olun.",
+"Patatesi çatalla ezip balığa ekleyin; yumurta, soğan, maydanoz, dereotu, tuz, karabiber ve kimyonu ilave edin.",
+"Karışımı yoğurun; 2 yemek kaşığı galeta ununu ekleyip ele yapışmayan bir kıvam elde edin.",
+"Ceviz büyüklüğünde parçalar alıp yassı köfteler şekillendirin, kalan galeta ununa bulayın ve 15 dakika buzdolabında dinlendirin.",
+"Yağı tavada orta ateşte ısıtın; köfteleri her yüzü 3–4 dakika altın rengi olana kadar pişirin.",
+"Fazla yağını kâğıt havluda alıp sıcak servis edin."
+],
+"tips": [
+"Buzdolabında dinlendirmek köftelerin pişerken dağılmasını önler.",
+"Daha hafif bir seçenek için köfteleri 200 °C fırında, yağlı kâğıt üzerinde 18–20 dakika pişirebilirsiniz."
+],
+"serving": "Yoğurtlu dereotlu sos ve yeşil salata ile servis edin.",
+"storage": "Pişmiş köfteler buzdolabında 1 gün saklanır; çiğ köfteler dondurucuda 1 ay saklanabilir."
+},
+{
+"id": "Ba-6-unique-7",
+"title": "Fırında uskumru",
+"category": "Balık ve deniz ürünleri",
+"servings": 2,
+"prepMinutes": 10,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"2 adet uskumru (temizlenmiş, kelebek açılmış)",
+"1 kırmızı soğan (ince halka)",
+"1 domates (küp doğranmış)",
+"2 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 çay kaşığı pul biber",
+"1 çay kaşığı tuz",
+"Yarım demet maydanoz"
+],
+"steps": [
+"Fırını 200 °C'ye ısıtın, tepsiye yağlı kâğıt serin.",
+"Uskumruları açık hâlde, derisi alta gelecek şekilde tepsiye yerleştirin; tuz ve pul biber serpin.",
+"Soğan halkalarını ve domates küplerini balıkların üzerine dağıtın.",
+"Zeytinyağını gezdirin ve yarım limonun suyunu sıkın.",
+"Fırında 18–20 dakika, et matlaşıp kolayca ayrılana kadar pişirin.",
+"Kıyılmış maydanoz ve kalan limon dilimleriyle servis edin."
+],
+"tips": [
+"Uskumru yağlı bir balıktır; ekstra yağ eklemeyin.",
+"Kılçıkları pişirmeden önce cımbızla almak servis sırasında kolaylık sağlar."
+],
+"serving": "Ekmek arasında veya roka salatası ile servis edin.",
+"storage": "Buzdolabında en fazla 1 gün saklayın."
+},
+{
+"id": "Ba-7-unique-8",
+"title": "Somonlu makarna",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ingredients": [
+"300 g penne makarna",
+"250 g somon fileto (derisiz, küp doğranmış)",
+"1 yemek kaşığı zeytinyağı",
+"1 yemek kaşığı tereyağı",
+"2 diş sarımsak (ince kıyılmış)",
+"200 ml sıvı krema (veya 1 su bardağı süt + 1 yemek kaşığı un)",
+"Yarım limonun rendelenmiş kabuğu",
+"Yarım demet dereotu",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Makarnayı bol tuzlu kaynar suda paketteki süreden 1 dakika eksik haşlayın; süzmeden önce 1 çay bardağı haşlama suyu ayırın.",
+"Geniş bir tavada zeytinyağı ve tereyağını ısıtın; sarımsağı 30 saniye kavurun.",
+"Somon küplerini ekleyip 3–4 dakika, tüm yüzleri açık renge dönene kadar nazikçe çevirin.",
+"Kremayı ve limon kabuğunu ekleyin; tuz ve karabiberle tatlandırıp 2 dakika kısık ateşte kaynatın.",
+"Süzülmüş makarnayı tavaya alın, sos kıvamını ayırdığınız haşlama suyuyla ayarlayarak 1 dakika karıştırın.",
+"Ocaktan alıp kıyılmış dereotunu ekleyin ve hemen servis edin."
+],
+"tips": [
+"Somonu fazla karıştırmayın; parçalar bütün kalırsa daha güzel görünür.",
+"Kremayı kaynatmadan, hafif fokurdayacak şekilde ısıtın."
+],
+"serving": "Üzerine taze çekilmiş karabiber ve limon dilimiyle servis edin.",
+"storage": "Buzdolabında 1 gün saklanır; ısıtırken bir kaşık süt ekleyin."
+},
+{
+"id": "Ba-8-unique-9",
+"title": "Balıklı sebze güveç",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 35,
+"difficulty": "Orta",
+"ovenCelsius": 190,
+"ingredients": [
+"600 g beyaz balık fileto (levrek, mezgit veya hamsi dışı bir balık; iri parçalar)",
+"2 patates (küp)",
+"1 kabak (yarım ay)",
+"1 kırmızı kapya biber (şerit)",
+"2 yeşil biber (halka)",
+"1 soğan (piyaz)",
+"2 domates (rendelenmiş)",
+"1 yemek kaşığı domates salçası",
+"3 yemek kaşığı zeytinyağı",
+"1 su bardağı sıcak su",
+"1 çay kaşığı tuz",
+"1 çay kaşığı kekik",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Fırını 190 °C'ye ısıtın.",
+"Tavada zeytinyağıyla soğanı 3 dakika yumuşatın, salçayı ekleyip 1 dakika kavurun; rendelenmiş domatesi ve sıcak suyu ilave edip 3 dakika kaynatın.",
+"Patates, kabak ve biberleri güveç kabına yayın, tuz ve kekik serpin; domatesli sosun yarısını üzerine dökün.",
+"Güveci folyoyla kapatıp fırında 20 dakika, patatesler yarı yumuşayana kadar pişirin.",
+"Balık parçalarını tuz ve karabiberle tatlandırıp sebzelerin arasına yerleştirin, kalan sosu üzerine gezdirin.",
+"Folyosuz olarak 12–15 dakika daha, balık beyazlaşıp kolayca dağılana kadar pişirin ve 5 dakika dinlendirip servis edin."
+],
+"tips": [
+"Balığı sebzelerle birlikte başta koyarsanız fazla pişip dağılır; son 15 dakikada ekleyin.",
+"Toprak güveç kullanıyorsanız soğuk fırına koyup birlikte ısıtın, aksi hâlde çatlayabilir."
+],
+"serving": "Güvecin içinde, yanında taze ekmekle sıcak servis edin.",
+"storage": "Buzdolabında kapalı kapta 1 gün saklayın; bir kez ısıtın."
+},
+{
+"id": "Ba-9-unique-10",
+"title": "Ton balıklı makarna",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 5,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ingredients": [
+"300 g spagetti veya burgu makarna",
+"2 kutu suda ton balığı (süzülmüş, toplam yaklaşık 300 g)",
+"2 yemek kaşığı zeytinyağı",
+"2 diş sarımsak (ince kıyılmış)",
+"400 g doğranmış konserve domates veya 3 rendelenmiş domates",
+"10 adet siyah zeytin (halka)",
+"1 yemek kaşığı kapari (isteğe bağlı)",
+"Yarım çay kaşığı pul biber",
+"Yarım çay kaşığı tuz",
+"Yarım demet maydanoz"
+],
+"steps": [
+"Makarnayı bol tuzlu suda paket süresine göre haşlayıp süzün.",
+"Bu sırada tavada zeytinyağıyla sarımsak ve pul biberi 30 saniye kavurun.",
+"Domatesi ekleyip orta ateşte 8 dakika, sos koyulaşana kadar pişirin; tuzu ayarlayın.",
+"Ton balığı, zeytin ve kapariyi ekleyip 2 dakika daha ısıtın; ton balığını çok ezmeden karıştırın.",
+"Süzülmüş makarnayı sosa ekleyip 1 dakika harmanlayın.",
+"Kıyılmış maydanoz serpip servis edin."
+],
+"tips": [
+"Kapari ve zeytin tuzlu olduğundan sosun tuzunu en sonda kontrol edin.",
+"Yağlı ton balığı kullanırsanız zeytinyağını yarıya indirin."
+],
+"serving": "Sıcak olarak, yanında yeşil salata ile servis edin.",
+"storage": "Buzdolabında 2 gün saklanır; soğuk makarna salatası olarak da tüketilebilir."
+},
+{
+"id": "p39a16_073",
+"title": "Limonlu dereotlu fırın levrek",
+"category": "Balık ve deniz ürünleri",
+"servings": 2,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"2 levrek fileto (toplam yaklaşık 350 g)",
+"Yarım demet dereotu",
+"2 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 diş sarımsak (rendelenmiş)",
+"1 çay kaşığı kekik",
+"Yarım çay kaşığı tuz",
+"Çeyrek çay kaşığı karabiber",
+"1 yemek kaşığı tereyağı"
+],
+"steps": [
+"Fırını 200 °C'ye ısıtın, küçük bir fırın kabını hafifçe yağlayın.",
+"Dereotunun yarısını ince kıyın; zeytinyağı, sarımsak, kekik, limon kabuğu rendesi, tuz ve karabiberle karıştırın.",
+"Filetoları kurulayıp derisi alta gelecek şekilde kaba yerleştirin ve dereotlu karışımı üzerlerine sürün.",
+"Her filetonun üzerine ince limon dilimleri ve küçük bir parça tereyağı koyun.",
+"Fırında 12–15 dakika, et opaklaşıp çatalla ayrılana kadar pişirin.",
+"Kalan taze dereotunu ve kaptaki sosu üzerine gezdirerek servis edin."
+],
+"tips": [
+"Levrek fileto ince olduğu için 15 dakikayı geçirmeyin.",
+"Limon dilimleri balığın üstünü nemli tutar."
+],
+"serving": "Buharda sebze veya pirinç pilavı ile servis edin.",
+"storage": "Aynı gün tüketin; buzdolabında en fazla 1 gün saklayın."
+},
+{
+"id": "p39a16_077",
+"title": "Portakallı rezeneli fırın somon",
+"category": "Balık ve deniz ürünleri",
+"servings": 2,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Orta",
+"ovenCelsius": 200,
+"ingredients": [
+"2 somon fileto (her biri yaklaşık 150 g)",
+"1 rezene (ince dilimlenmiş)",
+"1 portakal (yarısı dilim, yarısının suyu)",
+"1 küçük kırmızı soğan (ince dilim)",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı bal",
+"1 çay kaşığı hardal",
+"Yarım çay kaşığı tuz",
+"Çeyrek çay kaşığı karabiber"
+],
+"steps": [
+"Fırını 200 °C'ye ısıtın.",
+"Rezene ve soğan dilimlerini 1 yemek kaşığı zeytinyağı ve bir tutam tuzla harmanlayıp fırın kabına yayın; 10 dakika ön pişirin.",
+"Portakal suyu, bal, hardal, kalan zeytinyağı, tuz ve karabiberi çırpın.",
+"Somonları rezenelerin üzerine yerleştirin, sosun yarısını üzerlerine sürün ve portakal dilimlerini aralara dizin.",
+"Fırında 12–15 dakika, somonun iç sıcaklığı 63 °C olana kadar pişirin.",
+"Kalan sosu servis sırasında üzerine gezdirin."
+],
+"tips": [
+"Rezenenin yeşil yapraklarını atmayın; servis sırasında üzerine serpin.",
+"Hardal tercih edilmiyorsa çıkarılabilir; tat daha tatlı olur."
+],
+"serving": "Kinoa veya bulgur pilavı ile servis edin.",
+"storage": "Buzdolabında en fazla 1 gün saklayın."
+},
+{
+"id": "p39a16_080",
+"title": "Pırasalı fırın çipura",
+"category": "Balık ve deniz ürünleri",
+"servings": 2,
+"prepMinutes": 15,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ovenCelsius": 190,
+"ingredients": [
+"2 çipura fileto",
+"2 pırasa (2 cm halka)",
+"1 havuç (ince halka)",
+"3 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 diş sarımsak",
+"Yarım su bardağı sıcak su",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Pırasa halkalarını bol suda yıkayıp aralarındaki toprağı temizleyin.",
+"Tavada 2 yemek kaşığı zeytinyağıyla pırasa, havuç ve sarımsağı 5 dakika soteleyin; sıcak suyu ve yarım çay kaşığı tuzu ekleyip kapağı kapalı 8 dakika pişirin.",
+"Fırını 190 °C'ye ısıtın; pırasalı karışımı fırın kabına yayın.",
+"Çipura filetolarını tuz ve karabiberle tatlandırıp pırasaların üzerine yerleştirin, kalan zeytinyağını gezdirin.",
+"Fırında 15 dakika, balık beyazlaşana kadar pişirin.",
+"Üzerine limon sıkıp sıcak servis edin."
+],
+"tips": [
+"Pırasayı önceden pişirmek, balığın kurumadan pırasanın yumuşamasını sağlar."
+],
+"serving": "Kabın içindeki pırasalarla birlikte, yanında yoğurtla servis edin.",
+"storage": "Buzdolabında 1 gün saklayın."
+}
+]

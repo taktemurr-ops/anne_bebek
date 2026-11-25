@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../models/app_data.dart';
 import '../services/app_store.dart';
 import '../widgets/ui.dart';
 import 'baby_health_page.dart';
 import 'child_profiles_page.dart';
 import 'module_hub_page.dart';
+import '../widgets/adaptive.dart';
 
 class BabyScreen extends StatelessWidget {
   final AppStore store;
@@ -15,7 +18,7 @@ class BabyScreen extends StatelessWidget {
     if (!context.mounted || name == null || name.isEmpty) return;
     final date = await showDatePicker(
       context: context, firstDate: DateTime(2010), lastDate: DateTime.now(),
-      initialDate: store.baby?.birthDate ?? DateTime.now(), helpText: 'Doğum tarihi',
+      initialDate: store.baby?.birthDate ?? DateTime.now(), helpText: t('Doğum tarihi'),
     );
     if (date == null || !context.mounted) return;
     await store.saveBaby(BabyProfile(name: name, birthDate: date));
@@ -62,9 +65,7 @@ class BabyScreen extends StatelessWidget {
         trailing: const Icon(Icons.edit), onTap: () => editBaby(context),
       )),
       sectionTitle('Günlük takip'),
-      GridView.count(
-        crossAxisCount: 2, crossAxisSpacing: 12, mainAxisSpacing: 12, childAspectRatio: 1.5,
-        shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
+      AdaptiveGrid(minTileWidth: 150, tileHeight: 106, spacing: 12, minColumns: 2, maxColumns: 4,
         children: [for (final item in categories) categoryCard(item.$1, item.$2, const Color(0xFFFFE1ED), () => addRecord(context, item.$1))],
       ),
       sectionTitle('Son kayıtlar'),

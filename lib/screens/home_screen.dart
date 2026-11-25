@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/text.dart';
 import '../widgets/ui.dart';
 import 'module_hub_page.dart';
+import '../widgets/adaptive.dart';
 
 class HomeScreen extends StatelessWidget {
   final ValueChanged<int> navigate;
@@ -21,9 +23,7 @@ class HomeScreen extends StatelessWidget {
       title: const Text('Tüm modüller'), subtitle: const Text('Ekranlara tek yerden ulaş'),
       trailing: const Icon(Icons.chevron_right),
       onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const ModuleHubPage())))),
-    GridView.count(
-      crossAxisCount: 2, crossAxisSpacing: 12, mainAxisSpacing: 12, childAspectRatio: 1.12,
-      shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
+    AdaptiveGrid(minTileWidth: 150, tileHeight: 140, spacing: 12, minColumns: 2, maxColumns: 4,
       children: [
         categoryCard('Bebek Gelişimi', Icons.child_care, const Color(0xFFFFE1ED), () => navigate(1)),
         categoryCard('Bugün Ne Pişirsem?', Icons.restaurant, const Color(0xFFFFEBCF), () => navigate(2)),

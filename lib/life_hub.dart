@@ -1,6 +1,9 @@
+import 'utils/dialog_helpers.dart';
+import 'i18n/i18n.dart' show t;
+import 'i18n/text.dart';
 import 'services/secure_health_store.dart';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 
 /// Yerel-öncelikli aile yaşamı kayıt merkezi. Kayıtlar cihazın güvenli saklama alanında tutulur.
 class LifeTool {
@@ -121,7 +124,7 @@ class _LifeHubPageState extends State<LifeHubPage> {
                   ])),
                 const SizedBox(height: 16),
                 TextField(onChanged: (s) => setState(() => query = s),
-                  decoration: InputDecoration(prefixIcon: const Icon(Icons.search), hintText: 'İhtiyacın olan aracı ara',
+                  decoration: InputDecoration(prefixIcon: const Icon(Icons.search), hintText: t('İhtiyacın olan aracı ara'),
                     filled: true, fillColor: Colors.white, border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none))),
                 const SizedBox(height: 10),
                 SizedBox(height: 48, child: ListView(scrollDirection: Axis.horizontal,
@@ -182,12 +185,12 @@ class _LifeRecordsPageState extends State<_LifeRecordsPage> {
     final amount = TextEditingController();
     final form = GlobalKey<FormState>();
     DateTime chosen = DateTime.now();
-    final result = await showDialog<Map<String, dynamic>>(context: context, builder: (dialogCtx) => StatefulBuilder(
+    final result = await showDialogAndDispose<Map<String, dynamic>>(disposables: [title, note, amount], context: context, builder: (dialogCtx) => StatefulBuilder(
       builder: (context, update) => AlertDialog(
         title: Text('${widget.tool.name} • Yeni kayıt'),
         content: SizedBox(width: 400, child: SingleChildScrollView(child: Form(key: form,
           child: Column(mainAxisSize: MainAxisSize.min, children: [
-            TextFormField(controller: title, maxLength: 90, decoration: const InputDecoration(labelText: 'Başlık / açıklama *'),
+            TextFormField(controller: title, maxLength: 90, decoration: InputDecoration(labelText: t('Başlık / açıklama *')),
               validator: (s) => (s == null || s.trim().isEmpty) ? 'Başlık girin' : null),
             if (widget.tool.numeric) TextFormField(controller: amount,
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -195,7 +198,7 @@ class _LifeRecordsPageState extends State<_LifeRecordsPage> {
               validator: (s) => s == null || s.trim().isEmpty || double.tryParse(s.replaceAll(',', '.')) == null
                 ? 'Geçerli sayı girin' : null),
             TextFormField(controller: note, maxLines: 3, maxLength: 500,
-              decoration: const InputDecoration(labelText: 'Not (isteğe bağlı)')),
+              decoration: InputDecoration(labelText: t('Not (isteğe bağlı)'))),
             TextButton.icon(icon: const Icon(Icons.event),
               label: Text(dateText(chosen.toIso8601String())), onPressed: () async {
                 final d = await showDatePicker(context: dialogCtx, initialDate: chosen,
@@ -214,7 +217,6 @@ class _LifeRecordsPageState extends State<_LifeRecordsPage> {
             });
           }, child: const Text('Kaydet'))],
       )));
-    title.dispose(); note.dispose(); amount.dispose();
     if (result == null || !mounted) return;
     setState(() => entries.insert(0, result));
     await widget.onChanged(entries);
@@ -258,7 +260,7 @@ class _LifeRecordsPageState extends State<_LifeRecordsPage> {
               '${(e['amount'] ?? '').toString().isNotEmpty ? ' • ${e['amount']}' : ''}'
               '${(e['note'] ?? '').toString().isNotEmpty ? '\n${e['note']}' : ''}'),
             isThreeLine: (e['note'] ?? '').toString().isNotEmpty,
-            trailing: IconButton(tooltip: 'Kaydı sil', icon: const Icon(Icons.delete_outline),
+            trailing: IconButton(tooltip: t('Kaydı sil'), icon: const Icon(Icons.delete_outline),
               onPressed: () => remove(i)),
           ));
         }),

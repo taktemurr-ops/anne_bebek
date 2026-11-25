@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'package:flutter/services.dart';
 import '../services/child_growth_export.dart';
 import '../services/cdc_who_reference_csv.dart';
@@ -20,6 +22,8 @@ class _ChildGrowthTrendsPageState extends State<ChildGrowthTrendsPage> {
   bool loading = true;
   final Map<String, List<CdcWhoRow>> whoReferences = {};
   String? whoMessage;
+  // Dönem filtresi: null = tümü.
+  int? periodMonths;
   @override void initState() { super.initState(); _load(); }
   Future<void> _load() async {
     try {
@@ -57,8 +61,8 @@ class _ChildGrowthTrendsPageState extends State<ChildGrowthTrendsPage> {
 
   @override Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: Text('${widget.child.name} · Büyüme geçmişi'), actions: [
-      IconButton(tooltip: 'WHO CSV referansı yükle', icon: const Icon(Icons.upload_file_outlined), onPressed: _importWhoCsv),
-      IconButton(tooltip: 'Ölçümleri CSV olarak kopyala', icon: const Icon(Icons.copy_all_outlined), onPressed: loading || error != null ? null : () async {
+      IconButton(tooltip: t('WHO CSV referansı yükle'), icon: const Icon(Icons.upload_file_outlined), onPressed: _importWhoCsv),
+      IconButton(tooltip: t('Ölçümleri CSV olarak kopyala'), icon: const Icon(Icons.copy_all_outlined), onPressed: loading || error != null ? null : () async {
         final csv = exportChildMeasurementsCsv(widget.child, entries);
         await Clipboard.setData(ClipboardData(text: csv));
         if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Ölçüm CSV verisi panoya kopyalandı.')));
@@ -71,8 +75,21 @@ class _ChildGrowthTrendsPageState extends State<ChildGrowthTrendsPage> {
               ? 'WHO persentili için doğrulanmış CDC/WHO 0–24 ay CSV dosyaları gereklidir. Üstteki yükleme simgesiyle resmi CSV içeriğini panodan içe aktarabilirsiniz. Referans yüklenmeden persentil hesaplanmaz.'
               : 'Yüklenen referanslar yalnızca bu ekran açıkken tutulur. 0–24 ay aylık WHO persentilleri bilgi amaçlıdır; tıbbi değerlendirme değildir.'))),
         if (whoMessage != null) Padding(padding: const EdgeInsets.all(8), child: Text(whoMessage!)),
+        Padding(padding: const EdgeInsets.symmetric(vertical: 8), child: SegmentedButton<int>(
+          key: const ValueKey('growth_period'),
+          segments: const [
+            ButtonSegment(value: 0, label: Text('Tümü')),
+            ButtonSegment(value: 3, label: Text('3 ay')),
+            ButtonSegment(value: 6, label: Text('6 ay')),
+            ButtonSegment(value: 12, label: Text('12 ay')),
+          ],
+          selected: {periodMonths ?? 0},
+          onSelectionChanged: (v) => setState(() => periodMonths = v.first == 0 ? null : v.first),
+        )),
         for (final category in const ['Kilo (kg)', 'Boy (cm)', 'Baş çevresi (cm)'])
-          _MeasurementSection(category: category, entries: entries, child: widget.child, reference: whoReferences[category]),
+          _MeasurementSection(category: category,
+            entries: growthEntriesInPeriod(entries, periodMonths, DateTime.now()),
+            child: widget.child, reference: whoReferences[category]),
       ]),
   );
 }

@@ -1,8 +1,13 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/general_recipe_catalog.dart';
+import '../widgets/recipe_info_sections.dart';
 import 'weekly_meal_planner_page.dart';
+import '../widgets/recipe_art.dart';
+import 'cook_mode_page.dart';
 
 /// Paket 39 / Asama 38-42: Mevcut tarif ve favori kayitlariyla uyumlu kesif ekrani.
 class RecipeExplorerPage extends StatefulWidget {
@@ -105,7 +110,7 @@ class _RecipeExplorerPageState extends State<RecipeExplorerPage> {
 
   @override
   Widget build(BuildContext context) {
-    final categories = ['Tümü', ...{for (final r in generalRecipes) r.category}];
+    final categories = ['Tümü', ...generalRecipeCategories];
     final q = _search.text.trim().toLowerCase();
     final filtered = generalRecipes.where((r) =>
       (_category == 'Tümü' || r.category == _category) &&
@@ -124,11 +129,13 @@ class _RecipeExplorerPageState extends State<RecipeExplorerPage> {
     }
     return Scaffold(
       appBar: AppBar(title: const Text('Tarif keşfi'), backgroundColor: _pink),
-      body: Column(children: [
+      // Arama ve filtreler listeyle birlikte kayar; kısa ve yatay ekranlarda taşmaz.
+      body: CustomScrollView(slivers: [
+        SliverToBoxAdapter(child: Column(children: [
         Padding(padding: const EdgeInsets.fromLTRB(14, 12, 14, 6), child: TextField(
           controller: _search, onChanged: (_) => setState(() {}),
           decoration: InputDecoration(prefixIcon: const Icon(Icons.search),
-            hintText: 'Tarif, kategori veya malzeme ara',
+            hintText: t('Tarif, kategori veya malzeme ara'),
             suffixIcon: IconButton(icon: const Icon(Icons.clear), onPressed: () { _search.clear(); setState(() {}); }),
             border: const OutlineInputBorder()))),
         SizedBox(height: 46, child: ListView(scrollDirection: Axis.horizontal, padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -136,41 +143,46 @@ class _RecipeExplorerPageState extends State<RecipeExplorerPage> {
             child: ChoiceChip(label: Text(c), selected: _category == c,
               onSelected: (_) => setState(() => _category = c)))])),
         Padding(padding: const EdgeInsets.symmetric(horizontal: 12), child: Wrap(spacing: 8, crossAxisAlignment: WrapCrossAlignment.center, children: [
-          DropdownButton<int>(value: _maxMinutes, items: const [
+          SizedBox(width: 140, child: DropdownButton<int>(isExpanded: true, value: _maxMinutes, items: const [
             DropdownMenuItem(value: 0, child: Text('Tüm süreler')),
             DropdownMenuItem(value: 15, child: Text('≤ 15 dk')),
             DropdownMenuItem(value: 30, child: Text('≤ 30 dk')),
             DropdownMenuItem(value: 60, child: Text('≤ 60 dk')),
-          ], onChanged: (v) => setState(() => _maxMinutes = v ?? 0)),
-          DropdownButton<String>(value: _sort, items: ['Önerilen','Süre: kısa → uzun','Süre: uzun → kısa','İsim: A → Z']
-            .map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),
-            onChanged: (v) => setState(() => _sort = v ?? 'Önerilen')),
+          ], onChanged: (v) => setState(() => _maxMinutes = v ?? 0))),
+          SizedBox(width: 170, child: DropdownButton<String>(isExpanded: true, value: _sort, items: ['Önerilen','Süre: kısa → uzun','Süre: uzun → kısa','İsim: A → Z']
+            .map((s) => DropdownMenuItem(value: s, child: Text(s, maxLines: 1, overflow: TextOverflow.ellipsis))).toList(),
+            onChanged: (v) => setState(() => _sort = v ?? 'Önerilen'))),
           FilterChip(label: const Text('Favorilerim'), selected: _onlyFavorites,
             onSelected: (v) => setState(() => _onlyFavorites = v)),
           FilterChip(label: const Text('Son görüntülenenler'), selected: _onlyRecent,
             onSelected: (v) => setState(() => _onlyRecent = v)),
         ])),
-        Padding(padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4), child: Row(children: [
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4), child: Wrap(
+          alignment: WrapAlignment.spaceBetween, crossAxisAlignment: WrapCrossAlignment.center, spacing: 8, children: [
           Text('${filtered.length} / ${generalRecipes.length} tarif', style: const TextStyle(color: _purple)),
-          const Spacer(),
           TextButton(onPressed: () => setState(() {
             _search.clear(); _category = 'Tümü'; _sort = 'Önerilen'; _maxMinutes = 0; _onlyFavorites = false; _onlyRecent = false;
           }), child: const Text('Filtreleri sıfırla')),
         ])),
-        Expanded(child: filtered.isEmpty ? const Center(child: Text('Bu filtrelere uygun tarif bulunamadı.')) :
-          ListView.builder(itemCount: filtered.length, itemBuilder: (ctx, i) {
+        ])),
+        if (filtered.isEmpty) const SliverFillRemaining(hasScrollBody: false,
+          child: Center(child: Text('Bu filtrelere uygun tarif bulunamadı.')))
+        else SliverList.builder(itemCount: filtered.length, itemBuilder: (ctx, i) {
             final r = filtered[i];
             return Card(margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               color: i.isEven ? _pink : const Color(0xFFF4EFFF),
               child: ListTile(
+                leading: RecipeArt(title: r.title, category: r.category, ingredients: r.ingredients,
+                  size: 52, borderRadius: 14),
                 title: Text(r.title, style: const TextStyle(fontWeight: FontWeight.w600)),
                 subtitle: Text('${r.category} • ${r.minutes} dk • ${r.ingredients.length} malzeme'),
-                trailing: IconButton(tooltip: 'Favorilere ekle / çıkar',
+                trailing: IconButton(tooltip: t('Favorilere ekle / çıkar'),
                   icon: Icon(_favorites.contains(r.title) ? Icons.favorite : Icons.favorite_border,
                     color: const Color(0xFFE94291)),
                   onPressed: () => _toggleFavorite(r)),
                 onTap: () => _details(r)));
-          })),
+          }),
+        const SliverToBoxAdapter(child: SizedBox(height: 16)),
       ]),
     );
   }
@@ -192,8 +204,8 @@ class _InteractiveRecipeDetailsState extends State<_InteractiveRecipeDetails> {
   final _notes = TextEditingController();
   final Set<int> _completed = {};
   bool _progressLoaded = false;
-  int _portions = 2;
-  int _basePortions = 2;
+  late int _portions = widget.recipe.servings.clamp(1, 12);
+  late int _basePortions = _portions;
   bool _saving = false;
 
   String get _noteKey => 'paket39_recipe_note_v1_${widget.recipe.id}';
@@ -262,8 +274,8 @@ class _InteractiveRecipeDetailsState extends State<_InteractiveRecipeDetails> {
               if (chosen != null) update(() => selected = chosen);
             },
           ),
-          DropdownButtonFormField<String>(
-            initialValue: meal, decoration: const InputDecoration(labelText: 'Öğün'),
+          DropdownButtonFormField<String>(isExpanded: true, 
+            initialValue: meal, decoration: InputDecoration(labelText: t('Öğün')),
             items: _meals.map((m) => DropdownMenuItem(value: m, child: Text(m))).toList(),
             onChanged: (v) { if (v != null) update(() => meal = v); },
           ),
@@ -368,18 +380,23 @@ class _InteractiveRecipeDetailsState extends State<_InteractiveRecipeDetails> {
     return Scaffold(
       appBar: AppBar(title: Text(r.title), backgroundColor: _pink),
       body: ListView(padding: const EdgeInsets.all(16), children: [
+        RecipeHeroArt(title: r.title, category: r.category, ingredients: r.ingredients),
+        const SizedBox(height: 12),
         Text('${r.category} • ${r.minutes} dakika', style: const TextStyle(color: _purple)),
+        const SizedBox(height: 8),
+        RecipeSummaryChips(recipe: r),
+        CookModeButton(title: r.title, ingredients: r.ingredients, steps: r.steps),
         const SizedBox(height: 12),
         Card(color: _pink, child: Padding(padding: const EdgeInsets.all(12), child: Column(
           crossAxisAlignment: CrossAxisAlignment.start, children: [
             const Text('Porsiyon ayarı', style: TextStyle(fontWeight: FontWeight.bold, color: _purple)),
             const SizedBox(height: 6),
-            const Text('Tariflerde standart porsiyon bilgisi bulunmadığından başlangıç değeri 2 kabul edilir. İstersen değiştirebilirsin.', style: TextStyle(fontSize: 12)),
+            Text('Tarif ${widget.recipe.servings} kişiliktir. Porsiyonu değiştirince sayıyla başlayan ölçüler oransal hesaplanır.', style: const TextStyle(fontSize: 12)),
             Row(children: [
               const Text('Temel:'),
               DropdownButton<int>(value: _basePortions, items: List.generate(12, (i) =>
                 DropdownMenuItem(value: i + 1, child: Text('${i + 1}'))),
-                onChanged: (v) => setState(() { _basePortions = v ?? 2; _portions = _basePortions; })),
+                onChanged: (v) => setState(() { _basePortions = v ?? widget.recipe.servings; _portions = _basePortions; })),
               const Spacer(),
               IconButton(onPressed: _portions > 1 ? () => setState(() => _portions--) : null,
                 icon: const Icon(Icons.remove_circle_outline)),
@@ -430,11 +447,12 @@ class _InteractiveRecipeDetailsState extends State<_InteractiveRecipeDetails> {
           })),
         TextButton.icon(onPressed: !_progressLoaded ? null : () { setState(_completed.clear); _saveProgress(); },
           icon: const Icon(Icons.refresh), label: const Text('Adımları sıfırla')),
+        RecipeExtraSections(recipe: r),
         const Divider(height: 28),
         const Text('Kişisel tarif notum', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _purple)),
         const SizedBox(height: 8),
         TextField(controller: _notes, maxLines: 4,
-          decoration: const InputDecoration(hintText: 'Tarifle ilgili notlarını yaz...', border: OutlineInputBorder())),
+          decoration: InputDecoration(hintText: t('Tarifle ilgili notlarını yaz...'), border: OutlineInputBorder())),
         const SizedBox(height: 10),
         FilledButton.icon(onPressed: _saving ? null : _saveNotes,
           icon: const Icon(Icons.save_outlined), label: const Text('Notumu kaydet')),

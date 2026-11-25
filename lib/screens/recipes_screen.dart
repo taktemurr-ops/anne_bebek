@@ -1,5 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/general_recipe_catalog.dart';
 import '../widgets/ui.dart';
@@ -80,14 +82,14 @@ class _RecipesScreenState extends State<RecipesScreen> {
       (!_onlyFavorites || _favorites.contains(r.id)) &&
       (query.isEmpty || r.title.toLowerCase().contains(query) || r.ingredients.join(' ').toLowerCase().contains(query))
     ).toList();
-    final categories = ['Tümü', ...{for (final r in generalRecipes) r.category}];
+    final categories = ['Tümü', ...generalRecipeCategories];
     return ListView(padding: const EdgeInsets.all(16), children: [
       sectionTitle('Bugün Ne Pişirsem? 🍲'),
       const Text('155 tarif kaydı; bunların 35 tanesi ölçülü tarif, 120 tanesi başlangıç fikridir. 1.000 özgün tarif hedefi henüz tamamlanmadı.'),
       const SizedBox(height: 12),
       FilledButton.icon(onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const WeeklyMealPlannerPage())), icon: const Icon(Icons.calendar_month), label: const Text('Haftalık yemek planı ve alışveriş listesi')),
       const SizedBox(height: 12),
-      TextField(controller: _search, decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Tarif veya malzeme ara', border: OutlineInputBorder())),
+      TextField(controller: _search, decoration: InputDecoration(prefixIcon: Icon(Icons.search), hintText: t('Tarif veya malzeme ara'), border: OutlineInputBorder())),
       const SizedBox(height: 8),
       SingleChildScrollView(scrollDirection: Axis.horizontal, child: Row(children: [
         for (final category in categories) Padding(padding: const EdgeInsets.only(right: 6), child: ChoiceChip(label: Text(category), selected: _category == category, onSelected: (_) => setState(() => _category = category))),

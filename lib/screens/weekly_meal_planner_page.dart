@@ -1,5 +1,8 @@
+import '../utils/dialog_helpers.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/general_recipe_catalog.dart';
 import 'weekly_shopping_assistant_page.dart';
@@ -90,8 +93,8 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
   Future<void> _choose(String day, String meal) async {
     final search = TextEditingController();
     String category = 'Tümü';
-    final categories = ['Tümü', ...{for (final r in generalRecipes) r.category}];
-    final chosen = await showModalBottomSheet<GeneralRecipe>(
+    final categories = ['Tümü', ...generalRecipeCategories];
+    final chosen = await showModalBottomSheetAndDispose<GeneralRecipe>(disposables: [search],
       context: context, isScrollControlled: true, showDragHandle: true,
       builder: (ctx) => StatefulBuilder(builder: (ctx, update) {
         final q = search.text.trim().toLowerCase();
@@ -106,8 +109,8 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
               child: Text('$day • $meal', style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold, color: _purple))),
             Padding(padding: const EdgeInsets.all(12), child: TextField(
               controller: search, onChanged: (_) => update(() {}),
-              decoration: const InputDecoration(prefixIcon: Icon(Icons.search),
-                hintText: 'Tarif veya malzeme ara', border: OutlineInputBorder()))),
+              decoration: InputDecoration(prefixIcon: Icon(Icons.search),
+                hintText: t('Tarif veya malzeme ara'), border: OutlineInputBorder()))),
             SizedBox(height: 42, child: ListView(scrollDirection: Axis.horizontal, children: [
               for (final c in categories) Padding(padding: const EdgeInsets.only(left: 8),
                 child: ChoiceChip(label: Text(c), selected: c == category,
@@ -120,7 +123,6 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
             })),
           ])));
       }));
-    search.dispose();
     if (chosen == null || !mounted) return;
     setState(() => _plan['$day|$meal'] = chosen.id);
     await _save();
@@ -234,8 +236,8 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
         content: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Text('Kahvaltı, öğle ve akşam için tarif önerileri oluşturulur. Beslenme veya sağlık önerisi değildir.'),
           const SizedBox(height: 12),
-          DropdownButtonFormField<String>(initialValue: style,
-            decoration: const InputDecoration(labelText: 'Menü türü'),
+          DropdownButtonFormField<String>(isExpanded: true, initialValue: style,
+            decoration: InputDecoration(labelText: t('Menü türü')),
             items: ['Dengeli', 'Pratik', 'Sebze ağırlıklı']
               .map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
             onChanged: (v) => update(() => style = v ?? 'Dengeli')),
@@ -373,13 +375,13 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
       ListView(padding: const EdgeInsets.all(14), children: [
         if (_error != null) Padding(padding: const EdgeInsets.all(8), child: Text(_error!, style: const TextStyle(color: Colors.red))),
         Row(children: [
-          IconButton(tooltip: 'Önceki hafta', onPressed: () => _changeWeek(-1), icon: const Icon(Icons.chevron_left)),
+          IconButton(tooltip: t('Önceki hafta'), onPressed: () => _changeWeek(-1), icon: const Icon(Icons.chevron_left)),
           Expanded(child: Column(children: [
             Text('${_dateLabel(_weekStart)} – ${_dateLabel(_weekStart.add(const Duration(days: 6)))}', textAlign: TextAlign.center,
               style: const TextStyle(fontWeight: FontWeight.bold, color: _purple)),
             Text(_hasStoredWeek ? 'Kayıtlı hafta' : 'Henüz planlanmamış hafta', style: const TextStyle(fontSize: 12)),
           ])),
-          IconButton(tooltip: 'Sonraki hafta', onPressed: () => _changeWeek(1), icon: const Icon(Icons.chevron_right)),
+          IconButton(tooltip: t('Sonraki hafta'), onPressed: () => _changeWeek(1), icon: const Icon(Icons.chevron_right)),
           TextButton(onPressed: () async { setState(() { _weekStart = _monday(DateTime.now()); _loading = true; }); await _load(); }, child: const Text('Bugün')),
         ]),
         Text('7 gün • Kahvaltı, öğle ve akşam • ${_plan.length}/21 öğün planlandı',
@@ -412,11 +414,11 @@ class _WeeklyMealPlannerPageState extends State<WeeklyMealPlannerPage> {
                 subtitle: Text(r?.title ?? 'Tarif seçilmedi'),
                 onTap: () => _choose(day, meal),
                 trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-                  if (r != null) IconButton(tooltip: 'Alternatif tarif öner',
+                  if (r != null) IconButton(tooltip: t('Alternatif tarif öner'),
                     icon: const Icon(Icons.swap_horiz), onPressed: () => _suggestReplacement(day, meal)),
-                  if (r != null) IconButton(tooltip: 'Tarifi görüntüle',
+                  if (r != null) IconButton(tooltip: t('Tarifi görüntüle'),
                     icon: const Icon(Icons.menu_book_outlined), onPressed: () => _showRecipe(r)),
-                  if (r != null) IconButton(tooltip: 'Plana eklenen tarifi kaldır',
+                  if (r != null) IconButton(tooltip: t('Plana eklenen tarifi kaldır'),
                     icon: const Icon(Icons.close), onPressed: () {setState(() => _plan.remove(key)); _save();}),
                   const Icon(Icons.edit_outlined, color: _purple),
                 ]),

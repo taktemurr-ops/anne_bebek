@@ -1,0 +1,223 @@
+f6284071	Was erwartet dich in Woche {0}?
+24dc6176	Woche vom {0}.{1}.{2}
+d5796a68	{0}.{1}.{2} • Datum wählen
+4fc32893	Schritt {0}/{1}
+5e8260f5	{0}/{1} Aktivitäten erledigt
+a66bda08	{0}/{1} mmHg
+a9a90428	{0}/{1} erledigt
+46773c53	{0}: Referenz für 25 Monate geladen. Stelle sicher, dass die CSV-Quelle CDC/WHO ist.
+30d07e6c	{0}: tippen, um zur Liste hinzuzufügen
+1e5d372f	{0}: {1} Einträge
+b27b5d6f	{0}: {1} Messungen • Zuletzt: {2} {3}
+808f2ff2	{0}–{1} Monate
+a896ccb4	{0}–{1} Monate • {2} • {3} Minuten
+90a8f74c	{1} ({2} {0} fehlen)
+c8c3fd10	{1} Stück • {0} Artikel gekauft
+ba8db48f	{0} zu {1} • {2} hinzufügen?
+c15e133b	Woche {1} · Trimester {0}
+42cd6a5d	ZUSAMMENFASSUNG KINDER-TRACKING
+7f4c3978	Mi
+8bae1de9	Widersprüchlicher alter und sicherer Eintrag: {0}
+7ae50242	Mittwoch
+a2b80208	Das Online-Forum ist noch nicht eingerichtet.
+797e9d4f	Offline-Themensuche und Vorschläge
+d65f69df	Offline-Nutzung
+220e6b06	Offline-Modulwechsel und Fehlerzustände wurden geprüft
+904bbab8	Kind (1–6 Jahre)
+41b623d8	Meine Kinderprofile
+1116ac39	Der Name des Kindes darf nicht leer sein.
+8b6ee7e9	Der Name des Kindes darf höchstens {0} Zeichen haben.
+4480f84d	Der Name des Kindes darf keine Steuerzeichen enthalten.
+63dc7819	Kindbezogener Tagebucheintrag
+de989419	Kindertagebuch (Kind wählen)
+beff0b4d	Kindertagebuch und Pflegeplan
+93bbd96a	Kindereinträge als JSON sichern
+b19d16d0	Kinderprofil
+41739cd5	Kinderprofil hinzufügen
+7e5d63ab	Die Altersgrenze für ein Kinderprofil liegt bei 18 Jahren.
+667a4e39	Ein Kinderprofil muss ausgewählt sein
+61dacb87	Das Kinderprofil oder Tagebuch ist ungültig.
+17f07456	Wähle ein Kinderprofil, um den altersgerechten Impfkalender zu öffnen
+884bedbf	Kinderprofile
+8e36b660	Kinderprofile und persönliche Tagebücher
+81191bcf	Der Gesundheitsplan des Kindes ist ungültig.
+e108f841	Prüfung der Kinderdaten
+70f7e10e	Gemeinsame Verwaltung für Kinder (geplant)
+16ecb930	Kindbezogenes Tagebuch
+6dcbb337	Sehr hoher Blutdruck. Bei Kopfschmerzen, Brustschmerzen, Atemnot oder verwaschener Sprache sofort die örtliche Notrufnummer wählen.
+0e8e35d0	Sehr hoher Blutdruck: Wähle die örtliche Notrufnummer oder geh ohne Wartezeit in den Kreißsaal.
+843fc8c9	Suppe
+6b054743	Suppen
+290f9902	Die Balkenskala beträgt 1.000 ml; sie ist keine empfohlene Trinkmenge.
+e440a26e	Absturz-, Leistungs- und Starttest
+08086945	Weil du auch wichtig bist!
+8d1ab12a	Abmelden
+67669d43	WICHTIG: Beikost wird meist mit etwa 6 Monaten eingeführt, je nach Entwicklungsreife. Kein Honig vor 12 Monaten; kein Salz oder Zucker zugeben. Ganze Nüsse und harte/runde Stücke bergen Erstickungsgefahr. Achte auf Allergene, biete Essen in passender Konsistenz an und lass dein Baby beim Essen nie allein.
+f3eb8943	Gemessener Bereich: {0} • Durchschnitt: {1} Tage\nKürzester: {2} Tage • Längster: {3} Tage
+876cf0c4	Messung
+65c8a57a	Temperatur / Medikament hinzufügen
+b217ca06	CSV-Messdaten in die Zwischenablage kopiert.
+23760529	Messabstand: {0} Tage
+5ea568b5	Der Messwert liegt unter der Fiebergrenze.
+77043d55	Messnotizen
+2998b307	Messwert
+ea8a87d7	Eine Messung darf nicht vor der Geburt liegen.
+1012c19b	Messung hinzufügen
+9d12b654	Messverlauf
+36c2ac59	Messverlauf (keine diagnostische Bewertung)
+9abd4180	Das Messdatum darf nicht in der Zukunft liegen.
+396c0d73	Ein Messdatum ist erforderlich.
+8c08e2dd	Messung und Beschreibung
+060a92af	Messstelle
+e8b596d0	Temperatur, Medikamentenzeiten und altersbezogene Warnungen
+fdb0d655	Messungen konnten nicht gelesen werden. Die Daten bleiben erhalten.
+e39206f4	Messungen, Medikamente und Vitamine, Vorsorge
+c3b327ba	Messungen als CSV kopieren
+3c63e527	Prüfe die Messungen: Größe 20–230 cm, Gewicht 0,3–200 kg, Kopfumfang 15–75 cm.
+4bbd114c	Erfasse Temperaturen und gegebene Medikamente mit Uhrzeit; so hast du beim Arztbesuch alles zur Hand.
+fe1df323	Meine Messungen
+b846de32	Messung löschen
+5b845cbc	Erlaube zuerst Familienerinnerungen unter „Meine Benachrichtigungseinstellungen“.
+edb2dd0c	Melde dich zuerst in deinem Konto an.
+80df10d2	Füge zuerst ein Rezept zum Plan hinzu.
+e5397c21	Rezepte mit Zutaten, die zuerst verbraucht werden sollten
+f4b8667c	Lege zuerst das Geschlecht im Kinderprofil fest.
+27317deb	Wähle zuerst ein Kinderprofil, um Einträge zu öffnen
+5e8d50f6	Gib zuerst die Menge als Zahl und Einheit ein (z. B. 500 g).
+97d58ddb	Vorheriger Monat
+a7cff434	Vorheriger Tag
+ec67d0e3	Vorherige Woche
+b850d96a	Für die Vorwoche wurde kein gespeicherter Plan gefunden.
+7fabbc58	Die Vorwoche konnte nicht gelesen werden. Alte Einträge blieben erhalten.
+7e97ec2d	Leere Mahlzeiten der Vorwoche übernehmen
+57d3ec6a	Vorwoche kopieren
+59bcee57	{0} nach der vorherigen Wehe
+1d4c187d	Frühere Sitzungen
+e840007a	Wichtige Daten
+4cb54f5b	Wichtig: Sichere vor Tests mit Gesundheitseinträgen. Teste die Wiederherstellung nur mit Testdaten. Flutter analyze, flutter test und Tests auf echten Geräten sind ebenfalls nötig.
+bd68db91	Empfohlen
+3c3ff2a3	Vorschläge
+3996f32f	Vorschläge basieren auf Rezeptkategorien; sie sind keine persönliche Ernährungs- oder Gesundheitsberatung. Die Übernahme in den Wochenplan aktualisiert denselben Tag der gewählten Woche.
+12e2a05b	Vorschläge erstellen
+4430b014	Z. B. Welche sicheren Spielideen gibt es für ein 8 Monate altes Baby?
+ac8e1b72	Z. B. Deniz
+57cd94d5	Z. B. Tomate, Ei, Milch
+bdeb4722	Z. B. Schlaf, Periode, Rezept
+e221d458	Beispielfragen
+91b5a9df	Beispiel: „Wie lange soll ich mein Eisenpräparat nehmen?“, „Der Stuhl meines Babys ist grün, ist das normal?“
+11f349c5	Persönlicher Kalender und voraussichtliche Termine
+40c778ab	Zusammenfassung in die Zwischenablage kopiert. Prüfe persönliche Angaben vor dem Teilen.
+dd479a2c	Mittagessen
+fb937b49	Mahlzeit
+3a0ba659	Essensplanung
+680431ed	Mahlzeit bereits geplant
+03d41708	Mahlzeit ändern
+e1743a7d	Frei
+2b1681e6	Im Live-Betrieb braucht der Admin-Bereich eine eigene Anmeldung, rollenbasierten Zugriff, Prüfprotokolle und serverseitige Verifizierung.
+29973836	Artikelname
+383bd517	Artikel hinzufügen
+46b0bd97	Produktkatalog
+c85d9607	Produktkatalog und Vergleich
+f0037199	Produktentdeckungskatalog
+c0bca32f	Artikel zur Liste hinzugefügt.
+8236c9fc	Produktmengen dienen der Information; ob sie für ein Rezept reichen, wird nicht automatisch geprüft.
+052daf91	Tippe auf einen Artikel, um Menge und Haltbarkeitsdatum zu bearbeiten.
+6ded1e0a	Ein Produkttyp-Katalog und ein Funktionsvergleich wurden hinzugefügt. Echte Preise, Bestände, Händler und Zahlungsintegration gibt es noch nicht.
+3139bbd2	Produkte oder Funktionen suchen
+f64a5ac1	Produktfunktionsvergleich
+dd982f3c	Die Produkte dienen als Bedarfsliste; es gibt keine echten Verkäufe, Bestände, Preise oder Zahlungslinks.
+08e05062	Artikel hinzufügen, abhaken und speichern
+17384021	Artikel löschen
+50963139	Mitgliedschaft konnte nicht bestätigt werden
+38558e31	Mitgliedschaftsstatus wird geprüft…
+513e65b8	Die Mitgliedschaft erfordert ein Supabase-Projekt. Gesundheitseinträge und Babydaten werden derzeit nicht in die Cloud gesendet; nur die Kontositzung wird verwaltet.
+7fa57377	Mitgliedschaftsoptionen
+977740ee	Mitgliedschaft und Premium
+61a6ad23	Drittes Trimester: Prüfe deinen Geburtsplan und die Vorbereitungen für die Klinik.
+1d879dbb	z. B. 165
+6cbc1b4f	z. B. 38,4
+7ba041db	Suche das Werkzeug, das du brauchst
+ae472a83	SQL-Dateien, RLS-Richtlinien und Mehrbenutzertests für beide Foren sind erforderlich.
+b994f500	Live-Supabase-Verbindung und RLS-Richtlinien für beide Foren wurden geprüft
+3de13b55	Zweiter Kontakt
+a0fd68e7	Zweites Trimester: Nimm regelmäßige Kontrollen und die von deinem Arzt empfohlenen Untersuchungen wahr.
+140e56ad	Medikamente & Vitamine
+caaed636	Medikament / Vitamin
+82f94b61	Medikament / Vitamin
+da4c274e	Medikament / Vitamin hinzufügen
+023a986c	Medikamententagebuch
+80d5b6e7	Medikamenten-Tracking
+1f8c2a59	Medikamente und Vitamine
+3a0e523f	Erinnerungen für Medikamente und Vitamine
+c2b0f10e	Kontakte und wichtige Notizen
+f542a6d8	Verwandte Bereiche
+a769efd8	Verwandte Themen
+7be06ec8	Inspiration
+f7e4f590	Beziehungen
+67d2b128	Die ersten 12 Wochen
+b021ae05	Die ersten 12 Wochen sind vorbei; Begleitung und Unterstützung können weitergehen.
+18b6cdc6	Erste Schritte, Wörter und Erinnerungen
+3d319203	Mein erstes Baby hinzufügen
+b7cc8489	Erste Tage: Befolge die Entlassungsempfehlungen, achte auf die Blutungsmenge und die Schmerzbehandlung. Plane Unterstützung zu Hause.
+9c8ad1ad	Erstes Trimester: Sprich mit deinem Arzt über Kontrollen, Ernährung und deine Medikamente.
+1d89be93	Unterschied erster–letzter: {1}{0} {2}
+08c23f7d	Erster: {0} · {1}  |  Letzter: {2} · {3}
+b746efe1	Erste Male
+4eb9f130	Signatur und Release-Kennungen
+b5c01a4f	Es gibt Einträge, die geprüft werden müssen
+4ead752b	Lokale Einträge und Bildschirmwechsel wurden ohne Internet getestet
+85e2d087	Abbrechen
+e8181f34	Tipp: Du kannst einen Periodenbeginn auch durch Tippen auf einen Tag im Kalender hinzufügen.
+ba2ea095	Name und Geburtsdatum hinzufügen
+522e5cd1	Name oder Bedeutung suchen
+4a2afac5	Name: A → Z
+48c7db33	Namen
+22711906	Optionale Familienkalender-Erinnerungen
+a4a548b9	Wohlfühlen
+dbea3a4e	Schön, dass du da bist!
+85e0dc14	Schön, dass du da bist!\nLeg zuerst das Profil deines Babys an.
+83698d09	Erholung und Ruhe
+b19b0d67	Erholung und Leben
+0329f33c	Erfasse Erholung, Schlaf, Stimmung und Notizen zur ärztlichen Kontrolle.
+d8b63190	Berechtigungen und Ruhezeiten verwalten
+cd16ba0c	Getränk
+accad8dd	Getränke
+ca6e7e3c	Die Inhalte dienen der Information und sind keine ärztliche Beratung. Zyklusprognosen sind ungefähr und dürfen nicht zur Verhütung genutzt werden. Im Notfall die örtliche Notrufnummer wählen.
+c8bb0f7d	Die Inhalte dienen der allgemeinen Information. Lass dich in Gesundheitsfragen fachlich beraten.
+1329a2aa	Inhalt entfernen
+fa88a9f5	Inhalt entfernen?
+86f920d7	Die Aktion ist fehlgeschlagen ({0}).
+6ff95d8b	Die Aktion konnte nicht abgeschlossen werden.
+780d96ee	Die Aktion konnte nicht abgeschlossen werden. Prüfe Berechtigungen und Verbindung.
+5d8f6cd3	Schweregrad / Auswirkung
+95a654a9	Schwer
+6f26a444	Passwort
+f8db6da4	Das Passwort muss mindestens 6 Zeichen haben.
+59dc2b49	Das verschlüsselte Sicherungsformat wird nicht unterstützt.
+a3f58601	Verschlüsselter Sicherungstext
+59d4cba5	Verschlüsselte Sicherung in die Zwischenablage kopiert. Bewahre dein Passwort getrennt an einem sicheren Ort auf.
+23aacf98	Die verschlüsselte Sicherung überschreitet das Datenlimit.
+7a6a7262	Verschlüsselte Sicherung und Wiederherstellung
+3065a659	Füge die verschlüsselte Sicherung unten ein und gib das Passwort ein, das du beim Erstellen verwendet hast. Alte unverschlüsselte Sicherungen können hier nicht importiert werden.
+483ac6a7	Verschlüsselte Sicherung in die Zwischenablage kopieren
+35c0e4e9	Passwort vergessen
+eb392d49	Gemeldeten Inhalt löschen?
+1c958933	Melden
+3aa8d279	Die Meldung konnte nicht gesendet werden: {0}
+190ee311	Grund der Meldung
+a0138bb1	Meldung ablehnen?
+62d1b0f4	Meldungen und Inhaltssicherheit
+570d82a2	Meldung ablehnen?
+dd58ae67	Deine Meldung wurde zur Prüfung gesendet.
+a4283cc2	Wird gerade abgespielt
+c045d371	Februar
+2678b35b	Schhh-Geräusch
+00d28b0c	Füge Artikel mit „Artikel hinzufügen“ hinzu und hake Gekauftes ab. Hier kannst du regelmäßigen Bedarf wie Windeln, Säuglingsnahrung und Feuchttücher notieren.
+5e94b390	≤ 15 Min.
+ad8e347d	≤ 30 Min.
+c8dbdc0c	≤ 60 Min.
+5ed1ebf1	⚠️ Online-Konten sind noch nicht aktiv. Die App muss mit der Konfiguration SUPABASE_URL und SUPABASE_ANON_KEY gebaut werden. Es werden keine Scheinkonten erstellt.
+c39ecb1f	🌸 Ich
+8cbd8b3e	👣\nBewegung
+4c748608	👶 Mein Baby
+4235a8e3	💧 Heute {0} Gläser Wasser. Ziel sind 8 Gläser (beim Stillen mehr).

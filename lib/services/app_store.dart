@@ -1,3 +1,4 @@
+import '../utils/privacy_log_sanitizer.dart';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,7 +21,7 @@ class AppStore extends ChangeNotifier {
       final shoppingJson = await _prefs.getString('shopping_v2');
       if (shoppingJson != null) shopping = (jsonDecode(shoppingJson) as List).cast<String>();
     } catch (e) {
-      debugPrint('Yerel veri okuma hatası: $e');
+      logSafeError('Yerel veri okuma hatası', e);
     } finally {
       ready = true;
       notifyListeners();

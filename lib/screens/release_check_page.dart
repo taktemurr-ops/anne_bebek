@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/text.dart';
 import 'integration_status_page.dart';
 import 'project_completion_center_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';

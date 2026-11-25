@@ -1,6 +1,9 @@
+import '../utils/dialog_helpers.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'package:flutter/services.dart';
 import '../services/child_calendar_export.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../services/child_care_plans.dart';
 import '../services/child_profiles.dart';
 import '../services/secure_health_store.dart';
@@ -56,15 +59,15 @@ class _ChildCarePlanPageState extends State<ChildCarePlanPage> {
     if (original != null) { title.text = original.title; note.text = original.note; }
     var category = original?.category ?? 'Aşı';
     var date = original?.date ?? DateTime.now();
-    final result = await showDialog<ChildCareItem>(context: context, builder: (ctx) =>
+    final result = await showDialogAndDispose<ChildCareItem>(disposables: [title, note], context: context, builder: (ctx) =>
       StatefulBuilder(builder: (ctx, refresh) => AlertDialog(
         title: Text(original == null ? 'Takip kaydı ekle' : 'Takip kaydını düzenle'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          DropdownButtonFormField<String>(initialValue: category, decoration: const InputDecoration(labelText: 'Kategori'),
+          DropdownButtonFormField<String>(isExpanded: true, initialValue: category, decoration: InputDecoration(labelText: t('Kategori')),
             items: ['Aşı', 'Doktor kontrolü', 'Gelişim gözlemi'].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
             onChanged: (v) { if (v != null) refresh(() => category = v); }),
-          TextField(controller: title, maxLength: 90, decoration: const InputDecoration(labelText: 'Başlık / aşı adı')),
-          TextField(controller: note, maxLines: 3, maxLength: 500, decoration: const InputDecoration(labelText: 'Not / sağlık kuruluşu')),
+          TextField(controller: title, maxLength: 90, decoration: InputDecoration(labelText: t('Başlık / aşı adı'))),
+          TextField(controller: note, maxLines: 3, maxLength: 500, decoration: InputDecoration(labelText: t('Not / sağlık kuruluşu'))),
           Text('Tarih, çocuğun doğum tarihinden önce olamaz.', style: Theme.of(ctx).textTheme.bodySmall),
           OutlinedButton.icon(icon: const Icon(Icons.event),
             label: Text('Tarih: ${date.day}.${date.month}.${date.year}'),
@@ -82,7 +85,6 @@ class _ChildCarePlanPageState extends State<ChildCarePlanPage> {
               note: note.text.trim(), date: date, completed: original?.completed ?? false));
           }, child: const Text('Kaydet'))],
       )));
-    title.dispose(); note.dispose();
     if (result != null && mounted) {
       final next = original == null ? [..._all, result] :
           _all.map((item) => item.id == original.id ? result : item).toList();
@@ -100,7 +102,7 @@ class _ChildCarePlanPageState extends State<ChildCarePlanPage> {
     final visible = filterCareItems(_all, widget.child.id, now, _filter);
     return Scaffold(
       appBar: AppBar(title: Text('${widget.child.name} • Sağlık planı'), actions: [
-        IconButton(tooltip: 'Takvimi panoya kopyala', icon: const Icon(Icons.event_available_outlined),
+        IconButton(tooltip: t('Takvimi panoya kopyala'), icon: const Icon(Icons.event_available_outlined),
           onPressed: _loading || _error != null ? null : () async {
             final content = buildChildCareCalendar(_all, widget.child.id, widget.child.name);
             await Clipboard.setData(ClipboardData(text: content));
@@ -139,9 +141,9 @@ class _ChildCarePlanPageState extends State<ChildCarePlanPage> {
               '${item.note.isEmpty ? '' : '\n${item.note}'}'),
             isThreeLine: item.note.isNotEmpty,
             trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-              IconButton(icon: const Icon(Icons.edit_outlined), tooltip: 'Düzenle',
+              IconButton(icon: const Icon(Icons.edit_outlined), tooltip: t('Düzenle'),
                 onPressed: _saving ? null : () => _edit(item)),
-              IconButton(icon: const Icon(Icons.delete_outline), tooltip: 'Sil',
+              IconButton(icon: const Icon(Icons.delete_outline), tooltip: t('Sil'),
               onPressed: _saving ? null : () async {
                 final yes = await showDialog<bool>(context: context, builder: (ctx) => AlertDialog(
                   title: const Text('Kayıt silinsin mi?'),

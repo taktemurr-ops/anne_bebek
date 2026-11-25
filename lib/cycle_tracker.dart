@@ -1,5 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'i18n/i18n.dart' show t;
+import 'i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'services/secure_health_store.dart';
 import 'services/cycle_statistics.dart';
 
@@ -48,7 +50,7 @@ class _CycleTrackerPageState extends State<CycleTrackerPage> {
 
   Future<void> _edit(DateTime old) async {
     final chosen = await showDatePicker(context: context, initialDate: old,
-      firstDate: DateTime(2000), lastDate: DateTime.now(), helpText: 'Başlangıç tarihini düzenle');
+      firstDate: DateTime(2000), lastDate: DateTime.now(), helpText: t('Başlangıç tarihini düzenle'));
     if (chosen == null || !mounted) return;
     final next = DateTime(chosen.year, chosen.month, chosen.day);
     if (next != old && _dates.contains(next)) {
@@ -67,7 +69,7 @@ class _CycleTrackerPageState extends State<CycleTrackerPage> {
       initialDate: now,
       firstDate: DateTime(2000),
       lastDate: now,
-      helpText: 'Adet başlangıç tarihini seç',
+      helpText: t('Adet başlangıç tarihini seç'),
     );
     if (date == null || !mounted) return;
     final normalized = DateTime(date.year, date.month, date.day);
@@ -153,8 +155,8 @@ class _CycleTrackerPageState extends State<CycleTrackerPage> {
                         subtitle: const Text('Adet başlangıcı'),
                         onTap: () => _edit(date),
                         trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-                          IconButton(tooltip: 'Düzenle', icon: const Icon(Icons.edit_outlined), onPressed: () => _edit(date)),
-                          IconButton(tooltip: 'Kaydı sil', icon: const Icon(Icons.delete_outline), onPressed: () => _remove(date)),
+                          IconButton(tooltip: t('Düzenle'), icon: const Icon(Icons.edit_outlined), onPressed: () => _edit(date)),
+                          IconButton(tooltip: t('Kaydı sil'), icon: const Icon(Icons.delete_outline), onPressed: () => _remove(date)),
                         ]),
                       ),
                     ),

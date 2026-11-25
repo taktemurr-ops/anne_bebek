@@ -1,0 +1,300 @@
+7dd4893d	Mon journal du sommeil
+d2f221e1	Saisie de sommeil
+6fe54c31	Supprimer la saisie de sommeil ?
+f35a8e57	Modifier la saisie de sommeil
+dbe666f3	Données de sommeil
+4c817317	Les données de sommeil n'ont pas pu être lues. Les données existantes n'ont pas été supprimées.
+a10a9f28	Mélodie du sommeil
+6b49345f	Routine du coucher
+7e3c9066	Sons pour dormir
+ea0c18d5	Sons pour dormir et berceuses
+4a0c0713	Sons pour dormir 🌙
+0ced78e5	Durée du sommeil (minutes)
+ada26820	Ajouter une durée de sommeil
+a9710c8f	Durée du sommeil et notes
+379d41de	Suivi du sommeil et graphique hebdomadaire
+4f596027	Sommeil et repos
+e59fcdb3	Sommeil et routine quotidienne
+04af83ce	Sommeil et vie quotidienne
+c429c486	Sommeil • Alimentation • Couches
+95605fed	Données de sommeil, d'alimentation, de couches et de médicaments par date
+ede951de	Liste de valise et de voyage
+cae2f2a4	Ventilateur
+14d24820	Annuler
+fd682e2f	Vérification de l'intégrité des données
+fa443a7c	Médicament donné et quantité (facultatif)
+1c2d5efd	Les données n'ont pas pu être vérifiées. Aucune donnée n'a été modifiée.
+0ad85845	Sauvegarder ou restaurer les données
+38849bc7	Mes données
+8671b79e	Période fertile
+8e134e98	Séparez par des virgules : 08:00, 20:00
+97125909	Indice de masse corporelle : {0} ({1}). Ce n'est pas une mesure valable pendant la grossesse et l'allaitement.
+31c8b4c6	La température semble basse. Réchauffez votre bébé et mesurez à nouveau ; si elle reste basse ou si votre bébé est mou, consultez immédiatement un médecin.
+51c7c481	La référence OMS 0–24 mois doit contenir les 25 mois
+dfd2d9ec	Charger la référence CSV de l'OMS
+1cc4765f	Lien vers la source OMS requis
+fd375b32	Des fichiers CSV CDC/OMS 0–24 mois vérifiés sont nécessaires pour les percentiles OMS. Vous pouvez importer le contenu CSV officiel depuis le presse-papiers avec l'icône d'import ci-dessus. Aucun percentile n'est calculé sans référence.
+c3e129b1	À venir
+cc54c201	Programmer des rappels pour les rendez-vous à venir
+d7b2d14b	Environ {0} mois
+89b96cf8	Bientôt disponible
+44bbbb95	Favoris uniquement
+a7afde3d	Seulement mes favoris
+2d1caed9	Résume seulement les intervalles passés entre les dates saisies. Ne l'utilisez pas pour une prévision ni pour la contraception.
+87aea77d	Seules les quantités commençant par un nombre sont recalculées proportionnellement. Vérifiez les fractions, les quantités approximatives et celles dans le texte.
+de7872a4	Seules les données de l'enfant sélectionné sont affichées. Les données restent sur votre appareil ; la copie les place dans le presse-papiers.
+1a58d99a	Sélectionnés uniquement
+3837ff97	Afficher uniquement les données des 7 derniers jours
+c7e13701	Seuls les comptes définis comme modérateurs sur le serveur peuvent voir les signalements.
+be4f070d	Seulement les recettes dont tous les ingrédients sont disponibles
+abf54174	Information de santé trompeuse
+dd7dfe98	Réponse
+11421ad6	En attente de réponse…
+95c6b0a1	Ajouter une réponse
+8d51bcd8	Écrire une réponse
+59dfc0be	Écrivez votre réponse
+8c62add1	Les réponses seront aussi supprimées.
+c23d93bb	C'est fait
+1d5b3520	Ma liste de choses à faire
+d33f496c	À faire et terminé
+61da8572	Vaccins faits et leurs dates
+0e53067d	Notez les vaccins faits avec la date et une note
+9d20e6ef	J'ai identifié les personnes à qui demander de l'aide
+6111735e	Le bruit des vagues qui vont et viennent lentement.
+697dcaae	Publication
+aa04ddbb	Vérifications de publication
+76e84489	Publication et qualité
+2dcf5a8e	Vérification avant publication
+cfbb1cec	Liste de contrôle avant publication
+52d23e7a	La question que vous écrivez sera envoyée. Les adresses e-mail et numéros de téléphone sont masqués automatiquement ; ce n'est pas une anonymisation complète. N'écrivez pas de noms, d'adresses, de résultats d'analyses ni d'autres informations personnelles sensibles.
+0cdd3141	Votre message...
+6a6c247a	Pluie
+1375a9ca	Âge
+77cef0fd	Tranche d'âge (mois)
+30179530	Les indications d'âge sont des informations générales. Tenez compte des allergènes, de la texture et du développement de votre bébé.
+f57b1aa7	Rechercher par âge, catégorie et ingrédient
+45918659	Explorer par âge, catégorie et ingrédient
+0bb80b4e	Activités adaptées à l'âge
+50fce414	Repas de bébé adaptés à l'âge
+5c2f6e29	Alimentation adaptée à l'âge
+f2cfca90	Guide d'alimentation et recettes adaptés à l'âge
+d6ed084c	Guide du développement adapté à l'âge
+a2a4f451	Contenus et guides adaptés à l'âge
+59fbc056	Guide adapté à l'âge
+70423165	Créez une routine du coucher régulière et adaptée à l'âge. Vérifiez la sécurité de l'environnement de sommeil ; couchez votre bébé sur le dos.
+9421742d	Guide de vie adapté à l'âge
+82974595	Vie
+0ed43857	Mon centre de vie
+6aaeb8f7	Outils de vie
+622e3358	La saisie du centre de vie n'est pas valide.
+705dbd24	Mon centre de vie ✨
+30bb8fd8	Le nombre de champs de sauvegarde n'est pas valide.
+0ce3cbc0	La sauvegarde est sous votre responsabilité ; il est recommandé de la chiffrer avec un mot de passe.
+e36c65f6	Limite de taille de sauvegarde dépassée (3 Mo).
+67814e28	La sauvegarde est vide ; il n'y a rien à restaurer. Les données existantes sont conservées.
+103d6777	Le fichier de sauvegarde est trop volumineux.
+e32ead49	La sauvegarde n'a pas pu être vérifiée : {0}
+86d36476	La sauvegarde appartient à un autre enfant
+2264ce25	Le contenu de la sauvegarde n'est pas valide : {0}
+117e220e	Le texte de sauvegarde contient les données de santé personnelles de l'enfant. Le contenu copié dans le presse-papiers peut être lu par d'autres applications. Continuer ?
+22a4830d	Création d'une sauvegarde et restauration avec des données de test
+2839f77d	La sauvegarde n'a pas pu être créée : {0}
+5226eeb0	La date de création de la sauvegarde est manquante ou invalide.
+3c881c49	La date de création de la sauvegarde semble être dans le futur.
+2d8e4624	Mot de passe de sauvegarde (au moins 12 caractères)
+4b8b8dd9	Le mot de passe de sauvegarde doit faire au moins 12 caractères.
+17846133	Le mot de passe de sauvegarde peut faire au maximum 256 caractères.
+cec9168c	Les champs de chiffrement de la sauvegarde ne sont pas valides.
+0cdfd711	Sauvegarde
+e723e5d5	Sauvegarde et restauration
+5ca9cc0f	Les sauvegardes sont chiffrées en AES-256-GCM avec un mot de passe. Si vous oubliez votre mot de passe, vous ne pourrez pas ouvrir la sauvegarde. Conservez tout de même en sécurité le texte de sauvegarde copié dans le presse-papiers. IMPORTANT : cela ne chiffre pas les données actuelles de l'appareil ; ce n'est pas une sauvegarde cloud.
+fe1295fb	La sauvegarde contient les données d'un autre enfant
+d28a2981	La sauvegarde contient un type de donnée invalide.
+19c81124	Donnée invalide dans la sauvegarde : {0}
+907a7099	La sauvegarde contient un élément de liste invalide.
+9b3640c7	La sauvegarde contient une liste invalide.
+b2251093	La sauvegarde contient un journal d'enfant sans profil.
+a6a28d8c	La sauvegarde contient un plan de santé d'enfant sans profil.
+9f013a15	La sauvegarde contient un champ de données non reconnu.
+2ae5db22	La sauvegarde ne contient pas {0} domaines de données. La restauration conserve les données existantes dans ces domaines.
+8b946ea0	La sauvegarde contient {0} domaines de données et environ {1} enregistrements.
+3306c64f	Vérifier et restaurer la sauvegarde
+13c341fa	Repas
+5c3b5359	Recettes
+b43d243d	Recettes de repas et de diversification
+168078d4	Ajouter un nouveau bébé
+1d3da1f4	Ajouter un nouveau bébé, passer d'un profil à l'autre ; journal et plan de soins
+d6c0cccf	Créer un nouveau profil de bébé
+76280fb8	Nouveau journal des aliments et des repas
+f5e5aa21	Créer une nouvelle saisie d'alimentation
+3daa42cd	La nouvelle date de naissance ne peut pas être postérieure aux données de journal ou de santé existantes. Vérifiez d'abord les données.
+3ab9c140	Nouvel événement
+8cd124b2	Créer un nouveau compte
+2c2c722a	Nouvelle saisie
+78864878	Ajouter une nouvelle saisie
+14139a8e	Nouvelle saisie • {0}
+34482149	Nouvelle saisie : {0}
+c543676f	Nouvelle note personnelle
+bbf53b45	Nouvelle recette
+60a6e435	Créer une nouvelle saisie de sommeil
+549bfe99	Les nouvelles réponses apparaissent ici. Les notifications instantanées sur le téléphone ne sont pas encore actives.
+330da458	Ajouter un article
+e7c85607	Nouveau : vie de famille ✨
+7ba41f54	Réessayer
+b96d401c	Plus récents d'abord
+ca2f77a3	Vérifier à nouveau
+de5e0d3c	Recharger
+e15030ea	Nouveau-né
+255b90ed	Actualiser
+051c4abc	Données locales bébé et femme
+a5a4ba01	Erreur de lecture des données locales
+a78fb991	Résumé de gestion local (aperçu)
+56657a1d	Le résumé local n'a pas pu être lu.
+9fc52a0e	Modération contrôlée par autorisations
+87963f33	Les autorisations, les flux de signalement, la protection anti-spam et de vrais tests de notification sont nécessaires. Il n'y a pas de notifications push.
+ec1961a9	Saisie de journal en double
+820f82f6	Saisie de routine en double
+cd178a76	ID de donnée en double
+af9b0db7	Profil en double
+2737e506	ID de recette en double
+6def65cb	ID d'article en double
+02d24668	Touchez l'une des cases ci-dessus pour ajouter votre première mesure.
+7c760d68	Œuf
+d8f5e465	L'ovulation et la période fertile sont estimées à partir de la durée moyenne de votre cycle. Ce n'est pas une méthode fiable de contraception ou de planification de grossesse et cela ne remplace pas une évaluation médicale.
+5bf24d05	Impossible d'accéder aux données de gestion. Vérifiez l'autorisation d'administration, la session et la configuration du serveur.
+851cf730	Résumé de gestion • Aperçu
+08ece895	Les références chargées ne sont conservées que tant que cet écran est ouvert. Les percentiles mensuels OMS 0–24 mois sont informatifs ; ce n'est pas une évaluation médicale.
+3be181d6	Un bilan général une fois par an ; selon les recommandations de votre médecin.
+a0584744	Une fois par an ; sans attendre en cas de grain de beauté qui grossit, change de couleur ou saigne.
+14282d47	Minuterie désactivée – répétition continue
+7a005fd4	Minuteur : gauche {0}, droite {1}
+06ffcdc4	[e-mail masqué]
+4f546c2d	[téléphone masqué]
+f27daa76	touchez pour démarrer
+84f4ef71	touchez pour arrêter
+f548092e	surpoids
+ba242156	Tests sur appareil iOS
+e5f8828a	Build iOS et vérification TestFlight effectués (Mac requis)
+76d713f4	Build iOS
+bc797ca2	Test iOS sur appareil réel/TestFlight
+77778cec	insuffisance pondérale
+8c8463b3	{0} ({1} mois et plus)
+d46506f3	{0} / 40 semaines
+3ed1d8a2	{0} / {1} vérifications cochées
+d7d21dc0	{0} / {1} vérifications terminées
+e8d1f06b	{0} / {1} modules
+4c047fc9	{0} / {1} recettes
+1e9bc45f	Quantité de {0} augmentée.
+6e31f528	Enregistrer {0} comme jour de début des règles ?
+9e3b35cb	{0} outils
+39dcb346	À partir de {0} mois ({1}) • {2}
+76d132a2	{0} mois
+a9e63ce1	{0} sujets mensuels • {1} lus
+1d4ccb16	{0} minutes
+b956e17b	{0} min
+1ed27a97	{0} articles de départ éditoriaux • {1} lus
+b01aab41	{0} activités affichées
+33d59205	{0} ingrédients différents • {1} à la maison • {2} manquants
+77d1adfb	{0} recettes favorites • {1} saisies de soins • {2} mesures de croissance
+a281475b	{0} en retard • {1} aujourd'hui
+6923ddc3	{0} recettes • {1} résultats
+867b5915	{0} jours
+ddc1685d	{0} jours (environ)
+6148359a	{0} jours
+620745ed	{0} outils de vie quotidienne • Vos données restent sur cet appareil
+344c841b	{0} prénoms
+25eed84e	{0} contenus
+e89655ea	{1} saisies pour {0}
+d6b3d33a	Saisissez une valeur entre {1} et {2} {3} pour {0}.
+33edf2af	{0} enregistré.
+66332aef	Saisie {0}
+32cd6bf1	Ajouter une saisie {0}
+ebffeb23	Saisie {0} ajoutée.
+409e949d	{0} saisies
+8d1220da	{0} domaines de données restaurés. Fermez complètement l'application et rouvrez-la.
+f2d88b06	{0} saisies copiées. Les anciennes données ont été conservées.
+0e5bf71a	{0} saisies · {1} catégories
+7167c108	{0} saisies • Première : {1} {3} • Dernière : {2} {4}
+65f7f6f0	{0} kg
+b28623e0	Pour {0} personnes
+d773d924	{0} contrôles sont dus ou n'ont jamais été enregistrés
+2004d198	{0} sujets
+8d7173f7	{0} ajouté à la liste.
+a3972015	{0} ingrédients ajoutés à votre liste de courses.
+2a0e9db5	{0} ingrédients ajoutés à la liste de courses.
+327d8d8e	{0} ingrédients ajoutés à la liste de courses pour {1} portions.
+c16337a7	{0} mg/dL
+86e23524	{0} ml
+c7fba814	{0} portions
+be8c429b	Ajouter les ingrédients pour {0} portions à la liste de courses
+7672293f	Voulez-vous supprimer le profil {0} ? Cette action est irréversible.
+b7d695c3	{0} h {1} min
+eba9aabb	{0} heures {1} minutes
+1728cbd2	{0} ajouté au panier
+699debf7	{0} résultats
+5cbd73d1	{0} recettes
+7829d135	{0} recettes trouvées
+93479447	{0} recettes • 6–72 mois • Explorer par âge et ingrédient
+5843347a	{0} recettes • L'adéquation est une correspondance approximative des ingrédients
+9c4c13d3	Date {0}
+c336a2fe	{0} ans {1} mois
+4edb960f	Recommandations générales de dépistage pour l'âge de {0} ans.
+5fd8a997	{0} ans
+57c717e5	{0} nouveaux ingrédients ajoutés à la liste de courses. Allez dans l'onglet Courses pour voir la liste.
+f2fb22d8	{0} nouveaux articles ajoutés à la liste de courses existante.
+57563a37	{0} est déjà enregistré. Ouvrez « Historique de mes règles » pour le supprimer.
+5f0f5e61	{0} {1}  •  {2} mouvements
+6b41fb39	La recette enregistrée pour {0} {1} sera remplacée.
+a028deba	{0} ajouté au plan {1}.
+920918f4	{0} · Historique de croissance
+e318d639	{0} · Résumé pour le médecin
+41928c4c	{0} · Vue d'ensemble
+66f73dce	{0} · Journal
+5fbc9967	{0} · Modifier la saisie
+301cdf03	{0} · Journal du sommeil 🌙
+e4f276cd	{0} · Nouvelle saisie
+5ef40115	{0} mesures
+758375a3	{0} mesures enregistrées • voir les graphiques
+b382e9ed	Donné il y a {0}. Fixez l'intervalle avant la prochaine dose selon la notice du médicament et l'avis de votre médecin.
+9d0904fd	{0} conseils • {1} lus
+8254be8c	{0} repas seront ajoutés aux créneaux vides. Les choix existants de cette semaine ne changent pas.
+4110f091	Suggestions préparées pour {0} repas.
+a162d32a	{0} repas repris de la semaine précédente.
+108a21c3	{0} articles ajoutés à la liste de courses.
+fb448456	Supprimer {0}
+05eed817	{0} • Calendrier vaccinal
+2ad16cdb	{0} • Informations
+1f0c7254	{0} • Plan de santé
+09672e22	{0} • Informations de stock
+8de7664e	{0} • Communauté
+1493394e	{0} • Saisie de consommation
+6e0fa32d	{0} • Environ {1} min
+cadd7921	{0} • Nouvelle saisie
+cd3f9664	{0} • {1} minutes
+64d6642e	{0} • {1} min
+c50903f6	{0} • {1} min • {2}
+cad4b532	{0} • {1} min • {2} ingrédients
+1ded6f2a	{0} • {1} min • dès {2} mois
+51d7899c	{0} • {1} min • {2}/{3} ingrédients disponibles
+22f78654	{0} • il y a {1} jours
+53a1b1e9	{0} • {1} semaines {2} jours (environ)
+b4492db8	{0} • Alternatives pour {1}
+bd4b1b59	{0} • {1} saisies
+b15ad4c5	{0} • {1} • {2} options de légumes
+7d785621	{0} • {1}–{2} mois\n{3}
+92c332c1	{0} • ~{1} min
+1dba9703	Dès {0} mois • {1} minutes • {2}
+252e384b	Mois {0}
+c0b84528	Guide d'alimentation du mois {0}
+5a325e25	Conseils de développement, de jeu et de soins pour le mois {0}
+70773554	Semaine {0}
+f6284071	Qu'est-ce qui vous attend en semaine {0} ?
+24dc6176	Semaine du {0}.{1}.{2}
+d5796a68	{0}.{1}.{2} • Choisir la date
+4fc32893	Étape {0}/{1}
+5e8260f5	{0}/{1} activités terminées
+a66bda08	{0}/{1} mmHg
+a9a90428	{0}/{1} terminés
+46773c53	{0} : référence de 25 mois chargée. Assurez-vous que la source CSV est CDC/OMS.
+30d07e6c	{0} : touchez pour ajouter à la liste
+1e5d372f	{0} : {1} saisies

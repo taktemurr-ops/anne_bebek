@@ -1,0 +1,545 @@
+[
+{
+"id": "Fı-0",
+"title": "Patates graten",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 50,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"800 g patates (2–3 mm ince dilim)",
+"1 yemek kaşığı tereyağı",
+"1 yemek kaşığı un",
+"2 su bardağı süt",
+"1 diş sarımsak (ezilmiş)",
+"100 g rendelenmiş kaşar peyniri",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"1 tutam muskat"
+],
+"steps": [
+"Fırını 180 °C'ye ısıtın, orta boy bir fırın kabını tereyağıyla yağlayın.",
+"Tencerede tereyağını eritip unu 1 dakika kavurun; sütü çırparak ekleyin ve kaynayıp hafif koyulaşana kadar 4 dakika karıştırın.",
+"Sarımsak, tuz, karabiber ve muskatı sosa ekleyin.",
+"Patates dilimlerini kaba kat kat dizin; her katın üzerine biraz sos ve az miktarda kaşar serpin.",
+"En üste kalan sosu döküp kabı folyoyla kapatın ve 35 dakika pişirin.",
+"Folyoyu kaldırıp kalan kaşarı serpin, 15 dakika daha üzeri kızarana ve patatesler bıçakla kolayca delinene kadar pişirin; 10 dakika dinlendirip dilimleyin."
+],
+"tips": [
+"Patatesleri ince ve eşit dilimlemek için rende veya mandolin kullanın.",
+"Dilimledikten sonra patatesleri yıkamayın; nişastası sosu bağlar."
+],
+"serving": "Izgara et, tavuk veya yeşil salata yanında servis edin.",
+"storage": "Buzdolabında 3 gün saklanır; fırında ısıtın."
+},
+{
+"id": "Fı-6",
+"title": "Fırın mücver",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 35,
+"difficulty": "Kolay",
+"ovenCelsius": 180,
+"ingredients": [
+"3 orta boy kabak (rendelenmiş)",
+"1 havuç (rendelenmiş)",
+"3 yumurta",
+"100 g beyaz peynir (ufalanmış)",
+"5 yemek kaşığı un",
+"1 çay kaşığı kabartma tozu",
+"3 dal taze soğan",
+"Yarım demet dereotu",
+"Yarım demet maydanoz",
+"3 yemek kaşığı zeytinyağı",
+"Yarım çay kaşığı tuz",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Rendelenmiş kabağa bir tutam tuz serpip 10 dakika bekletin, ardından suyunu avucunuzla iyice sıkın.",
+"Fırını 180 °C'ye ısıtın, 20x30 cm tepsiyi yağlı kâğıtla kaplayın.",
+"Yumurtaları çırpıp kabak, havuç, peynir, ince kıyılmış yeşillikler, zeytinyağı, tuz ve karabiberi ekleyin.",
+"Un ve kabartma tozunu ekleyip pürüzsüz bir harç elde edene kadar karıştırın.",
+"Harcı tepsiye eşit yayın ve 30–35 dakika, üzeri altın rengi olana ve kürdan kuru çıkana kadar pişirin.",
+"10 dakika ılıdıktan sonra kare dilimleyin."
+],
+"tips": [
+"Kabağın suyunu iyice sıkmazsanız mücver hamurlu kalır."
+],
+"serving": "Sarımsaklı yoğurtla ılık veya soğuk servis edin.",
+"storage": "Buzdolabında 3 gün saklanır."
+},
+{
+"id": "Fı-7",
+"title": "Fırında kaşarlı mantar",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 20,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"500 g büyük boy kültür mantarı",
+"2 yemek kaşığı tereyağı (eritilmiş)",
+"2 diş sarımsak (ince kıyılmış)",
+"Yarım demet maydanoz (ince kıyılmış)",
+"80 g rendelenmiş kaşar",
+"Yarım çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"Yarım çay kaşığı kekik"
+],
+"steps": [
+"Fırını 200 °C'ye ısıtın.",
+"Mantarları nemli bir bezle silin, saplarını çıkarıp ince kıyın.",
+"Kıyılmış sapları tereyağının yarısı ve sarımsakla tavada 4 dakika soteleyin; maydanoz, tuz, karabiber ve kekiği ekleyin.",
+"Mantar şapkalarını ters çevirip fırın kabına dizin, içlerine kalan tereyağını sürün.",
+"Sapli harcı şapkalara paylaştırıp üzerlerine kaşar serpin.",
+"Fırında 15–18 dakika, mantarlar suyunu salıp kaşar kızarana kadar pişirin."
+],
+"tips": [
+"Mantarları yıkamayın; su çekip lastik gibi olurlar."
+],
+"serving": "Sıcak olarak başlangıç veya garnitür olarak servis edin.",
+"storage": "Buzdolabında 1 gün saklanır."
+},
+{
+"id": "Fı-8",
+"title": "Kabak graten",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 35,
+"difficulty": "Kolay",
+"ovenCelsius": 190,
+"ingredients": [
+"4 orta boy kabak (yarım ay)",
+"1 yemek kaşığı tereyağı",
+"1 yemek kaşığı un",
+"1,5 su bardağı süt",
+"2 yumurta sarısı",
+"100 g rendelenmiş kaşar",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"Yarım demet dereotu"
+],
+"steps": [
+"Kabakları tavada az zeytinyağıyla 5 dakika diri kalacak şekilde soteleyin ve süzerek fazla suyunu atın.",
+"Fırını 190 °C'ye ısıtın.",
+"Tereyağında unu 1 dakika kavurun, sütü çırparak ekleyip 3 dakika koyulaşana kadar pişirin.",
+"Ocaktan aldığınız sosa yumurta sarılarını hızla çırparak ekleyin; tuz, karabiber, dereotu ve kaşarın yarısını ilave edin.",
+"Kabakları fırın kabına yayıp sosu üzerine dökün, kalan kaşarı serpin.",
+"Fırında 25–30 dakika üzeri kızarana kadar pişirin."
+],
+"tips": [
+"Kabakların suyunu atmazsanız graten sulanır."
+],
+"serving": "Ana yemeğin yanında garnitür olarak sıcak servis edin.",
+"storage": "Buzdolabında 2 gün saklanır."
+},
+{
+"id": "Fı-9",
+"title": "Fırın karnabahar",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ovenCelsius": 220,
+"ingredients": [
+"1 orta boy karnabahar (çiçeklerine ayrılmış)",
+"3 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı tatlı toz biber",
+"1 çay kaşığı kimyon",
+"1 diş sarımsak (rendelenmiş)",
+"1 çay kaşığı tuz",
+"1 su bardağı süzme yoğurt",
+"Yarım limonun suyu",
+"Yarım demet maydanoz"
+],
+"steps": [
+"Fırını 220 °C'ye ısıtın, tepsiye yağlı kâğıt serin.",
+"Karnabaharları zeytinyağı, toz biber, kimyon ve tuzla iyice harmanlayın.",
+"Tepsiye üst üste gelmeyecek şekilde yayın.",
+"Fırında 25–30 dakika, yarısında bir kez çevirerek kenarları koyu altın rengi olana kadar pişirin.",
+"Bu sırada yoğurt, sarımsak ve limon suyunu karıştırın.",
+"Karnabaharları yoğurtlu sosun üzerine alıp kıyılmış maydanozla servis edin."
+],
+"tips": [
+"Yüksek ısı ve tek kat dizmek karnabaharın haşlanmak yerine kavrulmasını sağlar."
+],
+"serving": "Ilık olarak yoğurtlu sosla meze veya garnitür olarak servis edin.",
+"storage": "Buzdolabında 2 gün saklanır."
+},
+{
+"id": "p39a16_014",
+"title": "Zeytinyağlı havuçlu pırasa",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 35,
+"difficulty": "Kolay",
+"ingredients": [
+"4 pırasa (3 cm doğranmış)",
+"2 havuç (halka)",
+"2 yemek kaşığı pirinç (yıkanmış)",
+"1 kuru soğan",
+"4 yemek kaşığı zeytinyağı",
+"1 su bardağı sıcak su",
+"1 çay kaşığı şeker",
+"1 çay kaşığı tuz",
+"Yarım limonun suyu"
+],
+"steps": [
+"Pırasaları bol suda yıkayıp katmanlarındaki toprağı temizleyin.",
+"Tencerede zeytinyağıyla soğanı 3 dakika kavurun, havucu ekleyip 3 dakika daha çevirin.",
+"Pırasaları ekleyip 5 dakika kavurun.",
+"Pirinç, şeker, tuz ve sıcak suyu ekleyin; kapağı kapalı kısık ateşte 25 dakika pişirin.",
+"Limon suyunu ekleyip ocağı kapatın.",
+"Tencerede oda sıcaklığına kadar soğutup servis edin."
+],
+"tips": [
+"Zeytinyağlılar tencerede soğutulursa sebzeler kararmaz ve şeklini korur."
+],
+"serving": "Soğuk olarak limon dilimiyle servis edin.",
+"storage": "Buzdolabında 3 gün saklanır."
+},
+{
+"id": "p39a16_015",
+"title": "Yeşil mercimekli patlıcan yemeği",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 30,
+"difficulty": "Kolay",
+"ingredients": [
+"2 patlıcan (küp)",
+"1 su bardağı haşlanmış yeşil mercimek",
+"1 kuru soğan",
+"2 yeşil biber",
+"2 domates (rendelenmiş)",
+"1 tatlı kaşığı biber salçası",
+"3 yemek kaşığı zeytinyağı",
+"1 su bardağı sıcak su",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı pul biber"
+],
+"steps": [
+"Patlıcanları tuzlu suda 15 dakika bekletip süzün ve kurulayın.",
+"Tavada 2 yemek kaşığı zeytinyağıyla patlıcanları orta ateşte 8 dakika, her yüzü hafif kızarana kadar soteleyin.",
+"Tencerede kalan yağla soğan ve biberi 4 dakika kavurun, salçayı ekleyip 1 dakika çevirin.",
+"Domatesi ekleyip 3 dakika pişirin; mercimek, patlıcan, tuz, pul biber ve sıcak suyu ilave edin.",
+"Kapağı kapalı kısık ateşte 15 dakika pişirin.",
+"Ilıdıktan sonra servis edin."
+],
+"tips": [
+"Patlıcanı önceden sotelemek pişerken dağılmasını önler."
+],
+"serving": "Bulgur pilavı ve yoğurtla servis edin.",
+"storage": "Buzdolabında 3 gün saklanır."
+},
+{
+"id": "p39a16_016",
+"title": "Bezelyeli karnabahar yemeği",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ingredients": [
+"1 küçük karnabahar (çiçeklerine ayrılmış)",
+"1 su bardağı bezelye",
+"1 kuru soğan",
+"1 havuç (küp)",
+"1 tatlı kaşığı domates salçası",
+"2 yemek kaşığı zeytinyağı",
+"1 su bardağı sıcak su",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Tencerede zeytinyağıyla soğanı 3 dakika kavurun.",
+"Havucu ve salçayı ekleyip 2 dakika çevirin.",
+"Karnabahar ve bezelyeyi ekleyin, 2 dakika karıştırın.",
+"Sıcak su, tuz ve karabiberi ilave edin; kapağı kapalı kısık ateşte 18 dakika pişirin.",
+"Karnabaharlar çatalla kolayca delinince ocaktan alın.",
+"Ilık servis edin."
+],
+"tips": [
+"Karnabaharı fazla pişirmeyin; dağılıp lapa olur."
+],
+"serving": "Yoğurt ve pilavla servis edin.",
+"storage": "Buzdolabında 3 gün saklanır."
+},
+{
+"id": "p39a16_017",
+"title": "Zeytinyağlı bamya",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ingredients": [
+"500 g taze bamya",
+"1 kuru soğan",
+"3 domates (rendelenmiş)",
+"4 yemek kaşığı zeytinyağı",
+"1 limonun suyu",
+"1 su bardağı sıcak su",
+"1 çay kaşığı şeker",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Bamyaların şapkalarını konik şekilde, iç kısmı açılmadan kalemtıraş gibi açın.",
+"Bamyaları geniş bir kapta limon suyu ve tuzla harmanlayıp 15 dakika bekletin, ardından yıkayıp süzün.",
+"Tencerede zeytinyağıyla soğanı 3 dakika kavurun, domatesi ekleyip 4 dakika pişirin.",
+"Bamyaları ekleyin; şeker ve sıcak suyu ilave edin, bamyalar dağılmasın diye karıştırmadan tencereyi sallayın.",
+"Kapağı kapalı kısık ateşte 25 dakika pişirin.",
+"Tencerede soğutup servis edin."
+],
+"tips": [
+"Limonlu suda bekletmek bamyanın salyalanmasını azaltır.",
+"Bamyayı kaşıkla karıştırmayın; tencereyi sallayın."
+],
+"serving": "Soğuk veya ılık, limonla servis edin.",
+"storage": "Buzdolabında 3 gün saklanır."
+},
+{
+"id": "p39a16_018",
+"title": "Patatesli taze fasulye",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 40,
+"difficulty": "Kolay",
+"ingredients": [
+"500 g taze fasulye (ayıklanıp ikiye bölünmüş)",
+"2 patates (iri küp)",
+"1 kuru soğan",
+"2 domates (rendelenmiş)",
+"1 tatlı kaşığı domates salçası",
+"4 yemek kaşığı zeytinyağı",
+"1 su bardağı sıcak su",
+"1 çay kaşığı şeker",
+"1 çay kaşığı tuz"
+],
+"steps": [
+"Fasulyelerin uç ve kılçıklarını ayıklayıp yıkayın.",
+"Tencerede zeytinyağıyla soğanı 4 dakika kavurun, salçayı ekleyip 1 dakika çevirin.",
+"Fasulyeleri ekleyip kapağı kapalı 10 dakika kendi suyunda pişirin.",
+"Domates, patates, şeker, tuz ve sıcak suyu ekleyin.",
+"Kapağı kapalı kısık ateşte 25–30 dakika, fasulye ve patates yumuşayana kadar pişirin.",
+"Tencerede ılıtıp servis edin."
+],
+"tips": [
+"Fasulyeyi önce kendi suyunda pişirmek rengini ve aromasını korur."
+],
+"serving": "Ilık veya soğuk, yoğurt ve ekmekle servis edin.",
+"storage": "Buzdolabında 3 gün saklanır."
+},
+{
+"id": "p39a16_020",
+"title": "Barbunyalı pazı yemeği",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ingredients": [
+"1 demet pazı (yaklaşık 400 g)",
+"1 su bardağı haşlanmış barbunya",
+"1 kuru soğan",
+"2 yemek kaşığı pirinç",
+"1 tatlı kaşığı biber salçası",
+"3 yemek kaşığı zeytinyağı",
+"1 su bardağı sıcak su",
+"1 çay kaşığı tuz",
+"Yarım limon"
+],
+"steps": [
+"Pazının saplarını ince, yapraklarını iri doğrayıp yıkayın.",
+"Tencerede zeytinyağıyla soğan ve pazı saplarını 5 dakika kavurun.",
+"Salçayı ekleyip 1 dakika çevirin, pirinci ekleyin.",
+"Barbunya, pazı yaprakları, tuz ve sıcak suyu ilave edin.",
+"Kapağı kapalı kısık ateşte 18 dakika, pirinç pişene kadar pişirin.",
+"Limon sıkarak ılık servis edin."
+],
+"tips": [
+"Pazının saplarını atmayın; önce pişirerek yemeğe lezzet katın."
+],
+"serving": "Yoğurtla ılık servis edin.",
+"storage": "Buzdolabında 3 gün saklanır."
+},
+{
+"id": "p39a16_021",
+"title": "Portakallı zeytinyağlı kereviz",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ingredients": [
+"2 orta boy kereviz kökü",
+"1 havuç (küp)",
+"1 küçük patates (küp)",
+"1 kuru soğan",
+"2 portakalın suyu",
+"1 limonun suyu",
+"4 yemek kaşığı zeytinyağı",
+"Yarım su bardağı su",
+"1 çay kaşığı şeker",
+"1 çay kaşığı tuz",
+"Yarım demet dereotu"
+],
+"steps": [
+"Kerevizleri soyup 1,5 cm kalınlığında dilimleyin ve kararmaması için limonlu suda bekletin.",
+"Tencerede zeytinyağıyla soğanı 3 dakika kavurun.",
+"Havuç ve patatesi ekleyip 3 dakika çevirin.",
+"Kereviz dilimlerini tencereye dizin; portakal suyu, su, şeker ve tuzu ekleyin.",
+"Kapağı kapalı kısık ateşte 25–30 dakika, kerevizler yumuşayana kadar pişirin.",
+"Tencerede soğutup üzerine dereotu serperek servis edin."
+],
+"tips": [
+"Portakal kabuğundan biraz rendelemek aromayı güçlendirir."
+],
+"serving": "Soğuk olarak, dereotuyla servis edin.",
+"storage": "Buzdolabında 3 gün saklanır."
+},
+{
+"id": "p39a16_022",
+"title": "Havuçlu Brüksel lahanası",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 25,
+"difficulty": "Kolay",
+"ingredients": [
+"400 g Brüksel lahanası (ikiye kesilmiş)",
+"2 havuç (halka)",
+"1 kuru soğan",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı domates salçası",
+"Yarım su bardağı sıcak su",
+"1 çay kaşığı tuz",
+"Yarım limonun suyu"
+],
+"steps": [
+"Brüksel lahanalarının sarı dış yapraklarını ayıklayıp yıkayın ve ikiye kesin.",
+"Kaynar tuzlu suda 5 dakika haşlayıp süzün; acılığı azalır.",
+"Tencerede zeytinyağıyla soğanı 3 dakika kavurun, salçayı ekleyip 1 dakika çevirin.",
+"Havuçları ekleyip 4 dakika soteleyin.",
+"Brüksel lahanası ve sıcak suyu ekleyin; kapağı kapalı 10 dakika pişirin.",
+"Tuz ve limon suyunu ekleyip ılık servis edin."
+],
+"tips": [
+"Kısa haşlamak Brüksel lahanasının acımsı tadını yumuşatır."
+],
+"serving": "Yoğurtla ılık servis edin.",
+"storage": "Buzdolabında 2 gün saklanır."
+},
+{
+"id": "p39a16_023",
+"title": "Mantarlı kabak sote",
+"category": "Sebze yemekleri",
+"servings": 3,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ingredients": [
+"300 g kültür mantarı (dilim)",
+"2 kabak (yarım ay)",
+"1 kuru soğan",
+"1 kırmızı kapya biber",
+"2 yemek kaşığı zeytinyağı",
+"1 diş sarımsak",
+"1 çay kaşığı tuz",
+"Yarım çay kaşığı karabiber",
+"1 çay kaşığı kekik"
+],
+"steps": [
+"Geniş tavada zeytinyağını yüksek ateşte ısıtın, mantarları 5 dakika suyunu çekene kadar soteleyin.",
+"Soğan ve biberi ekleyip 3 dakika çevirin.",
+"Kabakları ve sarımsağı ekleyin.",
+"5 dakika, kabaklar diri kalacak şekilde soteleyin.",
+"Tuz, karabiber ve kekikle tatlandırın.",
+"Hemen servis edin."
+],
+"tips": [
+"Tuzu en sonda ekleyin; erken eklenirse sebzeler su salar."
+],
+"serving": "Pilav veya makarna yanında sıcak servis edin.",
+"storage": "Buzdolabında 2 gün saklanır."
+},
+{
+"id": "p39a16_024",
+"title": "Zeytinyağlı bezelyeli enginar",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ingredients": [
+"6 enginar çanağı",
+"1 su bardağı bezelye",
+"1 havuç (küp)",
+"1 küçük patates (küp)",
+"1 kuru soğan",
+"5 yemek kaşığı zeytinyağı",
+"1 limonun suyu",
+"1 tatlı kaşığı un",
+"1 su bardağı sıcak su",
+"1 çay kaşığı şeker",
+"1 çay kaşığı tuz",
+"Yarım demet dereotu"
+],
+"steps": [
+"Enginar çanaklarını limonlu ve unlu suda bekleterek kararmalarını önleyin.",
+"Tencerede zeytinyağıyla soğanı 3 dakika kavurun; havuç, patates ve bezelyeyi ekleyip 3 dakika çevirin.",
+"Enginarları tencereye dizin, sebzeli karışımı çanakların içine ve aralarına paylaştırın.",
+"Sıcak su, limon suyunun yarısı, şeker ve tuzu ekleyin.",
+"Üzerine yağlı kâğıt kapatıp kapağı kapalı kısık ateşte 30 dakika pişirin.",
+"Tencerede soğutup kalan limon suyu ve dereotuyla servis edin."
+],
+"tips": [
+"Enginarın üzerine yağlı kâğıt kapatmak eşit pişmesini ve rengini korumasını sağlar."
+],
+"serving": "Soğuk olarak, dereotu ve limonla servis edin.",
+"storage": "Buzdolabında 3 gün saklanır."
+},
+{
+"id": "p39a19_131",
+"title": "Kabaklı patatesli fırın tepsi",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 40,
+"difficulty": "Kolay",
+"ovenCelsius": 200,
+"ingredients": [
+"3 patates (iri küp)",
+"2 kabak (iri küp)",
+"1 kırmızı soğan (iri doğranmış)",
+"1 kırmızı kapya biber",
+"8 cherry domates",
+"3 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı kekik",
+"1 çay kaşığı tatlı toz biber",
+"1 çay kaşığı tuz",
+"2 diş sarımsak"
+],
+"steps": [
+"Fırını 200 °C'ye ısıtın.",
+"Patatesleri zeytinyağının yarısı, tuz ve toz biberle harmanlayıp tepsiye yayın; 15 dakika ön pişirin.",
+"Kabak, soğan, biber ve sarımsağı kalan zeytinyağı ve kekikle harmanlayın.",
+"Ön pişmiş patateslerin arasına bu sebzeleri ve cherry domatesleri ekleyin.",
+"Fırında 25 dakika, sebzeler kızarana kadar, yarısında bir kez karıştırarak pişirin.",
+"Sıcak servis edin."
+],
+"tips": [
+"Patates kabaktan uzun piştiği için önce fırına girmelidir."
+],
+"serving": "Yoğurt veya ızgara etin yanında servis edin.",
+"storage": "Buzdolabında 2 gün saklanır."
+}
+]

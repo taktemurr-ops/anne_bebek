@@ -58,3 +58,18 @@ bool mayNeedVaricellaCatchup(DateTime birth, DateTime today) {
   final month = (day.year - birth.year) * 12 + day.month - birth.month - (day.day < birth.day ? 1 : 0);
   return month >= 49 && month <= 72;
 }
+
+/// Bugünden itibaren en yakın planlı aşı günü ve o gün planlanan aşılar.
+/// [withinDays] içinde değilse null (ana ekranı gereksiz kalabalıklaştırmamak için).
+({DateTime date, List<PlannedVaccine> vaccines})? nextVaccineVisit(DateTime birth, DateTime now, {int withinDays = 60}) {
+  final today = DateTime(now.year, now.month, now.day);
+  DateTime? best;
+  for (final v in routineVaccinesForBirth(birth)) {
+    final d = v.dueDate(birth);
+    if (d.isBefore(today)) continue;
+    if (best == null || d.isBefore(best)) best = d;
+  }
+  if (best == null || best.difference(today).inDays > withinDays) return null;
+  final date = best;
+  return (date: date, vaccines: routineVaccinesForBirth(birth).where((v) => v.dueDate(birth) == date).toList());
+}

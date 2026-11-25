@@ -1,5 +1,11 @@
+import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../services/affiliate.dart';
+import '../services/affiliate_log.dart';
+import '../services/link_launcher.dart';
 import '../services/product_catalog.dart';
 import '../services/secure_health_store.dart';
 
@@ -47,6 +53,11 @@ class _ProductCatalogPageState extends State<ProductCatalogPage> {
       }
     } finally { if (mounted) setState(() => saving = false); }
   }
+  String _storeLabel() {
+    final label = t('Mağazada ara');
+    return '$label: ${Affiliate.partner}';
+  }
+
   void _details(CatalogProduct p) {
     Navigator.push(context, MaterialPageRoute<void>(builder: (_) => Scaffold(
       appBar: AppBar(title: Text(p.name)),
@@ -56,7 +67,26 @@ class _ProductCatalogPageState extends State<ProductCatalogPage> {
         const SizedBox(height: 16), const Text('Karşılaştırma ölçütleri', style: TextStyle(fontWeight: FontWeight.bold)),
         for (final f in p.features) ListTile(leading: const Icon(Icons.check_circle_outline), title: Text(f)),
         Card(child: Padding(padding: const EdgeInsets.all(14), child: Text('Dikkat: ${p.note}'))),
-        const SizedBox(height: 10), const Text('Bu katalog marka, satıcı, güncel fiyat, stok veya satın alma bağlantısı içermez.'),
+        const SizedBox(height: 10),
+        if (Affiliate.configured) ...[
+          FilledButton.icon(
+            key: const Key('affiliate_ac'),
+            onPressed: () async {
+              final url = Affiliate.urlFor(t(p.name));
+              if (url == null) return;
+              unawaited(AffiliateLog.click(p.id, Affiliate.partner));
+              var ok = false;
+              try { ok = await LinkLauncher.open(url); } catch (_) {}
+              if (!ok && mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t('Bağlantı açılamadı.'))));
+              }
+            },
+            icon: const Icon(Icons.open_in_new),
+            label: Text(_storeLabel())),
+          const SizedBox(height: 4),
+          const Text('Reklam · İş birliği bağlantısı: bu bağlantıyla yapılan alışverişlerden uygulama komisyon alabilir; fiyat sana değişmez.',
+            style: TextStyle(fontSize: 12, color: Colors.black54)),
+        ] else const Text('Bu katalog marka, satıcı, güncel fiyat, stok veya satın alma bağlantısı içermez.'),
         StatefulBuilder(builder: (context, refresh) => Column(children: [
           ListTile(leading: Icon(favorites.contains(p.id) ? Icons.favorite : Icons.favorite_border), title: const Text('Favori durumunu değiştir'), onTap: () async { await _toggle(p.id, comparison: false); refresh(() {}); }),
           ListTile(leading: Icon(compared.contains(p.id) ? Icons.check_box : Icons.check_box_outline_blank), title: const Text('Karşılaştırma seçimini değiştir'), onTap: () async { await _toggle(p.id, comparison: true); refresh(() {}); }),
@@ -93,9 +123,9 @@ class _ProductCatalogPageState extends State<ProductCatalogPage> {
         const Text('36 ürün türü • 6 kategori • Bağımsız seçim rehberi'),
         const SizedBox(height: 8),
         if (error != null) Text(error!, style: const TextStyle(color: Colors.red)),
-        TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), labelText: 'Ürün veya özellik ara', border: OutlineInputBorder()), onChanged: (v) => setState(() => search = v)),
+        TextField(decoration: InputDecoration(prefixIcon: Icon(Icons.search), labelText: t('Ürün veya özellik ara'), border: OutlineInputBorder()), onChanged: (v) => setState(() => search = v)),
         const SizedBox(height: 10),
-        DropdownButtonFormField<String>(initialValue: category, decoration: const InputDecoration(labelText: 'Kategori'), items: ['Tümü', ...ProductCatalog.categories].map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(), onChanged: (v) => setState(() => category = v ?? 'Tümü')),
+        DropdownButtonFormField<String>(initialValue: category, isExpanded: true, decoration: InputDecoration(labelText: t('Kategori')), items: ['Tümü', ...ProductCatalog.categories].map((c) => DropdownMenuItem(value: c, child: Text(c, maxLines: 1, overflow: TextOverflow.ellipsis))).toList(), onChanged: (v) => setState(() => category = v ?? 'Tümü')),
         SwitchListTile(title: const Text('Yalnızca favoriler'), value: onlyFavorites, onChanged: (v) => setState(() => onlyFavorites = v)),
         FilledButton.icon(onPressed: _compare, icon: const Icon(Icons.compare_arrows), label: Text('Karşılaştır (${compared.length}/3)')),
         const SizedBox(height: 8),
@@ -103,8 +133,8 @@ class _ProductCatalogPageState extends State<ProductCatalogPage> {
           title: Text(p.name), subtitle: Text('${p.category} • ${p.features.join(', ')}', maxLines: 2, overflow: TextOverflow.ellipsis),
           onTap: () => _details(p),
           trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-            IconButton(tooltip: 'Favori', icon: Icon(favorites.contains(p.id) ? Icons.favorite : Icons.favorite_border), onPressed: () => _toggle(p.id, comparison: false)),
-            IconButton(tooltip: 'Karşılaştır', icon: Icon(compared.contains(p.id) ? Icons.check_box : Icons.check_box_outline_blank), onPressed: () => _toggle(p.id, comparison: true)),
+            IconButton(tooltip: t('Favori'), icon: Icon(favorites.contains(p.id) ? Icons.favorite : Icons.favorite_border), onPressed: () => _toggle(p.id, comparison: false)),
+            IconButton(tooltip: t('Karşılaştır'), icon: Icon(compared.contains(p.id) ? Icons.check_box : Icons.check_box_outline_blank), onPressed: () => _toggle(p.id, comparison: true)),
           ]),
         )),
         if (visible.isEmpty) const Padding(padding: EdgeInsets.all(20), child: Text('Aramaya uygun ürün bulunamadı.')),

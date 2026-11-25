@@ -1,4 +1,8 @@
-import 'package:flutter/material.dart';
+import '../utils/dialog_helpers.dart';
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
+import '../services/family_notification_repository.dart';
+import 'package:flutter/material.dart' hide Text;
 import '../services/reminder_repository.dart';
 import '../services/local_reminder_notifications.dart';
 
@@ -24,7 +28,7 @@ class _RemindersPageState extends State<RemindersPage> {
     setState(() { busy = true; error = null; });
     try {
       final items = await ReminderRepository.load();
-      if (mounted) setState(() { reminders = items; busy = false; });
+      if (mounted) { setState(() { reminders = items; busy = false; }); }
     } catch (_) {
       if (mounted) { setState(() {
         busy = false;
@@ -57,13 +61,13 @@ class _RemindersPageState extends State<RemindersPage> {
     final controller = TextEditingController();
     DateTime selected = DateTime.now().add(const Duration(days: 1));
     bool notify = false;
-    final result = await showDialog<FamilyReminder>(context: context,
+    final result = await showDialogAndDispose<FamilyReminder>(disposables: [controller], context: context,
       builder: (dialogContext) => StatefulBuilder(
         builder: (dialogContext, update) => AlertDialog(
           title: const Text('Hatırlatıcı ekle'),
           content: Column(mainAxisSize: MainAxisSize.min, children: [
             TextField(controller: controller, maxLength: 120,
-              decoration: const InputDecoration(labelText: 'Başlık')),
+              decoration: InputDecoration(labelText: t('Başlık'))),
             OutlinedButton.icon(
               onPressed: () async {
                 final date = await showDatePicker(context: dialogContext,
@@ -100,11 +104,21 @@ class _RemindersPageState extends State<RemindersPage> {
             }, child: const Text('Ekle')),
           ],
         )));
-    controller.dispose();
     if (result != null && mounted) {
       if (result.notify) {
         bool allowed = false;
-        try { allowed = await LocalReminderNotifications.requestPermission(); } catch (_) {}
+        try {
+          final preferences = await FamilyNotificationRepository.load();
+          if (preferences.remindersEnabled) {
+            allowed = await LocalReminderNotifications.requestPermission();
+          } else if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Önce Bildirim tercihlerim ekranından aile hatırlatıcılarına izin verin.')));
+          }
+        } catch (_) {
+          if (mounted) { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Bildirim tercihleri doğrulanamadı. Telefon bildirimi kapalı tutuldu.'))); }
+        }
         if (!allowed && mounted) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Bildirim izni verilmedi. Hatırlatıcı uygulama içinde saklandı.')));
@@ -140,7 +154,7 @@ class _RemindersPageState extends State<RemindersPage> {
           title: Text(item.title),
           subtitle: Text('${item.due.day}.${item.due.month}.${item.due.year} ${item.due.hour.toString().padLeft(2, '0')}:${item.due.minute.toString().padLeft(2, '0')}${item.notify ? ' • Bildirim açık' : ''}'
             '${!item.completed && item.due.isBefore(DateTime.now()) ? ' • Tarihi geçti' : ''}'),
-          secondary: IconButton(tooltip: 'Sil', icon: const Icon(Icons.delete_outline),
+          secondary: IconButton(tooltip: t('Sil'), icon: const Icon(Icons.delete_outline),
             onPressed: () => _save(reminders.where((e) => e.id != item.id).toList())),
           onChanged: (checked) => _save([
             for (final e in reminders)

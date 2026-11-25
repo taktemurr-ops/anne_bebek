@@ -1,0 +1,213 @@
+b27b5d6f	{0} : {1} mesures • Dernière : {2} {3}
+808f2ff2	{0}–{1} mois
+a896ccb4	{0}–{1} mois • {2} • {3} minutes
+90a8f74c	{1} ({2} {0} manquants)
+c8c3fd10	{1} pièces • {0} articles achetés
+ba8db48f	Ajouter {0} à {1} • {2} ?
+c15e133b	Semaine {1} · Trimestre {0}
+42cd6a5d	RÉSUMÉ DU SUIVI DE L'ENFANT
+7f4c3978	Me
+8bae1de9	Conflit entre ancienne donnée et donnée sécurisée : {0}
+7ae50242	Mercredi
+a2b80208	Le forum en ligne n'est pas encore configuré.
+797e9d4f	Recherche de sujets et suggestions hors ligne
+d65f69df	Utilisation hors ligne
+220e6b06	Les transitions de modules et les états d'erreur hors ligne ont été vérifiés
+904bbab8	Enfant (1–6 ans)
+41b623d8	Mes profils d'enfants
+1116ac39	Le prénom de l'enfant ne peut pas être vide.
+8b6ee7e9	Le prénom de l'enfant peut faire au maximum {0} caractères.
+4480f84d	Le prénom de l'enfant ne peut pas contenir de caractères de contrôle.
+63dc7819	Saisie de journal propre à l'enfant
+de989419	Journal de l'enfant (choisir un enfant)
+beff0b4d	Journal de l'enfant et plan de soins
+93bbd96a	Sauvegarder les données de l'enfant en JSON
+b19d16d0	Profil de l'enfant
+41739cd5	Ajouter un profil d'enfant
+7e5d63ab	La limite d'âge d'un profil d'enfant est de 18 ans.
+667a4e39	Un profil d'enfant doit être sélectionné
+61dacb87	Le profil ou le journal de l'enfant n'est pas valide.
+17f07456	Choisissez un profil d'enfant pour ouvrir le calendrier vaccinal adapté à son âge
+884bedbf	Profils d'enfants
+8e36b660	Profils d'enfants et journaux personnels
+81191bcf	Le plan de santé de l'enfant n'est pas valide.
+e108f841	Vérification des données de l'enfant
+70f7e10e	Gestion partagée des enfants (prévue)
+16ecb930	Journal propre à l'enfant
+6dcbb337	Tension très élevée. En cas de mal de tête, douleur thoracique, essoufflement ou trouble de la parole, appelez immédiatement le numéro d'urgence local.
+0e8e35d0	Tension très élevée : appelez le numéro d'urgence local ou allez à la maternité sans attendre.
+843fc8c9	Soupe
+6b054743	Soupes
+290f9902	L'échelle des barres est de 1 000 ml ; ce n'est pas une quantité recommandée.
+e440a26e	Test de plantage, de performance et de démarrage
+08086945	Parce que vous comptez aussi !
+8d1ab12a	Se déconnecter
+67669d43	IMPORTANT : la diversification commence généralement vers 6 mois, selon la maturité du développement. Pas de miel avant 12 mois ; n'ajoutez ni sel ni sucre. Les noix entières et les morceaux durs/ronds présentent un risque d'étouffement. Faites attention aux allergènes, proposez une texture adaptée et ne laissez jamais votre bébé seul pendant qu'il mange.
+f3eb8943	Plage mesurée : {0} • Moyenne : {1} jours\nPlus court : {2} jours • Plus long : {3} jours
+876cf0c4	Mesure
+65c8a57a	Ajouter température / médicament
+b217ca06	Données CSV des mesures copiées dans le presse-papiers.
+23760529	Intervalle de mesure : {0} jours
+5ea568b5	La valeur est inférieure au seuil de fièvre.
+77043d55	Notes de mesure
+2998b307	Valeur mesurée
+ea8a87d7	Une mesure ne peut pas être antérieure à la naissance.
+1012c19b	Ajouter une mesure
+9d12b654	Historique des mesures
+36c2ac59	Historique des mesures (pas une évaluation diagnostique)
+9abd4180	La date de mesure ne peut pas être dans le futur.
+396c0d73	Une date de mesure est requise.
+8c08e2dd	Mesure et description
+060a92af	Lieu de mesure
+e8b596d0	Température, heures de médicament et alertes selon l'âge
+fdb0d655	Les mesures n'ont pas pu être lues. Les données sont conservées.
+e39206f4	Mesures, médicaments et vitamines, contrôles
+c3b327ba	Copier les mesures en CSV
+3c63e527	Vérifiez les mesures : taille 20–230 cm, poids 0,3–200 kg, périmètre crânien 15–75 cm.
+4bbd114c	Notez les températures et les médicaments donnés avec l'heure ; ayez tout sous la main chez le médecin.
+fe1df323	Mes mesures
+b846de32	Supprimer la mesure
+5b845cbc	Autorisez d'abord les rappels familiaux dans l'écran Mes préférences de notification.
+edb2dd0c	Connectez-vous d'abord à votre compte.
+80df10d2	Ajoutez d'abord une recette au plan.
+e5397c21	Recettes avec des articles à consommer en priorité
+f4b8667c	Définissez d'abord le sexe dans le profil de l'enfant.
+27317deb	Choisissez d'abord un profil d'enfant pour ouvrir les données
+5e8d50f6	Saisissez d'abord la quantité de l'article en nombre et unité (ex. 500 g).
+97d58ddb	Mois précédent
+a7cff434	Jour précédent
+ec67d0e3	Semaine précédente
+b850d96a	Aucun plan enregistré trouvé pour la semaine précédente.
+7fabbc58	La semaine précédente n'a pas pu être lue. Les anciennes données ont été conservées.
+7e97ec2d	Reprendre les repas vides de la semaine dernière
+57d3ec6a	Copier la semaine dernière
+59bcee57	{0} après la contraction précédente
+1d4c187d	Séances précédentes
+e840007a	Dates importantes
+4cb54f5b	Important : faites une sauvegarde avant de tester avec des données de santé. Testez la restauration uniquement avec des données de test. Flutter analyze, flutter test et des tests sur appareil réel sont aussi nécessaires.
+bd68db91	Recommandé
+3c3ff2a3	Suggestions
+3996f32f	Les suggestions sont basées sur les catégories de recettes ; ce ne sont pas des conseils personnels de nutrition ou de santé. Le transfert vers le plan de la semaine met à jour le même jour de la semaine choisie.
+12e2a05b	Créer des suggestions
+4430b014	Ex. Quelles idées de jeux sûrs pour un bébé de 8 mois ?
+ac8e1b72	Ex. Deniz
+57cd94d5	Ex. tomate, œuf, lait
+bdeb4722	Ex. sommeil, règles, recette
+e221d458	Exemples de questions
+91b5a9df	Exemple : « Combien de temps dois-je prendre mon complément de fer ? », « Les selles de mon bébé sont vertes, est-ce normal ? »
+11f349c5	Calendrier personnel et dates estimées
+40c778ab	Résumé copié dans le presse-papiers. Vérifiez les informations personnelles avant de le partager.
+dd479a2c	Déjeuner
+fb937b49	Repas
+3a0ba659	Planification des repas
+680431ed	Repas déjà planifié
+03d41708	Changer le repas
+e1743a7d	Gratuit
+2b1681e6	En production, le panneau d'administration nécessite une connexion séparée, un accès par rôles, des journaux d'audit et une vérification côté serveur.
+29973836	Nom de l'article
+383bd517	Ajouter un article
+46b0bd97	Catalogue de produits
+c85d9607	Catalogue et comparaison de produits
+f0037199	Catalogue de découverte de produits
+c0bca32f	Article ajouté à la liste.
+8236c9fc	Les quantités de produits sont indicatives ; la suffisance pour une recette n'est pas vérifiée automatiquement.
+052daf91	Touchez un article pour modifier sa quantité et sa date de péremption.
+6ded1e0a	Un catalogue de types de produits et une comparaison des fonctionnalités ont été ajoutés. Les vrais prix, stocks, vendeurs et l'intégration de paiement ne sont pas encore disponibles.
+3139bbd2	Rechercher un produit ou une fonctionnalité
+f64a5ac1	Comparaison des fonctionnalités des produits
+dd982f3c	Les produits servent de liste de besoins ; il n'y a pas de vente réelle, de stock, de prix ni de lien de paiement.
+08e05062	Ajouter, cocher et enregistrer des articles
+17384021	Supprimer l'article
+50963139	L'abonnement n'a pas pu être vérifié
+38558e31	Vérification de l'état de l'abonnement…
+513e65b8	L'abonnement nécessite un projet Supabase. Les données de santé et du bébé ne sont pas envoyées dans le cloud à ce stade ; seule la session du compte est gérée.
+7fa57377	Options d'abonnement
+977740ee	Abonnement et Premium
+61a6ad23	Troisième trimestre : revoyez votre projet de naissance et les préparatifs pour la maternité.
+1d879dbb	ex. 165
+6cbc1b4f	ex. 38,4
+7ba041db	Recherchez l'outil dont vous avez besoin
+ae472a83	Des fichiers SQL, des règles RLS et des tests multi-utilisateurs pour les deux forums sont nécessaires.
+b994f500	La connexion Supabase en direct et les règles RLS des deux forums ont été vérifiées
+3de13b55	Deuxième contact
+a0fd68e7	Deuxième trimestre : poursuivez les contrôles réguliers et les examens recommandés par votre médecin.
+140e56ad	Médicaments & vitamines
+caaed636	Médicament / Vitamine
+82f94b61	Médicament / vitamine
+da4c274e	Ajouter un médicament / une vitamine
+023a986c	Journal des médicaments
+80d5b6e7	Suivi des médicaments
+1f8c2a59	Médicaments et vitamines
+3a0e523f	Rappels de médicaments et de vitamines
+c2b0f10e	Contacts et notes importantes
+f542a6d8	Domaines liés
+a769efd8	Sujets liés
+7be06ec8	Inspiration
+f7e4f590	Relations
+67d2b128	12 premières semaines
+b021ae05	Les 12 premières semaines sont terminées ; le suivi et le soutien peuvent continuer.
+18b6cdc6	Premiers pas, premiers mots et souvenirs
+3d319203	Ajouter mon premier bébé
+b7cc8489	Premiers jours : suivez les conseils de sortie, la quantité de saignements et le contrôle de la douleur. Prévoyez du soutien à la maison.
+9c8ad1ad	Premier trimestre : parlez à votre médecin des contrôles, de l'alimentation et des médicaments que vous prenez.
+1d89be93	Différence première–dernière : {1}{0} {2}
+08c23f7d	Première : {0} · {1}  |  Dernière : {2} · {3}
+b746efe1	Premières fois
+4eb9f130	Signature et identités de publication
+b5c01a4f	Certaines données doivent être vérifiées
+4ead752b	Les données locales et les changements d'écran ont été testés sans internet
+85e2d087	Annuler
+e8181f34	Astuce : vous pouvez aussi ajouter un début de règles en touchant un jour dans le calendrier.
+ba2ea095	Ajouter le prénom et la date de naissance
+522e5cd1	Rechercher un prénom ou une signification
+4a2afac5	Prénom : A → Z
+48c7db33	Prénoms
+22711906	Rappels facultatifs du calendrier familial
+a4a548b9	Se sentir bien
+dbea3a4e	Ravie de vous voir !
+85e0dc14	Ravie de vous voir !\nCommencez par ajouter le profil de votre bébé.
+83698d09	Récupération et repos
+b19b0d67	Récupération et vie
+0329f33c	Notez votre récupération, votre sommeil, votre humeur et vos notes de contrôle médical.
+d8b63190	Gérer les autorisations et les heures calmes
+cd16ba0c	Boisson
+accad8dd	Boissons
+ca6e7e3c	Le contenu est informatif, pas un avis médical. Les prévisions de cycle sont approximatives et ne doivent pas servir de contraception. En cas d'urgence, appelez le numéro d'urgence local.
+c8bb0f7d	Le contenu est fourni à titre d'information générale. Demandez l'avis d'un spécialiste pour les questions de santé.
+1329a2aa	Retirer le contenu
+fa88a9f5	Retirer le contenu ?
+86f920d7	L'action a échoué ({0}).
+6ff95d8b	L'action n'a pas pu être effectuée.
+780d96ee	L'action n'a pas pu être effectuée. Vérifiez les autorisations et la connexion.
+5d8f6cd3	Gravité / impact
+95a654a9	Grave
+6f26a444	Mot de passe
+f8db6da4	Le mot de passe doit faire au moins 6 caractères.
+59dc2b49	Le format de sauvegarde chiffrée n'est pas pris en charge.
+a3f58601	Texte de sauvegarde chiffrée
+59d4cba5	Sauvegarde chiffrée copiée dans le presse-papiers. Conservez votre mot de passe séparément en lieu sûr.
+23aacf98	La sauvegarde chiffrée dépasse la limite de données.
+7a6a7262	Sauvegarde chiffrée et restauration
+3065a659	Collez la sauvegarde chiffrée ci-dessous et saisissez le mot de passe utilisé lors de sa création. Les anciennes sauvegardes non chiffrées ne peuvent pas être importées sur cet écran.
+483ac6a7	Copier la sauvegarde chiffrée dans le presse-papiers
+35c0e4e9	Mot de passe oublié
+eb392d49	Supprimer le contenu signalé ?
+1c958933	Signaler
+3aa8d279	Le signalement n'a pas pu être envoyé : {0}
+190ee311	Motif du signalement
+a0138bb1	Rejeter le signalement ?
+62d1b0f4	Signalements et sécurité des contenus
+570d82a2	Rejeter le signalement ?
+dd58ae67	Votre signalement a été envoyé pour examen.
+a4283cc2	Lecture en cours
+c045d371	Février
+2678b35b	Son « chhh »
+00d28b0c	Ajoutez des articles avec « Ajouter un article » et cochez ce que vous avez acheté. Vous pouvez noter ici vos besoins réguliers comme les couches, le lait infantile et les lingettes.
+5e94b390	≤ 15 min
+ad8e347d	≤ 30 min
+c8dbdc0c	≤ 60 min
+5ed1ebf1	⚠️ Les comptes en ligne ne sont pas encore actifs. L'application doit être compilée avec la configuration SUPABASE_URL et SUPABASE_ANON_KEY. Aucun faux compte n'est créé.
+c39ecb1f	🌸 Moi
+8cbd8b3e	👣\nMouvement
+4c748608	👶 Mon bébé
+4235a8e3	💧 {0} verres d'eau aujourd'hui. L'objectif est de 8 verres (plus si vous allaitez).

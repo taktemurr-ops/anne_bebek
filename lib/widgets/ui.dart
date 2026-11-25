@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/text.dart';
 const purple = Color(0xFF75466F);
 const pink = Color(0xFFF3D5EB);
 

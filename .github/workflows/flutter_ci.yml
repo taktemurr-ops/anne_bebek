@@ -1,10 +1,10 @@
-﻿name: Flutter CI
+name: Flutter CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'feature/gp*']
   pull_request:
-    branches: [main]
+    branches: [main, 'feature/gp*']
   workflow_dispatch:
 
 permissions:
@@ -37,16 +37,64 @@ jobs:
         run: flutter --version
 
       - name: Bagimliliklari yukle
-        run: flutter pub get
+        shell: bash
+        run: |
+          set -o pipefail
+          flutter pub get 2>&1 | tee /tmp/anne-bebek-pub-get.log
 
       - name: Flutter analiz
-        run: flutter analyze
+        shell: bash
+        run: |
+          set -o pipefail
+          flutter analyze 2>&1 | tee /tmp/anne-bebek-analyze.log
 
       - name: Flutter testleri
-        run: flutter test
+        shell: bash
+        run: |
+          set -o pipefail
+          flutter test 2>&1 | tee /tmp/anne-bebek-test.log
 
       - name: Android APK olustur
-        run: flutter build apk --debug
+        shell: bash
+        run: |
+          # Retry only dependency-download failures; preserve the original exit status otherwise.
+          set +e
+          flutter build apk --debug 2>&1 | tee /tmp/anne-bebek-apk-build.log
+          result=${PIPESTATUS[0]}
+          set -e
+          if [ "$result" -ne 0 ] && grep -Eq 'Could not resolve all artifacts|Could not find org.jetbrains.kotlin|Could not parse POM|Connection reset by peer' /tmp/anne-bebek-apk-build.log; then
+            echo 'Transient Gradle dependency download failure; retrying once.'
+            sleep 15
+            flutter build apk --debug
+          elif [ "$result" -ne 0 ]; then
+            exit "$result"
+          fi
+
+      - name: CI adim durumlarini raporla
+        if: always()
+        run: |
+          echo 'Flutter CI diagnostic summary'
+          echo 'Commit: ${{ github.sha }}'
+          echo 'Job status: ${{ job.status }}'
+          for log in /tmp/anne-bebek-*.log; do
+            if [ -f "$log" ]; then
+              echo "=== $log (last 80 lines) ==="
+              tail -n 80 "$log"
+            fi
+          done
+
+      - name: Basarisiz adimlar icin tani gunluklerini sakla
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-failure-logs
+          path: |
+            /tmp/anne-bebek-pub-get.log
+            /tmp/anne-bebek-analyze.log
+            /tmp/anne-bebek-test.log
+            /tmp/anne-bebek-apk-build.log
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: APK dosyasini kaydet
         uses: actions/upload-artifact@v4
@@ -55,3 +103,64 @@ jobs:
           path: build/app/outputs/flutter-apk/app-debug.apk
           if-no-files-found: error
           retention-days: 14
+
+  gp01-android-emulator:
+    name: Android emulatorde ekran ve kayit testi
+    if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'feature/gp')
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    concurrency:
+      group: gp-android-${{ github.head_ref }}
+      cancel-in-progress: false
+
+    steps:
+      - name: Kaynak kodlarini indir
+        uses: actions/checkout@v4
+
+      - name: Java 17 kurulumu
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Flutter 3.47.9 kurulumu
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.9'
+          channel: stable
+          cache: true
+
+      - name: Bagimliliklari yukle
+        run: flutter pub get
+
+      - name: Android emulator icin disk alani ac
+        run: |
+          df -h
+          # Preserve Android SDK/NDK/CMake to avoid costly reinstall during Gradle build.
+          sudo rm -rf /opt/hostedtoolcache/CodeQL /usr/share/dotnet /usr/local/share/powershell /opt/ghc
+          df -h
+
+      - name: Android sanallastirma izinleri
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Android emulator temel smoke testleri
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: default
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          script: bash -o pipefail -c "flutter test integration_test/gp01_smoke_test.dart -d emulator-5554 2>&1 | tee /tmp/anne-bebek-emulator-smoke.log"
+
+      - name: Emulator smoke hata gunlugunu sakla
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: emulator-smoke-failure-logs
+          path: /tmp/anne-bebek-emulator-smoke.log
+          if-no-files-found: ignore
+          retention-days: 7

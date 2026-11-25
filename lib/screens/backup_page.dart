@@ -1,9 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import 'package:flutter/services.dart';
 
 import '../services/backup_service.dart';
 import '../services/encrypted_backup.dart';
 import '../services/backup_inspection.dart';
+import '../services/local_reminder_notifications.dart';
+import '../services/reminder_repository.dart';
 
 class BackupPage extends StatefulWidget {
   const BackupPage({super.key});
@@ -106,9 +110,10 @@ class _BackupPageState extends State<BackupPage> {
               ),
               const SizedBox(height: 8),
               const Text(
-                'DİKKAT: Mevcut uygulama kayıtları değiştirilecek. '
-                'Yedekte olmayan alanlardaki kayıtlar da silinecek. '
-                'Önce mevcut verilerinizi ayrıca yedekleyin.',
+                'DİKKAT: Yedekte bulunan alanlardaki mevcut kayıtlar '
+                'yedekteki değerlerle değiştirilecek. Yedekte olmayan '
+                'alanlardaki kayıtlar korunur. İşlem öncesi yine de '
+                'mevcut verilerinizi ayrıca yedekleyin.',
               ),
               for (final warning in inspection.warnings) ...[
                 const SizedBox(height: 8),
@@ -149,6 +154,13 @@ class _BackupPageState extends State<BackupPage> {
 
     try {
       final count = await BackupService.restore(plain);
+      // Geri yüklenen hatırlatıcıları, bildirim tercihine göre yeniden planla.
+      try {
+        final reminders = await ReminderRepository.load();
+        await LocalReminderNotifications.sync(reminders, reminders);
+      } catch (_) {
+        // Bildirim desteği olmayan platformlarda kayıtlar yine geri yüklenir.
+      }
 
       password.clear();
       input.clear();
@@ -199,7 +211,7 @@ class _BackupPageState extends State<BackupPage> {
             enableSuggestions: false,
             autocorrect: false,
             decoration: InputDecoration(
-              labelText: 'Yedek parolası (en az 12 karakter)',
+              labelText: t('Yedek parolası (en az 12 karakter)'),
               border: const OutlineInputBorder(),
               suffixIcon: IconButton(
                 onPressed: () {
@@ -269,9 +281,9 @@ class _BackupPageState extends State<BackupPage> {
             controller: input,
             minLines: 3,
             maxLines: 6,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               border: OutlineInputBorder(),
-              hintText: 'Şifreli yedek metni',
+              hintText: t('Şifreli yedek metni'),
             ),
           ),
 

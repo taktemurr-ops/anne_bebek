@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/text.dart';
 import '../services/child_profiles.dart';
 import '../services/turkey_vaccine_schedule.dart';
 

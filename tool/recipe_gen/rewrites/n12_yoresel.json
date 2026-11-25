@@ -1,0 +1,1347 @@
+[
+{
+"id": "n12_001",
+"title": "Kalburabastı",
+"category": "Tatlılar",
+"servings": 12,
+"prepMinutes": 30,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"1 su bardağı sıvı yağ",
+"1 su bardağı yoğurt",
+"1 yumurta",
+"1 paket kabartma tozu",
+"4 su bardağı un",
+"1 su bardağı ceviz içi",
+"Şerbet: 3 su bardağı şeker, 3 su bardağı su, yarım limon"
+],
+"steps": [
+"Şerbeti 15 dakika kaynatıp limon ekleyin ve soğutun.",
+"Yağ, yoğurt, yumurta ve kabartma tozunu karıştırıp unu azar azar ekleyerek yumuşak bir hamur yoğurun.",
+"Ceviz büyüklüğünde parçaları açıp içine ceviz koyun, oval şekil verin.",
+"Kalbur ya da rende üzerine bastırarak desen verin, tepsiye dizin.",
+"180 °C fırında 30 dakika kızarana kadar pişirin.",
+"Sıcak tatlıya soğuk şerbeti dökün."
+],
+"tips": [
+"Desen şerbetin daha iyi işlemesini sağlar."
+],
+"serving": "Oda sıcaklığında.",
+"storage": "Kapalı kapta 3 gün."
+},
+{
+"id": "n12_002",
+"title": "Saray sarması",
+"category": "Tatlılar",
+"servings": 10,
+"prepMinutes": 40,
+"cookMinutes": 35,
+"difficulty": "Zor",
+"ovenCelsius": 180,
+"ingredients": [
+"10 yaprak baklavalık yufka",
+"200 g tereyağı",
+"2 su bardağı iri çekilmiş ceviz",
+"Şerbet: 2,5 su bardağı şeker, 2 su bardağı su, yarım limon"
+],
+"steps": [
+"Şerbeti kaynatıp soğutun.",
+"İki yufkanın arasına tereyağı sürüp üst üste koyun, cevizi serpin.",
+"Merdane üzerine sarıp iki yandan büzerek merdaneyi çekin.",
+"Büzgülü ruloları 4 cm parçalara kesip tepsiye dizin, eritilmiş tereyağı gezdirin.",
+"180 °C fırında 35 dakika pişirin.",
+"Sıcakken soğuk şerbeti dökün."
+],
+"tips": [
+"Büzme işlemi tatlının çıtır katmanlarını oluşturur."
+],
+"serving": "Oda sıcaklığında.",
+"storage": "Kapalı kapta 3 gün."
+},
+{
+"id": "n12_003",
+"title": "Kadayıf dolması",
+"category": "Tatlılar",
+"servings": 10,
+"prepMinutes": 30,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"250 g tel kadayıf",
+"150 g tereyağı",
+"1 su bardağı ceviz",
+"Şerbet: 2 su bardağı şeker, 2 su bardağı su, yarım limon"
+],
+"steps": [
+"Şerbeti hazırlayıp soğutun.",
+"Kadayıfı eritilmiş tereyağıyla harmanlayın.",
+"Bir tutam kadayıfı avucunuza yayıp ortasına ceviz koyun ve rulo yapın.",
+"Tepsiye sıkıca dizin.",
+"180 °C fırında 30 dakika kızarana kadar pişirin.",
+"Sıcakken soğuk şerbeti dökün."
+],
+"tips": [
+"Kadayıf kurursa kırılır; çalışırken üzerini örtün."
+],
+"serving": "Oda sıcaklığında.",
+"storage": "Kapalı kapta 3 gün."
+},
+{
+"id": "n12_004",
+"title": "Katmer (Antep usulü)",
+"category": "Tatlılar",
+"servings": 2,
+"prepMinutes": 20,
+"cookMinutes": 8,
+"difficulty": "Orta",
+"ovenCelsius": 220,
+"ingredients": [
+"1 yufkalık hamur (250 g un, su, tuz)",
+"3 yemek kaşığı toz Antep fıstığı",
+"3 yemek kaşığı kaymak",
+"2 yemek kaşığı toz şeker",
+"2 yemek kaşığı tereyağı"
+],
+"steps": [
+"Hamuru yoğurup 20 dakika dinlendirin.",
+"Tereyağı sürerek kâğıt inceliğinde açın.",
+"Ortaya kaymak, fıstık ve şeker koyup dört taraftan zarf gibi kapatın.",
+"Önceden ısıtılmış 220 °C fırında ya da sacda her yüzü 3–4 dakika pişirin.",
+"Sıcak dilimleyip servis edin."
+],
+"tips": [
+"Antep’te sabah kahvaltısında yenir."
+],
+"serving": "Sıcak, hemen.",
+"storage": "Aynı gün."
+},
+{
+"id": "n12_005",
+"title": "Lor tatlısı",
+"category": "Tatlılar",
+"servings": 8,
+"prepMinutes": 15,
+"cookMinutes": 35,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"500 g lor peyniri",
+"3 yumurta",
+"1 su bardağı şeker",
+"1 su bardağı irmik",
+"1 paket kabartma tozu",
+"1 limon kabuğu rendesi",
+"Şerbet: 2 su bardağı şeker, 2,5 su bardağı su"
+],
+"steps": [
+"Şerbeti kaynatıp soğutun.",
+"Lor, yumurta ve şekeri pürüzsüz olana kadar çırpın.",
+"İrmik, kabartma tozu ve limon kabuğunu ekleyin.",
+"Yağlanmış kalıpta 180 °C fırında 35 dakika pişirin.",
+"Sıcakken dilimleyip soğuk şerbeti dökün."
+],
+"tips": [
+"Şerbeti hafif tutmak lor tadını öne çıkarır."
+],
+"serving": "Oda sıcaklığında.",
+"storage": "Kapalı kapta 3 gün."
+},
+{
+"id": "n12_006",
+"title": "Hurmalı tatlı",
+"category": "Tatlılar",
+"servings": 12,
+"prepMinutes": 20,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"125 g tereyağı",
+"1 su bardağı sıvı yağ",
+"1 yumurta",
+"1 su bardağı pudra şekeri",
+"1 paket kabartma tozu",
+"3,5 su bardağı un",
+"Şerbet: 3 su bardağı şeker, 3 su bardağı su, yarım limon",
+"2 yemek kaşığı toz fıstık"
+],
+"steps": [
+"Şerbeti hazırlayıp soğutun.",
+"Yağlar, yumurta ve şekeri çırpın; un ve kabartma tozunu ekleyip yumuşak hamur yoğurun.",
+"Ceviz büyüklüğünde parçaları rendenin üzerine bastırıp hurma şekli verin.",
+"180 °C fırında 30 dakika pişirin.",
+"Sıcak tatlıya soğuk şerbeti dökün, fıstıkla süsleyin."
+],
+"tips": [
+"Şekli rendeyle vermek gelenekseldir."
+],
+"serving": "Oda sıcaklığında.",
+"storage": "Kapalı kapta 3 gün."
+},
+{
+"id": "n12_007",
+"title": "Bülbül yuvası",
+"category": "Tatlılar",
+"servings": 10,
+"prepMinutes": 30,
+"cookMinutes": 30,
+"difficulty": "Zor",
+"ovenCelsius": 180,
+"ingredients": [
+"10 yaprak baklavalık yufka",
+"200 g tereyağı",
+"1 su bardağı toz Antep fıstığı",
+"Şerbet: 2 su bardağı şeker, 2 su bardağı su, yarım limon"
+],
+"steps": [
+"Şerbeti hazırlayıp soğutun.",
+"Yufkaya tereyağı sürüp ince merdaneye sarın, büzerek çekin.",
+"Büzülmüş yufkayı yuvarlak yuva şeklinde kıvırın, tepsiye dizin.",
+"Ortalarına fıstık koyun, tereyağı gezdirin.",
+"180 °C fırında 30 dakika pişirin.",
+"Soğuk şerbeti dökün."
+],
+"tips": [
+"Yuvaların ortası fıstıkla dolu olmalı."
+],
+"serving": "Oda sıcaklığında.",
+"storage": "Kapalı kapta 3 gün."
+},
+{
+"id": "n12_008",
+"title": "Ekmek kadayıfı (kaymaklı)",
+"category": "Tatlılar",
+"servings": 8,
+"prepMinutes": 10,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"1 adet hazır ekmek kadayıfı",
+"3 su bardağı şeker",
+"3 su bardağı su",
+"Yarım limon",
+"200 g kaymak",
+"2 yemek kaşığı toz fıstık"
+],
+"steps": [
+"Kadayıfı tepsiye koyup üzerine sıcak su döküp 5 dakika yumuşatın, suyunu süzün.",
+"Şeker ve suyu kaynatıp limonu ekleyin.",
+"Sıcak şerbeti kadayıfın üzerine dökün.",
+"Kısık ateşte ya da 180 °C fırında şerbeti çekene kadar 20 dakika pişirin.",
+"Soğuyunca kaymak ve fıstıkla servis edin."
+],
+"tips": [
+"Kaymak yerine dövme dondurma da kullanılır."
+],
+"serving": "Oda sıcaklığında.",
+"storage": "Kapalı kapta 3 gün."
+},
+{
+"id": "n12_009",
+"title": "Pestil ve cevizli sucuk (ev usulü)",
+"category": "Tatlılar",
+"servings": 10,
+"prepMinutes": 40,
+"cookMinutes": 40,
+"difficulty": "Zor",
+"ovenCelsius": null,
+"ingredients": [
+"2 litre üzüm suyu ya da 1 litre pekmez ve 1 litre su",
+"1 su bardağı nişasta",
+"1 su bardağı un",
+"2 su bardağı ceviz içi",
+"4 adet 50 cm kalın pamuk ip"
+],
+"steps": [
+"Cevizleri ipe iğneyle dizin.",
+"Üzüm suyunun bir kısmında un ve nişastayı topaksız eritin.",
+"Kalan üzüm suyunu kaynatıp karışımı ekleyin, koyulaşıp bulamaç olana kadar karıştırın.",
+"Ceviz dizilerini bulamaca batırıp çıkarın, 10 dakika kurutup 3–4 kez tekrarlayın.",
+"Gölgede havadar yerde 1 hafta kurutun.",
+"Kalan bulamacı tepsiye ince yayıp kurutarak pestil yapın."
+],
+"tips": [
+"Kurutma havadar ve tozsuz yerde yapılmalı."
+],
+"serving": "Dilimleyerek.",
+"storage": "Serin yerde kapalı kapta 3 ay."
+},
+{
+"id": "n12_010",
+"title": "İnegöl köfte",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 15,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"500 g dana kıyma (az yağlı)",
+"1 küçük soğan rendesi",
+"1 tatlı kaşığı karbonat",
+"1 tatlı kaşığı tuz",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Kıyma, suyu sıkılmış soğan, karbonat, tuz ve karabiberi 10 dakika yoğurun.",
+"Buzdolabında en az 2 saat dinlendirin.",
+"Parmak kalınlığında, 6 cm uzunluğunda köfteler yapın.",
+"Kızgın ızgarada her yüzünü 4 dakika pişirin.",
+"Piyaz ve közlenmiş biberle servis edin."
+],
+"tips": [
+"Ekmek eklenmez; yoğurma ve dinlendirme köfteye kıvamını verir."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_011",
+"title": "Tekirdağ köftesi",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 15,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"500 g kıyma",
+"1 su bardağı galeta unu",
+"1 soğan rendesi",
+"1 tatlı kaşığı kimyon",
+"1 tatlı kaşığı tuz",
+"Yarım çay kaşığı karabiber"
+],
+"steps": [
+"Tüm malzemeyi 10 dakika yoğurun.",
+"Harcı 1 saat buzdolabında bekletin.",
+"Ceviz büyüklüğünde yassı ve dikdörtgen köfteler yapın.",
+"Izgarada her yüzünü 4–5 dakika pişirin.",
+"Piyaz ve közlenmiş domatesle servis edin."
+],
+"tips": [
+"Ince ve düzgün şekil eşit pişmesini sağlar."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_012",
+"title": "Akçaabat köftesi",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 15,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"500 g kıyma",
+"2 dilim bayat ekmek",
+"2 diş sarımsak",
+"1 tatlı kaşığı kimyon",
+"1 tatlı kaşığı tuz",
+"1 çay kaşığı karabiber"
+],
+"steps": [
+"Ekmeği ıslatıp sıkın.",
+"Kıyma, ekmek, ezilmiş sarımsak ve baharatları yoğurun.",
+"Kalın ve oval köfteler yapın.",
+"Izgarada ya da döküm tavada her yüzünü 5 dakika pişirin.",
+"Közlenmiş biber ve pilavla servis edin."
+],
+"tips": [
+"Sarımsak Trabzon usulünün belirgin tadıdır."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_014",
+"title": "Hasanpaşa köfte",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 25,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": 190,
+"ingredients": [
+"500 g kıyma",
+"1 soğan rendesi",
+"1 yumurta",
+"1 dilim bayat ekmek",
+"4 patates",
+"1 su bardağı süt",
+"1 yemek kaşığı tereyağı",
+"1 su bardağı rendelenmiş kaşar",
+"1 yemek kaşığı salça",
+"1 tatlı kaşığı tuz, 1 çay kaşığı karabiber"
+],
+"steps": [
+"Kıyma, soğan, yumurta, ekmek ve baharatla köfte harcı yapıp yuvarlak köfteler hazırlayın, ortalarını çukurlaştırın.",
+"Patatesleri haşlayıp süt ve tereyağıyla püre yapın.",
+"Köftelerin çukuruna püre koyup fırın kabına dizin.",
+"Salçayı 1 su bardağı sıcak suyla açıp kenarlardan dökün.",
+"Üzerine kaşar serpip 190 °C fırında 35 dakika pişirin."
+],
+"tips": [
+"Püre koyu olursa fırında akmaz."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_015",
+"title": "Beyti kebabı",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 20,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"500 g kuzu kıyma",
+"1 diş sarımsak",
+"1 tatlı kaşığı pul biber",
+"1 tatlı kaşığı tuz",
+"4 lavaş",
+"1 su bardağı yoğurt",
+"3 yemek kaşığı tereyağı",
+"1 yemek kaşığı salça"
+],
+"steps": [
+"Kıymayı sarımsak, pul biber ve tuzla yoğurup şişe ya da uzun köfte şeklinde hazırlayın.",
+"Izgarada çevirerek 10 dakika pişirin.",
+"Lavaşlara sarıp 3 cm dilimleyin.",
+"Salçayı tereyağında eritip dilimlerin üzerine gezdirin.",
+"Yoğurtla servis edin."
+],
+"tips": [
+"Lavaşı sıkı sarmak dilimlerin dağılmasını önler."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_016",
+"title": "Urfa kebabı",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 15,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"600 g kuzu kıyma (yağlı)",
+"1 tatlı kaşığı tuz",
+"4 yassı şiş",
+"Yanına: 4 közlenmiş domates, 4 sivri biber, 4 lavaş, 1 soğan, isot"
+],
+"steps": [
+"Kıymayı tuzla 10 dakika yoğurun; acı eklenmez.",
+"Yassı şişlere bastırarak geçirin.",
+"Mangalda çevirerek 8–10 dakika pişirin.",
+"Domates ve biberleri de közleyin.",
+"Lavaş, sumaklı soğan ve isotla servis edin."
+],
+"tips": [
+"Adana’dan farkı acısız olmasıdır."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_017",
+"title": "Elbasan tava",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 90,
+"difficulty": "Orta",
+"ovenCelsius": 200,
+"ingredients": [
+"500 g kuşbaşı kuzu eti",
+"3 yemek kaşığı tereyağı",
+"Terbiye: 2 su bardağı yoğurt, 2 yumurta, 2 yemek kaşığı un",
+"1 tatlı kaşığı tuz, 1 çay kaşığı karabiber, 1 tatlı kaşığı kekik"
+],
+"steps": [
+"Eti tereyağında kavurup az suyla 1 saat yumuşayana kadar pişirin.",
+"Eti suyuyla fırın kabına alın.",
+"Yoğurt, yumurta, un ve tuzu çırpın.",
+"Karışımı etin üzerine dökün.",
+"200 °C fırında 25 dakika, üzeri kızarana kadar pişirip kekik serpin."
+],
+"tips": [
+"Arnavut mutfağından gelen bir Osmanlı yemeğidir."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_018",
+"title": "Sultan kebabı",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 30,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": 200,
+"ingredients": [
+"400 g kuşbaşı dana eti",
+"1 soğan",
+"2 sivri biber",
+"1 domates",
+"1 yemek kaşığı salça",
+"4 yaprak baklavalık yufka",
+"1 yumurta sarısı",
+"100 g kaşar",
+"1 tatlı kaşığı tuz, 1 çay kaşığı karabiber"
+],
+"steps": [
+"Eti kendi suyunda pişirip soğan, biber, domates ve salçayla kavurun.",
+"Harcı soğutun.",
+"Yufkaları bölüp içine harç ve kaşar koyarak bohça yapın.",
+"Üzerine yumurta sarısı sürün.",
+"200 °C fırında 25 dakika kızarana kadar pişirin."
+],
+"tips": [
+"Harç soğumazsa yufka yumuşar."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_019",
+"title": "Kuru dolma (patlıcan ve biber)",
+"category": "Sebze yemekleri",
+"servings": 6,
+"prepMinutes": 40,
+"cookMinutes": 60,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"20 kuru patlıcan ve kuru biber",
+"300 g kıyma",
+"1 su bardağı pirinç",
+"2 domates",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı tuz, 1 tatlı kaşığı pul biber, 1 tatlı kaşığı nane"
+],
+"steps": [
+"Kuru sebzeleri kaynar suda 5 dakika haşlayıp yumuşatın.",
+"Kıyma, pirinç, rendelenmiş domates, salça, yağ ve baharatı yoğurun.",
+"Sebzeleri harçla doldurup tencereye dizin.",
+"Üzerine ters tabak koyup sıcak su ekleyin.",
+"Kısık ateşte 50–60 dakika pişirin."
+],
+"tips": [
+"Gaziantep ve Doğu mutfağında kışın yapılır."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_020",
+"title": "Zeytinyağlı taze bakla",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"1 kg taze bakla",
+"1 soğan",
+"3 dal taze soğan",
+"Yarım demet dereotu",
+"Yarım su bardağı zeytinyağı",
+"1 tatlı kaşığı şeker",
+"1 yemek kaşığı un",
+"1 limon",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Baklaların uçlarını ve kenar liflerini temizleyip 3 cm doğrayın, limonlu unlu suda bekletin.",
+"Soğanları zeytinyağında yumuşatın.",
+"Baklaları, şekeri, tuzu ve 1 su bardağı sıcak suyu ekleyin.",
+"Kısık ateşte 40 dakika pişirin.",
+"Dereotu serpip soğuk, yoğurtla servis edin."
+],
+"tips": [
+"Unlu limonlu su baklanın kararmasını önler."
+],
+"serving": "Soğuk, yoğurtla.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n12_021",
+"title": "Pazı sarması",
+"category": "Sebze yemekleri",
+"servings": 6,
+"prepMinutes": 40,
+"cookMinutes": 45,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"1 demet pazı",
+"1 su bardağı pirinç",
+"1 soğan",
+"2 yemek kaşığı zeytinyağı",
+"1 yemek kaşığı salça",
+"Yarım demet maydanoz",
+"1 tatlı kaşığı tuz, 1 tatlı kaşığı nane, 1 çay kaşığı pul biber"
+],
+"steps": [
+"Pazı yapraklarını kaynar suda 1 dakika haşlayıp saplarını ayırın.",
+"Soğanı kavurup pirinç, salça, maydanoz ve baharatla harç hazırlayın.",
+"Yaprakları harçla sarın.",
+"Tencereye dizip sıcak su ekleyin, üzerine tabak kapatın.",
+"Kısık ateşte 45 dakika pişirin."
+],
+"tips": [
+"Karadeniz’de pazı sarması kıymalı da yapılır."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_022",
+"title": "Ekşili lahana (Karadeniz usulü)",
+"category": "Sebze yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"1 kg lahana turşusu",
+"1 soğan",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı pul biber",
+"Yarım su bardağı pirinç"
+],
+"steps": [
+"Turşuyu doğrayıp tuzu fazlaysa yıkayın.",
+"Soğanı tereyağında kavurun, pul biberi ekleyin.",
+"Turşu ve pirinci ekleyip 1 su bardağı su ilave edin.",
+"Kısık ateşte 40 dakika pişirin.",
+"Mısır ekmeğiyle servis edin."
+],
+"tips": [
+"Turşu tuzlu olduğu için tuz eklemeyin."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_023",
+"title": "Piliç güveç",
+"category": "Tavuk yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 60,
+"difficulty": "Orta",
+"ovenCelsius": 200,
+"ingredients": [
+"4 tavuk but",
+"2 patates",
+"2 biber",
+"2 domates",
+"8 arpacık soğan",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı tuz, 1 tatlı kaşığı kekik"
+],
+"steps": [
+"Sebzeleri iri doğrayın.",
+"Güvece tavukları ve sebzeleri dizin.",
+"Salçayı tereyağı ve 1 su bardağı sıcak suyla açıp dökün.",
+"Baharatları serpip güvecin ağzını kapatın.",
+"Soğuk fırına koyup 200 °C’de 60 dakika pişirin."
+],
+"tips": [
+"Toprak güveç soğuk fırına konur."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_024",
+"title": "Sac kavurma",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 20,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"600 g kuşbaşı kuzu eti",
+"2 sivri biber",
+"2 domates",
+"1 soğan",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı tuz, 1 tatlı kaşığı pul biber, 1 çay kaşığı kekik"
+],
+"steps": [
+"Sacı ya da geniş döküm tavayı iyice ısıtın.",
+"Eti yüksek ateşte suyunu salıp çekene kadar kavurun.",
+"Tereyağı ve doğranmış soğanı ekleyin.",
+"Biber ve domatesi ekleyip 5 dakika daha çevirin.",
+"Baharatlarla tatlandırıp lavaşla servis edin."
+],
+"tips": [
+"Az miktarda pişirmek etin haşlanmasını önler."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_025",
+"title": "Kuzu haşlama",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 120,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"1 kg kemikli kuzu eti",
+"2 havuç",
+"3 patates",
+"1 soğan",
+"1 kereviz sapı",
+"1 limon",
+"1 tatlı kaşığı tuz, 5 tane karabiber"
+],
+"steps": [
+"Eti soğuk suya koyup kaynatın, köpüğünü alın.",
+"Soğan, karabiber ve kerevizi ekleyip kısık ateşte 1,5 saat pişirin.",
+"İri doğranmış havuç ve patatesi ekleyin.",
+"Sebzeler yumuşayana kadar 25 dakika daha pişirin, tuzlayın.",
+"Limonla servis edin."
+],
+"tips": [
+"Haşlama suyu çorbalarda kullanılabilir."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_026",
+"title": "Ciğer sarma",
+"category": "Et yemekleri",
+"servings": 4,
+"prepMinutes": 25,
+"cookMinutes": 25,
+"difficulty": "Orta",
+"ovenCelsius": 200,
+"ingredients": [
+"400 g kuzu ciğeri",
+"1 kuzu kuyruk yağı zarı",
+"1 soğan",
+"1 tatlı kaşığı tuz, 1 tatlı kaşığı kimyon, 1 çay kaşığı karabiber"
+],
+"steps": [
+"Ciğeri küçük küp doğrayın, ince doğranmış soğan ve baharatla karıştırın.",
+"Zarı ılık suda yumuşatıp kare parçalara kesin.",
+"Harcı zara sarıp kürdanla tutturun.",
+"Izgarada ya da 200 °C fırında 20–25 dakika pişirin.",
+"Sumaklı soğanla servis edin."
+],
+"tips": [
+"Ciğer iyice pişmeli; içi pembe kalmamalı."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_027",
+"title": "Hamsi buğulama",
+"category": "Balık ve deniz ürünleri",
+"servings": 4,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"500 g hamsi",
+"2 domates",
+"1 soğan",
+"2 sivri biber",
+"1 limon",
+"3 yemek kaşığı zeytinyağı",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Hamsilerin başını alıp ayıklayın, yıkayın.",
+"Tencerenin tabanına halka soğan ve biber dizin.",
+"Hamsileri üzerine yan yana dizin, domates ve limon dilimleriyle kapatın.",
+"Zeytinyağı ve tuzu ekleyip kapağı kapalı kısık ateşte 15 dakika buğulayın.",
+"Ilık servis edin."
+],
+"tips": [
+"Su eklemeye gerek yoktur; sebzeler su salar."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_028",
+"title": "Levrek ızgara",
+"category": "Balık ve deniz ürünleri",
+"servings": 2,
+"prepMinutes": 10,
+"cookMinutes": 12,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"2 bütün levrek (temizlenmiş)",
+"2 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 tatlı kaşığı tuz",
+"Yanına roka ve kırmızı soğan (1 demet, 1 adet)"
+],
+"steps": [
+"Balıkların üzerine çapraz çizikler atın.",
+"Zeytinyağı ve tuz sürün.",
+"Kızgın ızgarada her yüzünü 5–6 dakika pişirin.",
+"Eti kılçıktan kolayca ayrılıyorsa pişmiştir.",
+"Limon ve roka salatasıyla servis edin."
+],
+"tips": [
+"Izgarayı iyice ısıtmak balığın yapışmasını önler."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_029",
+"title": "Ahtapot salatası",
+"category": "Salatalar",
+"servings": 4,
+"prepMinutes": 20,
+"cookMinutes": 45,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"1 kg ahtapot",
+"1 kırmızı soğan",
+"1 kırmızı biber",
+"Yarım demet maydanoz",
+"4 yemek kaşığı zeytinyağı",
+"1 limon",
+"1 tatlı kaşığı tuz"
+],
+"steps": [
+"Ahtapotu kaynar suda kendi suyunda 45 dakika, çatal kolayca girene kadar pişirin.",
+"Soğuyunca kollarını 1 cm dilimleyin.",
+"Soğan, biber ve maydanozu ince doğrayın.",
+"Zeytinyağı, limon ve tuzla karıştırın.",
+"Buzdolabında 1 saat dinlendirip servis edin."
+],
+"tips": [
+"Dondurulmuş ahtapot daha kolay yumuşar."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_030",
+"title": "Tutmaç çorbası",
+"category": "Çorbalar",
+"servings": 6,
+"prepMinutes": 30,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"Erişte için: 1 su bardağı un, 1 yumurta, 1 çay kaşığı tuz",
+"1 su bardağı yeşil mercimek",
+"2 su bardağı yoğurt",
+"1 yumurta sarısı",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı kuru nane, 1 tatlı kaşığı pul biber, 1 tatlı kaşığı tuz"
+],
+"steps": [
+"Un, yumurta ve tuzla sert hamur yoğurup ince açın, küçük kareler kesin.",
+"Mercimeği 6 su bardağı suda 20 dakika haşlayın.",
+"Erişteleri ekleyip 10 dakika pişirin.",
+"Yoğurt ve yumurta sarısını ılıştırıp ekleyin, kaynamaya yakın ocaktan alın.",
+"Naneli pul biberli tereyağı gezdirin."
+],
+"tips": [
+"Selçuklu’dan beri bilinen bir Anadolu çorbasıdır."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_031",
+"title": "Lebeniye çorbası",
+"category": "Çorbalar",
+"servings": 6,
+"prepMinutes": 10,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"1 su bardağı haşlanmış nohut",
+"Yarım su bardağı pirinç",
+"2 su bardağı yoğurt",
+"1 yumurta",
+"1 yemek kaşığı un",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı kuru nane, 1 tatlı kaşığı tuz"
+],
+"steps": [
+"Pirinci 5 su bardağı suda 15 dakika pişirin.",
+"Nohudu ekleyin.",
+"Yoğurt, yumurta ve unu çırpıp ılıştırarak ekleyin.",
+"Sürekli karıştırarak kaynayana kadar pişirin.",
+"Naneli tereyağıyla servis edin."
+],
+"tips": [
+"Hatay ve Antep mutfağında sık yapılır."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_032",
+"title": "Mahluta (Hatay mercimek çorbası)",
+"category": "Çorbalar",
+"servings": 6,
+"prepMinutes": 10,
+"cookMinutes": 35,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"1 su bardağı kırmızı mercimek",
+"2 yemek kaşığı pirinç",
+"1 soğan",
+"1 yemek kaşığı salça",
+"2 yemek kaşığı tereyağı",
+"1 tatlı kaşığı kimyon, 1 tatlı kaşığı pul biber, 1 tatlı kaşığı tuz",
+"1 limon"
+],
+"steps": [
+"Soğanı tereyağında kavurup salçayı ekleyin.",
+"Yıkanmış mercimek, pirinç ve 6 su bardağı sıcak suyu ekleyin.",
+"30 dakika pişirip blenderdan geçirin.",
+"Kimyon ve tuzu ekleyin.",
+"Pul biberli tereyağı ve limonla servis edin."
+],
+"tips": [
+"Kimyon mahlutanın ayırt edici tadıdır."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_033",
+"title": "Ayran aşı çorbası",
+"category": "Çorbalar",
+"servings": 6,
+"prepMinutes": 10,
+"cookMinutes": 25,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"Yarım su bardağı aşurelik buğday (haşlanmış)",
+"Yarım su bardağı nohut (haşlanmış)",
+"3 su bardağı yoğurt",
+"1 yumurta",
+"1 yemek kaşığı un",
+"1 demet ıspanak ya da pazı",
+"1 tatlı kaşığı kuru nane, 1 tatlı kaşığı tuz"
+],
+"steps": [
+"Yoğurt, yumurta, un ve 4 su bardağı suyu çırpın.",
+"Orta ateşte sürekli karıştırarak kaynatın.",
+"Buğday, nohut ve doğranmış yeşilliği ekleyin.",
+"10 dakika pişirip tuzlayın.",
+"Sıcak ya da yazın soğuk servis edin."
+],
+"tips": [
+"Yazın soğuk içilen bir Anadolu çorbasıdır."
+],
+"serving": "Sıcak ya da soğuk.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_034",
+"title": "Paçanga böreği",
+"category": "Hamur işleri",
+"servings": 4,
+"prepMinutes": 15,
+"cookMinutes": 10,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"4 yaprak yufka",
+"150 g pastırma",
+"150 g kaşar",
+"2 domates",
+"2 sivri biber",
+"1 yumurta",
+"Kızartmak için 1 su bardağı sıvı yağ"
+],
+"steps": [
+"Yufkaları üçgen dilimlere kesin.",
+"Pastırma, kaşar, domates ve biberi ince doğrayın.",
+"Harcı yufkalara koyup sigara böreği gibi sarın, ucunu yumurtayla yapıştırın.",
+"Kızgın yağda her yüzünü 2 dakika kızartın.",
+"Kağıt havluya alıp sıcak servis edin."
+],
+"tips": [
+"İstanbul meyhane mutfağının sıcak mezesidir."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_035",
+"title": "Çiğ börek",
+"category": "Hamur işleri",
+"servings": 8,
+"prepMinutes": 40,
+"cookMinutes": 20,
+"difficulty": "Zor",
+"ovenCelsius": null,
+"ingredients": [
+"Hamur: 3 su bardağı un, 1 su bardağı su, 1 tatlı kaşığı tuz",
+"İç: 300 g kıyma, 2 soğan rendesi, 1 tatlı kaşığı tuz, 1 çay kaşığı karabiber",
+"Kızartmak için 3 su bardağı ayçiçek yağı"
+],
+"steps": [
+"Hamuru yoğurup 30 dakika dinlendirin.",
+"Kıymayı soğan, tuz ve karabiberle yoğurup çiğ bırakın.",
+"Hamuru ince açıp yarısına iç harcı ince yayın, katlayıp kenarlarını bastırın.",
+"Kızgın yağda 2–3 dakika, kıyma pişene kadar kızartın.",
+"Ayranla sıcak servis edin."
+],
+"tips": [
+"Kırım Tatar mutfağındandır; harç çiğ konur, yağda pişer."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_036",
+"title": "Patatesli kol böreği",
+"category": "Hamur işleri",
+"servings": 8,
+"prepMinutes": 30,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"4 yaprak yufka",
+"4 patates",
+"1 soğan",
+"1 su bardağı süt",
+"Yarım su bardağı sıvı yağ",
+"2 yumurta",
+"1 tatlı kaşığı tuz, 1 tatlı kaşığı pul biber",
+"1 yemek kaşığı çörek otu"
+],
+"steps": [
+"Patatesleri haşlayıp ezin, kavrulmuş soğan ve baharatla karıştırın.",
+"Süt, yağ ve 1 yumurtayı çırpın.",
+"Yufkayı serip sosla nemlendirin, kenarına harç koyup rulo yapın.",
+"Ruloları tepsiye spiral dizin, üzerine yumurta sarısı sürüp çörek otu serpin.",
+"180 °C fırında 40 dakika pişirin."
+],
+"tips": [
+"Ruloları sıkı sarmak pişerken açılmasını önler."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_037",
+"title": "Karadeniz pidesi (kıymalı yumurtalı)",
+"category": "Hamur işleri",
+"servings": 4,
+"prepMinutes": 60,
+"cookMinutes": 15,
+"difficulty": "Orta",
+"ovenCelsius": 230,
+"ingredients": [
+"Hamur: 3 su bardağı un, 1 paket kuru maya, 1 su bardağı ılık su, 1 tatlı kaşığı tuz",
+"300 g kıyma",
+"1 soğan",
+"4 yumurta",
+"2 yemek kaşığı tereyağı"
+],
+"steps": [
+"Hamuru yoğurup 45 dakika mayalandırın.",
+"Kıymayı soğanla kavurun.",
+"Hamuru 4 parçaya bölüp uzun oval açın, kenarlarını kıvırıp kayık şekli verin.",
+"Kıymayı yayıp 230 °C fırında 10 dakika pişirin.",
+"Yumurtayı ortaya kırıp 4–5 dakika daha pişirin, tereyağı sürün."
+],
+"tips": [
+"Gebeler ve çocuklar için yumurta sarısı tam pişmeli."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_038",
+"title": "Kete (Kars usulü)",
+"category": "Hamur işleri",
+"servings": 10,
+"prepMinutes": 90,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"Hamur: 4 su bardağı un, 1 paket kuru maya, 1 su bardağı ılık süt, yarım su bardağı sıvı yağ, 1 yumurta, 1 tatlı kaşığı tuz",
+"İç: 125 g tereyağı, 1 su bardağı un",
+"Üzeri için 1 yumurta sarısı"
+],
+"steps": [
+"Hamuru yoğurup 1 saat mayalandırın.",
+"Tereyağında unu kokusu çıkana kadar kavurup soğutun (kavut).",
+"Hamuru açıp kavutu yayın, rulo yapıp salyangoz gibi sarın.",
+"Avuçla bastırıp yuvarlak açın, yumurta sarısı sürün.",
+"180 °C fırında 30 dakika pişirin."
+],
+"tips": [
+"Doğu Anadolu’nun çay saati çöreğidir."
+],
+"serving": "Çayla.",
+"storage": "Kapalı kapta 3 gün."
+},
+{
+"id": "n12_039",
+"title": "Ay çöreği",
+"category": "Hamur işleri",
+"servings": 10,
+"prepMinutes": 90,
+"cookMinutes": 30,
+"difficulty": "Orta",
+"ovenCelsius": 180,
+"ingredients": [
+"Hamur: 4 su bardağı un, 1 paket kuru maya, 1 su bardağı ılık süt, 125 g tereyağı, yarım su bardağı şeker, 1 yumurta",
+"İç: 1 su bardağı ceviz, 3 yemek kaşığı kuru üzüm, 1 tatlı kaşığı tarçın, 3 yemek kaşığı şeker",
+"Üzeri için 1 yumurta sarısı"
+],
+"steps": [
+"Hamuru yoğurup 1 saat mayalandırın.",
+"İç malzemeleri karıştırın.",
+"Hamuru 10 parçaya bölüp oval açın, iç koyup rulo yapın ve hilal şeklinde kıvırın.",
+"Üzerine yumurta sarısı sürüp 20 dakika bekletin.",
+"180 °C fırında 30 dakika pişirin."
+],
+"tips": [
+"Hilal şekli adını verir."
+],
+"serving": "Çayla.",
+"storage": "Kapalı kapta 3 gün."
+},
+{
+"id": "n12_040",
+"title": "Özbek pilavı",
+"category": "Pilavlar",
+"servings": 6,
+"prepMinutes": 20,
+"cookMinutes": 40,
+"difficulty": "Orta",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı baldo pirinç",
+"400 g kuşbaşı kuzu eti",
+"3 havuç",
+"1 soğan",
+"2 yemek kaşığı nohut (haşlanmış)",
+"2 yemek kaşığı kuru üzüm",
+"3 yemek kaşığı sıvı yağ",
+"1 tatlı kaşığı kimyon, 1 tatlı kaşığı tuz"
+],
+"steps": [
+"Pirinci ılık tuzlu suda 30 dakika bekletin.",
+"Eti yağda kavurup soğanı ekleyin.",
+"Kibrit çöpü doğranmış havucu ekleyip 5 dakika çevirin.",
+"Nohut, üzüm, kimyon, tuz ve süzülmüş pirinci üzerine yayın; 3 su bardağı sıcak su ekleyin.",
+"Kısık ateşte suyunu çekene kadar 20 dakika pişirip 15 dakika demlendirin."
+],
+"tips": [
+"Pirinci karıştırmadan katlar hâlinde pişirmek geleneksel yöntemdir."
+],
+"serving": "Sıcak servis edin.",
+"storage": "Buzdolabında 2 gün."
+},
+{
+"id": "n12_043",
+"title": "Sahlep (ev usulü)",
+"category": "İçecekler",
+"servings": 2,
+"prepMinutes": 2,
+"cookMinutes": 10,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"2 su bardağı süt",
+"2 tatlı kaşığı toz salep",
+"2 yemek kaşığı şeker",
+"1 çay kaşığı tarçın"
+],
+"steps": [
+"Salep ve şekeri soğuk sütün bir kısmında eritin.",
+"Kalan sütü ısıtıp karışımı ekleyin.",
+"Sürekli karıştırarak koyulaşana kadar 8–10 dakika pişirin.",
+"Fincanlara alıp tarçın serpin."
+],
+"tips": [
+"Gerçek salep orkide yumrusundan yapılır; katkısız ürün seçin."
+],
+"serving": "Sıcak.",
+"storage": "Hemen tüketin."
+},
+{
+"id": "n12_044",
+"title": "Demirhindi şerbeti",
+"category": "İçecekler",
+"servings": 8,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"100 g demirhindi",
+"1 su bardağı şeker",
+"2 litre su",
+"4 karanfil",
+"1 limon"
+],
+"steps": [
+"Demirhindiyi 1 litre suda 2 saat bekletin.",
+"Karanfille 15 dakika kaynatıp süzün.",
+"Kalan su ve şekeri ekleyip karıştırın.",
+"Limon suyunu ekleyip soğutun.",
+"Buzla servis edin."
+],
+"tips": [
+"Ramazan sofralarının geleneksel şerbetidir."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 4 gün."
+},
+{
+"id": "n12_045",
+"title": "Gül şerbeti",
+"category": "İçecekler",
+"servings": 8,
+"prepMinutes": 10,
+"cookMinutes": 15,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 su bardağı kurutulmuş gül yaprağı (gıdaya uygun)",
+"1 su bardağı şeker",
+"2 litre su",
+"1 limon"
+],
+"steps": [
+"Gül yapraklarını kaynar suya koyup kapağı kapalı 30 dakika demleyin.",
+"Süzüp şekeri eritin.",
+"Limon suyunu ekleyin; renk açık pembeye döner.",
+"Soğutup buzla servis edin."
+],
+"tips": [
+"Yalnızca ilaçlanmamış, gıdaya uygun gül kullanın."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 4 gün."
+},
+{
+"id": "n12_046",
+"title": "Sumak şerbeti",
+"category": "İçecekler",
+"servings": 6,
+"prepMinutes": 10,
+"cookMinutes": 10,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"3 yemek kaşığı sumak",
+"1,5 litre su",
+"4 yemek kaşığı şeker ya da bal"
+],
+"steps": [
+"Sumağı suya koyup 2 saat bekletin.",
+"İnce süzgeçten ya da tülbentten süzün.",
+"Şekeri ya da balı eritin.",
+"Soğutup buzla servis edin."
+],
+"tips": [
+"Güneydoğu’da yazın serinletici olarak içilir."
+],
+"serving": "Soğuk.",
+"storage": "Buzdolabında 3 gün."
+},
+{
+"id": "n12_047",
+"title": "Ev yapımı vişne reçeli",
+"category": "Kahvaltılıklar",
+"servings": 20,
+"prepMinutes": 30,
+"cookMinutes": 35,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 kg çekirdeği çıkarılmış vişne",
+"800 g şeker",
+"Yarım limon suyu"
+],
+"steps": [
+"Vişneleri şekerle karıştırıp 3 saat suyunu salması için bekletin.",
+"Orta ateşte kaynatıp köpüğünü alın.",
+"Kısık ateşte 30 dakika, şerbeti koyulaşana kadar pişirin.",
+"Limon suyunu ekleyip 2 dakika daha kaynatın.",
+"Sıcakken steril kavanozlara doldurup ters çevirin."
+],
+"tips": [
+"Tabağa damlatılan şurup akmıyorsa kıvamı gelmiştir."
+],
+"serving": "Kahvaltıda.",
+"storage": "Açılmamış kavanoz serin yerde 1 yıl."
+},
+{
+"id": "n12_048",
+"title": "Ezme biber turşusu (ev usulü)",
+"category": "Mezeler",
+"servings": 10,
+"prepMinutes": 30,
+"cookMinutes": 0,
+"difficulty": "Kolay",
+"ovenCelsius": null,
+"ingredients": [
+"1 kg sivri biber",
+"1 su bardağı üzüm sirkesi",
+"2 yemek kaşığı kaya tuzu",
+"1 tatlı kaşığı şeker",
+"5 diş sarımsak",
+"Su (kavanozu doldurmaya yetecek kadar, yaklaşık 1 litre)"
+],
+"steps": [
+"Biberleri yıkayıp saplarını kısaltın, birkaç yerinden çatalla delin.",
+"Kavanoza sarımsakla birlikte sıkıca yerleştirin.",
+"Su, sirke, tuz ve şekeri karıştırıp kavanozu doldurun.",
+"Ağzını sıkıca kapatıp serin ve karanlık yerde 2–3 hafta bekletin.",
+"Açtıktan sonra buzdolabında saklayın."
+],
+"tips": [
+"Sirke ve tuz oranını azaltmayın; turşunun güvenliğini sağlar."
+],
+"serving": "Yemek yanında.",
+"storage": "Açılınca buzdolabında 1 ay."
+}
+]

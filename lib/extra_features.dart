@@ -1,12 +1,17 @@
+import 'utils/dialog_helpers.dart';
+import 'i18n/i18n.dart' show t;
+import 'i18n/text.dart';
 import 'dart:convert';
 import 'dart:math' as math;
 import 'tracking_journal.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'services/secure_health_store.dart';
 import 'services/growth_analysis.dart';
 import 'services/monthly_growth.dart';
 import 'services/pregnancy_timeline.dart';
 import 'services/pregnancy_week_guide.dart';
+import 'widgets/reference_widgets.dart';
+import 'screens/mom_tools_page.dart';
 
 const _mor = Color(0xFF764A72);
 const _pembe = Color(0xFFF8DDEB);
@@ -17,7 +22,7 @@ Widget _header(String title, String subtitle) => Container(
   decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),
     gradient: const LinearGradient(colors: [_pembe, _lila])),
   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-    Text(title, style: const TextStyle(fontSize: 24, color: _mor, fontWeight: FontWeight.bold)),
+    Text(title, style: const TextStyle(fontSize: 20, color: _mor, fontWeight: FontWeight.bold)),
     const SizedBox(height: 8), Text(subtitle, style: const TextStyle(color: _mor)),
   ]));
 String _date(DateTime d) => '${d.day.toString().padLeft(2, '0')}.${d.month.toString().padLeft(2, '0')}.${d.year}';
@@ -28,6 +33,7 @@ class PregnancyPage extends StatefulWidget {
   State<PregnancyPage> createState() => _PregnancyPageState();
 }
 class _PregnancyPageState extends State<PregnancyPage> {
+  final _checklistKey = GlobalKey();
   DateTime? period;
   final Set<String> done = {};
   final List<Map<String, String>> appointments = [];
@@ -84,12 +90,12 @@ class _PregnancyPageState extends State<PregnancyPage> {
   Future<void> _addAppointment() async {
     final controller = TextEditingController();
     DateTime selected = DateTime.now();
-    final result = await showDialog<Map<String, String>>(context: context,
+    final result = await showDialogAndDispose<Map<String, String>>(disposables: [controller], context: context,
       builder: (ctx) => StatefulBuilder(builder: (ctx, refresh) => AlertDialog(
         title: const Text('Kontrol / randevu ekle'),
         content: Column(mainAxisSize: MainAxisSize.min, children: [
           TextField(controller: controller, maxLength: 100,
-            decoration: const InputDecoration(labelText: 'Kontrol adı')),
+            decoration: InputDecoration(labelText: t('Kontrol adı'))),
           OutlinedButton.icon(icon: const Icon(Icons.event), label: Text(_date(selected)),
             onPressed: () async {
               final date = await showDatePicker(context: ctx, initialDate: selected,
@@ -106,7 +112,6 @@ class _PregnancyPageState extends State<PregnancyPage> {
           }, child: const Text('Kaydet')),
         ],
       )));
-    controller.dispose();
     if (result == null || !mounted) return;
     setState(() => appointments.add(result));
     try {
@@ -148,25 +153,46 @@ class _PregnancyPageState extends State<PregnancyPage> {
       }
     }
   }
+  void _openTools(int tab, String title) => Navigator.of(context).push(MaterialPageRoute<void>(
+    builder: (_) => Scaffold(appBar: AppBar(title: Text(title)), body: MomToolsPage(initialTab: tab))));
   @override
   Widget build(BuildContext context) {
     final timeline = period == null ? null : pregnancyTimeline(period!, DateTime.now());
     final valid = timeline != null;
+    final week = timeline?.week;
+    void openGuide() => Navigator.of(context).push(MaterialPageRoute<void>(
+      builder: (_) => PregnancyWeekGuidePage(initialWeek: (week ?? 1).clamp(1, 40))));
+    // Paket 39 referansı: hafta kartı, 40 haftalık ilerleme ve üç bağlantı kartı.
     return ListView(padding: const EdgeInsets.all(16), children: [
-      _header('Hamilelik takibi 🤰', valid ? '${timeline.week} hafta ${timeline.dayOfWeek} gün (yaklaşık)' :
-        'Son adet başlangıç tarihini girerek haftalık takibe başla.'),
-      const SizedBox(height: 16),
-      FilledButton.icon(onPressed: _choose, icon: const Icon(Icons.calendar_month),
-        label: Text(period == null ? 'Tarih seç' : 'Tarihi değiştir: ${_date(period!)}')),
+      PregnancyWeekCard(
+        week: week,
+        dueDate: period == null ? null : _date(period!.add(const Duration(days: 280))),
+        progress: timeline?.progress ?? 0,
+        onChangeDate: _choose,
+      ),
+      const SizedBox(height: 14),
+      PastelLinkCard(icon: Icons.child_friendly_outlined, title: 'Bebeğin Gelişimi',
+        subtitle: valid ? pregnancyWeekNote(timeline.week) : 'Tarih girildiğinde bu haftanın gelişimi gösterilir',
+        onTap: openGuide),
+      PastelLinkCard(icon: Icons.calendar_view_week_rounded, title: 'Hafta Hafta Gebelik',
+        subtitle: valid ? '${timeline.week}. haftada seni neler bekliyor?' : '1–40 hafta gebelik rehberi',
+        iconColor: _lila, onTap: openGuide),
+      PastelLinkCard(icon: Icons.menu_book_rounded, title: 'Yapılacaklar Listem',
+        subtitle: 'Kontroller, testler ve hazırlıklar', iconColor: const Color(0xFFFFEBD9),
+        onTap: () {
+          final ctx = _checklistKey.currentContext;
+          if (ctx != null) Scrollable.ensureVisible(ctx, duration: const Duration(milliseconds: 350));
+        }),
+      PastelLinkCard(key: const Key('gebelik_kasilma'), icon: Icons.timer_outlined, title: 'Kasılma ve Tekme Sayacı',
+        subtitle: 'Kasılma aralığı, 5-1-1 uyarısı ve 10 hareket takibi', iconColor: const Color(0xFFFFE0E0),
+        onTap: () => _openTools(0, 'Kasılma ve Tekme Sayacı')),
+      PastelLinkCard(key: const Key('gebelik_isimler'), icon: Icons.badge_outlined, title: 'Bebek İsimleri',
+        subtitle: 'Anlamıyla isim önerileri ve favori listen', iconColor: _lila,
+        onTap: () => _openTools(3, 'Bebek İsimleri')),
       if (timeline != null) ...[
-        const SizedBox(height: 18),
-        LinearProgressIndicator(value: timeline.progress, minHeight: 12,
-          borderRadius: BorderRadius.circular(10), color: _mor, backgroundColor: _pembe),
-        ListTile(leading: const Icon(Icons.event, color: _mor), title: const Text('Tahmini doğum tarihi'),
-          subtitle: Text(_date(period!.add(const Duration(days: 280))))),
         Card(child: ListTile(leading: const Icon(Icons.auto_awesome, color: _mor),
-          title: Text('${timeline.trimester} • ${timeline.week}. hafta'),
-          subtitle: Text(pregnancyWeekNote(timeline.week)))),
+          title: Text('${timeline.trimester} • ${timeline.week} hafta ${timeline.dayOfWeek} gün (yaklaşık)'),
+          subtitle: Text('Son adet başlangıcı: ${_date(period!)}'))),
         Card(child: ListTile(leading: const Icon(Icons.today, color: _mor),
           title: const Text('Tahmini doğuma kalan süre'),
           subtitle: Text(timeline.daysUntilEstimatedDueDate >= 0
@@ -187,10 +213,10 @@ class _PregnancyPageState extends State<PregnancyPage> {
           body: const TrackingJournalPage(pregnancy: true)))),
         icon: const Icon(Icons.edit_note), label: const Text('Kilo, belirti ve kontrol günlüğüm')),
       const SizedBox(height: 16),
-      Row(children: [
+      Row(key: _checklistKey, children: [
         const Expanded(child: Text('Kontrol ve randevularım',
-          style: TextStyle(fontSize: 20, color: _mor, fontWeight: FontWeight.bold))),
-        IconButton(tooltip: 'Kontrol ekle', onPressed: _addAppointment,
+          style: TextStyle(fontSize: 17, color: _mor, fontWeight: FontWeight.bold))),
+        IconButton(tooltip: t('Kontrol ekle'), onPressed: _addAppointment,
           icon: const Icon(Icons.add_circle_outline, color: _mor)),
       ]),
       if (appointments.isEmpty) const Padding(
@@ -200,10 +226,10 @@ class _PregnancyPageState extends State<PregnancyPage> {
         child: ListTile(leading: const Icon(Icons.medical_services_outlined, color: _mor),
           title: Text(a['title']!),
           subtitle: Text(_date(DateTime.parse(a['date']!))),
-          trailing: IconButton(tooltip: 'Kontrolü sil', icon: const Icon(Icons.delete_outline),
+          trailing: IconButton(tooltip: t('Kontrolü sil'), icon: const Icon(Icons.delete_outline),
             onPressed: () => _removeAppointment(a))))),
-      const Padding(padding: EdgeInsets.symmetric(vertical: 16), child: Text('Doğuma hazırlık listesi',
-        style: TextStyle(fontSize: 20, color: _mor, fontWeight: FontWeight.bold))),
+      const Padding(padding: EdgeInsets.symmetric(vertical: 10), child: Text('Doğuma hazırlık listesi',
+        style: TextStyle(fontSize: 17, color: _mor, fontWeight: FontWeight.bold))),
       ...tasks.map((task) => Card(color: Colors.white, child: CheckboxListTile(
         title: Text(task), value: done.contains(task), activeColor: _mor,
         onChanged: (v) async {
@@ -242,16 +268,33 @@ class _PregnancyWeekGuidePageState extends State<PregnancyWeekGuidePage> {
       body: ListView(padding: const EdgeInsets.all(16), children: [
         _header('$week. hafta', 'Genel bilgilendirme • Doktorunun belirlediği gebelik haftası esas alınır.'),
         const SizedBox(height: 16),
-        DropdownButtonFormField<int>(
+        DropdownButtonFormField<int>(isExpanded: true, 
           initialValue: week,
-          decoration: const InputDecoration(labelText: 'Hafta seç', border: OutlineInputBorder()),
+          decoration: InputDecoration(labelText: t('Hafta seç'), border: OutlineInputBorder()),
           items: [for (var i = 1; i <= 40; i++) DropdownMenuItem(value: i, child: Text('$i. hafta'))],
           onChanged: (value) { if (value != null) setState(() => week = value); },
         ),
         const SizedBox(height: 12),
+        Card(color: const Color(0xFFFFEEF6), elevation: 0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
+          child: Padding(padding: const EdgeInsets.all(16), child: Row(children: [
+            Text(guide.sizeEmoji, style: const TextStyle(fontSize: 52)),
+            const SizedBox(width: 14),
+            Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text('$week. hafta · ${guide.trimester}. trimester',
+                style: const TextStyle(fontWeight: FontWeight.w800, color: _mor)),
+              if (guide.sizeLabel.isNotEmpty) ...[
+                const SizedBox(height: 4),
+                Text('Bebeğin bir ${guide.sizeLabel} büyüklüğünde',
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: Color(0xFFE94791))),
+              ],
+              if (guide.measure.isNotEmpty) Text(guide.measure[0].toUpperCase() + guide.measure.substring(1),
+                style: const TextStyle(color: Colors.black54)),
+            ])),
+          ]))),
         _guideCard('Bebeğin gelişimi', guide.development, Icons.child_care),
         _guideCard('Anne adayındaki değişimler', guide.maternalChanges, Icons.favorite_outline),
-        _guideCard('Bu dönemde planlanabilecekler', guide.preparation, Icons.checklist),
+        _guideCard('Bu hafta yapılacaklar', guide.preparation, Icons.checklist),
         _guideCard('Ne zaman yardım alınmalı?', guide.safety, Icons.health_and_safety_outlined),
         Row(children: [
           Expanded(child: OutlinedButton.icon(
@@ -303,7 +346,7 @@ class _FamilyCalendarPageState extends State<FamilyCalendarPage> {
       builder: (ctx) => StatefulBuilder(builder: (ctx, refresh) => AlertDialog(
         title: const Text('Etkinlik ekle'),
         content: Column(mainAxisSize: MainAxisSize.min, children: [
-          TextField(controller: input, decoration: const InputDecoration(labelText: 'Etkinlik adı')),
+          TextField(controller: input, decoration: InputDecoration(labelText: t('Etkinlik adı'))),
           OutlinedButton.icon(icon: const Icon(Icons.event), label: Text(_date(selected)), onPressed: () async {
             final d = await showDatePicker(context: ctx, initialDate: selected,
               firstDate: DateTime(2020), lastDate: DateTime(2100));

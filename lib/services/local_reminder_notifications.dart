@@ -1,3 +1,5 @@
+import '../i18n/i18n.dart';
+import 'family_notification_repository.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
@@ -45,24 +47,66 @@ class LocalReminderNotifications {
     await _plugin.cancel(notificationId(id));
   }
 
+  /// "Tüm yerel kayıtları sil" sonrasında planlanmış hiçbir hatırlatıcı
+  /// kalmamalı; silinen kayda ait bildirim teslim edilmemeli.
+  static Future<void> cancelAll() async {
+    await initialize();
+    await _plugin.cancelAll();
+  }
+
   static Future<void> schedule(FamilyReminder reminder) async {
     await initialize();
     await cancel(reminder.id);
-    if (!reminder.notify || reminder.completed || !reminder.due.isAfter(DateTime.now())) return;
+    if (!reminder.notify || reminder.completed || !reminder.due.isAfter(DateTime.now())) { return; }
+    // Fail closed: no OS notification without persisted opt-in.
+    final preferences = await FamilyNotificationRepository.load();
+    if (!preferences.remindersEnabled ||
+        preferences.isQuietHour(reminder.due.hour)) {
+      return;
+    }
     // Convert local instant to UTC for correct scheduling without device-zone lookup.
     final utcTime = tz.TZDateTime.from(reminder.due.toUtc(), tz.UTC);
-    await _plugin.zonedSchedule(notificationId(reminder.id), 'Anne & Bebek',
+    await _plugin.zonedSchedule(notificationId(reminder.id), t('Anne & Bebek'),
       reminder.title, utcTime,
-      const NotificationDetails(android: AndroidNotificationDetails(
-        'family_reminders', 'Aile hatırlatıcıları',
-        channelDescription: 'İsteğe bağlı aile takvimi hatırlatıcıları',
+      NotificationDetails(android: AndroidNotificationDetails(
+        'family_reminders', t('Aile hatırlatıcıları'),
+        channelDescription: t('İsteğe bağlı aile takvimi hatırlatıcıları'),
         importance: Importance.high, priority: Priority.high),
         iOS: DarwinNotificationDetails()),
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
   }
 
+  /// Her gün aynı saatte tekrarlanan hatırlatma (ilaç/vitamin). Kullanıcı
+  /// bildirimleri açmadıysa planlanmaz.
+  static Future<void> scheduleDaily(String id, String title, int hour, int minute) async {
+    await initialize();
+    await cancel(id);
+    final preferences = await FamilyNotificationRepository.load();
+    if (!preferences.remindersEnabled) return;
+    final now = DateTime.now();
+    var next = DateTime(now.year, now.month, now.day, hour, minute);
+    if (!next.isAfter(now)) next = next.add(const Duration(days: 1));
+    final utcTime = tz.TZDateTime.from(next.toUtc(), tz.UTC);
+    await _plugin.zonedSchedule(notificationId(id), t('Anne & Bebek'), title, utcTime,
+      NotificationDetails(android: AndroidNotificationDetails(
+        'daily_medicine', t('İlaç ve vitamin'),
+        channelDescription: t('Her gün tekrarlanan ilaç ve vitamin hatırlatmaları'),
+        importance: Importance.high, priority: Priority.high),
+        iOS: DarwinNotificationDetails()),
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      matchDateTimeComponents: DateTimeComponents.time,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
+  }
+
   static Future<void> sync(List<FamilyReminder> previous, List<FamilyReminder> next) async {
+    final preferences = await FamilyNotificationRepository.load();
+    if (!preferences.remindersEnabled) {
+      for (final item in [...previous, ...next]) {
+        await cancel(item.id);
+      }
+      return;
+    }
     for (final item in previous) {
       if (!next.any((n) => n.id == item.id)) await cancel(item.id);
     }

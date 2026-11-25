@@ -1,7 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../services/child_journals.dart';
 import '../services/child_profiles.dart';
 import '../services/secure_health_store.dart';
+import '../utils/growth_measurement_validator.dart';
+import '../utils/growth_measurement_record_validator.dart';
 
 class ChildJournalPage extends StatefulWidget {
   final ChildProfile child;
@@ -38,43 +42,85 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
         const SnackBar(content: Text('Kaydedilemedi; eski kayıtlar korundu.'))); }
     } finally { if (mounted) setState(() => _saving = false); }
   }
+  String? _measurementError(String category, double? value, DateTime at) {
+    // Validate the full record before either creating or editing a measurement.
+    // Non-measurement journal entries retain their existing date validation.
+    switch (category) {
+      case 'Kilo (kg)':
+        return GrowthMeasurementRecordValidator.validate(
+          birthDate: widget.child.birthDate, measuredAt: at, weightKg: value);
+      case 'Boy (cm)':
+        return GrowthMeasurementRecordValidator.validate(
+          birthDate: widget.child.birthDate, measuredAt: at, heightCm: value);
+      case 'Baş çevresi (cm)':
+        return GrowthMeasurementRecordValidator.validate(
+          birthDate: widget.child.birthDate, measuredAt: at,
+          headCircumferenceCm: value);
+      default:
+        return GrowthMeasurementValidator.validateMeasurementDate(
+          at, birthDate: widget.child.birthDate);
+    }
+  }
+
   Future<void> _add() async {
     final note = TextEditingController();
     final number = TextEditingController();
     String category = categories.first;
     DateTime at = DateTime.now();
+    ModalRoute<dynamic>? addRoute;
     final entry = await showDialog<ChildJournalEntry>(context: context,
-      builder: (ctx) => StatefulBuilder(builder: (ctx, update) => AlertDialog(
+      builder: (ctx) {
+        addRoute = ModalRoute.of(ctx);
+        return StatefulBuilder(builder: (ctx, update) => AlertDialog(
         title: Text('${widget.child.name} · Yeni kayıt'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min,
           children: [
-            DropdownButtonFormField<String>(initialValue: category,
+            DropdownButtonFormField<String>(isExpanded: true, initialValue: category,
               items: categories.map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),
               onChanged: (s) { if (s != null) update(() => category = s); },
-              decoration: const InputDecoration(labelText: 'Kategori')),
+              decoration: InputDecoration(labelText: t('Kategori'))),
             TextField(controller: note, maxLines: 2, maxLength: 300,
-              decoration: const InputDecoration(labelText: 'Açıklama / not')),
+              decoration: InputDecoration(labelText: t('Açıklama / not'))),
             if (category == 'Kilo (kg)' || category == 'Boy (cm)' || category == 'Baş çevresi (cm)')
-              TextField(controller: number, keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                decoration: const InputDecoration(labelText: 'Ölçüm değeri')),
+              TextField(controller: number, maxLength: 64,
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                decoration: InputDecoration(labelText: t('Ölçüm değeri'))),
             OutlinedButton(onPressed: () async {
-              final selected = await showDatePicker(context: ctx, initialDate: at,
-                firstDate: widget.child.birthDate, lastDate: DateTime.now());
-              if (selected != null) update(() => at = selected);
+              if (DateUtils.dateOnly(widget.child.birthDate)
+                  .isAfter(DateUtils.dateOnly(DateTime.now()))) {
+                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(
+                  content: Text('Doğum tarihi gelecekte olamaz.')));
+                return;
+              }
+              final now = DateTime.now();
+              final first = DateTime(widget.child.birthDate.year,
+                  widget.child.birthDate.month, widget.child.birthDate.day);
+              final last = DateTime(now.year, now.month, now.day);
+              final selectedDay = DateTime(at.year, at.month, at.day);
+              final initial = selectedDay.isBefore(first) ? first :
+                  selectedDay.isAfter(last) ? last : selectedDay;
+              final selected = await showDatePicker(context: ctx,
+                initialDate: initial, firstDate: first, lastDate: last);
+              if (selected != null && ctx.mounted) update(() => at = selected);
             }, child: Text('Tarih: ${at.day}.${at.month}.${at.year}')),
           ])),
         actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
           FilledButton(onPressed: () {
             final isMeasure = category.contains('(kg)') || category.contains('(cm)');
-            final parsed = double.tryParse(number.text.replaceAll(',', '.'));
-            if (isMeasure && (parsed == null || !parsed.isFinite || parsed <= 0 || parsed > 300)) return;
+            final parsed = GrowthMeasurementValidator.parseMeasurement(number.text);
+            final validation = _measurementError(category, isMeasure ? parsed : null, at);
+            if (validation != null) {
+              ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(validation)));
+              return;
+            }
             if (!isMeasure && note.text.trim().isEmpty) return;
             Navigator.pop(ctx, ChildJournalEntry(
               id: DateTime.now().microsecondsSinceEpoch.toString(),
               childId: widget.child.id, category: category, note: note.text.trim(),
               at: at, value: isMeasure ? parsed : null));
           }, child: const Text('Kaydet'))],
-      )));
+      )); });
+    await addRoute?.completed;
     note.dispose(); number.dispose();
     if (entry != null && mounted) await _save([..._all, entry]);
   }
@@ -85,30 +131,45 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
     DateTime at = original.at;
     final isMeasure = original.category == 'Kilo (kg)' ||
         original.category == 'Boy (cm)' || original.category == 'Baş çevresi (cm)';
+    ModalRoute<dynamic>? editRoute;
     final changed = await showDialog<ChildJournalEntry>(context: context,
-      builder: (ctx) => StatefulBuilder(builder: (ctx, update) => AlertDialog(
+      builder: (ctx) {
+        editRoute = ModalRoute.of(ctx);
+        return StatefulBuilder(builder: (ctx, update) => AlertDialog(
         title: Text('${widget.child.name} · Kaydı düzenle'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
           Text(original.category),
           TextField(controller: note, maxLines: 2, maxLength: 300,
-            decoration: const InputDecoration(labelText: 'Açıklama / not')),
-          if (isMeasure) TextField(controller: number,
+            decoration: InputDecoration(labelText: t('Açıklama / not'))),
+          if (isMeasure) TextField(controller: number, maxLength: 64,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: const InputDecoration(labelText: 'Ölçüm değeri')),
+            decoration: InputDecoration(labelText: t('Ölçüm değeri'))),
           OutlinedButton(onPressed: () async {
+            if (DateUtils.dateOnly(widget.child.birthDate)
+                  .isAfter(DateUtils.dateOnly(DateTime.now()))) {
+              ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(
+                content: Text('Doğum tarihi gelecekte olamaz.')));
+              return;
+            }
+            final now = DateTime.now();
+            final first = DateTime(widget.child.birthDate.year,
+                widget.child.birthDate.month, widget.child.birthDate.day);
+            final last = DateTime(now.year, now.month, now.day);
+            final selectedDay = DateTime(at.year, at.month, at.day);
+            final initial = selectedDay.isBefore(first) ? first :
+                selectedDay.isAfter(last) ? last : selectedDay;
             final selected = await showDatePicker(context: ctx,
-              initialDate: at.isAfter(DateTime.now()) ? DateTime.now() :
-                at.isBefore(widget.child.birthDate) ? widget.child.birthDate : at,
-              firstDate: widget.child.birthDate, lastDate: DateTime.now());
-            if (selected != null) update(() => at = selected);
+              initialDate: initial, firstDate: first, lastDate: last);
+            if (selected != null && ctx.mounted) update(() => at = selected);
           }, child: Text('Tarih: ${at.day}.${at.month}.${at.year}')),
         ])),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Vazgeç')),
           FilledButton(onPressed: () {
-            final parsed = double.tryParse(number.text.replaceAll(',', '.'));
-            if (isMeasure && (parsed == null || !parsed.isFinite || !parsed.isFinite || parsed <= 0 || parsed > 300)) {
-              ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Geçerli bir ölçüm girin.')));
+            final parsed = GrowthMeasurementValidator.parseMeasurement(number.text);
+            final validation = _measurementError(original.category, isMeasure ? parsed : null, at);
+            if (validation != null) {
+              ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(validation)));
               return;
             }
             if (!isMeasure && note.text.trim().isEmpty) {
@@ -120,7 +181,8 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
               note: note.text.trim(), at: at, value: isMeasure ? parsed : null));
           }, child: const Text('Değişiklikleri kaydet')),
         ],
-      )));
+      )); });
+    await editRoute?.completed;
     note.dispose(); number.dispose();
     if (changed != null && mounted) {
       await _save(_all.map((entry) => entry.id == original.id &&
@@ -162,9 +224,9 @@ class _ChildJournalPageState extends State<ChildJournalPage> {
             title: Text(e.category + (e.value == null ? '' : ': ${e.value}')),
             subtitle: Text('${e.at.day}.${e.at.month}.${e.at.year}  ${e.note}'),
             trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-              IconButton(tooltip: 'Kaydı düzenle', icon: const Icon(Icons.edit_outlined),
+              IconButton(tooltip: t('Kaydı düzenle'), icon: const Icon(Icons.edit_outlined),
                 onPressed: _saving ? null : () => _edit(e)),
-              IconButton(tooltip: 'Kaydı sil', icon: const Icon(Icons.delete_outline),
+              IconButton(tooltip: t('Kaydı sil'), icon: const Icon(Icons.delete_outline),
               onPressed: _saving ? null : () async {
                 final ok = await showDialog<bool>(context: context, builder: (ctx) => AlertDialog(
                   title: const Text('Kayıt silinsin mi?'),

@@ -1,8 +1,13 @@
+import 'utils/dialog_helpers.dart';
+import 'i18n/i18n.dart' show t;
+import 'i18n/text.dart';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'services/secure_health_store.dart';
 import 'services/daily_analytics.dart';
 import 'services/period_comparison.dart';
+import 'services/fever_log.dart' show pregnancyReadingWarning;
+import 'screens/mom_tools_page.dart';
 
 /// Local journal using platform-protected secure storage; no cloud sync.
 class TrackingJournalPage extends StatefulWidget {
@@ -13,8 +18,8 @@ class TrackingJournalPage extends StatefulWidget {
 }
 
 class _TrackingJournalPageState extends State<TrackingJournalPage> {
-  static const _feedingTypes = ['Emzirme', 'Mama', 'Ek gıda'];
-  static const _pregnancyTypes = ['Kilo', 'Belirti', 'Kontrol / tetkik', 'Not'];
+  static const _feedingTypes = ['Emzirme', 'Mama', 'Ek gıda', 'Süt sağma'];
+  static const _pregnancyTypes = ['Kilo', 'Tansiyon', 'Kan şekeri', 'Belirti', 'Kontrol / tetkik', 'Not'];
   final List<Map<String, dynamic>> _entries = [];
   String _type = 'Emzirme';
   bool _loading = true;
@@ -41,27 +46,31 @@ class _TrackingJournalPageState extends State<TrackingJournalPage> {
 
   Future<void> _add() async {
     final quantity = TextEditingController();
+    final quantity2 = TextEditingController();
     final note = TextEditingController();
     String type = _type;
     String side = 'Belirtilmedi';
     DateTime date = DateTime.now();
-    final result = await showDialog<Map<String, dynamic>>(
+    final result = await showDialogAndDispose<Map<String, dynamic>>(disposables: [quantity, quantity2, note],
       context: context,
       builder: (ctx) => StatefulBuilder(builder: (ctx, update) => AlertDialog(
         title: Text(widget.pregnancy ? 'Gebelik kaydı ekle' : 'Beslenme kaydı ekle'),
         content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
           DropdownButtonFormField<String>(initialValue: type, isExpanded: true,
-            decoration: const InputDecoration(labelText: 'Kayıt türü'),
+            decoration: InputDecoration(labelText: t('Kayıt türü')),
             items: _types.map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
             onChanged: (v) { if (v != null) update(() => type = v); }),
-          if (type == 'Emzirme') DropdownButtonFormField<String>(initialValue: side,
-            decoration: const InputDecoration(labelText: 'Taraf'),
+          if (type == 'Emzirme') DropdownButtonFormField<String>(isExpanded: true, initialValue: side,
+            decoration: InputDecoration(labelText: t('Taraf')),
             items: ['Belirtilmedi', 'Sol', 'Sağ', 'Her ikisi']
               .map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),
             onChanged: (v) { if (v != null) update(() => side = v); }),
           if (_numericType(type)) TextField(controller: quantity,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             decoration: InputDecoration(labelText: _unitLabel(type))),
+          if (type == 'Tansiyon') TextField(key: const Key('journal_amount2'), controller: quantity2,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(labelText: t('Küçük tansiyon (mmHg)'))),
           TextField(controller: note, maxLength: 500,
             decoration: InputDecoration(labelText: type == 'Ek gıda' ? 'Besin / porsiyon / gözlem' : 'Açıklama (isteğe bağlı)')),
           OutlinedButton.icon(icon: const Icon(Icons.calendar_today),
@@ -81,17 +90,37 @@ class _TrackingJournalPageState extends State<TrackingJournalPage> {
               ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('Geçerli bir ${_unitLabel(type).toLowerCase()} girin.')));
               return;
             }
+            final amount2 = double.tryParse(quantity2.text.trim().replaceAll(',', '.'));
+            if (type == 'Tansiyon' && !validJournalAmount('Küçük tansiyon', amount2)) {
+              ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Geçerli bir küçük tansiyon girin (30–160 mmHg).')));
+              return;
+            }
             if (date.isAfter(DateTime.now())) return;
             Navigator.pop(ctx, {'type': type, 'date': date.toIso8601String(),
-              'amount': amount, 'side': side, 'note': note.text.trim()});
+              'amount': amount, if (type == 'Tansiyon') 'amount2': amount2, 'side': side, 'note': note.text.trim()});
           }, child: const Text('Kaydet'))],
       )),
     );
-    quantity.dispose(); note.dispose();
     if (result == null || !mounted) return;
+    final warning = journalEntryWarning(result);
+    if (warning != null) {
+      ScaffoldMessenger.of(context)..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(content: Text(warning), duration: const Duration(seconds: 8)));
+    }
     setState(() { _entries.insert(0, result); _entries.sort((a, b) =>
       (b['date'] as String).compareTo(a['date'] as String)); });
     await _save();
+  }
+
+  /// Zamanlayıcı kaydı aynı günlüğe yazar; dönüşte liste yeniden okunur.
+  Future<void> _openNursingTimer() async {
+    await Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => Scaffold(
+      appBar: AppBar(title: const Text('Emzirme zamanlayıcısı')),
+      body: const MomToolsPage(initialTab: 2))));
+    if (!mounted) return;
+    final parsed = decodeJournal(await SecureHealthStore.read(_key));
+    if (!mounted) return;
+    setState(() { _entries..clear()..addAll(parsed); });
   }
 
   Future<void> _delete(Map<String, dynamic> entry) async {
@@ -130,8 +159,8 @@ class _TrackingJournalPageState extends State<TrackingJournalPage> {
           Text(widget.pregnancy ? 'Gebelik günlüğüm 🤰' : 'Beslenme günlüğüm 🍼',
             style: const TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: Color(0xFF764A72))),
           const SizedBox(height: 8),
-          Text(widget.pregnancy ? 'Kilo, belirti ve kontrollerini tarihli kaydet.' :
-            'Emzirme, mama ve ek gıda kayıtlarını bir arada tut.'),
+          Text(widget.pregnancy ? 'Kilo, tansiyon, kan şekeri, belirti ve kontrollerini tarihli kaydet.' :
+            'Emzirme, mama, süt sağma ve ek gıda kayıtlarını bir arada tut.'),
           if (!widget.pregnancy) Padding(padding: const EdgeInsets.only(top: 12),
             child: Text('Bugün: ${todayEntries.length} kayıt • Mama: ${mamaTotal.toStringAsFixed(0)} ml')),
         ]))),
@@ -197,6 +226,10 @@ class _TrackingJournalPageState extends State<TrackingJournalPage> {
       ),
       const SizedBox(height: 10),
       FilledButton.icon(onPressed: _add, icon: const Icon(Icons.add), label: const Text('Yeni kayıt ekle')),
+      if (!widget.pregnancy) Padding(padding: const EdgeInsets.only(top: 8), child: OutlinedButton.icon(
+        key: const Key('journal_open_nursing_timer'),
+        icon: const Icon(Icons.timer), label: const Text('Emzirme zamanlayıcısı (sol / sağ)'),
+        onPressed: _openNursingTimer)),
       if (_loading) const Center(child: CircularProgressIndicator()),
       if (!_loading && _entries.isEmpty) const Padding(padding: EdgeInsets.all(20),
         child: Text('Henüz kayıt bulunmuyor. Yeni kayıt ekleyerek başlayabilirsin.')),
@@ -206,12 +239,15 @@ class _TrackingJournalPageState extends State<TrackingJournalPage> {
         final type = entry['type'] as String? ?? '';
         final detail = <String>[
           if (d != null) '${d.day}.${d.month}.${d.year} ${d.hour.toString().padLeft(2, '0')}:${d.minute.toString().padLeft(2, '0')}',
-          if (amount is num) '${amount.toString()} ${type == 'Mama' ? 'ml' : type == 'Kilo' ? 'kg' : 'dk'}',
+          if (amount is num) journalAmountText(entry),
           if (type == 'Emzirme' && entry['side'] != 'Belirtilmedi') '${entry['side']}',
           if ((entry['note'] as String? ?? '').isNotEmpty) entry['note'] as String,
         ];
-        return Card(child: ListTile(title: Text(type), subtitle: Text(detail.join(' • ')),
-          trailing: IconButton(tooltip: 'Kaydı sil', icon: const Icon(Icons.delete_outline),
+        final warning = journalEntryWarning(entry);
+        if (warning != null) detail.add('⚠️ $warning');
+        return Card(color: warning != null ? const Color(0xFFFFF0F0) : null,
+          child: ListTile(title: Text(type), subtitle: Text(detail.join(' • ')),
+          trailing: IconButton(tooltip: t('Kaydı sil'), icon: const Icon(Icons.delete_outline),
             onPressed: () => _delete(entry))));
       }),
       const Padding(padding: EdgeInsets.all(12), child: Text(
@@ -222,8 +258,33 @@ class _TrackingJournalPageState extends State<TrackingJournalPage> {
   }
 }
 
-bool _numericType(String type) => type == 'Mama' || type == 'Emzirme' || type == 'Kilo';
-String _unitLabel(String type) => type == 'Mama' ? 'Miktar (ml)' : type == 'Kilo' ? 'Kilo (kg)' : 'Süre (dakika)';
+bool _numericType(String type) =>
+    const {'Mama', 'Emzirme', 'Kilo', 'Süt sağma', 'Tansiyon', 'Kan şekeri'}.contains(type);
+String _unitLabel(String type) => switch (type) {
+      'Mama' || 'Süt sağma' => 'Miktar (ml)',
+      'Kilo' => 'Kilo (kg)',
+      'Tansiyon' => 'Büyük tansiyon (mmHg)',
+      'Kan şekeri' => 'Kan şekeri (mg/dL)',
+      _ => 'Süre (dakika)',
+    };
+
+String journalAmountText(Map<String, dynamic> entry) {
+  final type = entry['type'];
+  final a = entry['amount'], b = entry['amount2'];
+  String n(Object? v) => v is num ? (v == v.roundToDouble() ? v.toInt().toString() : v.toString()) : '';
+  return switch (type) {
+    'Tansiyon' => '${n(a)}/${n(b)} mmHg',
+    'Kan şekeri' => '${n(a)} mg/dL',
+    'Mama' || 'Süt sağma' => '${n(a)} ml',
+    'Kilo' => '${n(a)} kg',
+    _ => '${n(a)} dk',
+  };
+}
+
+String? journalEntryWarning(Map<String, dynamic> entry) {
+  final a = entry['amount'], b = entry['amount2'];
+  return pregnancyReadingWarning('${entry['type']}', a is num ? a.toDouble() : null, b is num ? b.toDouble() : null);
+}
 
 bool validJournalAmount(String type, double? value) {
   if (value == null || !value.isFinite) return false;
@@ -231,6 +292,10 @@ bool validJournalAmount(String type, double? value) {
     case 'Mama': return value > 0 && value <= 1000;
     case 'Emzirme': return value > 0 && value <= 240;
     case 'Kilo': return value >= 20 && value <= 350;
+    case 'Süt sağma': return value > 0 && value <= 1000;
+    case 'Tansiyon': return value >= 60 && value <= 250;
+    case 'Küçük tansiyon': return value >= 30 && value <= 160;
+    case 'Kan şekeri': return value >= 20 && value <= 600;
     default: return true;
   }
 }

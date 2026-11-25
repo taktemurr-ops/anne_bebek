@@ -1,11 +1,32 @@
+import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'i18n/i18n.dart' show t;
+import 'i18n/text.dart';
+import 'package:flutter/material.dart' hide Text;
 import 'services/secure_health_store.dart';
 import 'services/daily_analytics.dart';
 import 'services/period_comparison.dart';
 import 'services/child_profiles.dart';
+import 'services/wake_window.dart';
 
 const sleepJournalKey = 'baby_sleep_journal_v1';
+/// Canlı uyku zamanlayıcıları: {günlük anahtarı: başlangıç ISO}.
+const sleepRunningKey = 'baby_sleep_running_v1';
+
+Map<String, String> decodeSleepRunning(String? raw) {
+  if (raw == null || raw.isEmpty) return {};
+  try {
+    final data = jsonDecode(raw);
+    if (data is! Map) return {};
+    return {
+      for (final e in data.entries)
+        if (e.key is String && e.value is String && DateTime.tryParse(e.value as String) != null)
+          e.key as String: e.value as String,
+    };
+  } catch (_) {
+    return {};
+  }
+}
 
 /// Reject reversed, future, or implausibly long sleep intervals.
 int? sleepDurationMinutes(DateTime start, DateTime end, DateTime now) {
@@ -45,7 +66,10 @@ List<Map<String, dynamic>> parseSleepJournal(String? raw) {
 
 class SleepJournalPage extends StatefulWidget {
   final ChildProfile? child;
-  const SleepJournalPage({super.key, this.child});
+  /// Profil seçilmeden açıldığında uyanıklık penceresi için doğum tarihi.
+  final DateTime? birth;
+  final DateTime Function()? clock;
+  const SleepJournalPage({super.key, this.child, this.birth, this.clock});
   @override
   State<SleepJournalPage> createState() => _SleepJournalPageState();
 }
@@ -55,6 +79,68 @@ class _SleepJournalPageState extends State<SleepJournalPage> {
   String get storageKey => widget.child == null ? sleepJournalKey : '${sleepJournalKey}_child_${widget.child!.id}';
   bool loading = true;
   String? error;
+  DateTime? runningSince;
+  Timer? _ticker;
+
+  DateTime _now() => (widget.clock ?? DateTime.now)();
+
+  @override
+  void dispose() {
+    _ticker?.cancel();
+    super.dispose();
+  }
+
+  void _syncTicker() {
+    if (runningSince != null) {
+      _ticker ??= Timer.periodic(const Duration(seconds: 1), (_) { if (mounted) setState(() {}); });
+    } else {
+      _ticker?.cancel();
+      _ticker = null;
+    }
+  }
+
+  Future<void> _setRunning(DateTime? start) async {
+    final map = decodeSleepRunning(await SecureHealthStore.read(sleepRunningKey));
+    if (start == null) {
+      map.remove(storageKey);
+    } else {
+      map[storageKey] = start.toIso8601String();
+    }
+    await SecureHealthStore.write(sleepRunningKey, jsonEncode(map));
+  }
+
+  /// "Uyudu" ile canlı zamanlayıcı başlar; "Uyandı" ile kayıt oluşturulur.
+  Future<void> _toggleLive() async {
+    final now = _now();
+    final start = runningSince;
+    try {
+      if (start == null) {
+        await _setRunning(now);
+        if (mounted) setState(() => runningSince = now);
+      } else {
+        final minutes = sleepDurationMinutes(start, now, now.add(const Duration(seconds: 1)));
+        await _setRunning(null);
+        if (mounted) setState(() => runningSince = null);
+        if (minutes == null || minutes < 1) {
+          _info('1 dakikadan kısa ya da 24 saatten uzun uyku kaydedilmez.');
+        } else if (sleepOverlaps(records, start, now)) {
+          _info('Bu saatlerde başka bir uyku kaydı var. Çakışan kayıt eklenemez.');
+        } else {
+          final updated = [...records, {'start': start.toIso8601String(), 'end': now.toIso8601String()}];
+          updated.sort((a, b) => (b['start'] as String).compareTo(a['start'] as String));
+          await _persist(updated);
+        }
+      }
+    } catch (_) {
+      if (mounted) setState(() => error = 'Kayıt kaydedilemedi; önceki kayıtlar korundu.');
+    }
+    _syncTicker();
+  }
+
+  void _info(String text) {
+    final m = ScaffoldMessenger.maybeOf(context);
+    m?..hideCurrentSnackBar()..showSnackBar(SnackBar(content: Text(text)));
+  }
 
   @override
   void initState() { super.initState(); _load(); }
@@ -62,7 +148,12 @@ class _SleepJournalPageState extends State<SleepJournalPage> {
   Future<void> _load() async {
     try {
       final value = await SecureHealthStore.read(storageKey);
-      if (mounted) setState(() { records = parseSleepJournal(value); loading = false; });
+      DateTime? running;
+      try {
+        running = DateTime.tryParse(decodeSleepRunning(await SecureHealthStore.read(sleepRunningKey))[storageKey] ?? '');
+      } catch (_) {}
+      if (mounted) setState(() { records = parseSleepJournal(value); runningSince = running; loading = false; });
+      _syncTicker();
     } catch (_) {
       if (mounted) setState(() { error = 'Uyku kayıtları okunamadı. Mevcut kayıtlar silinmedi.'; loading = false; });
     }
@@ -119,6 +210,42 @@ class _SleepJournalPageState extends State<SleepJournalPage> {
     }
   }
 
+  String _clock(Duration d) =>
+      '${d.inHours.toString().padLeft(2, '0')}:${(d.inMinutes % 60).toString().padLeft(2, '0')}:${(d.inSeconds % 60).toString().padLeft(2, '0')}';
+
+  String _hm(DateTime d) => '${d.hour.toString().padLeft(2, '0')}:${d.minute.toString().padLeft(2, '0')}';
+
+  /// Son uyanıştan bu yana geçen süre ve sıradaki uyku için önerilen aralık.
+  List<Widget> _wakeWindowCard() {
+    final birth = widget.child?.birthDate ?? widget.birth;
+    if (birth == null || loading) return const [];
+    final now = _now();
+    final s = nextNapSuggestion(records, birth, now);
+    if (s == null) {
+      return [Card(key: const Key('uyaniklik_penceresi'), color: const Color(0xFFF3EEFF), child: const ListTile(
+        leading: Icon(Icons.wb_twilight_rounded, color: Color(0xFF764A72)),
+        title: Text('Uyanıklık penceresi'),
+        subtitle: Text('Son uykunun bitiş saatini kaydedince sıradaki uyku için önerilen saat aralığı burada görünür.')))];
+    }
+    final awake = '${s.awake.inHours} sa ${s.awake.inMinutes % 60} dk';
+    final range = '${_hm(s.from)}–${_hm(s.to)}';
+    final (color, text) = switch (s.status) {
+      WakeStatus.early => (const Color(0xFFE3F6E8), 'Sıradaki uyku için önerilen aralık: $range'),
+      WakeStatus.inWindow => (const Color(0xFFFFF4D6), 'Uyku zamanı yaklaştı ($range). Yorgunluk belirtilerini izle.'),
+      WakeStatus.late => (const Color(0xFFFFE6CC), 'Önerilen aralık geçti ($range). Aşırı yorgunluk uykuya dalmayı zorlaştırabilir; sakin bir ortam hazırla.'),
+    };
+    return [Card(key: const Key('uyaniklik_penceresi'), color: color, child: Padding(padding: const EdgeInsets.all(12), child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text('Uyanık: $awake (son uyanış ${_hm(s.lastWake)})', style: const TextStyle(fontWeight: FontWeight.w800)),
+        const SizedBox(height: 4),
+        Text(text),
+        const SizedBox(height: 6),
+        Text('Yorgunluk belirtileri: ${sleepyCues.map(t).join(', ')}', style: const TextStyle(fontSize: 12)),
+        const Text('Aralıklar yaşa göre genel değerlerdir; bebeğinin belirtileri her zaman önceliklidir.',
+            style: TextStyle(fontSize: 11, color: Colors.black54)),
+      ])))];
+  }
+
   String _display(DateTime date) => '${date.day}.${date.month}.${date.year} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
 
   @override
@@ -132,6 +259,32 @@ class _SleepJournalPageState extends State<SleepJournalPage> {
     return ListView(padding: const EdgeInsets.all(16), children: [
       Text(widget.child == null ? 'Uyku günlüğü 🌙' : '${widget.child!.name} · Uyku günlüğü 🌙', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
       const SizedBox(height: 8),
+      if (!loading && error == null) Card(key: const Key('uyku_canli'),
+        color: runningSince == null ? const Color(0xFFF3EEFF) : const Color(0xFFE6E9FF),
+        child: Padding(padding: const EdgeInsets.all(12), child: Row(children: [
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(runningSince == null ? 'Şimdi mi uyudu?' : 'Uyuyor', style: const TextStyle(fontWeight: FontWeight.w800)),
+            Text(runningSince == null
+                ? 'Dokun, uyandığında tekrar dokun; süre kendiliğinden kaydedilir.'
+                : '${_clock(_now().difference(runningSince!))} • başladı ${_hm(runningSince!)}',
+                style: const TextStyle(fontSize: 12.5)),
+          ])),
+          FilledButton.icon(key: const Key('uyku_canli_dugme'), onPressed: _toggleLive,
+            icon: Icon(runningSince == null ? Icons.bedtime_rounded : Icons.wb_sunny_rounded),
+            label: Text(runningSince == null ? 'Uyudu' : 'Uyandı')),
+        ]))),
+      if (runningSince == null) ..._wakeWindowCard(),
+      if (!loading && records.isNotEmpty) Builder(builder: (_) {
+        final dn = dayNightSleep(records, _now());
+        String hm(int m) => t('${m ~/ 60} sa ${m % 60} dk');
+        return Card(key: const Key('gece_gunduz'), child: ListTile(
+          leading: const Icon(Icons.nights_stay_outlined),
+          title: Text('Geçen gece: ${hm(dn.nightMinutes)}'),
+          subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text('Bugün gündüz: ${hm(dn.dayMinutes)} • ${dn.naps} şekerleme'),
+            const Text('Gece 19:00–07:00, gündüz 07:00–19:00 arası sayılır.', style: TextStyle(fontSize: 11, color: Colors.black54)),
+          ])));
+      }),
       Card(child: ListTile(title: const Text('Son 7 gündeki uyku süresi'),
         subtitle: Text('${weeklyMinutes ~/ 60} saat ${weeklyMinutes % 60} dakika • ${records.where((r) => !DateTime.parse(r['start'] as String).isBefore(start)).length} kayıt'))),
       const Text('Bu süreler kayıt bazlıdır; uyku ihtiyacı için tıbbi değerlendirme yerine geçmez.'),
@@ -185,8 +338,8 @@ class _SleepJournalPageState extends State<SleepJournalPage> {
         return Card(child: ListTile(title: Text('${minutes ~/ 60} saat ${minutes % 60} dakika'),
           subtitle: Text('${_display(s)} → ${_display(e)}'),
           trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-          IconButton(tooltip: 'Kaydı düzenle', icon: const Icon(Icons.edit_outlined), onPressed: () => _add(editing: entry)),
-          IconButton(tooltip: 'Kaydı sil', icon: const Icon(Icons.delete_outline),
+          IconButton(tooltip: t('Kaydı düzenle'), icon: const Icon(Icons.edit_outlined), onPressed: () => _add(editing: entry)),
+          IconButton(tooltip: t('Kaydı sil'), icon: const Icon(Icons.delete_outline),
             onPressed: () async {
               final ok = await showDialog<bool>(context: context, builder: (ctx) => AlertDialog(
                 title: const Text('Uyku kaydı silinsin mi?'),

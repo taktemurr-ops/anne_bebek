@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Text;
+import '../i18n/i18n.dart' show t;
+import '../i18n/text.dart';
 import '../services/admin_dashboard_service.dart';
 import '../services/forum_safety_service.dart';
 
@@ -12,6 +14,7 @@ class AdminDashboardPage extends StatefulWidget {
 
 class _AdminDashboardPageState extends State<AdminDashboardPage> {
   Map<String, dynamic>? _summary;
+  Map<String, dynamic>? _revenue;
   List<Map<String, dynamic>> _reports = [];
   String? _error;
   bool _loading = false;
@@ -25,8 +28,10 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
     try {
       final summary = await AdminDashboardService.summary();
       final reports = await ForumSafetyService.pendingReports();
+      Map<String, dynamic>? revenue;
+      try { revenue = await AdminDashboardService.revenue(); } catch (_) {}
       if (!mounted) return;
-      setState(() { _summary = summary; _reports = reports; });
+      setState(() { _summary = summary; _reports = reports; _revenue = revenue; });
     } catch (_) {
       if (mounted) { setState(() {
         _summary = null; _reports = [];
@@ -55,7 +60,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: const Text('Merkezi Yönetim'), actions: [
-      IconButton(onPressed: _loading ? null : _reload, icon: const Icon(Icons.refresh), tooltip: 'Yenile')]),
+      IconButton(onPressed: _loading ? null : _reload, icon: const Icon(Icons.refresh), tooltip: t('Yenile'))]),
     body: ListView(padding: const EdgeInsets.all(16), children: [
       const Card(color: Color(0xFFFFE6F3), child: Padding(padding: EdgeInsets.all(14), child: Text(
         'Bu ekran yalnızca sunucu tarafından doğrulanmış yöneticilere veri gösterir. Kullanıcıların sağlık kayıtları burada görüntülenmez.'))),
@@ -74,6 +79,25 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
         ]) Card(child: ListTile(title: Text(item.$2), trailing: Text('${_summary![item.$1] ?? '—'}',
           style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)))),
         const SizedBox(height: 20),
+        const Text('Gelir ve üyelik', style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold)),
+        if (_revenue == null) const ListTile(title: Text('Gelir özeti için MONETIZATION_SUPABASE_SETUP.sql kurulmalı.'))
+        else ...[
+          for (final item in <(String, String)>[
+            ('active_premium', 'Etkin Premium üye'),
+            ('active_family', 'Etkin Premium Aile üye'),
+            ('new_subscriptions_30d', 'Son 30 günde yeni abonelik'),
+            ('canceled_active', 'İptal edilmiş, dönem sonu bekleyen'),
+            ('affiliate_clicks_30d', 'Son 30 günde iş birliği tıklaması'),
+          ]) Card(child: ListTile(title: Text(item.$2), trailing: Text('${_revenue![item.$1] ?? '—'}',
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)))),
+          for (final group in <(String, String)>[('by_product', 'Ürüne göre etkin abonelik'), ('affiliate_by_partner', 'İş ortağına göre tıklama (30 gün)')])
+            if (_revenue![group.$1] is Map && (_revenue![group.$1] as Map).isNotEmpty) Card(child: Padding(padding: const EdgeInsets.all(12), child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(group.$2, style: const TextStyle(fontWeight: FontWeight.bold)),
+                for (final e in (_revenue![group.$1] as Map).entries) Text('${e.key}: ${e.value}'),
+              ]))),
+        ],
+        const SizedBox(height: 20),
         const Text('Bekleyen forum şikâyetleri', style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold)),
         if (_reports.isEmpty) const ListTile(title: Text('Bekleyen şikâyet bulunmuyor.')),
         for (final report in _reports) Card(child: Padding(padding: const EdgeInsets.all(10), child: Column(
@@ -89,7 +113,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
         ]))),
       ],
       const SizedBox(height: 16),
-      const Text('Kullanıcı arama, abonelik gelirleri, içerik editörü ve merkezi ürün yönetimi bu sürümde mevcut değildir.',
+      const Text('Gelir tutarları (TL) Google Play Console ve App Store Connect raporlarında; iş birliği komisyonları iş ortağı panelinde görülür.',
         style: TextStyle(color: Colors.black54)),
     ]),
   );
